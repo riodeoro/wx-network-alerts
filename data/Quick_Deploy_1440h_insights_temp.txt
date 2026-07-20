@@ -1,0 +1,8 @@
+<!-- hash:0b22823f8e8b -->
+```
+EXTREME VALUES
+QD #1:            Highest (39.2°C)                                                  [Jul 17]
+QD #17:           Lowest (-0.8°C)                                                   [May 31]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+QD #20:           1 spike                                                     [Jul 19 15:00]
+```

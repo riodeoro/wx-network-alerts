@@ -1,0 +1,6 @@
+<!-- hash:050fd94154e9 -->
+```
+EXTREME VALUES
+CEDARVALE:        Highest (36.3°C)                                                  [Jul 17]
+HOUSTON:          Lowest (-5.5°C)                                                   [May 31]
+```

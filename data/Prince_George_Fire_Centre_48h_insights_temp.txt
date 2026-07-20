@@ -1,0 +1,6 @@
+<!-- hash:ed376a7495b8 -->
+```
+EXTREME VALUES
+ELK MOUNTAIN:     Highest (29.7°C)                                            [Jul 19 18:00]
+PINK MOUNTAIN:    Lowest (3.4°C)                                              [Jul 20 05:00]
+```

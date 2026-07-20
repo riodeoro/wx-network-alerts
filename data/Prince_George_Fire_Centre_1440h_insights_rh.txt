@@ -1,0 +1,15 @@
+<!-- hash:96f936b20155 -->
+```
+RH CHANGED >50%/H
+FORT NELSON FS:   2 events                                     [Jun 24 18:00 → Jul 19 04:00]
+BEAR LAKE:        1 event                                                     [Jul 17 17:00]
+BEDNESTI:         1 event                                                     [Jul 17 15:00]
+CATFISH:          1 event                                                     [Jun 24 14:00]
+ELK MOUNTAIN:     1 event                                                     [Jun 23 18:00]
+PERSISTENT STATES
+NELSON FORKS:     RH constant 100% for 31h, Rn_1 (45.2mm)        [Jun 5 02:00 – Jun 6 08:00]
+MANSON:           RH constant 100% for 22h, Rn_1 (15.6mm)      [Jun 18 19:00 – Jun 19 16:00]
+NOEL:             RH constant 100% for 19h, Rn_1 (29.6mm)      [Jun 27 16:00 – Jun 28 10:00]
+KOMIE:            RH constant 100% for 16h, Rn_1 (0.4mm)         [Jul 1 16:00 – Jul 2 07:00]
+LOVELL COVE:      RH constant 97% for 12h, Rn_1 (19.4mm)                [May 25 02:00–13:00]
+```

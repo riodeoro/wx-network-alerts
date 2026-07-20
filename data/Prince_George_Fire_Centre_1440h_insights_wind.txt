@@ -1,0 +1,17 @@
+<!-- hash:96f936b20155 -->
+```
+GUSTS EXCEEDED 80 KM/H
+VALEMOUNT 2:      1367.0 km/h (66 readings >80)                [May 21 08:00 – Jun 20 05:00]
+BEDNESTI:         330.4 km/h (1 reading >80)                                  [Jun 19 17:00]
+KLUSKUS:          180.6 km/h (2 readings >80)                   [May 25 17:00 – Jun 3 15:00]
+GRAHAM:           125.4 km/h (1 reading >80)                                  [Jun 10 16:00]
+SAWTOOTH:         101.9 km/h (1 reading >80)                                  [Jun 19 10:00]
+PERSISTENT STATES
+MANSON:           zero wind 14h, 1 shifts >90°, max 4.9km/h    [Jun 26 18:00 – Jun 27 07:00]
+DAILY DIRECTION CONCENTRATION
+MUSKWA:           up to 67% of a day within ±5° of 243° (3 day(s) at 50%+)
+HOLY CROSS 2:     up to 58% of a day within ±5° of 267° (4 day(s) at 50%+)
+NOEL:             up to 58% of a day within ±5° of 226° (4 day(s) at 50%+)
+FIRESIDE:         up to 54% of a day within ±5° of 250° (1 day(s) at 50%+)
+WITCH:            up to 54% of a day within ±5° of 168° (2 day(s) at 50%+)
+```

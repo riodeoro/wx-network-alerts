@@ -1,0 +1,21 @@
+<!-- hash:d1dbbcd35154 -->
+```
+RH READ 0%
+BAKER:            629 readings                                 [May 21 09:00 → Jun 16 13:00]
+DEWAR CREEK:      49 readings                                   [May 25 15:00 → Jun 5 01:00]
+CARIBOO CREEK:    13 readings                                   [Jun 9 01:00 → Jun 12 13:00]
+RH EXCEEDED 100%
+CARIBOO CREEK:    380 readings, max 116.0%                     [May 21 13:00 → Jun 12 07:00]
+RH CHANGED >50%/H
+DEWAR CREEK:      29 events                                     [May 26 16:00 → Jun 5 12:00]
+CARIBOO CREEK:    9 events                                     [May 21 13:00 → Jun 12 08:00]
+BLAEBERRY:        1 event                                                     [Jun 25 20:00]
+CHERRY LAKE:      1 event                                                     [Jun 12 15:00]
+DOWNIE:           1 event                                                     [Jul 18 15:00]
+PERSISTENT STATES
+BAKER:            RH constant 0% for 629h, zero Rn_1           [May 21 09:00 – Jun 16 13:00]
+NORNS:            RH constant 100% for 43h, zero Rn_1           [Jun 29 22:00 – Jul 1 16:00]
+DUNCAN:           RH constant 100% for 19h, Rn_1 (11.0mm)       [Jun 30 17:00 – Jul 1 11:00]
+ROUND PRAIRIE:    RH constant 99% for 16h, Rn_1 (13.8mm)        [May 31 20:00 – Jun 1 11:00]
+DEWAR CREEK:      RH constant 100% for 14h, Rn_1 (0.4mm)        [Jun 30 20:00 – Jul 1 09:00]
+```

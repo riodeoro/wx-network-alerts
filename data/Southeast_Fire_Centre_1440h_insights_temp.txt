@@ -1,0 +1,18 @@
+<!-- hash:d1dbbcd35154 -->
+```
+EXTREME VALUES
+PENDOREILLE:      Highest (37.3°C)                                                  [Jul 16]
+NORNS:            Lowest (-4.3°C)                                                    [Jun 7]
+TEMPERATURE EXCEEDED 35°C
+DUNCAN:           36.9°C                                                            [May 28]
+ROCK CREEK:       36.8°C                                                            [Jul 16]
+BEAVERDELL:       35.8°C                                                            [Jul 16]
+DOWNIE:           35.8°C                                                            [Jul 17]
+GRAND FORKS:      35.8°C                                                            [Jul 16]
+BRISCO:           35.6°C                                                            [Jul 16]
+JOHNSON LAKE:     35.6°C                                                            [Jul 16]
+TOBY HUB:         35.1°C                                                            [Jul 16]
+PERSISTENT STATES
+NANCY GREENE:     constant (9.1°C) for 6h, RH varied 0%                  [Jul 1 00:00–05:00]
+WHITE RIVER:      constant (7.8°C) for 6h, RH varied 0%                 [Jun 29 00:00–05:00]
+```

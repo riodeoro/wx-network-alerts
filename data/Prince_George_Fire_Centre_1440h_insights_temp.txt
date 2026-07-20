@@ -1,0 +1,8 @@
+<!-- hash:96f936b20155 -->
+```
+EXTREME VALUES
+BLUE RIVER 2:     Highest (35.9°C)                                                  [Jul 17]
+MOOSE LAKE:       Lowest (-6.9°C)                                                   [May 31]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+MANSON:           1 spike                                                     [May 26 13:00]
+```

@@ -1,0 +1,7 @@
+<!-- hash:815ff6196c5b -->
+```
+RH CHANGED >50%/H
+LONE BUTTE:       1 event                                                     [Jul 18 17:00]
+PERSISTENT STATES
+BIG VALLEY:       RH constant 99% for 12h, Rn_1 (4.4mm)                 [Jul 19 00:00–11:00]
+```
