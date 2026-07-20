@@ -1,0 +1,21 @@
+FIRE CENTRE: Northwest Fire Centre
+WINDOW: 48h | STATIONS: 32 | RECORDS: 1,563
+
+=== STATION OUTAGES ===
+None.
+
+=== RH ===
+None.
+
+=== WIND ===
+DIRECTION CONCENTRATION: CRANBERRY - up to 50% of a day in the 221 deg bin (1 day(s) at 50%+)
+
+=== TEMPERATURE ===
+HIGHEST TEMP: CEDARVALE - 31.5C @ts=2026-07-19T16:00
+LOWEST TEMP: ISKUT - 2.3C @ts=2026-07-19T06:00
+
+=== PRECIPITATION ===
+None.
+
+=== POWER ===
+None.
