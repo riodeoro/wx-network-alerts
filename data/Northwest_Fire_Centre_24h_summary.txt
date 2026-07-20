@@ -1,0 +1,21 @@
+FIRE CENTRE: Northwest Fire Centre
+WINDOW: 24h | STATIONS: 32 | RECORDS: 795
+
+=== STATION OUTAGES ===
+None.
+
+=== RH ===
+None.
+
+=== WIND ===
+None.
+
+=== TEMPERATURE ===
+HIGHEST TEMP: CEDARVALE - 31.5C @ts=2026-07-19T16:00
+LOWEST TEMP: ISKUT - 4.6C @ts=2026-07-19T08:00
+
+=== PRECIPITATION ===
+None.
+
+=== POWER ===
+None.

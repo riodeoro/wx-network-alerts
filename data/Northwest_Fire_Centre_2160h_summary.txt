@@ -1,0 +1,42 @@
+FIRE CENTRE: Northwest Fire Centre
+WINDOW: 2160h | STATIONS: 32 | RECORDS: 69,009
+
+=== STATION OUTAGES ===
+SENSOR NA: NILKITKWA - Vbat=73% NA, Vslr=73% NA, Ibat=73% NA
+
+=== RH ===
+RH CHANGE >50%/h: BELL-IRVING - 1 events @first=2026-06-09T15:00@last=2026-06-09T15:00
+RH CHANGE >50%/h: BOYA LAKE - 1 events @first=2026-06-09T22:00@last=2026-06-09T22:00
+RH CHANGE >50%/h: CEDARVALE - 2 events @first=2026-05-08T13:00@last=2026-05-08T14:00
+RH CHANGE >50%/h: GANOKWA - 1 events @first=2026-06-21T17:00@last=2026-06-21T17:00
+RH CHANGE >50%/h: NADINA - 1 events @first=2026-06-20T16:00@last=2026-06-20T16:00
+CONSTANT RH: DEASE LAKE FS - Constant 100%, avg=100%, 18h, precip=33.4mm @start=2026-06-04T17:00@end=2026-06-05T10:00
+CONSTANT RH: OLD FADDY - Constant 100%, avg=100%, 13h, no precip @start=2026-07-10T22:00@end=2026-07-11T10:00
+CONSTANT RH: NORTH BABINE - Constant 100%, avg=100%, 12h, no precip @start=2026-05-25T21:00@end=2026-05-26T08:00
+CONSTANT RH: UPPER FULTON - Constant high (90-99%), avg=99%, 12h, precip=22.0mm @start=2026-05-24T23:00@end=2026-05-25T10:00
+
+=== WIND ===
+ZERO WIND 15h: BOYA LAKE - Wspd=0 but 1 direction changes >90deg detected (max_delta=151deg), gusts nonzero (max=11.7km/h, avg=1.4km/h) @start=2026-06-23T22:00@end=2026-06-24T12:00
+ZERO WIND 14h: KISPIOX HUB - Wspd=0 but 7 direction changes >90deg detected (max_delta=147deg), gusts nonzero (max=7.6km/h, avg=1.8km/h) @start=2026-05-11T20:00@end=2026-05-12T09:00
+ZERO WIND 14h: ROSSWOOD - Wspd=0 but 7 direction changes >90deg detected (max_delta=156deg), gusts nonzero (max=5.3km/h, avg=0.9km/h) @start=2026-07-12T19:00@end=2026-07-13T08:00
+ZERO WIND 13h: VAN DYKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=176deg), gusts nonzero (max=5.6km/h, avg=1.9km/h) @start=2026-06-25T20:00@end=2026-06-26T08:00
+ZERO WIND 12h: BELL-IRVING - Wspd=0 but 2 direction changes >90deg detected (max_delta=129deg), gusts nonzero (max=5.0km/h, avg=1.6km/h) @start=2026-06-25T23:00@end=2026-06-26T10:00
+DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 75% of a day in the 234 deg bin (38 day(s) at 50%+)
+DIRECTION CONCENTRATION: PARROTT - up to 67% of a day in the 273 deg bin (17 day(s) at 50%+)
+DIRECTION CONCENTRATION: AUGIER LAKE - up to 62% of a day in the 225 deg bin (4 day(s) at 50%+)
+DIRECTION CONCENTRATION: CEDARVALE - up to 75% of a day in the 276 deg bin (4 day(s) at 50%+)
+DIRECTION CONCENTRATION: ATLIN - up to 54% of a day in the 187 deg bin (2 day(s) at 50%+)
+
+=== TEMPERATURE ===
+HIGHEST TEMP: CEDARVALE - 36.3C @ts=2026-07-17T17:00
+LOWEST TEMP: ATLIN - -6.2C @ts=2026-04-22T08:00
+
+=== PRECIPITATION ===
+None.
+
+=== POWER ===
+NO CHARGE: UPPER FULTON - 136 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.20V @start=2026-05-15T08:00@end=2026-07-12T08:00
+NO CHARGE: NASS CAMP - 58 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.40V @start=2026-04-21T08:00@end=2026-07-20T08:00
+NO CHARGE: NORTH BABINE - 14 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.10V @start=2026-04-28T08:00@end=2026-07-12T09:00
+NO CHARGE: MCBRIDE LAKE - 11 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.30V @start=2026-04-27T08:00@end=2026-07-19T08:00
+NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00

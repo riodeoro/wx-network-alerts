@@ -1,0 +1,82 @@
+FIRE CENTRE: Cariboo Fire Centre
+WINDOW: 4380h | STATIONS: 27 | RECORDS: 115,874
+
+=== STATION OUTAGES ===
+SENSOR NA: BENSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GASPARD - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GAVIN - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: KNIFE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: LONE BUTTE - Vbat=50% NA, Vslr=50% NA, Ibat=50% NA
+
+=== RH ===
+RH CHANGE >50%/h: ALEXIS CREEK - 1 events @first=2026-04-14T19:00@last=2026-04-14T19:00
+RH CHANGE >50%/h: BALDFACE - 3 events @first=2026-04-10T09:00@last=2026-06-24T16:00
+RH CHANGE >50%/h: GASPARD - 1 events @first=2026-03-20T15:00@last=2026-03-20T15:00
+RH CHANGE >50%/h: GAVIN - 4 events @first=2026-04-06T18:00@last=2026-07-17T16:00
+RH CHANGE >50%/h: KNIFE - 1 events @first=2026-04-14T23:00@last=2026-04-14T23:00
+CONSTANT RH: TAUTRI - Constant low (<50%), avg=3%, 45h, precip=1.0mm @start=2026-04-21T18:00@end=2026-04-23T14:00
+CONSTANT RH: PLUMMER HUT - Constant high (90-99%), avg=99%, 30h, no precip @start=2026-01-29T10:00@end=2026-01-30T15:00
+CONSTANT RH: KNIFE - Constant 100%, avg=100%, 22h, precip=0.6mm @start=2026-01-30T19:00@end=2026-01-31T16:00
+CONSTANT RH: ALEXIS CREEK - Constant 100%, avg=100%, 21h, precip=0.2mm @start=2026-03-06T17:00@end=2026-03-07T13:00
+CONSTANT RH: DECEPTION - Constant high (90-99%), avg=97%, 17h, no precip @start=2026-02-02T18:00@end=2026-02-03T10:00
+
+=== WIND ===
+EXTREME GUST: ANAHIM LAKE - max=282.2km/h, 1 readings >80km/h @start=2026-07-11T16:00@end=2026-07-11T16:00
+EXTREME GUST: TAUTRI - max=226.9km/h, 1 readings >80km/h @start=2026-06-05T15:00@end=2026-06-05T15:00
+EXTREME GUST: TATLA LAKE - max=202.2km/h, 1 readings >80km/h @start=2026-06-06T13:00@end=2026-06-06T13:00
+EXTREME GUST: PLUMMER HUT - max=176.6km/h, 217 readings >80km/h @start=2026-01-30T16:00@end=2026-04-19T01:00
+EXTREME GUST: HORSEFLY - max=130.3km/h, 3 readings >80km/h @start=2026-06-04T11:00@end=2026-07-17T19:00
+EXTREME WIND: PLUMMER HUT - max=76.3km/h, 27 readings >60km/h @start=2026-02-04T01:00@end=2026-04-06T18:00
+ZERO WIND 163h: DECEPTION - Wspd=0 but 18 direction changes >90deg detected (max_delta=166deg), gusts nonzero (max=4.0km/h, avg=0.0km/h) @start=2026-01-18T21:00@end=2026-01-25T15:00
+ZERO WIND 47h: BENSON - Wspd=0 but 7 direction changes >90deg detected (max_delta=130deg), gusts nonzero (max=7.4km/h, avg=0.2km/h) @start=2026-01-20T17:00@end=2026-01-22T15:00
+ZERO WIND 22h: PLUMMER HUT - Wspd=0 but 7 direction changes >90deg detected (max_delta=155deg), gusts nonzero (max=9.6km/h, avg=0.4km/h) @start=2026-03-04T13:00@end=2026-03-05T10:00
+ZERO WIND 19h: PLACE LAKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=142deg), gusts nonzero (max=2.7km/h, avg=0.3km/h) @start=2026-01-23T17:00@end=2026-01-24T11:00
+ZERO WIND 13h: YOUNG LAKE - Wspd=0 but 3 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=8.2km/h, avg=0.6km/h) @start=2026-03-20T23:00@end=2026-03-21T11:00
+ZERO WIND 70h: CHURN CREEK - Wspd=0, gusts=0, no direction changes >90deg @start=2026-04-01T15:00@end=2026-04-04T12:00
+DIRECTION CONCENTRATION: MEADOW LAKE - up to 100% of a day in the 37 deg bin (72 day(s) at 50%+)
+DIRECTION CONCENTRATION: BIG VALLEY - up to 88% of a day in the 225 deg bin (25 day(s) at 50%+)
+DIRECTION CONCENTRATION: PLUMMER HUT - up to 58% of a day in the 188 deg bin (6 day(s) at 50%+)
+DIRECTION CONCENTRATION: YOUNG LAKE - up to 88% of a day in the 164 deg bin (27 day(s) at 50%+)
+DIRECTION CONCENTRATION: GASPARD - up to 88% of a day in the 51 deg bin (28 day(s) at 50%+)
+
+=== TEMPERATURE ===
+HIGHEST TEMP: ALEXIS CREEK - 34.2C @ts=2026-07-16T16:00
+LOWEST TEMP: BALDFACE - -32.7C @ts=2026-02-19T07:00
+ISOLATED TEMP SPIKE: BALDFACE - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-02-28T00:00@last=2026-02-28T00:00
+ISOLATED TEMP SPIKE: NAZKO - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-05-05T21:00@last=2026-05-05T21:00
+ISOLATED TEMP SPIKE: PLUMMER HUT - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-02-17T11:00@last=2026-02-17T11:00
+CONSTANT TEMP: HORSEFLY - -6.8C for 7h, RH also flat (2% range) @start=2026-01-21T18:00@end=2026-01-22T00:00
+CONSTANT TEMP: LONE BUTTE - 0.1C for 7h, RH also flat (1% range) @start=2026-05-15T22:00@end=2026-05-16T04:00
+CONSTANT TEMP: MATHEW - 0.0C for 7h, RH also flat (0% range) @start=2026-01-30T19:00@end=2026-01-31T01:00
+
+=== PRECIPITATION ===
+RAIN AT RH<10%: TAUTRI - 2 hours, 1.0mm total @first=2026-04-21T18:00@last=2026-04-23T14:00
+RAIN AT RH 10-25%: BALDFACE - 1 hours, 6.4mm total @first=2026-06-25T14:00@last=2026-06-25T14:00
+RAIN AT RH 10-25%: GASPARD - 1 hours, 0.2mm total @first=2026-03-30T13:00@last=2026-03-30T13:00
+RAIN AT RH 10-25%: MEADOW LAKE - 1 hours, 0.2mm total @first=2026-03-30T15:00@last=2026-03-30T15:00
+HIGH PRECIP: PLUMMER HUT - max=90.2mm/h @ts=2026-02-04T07:00
+
+=== POWER ===
+LOW VBAT: BIG VALLEY - min=11.90V, mean=13.14V, severity=low @ts=2026-01-19T05:00
+LOW VBAT: TIMOTHY - min=12.00V, mean=12.43V @ts=2026-01-22T05:00
+LOW VBAT: ANAHIM LAKE (AC) - min=12.20V, mean=13.25V @ts=2026-02-19T04:00
+LOW VBAT: NAZKO (AC) - min=12.20V, mean=13.28V @ts=2026-02-19T07:00
+LOW VBAT: TAUTRI - min=12.20V, mean=13.17V @ts=2026-02-19T07:00
+NO CHARGE: TIMOTHY - 278 daytime readings (Vslr<Vbat), median Vbat=12.20V, median Vslr=9.30V @start=2026-01-19T08:00@end=2026-04-20T08:00
+NO CHARGE: MATHEW (AC) - 277 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-01-19T08:00@end=2026-07-20T08:00
+NO CHARGE: NAZKO (AC) - 185 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=0.10V @start=2026-01-19T08:00@end=2026-07-19T08:00
+NO CHARGE: BIG VALLEY - 183 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=5.90V, severity=low @start=2026-01-19T08:00@end=2026-06-11T08:00
+NO CHARGE: WINDY MOUNTAIN - 121 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.00V @start=2026-01-19T08:00@end=2026-07-01T08:00
+NO CHARGE: TAUTRI - 120 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=9.95V @start=2026-01-19T08:00@end=2026-07-12T09:00
+NO CHARGE: DECEPTION - 117 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.70V @start=2026-01-22T08:00@end=2026-07-01T09:00
+NO CHARGE: NEMIAH - 93 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.90V @start=2026-01-19T08:00@end=2026-04-03T08:00
+NO CHARGE: MIDDLE LAKE - 91 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=8.70V @start=2026-01-19T08:00@end=2026-04-03T08:00
+NO CHARGE: RISKE CREEK (AC) - 62 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=0.10V @start=2026-01-19T08:00@end=2026-04-06T08:00
+NO CHARGE: HORSEFLY - 54 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.30V @start=2026-01-19T08:00@end=2026-04-15T08:00
+NO CHARGE: PRAIRIE CREEK - 50 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.60V @start=2026-01-21T08:00@end=2026-03-28T08:00
+NO CHARGE: CHURN CREEK - 49 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.70V @start=2026-01-19T08:00@end=2026-03-24T08:00
+NO CHARGE: BALDFACE - 48 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=10.45V @start=2026-01-19T08:00@end=2026-03-20T08:00
+NO CHARGE: YOUNG LAKE - 37 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.40V @start=2026-01-19T08:00@end=2026-03-24T08:00
+NO CHARGE: MEADOW LAKE - 29 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.60V @start=2026-01-19T08:00@end=2026-03-24T08:00
+NO CHARGE: ANAHIM LAKE (AC) - 26 daytime readings (Vslr<Vbat), median Vbat=12.65V, median Vslr=0.10V @start=2026-01-24T08:00@end=2026-06-06T11:00
+NO CHARGE: TATLA LAKE - 25 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=7.20V @start=2026-01-19T08:00@end=2026-03-14T08:00

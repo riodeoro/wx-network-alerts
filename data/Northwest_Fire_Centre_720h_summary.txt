@@ -1,0 +1,35 @@
+FIRE CENTRE: Northwest Fire Centre
+WINDOW: 720h | STATIONS: 32 | RECORDS: 22,961
+
+=== STATION OUTAGES ===
+None.
+
+=== RH ===
+RH CHANGE >50%/h: GANOKWA - 1 events @first=2026-06-21T17:00@last=2026-06-21T17:00
+RH CHANGE >50%/h: NADINA - 1 events @first=2026-06-20T16:00@last=2026-06-20T16:00
+RH CHANGE >50%/h: VAN DYKE - 1 events @first=2026-06-20T17:00@last=2026-06-20T17:00
+CONSTANT RH: OLD FADDY - Constant 100%, avg=100%, 13h, no precip @start=2026-07-10T22:00@end=2026-07-11T10:00
+
+=== WIND ===
+ZERO WIND 15h: BOYA LAKE - Wspd=0 but 1 direction changes >90deg detected (max_delta=151deg), gusts nonzero (max=11.7km/h, avg=1.4km/h) @start=2026-06-23T22:00@end=2026-06-24T12:00
+ZERO WIND 14h: ROSSWOOD - Wspd=0 but 7 direction changes >90deg detected (max_delta=156deg), gusts nonzero (max=5.3km/h, avg=0.9km/h) @start=2026-07-12T19:00@end=2026-07-13T08:00
+ZERO WIND 13h: VAN DYKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=176deg), gusts nonzero (max=5.6km/h, avg=1.9km/h) @start=2026-06-25T20:00@end=2026-06-26T08:00
+ZERO WIND 12h: BELL-IRVING - Wspd=0 but 3 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=4.9km/h, avg=0.8km/h) @start=2026-07-03T21:00@end=2026-07-04T08:00
+DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 67% of a day in the 244 deg bin (11 day(s) at 50%+)
+DIRECTION CONCENTRATION: PARROTT - up to 62% of a day in the 284 deg bin (6 day(s) at 50%+)
+DIRECTION CONCENTRATION: NASS CAMP - up to 88% of a day in the 189 deg bin (11 day(s) at 50%+)
+DIRECTION CONCENTRATION: KITPARK - up to 50% of a day in the 237 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: AUGIER LAKE - up to 50% of a day in the 224 deg bin (1 day(s) at 50%+)
+
+=== TEMPERATURE ===
+HIGHEST TEMP: CEDARVALE - 36.3C @ts=2026-07-17T17:00
+LOWEST TEMP: GANOKWA - -0.5C @ts=2026-07-14T05:00
+
+=== PRECIPITATION ===
+None.
+
+=== POWER ===
+NO CHARGE: NASS CAMP - 31 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.40V @start=2026-06-20T18:00@end=2026-07-20T08:00
+NO CHARGE: NORTH BABINE - 8 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.40V @start=2026-06-26T08:00@end=2026-07-12T09:00
+NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00
+NO CHARGE: MCBRIDE LAKE - 5 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=12.30V @start=2026-07-04T08:00@end=2026-07-19T08:00

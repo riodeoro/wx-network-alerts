@@ -1,0 +1,97 @@
+FIRE CENTRE: Coastal Fire Centre
+WINDOW: 4380h | STATIONS: 49 | RECORDS: 205,357
+
+=== STATION OUTAGES ===
+LOW COVERAGE: CHEF CREEK TEST - 2% (99/4381 hours) @start=2026-04-16T21:00@end=2026-04-20T23:00
+LOW COVERAGE: TS MAURELLE - 36% (1595/4381 hours) @start=2026-01-18T21:00@end=2026-07-20T08:00
+SENSOR NA: APE LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: HOMATHKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: KLINAKLINI - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MACHMELL KLINIKLINI - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MESACHIE 2 - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+OUTLIER Rh: TS ARTLISH - min=3.0, max=62.0 @ts=2026-04-09T12:00
+OUTLIER Rh: TS SAN JUAN - min=18.0, max=47.0 @ts=2026-04-25T11:00
+OUTLIER Rh: MACHMELL - min=13.0, max=23.0 @ts=2026-06-02T14:00
+RH CHANGE >50%/h: ALLISON PASS - 1 events @first=2026-07-16T15:00@last=2026-07-16T15:00
+RH CHANGE >50%/h: DARCY - 3 events @first=2026-03-05T11:00@last=2026-05-10T17:00
+RH CHANGE >50%/h: FRANK CREEK - 1 events @first=2026-03-08T12:00@last=2026-03-08T12:00
+RH CHANGE >50%/h: KLINAKLINI - 1 events @first=2026-02-28T13:00@last=2026-02-28T13:00
+RH CHANGE >50%/h: SALTSPRING 2 - 1 events @first=2026-03-30T02:00@last=2026-03-30T02:00
+CONSTANT RH: UBC RESEARCH - Constant 100%, avg=100%, 202h, precip=131.2mm @start=2026-01-28T03:00@end=2026-02-05T12:00
+CONSTANT RH: TS ARTLISH - Constant 100%, avg=100%, 189h, precip=331.4mm @start=2026-01-27T16:00@end=2026-02-04T12:00
+CONSTANT RH: TOBA CAMP - Constant 100%, avg=100%, 187h, precip=113.0mm @start=2026-01-27T17:00@end=2026-02-04T11:00
+CONSTANT RH: SCAR CREEK - Constant high (90-99%), avg=98%, 140h, precip=142.4mm @start=2026-01-29T21:00@end=2026-02-04T16:00
+CONSTANT RH: TS MCNABB - Constant 100%, avg=100%, 129h, precip=224.2mm @start=2026-01-28T04:00@end=2026-02-02T12:00
+
+=== WIND ===
+EXTREME GUST: TS SAN JUAN - max=366.1km/h, 1 readings >80km/h @start=2026-03-10T13:00@end=2026-03-10T13:00
+EXTREME GUST: SUMMIT - max=313.3km/h, 1 readings >80km/h @start=2026-04-05T14:00@end=2026-04-05T14:00
+EXTREME GUST: HAIG CAMP - max=101.4km/h, 1 readings >80km/h @start=2026-03-12T00:00@end=2026-03-12T00:00
+EXTREME GUST: APE LAKE - max=96.4km/h, 1 readings >80km/h @start=2026-02-26T09:00@end=2026-02-26T09:00
+ZERO WIND 696h: HAIG CAMP - Wspd=0 but 104 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=16.7km/h, avg=0.0km/h) @start=2026-04-29T13:00@end=2026-05-28T12:00
+ZERO WIND 233h: TALCHAKO - Wspd=0 but 53 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=2.6km/h, avg=0.0km/h) @start=2026-01-18T21:00@end=2026-01-28T13:00
+ZERO WIND 138h: NAHATLATCH - Wspd=0 but 30 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=11.0km/h, avg=0.1km/h) @start=2026-02-17T12:00@end=2026-02-23T05:00
+ZERO WIND 103h: QUINSAM BASE FWX - Wspd=0 but 21 direction changes >90deg detected (max_delta=174deg), gusts nonzero (max=7.4km/h, avg=0.1km/h) @start=2026-01-23T16:00@end=2026-01-27T22:00
+ZERO WIND 93h: HOMATHKO - Wspd=0 but 16 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=9.8km/h, avg=0.1km/h) @start=2026-03-09T15:00@end=2026-03-13T11:00
+DIRECTION CONCENTRATION: APE LAKE - up to 62% of a day in the 353 deg bin (5 day(s) at 50%+)
+DIRECTION CONCENTRATION: CHEAKAMUS - up to 96% of a day in the 91 deg bin (12 day(s) at 50%+)
+DIRECTION CONCENTRATION: TS NAKA CREEK - up to 62% of a day in the 336 deg bin (2 day(s) at 50%+)
+DIRECTION CONCENTRATION: POWELL RIVER WEST LAKE - up to 88% of a day in the 153 deg bin (21 day(s) at 50%+)
+DIRECTION CONCENTRATION: HAIG CAMP - up to 62% of a day in the 323 deg bin (5 day(s) at 50%+)
+
+=== TEMPERATURE ===
+HIGHEST TEMP: TOBA CAMP - 37.4C @ts=2026-06-23T16:00
+LOWEST TEMP: ALLISON PASS - -21.8C @ts=2026-02-20T02:00
+TEMP>35C: BEAVER CREEK - max=35.8C @ts=2026-06-14T17:00
+TEMP>35C: BOOTHROYD - max=36.1C @ts=2026-07-15T18:00
+TEMP>35C: DARCY - max=35.7C @ts=2026-07-15T15:00
+TEMP>35C: FRANK CREEK - max=35.2C @ts=2026-06-14T15:00
+TEMP>35C: PEMBERTON BASE - max=36.4C @ts=2026-06-23T17:00
+TEMP>35C: SCAR CREEK - max=36.7C @ts=2026-06-23T17:00
+TEMP>35C: TS BURMAN - max=35.2C @ts=2026-06-23T16:00
+TEMP>35C: WOSS CAMP - max=35.7C @ts=2026-06-14T16:00
+ISOLATED TEMP SPIKE: FRANK CREEK - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-06-21T16:00@last=2026-06-21T16:00
+ISOLATED TEMP SPIKE: SALTSPRING 2 - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-07-07T12:00@last=2026-07-07T12:00
+CONSTANT TEMP: SCAR CREEK - 0.1C for 13h, RH also flat (1% range) @start=2026-03-16T20:00@end=2026-03-17T08:00
+CONSTANT TEMP: TOBA CAMP - 0.1C for 11h, RH also flat (0% range) @start=2026-03-15T22:00@end=2026-03-16T08:00
+CONSTANT TEMP: UBC RESEARCH - 5.4C for 10h, RH also flat (0% range) @start=2026-02-13T00:00@end=2026-02-13T09:00
+CONSTANT TEMP: HAGENSBORG 2 - 0.1C for 10h, RH also flat (0% range) @start=2026-03-15T20:00@end=2026-03-16T05:00
+CONSTANT TEMP: HOMATHKO - 0.0C for 9h, RH also flat (0% range) @start=2026-01-30T12:00@end=2026-01-30T20:00
+
+=== PRECIPITATION ===
+RAIN AT RH<10%: TS ARTLISH - 1 hours, 0.4mm total @first=2026-04-09T12:00@last=2026-04-09T12:00
+RAIN AT RH 10-25%: APE LAKE - 1 hours, 0.2mm total @first=2026-03-01T12:00@last=2026-03-01T12:00
+RAIN AT RH 10-25%: TS EFFINGHAM - 1 hours, 0.4mm total @first=2026-03-14T12:00@last=2026-03-14T12:00
+HIGH PRECIP: TS EFFINGHAM - max=25.0mm/h @ts=2026-01-30T01:00
+
+=== POWER ===
+LOW VBAT: QUINSAM BASE FWX - min=7.00V, mean=12.63V, severity=low @ts=2026-02-02T17:00
+LOW VBAT: SCAR CREEK - min=11.40V, mean=12.05V, severity=low @ts=2026-06-04T03:00
+LOW VBAT: TS MAURELLE - min=11.50V, mean=12.91V, severity=low @ts=2026-01-21T02:00
+LOW VBAT: TALCHAKO - min=12.30V, mean=12.99V @ts=2026-01-23T00:00
+NO CHARGE: FRANK CREEK - 393 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.70V @start=2026-01-19T10:00@end=2026-07-20T08:00
+NO CHARGE: SCAR CREEK - 308 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=7.40V, severity=low @start=2026-01-19T08:00@end=2026-06-09T12:00
+NO CHARGE: TS ARTLISH - 283 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.50V @start=2026-01-19T08:00@end=2026-02-28T09:00
+NO CHARGE: TALCHAKO - 259 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.50V @start=2026-01-19T08:00@end=2026-07-18T10:00
+NO CHARGE: CHEAKAMUS - 236 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-01-19T14:00@end=2026-04-18T14:00
+NO CHARGE: QUINSAM BASE FWX - 145 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=6.10V, severity=low @start=2026-01-19T08:00@end=2026-07-17T08:00
+NO CHARGE: BIG SILVER 2 - 144 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.65V @start=2026-01-24T08:00@end=2026-06-18T08:00
+NO CHARGE: MENZIES CAMP - 115 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.50V @start=2026-01-19T08:00@end=2026-07-17T11:00
+NO CHARGE: MACHMELL - 113 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.50V @start=2026-01-19T08:00@end=2026-07-04T08:00
+NO CHARGE: TS ATLUCK - 103 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=10.50V @start=2026-01-19T08:00@end=2026-04-01T08:00
+NO CHARGE: BEAVER CREEK - 98 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.10V @start=2026-01-24T08:00@end=2026-04-07T09:00
+NO CHARGE: TS MAURELLE - 92 daytime readings (Vslr<Vbat), median Vbat=11.50V, median Vslr=8.10V, severity=low @start=2026-01-19T08:00@end=2026-02-02T17:00
+NO CHARGE: TS BLACKWATER - 91 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=10.50V @start=2026-01-19T08:00@end=2026-04-06T08:00
+NO CHARGE: TS NAHMINT - 89 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.70V @start=2026-01-20T08:00@end=2026-04-28T08:00
+NO CHARGE: TS TSITIKA - 84 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.80V @start=2026-01-21T08:00@end=2026-04-14T08:00
+NO CHARGE: TS BURMAN - 61 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.10V @start=2026-02-02T08:00@end=2026-05-05T08:00
+NO CHARGE: ALLISON PASS - 43 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.70V @start=2026-01-24T08:00@end=2026-06-08T08:00
+NO CHARGE: BOOTHROYD - 31 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.10V @start=2026-01-19T08:00@end=2026-04-07T08:00
+NO CHARGE: POWELL RIVER WEST LAKE - 26 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=7.90V @start=2026-01-24T08:00@end=2026-04-01T08:00
+NO CHARGE: SALTSPRING 2 (AC) - 23 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-01-24T08:00@end=2026-04-01T08:00
+NO CHARGE: MEAGER CREEK - 16 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.20V @start=2026-01-30T10:00@end=2026-07-17T08:00
+NO CHARGE: TS NAKA CREEK - 15 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.90V @start=2026-02-10T08:00@end=2026-07-09T08:00
+NO CHARGE: TOBA CAMP - 12 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.10V @start=2026-02-23T08:00@end=2026-04-14T08:00
+NO CHARGE: TS ELPHINSTONE - 11 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.20V @start=2026-02-01T09:00@end=2026-07-17T08:00
