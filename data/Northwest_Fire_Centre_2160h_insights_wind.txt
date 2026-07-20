@@ -1,1 +1,15 @@
 <!-- hash:b27044564dd4 -->
+```
+PERSISTENT STATES
+BOYA LAKE:        zero wind 15h, 1 shifts >90°, max 11.7km/h   [Jun 23 22:00 – Jun 24 12:00]
+KISPIOX HUB:      zero wind 14h, 7 shifts >90°, max 7.6km/h    [May 11 20:00 – May 12 09:00]
+ROSSWOOD:         zero wind 14h, 7 shifts >90°, max 5.3km/h    [Jul 12 19:00 – Jul 13 08:00]
+VAN DYKE:         zero wind 13h, 2 shifts >90°, max 5.6km/h    [Jun 25 20:00 – Jun 26 08:00]
+BELL:             zero wind 12h, 2 shifts >90°, max 5.0km/h    [Jun 25 23:00 – Jun 26 10:00]
+DAILY DIRECTION CONCENTRATION
+TELEGRAPH CREEK:  up to 75% of a day within ±5° of 234° (38 day(s) at 50%+)
+CEDARVALE:        up to 75% of a day within ±5° of 276° (4 day(s) at 50%+)
+PARROTT:          up to 67% of a day within ±5° of 273° (17 day(s) at 50%+)
+AUGIER LAKE:      up to 62% of a day within ±5° of 225° (4 day(s) at 50%+)
+ATLIN:            up to 54% of a day within ±5° of 187° (2 day(s) at 50%+)
+```

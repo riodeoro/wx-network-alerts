@@ -1,1 +1,7 @@
 <!-- hash:0fec1e3cf83c -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+BOYA LAKE:        4 hours, Rn_1 (1.0mm)                        [Mar 20 16:00 → Mar 28 16:00]
+EAST OOTSA:       1 hour, Rn_1 (0.2mm)                                         [Mar 1 12:00]
+OLD FADDY:        1 hour, Rn_1 (0.2mm)                                        [Mar 27 15:00]
+```

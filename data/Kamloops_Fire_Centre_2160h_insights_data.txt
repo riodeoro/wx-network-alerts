@@ -1,1 +1,6 @@
 <!-- hash:0744b0c36e75 -->
+```
+UNCONFIGURED SENSORS
+  SILVERSTAR SF: battery voltage, charge current, solar voltage, and temperature unconfigured
+  LEIGHTON LAKE, MAYSON, MCLEAN LAKE, PASKA LAKE: battery voltage, charge current, and solar voltage unconfigured
+```

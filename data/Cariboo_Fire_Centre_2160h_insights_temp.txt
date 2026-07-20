@@ -1,1 +1,10 @@
 <!-- hash:177a9a7fba1f -->
+```
+EXTREME VALUES
+ALEXIS CREEK:     Highest (34.2°C)                                                  [Jul 16]
+NAZKO:            Lowest (-9.6°C)                                                   [Apr 23]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+NAZKO:            1 spike                                                      [May 5 21:00]
+PERSISTENT STATES
+LONE BUTTE:       constant (0.1°C) for 7h, RH varied 1%        [May 15 22:00 – May 16 04:00]
+```

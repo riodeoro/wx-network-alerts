@@ -1,1 +1,24 @@
 <!-- hash:c028c6c5514f -->
+```
+EXTREME VALUES
+TOBA CAMP:        Highest (37.4°C)                                                  [Jun 23]
+ALLISON PASS:     Lowest (-21.8°C)                                                  [Feb 20]
+TEMPERATURE EXCEEDED 35°C
+SCAR CREEK:       36.7°C                                                            [Jun 23]
+PEMBERTON BASE:   36.4°C                                                            [Jun 23]
+BOOTHROYD:        36.1°C                                                            [Jul 15]
+BEAVER CREEK:     35.8°C                                                            [Jun 14]
+DARCY:            35.7°C                                                            [Jul 15]
+WOSS CAMP:        35.7°C                                                            [Jun 14]
+FRANK CREEK:      35.2°C                                                            [Jun 14]
+TS BURMAN:        35.2°C                                                            [Jun 23]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+FRANK CREEK:      1 spike                                                     [Jun 21 16:00]
+SALTSPRING 2:     1 spike                                                      [Jul 7 12:00]
+PERSISTENT STATES
+SCAR CREEK:       constant (0.1°C) for 13h, RH varied 1%       [Mar 16 20:00 – Mar 17 08:00]
+TOBA CAMP:        constant (0.1°C) for 11h, RH varied 0%       [Mar 15 22:00 – Mar 16 08:00]
+UBC RESEARCH:     constant (5.4°C) for 10h, RH varied 0%                [Feb 13 00:00–09:00]
+HAGENSBORG 2:     constant (0.1°C) for 10h, RH varied 0%       [Mar 15 20:00 – Mar 16 05:00]
+HOMATHKO:         constant (0.0°C) for 9h, RH varied 0%                 [Jan 30 12:00–20:00]
+```

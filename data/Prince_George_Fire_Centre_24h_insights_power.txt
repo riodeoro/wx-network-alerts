@@ -1,1 +1,5 @@
 <!-- hash:c70618676ff4 -->
+```
+LOW BATTERY VOLTAGE
+LEMORAY:          min 11.70V, mean 11.70V [low]                               [Jul 19 08:00]
+```

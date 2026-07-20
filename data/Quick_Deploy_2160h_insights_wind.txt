@@ -1,1 +1,10 @@
 <!-- hash:ff3d9884cbf7 -->
+```
+PERSISTENT STATES
+QD #7:            zero wind 12h, 1 shifts >90°, max 6.6km/h    [Jun 27 20:00 – Jun 28 07:00]
+DAILY DIRECTION CONCENTRATION
+QD #7:            up to 54% of a day within ±5° of 349° (1 day(s) at 50%+)
+QD #17:           up to 50% of a day within ±5° of 189° (1 day(s) at 50%+)
+QD #2:            up to 50% of a day within ±5° of 51° (1 day(s) at 50%+)
+QD #1:            up to 50% of a day within ±5° of 279° (1 day(s) at 50%+)
+```

@@ -1,1 +1,14 @@
 <!-- hash:39ddcc3ecfb5 -->
+```
+PERSISTENT STATES
+BOYA LAKE:        zero wind 15h, 1 shifts >90°, max 11.7km/h   [Jun 23 22:00 – Jun 24 12:00]
+ROSSWOOD:         zero wind 14h, 7 shifts >90°, max 5.3km/h    [Jul 12 19:00 – Jul 13 08:00]
+VAN DYKE:         zero wind 13h, 2 shifts >90°, max 5.6km/h    [Jun 25 20:00 – Jun 26 08:00]
+BELL:             zero wind 12h, 3 shifts >90°, max 4.9km/h      [Jul 3 21:00 – Jul 4 08:00]
+DAILY DIRECTION CONCENTRATION
+NASS CAMP:        up to 88% of a day within ±5° of 189° (11 day(s) at 50%+)
+TELEGRAPH CREEK:  up to 67% of a day within ±5° of 244° (11 day(s) at 50%+)
+PARROTT:          up to 62% of a day within ±5° of 284° (6 day(s) at 50%+)
+KITPARK:          up to 50% of a day within ±5° of 237° (1 day(s) at 50%+)
+AUGIER LAKE:      up to 50% of a day within ±5° of 224° (1 day(s) at 50%+)
+```

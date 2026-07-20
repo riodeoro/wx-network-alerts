@@ -1,1 +1,21 @@
 <!-- hash:f4416d3e4556 -->
+```
+RH EXCEEDED 100%
+TABLE RIVER:      248 readings, max 116.0%                     [Jan 27 16:00 → May 12 10:00]
+RH CHANGED >50%/H
+FORT NELSON FS:   2 events                                     [Jun 24 18:00 → Jul 19 04:00]
+BEAR LAKE:        1 event                                                     [Jul 17 17:00]
+BEDNESTI:         1 event                                                     [Jul 17 15:00]
+CATFISH:          1 event                                                     [Jun 24 14:00]
+ELK MOUNTAIN:     1 event                                                     [Jun 23 18:00]
+RH DROPPED AS LOW AS
+TABLE RIVER:      1.0%                                                               [Mar 3]
+MANSON:           3.0%                                                              [Jun 23]
+VALEMOUNT 2:      14.0%                                                             [Apr 25]
+PERSISTENT STATES
+MANSON:           RH constant 100% for 378h, Rn_1 (24.6mm)     [Mar 27 11:00 – Apr 12 04:00]
+SIFTON:           RH constant 100% for 135h, Rn_1 (31.8mm)       [Feb 2 14:00 – Feb 8 04:00]
+BLUE RIVER 2:     RH constant 100% for 66h, Rn_1 (10.0mm)       [Jan 31 17:00 – Feb 3 10:00]
+WITCH:            RH constant 100% for 46h, Rn_1 (40.6mm)        [Feb 2 15:00 – Feb 4 12:00]
+SEVEREID:         RH constant 100% for 45h, Rn_1 (21.6mm)       [Jan 31 17:00 – Feb 3 10:00]
+```

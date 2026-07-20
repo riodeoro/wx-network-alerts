@@ -1,1 +1,7 @@
 <!-- hash:40c76a113c24 -->
+```
+DAILY DIRECTION CONCENTRATION
+MERRITT 2 HUB:    up to 54% of a day within ±5° of 208° (1 day(s) at 50%+)
+LITTLE CHOPAKA:   up to 50% of a day within ±5° of 319° (1 day(s) at 50%+)
+GWYNETH LAKE:     up to 50% of a day within ±5° of 198° (1 day(s) at 50%+)
+```

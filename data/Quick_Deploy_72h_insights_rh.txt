@@ -1,1 +1,5 @@
 <!-- hash:479e0b6329af -->
+```
+PERSISTENT STATES
+QD #20:           RH constant 3% for 73h, zero Rn_1   [Jul 17 08:00 – Jul 20 08:00, ongoing]
+```

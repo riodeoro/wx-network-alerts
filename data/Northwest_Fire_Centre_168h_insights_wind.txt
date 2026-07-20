@@ -1,1 +1,9 @@
 <!-- hash:d1a932f2015a -->
+```
+DAILY DIRECTION CONCENTRATION
+NASS CAMP:        up to 62% of a day within ±5° of 186° (1 day(s) at 50%+)
+TELEGRAPH CREEK:  up to 58% of a day within ±5° of 244° (1 day(s) at 50%+)
+GRASSY PLAINS HUB: up to 58% of a day within ±5° of 264° (1 day(s) at 50%+)
+UPPER KISPIOX:    up to 54% of a day within ±5° of 328° (1 day(s) at 50%+)
+CRANBERRY:        up to 50% of a day within ±5° of 221° (1 day(s) at 50%+)
+```

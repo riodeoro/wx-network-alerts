@@ -1,1 +1,6 @@
 <!-- hash:d67005135276 -->
+```
+EXTREME VALUES
+BLUE RIVER 2:     Highest (35.9°C)                                            [Jul 17 16:00]
+MOOSE LAKE:       Lowest (-2.1°C)                                             [Jul 13 06:00]
+```

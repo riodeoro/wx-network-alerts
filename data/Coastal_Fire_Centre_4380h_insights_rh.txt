@@ -1,1 +1,19 @@
 <!-- hash:c028c6c5514f -->
+```
+RH CHANGED >50%/H
+DARCY:            3 events                                      [Mar 5 11:00 → May 10 17:00]
+ALLISON PASS:     1 event                                                     [Jul 16 15:00]
+FRANK CREEK:      1 event                                                      [Mar 8 12:00]
+KLINAKLINI:       1 event                                                     [Feb 28 13:00]
+SALTSPRING 2:     1 event                                                     [Mar 30 02:00]
+RH DROPPED AS LOW AS
+TS ARTLISH:       3.0%                                                               [Apr 9]
+MACHMELL:         13.0%                                                              [Jun 2]
+TS SAN JUAN:      18.0%                                                             [Apr 25]
+PERSISTENT STATES
+UBC RESEARCH:     RH constant 100% for 202h, Rn_1 (131.2mm)     [Jan 28 03:00 – Feb 5 12:00]
+TS ARTLISH:       RH constant 100% for 189h, Rn_1 (331.4mm)     [Jan 27 16:00 – Feb 4 12:00]
+TOBA CAMP:        RH constant 100% for 187h, Rn_1 (113.0mm)     [Jan 27 17:00 – Feb 4 11:00]
+SCAR CREEK:       RH constant 98% for 140h, Rn_1 (142.4mm)      [Jan 29 21:00 – Feb 4 16:00]
+TS MCNABB:        RH constant 100% for 129h, Rn_1 (224.2mm)     [Jan 28 04:00 – Feb 2 12:00]
+```

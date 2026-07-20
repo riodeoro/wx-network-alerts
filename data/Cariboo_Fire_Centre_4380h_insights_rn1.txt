@@ -1,1 +1,11 @@
 <!-- hash:f76063155e02 -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
+TAUTRI:           2 hours, Rn_1 (1.0mm)                        [Apr 21 18:00 → Apr 23 14:00]
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]
+GASPARD:          1 hour, Rn_1 (0.2mm)                                        [Mar 30 13:00]
+MEADOW LAKE:      1 hour, Rn_1 (0.2mm)                                        [Mar 30 15:00]
+HIGH PRECIPITATION
+PLUMMER HUT:      90.2 mm/h                                                          [Feb 4]
+```

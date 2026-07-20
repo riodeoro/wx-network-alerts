@@ -1,1 +1,9 @@
 <!-- hash:946fbdcdd96b -->
+```
+LOW DATA COVERAGE
+TABERNACLE WIND:  1% (15/2161h)                                                     [Apr 21]
+UNCONFIGURED SENSORS
+  NORNS: battery voltage, charge current, gust speed, solar voltage, wind direction, and wind speed unconfigured
+  BAKER: RH, battery voltage, charge current, solar voltage, and temperature unconfigured
+  AKOKLI CREEK, BRISCO, DARKWOODS: battery voltage, charge current, and solar voltage unconfigured
+```

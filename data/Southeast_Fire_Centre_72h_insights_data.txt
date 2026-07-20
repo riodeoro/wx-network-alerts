@@ -1,1 +1,7 @@
 <!-- hash:4be769bfafed -->
+```
+UNCONFIGURED SENSORS
+  BAKER: RH, battery voltage, charge current, gust speed, precipitation, solar voltage, temperature, wind direction, and wind speed unconfigured
+  NORNS: battery voltage, charge current, gust speed, solar voltage, wind direction, and wind speed unconfigured
+  BRISCO, DARKWOODS, EIGHT MILE: battery voltage, charge current, and solar voltage unconfigured
+```

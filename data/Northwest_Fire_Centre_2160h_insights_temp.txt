@@ -1,1 +1,6 @@
 <!-- hash:b27044564dd4 -->
+```
+EXTREME VALUES
+CEDARVALE:        Highest (36.3°C)                                                  [Jul 17]
+ATLIN:            Lowest (-6.2°C)                                                   [Apr 22]
+```

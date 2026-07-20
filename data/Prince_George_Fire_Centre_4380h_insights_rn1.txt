@@ -1,1 +1,9 @@
 <!-- hash:f4416d3e4556 -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+CHILAKO:          2 hours, Rn_1 (1.4mm)                                 [Mar 29 16:00–17:00]
+BLUE RIVER 2:     1 hour, Rn_1 (0.8mm)                                        [Mar 12 14:00]
+ELK MOUNTAIN:     1 hour, Rn_1 (0.8mm)                                        [Mar 14 17:00]
+HIGH PRECIPITATION
+KOMIE:            37.0 mm/h                                                         [Jun 30]
+```

@@ -1,1 +1,14 @@
 <!-- hash:b27044564dd4 -->
+```
+RH CHANGED >50%/H
+CEDARVALE:        2 events                                               [May 8 13:00–14:00]
+BELL-IRVING:      1 event                                                      [Jun 9 15:00]
+BOYA LAKE:        1 event                                                      [Jun 9 22:00]
+GANOKWA:          1 event                                                     [Jun 21 17:00]
+NADINA:           1 event                                                     [Jun 20 16:00]
+PERSISTENT STATES
+DEASE LAKE FS:    RH constant 100% for 18h, Rn_1 (33.4mm)        [Jun 4 17:00 – Jun 5 10:00]
+OLD FADDY:        RH constant 100% for 13h, zero Rn_1          [Jul 10 22:00 – Jul 11 10:00]
+NORTH BABINE:     RH constant 100% for 12h, zero Rn_1          [May 25 21:00 – May 26 08:00]
+UPPER FULTON:     RH constant 99% for 12h, Rn_1 (22.0mm)       [May 24 23:00 – May 25 10:00]
+```

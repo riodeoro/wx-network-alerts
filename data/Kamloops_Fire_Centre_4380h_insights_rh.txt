@@ -1,1 +1,19 @@
 <!-- hash:51c80d4a81f8 -->
+```
+RH READ 0%
+SILVERSTAR SF:    4371 readings                       [Jan 18 20:00 → Jul 20 08:00, ongoing]
+TURTLE:           157 readings                                  [Jan 25 20:00 → Feb 2 12:00]
+MABEL LAKE 2:     2 readings                                            [Apr 30 20:00–21:00]
+RH CHANGED >50%/H
+CLEARWATER HUB:   3 events                                      [Mar 8 05:00 → Jul 12 09:00]
+AUGUST LAKE:      2 events                                     [Mar 25 17:00 → May 21 18:00]
+ASPEN GROVE:      1 event                                                      [Jun 3 14:00]
+BRENDA MINES:     1 event                                                     [Jan 20 00:00]
+COLDSCAUR LAKE:   1 event                                                     [Jun 25 23:00]
+PERSISTENT STATES
+SILVERSTAR SF:    RH constant 0% for 4371h, zero Rn_1  [Jan 18 20:00 – Jul 20 08:00, ongoing]
+MABEL LAKE 2:     RH constant 100% for 262h, Rn_1 (13.4mm)      [Jan 28 17:00 – Feb 8 14:00]
+TURTLE:           RH constant 0% for 92h, Rn_1 (5.8mm)         [Jan 27 20:00 – Jan 31 15:00]
+SEYMOUR ARM:      RH constant 100% for 68h, Rn_1 (4.0mm)        [Jan 31 16:00 – Feb 3 11:00]
+MCLEAN LAKE:      RH constant 100% for 65h, Rn_1 (0.2mm)         [Feb 4 19:00 – Feb 7 11:00]
+```

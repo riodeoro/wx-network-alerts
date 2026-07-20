@@ -1,1 +1,18 @@
 <!-- hash:0744b0c36e75 -->
+```
+RH READ 0%
+SILVERSTAR SF:    2151 readings                       [Apr 21 08:00 → Jul 20 08:00, ongoing]
+MABEL LAKE 2:     2 readings                                            [Apr 30 20:00–21:00]
+RH CHANGED >50%/H
+CLEARWATER HUB:   2 events                                     [Jun 25 23:00 → Jul 12 09:00]
+ASPEN GROVE:      1 event                                                      [Jun 3 14:00]
+AUGUST LAKE:      1 event                                                     [May 21 18:00]
+COLDSCAUR LAKE:   1 event                                                     [Jun 25 23:00]
+FINTRY:           1 event                                                      [Jun 3 18:00]
+PERSISTENT STATES
+SILVERSTAR SF:    RH constant 0% for 2151h, zero Rn_1  [Apr 21 08:00 – Jul 20 08:00, ongoing]
+SICAMOUS:         RH constant 100% for 20h, Rn_1 (21.4mm)      [May 13 13:00 – May 14 08:00]
+GWYNETH LAKE:     RH constant 98% for 14h, Rn_1 (4.4mm)        [Apr 21 19:00 – Apr 22 08:00]
+CAHILTY:          RH constant 99% for 12h, Rn_1 (11.4mm)       [May 13 22:00 – May 14 09:00]
+WELLS GRAY:       RH constant 100% for 12h, zero Rn_1          [May 29 20:00 – May 30 07:00]
+```

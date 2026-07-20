@@ -1,1 +1,17 @@
 <!-- hash:f9f4c2060a81 -->
+```
+EXTREME VALUES
+SEYMOUR ARM:      Highest (38.6°C)                                            [Jul 17 17:00]
+FRENCH BAR:       Lowest (-1.7°C)                                             [Jun 27 05:00]
+TEMPERATURE EXCEEDED 35°C
+LITTLE CHOPAKA:   37.5°C                                                      [Jul 16 17:00]
+SPLINTLUM:        37.4°C                                                      [Jul 16 16:00]
+AUGUST LAKE:      36.5°C                                                      [Jul 15 16:00]
+AFTON:            36.2°C                                                      [Jul 17 15:00]
+PENTICTON RS:     36.2°C                                                      [Jul 14 17:00]
+EAST BARRIERE:    36.1°C                                                      [Jul 17 14:00]
+LILLOOET:         36.1°C                                                      [Jul 16 17:00]
+TURTLE:           36.1°C                                                      [Jul 17 16:00]
+FINTRY:           36.0°C                                                      [Jul 16 16:00]
+WEST KELOWNA:     35.5°C                                                      [Jul 14 17:00]
+```

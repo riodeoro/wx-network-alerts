@@ -1,1 +1,20 @@
 <!-- hash:0fec1e3cf83c -->
+```
+GUSTS EXCEEDED 80 KM/H
+PINE CREEK:       95.0 km/h (5 readings >80)                     [Feb 8 00:00 – Mar 7 20:00]
+PARROTT:          90.5 km/h (16 readings >80)                   [Feb 12 10:00 – Apr 6 18:00]
+GRASSY PLAINS HUB: 84.7 km/h (1 reading >80)                                  [Feb 26 07:00]
+NASS CAMP:        84.3 km/h (1 reading >80)                                    [Mar 7 18:00]
+PERSISTENT STATES
+KISPIOX HUB:      zero wind 108h, 33 shifts >90°, max 6.8km/h  [Jan 22 16:00 – Jan 27 03:00]
+ROSSWOOD:         zero wind 92h, 17 shifts >90°, max 16.2km/h  [Jan 23 16:00 – Jan 27 11:00]
+BOB QUINN LAKE:   zero wind 91h, 32 shifts >90°, max 3.1km/h   [Jan 19 22:00 – Jan 23 16:00]
+OLD FADDY:        zero wind 74h, 10 shifts >90°, max 5.4km/h    [Jan 31 23:00 – Feb 4 00:00]
+VAN DYKE:         zero wind 59h, 11 shifts >90°, max 2.9km/h   [Jan 20 04:00 – Jan 22 14:00]
+DAILY DIRECTION CONCENTRATION
+AUGIER LAKE:      up to 96% of a day within ±5° of 59° (14 day(s) at 50%+)
+TELEGRAPH CREEK:  up to 88% of a day within ±5° of 234° (56 day(s) at 50%+)
+PARROTT:          up to 83% of a day within ±5° of 85° (32 day(s) at 50%+)
+KITPARK:          up to 75% of a day within ±5° of 17° (25 day(s) at 50%+)
+CEDARVALE:        up to 75% of a day within ±5° of 276° (13 day(s) at 50%+)
+```

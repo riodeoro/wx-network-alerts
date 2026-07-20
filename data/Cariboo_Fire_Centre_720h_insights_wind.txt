@@ -1,1 +1,12 @@
 <!-- hash:07d9148c99c8 -->
+```
+GUSTS EXCEEDED 80 KM/H
+ANAHIM LAKE:      282.2 km/h (1 reading >80)                                  [Jul 11 16:00]
+HORSEFLY:         130.3 km/h (2 readings >80)                   [Jul 4 13:00 – Jul 17 19:00]
+DAILY DIRECTION CONCENTRATION
+NEMIAH:           up to 54% of a day within ±5° of 288° (1 day(s) at 50%+)
+ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (1 day(s) at 50%+)
+BIG VALLEY:       up to 50% of a day within ±5° of 30° (1 day(s) at 50%+)
+BALDFACE:         up to 50% of a day within ±5° of 289° (1 day(s) at 50%+)
+DECEPTION:        up to 50% of a day within ±5° of 56° (1 day(s) at 50%+)
+```

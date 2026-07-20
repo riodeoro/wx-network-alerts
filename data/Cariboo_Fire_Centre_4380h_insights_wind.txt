@@ -1,1 +1,24 @@
 <!-- hash:f76063155e02 -->
+```
+GUSTS EXCEEDED 80 KM/H
+ANAHIM LAKE:      282.2 km/h (1 reading >80)                                  [Jul 11 16:00]
+TAUTRI:           226.9 km/h (1 reading >80)                                   [Jun 5 15:00]
+TATLA LAKE:       202.2 km/h (1 reading >80)                                   [Jun 6 13:00]
+PLUMMER HUT:      176.6 km/h (217 readings >80)                [Jan 30 16:00 – Apr 19 01:00]
+HORSEFLY:         130.3 km/h (3 readings >80)                   [Jun 4 11:00 – Jul 17 19:00]
+SUSTAINED WIND EXCEEDED 60 KM/H
+PLUMMER HUT:      76.3 km/h (27 readings >60)                    [Feb 4 01:00 – Apr 6 18:00]
+PERSISTENT STATES
+DECEPTION:        zero wind 163h, 18 shifts >90°, max 4.0km/h  [Jan 18 21:00 – Jan 25 15:00]
+BENSON:           zero wind 47h, 7 shifts >90°, max 7.4km/h    [Jan 20 17:00 – Jan 22 15:00]
+PLUMMER HUT:      zero wind 22h, 7 shifts >90°, max 9.6km/h      [Mar 4 13:00 – Mar 5 10:00]
+PLACE LAKE:       zero wind 19h, 2 shifts >90°, max 2.7km/h    [Jan 23 17:00 – Jan 24 11:00]
+YOUNG LAKE:       zero wind 13h, 3 shifts >90°, max 8.2km/h    [Mar 20 23:00 – Mar 21 11:00]
+CHURN CREEK:      zero wind 70h, no gusts, no dir changes        [Apr 1 15:00 – Apr 4 12:00]
+DAILY DIRECTION CONCENTRATION
+MEADOW LAKE:      up to 100% of a day within ±5° of 37° (72 day(s) at 50%+)
+BIG VALLEY:       up to 88% of a day within ±5° of 225° (25 day(s) at 50%+)
+YOUNG LAKE:       up to 88% of a day within ±5° of 164° (27 day(s) at 50%+)
+GASPARD:          up to 88% of a day within ±5° of 51° (28 day(s) at 50%+)
+PLUMMER HUT:      up to 58% of a day within ±5° of 188° (6 day(s) at 50%+)
+```

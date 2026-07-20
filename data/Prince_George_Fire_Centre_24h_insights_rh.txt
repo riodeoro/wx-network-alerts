@@ -1,1 +1,5 @@
 <!-- hash:c70618676ff4 -->
+```
+PERSISTENT STATES
+CATFISH:          RH constant 100% for 12h, zero Rn_1  [Jul 19 21:00 – Jul 20 08:00, ongoing]
+```

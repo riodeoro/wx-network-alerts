@@ -1,1 +1,10 @@
 <!-- hash:4be769bfafed -->
+```
+EXTREME VALUES
+DOWNIE:           Highest (35.8°C)                                            [Jul 17 16:00]
+MARION:           Lowest (3.1°C)                                     [since Jul 20, ongoing]
+TEMPERATURE EXCEEDED 35°C
+ROCK CREEK:       35.7°C                                                      [Jul 17 16:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+FALLS CREEK:      1 spike                                                     [Jul 17 10:00]
+```

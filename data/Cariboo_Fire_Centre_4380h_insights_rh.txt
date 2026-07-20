@@ -1,1 +1,15 @@
 <!-- hash:f76063155e02 -->
+```
+RH CHANGED >50%/H
+GAVIN:            4 events                                      [Apr 6 18:00 → Jul 17 16:00]
+BALDFACE:         3 events                                     [Apr 10 09:00 → Jun 24 16:00]
+ALEXIS CREEK:     1 event                                                     [Apr 14 19:00]
+GASPARD:          1 event                                                     [Mar 20 15:00]
+KNIFE:            1 event                                                     [Apr 14 23:00]
+PERSISTENT STATES
+TAUTRI:           RH constant 3% for 45h, Rn_1 (1.0mm)         [Apr 21 18:00 – Apr 23 14:00]
+PLUMMER HUT:      RH constant 99% for 30h, zero Rn_1           [Jan 29 10:00 – Jan 30 15:00]
+KNIFE:            RH constant 100% for 22h, Rn_1 (0.6mm)       [Jan 30 19:00 – Jan 31 16:00]
+ALEXIS CREEK:     RH constant 100% for 21h, Rn_1 (0.2mm)         [Mar 6 17:00 – Mar 7 13:00]
+DECEPTION:        RH constant 97% for 17h, zero Rn_1             [Feb 2 18:00 – Feb 3 10:00]
+```

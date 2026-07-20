@@ -1,1 +1,6 @@
 <!-- hash:568f609d8624 -->
+```
+EXTREME VALUES
+SPLINTLUM:        Highest (31.7°C)                                            [Jul 19 16:00]
+COLDSCAUR LAKE:   Lowest (4.3°C)                                              [Jul 20 05:00]
+```

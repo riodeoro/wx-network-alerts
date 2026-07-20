@@ -1,1 +1,14 @@
 <!-- hash:c38490ebdd5b -->
+```
+RH CHANGED >50%/H
+BLAEBERRY:        1 event                                                     [Jun 25 20:00]
+DOWNIE:           1 event                                                     [Jul 18 15:00]
+ELKO:             1 event                                                      [Jul 1 17:00]
+NICOLL:           1 event                                                     [Jul 15 18:00]
+PERSISTENT STATES
+NORNS:            RH constant 100% for 43h, zero Rn_1           [Jun 29 22:00 – Jul 1 16:00]
+DUNCAN:           RH constant 100% for 19h, Rn_1 (11.0mm)       [Jun 30 17:00 – Jul 1 11:00]
+DEWAR CREEK:      RH constant 100% for 14h, Rn_1 (0.4mm)        [Jun 30 20:00 – Jul 1 09:00]
+BLAEBERRY:        RH constant 100% for 12h, Rn_1 (0.2mm)       [Jun 27 23:00 – Jun 28 10:00]
+FLATHEAD 2:       RH constant 100% for 12h, zero Rn_1          [Jun 29 22:00 – Jun 30 09:00]
+```

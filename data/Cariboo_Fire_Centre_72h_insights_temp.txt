@@ -1,1 +1,6 @@
 <!-- hash:2e3744a7bba2 -->
+```
+EXTREME VALUES
+KNIFE:            Highest (34.2°C)                                            [Jul 17 14:00]
+BALDFACE:         Lowest (2.4°C)                                     [since Jul 20, ongoing]
+```

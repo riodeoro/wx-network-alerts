@@ -1,1 +1,10 @@
 <!-- hash:16e56e2bffe9 -->
+```
+RH READ 0%
+SILVERSTAR SF:    169 readings                        [Jul 13 08:00 → Jul 20 08:00, ongoing]
+RH CHANGED >50%/H
+SICAMOUS:         2 events                                     [Jul 17 19:00 → Jul 19 17:00]
+PERSISTENT STATES
+SILVERSTAR SF:    RH constant 0% for 169h, zero Rn_1  [Jul 13 08:00 – Jul 20 08:00, ongoing]
+WELLS GRAY:       RH constant 100% for 12h, zero Rn_1          [Jul 18 21:00 – Jul 19 08:00]
+```

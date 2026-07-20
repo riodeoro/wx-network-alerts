@@ -1,1 +1,5 @@
 <!-- hash:c70618676ff4 -->
+```
+UNCONFIGURED SENSORS
+  BEAR LAKE, CHILAKO, FORT NELSON FS, GOSNEL, MOOSE LAKE: battery voltage, charge current, and solar voltage unconfigured
+```

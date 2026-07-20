@@ -1,1 +1,14 @@
 <!-- hash:a6f590c2013a -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
+DEWAR CREEK:      23 hours, Rn_1 (16.8mm)                        [Mar 5 13:00 → Jun 5 12:00]
+CARIBOO CREEK:    3 hours, Rn_1 (7.0mm)                        [Jun 11 22:00 → Jun 12 12:00]
+DUNCAN:           3 hours, Rn_1 (3.0mm)                                 [May 29 12:00–15:00]
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+DARKWOODS:        25 hours, Rn_1 (10.2mm)                      [Mar 22 12:00 → Jul 12 18:00]
+BIGATTINI:        5 hours, Rn_1 (4.6mm)                        [Mar 14 15:00 → Mar 30 14:00]
+CHERRY LAKE:      1 hour, Rn_1 (0.6mm)                                        [Mar 12 13:00]
+HIGH PRECIPITATION
+OCTOPUS CREEK:    27.4 mm/h                                                         [Jun 29]
+NICOLL:           23.2 mm/h                                                         [Jun 29]
+```

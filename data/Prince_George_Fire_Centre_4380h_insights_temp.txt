@@ -1,1 +1,27 @@
 <!-- hash:f4416d3e4556 -->
+```
+EXTREME VALUES
+BLUE RIVER 2:     Highest (35.9°C)                                                  [Jul 17]
+TABLE RIVER:      Lowest (-62.2°C)                                                  [Mar 21]
+TEMPERATURE DROPPED BELOW -35°C
+TOAD RIVER:       -41.1°C                                                           [Feb 27]
+PINK MOUNTAIN:    -40.6°C                                                           [Feb 27]
+HELMUT:           -39.5°C                                                           [Feb 27]
+SIERRA:           -38.9°C                                                           [Feb 23]
+FIRESIDE:         -38.8°C                                                           [Feb 18]
+ELK MOUNTAIN:     -38.7°C                                                           [Feb 18]
+KOMIE:            -38.6°C                                                           [Feb 27]
+MUSKWA:           -36.3°C                                                           [Feb 27]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+GOSNEL:           1 spike                                                      [Apr 8 15:00]
+HELMUT:           1 spike                                                      [Apr 3 05:00]
+HUDSON HOPE:      1 spike                                                     [Feb 28 00:00]
+MANSON:           1 spike                                                     [May 26 13:00]
+MOOSE LAKE:       1 spike                                                     [Apr 14 20:00]
+PERSISTENT STATES
+MANSON:           constant (0.1°C) for 24h, RH varied 0%         [Apr 5 22:00 – Apr 6 21:00]
+LOVELL COVE:      constant (0.1°C) for 11h, RH varied 0%       [Jan 29 18:00 – Jan 30 04:00]
+TABLE RIVER:      constant (1.8°C) for 10h, RH varied 8%        [Feb 9 20:00 – Feb 10 05:00]
+BLUE RIVER 2:     constant (0.2°C) for 9h, RH varied 0%        [Mar 16 19:00 – Mar 17 03:00]
+CATFISH:          constant (0.1°C) for 7h, RH varied 0%          [Mar 2 19:00 – Mar 3 01:00]
+```

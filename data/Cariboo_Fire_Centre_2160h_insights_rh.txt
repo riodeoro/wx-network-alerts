@@ -1,1 +1,13 @@
 <!-- hash:177a9a7fba1f -->
+```
+RH CHANGED >50%/H
+GAVIN:            3 events                                     [Jun 24 15:00 → Jul 17 16:00]
+PLACE LAKE:       3 events                                       [May 3 08:00 → Jul 7 08:00]
+BALDFACE:         2 events                                              [Jun 24 08:00–16:00]
+LIKELY RS:        1 event                                                     [Jun 21 18:00]
+LONE BUTTE:       1 event                                                     [Jul 18 17:00]
+PERSISTENT STATES
+TAUTRI:           RH constant 3% for 45h, Rn_1 (1.0mm)         [Apr 21 18:00 – Apr 23 14:00]
+DECEPTION:        RH constant 100% for 12h, zero Rn_1          [May 29 21:00 – May 30 08:00]
+BIG VALLEY:       RH constant 99% for 12h, Rn_1 (4.4mm)                 [Jul 19 00:00–11:00]
+```

@@ -1,1 +1,19 @@
 <!-- hash:0fec1e3cf83c -->
+```
+RH CHANGED >50%/H
+CEDARVALE:        2 events                                               [May 8 13:00–14:00]
+BELL-IRVING:      1 event                                                      [Jun 9 15:00]
+BOYA LAKE:        1 event                                                      [Jun 9 22:00]
+GANOKWA:          1 event                                                     [Jun 21 17:00]
+NADINA:           1 event                                                     [Jun 20 16:00]
+RH DROPPED AS LOW AS
+CEDARVALE:        3.0%                                                               [May 8]
+ROSSWOOD:         13.0%                                                              [Jun 2]
+PINE CREEK:       13.0%                                                              [May 7]
+PERSISTENT STATES
+KITPARK:          RH constant 100% for 214h, Rn_1 (238.2mm)     [Jan 27 16:00 – Feb 5 13:00]
+DEASE LAKE FS:    RH constant 100% for 117h, Rn_1 (8.8mm)        [Feb 3 17:00 – Feb 8 13:00]
+CRANBERRY:        RH constant 100% for 103h, Rn_1 (38.0mm)       [Feb 3 15:00 – Feb 7 21:00]
+BELL:             RH constant 98% for 69h, Rn_1 (47.2mm)         [Feb 2 18:00 – Feb 5 14:00]
+VAN DYKE:         RH constant 100% for 66h, Rn_1 (60.0mm)        [Feb 2 18:00 – Feb 5 11:00]
+```

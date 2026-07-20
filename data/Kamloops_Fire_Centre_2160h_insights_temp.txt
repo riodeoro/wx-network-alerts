@@ -1,1 +1,19 @@
 <!-- hash:0744b0c36e75 -->
+```
+EXTREME VALUES
+SEYMOUR ARM:      Highest (38.6°C)                                                  [Jul 17]
+COLDSCAUR LAKE:   Lowest (-8.9°C)                                                   [Apr 27]
+TEMPERATURE EXCEEDED 35°C
+LITTLE CHOPAKA:   37.5°C                                                            [Jul 16]
+SPLINTLUM:        37.4°C                                                            [Jul 16]
+AUGUST LAKE:      36.5°C                                                            [Jul 15]
+AFTON:            36.2°C                                                            [Jul 17]
+PENTICTON RS:     36.2°C                                                            [Jul 14]
+EAST BARRIERE:    36.1°C                                                            [Jul 17]
+LILLOOET:         36.1°C                                                            [Jul 16]
+TURTLE:           36.1°C                                                            [Jul 17]
+FINTRY:           36.0°C                                                            [Jul 16]
+WEST KELOWNA:     35.5°C                                                            [Jul 14]
+PERSISTENT STATES
+PASKA LAKE:       constant (0.1°C) for 6h, RH varied 1%                 [May 17 00:00–05:00]
+```

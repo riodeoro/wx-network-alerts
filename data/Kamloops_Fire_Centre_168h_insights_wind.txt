@@ -1,1 +1,10 @@
 <!-- hash:16e56e2bffe9 -->
+```
+GUSTS EXCEEDED 80 KM/H
+MERRITT 2 HUB:    86.6 km/h (1 reading >80)                                   [Jul 16 18:00]
+LITTLE CHOPAKA:   80.8 km/h (1 reading >80)                                   [Jul 15 21:00]
+DAILY DIRECTION CONCENTRATION
+MERRITT 2 HUB:    up to 54% of a day within ±5° of 208° (1 day(s) at 50%+)
+LITTLE CHOPAKA:   up to 50% of a day within ±5° of 319° (1 day(s) at 50%+)
+GWYNETH LAKE:     up to 50% of a day within ±5° of 198° (1 day(s) at 50%+)
+```

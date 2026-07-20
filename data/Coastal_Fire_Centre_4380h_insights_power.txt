@@ -1,1 +1,33 @@
 <!-- hash:c028c6c5514f -->
+```
+LOW BATTERY VOLTAGE
+QUINSAM BASE FWX: min 7.00V, mean 12.63V [low]                                       [Feb 2]
+SCAR CREEK:       min 11.40V, mean 12.05V [low]                                      [Jun 4]
+TS MAURELLE:      min 11.50V, mean 12.91V [low]                                     [Jan 21]
+TALCHAKO:         min 12.30V, mean 12.99V                                           [Jan 23]
+NO DAYTIME CHARGING
+FRANK CREEK:      no charge 393 daytime readings (Vbat 12.70V, Vslr 9.70V)  [Jan 19 10:00 – Jul 20 08:00, ongoing]
+SCAR CREEK:       no charge 308 daytime readings (Vbat 11.80V, Vslr 7.40V) [low]  [Jan 19 08:00 – Jun 9 12:00]
+TS ARTLISH:       no charge 283 daytime readings (Vbat 12.60V, Vslr 8.50V)  [Jan 19 08:00 – Feb 28 09:00]
+TALCHAKO:         no charge 259 daytime readings (Vbat 12.60V, Vslr 8.50V)  [Jan 19 08:00 – Jul 18 10:00]
+CHEAKAMUS:        no charge 236 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Jan 19 14:00 – Apr 18 14:00]
+QUINSAM BASE FWX: no charge 145 daytime readings (Vbat 11.90V, Vslr 6.10V) [low]  [Jan 19 08:00 – Jul 17 08:00]
+BIG SILVER 2:     no charge 144 daytime readings (Vbat 12.70V, Vslr 10.65V)  [Jan 24 08:00 – Jun 18 08:00]
+MENZIES CAMP:     no charge 115 daytime readings (Vbat 12.70V, Vslr 8.50V)  [Jan 19 08:00 – Jul 17 11:00]
+MACHMELL:         no charge 113 daytime readings (Vbat 12.70V, Vslr 10.50V)  [Jan 19 08:00 – Jul 4 08:00]
+TS ATLUCK:        no charge 103 daytime readings (Vbat 12.60V, Vslr 10.50V)  [Jan 19 08:00 – Apr 1 08:00]
+BEAVER CREEK:     no charge 98 daytime readings (Vbat 12.70V, Vslr 9.10V)  [Jan 24 08:00 – Apr 7 09:00]
+TS MAURELLE:      no charge 92 daytime readings (Vbat 11.50V, Vslr 8.10V) [low]  [Jan 19 08:00 – Feb 2 17:00]
+TS BLACKWATER:    no charge 91 daytime readings (Vbat 12.60V, Vslr 10.50V)  [Jan 19 08:00 – Apr 6 08:00]
+TS NAHMINT:       no charge 89 daytime readings (Vbat 12.70V, Vslr 9.70V)  [Jan 20 08:00 – Apr 28 08:00]
+TS TSITIKA:       no charge 84 daytime readings (Vbat 12.70V, Vslr 11.80V)  [Jan 21 08:00 – Apr 14 08:00]
+TS BURMAN:        no charge 61 daytime readings (Vbat 12.70V, Vslr 12.10V)  [Feb 2 08:00 – May 5 08:00]
+ALLISON PASS:     no charge 43 daytime readings (Vbat 12.70V, Vslr 10.70V)  [Jan 24 08:00 – Jun 8 08:00]
+BOOTHROYD:        no charge 31 daytime readings (Vbat 12.70V, Vslr 8.10V)  [Jan 19 08:00 – Apr 7 08:00]
+POWELL RIVER WEST LAKE: no charge 26 daytime readings (Vbat 12.70V, Vslr 7.90V)  [Jan 24 08:00 – Apr 1 08:00]
+SALTSPRING 2 (AC): no charge 23 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Jan 24 08:00 – Apr 1 08:00]
+MEAGER CREEK:     no charge 16 daytime readings (Vbat 12.70V, Vslr 12.20V)  [Jan 30 10:00 – Jul 17 08:00]
+TS NAKA CREEK:    no charge 15 daytime readings (Vbat 12.70V, Vslr 10.90V)  [Feb 10 08:00 – Jul 9 08:00]
+TOBA CAMP:        no charge 12 daytime readings (Vbat 12.70V, Vslr 12.10V)  [Feb 23 08:00 – Apr 14 08:00]
+TS ELPHINSTONE:   no charge 11 daytime readings (Vbat 12.70V, Vslr 8.20V)  [Feb 1 09:00 – Jul 17 08:00]
+```

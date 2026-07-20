@@ -1,1 +1,7 @@
 <!-- hash:177a9a7fba1f -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
+TAUTRI:           2 hours, Rn_1 (1.0mm)                        [Apr 21 18:00 → Apr 23 14:00]
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]
+```

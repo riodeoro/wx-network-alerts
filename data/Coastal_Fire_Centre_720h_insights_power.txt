@@ -1,1 +1,8 @@
 <!-- hash:32c867ce6c26 -->
+```
+LOW BATTERY VOLTAGE
+QUINSAM BASE FWX: min 12.30V, mean 12.83V                                     [Jun 21 05:00]
+NO DAYTIME CHARGING
+FRANK CREEK:      no charge 35 daytime readings (Vbat 12.60V, Vslr 11.80V)  [Jun 20 09:00 – Jul 20 08:00, ongoing]
+TALCHAKO:         no charge 11 daytime readings (Vbat 12.50V, Vslr 12.40V)  [Jun 21 08:00 – Jul 18 10:00]
+```
