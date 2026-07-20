@@ -1,6 +1,6 @@
-<!-- hash:ebb281c062c3 -->
+<!-- hash:5c7d31582e6c -->
 ```
 EXTREME VALUES
-CEDARVALE:        Highest (31.5°C)                                   [since Jul 19, ongoing]
+CEDARVALE:        Highest (31.5°C)                                            [Jul 19 16:00]
 ISKUT:            Lowest (2.3°C)                                              [Jul 19 06:00]
 ```

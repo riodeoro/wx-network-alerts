@@ -1,9 +1,9 @@
 FIRE CENTRE: Coastal Fire Centre
-WINDOW: 4380h | STATIONS: 49 | RECORDS: 205,357
+WINDOW: 4380h | STATIONS: 49 | RECORDS: 205,392
 
 === STATION OUTAGES ===
 LOW COVERAGE: CHEF CREEK TEST - 2% (99/4381 hours) @start=2026-04-16T21:00@end=2026-04-20T23:00
-LOW COVERAGE: TS MAURELLE - 36% (1595/4381 hours) @start=2026-01-18T21:00@end=2026-07-20T08:00
+LOW COVERAGE: TS MAURELLE - 36% (1595/4381 hours) @start=2026-01-19T01:00@end=2026-07-20T12:00
 SENSOR NA: APE LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: HOMATHKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: KLINAKLINI - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -13,7 +13,7 @@ SENSOR NA: MESACHIE 2 - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFI
 === RH ===
 OUTLIER Rh: TS ARTLISH - min=3.0, max=62.0 @ts=2026-04-09T12:00
 OUTLIER Rh: TS SAN JUAN - min=18.0, max=47.0 @ts=2026-04-25T11:00
-OUTLIER Rh: MACHMELL - min=13.0, max=23.0 @ts=2026-06-02T14:00
+OUTLIER Rh: TS TSITIKA - min=16.0, max=38.0 @ts=2026-06-02T15:00
 RH CHANGE >50%/h: TS ELPHINSTONE - 2 events, peak=+80.0%/h @first=2026-05-13T10:00@last=2026-05-13T11:00
 RH CHANGE >50%/h: TS ARTLISH - 2 events, peak=-75.0%/h @first=2026-04-09T12:00@last=2026-04-09T13:00
 RH CHANGE >50%/h: TS SAN JUAN - 1 events, peak=-62.0%/h @first=2026-04-25T09:00@last=2026-04-25T09:00
@@ -31,7 +31,7 @@ EXTREME GUST: SUMMIT - max=313.3km/h, 1 readings >80km/h @start=2026-04-05T14:00
 EXTREME GUST: HAIG CAMP - max=101.4km/h, 1 readings >80km/h @start=2026-03-12T00:00@end=2026-03-12T00:00
 EXTREME GUST: APE LAKE - max=96.4km/h, 1 readings >80km/h @start=2026-02-26T09:00@end=2026-02-26T09:00
 ZERO WIND 696h: HAIG CAMP - Wspd=0 but 104 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=16.7km/h, avg=0.0km/h) @start=2026-04-29T13:00@end=2026-05-28T12:00
-ZERO WIND 233h: TALCHAKO - Wspd=0 but 53 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=2.6km/h, avg=0.0km/h) @start=2026-01-18T21:00@end=2026-01-28T13:00
+ZERO WIND 229h: TALCHAKO - Wspd=0 but 51 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=2.6km/h, avg=0.0km/h) @start=2026-01-19T01:00@end=2026-01-28T13:00
 ZERO WIND 138h: NAHATLATCH - Wspd=0 but 30 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=11.0km/h, avg=0.1km/h) @start=2026-02-17T12:00@end=2026-02-23T05:00
 ZERO WIND 103h: QUINSAM BASE FWX - Wspd=0 but 21 direction changes >90deg detected (max_delta=174deg), gusts nonzero (max=7.4km/h, avg=0.1km/h) @start=2026-01-23T16:00@end=2026-01-27T22:00
 ZERO WIND 93h: HOMATHKO - Wspd=0 but 16 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=9.8km/h, avg=0.1km/h) @start=2026-03-09T15:00@end=2026-03-13T11:00

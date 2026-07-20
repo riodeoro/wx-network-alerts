@@ -1,9 +1,9 @@
-<!-- hash:2eb19d08e014 -->
+<!-- hash:49719c6916fd -->
 ```
 PERSISTENT STATES
-HOMATHKO:         RH constant 100% for 49h, Rn_1 (1.4mm)       [Jul 17 09:00 – Jul 19 09:00]
-MACHMELL KLINIKLINI: RH constant 100% for 48h, Rn_1 (23.0mm)   [Jul 17 12:00 – Jul 19 11:00]
-KLINAKLINI:       RH constant 100% for 44h, Rn_1 (4.8mm)       [Jul 17 09:00 – Jul 19 04:00]
+MACHMELL KLINIKLINI: RH constant 100% for 47h, Rn_1 (23.0mm)   [Jul 17 13:00 – Jul 19 11:00]
+HOMATHKO:         RH constant 100% for 45h, Rn_1 (1.4mm)       [Jul 17 13:00 – Jul 19 09:00]
+KLINAKLINI:       RH constant 100% for 40h, Rn_1 (4.8mm)       [Jul 17 13:00 – Jul 19 04:00]
 APE LAKE:         RH constant 99% for 39h, Rn_1 (33.4mm)       [Jul 17 18:00 – Jul 19 08:00]
 MOUNT CAYLEY:     RH constant 100% for 36h, Rn_1 (0.2mm)       [Jul 17 20:00 – Jul 19 07:00]
 ```

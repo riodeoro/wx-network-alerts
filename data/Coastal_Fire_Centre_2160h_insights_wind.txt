@@ -1,11 +1,11 @@
-<!-- hash:cbcf1ad05a7b -->
+<!-- hash:a4a08f1cf32a -->
 ```
 PERSISTENT STATES
 HAIG CAMP:        zero wind 696h, 104 shifts >90°, max 16.7km/h  [Apr 29 13:00 – May 28 12:00]
 MESACHIE 2:       zero wind 17h, 3 shifts >90°, max 10.2km/h     [Jul 2 17:00 – Jul 3 09:00]
 TS ARTLISH:       zero wind 15h, 3 shifts >90°, max 2.3km/h    [Jun 25 19:00 – Jun 26 09:00]
-UBC RESEARCH:     zero wind 14h, 3 shifts >90°, max 4.1km/h      [Jul 2 19:00 – Jul 3 08:00]
 QUINSAM BASE FWX: zero wind 14h, 4 shifts >90°, max 5.2km/h     [Jul 9 18:00 – Jul 10 07:00]
+FRANK CREEK:      zero wind 14h, 2 shifts >90°, max 5.8km/h     [May 9 20:00 – May 10 09:00]
 DAILY DIRECTION CONCENTRATION
 FRANK CREEK:      up to 67% of a day within ±5° of 201° (12 day(s) at 50%+)
 TS BLACKWATER:    up to 67% of a day within ±5° of 115° (6 day(s) at 50%+)

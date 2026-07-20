@@ -1,4 +1,4 @@
-<!-- hash:cbcf1ad05a7b -->
+<!-- hash:a4a08f1cf32a -->
 ```
 LOW BATTERY VOLTAGE
 SCAR CREEK:       min 11.40V, mean 12.33V [low]                                      [Jun 4]

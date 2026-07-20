@@ -1,4 +1,4 @@
-<!-- hash:6e23ffc4bace -->
+<!-- hash:9ca5a6820450 -->
 ```
 LOW BATTERY VOLTAGE
 BIG VALLEY:       min 11.90V, mean 13.14V [low]                                     [Jan 19]

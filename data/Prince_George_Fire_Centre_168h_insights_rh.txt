@@ -1,4 +1,4 @@
-<!-- hash:109c395d8bc5 -->
+<!-- hash:de33d17cfb7c -->
 ```
 RH CHANGED >50%/H
 ROCKINGHAM:       1 event, peak Δ +59%/h                                      [Jul 18 16:00]
@@ -7,5 +7,6 @@ BEAR LAKE:        1 event, peak Δ +56%/h                                      [
 BEDNESTI:         1 event, peak Δ +52%/h                                      [Jul 17 15:00]
 GRAHAM:           1 event, peak Δ +52%/h                                      [Jul 16 21:00]
 PERSISTENT STATES
+HIXON:            RH constant 100% for 12h, zero Rn_1  [Jul 19 23:00 – Jul 20 10:00, ongoing]
 CATFISH:          RH constant 100% for 12h, zero Rn_1  [Jul 19 21:00 – Jul 20 08:00, ongoing]
 ```

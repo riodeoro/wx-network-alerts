@@ -1,6 +1,8 @@
-<!-- hash:f23594d8bb45 -->
+<!-- hash:6313ea0ce216 -->
 ```
 EXTREME VALUES
 BLUE RIVER 2:     Highest (35.9°C)                                            [Jul 17 16:00]
 MOOSE LAKE:       Lowest (-2.1°C)                                             [Jul 13 06:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+WONOWON:          1 spike, peak Δ 5.0°C                                       [Jun 20 14:00]
 ```

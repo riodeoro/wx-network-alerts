@@ -1,8 +1,8 @@
-<!-- hash:bdbef0c0850f -->
+<!-- hash:a99ab13aa2c9 -->
 ```
 LOW BATTERY VOLTAGE
-SMALLWOOD:        min 6.90V, mean 12.63V [low]                                       [Feb 9]
-BLAEBERRY:        min 10.90V, mean 12.61V [low]                                      [Feb 5]
+SMALLWOOD:        min 6.90V, mean 12.64V [low]                                       [Feb 9]
+BLAEBERRY:        min 10.90V, mean 12.62V [low]                                      [Feb 5]
 ROUND PRAIRIE:    min 11.50V, mean 13.38V [low]                                     [Feb 19]
 ROCK CREEK:       min 11.80V, mean 13.01V [low]                                      [Feb 8]
 REVELSTOKE:       min 12.00V, mean 13.04V                                           [Jan 23]

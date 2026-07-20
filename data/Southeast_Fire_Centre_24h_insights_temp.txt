@@ -1,6 +1,6 @@
-<!-- hash:d22592686406 -->
+<!-- hash:2dfed717b14b -->
 ```
 EXTREME VALUES
 ROCK CREEK:       Highest (33.3°C)                                            [Jul 19 17:00]
-MARION:           Lowest (3.1°C)                                     [since Jul 20, ongoing]
+MARION:           Lowest (3.1°C)                                              [Jul 20 05:00]
 ```

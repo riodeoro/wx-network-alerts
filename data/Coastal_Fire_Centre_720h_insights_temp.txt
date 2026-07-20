@@ -1,4 +1,4 @@
-<!-- hash:f43a3f8bb516 -->
+<!-- hash:a29ebc7e16e5 -->
 ```
 EXTREME VALUES
 TOBA CAMP:        Highest (37.4°C)                                            [Jun 23 16:00]

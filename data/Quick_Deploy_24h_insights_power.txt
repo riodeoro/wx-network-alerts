@@ -1,7 +1,7 @@
-<!-- hash:746aadce4058 -->
+<!-- hash:10ef769337ab -->
 ```
 LOW BATTERY VOLTAGE
-QD #20 (AC):      min 12.10V, mean 12.53V                                     [Jul 20 01:00]
+QD #20 (AC):      min 12.10V, mean 12.52V                                     [Jul 20 01:00]
 NO DAYTIME CHARGING
 QD #20 (AC):      no charge 5 daytime readings (Vbat 12.70V, Vslr 0.00V)  [Jul 19 14:00–19:00]
 ```

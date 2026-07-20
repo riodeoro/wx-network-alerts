@@ -1,4 +1,4 @@
-<!-- hash:2d7154688ccf -->
+<!-- hash:80fae0d6bf47 -->
 ```
 PERSISTENT STATES
 QD #7:            zero wind 12h, 1 shifts >90°, max 6.6km/h    [Jun 27 20:00 – Jun 28 07:00]

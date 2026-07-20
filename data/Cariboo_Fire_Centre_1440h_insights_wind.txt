@@ -1,4 +1,4 @@
-<!-- hash:a12bf9d9b506 -->
+<!-- hash:34a50d63d156 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 ANAHIM LAKE:      282.2 km/h (1 reading >80)                                  [Jul 11 16:00]

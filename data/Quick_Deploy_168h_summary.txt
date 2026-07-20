@@ -1,11 +1,11 @@
 FIRE CENTRE: Quick Deploy
-WINDOW: 168h | STATIONS: 5 | RECORDS: 800
+WINDOW: 168h | STATIONS: 5 | RECORDS: 810
 
 === STATION OUTAGES ===
 SENSOR NA: QD #14 - Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED
 
 === RH ===
-CONSTANT RH: QD #20 - Constant low (<50%), avg=3%, 156h, precip=1.0mm @start=2026-07-13T20:00@end=2026-07-20T08:00
+CONSTANT RH: QD #20 - Constant low (<50%), avg=3%, 161h, precip=1.0mm @start=2026-07-13T20:00@end=2026-07-20T13:00
 
 === WIND ===
 None.
@@ -20,5 +20,5 @@ RAIN AT RH<10%: QD #20 - 3 hours, 1.0mm total, rank=2 @first=2026-07-16T08:00@la
 RAIN AT RH 10-25%: QD #19 - 2 hours, 0.2mm total, rank=1 @first=2026-07-17T15:00@last=2026-07-18T11:00
 
 === POWER ===
-LOW VBAT: QD #20 (AC) - min=11.70V, mean=12.41V, severity=low @ts=2026-07-14T06:00
+LOW VBAT: QD #20 (AC) - min=11.70V, mean=12.43V, severity=low @ts=2026-07-14T06:00
 NO CHARGE: QD #20 (AC) - 31 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=0.00V @start=2026-07-14T09:00@end=2026-07-19T19:00

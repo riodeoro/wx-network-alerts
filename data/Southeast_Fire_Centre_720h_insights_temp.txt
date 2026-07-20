@@ -1,4 +1,4 @@
-<!-- hash:2c89107b1aee -->
+<!-- hash:2ca86f7ebc3e -->
 ```
 EXTREME VALUES
 PENDOREILLE:      Highest (37.3°C)                                            [Jul 16 18:00]
@@ -11,6 +11,8 @@ GRAND FORKS:      35.8°C                                                      [
 BRISCO:           35.6°C                                                      [Jul 16 17:00]
 JOHNSON LAKE:     35.6°C                                                      [Jul 16 17:00]
 TOBY HUB:         35.1°C                                                      [Jul 16 17:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+SUCCOUR CREEK:    1 spike, peak Δ 5.2°C                                       [Jun 20 14:00]
 PERSISTENT STATES
 NANCY GREENE:     constant (9.1°C) for 6h, RH varied 0%                  [Jul 1 00:00–05:00]
 WHITE RIVER:      constant (7.8°C) for 6h, RH varied 0%                 [Jun 29 00:00–05:00]

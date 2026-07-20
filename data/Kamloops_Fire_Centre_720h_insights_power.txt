@@ -1,7 +1,7 @@
-<!-- hash:375fd13069d1 -->
+<!-- hash:208af174347b -->
 ```
 LOW BATTERY VOLTAGE
 MABEL LAKE 2 (AC): min 10.60V, mean 11.81V [low]                              [Jun 22 16:00]
 NO DAYTIME CHARGING
-MABEL LAKE 2 (AC): no charge 250 daytime readings (Vbat 11.90V, Vslr 0.10V) [low]  [Jun 20 08:00 – Jul 19 19:00]
+MABEL LAKE 2 (AC): no charge 250 daytime readings (Vbat 11.90V, Vslr 0.10V) [low]  [Jun 20 13:00 – Jul 20 12:00, ongoing]
 ```

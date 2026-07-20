@@ -1,4 +1,4 @@
-<!-- hash:2eb19d08e014 -->
+<!-- hash:49719c6916fd -->
 ```
 PERSISTENT STATES
 QUINSAM BASE FWX: zero wind 13h, 1 shifts >90°, max 4.3km/h    [Jul 17 20:00 – Jul 18 08:00]

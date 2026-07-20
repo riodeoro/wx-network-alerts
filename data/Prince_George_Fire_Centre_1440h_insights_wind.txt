@@ -1,7 +1,7 @@
-<!-- hash:5f248123a67c -->
+<!-- hash:b5886367716a -->
 ```
 GUSTS EXCEEDED 80 KM/H
-VALEMOUNT 2:      1367.0 km/h (66 readings >80)                [May 21 08:00 – Jun 20 05:00]
+VALEMOUNT 2:      1367.0 km/h (65 readings >80)                [May 24 07:00 – Jun 20 05:00]
 BEDNESTI:         330.4 km/h (1 reading >80)                                  [Jun 19 17:00]
 KLUSKUS:          180.6 km/h (2 readings >80)                   [May 25 17:00 – Jun 3 15:00]
 GRAHAM:           125.4 km/h (1 reading >80)                                  [Jun 10 16:00]

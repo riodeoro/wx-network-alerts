@@ -1,5 +1,5 @@
 FIRE CENTRE: Kamloops Fire Centre
-WINDOW: 4380h | STATIONS: 42 | RECORDS: 181,587
+WINDOW: 4380h | STATIONS: 42 | RECORDS: 181,588
 
 === STATION OUTAGES ===
 SENSOR NA: SILVERSTAR SF - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -10,14 +10,14 @@ SENSOR NA: PASKA LAKE - Vbat=50% NA, Vslr=50% NA, Ibat=50% NA
 
 === RH ===
 RH=0%: MABEL LAKE 2 - 2 readings @first=2026-04-30T20:00@last=2026-04-30T21:00
-RH=0%: SILVERSTAR SF - 4371 readings @first=2026-01-18T20:00@last=2026-07-20T08:00
+RH=0%: SILVERSTAR SF - 4370 readings @first=2026-01-19T01:00@last=2026-07-20T12:00
 RH=0%: TURTLE - 157 readings @first=2026-01-25T20:00@last=2026-02-02T12:00
 RH CHANGE >50%/h: TURTLE - 9 events, peak=+92.0%/h @first=2026-01-26T11:00@last=2026-06-25T18:00
 RH CHANGE >50%/h: SICAMOUS - 3 events, peak=+64.0%/h @first=2026-06-11T18:00@last=2026-07-19T17:00
 RH CHANGE >50%/h: CLEARWATER HUB - 3 events, peak=+61.0%/h @first=2026-03-08T05:00@last=2026-07-12T09:00
 RH CHANGE >50%/h: WELLS GRAY - 1 events, peak=+57.0%/h @first=2026-06-03T20:00@last=2026-06-03T20:00
 RH CHANGE >50%/h: AUGUST LAKE - 2 events, peak=+55.0%/h @first=2026-03-25T17:00@last=2026-05-21T18:00
-CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 4371h, no precip @start=2026-01-18T20:00@end=2026-07-20T08:00
+CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 4370h, no precip @start=2026-01-19T01:00@end=2026-07-20T12:00
 CONSTANT RH: MABEL LAKE 2 - Constant 100%, avg=100%, 262h, precip=13.4mm @start=2026-01-28T17:00@end=2026-02-08T14:00
 CONSTANT RH: TURTLE - Constant low (<50%), avg=0%, 92h, precip=5.8mm @start=2026-01-27T20:00@end=2026-01-31T15:00
 CONSTANT RH: SEYMOUR ARM - Constant 100%, avg=100%, 68h, precip=4.0mm @start=2026-01-31T16:00@end=2026-02-03T11:00
@@ -35,7 +35,7 @@ ZERO WIND 39h: SILVERSTAR SF - Wspd=0 but 1 direction changes >90deg detected (m
 ZERO WIND 22h: WELLS GRAY - Wspd=0 but 5 direction changes >90deg detected (max_delta=166deg), gusts nonzero (max=6.1km/h, avg=0.3km/h) @start=2026-02-13T15:00@end=2026-02-14T12:00
 ZERO WIND 22h: GWYNETH LAKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=134deg), gusts nonzero (max=4.6km/h, avg=0.8km/h) @start=2026-01-20T14:00@end=2026-01-21T11:00
 ZERO WIND 21h: CLEARWATER HUB - Wspd=0 but 9 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=3.0km/h, avg=0.4km/h) @start=2026-02-13T13:00@end=2026-02-14T09:00
-DIRECTION CONCENTRATION: ASHNOLA - up to 79% of a day in the 268 deg bin (34 day(s) at 50%+)
+DIRECTION CONCENTRATION: ASHNOLA - up to 79% of a day in the 268 deg bin (33 day(s) at 50%+)
 DIRECTION CONCENTRATION: GREENSTONE HUB - up to 96% of a day in the 302 deg bin (52 day(s) at 50%+)
 DIRECTION CONCENTRATION: GWYNETH LAKE - up to 79% of a day in the 189 deg bin (31 day(s) at 50%+)
 DIRECTION CONCENTRATION: SILVERSTAR SF - up to 75% of a day in the 262 deg bin (16 day(s) at 50%+)
@@ -73,13 +73,13 @@ SILENT GAUGE: MUDPIT - silent 5 of 7 neighbour rain hours (71.4%) @first=2026-06
 
 === POWER ===
 LOW VBAT: AFTON - min=7.50V, mean=13.11V, severity=low @ts=2026-01-22T18:00
-LOW VBAT: MABEL LAKE 2 - min=10.60V, mean=13.63V, severity=low @ts=2026-06-22T16:00
+LOW VBAT: MABEL LAKE 2 - min=10.60V, mean=13.62V, severity=low @ts=2026-06-22T16:00
 LOW VBAT: FINTRY - min=11.00V, mean=13.03V, severity=low @ts=2026-01-22T22:00
 LOW VBAT: GLIMPSE - min=11.50V, mean=12.17V, severity=low @ts=2026-05-13T22:00
-LOW VBAT: THYNNE - min=11.90V, mean=13.23V, severity=low @ts=2026-01-27T07:00
+LOW VBAT: THYNNE - min=11.90V, mean=13.24V, severity=low @ts=2026-01-27T07:00
 NO CHARGE: KETTLE 2 - 332 daytime readings (Vslr<Vbat), median Vbat=12.20V, median Vslr=9.25V @start=2026-01-19T08:00@end=2026-03-30T10:00
 NO CHARGE: GLIMPSE - 271 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=10.00V, severity=low @start=2026-01-19T08:00@end=2026-06-12T19:00
-NO CHARGE: MABEL LAKE 2 - 266 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=0.10V, severity=low @start=2026-06-18T16:00@end=2026-07-19T19:00
+NO CHARGE: MABEL LAKE 2 - 271 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=0.10V, severity=low @start=2026-06-18T16:00@end=2026-07-20T12:00
 NO CHARGE: HARBOUR LAKE - 249 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.00V @start=2026-01-19T08:00@end=2026-03-18T08:00
 NO CHARGE: WELLS GRAY - 227 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.00V @start=2026-01-19T08:00@end=2026-05-29T16:00
 NO CHARGE: COLDSCAUR LAKE - 223 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=10.70V @start=2026-01-19T08:00@end=2026-07-01T08:00

@@ -1,15 +1,15 @@
 FIRE CENTRE: Quick Deploy
-WINDOW: 720h | STATIONS: 7 | RECORDS: 2,702
+WINDOW: 720h | STATIONS: 7 | RECORDS: 2,707
 
 === STATION OUTAGES ===
-LOW COVERAGE: QD #19 - 19% (137/721 hours) @start=2026-07-14T16:00@end=2026-07-20T08:00
-LOW COVERAGE: QD #20 - 22% (156/721 hours) @start=2026-07-13T20:00@end=2026-07-20T08:00
-LOW COVERAGE: QD #14 - 28% (199/721 hours) @start=2026-07-12T02:00@end=2026-07-20T08:00
-LOW COVERAGE: QD #7 - 40% (288/721 hours) @start=2026-06-20T08:00@end=2026-07-02T09:00
+LOW COVERAGE: QD #19 - 20% (142/721 hours) @start=2026-07-14T16:00@end=2026-07-20T13:00
+LOW COVERAGE: QD #20 - 22% (161/721 hours) @start=2026-07-13T20:00@end=2026-07-20T13:00
+LOW COVERAGE: QD #14 - 28% (204/721 hours) @start=2026-07-12T02:00@end=2026-07-20T13:00
+LOW COVERAGE: QD #7 - 39% (283/721 hours) @start=2026-06-20T13:00@end=2026-07-02T09:00
 SENSOR NA: QD #14 - Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED
 
 === RH ===
-CONSTANT RH: QD #20 - Constant low (<50%), avg=3%, 156h, precip=1.0mm @start=2026-07-13T20:00@end=2026-07-20T08:00
+CONSTANT RH: QD #20 - Constant low (<50%), avg=3%, 161h, precip=1.0mm @start=2026-07-13T20:00@end=2026-07-20T13:00
 
 === WIND ===
 ZERO WIND 12h: QD #7 - Wspd=0 but 1 direction changes >90deg detected (max_delta=133deg), gusts nonzero (max=6.6km/h, avg=2.0km/h) @start=2026-06-27T20:00@end=2026-06-28T07:00
@@ -19,11 +19,12 @@ DIRECTION CONCENTRATION: QD #2 - up to 50% of a day in the 51 deg bin (1 day(s) 
 HIGHEST TEMP: QD #1 - 39.2C @ts=2026-07-17T16:00
 LOWEST TEMP: QD #7 - 3.6C @ts=2026-06-22T05:00
 ISOLATED TEMP SPIKE: QD #20 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.2C, mag=7.4 @first=2026-07-19T15:00@last=2026-07-19T15:00
+ISOLATED TEMP SPIKE: QD #17 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.6C, mag=5.6 @first=2026-06-20T14:00@last=2026-06-20T14:00
 
 === PRECIPITATION ===
 RAIN AT RH<10%: QD #20 - 3 hours, 1.0mm total, rank=2 @first=2026-07-16T08:00@last=2026-07-16T18:00
 RAIN AT RH 10-25%: QD #19 - 2 hours, 0.2mm total, rank=1 @first=2026-07-17T15:00@last=2026-07-18T11:00
 
 === POWER ===
-LOW VBAT: QD #20 (AC) - min=11.70V, mean=12.41V, severity=low @ts=2026-07-14T06:00
+LOW VBAT: QD #20 (AC) - min=11.70V, mean=12.43V, severity=low @ts=2026-07-14T06:00
 NO CHARGE: QD #20 (AC) - 31 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=0.00V @start=2026-07-14T09:00@end=2026-07-19T19:00

@@ -1,5 +1,5 @@
 FIRE CENTRE: Southeast Fire Centre
-WINDOW: 4380h | STATIONS: 49 | RECORDS: 209,165
+WINDOW: 4380h | STATIONS: 49 | RECORDS: 209,226
 
 === STATION OUTAGES ===
 SENSOR NA: NORNS - Wspd=NOT CONFIGURED, Dir=NOT CONFIGURED, Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -12,7 +12,7 @@ SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFI
 OUTLIER Rh: DOWNIE - min=3.0, max=19.0 @ts=2026-06-18T11:00
 OUTLIER Rh: CARIBOO CREEK - min=0.0, max=11.0 @ts=2026-05-18T14:00
 OUTLIER Rh: TABERNACLE WIND - min=17.0, max=31.0 @ts=2026-01-22T03:00
-RH=0%: BAKER - 3569 readings @first=2026-01-18T21:00@last=2026-06-16T13:00
+RH=0%: BAKER - 3565 readings @first=2026-01-19T01:00@last=2026-06-16T13:00
 RH=0%: CARIBOO CREEK - 14 readings @first=2026-05-18T14:00@last=2026-06-12T13:00
 RH=0%: DEWAR CREEK - 422 readings @first=2026-01-31T19:00@last=2026-06-05T01:00
 RH>100%: CARIBOO CREEK - 408 readings, max=116.0% @first=2026-05-15T21:00@last=2026-06-12T07:00
@@ -22,7 +22,7 @@ RH CHANGE >50%/h: DEWAR CREEK - 127 events, peak=-100.0%/h @first=2026-01-31T19:
 RH CHANGE >50%/h: DUNCAN - 7 events, peak=+100.0%/h @first=2026-05-20T10:00@last=2026-06-11T13:00
 RH CHANGE >50%/h: PENDOREILLE - 2 events, peak=-91.0%/h @first=2026-04-15T11:00@last=2026-04-15T12:00
 RH CHANGE >50%/h: FLATHEAD 2 - 2 events, peak=-80.0%/h @first=2026-06-06T08:00@last=2026-06-06T09:00
-CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 3569h, no precip @start=2026-01-18T21:00@end=2026-06-16T13:00
+CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 3565h, no precip @start=2026-01-19T01:00@end=2026-06-16T13:00
 CONSTANT RH: DUNCAN - Constant 100%, avg=100%, 604h, precip=99.2mm @start=2026-03-21T09:00@end=2026-04-15T12:00
 CONSTANT RH: NORNS - Constant 100%, avg=100%, 470h, no precip @start=2026-04-04T18:00@end=2026-04-24T07:00
 CONSTANT RH: REVELSTOKE - Constant 100%, avg=100%, 215h, no precip @start=2026-01-28T15:00@end=2026-02-06T13:00
@@ -33,9 +33,9 @@ EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T2
 EXTREME GUST: TABERNACLE WIND - max=128.9km/h, 106 readings >80km/h @start=2026-02-08T00:00@end=2026-04-07T07:00
 EXTREME GUST: SPARWOOD - max=85.4km/h, 1 readings >80km/h @start=2026-02-26T13:00@end=2026-02-26T13:00
 EXTREME WIND: TABERNACLE WIND - max=70.0km/h, 11 readings >60km/h @start=2026-02-26T06:00@end=2026-03-19T04:00
-ZERO WIND 857h: BAKER - Wspd=0 but 17 direction changes >90deg detected (max_delta=174deg), gusts nonzero (max=5.6km/h, avg=0.0km/h) @start=2026-01-18T21:00@end=2026-02-23T13:00
+ZERO WIND 853h: BAKER - Wspd=0 but 17 direction changes >90deg detected (max_delta=174deg), gusts nonzero (max=5.6km/h, avg=0.0km/h) @start=2026-01-19T01:00@end=2026-02-23T13:00
 ZERO WIND 398h: NANCY GREENE - Wspd=0 but 65 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=29.2km/h, avg=0.1km/h) @start=2026-05-03T12:00@end=2026-05-20T16:00
-ZERO WIND 97h: BIG MOUTH 2 - Wspd=0 but 23 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=1.9km/h, avg=0.0km/h) @start=2026-01-18T21:00@end=2026-01-22T21:00
+ZERO WIND 93h: BIG MOUTH 2 - Wspd=0 but 23 direction changes >90deg detected (max_delta=179deg) @start=2026-01-19T01:00@end=2026-01-22T21:00
 ZERO WIND 90h: FLATHEAD 2 - Wspd=0 but 9 direction changes >90deg detected (max_delta=165deg), gusts nonzero (max=6.5km/h, avg=0.1km/h) @start=2026-02-16T21:00@end=2026-02-20T14:00
 ZERO WIND 83h: GOATHAVEN - Wspd=0 but 9 direction changes >90deg detected (max_delta=161deg), gusts nonzero (max=8.6km/h, avg=0.2km/h) @start=2026-02-17T00:00@end=2026-02-20T10:00
 ZERO WIND 1597h: MARION - Wspd=0, gusts=0, no direction changes >90deg @start=2026-01-28T20:00@end=2026-04-05T08:00
@@ -81,8 +81,8 @@ HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
 
 === POWER ===
-LOW VBAT: SMALLWOOD - min=6.90V, mean=12.63V, severity=low @ts=2026-02-09T10:00
-LOW VBAT: BLAEBERRY - min=10.90V, mean=12.61V, severity=low @ts=2026-02-05T04:00
+LOW VBAT: SMALLWOOD - min=6.90V, mean=12.64V, severity=low @ts=2026-02-09T10:00
+LOW VBAT: BLAEBERRY - min=10.90V, mean=12.62V, severity=low @ts=2026-02-05T04:00
 LOW VBAT: ROUND PRAIRIE - min=11.50V, mean=13.38V, severity=low @ts=2026-02-19T20:00
 LOW VBAT: ROCK CREEK - min=11.80V, mean=13.01V, severity=low @ts=2026-02-08T00:00
 LOW VBAT: REVELSTOKE - min=12.00V, mean=13.04V @ts=2026-01-23T01:00

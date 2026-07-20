@@ -1,5 +1,5 @@
 FIRE CENTRE: Cariboo Fire Centre
-WINDOW: 4380h | STATIONS: 27 | RECORDS: 115,874
+WINDOW: 4380h | STATIONS: 27 | RECORDS: 115,878
 
 === STATION OUTAGES ===
 SENSOR NA: BENSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -27,17 +27,17 @@ EXTREME GUST: TATLA LAKE - max=202.2km/h, 1 readings >80km/h @start=2026-06-06T1
 EXTREME GUST: PLUMMER HUT - max=176.6km/h, 217 readings >80km/h @start=2026-01-30T16:00@end=2026-04-19T01:00
 EXTREME GUST: HORSEFLY - max=130.3km/h, 3 readings >80km/h @start=2026-06-04T11:00@end=2026-07-17T19:00
 EXTREME WIND: PLUMMER HUT - max=76.3km/h, 27 readings >60km/h @start=2026-02-04T01:00@end=2026-04-06T18:00
-ZERO WIND 163h: DECEPTION - Wspd=0 but 18 direction changes >90deg detected (max_delta=166deg), gusts nonzero (max=4.0km/h, avg=0.0km/h) @start=2026-01-18T21:00@end=2026-01-25T15:00
+ZERO WIND 159h: DECEPTION - Wspd=0 but 18 direction changes >90deg detected (max_delta=166deg) @start=2026-01-19T01:00@end=2026-01-25T15:00
 ZERO WIND 47h: BENSON - Wspd=0 but 7 direction changes >90deg detected (max_delta=130deg), gusts nonzero (max=7.4km/h, avg=0.2km/h) @start=2026-01-20T17:00@end=2026-01-22T15:00
 ZERO WIND 22h: PLUMMER HUT - Wspd=0 but 7 direction changes >90deg detected (max_delta=155deg), gusts nonzero (max=9.6km/h, avg=0.4km/h) @start=2026-03-04T13:00@end=2026-03-05T10:00
 ZERO WIND 19h: PLACE LAKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=142deg), gusts nonzero (max=2.7km/h, avg=0.3km/h) @start=2026-01-23T17:00@end=2026-01-24T11:00
 ZERO WIND 13h: YOUNG LAKE - Wspd=0 but 3 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=8.2km/h, avg=0.6km/h) @start=2026-03-20T23:00@end=2026-03-21T11:00
 ZERO WIND 70h: CHURN CREEK - Wspd=0, gusts=0, no direction changes >90deg @start=2026-04-01T15:00@end=2026-04-04T12:00
-DIRECTION CONCENTRATION: MEADOW LAKE - up to 100% of a day in the 37 deg bin (72 day(s) at 50%+)
+DIRECTION CONCENTRATION: MEADOW LAKE - up to 100% of a day in the 37 deg bin (71 day(s) at 50%+)
 DIRECTION CONCENTRATION: BIG VALLEY - up to 88% of a day in the 225 deg bin (25 day(s) at 50%+)
 DIRECTION CONCENTRATION: PLUMMER HUT - up to 58% of a day in the 188 deg bin (6 day(s) at 50%+)
-DIRECTION CONCENTRATION: YOUNG LAKE - up to 88% of a day in the 164 deg bin (27 day(s) at 50%+)
 DIRECTION CONCENTRATION: GASPARD - up to 88% of a day in the 51 deg bin (28 day(s) at 50%+)
+DIRECTION CONCENTRATION: YOUNG LAKE - up to 88% of a day in the 164 deg bin (27 day(s) at 50%+)
 
 === TEMPERATURE ===
 HIGHEST TEMP: ALEXIS CREEK - 34.2C @ts=2026-07-16T16:00

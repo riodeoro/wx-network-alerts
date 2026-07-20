@@ -1,6 +1,6 @@
-<!-- hash:a3efbf56dcc2 -->
+<!-- hash:de1bc37272ed -->
 ```
 EXTREME VALUES
 BRISCO:           Highest (34.6°C)                                            [Jul 18 16:00]
-MARION:           Lowest (3.1°C)                                     [since Jul 20, ongoing]
+MARION:           Lowest (3.1°C)                                              [Jul 20 05:00]
 ```

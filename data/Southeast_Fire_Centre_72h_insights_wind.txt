@@ -1,7 +1,9 @@
-<!-- hash:986054290d00 -->
+<!-- hash:a1d3a498aa36 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
 PERSISTENT STATES
-BAKER:            zero wind 25h, 2 shifts >90° (max 155°)      [Jul 17 09:00 – Jul 18 09:00]
+BAKER:            zero wind 73h, 4 shifts >90° (max 177°)  [Jul 17 13:00 – Jul 20 13:00, ongoing]
+DAILY DIRECTION CONCENTRATION
+BAKER:            up to 50% of a day within ±5° of 244° (1 day(s) at 50%+)
 ```

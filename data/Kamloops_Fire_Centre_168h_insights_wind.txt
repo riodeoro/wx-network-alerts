@@ -1,4 +1,4 @@
-<!-- hash:feb8a15f8ddd -->
+<!-- hash:c4d6d0d7a6cd -->
 ```
 GUSTS EXCEEDED 80 KM/H
 MERRITT 2 HUB:    86.6 km/h (1 reading >80)                                   [Jul 16 18:00]

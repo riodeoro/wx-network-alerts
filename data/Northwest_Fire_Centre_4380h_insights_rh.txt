@@ -1,4 +1,4 @@
-<!-- hash:6bd93c2d5216 -->
+<!-- hash:4d41a89837a7 -->
 ```
 RH CHANGED >50%/H
 BELL-IRVING:      1 event, peak Δ +59%/h                                       [Jun 9 15:00]
@@ -6,10 +6,6 @@ GANOKWA:          1 event, peak Δ -57%/h                                      [
 CEDARVALE:        2 events, peak Δ +56%/h                                [May 8 13:00–14:00]
 NADINA:           1 event, peak Δ +54%/h                                      [Jun 20 16:00]
 VAN DYKE:         1 event, peak Δ +53%/h                                      [Jun 20 17:00]
-RH DROPPED AS LOW AS
-CEDARVALE:        3.0%                                                               [May 8]
-ROSSWOOD:         13.0%                                                              [Jun 2]
-PINE CREEK:       13.0%                                                              [May 7]
 PERSISTENT STATES
 KITPARK:          RH constant 100% for 214h, Rn_1 (238.2mm)     [Jan 27 16:00 – Feb 5 13:00]
 DEASE LAKE FS:    RH constant 100% for 117h, Rn_1 (8.8mm)        [Feb 3 17:00 – Feb 8 13:00]

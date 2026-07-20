@@ -1,4 +1,4 @@
-<!-- hash:bdbef0c0850f -->
+<!-- hash:a99ab13aa2c9 -->
 ```
 UNCONFIGURED SENSORS
   NORNS: battery voltage, charge current, gust speed, solar voltage, wind direction, and wind speed unconfigured

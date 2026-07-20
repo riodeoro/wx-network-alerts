@@ -1,5 +1,6 @@
-<!-- hash:2e6f5f7e40be -->
+<!-- hash:53b2624b118a -->
 ```
 PERSISTENT STATES
+HIXON:            RH constant 100% for 12h, zero Rn_1  [Jul 19 23:00 – Jul 20 10:00, ongoing]
 CATFISH:          RH constant 100% for 12h, zero Rn_1  [Jul 19 21:00 – Jul 20 08:00, ongoing]
 ```

@@ -1,12 +1,12 @@
-<!-- hash:2c89107b1aee -->
+<!-- hash:2ca86f7ebc3e -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
 PERSISTENT STATES
-BAKER:            zero wind 346h, 9 shifts >90° (max 179°)      [Jul 4 00:00 – Jul 18 09:00]
+BAKER:            zero wind 398h, 13 shifts >90° (max 179°)  [Jul 4 00:00 – Jul 20 13:00, ongoing]
 EIGHT MILE:       zero wind 12h, gusts max 5.3km/h               [Jul 5 20:00 – Jul 6 07:00]
 DAILY DIRECTION CONCENTRATION
-BAKER:            up to 71% of a day within ±5° of 242° (4 day(s) at 50%+)
+BAKER:            up to 71% of a day within ±5° of 242° (5 day(s) at 50%+)
 SLOCAN:           up to 54% of a day within ±5° of 17° (2 day(s) at 50%+)
 POWDER CREEK:     up to 54% of a day within ±5° of 172° (2 day(s) at 50%+)
 CRAWFORD:         up to 50% of a day within ±5° of 48° (1 day(s) at 50%+)

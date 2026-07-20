@@ -5,7 +5,7 @@ WINDOW: 48h | STATIONS: 5 | RECORDS: 245
 SENSOR NA: QD #14 - Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED
 
 === RH ===
-CONSTANT RH: QD #20 - Constant low (<50%), avg=3%, 49h, no precip @start=2026-07-18T08:00@end=2026-07-20T08:00
+CONSTANT RH: QD #20 - Constant low (<50%), avg=3%, 49h, no precip @start=2026-07-18T13:00@end=2026-07-20T13:00
 
 === WIND ===
 None.
@@ -16,8 +16,8 @@ LOWEST TEMP: QD #20 - 5.4C @ts=2026-07-19T05:00
 ISOLATED TEMP SPIKE: QD #20 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.2C, mag=6.2 @first=2026-07-19T15:00@last=2026-07-19T15:00
 
 === PRECIPITATION ===
-RAIN AT RH 10-25%: QD #19 - 1 hours, 0.2mm total, rank=1 @first=2026-07-18T11:00@last=2026-07-18T11:00
+None.
 
 === POWER ===
-LOW VBAT: QD #20 (AC) - min=12.00V, mean=12.50V @ts=2026-07-19T04:00
-NO CHARGE: QD #20 (AC) - 10 daytime readings (Vslr<Vbat), median Vbat=12.65V, median Vslr=0.00V @start=2026-07-18T09:00@end=2026-07-19T19:00
+LOW VBAT: QD #20 (AC) - min=12.00V, mean=12.51V @ts=2026-07-19T04:00
+NO CHARGE: QD #20 (AC) - 8 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=0.00V @start=2026-07-18T17:00@end=2026-07-19T19:00

@@ -1,6 +1,6 @@
-<!-- hash:8cf47b2df2df -->
+<!-- hash:ea6ec19d7bb3 -->
 ```
 EXTREME VALUES
-MIDDLE LAKE:      Highest (28.7°C)                                            [Jul 19 16:00]
-BALDFACE:         Lowest (2.4°C)                                     [since Jul 20, ongoing]
+MIDDLE LAKE:      Highest (29.7°C)                                   [since Jul 20, ongoing]
+BALDFACE:         Lowest (2.4°C)                                              [Jul 20 05:00]
 ```

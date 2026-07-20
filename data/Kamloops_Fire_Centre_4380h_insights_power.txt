@@ -1,15 +1,15 @@
-<!-- hash:d6cc7b136aa2 -->
+<!-- hash:766c71c23262 -->
 ```
 LOW BATTERY VOLTAGE
 AFTON:            min 7.50V, mean 13.11V [low]                                      [Jan 22]
-MABEL LAKE 2:     min 10.60V, mean 13.63V [low]                                     [Jun 22]
+MABEL LAKE 2:     min 10.60V, mean 13.62V [low]                                     [Jun 22]
 FINTRY:           min 11.00V, mean 13.03V [low]                                     [Jan 22]
 GLIMPSE:          min 11.50V, mean 12.17V [low]                                     [May 13]
-THYNNE:           min 11.90V, mean 13.23V [low]                                     [Jan 27]
+THYNNE:           min 11.90V, mean 13.24V [low]                                     [Jan 27]
 NO DAYTIME CHARGING
 KETTLE 2:         no charge 332 daytime readings (Vbat 12.20V, Vslr 9.25V)  [Jan 19 08:00 – Mar 30 10:00]
 GLIMPSE:          no charge 271 daytime readings (Vbat 11.90V, Vslr 10.00V) [low]  [Jan 19 08:00 – Jun 12 19:00]
-MABEL LAKE 2:     no charge 266 daytime readings (Vbat 11.90V, Vslr 0.10V) [low]  [Jun 18 16:00 – Jul 19 19:00]
+MABEL LAKE 2:     no charge 271 daytime readings (Vbat 11.90V, Vslr 0.10V) [low]  [Jun 18 16:00 – Jul 20 12:00, ongoing]
 HARBOUR LAKE:     no charge 249 daytime readings (Vbat 12.50V, Vslr 12.00V)  [Jan 19 08:00 – Mar 18 08:00]
 WELLS GRAY:       no charge 227 daytime readings (Vbat 12.60V, Vslr 8.00V)  [Jan 19 08:00 – May 29 16:00]
 COLDSCAUR LAKE:   no charge 223 daytime readings (Vbat 12.60V, Vslr 10.70V)  [Jan 19 08:00 – Jul 1 08:00]

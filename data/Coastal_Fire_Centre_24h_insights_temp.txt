@@ -1,6 +1,6 @@
-<!-- hash:216308f44da8 -->
+<!-- hash:d333172f1a8a -->
 ```
 EXTREME VALUES
-DARCY:            Highest (32.2°C)                                            [Jul 19 16:00]
-ALLISON PASS:     Lowest (4.7°C)                                     [since Jul 20, ongoing]
+FORD MOUNTAIN:    Highest (33.2°C)                                   [since Jul 20, ongoing]
+ALLISON PASS:     Lowest (4.7°C)                                              [Jul 20 05:00]
 ```

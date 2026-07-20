@@ -1,4 +1,4 @@
-<!-- hash:375fd13069d1 -->
+<!-- hash:208af174347b -->
 ```
 UNCONFIGURED SENSORS
   SILVERSTAR SF: battery voltage, charge current, solar voltage, and temperature unconfigured

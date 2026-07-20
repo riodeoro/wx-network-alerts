@@ -1,7 +1,7 @@
-<!-- hash:8066043f2993 -->
+<!-- hash:33e7042a5548 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
-CURWEN CREEK:     3 hours, Rn_1 (16.0mm)                                [Apr 21 12:00–14:00]
+CURWEN CREEK:     2 hours, Rn_1 (11.8mm)                                [Apr 21 13:00–14:00]
 MABEL LAKE 2:     2 hours, Rn_1 (17.4mm)                                [Jun 23 14:00–16:00]
 FRENCH BAR:       1 hour, Rn_1 (0.2mm)                                        [Apr 22 15:00]
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)

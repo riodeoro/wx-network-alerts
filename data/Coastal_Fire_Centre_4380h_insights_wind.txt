@@ -1,4 +1,4 @@
-<!-- hash:46c7fe4d3772 -->
+<!-- hash:744a5cb60518 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 TS SAN JUAN:      366.1 km/h (1 reading >80)                                  [Mar 10 13:00]
@@ -7,7 +7,7 @@ HAIG CAMP:        101.4 km/h (1 reading >80)                                  [M
 APE LAKE:         96.4 km/h (1 reading >80)                                   [Feb 26 09:00]
 PERSISTENT STATES
 HAIG CAMP:        zero wind 696h, 104 shifts >90°, max 16.7km/h  [Apr 29 13:00 – May 28 12:00]
-TALCHAKO:         zero wind 233h, 53 shifts >90°, max 2.6km/h  [Jan 18 21:00 – Jan 28 13:00]
+TALCHAKO:         zero wind 229h, 51 shifts >90°, max 2.6km/h  [Jan 19 01:00 – Jan 28 13:00]
 NAHATLATCH:       zero wind 138h, 30 shifts >90°, max 11.0km/h  [Feb 17 12:00 – Feb 23 05:00]
 QUINSAM BASE FWX: zero wind 103h, 21 shifts >90°, max 7.4km/h  [Jan 23 16:00 – Jan 27 22:00]
 HOMATHKO:         zero wind 93h, 16 shifts >90°, max 9.8km/h    [Mar 9 15:00 – Mar 13 11:00]

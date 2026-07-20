@@ -1,7 +1,7 @@
-<!-- hash:d6cc7b136aa2 -->
+<!-- hash:766c71c23262 -->
 ```
 RH READ 0%
-SILVERSTAR SF:    4371 readings                       [Jan 18 20:00 → Jul 20 08:00, ongoing]
+SILVERSTAR SF:    4370 readings                       [Jan 19 01:00 → Jul 20 12:00, ongoing]
 TURTLE:           157 readings                                  [Jan 25 20:00 → Feb 2 12:00]
 MABEL LAKE 2:     2 readings                                            [Apr 30 20:00–21:00]
 RH CHANGED >50%/H
@@ -11,7 +11,7 @@ CLEARWATER HUB:   3 events, peak Δ +61%/h                       [Mar 8 05:00 �
 WELLS GRAY:       1 event, peak Δ +57%/h                                       [Jun 3 20:00]
 AUGUST LAKE:      2 events, peak Δ +55%/h                      [Mar 25 17:00 → May 21 18:00]
 PERSISTENT STATES
-SILVERSTAR SF:    RH constant 0% for 4371h, zero Rn_1  [Jan 18 20:00 – Jul 20 08:00, ongoing]
+SILVERSTAR SF:    RH constant 0% for 4370h, zero Rn_1  [Jan 19 01:00 – Jul 20 12:00, ongoing]
 MABEL LAKE 2:     RH constant 100% for 262h, Rn_1 (13.4mm)      [Jan 28 17:00 – Feb 8 14:00]
 TURTLE:           RH constant 0% for 92h, Rn_1 (5.8mm)         [Jan 27 20:00 – Jan 31 15:00]
 SEYMOUR ARM:      RH constant 100% for 68h, Rn_1 (4.0mm)        [Jan 31 16:00 – Feb 3 11:00]

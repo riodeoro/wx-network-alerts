@@ -1,4 +1,4 @@
-<!-- hash:2c89107b1aee -->
+<!-- hash:2ca86f7ebc3e -->
 ```
 RH CHANGED >50%/H
 NICOLL:           1 event, peak Δ +64%/h                                      [Jul 15 18:00]

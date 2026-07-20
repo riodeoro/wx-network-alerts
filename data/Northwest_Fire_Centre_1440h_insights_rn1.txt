@@ -1,4 +1,4 @@
-<!-- hash:ba9693d8c079 -->
+<!-- hash:371d5606a83f -->
 ```
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 ATLIN:            silent 15 of 16 neighbour rain hours (94%)    [Jun 5 00:00 → Jun 18 22:00]
