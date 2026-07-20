@@ -13,11 +13,11 @@ None.
 === TEMPERATURE ===
 HIGHEST TEMP: QD #1 - 39.2C @ts=2026-07-17T16:00
 LOWEST TEMP: QD #20 - 4.8C @ts=2026-07-18T05:00
-ISOLATED TEMP SPIKE: QD #20 - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-07-19T15:00@last=2026-07-19T15:00
+ISOLATED TEMP SPIKE: QD #20 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.2C, mag=7.4 @first=2026-07-19T15:00@last=2026-07-19T15:00
 
 === PRECIPITATION ===
-RAIN AT RH<10%: QD #20 - 3 hours, 1.0mm total @first=2026-07-16T08:00@last=2026-07-16T18:00
-RAIN AT RH 10-25%: QD #19 - 2 hours, 0.2mm total @first=2026-07-17T15:00@last=2026-07-18T11:00
+RAIN AT RH<10%: QD #20 - 3 hours, 1.0mm total, rank=2 @first=2026-07-16T08:00@last=2026-07-16T18:00
+RAIN AT RH 10-25%: QD #19 - 2 hours, 0.2mm total, rank=1 @first=2026-07-17T15:00@last=2026-07-18T11:00
 
 === POWER ===
 LOW VBAT: QD #20 (AC) - min=11.70V, mean=12.41V, severity=low @ts=2026-07-14T06:00

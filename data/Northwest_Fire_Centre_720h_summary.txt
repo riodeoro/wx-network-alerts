@@ -5,9 +5,9 @@ WINDOW: 720h | STATIONS: 32 | RECORDS: 22,961
 None.
 
 === RH ===
-RH CHANGE >50%/h: GANOKWA - 1 events @first=2026-06-21T17:00@last=2026-06-21T17:00
-RH CHANGE >50%/h: NADINA - 1 events @first=2026-06-20T16:00@last=2026-06-20T16:00
-RH CHANGE >50%/h: VAN DYKE - 1 events @first=2026-06-20T17:00@last=2026-06-20T17:00
+RH CHANGE >50%/h: GANOKWA - 1 events, peak=-57.0%/h @first=2026-06-21T17:00@last=2026-06-21T17:00
+RH CHANGE >50%/h: NADINA - 1 events, peak=+54.0%/h @first=2026-06-20T16:00@last=2026-06-20T16:00
+RH CHANGE >50%/h: VAN DYKE - 1 events, peak=+53.0%/h @first=2026-06-20T17:00@last=2026-06-20T17:00
 CONSTANT RH: OLD FADDY - Constant 100%, avg=100%, 13h, no precip @start=2026-07-10T22:00@end=2026-07-11T10:00
 
 === WIND ===
@@ -26,7 +26,7 @@ HIGHEST TEMP: CEDARVALE - 36.3C @ts=2026-07-17T17:00
 LOWEST TEMP: GANOKWA - -0.5C @ts=2026-07-14T05:00
 
 === PRECIPITATION ===
-None.
+SILENT GAUGE: UPPER KISPIOX - silent 14 of 20 neighbour rain hours (70.0%) @first=2026-06-26T04:00@last=2026-07-12T10:00
 
 === POWER ===
 NO CHARGE: NASS CAMP - 31 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.40V @start=2026-06-20T18:00@end=2026-07-20T08:00

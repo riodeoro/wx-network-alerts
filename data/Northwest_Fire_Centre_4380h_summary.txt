@@ -8,11 +8,11 @@ SENSOR NA: NILKITKWA - Vbat=87% NA, Vslr=87% NA, Ibat=87% NA
 OUTLIER Rh: ROSSWOOD - min=13.0, max=14.0 @ts=2026-06-02T16:00
 OUTLIER Rh: CEDARVALE - min=3.0, max=3.0 @ts=2026-05-08T13:00
 OUTLIER Rh: PINE CREEK - min=13.0, max=13.0 @ts=2026-05-07T16:00
-RH CHANGE >50%/h: BELL-IRVING - 1 events @first=2026-06-09T15:00@last=2026-06-09T15:00
-RH CHANGE >50%/h: BOYA LAKE - 1 events @first=2026-06-09T22:00@last=2026-06-09T22:00
-RH CHANGE >50%/h: CEDARVALE - 2 events @first=2026-05-08T13:00@last=2026-05-08T14:00
-RH CHANGE >50%/h: GANOKWA - 1 events @first=2026-06-21T17:00@last=2026-06-21T17:00
-RH CHANGE >50%/h: NADINA - 1 events @first=2026-06-20T16:00@last=2026-06-20T16:00
+RH CHANGE >50%/h: BELL-IRVING - 1 events, peak=+59.0%/h @first=2026-06-09T15:00@last=2026-06-09T15:00
+RH CHANGE >50%/h: GANOKWA - 1 events, peak=-57.0%/h @first=2026-06-21T17:00@last=2026-06-21T17:00
+RH CHANGE >50%/h: CEDARVALE - 2 events, peak=+56.0%/h @first=2026-05-08T13:00@last=2026-05-08T14:00
+RH CHANGE >50%/h: NADINA - 1 events, peak=+54.0%/h @first=2026-06-20T16:00@last=2026-06-20T16:00
+RH CHANGE >50%/h: VAN DYKE - 1 events, peak=+53.0%/h @first=2026-06-20T17:00@last=2026-06-20T17:00
 CONSTANT RH: KITPARK - Constant 100%, avg=100%, 214h, precip=238.2mm @start=2026-01-27T16:00@end=2026-02-05T13:00
 CONSTANT RH: DEASE LAKE FS - Constant 100%, avg=100%, 117h, precip=8.8mm @start=2026-02-03T17:00@end=2026-02-08T13:00
 CONSTANT RH: CRANBERRY - Constant 100%, avg=100%, 103h, precip=38.0mm @start=2026-02-03T15:00@end=2026-02-07T21:00
@@ -38,7 +38,7 @@ DIRECTION CONCENTRATION: CEDARVALE - up to 75% of a day in the 276 deg bin (13 d
 === TEMPERATURE ===
 HIGHEST TEMP: CEDARVALE - 36.3C @ts=2026-07-17T17:00
 LOWEST TEMP: BOYA LAKE - -35.8C @ts=2026-02-18T07:00
-ISOLATED TEMP SPIKE: EAST OOTSA - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-04-11T10:00@last=2026-04-11T10:00
+ISOLATED TEMP SPIKE: EAST OOTSA - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.0C, mag=7.7 @first=2026-04-11T10:00@last=2026-04-11T10:00
 CONSTANT TEMP: PINE CREEK - 0.0C for 14h, RH also flat (1% range) @start=2026-03-16T12:00@end=2026-03-17T01:00
 CONSTANT TEMP: BELL-IRVING - 0.0C for 12h, RH also flat (0% range) @start=2026-01-28T19:00@end=2026-01-29T06:00
 CONSTANT TEMP: NILKITKWA - 0.0C for 8h, RH also flat (0% range) @start=2026-01-30T01:00@end=2026-01-30T08:00
@@ -46,9 +46,11 @@ CONSTANT TEMP: ROSSWOOD - 0.2C for 8h, RH also flat (0% range) @start=2026-01-29
 CONSTANT TEMP: UPPER FULTON - 0.0C for 8h, RH also flat (0% range) @start=2026-02-07T01:00@end=2026-02-07T08:00
 
 === PRECIPITATION ===
-RAIN AT RH 10-25%: BOYA LAKE - 4 hours, 1.0mm total @first=2026-03-20T16:00@last=2026-03-28T16:00
-RAIN AT RH 10-25%: EAST OOTSA - 1 hours, 0.2mm total @first=2026-03-01T12:00@last=2026-03-01T12:00
-RAIN AT RH 10-25%: OLD FADDY - 1 hours, 0.2mm total @first=2026-03-27T15:00@last=2026-03-27T15:00
+RAIN AT RH 10-25%: BOYA LAKE - 4 hours, 1.0mm total, rank=1 @first=2026-03-20T16:00@last=2026-03-28T16:00
+RAIN AT RH 10-25%: EAST OOTSA - 1 hours, 0.2mm total, rank=2 @first=2026-03-01T12:00@last=2026-03-01T12:00
+RAIN AT RH 10-25%: OLD FADDY - 1 hours, 0.2mm total, rank=3 @first=2026-03-27T15:00@last=2026-03-27T15:00
+SILENT GAUGE: ATLIN - silent 21 of 23 neighbour rain hours (91.3%) @first=2026-02-04T16:00@last=2026-06-18T22:00
+SILENT GAUGE: OLD FADDY - silent 12 of 19 neighbour rain hours (63.2%) @first=2026-02-04T20:00@last=2026-06-26T02:00
 
 === POWER ===
 LOW VBAT: NORTH BABINE - min=12.00V, mean=12.90V @ts=2026-02-27T18:00

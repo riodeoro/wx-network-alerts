@@ -9,11 +9,11 @@ SENSOR NA: KNIFE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: LONE BUTTE - Vbat=50% NA, Vslr=50% NA, Ibat=50% NA
 
 === RH ===
-RH CHANGE >50%/h: ALEXIS CREEK - 1 events @first=2026-04-14T19:00@last=2026-04-14T19:00
-RH CHANGE >50%/h: BALDFACE - 3 events @first=2026-04-10T09:00@last=2026-06-24T16:00
-RH CHANGE >50%/h: GASPARD - 1 events @first=2026-03-20T15:00@last=2026-03-20T15:00
-RH CHANGE >50%/h: GAVIN - 4 events @first=2026-04-06T18:00@last=2026-07-17T16:00
-RH CHANGE >50%/h: KNIFE - 1 events @first=2026-04-14T23:00@last=2026-04-14T23:00
+RH CHANGE >50%/h: GAVIN - 4 events, peak=+61.0%/h @first=2026-04-06T18:00@last=2026-07-17T16:00
+RH CHANGE >50%/h: PLUMMER HUT - 1 events, peak=-60.0%/h @first=2026-04-06T23:00@last=2026-04-06T23:00
+RH CHANGE >50%/h: ALEXIS CREEK - 1 events, peak=+59.0%/h @first=2026-04-14T19:00@last=2026-04-14T19:00
+RH CHANGE >50%/h: BALDFACE - 3 events, peak=+59.0%/h @first=2026-04-10T09:00@last=2026-06-24T16:00
+RH CHANGE >50%/h: LONE BUTTE - 1 events, peak=+56.0%/h @first=2026-07-18T17:00@last=2026-07-18T17:00
 CONSTANT RH: TAUTRI - Constant low (<50%), avg=3%, 45h, precip=1.0mm @start=2026-04-21T18:00@end=2026-04-23T14:00
 CONSTANT RH: PLUMMER HUT - Constant high (90-99%), avg=99%, 30h, no precip @start=2026-01-29T10:00@end=2026-01-30T15:00
 CONSTANT RH: KNIFE - Constant 100%, avg=100%, 22h, precip=0.6mm @start=2026-01-30T19:00@end=2026-01-31T16:00
@@ -42,18 +42,19 @@ DIRECTION CONCENTRATION: GASPARD - up to 88% of a day in the 51 deg bin (28 day(
 === TEMPERATURE ===
 HIGHEST TEMP: ALEXIS CREEK - 34.2C @ts=2026-07-16T16:00
 LOWEST TEMP: BALDFACE - -32.7C @ts=2026-02-19T07:00
-ISOLATED TEMP SPIKE: BALDFACE - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-02-28T00:00@last=2026-02-28T00:00
-ISOLATED TEMP SPIKE: NAZKO - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-05-05T21:00@last=2026-05-05T21:00
-ISOLATED TEMP SPIKE: PLUMMER HUT - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-02-17T11:00@last=2026-02-17T11:00
+ISOLATED TEMP SPIKE: BALDFACE - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.0C, mag=15.1 @first=2026-02-28T00:00@last=2026-02-28T00:00
+ISOLATED TEMP SPIKE: NAZKO - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.8C, mag=8.7 @first=2026-05-05T21:00@last=2026-05-05T21:00
+ISOLATED TEMP SPIKE: PLUMMER HUT - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.5C, mag=5.5 @first=2026-02-17T11:00@last=2026-02-17T11:00
 CONSTANT TEMP: HORSEFLY - -6.8C for 7h, RH also flat (2% range) @start=2026-01-21T18:00@end=2026-01-22T00:00
 CONSTANT TEMP: LONE BUTTE - 0.1C for 7h, RH also flat (1% range) @start=2026-05-15T22:00@end=2026-05-16T04:00
 CONSTANT TEMP: MATHEW - 0.0C for 7h, RH also flat (0% range) @start=2026-01-30T19:00@end=2026-01-31T01:00
 
 === PRECIPITATION ===
-RAIN AT RH<10%: TAUTRI - 2 hours, 1.0mm total @first=2026-04-21T18:00@last=2026-04-23T14:00
-RAIN AT RH 10-25%: BALDFACE - 1 hours, 6.4mm total @first=2026-06-25T14:00@last=2026-06-25T14:00
-RAIN AT RH 10-25%: GASPARD - 1 hours, 0.2mm total @first=2026-03-30T13:00@last=2026-03-30T13:00
-RAIN AT RH 10-25%: MEADOW LAKE - 1 hours, 0.2mm total @first=2026-03-30T15:00@last=2026-03-30T15:00
+RAIN AT RH 10-25%: GASPARD - 1 hours, 0.2mm total, rank=2 @first=2026-03-30T13:00@last=2026-03-30T13:00
+RAIN AT RH 10-25%: BALDFACE - 1 hours, 6.4mm total, rank=4 @first=2026-06-25T14:00@last=2026-06-25T14:00
+RAIN AT RH 10-25%: NAZKO - 1 hours, 0.2mm total, rank=6 @first=2026-04-06T18:00@last=2026-04-06T18:00
+SILENT GAUGE: ALEXIS CREEK - silent 3 of 3 neighbour rain hours (100.0%) @first=2026-03-12T14:00@last=2026-06-26T16:00
+SILENT GAUGE: NEMIAH - silent 8 of 11 neighbour rain hours (72.7%) @first=2026-03-19T23:00@last=2026-06-10T07:00
 HIGH PRECIP: PLUMMER HUT - max=90.2mm/h @ts=2026-02-04T07:00
 
 === POWER ===

@@ -9,11 +9,11 @@ SENSOR NA: KNIFE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: LONE BUTTE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH CHANGE >50%/h: BALDFACE - 2 events @first=2026-06-24T08:00@last=2026-06-24T16:00
-RH CHANGE >50%/h: GAVIN - 3 events @first=2026-06-24T15:00@last=2026-07-17T16:00
-RH CHANGE >50%/h: LIKELY RS - 1 events @first=2026-06-21T18:00@last=2026-06-21T18:00
-RH CHANGE >50%/h: LONE BUTTE - 1 events @first=2026-07-18T17:00@last=2026-07-18T17:00
-RH CHANGE >50%/h: PLACE LAKE - 3 events @first=2026-05-03T08:00@last=2026-07-07T08:00
+RH CHANGE >50%/h: GAVIN - 3 events, peak=+61.0%/h @first=2026-06-24T15:00@last=2026-07-17T16:00
+RH CHANGE >50%/h: BALDFACE - 2 events, peak=+59.0%/h @first=2026-06-24T08:00@last=2026-06-24T16:00
+RH CHANGE >50%/h: LONE BUTTE - 1 events, peak=+56.0%/h @first=2026-07-18T17:00@last=2026-07-18T17:00
+RH CHANGE >50%/h: PLACE LAKE - 3 events, peak=-56.0%/h @first=2026-05-03T08:00@last=2026-07-07T08:00
+RH CHANGE >50%/h: TIMOTHY - 2 events, peak=+56.0%/h @first=2026-06-25T23:00@last=2026-07-11T17:00
 CONSTANT RH: TAUTRI - Constant low (<50%), avg=3%, 45h, precip=1.0mm @start=2026-04-21T18:00@end=2026-04-23T14:00
 CONSTANT RH: DECEPTION - Constant 100%, avg=100%, 12h, no precip @start=2026-05-29T21:00@end=2026-05-30T08:00
 CONSTANT RH: BIG VALLEY - Constant high (90-99%), avg=99%, 12h, precip=4.4mm @start=2026-07-19T00:00@end=2026-07-19T11:00
@@ -32,12 +32,13 @@ DIRECTION CONCENTRATION: ANAHIM LAKE - up to 54% of a day in the 260 deg bin (2 
 === TEMPERATURE ===
 HIGHEST TEMP: ALEXIS CREEK - 34.2C @ts=2026-07-16T16:00
 LOWEST TEMP: NAZKO - -9.6C @ts=2026-04-23T06:00
-ISOLATED TEMP SPIKE: NAZKO - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-05-05T21:00@last=2026-05-05T21:00
+ISOLATED TEMP SPIKE: NAZKO - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.8C, mag=8.3 @first=2026-05-05T21:00@last=2026-05-05T21:00
 CONSTANT TEMP: LONE BUTTE - 0.1C for 7h, RH also flat (1% range) @start=2026-05-15T22:00@end=2026-05-16T04:00
 
 === PRECIPITATION ===
-RAIN AT RH<10%: TAUTRI - 2 hours, 1.0mm total @first=2026-04-21T18:00@last=2026-04-23T14:00
-RAIN AT RH 10-25%: BALDFACE - 1 hours, 6.4mm total @first=2026-06-25T14:00@last=2026-06-25T14:00
+RAIN AT RH 10-25%: BALDFACE - 1 hours, 6.4mm total, rank=2 @first=2026-06-25T14:00@last=2026-06-25T14:00
+SILENT GAUGE: MIDDLE LAKE - silent 5 of 6 neighbour rain hours (83.3%) @first=2026-06-09T08:00@last=2026-07-02T09:00
+SILENT GAUGE: NEMIAH - silent 3 of 4 neighbour rain hours (75.0%) @first=2026-05-29T07:00@last=2026-06-10T07:00
 
 === POWER ===
 NO CHARGE: MATHEW (AC) - 24 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-04-28T08:00@end=2026-07-20T08:00

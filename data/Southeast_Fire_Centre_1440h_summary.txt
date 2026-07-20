@@ -13,11 +13,11 @@ RH=0%: BAKER - 629 readings @first=2026-05-21T09:00@last=2026-06-16T13:00
 RH=0%: CARIBOO CREEK - 13 readings @first=2026-06-09T01:00@last=2026-06-12T13:00
 RH=0%: DEWAR CREEK - 49 readings @first=2026-05-25T15:00@last=2026-06-05T01:00
 RH>100%: CARIBOO CREEK - 380 readings, max=116.0% @first=2026-05-21T13:00@last=2026-06-12T07:00
-RH CHANGE >50%/h: BLAEBERRY - 1 events @first=2026-06-25T20:00@last=2026-06-25T20:00
-RH CHANGE >50%/h: CARIBOO CREEK - 9 events @first=2026-05-21T13:00@last=2026-06-12T08:00
-RH CHANGE >50%/h: CHERRY LAKE - 1 events @first=2026-06-12T15:00@last=2026-06-12T15:00
-RH CHANGE >50%/h: DEWAR CREEK - 29 events @first=2026-05-26T16:00@last=2026-06-05T12:00
-RH CHANGE >50%/h: DOWNIE - 1 events @first=2026-07-18T15:00@last=2026-07-18T15:00
+RH CHANGE >50%/h: CARIBOO CREEK - 9 events, peak=-108.0%/h @first=2026-05-21T13:00@last=2026-06-12T08:00
+RH CHANGE >50%/h: DEWAR CREEK - 29 events, peak=-100.0%/h @first=2026-05-26T16:00@last=2026-06-05T12:00
+RH CHANGE >50%/h: DUNCAN - 6 events, peak=+100.0%/h @first=2026-05-29T09:00@last=2026-06-11T13:00
+RH CHANGE >50%/h: FLATHEAD 2 - 2 events, peak=-80.0%/h @first=2026-06-06T08:00@last=2026-06-06T09:00
+RH CHANGE >50%/h: NICOLL - 1 events, peak=+64.0%/h @first=2026-07-15T18:00@last=2026-07-15T18:00
 CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 629h, no precip @start=2026-05-21T09:00@end=2026-06-16T13:00
 CONSTANT RH: NORNS - Constant 100%, avg=100%, 43h, no precip @start=2026-06-29T22:00@end=2026-07-01T16:00
 CONSTANT RH: DUNCAN - Constant 100%, avg=100%, 19h, precip=11.0mm @start=2026-06-30T17:00@end=2026-07-01T11:00
@@ -52,11 +52,15 @@ CONSTANT TEMP: NANCY GREENE - 9.1C for 6h, RH also flat (0% range) @start=2026-0
 CONSTANT TEMP: WHITE RIVER - 7.8C for 6h, RH also flat (0% range) @start=2026-06-29T00:00@end=2026-06-29T05:00
 
 === PRECIPITATION ===
-RAIN AT RH<10%: CARIBOO CREEK - 3 hours, 7.0mm total @first=2026-06-11T22:00@last=2026-06-12T12:00
-RAIN AT RH<10%: DEWAR CREEK - 7 hours, 4.8mm total @first=2026-05-29T21:00@last=2026-06-05T12:00
-RAIN AT RH<10%: DUNCAN - 3 hours, 3.0mm total @first=2026-05-29T12:00@last=2026-05-29T15:00
-RAIN AT RH 10-25%: DARKWOODS - 5 hours, 1.0mm total @first=2026-06-16T15:00@last=2026-07-12T18:00
-RAIN AT RH 10-25%: WHISKEY - 1 hours, 0.2mm total @first=2026-06-08T13:00@last=2026-06-08T13:00
+RAIN AT RH<10%: DEWAR CREEK - 6 hours, 4.6mm total, rank=2 @first=2026-05-29T21:00@last=2026-06-05T01:00
+RAIN AT RH<10%: CARIBOO CREEK - 3 hours, 7.0mm total, rank=3 @first=2026-06-11T22:00@last=2026-06-12T12:00
+RAIN AT RH<10%: DUNCAN - 3 hours, 3.0mm total, rank=4 @first=2026-05-29T12:00@last=2026-05-29T15:00
+RAIN AT RH 10-25%: DARKWOODS - 5 hours, 1.0mm total, rank=1 @first=2026-06-16T15:00@last=2026-07-12T18:00
+RAIN AT RH 10-25%: WHISKEY - 1 hours, 0.2mm total, rank=14 @first=2026-06-08T13:00@last=2026-06-08T13:00
+SILENT GAUGE: NORNS - silent 22 of 22 neighbour rain hours (100.0%) @first=2026-05-26T00:00@last=2026-07-17T08:00
+SILENT GAUGE: FLATHEAD 2 - silent 16 of 17 neighbour rain hours (94.1%) @first=2026-06-09T06:00@last=2026-07-17T04:00
+SILENT GAUGE: DARKWOODS - silent 24 of 28 neighbour rain hours (85.7%) @first=2026-05-26T01:00@last=2026-07-17T08:00
+SILENT GAUGE: TSAR CREEK - silent 8 of 12 neighbour rain hours (66.7%) @first=2026-05-26T05:00@last=2026-06-09T21:00
 HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
 

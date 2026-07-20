@@ -11,11 +11,11 @@ SENSOR NA: MCLEOD LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONF
 
 === RH ===
 RH>100%: TABLE RIVER - 52 readings, max=115.0% @first=2026-04-22T06:00@last=2026-05-12T10:00
-RH CHANGE >50%/h: BEAR LAKE - 1 events @first=2026-07-17T17:00@last=2026-07-17T17:00
-RH CHANGE >50%/h: BEDNESTI - 1 events @first=2026-07-17T15:00@last=2026-07-17T15:00
-RH CHANGE >50%/h: CATFISH - 1 events @first=2026-06-24T14:00@last=2026-06-24T14:00
-RH CHANGE >50%/h: ELK MOUNTAIN - 1 events @first=2026-06-23T18:00@last=2026-06-23T18:00
-RH CHANGE >50%/h: FORT NELSON FS - 2 events @first=2026-06-24T18:00@last=2026-07-19T04:00
+RH CHANGE >50%/h: TABLE RIVER - 4 events, peak=-104.0%/h @first=2026-04-23T08:00@last=2026-05-12T11:00
+RH CHANGE >50%/h: ELK MOUNTAIN - 1 events, peak=+68.0%/h @first=2026-06-23T18:00@last=2026-06-23T18:00
+RH CHANGE >50%/h: NORTH CHILCO - 1 events, peak=+64.0%/h @first=2026-06-24T16:00@last=2026-06-24T16:00
+RH CHANGE >50%/h: FORT NELSON FS - 2 events, peak=+61.0%/h @first=2026-06-24T18:00@last=2026-07-19T04:00
+RH CHANGE >50%/h: MANSON - 3 events, peak=+60.0%/h @first=2026-05-16T16:00@last=2026-06-25T14:00
 CONSTANT RH: SILVER - Constant 100%, avg=100%, 33h, precip=11.4mm @start=2026-05-15T00:00@end=2026-05-16T08:00
 CONSTANT RH: NELSON FORKS - Constant 100%, avg=100%, 31h, precip=45.2mm @start=2026-06-05T02:00@end=2026-06-06T08:00
 CONSTANT RH: MANSON - Constant 100%, avg=100%, 22h, precip=15.6mm @start=2026-06-18T19:00@end=2026-06-19T16:00
@@ -40,10 +40,15 @@ DIRECTION CONCENTRATION: MCLEOD LAKE - up to 50% of a day in the 209 deg bin (2 
 === TEMPERATURE ===
 HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00
 LOWEST TEMP: TABLE RIVER - -59.4C @ts=2026-04-26T04:00
-ISOLATED TEMP SPIKE: MANSON - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-05-26T13:00@last=2026-05-26T13:00
-ISOLATED TEMP SPIKE: TABLE RIVER - 5 readings deviated >=5C then returned, no inverse RH shift @first=2026-04-21T14:00@last=2026-05-03T12:00
+ISOLATED TEMP SPIKE: TABLE RIVER - 5 readings deviated >=5C then returned, no inverse RH shift, peak=8.3C, mag=21.2 @first=2026-04-21T14:00@last=2026-05-03T12:00
+ISOLATED TEMP SPIKE: MANSON - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.6C, mag=11.3 @first=2026-05-26T13:00@last=2026-05-26T13:00
 
 === PRECIPITATION ===
+SILENT GAUGE: BLUE RIVER 2 - silent 4 of 4 neighbour rain hours (100.0%) @first=2026-07-19T21:00@last=2026-07-20T00:00
+SILENT GAUGE: FIRESIDE - silent 18 of 25 neighbour rain hours (72.0%) @first=2026-05-14T11:00@last=2026-07-08T16:00
+SILENT GAUGE: SUSTUT - silent 24 of 36 neighbour rain hours (66.7%) @first=2026-05-25T13:00@last=2026-07-13T10:00
+SILENT GAUGE: SILVER - silent 10 of 16 neighbour rain hours (62.5%) @first=2026-05-14T11:00@last=2026-06-26T17:00
+SILENT GAUGE: MUSKWA - silent 9 of 15 neighbour rain hours (60.0%) @first=2026-05-15T08:00@last=2026-07-18T19:00
 HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
 
 === POWER ===

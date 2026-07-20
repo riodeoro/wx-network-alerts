@@ -9,10 +9,10 @@ SENSOR NA: DARKWOODS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIG
 SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH CHANGE >50%/h: BLAEBERRY - 1 events @first=2026-06-25T20:00@last=2026-06-25T20:00
-RH CHANGE >50%/h: DOWNIE - 1 events @first=2026-07-18T15:00@last=2026-07-18T15:00
-RH CHANGE >50%/h: ELKO - 1 events @first=2026-07-01T17:00@last=2026-07-01T17:00
-RH CHANGE >50%/h: NICOLL - 1 events @first=2026-07-15T18:00@last=2026-07-15T18:00
+RH CHANGE >50%/h: NICOLL - 1 events, peak=+64.0%/h @first=2026-07-15T18:00@last=2026-07-15T18:00
+RH CHANGE >50%/h: ELKO - 1 events, peak=-63.0%/h @first=2026-07-01T17:00@last=2026-07-01T17:00
+RH CHANGE >50%/h: DOWNIE - 1 events, peak=+57.0%/h @first=2026-07-18T15:00@last=2026-07-18T15:00
+RH CHANGE >50%/h: BLAEBERRY - 1 events, peak=+55.0%/h @first=2026-06-25T20:00@last=2026-06-25T20:00
 CONSTANT RH: NORNS - Constant 100%, avg=100%, 43h, no precip @start=2026-06-29T22:00@end=2026-07-01T16:00
 CONSTANT RH: DUNCAN - Constant 100%, avg=100%, 19h, precip=11.0mm @start=2026-06-30T17:00@end=2026-07-01T11:00
 CONSTANT RH: DEWAR CREEK - Constant 100%, avg=100%, 14h, precip=0.4mm @start=2026-06-30T20:00@end=2026-07-01T09:00
@@ -43,7 +43,12 @@ CONSTANT TEMP: NANCY GREENE - 9.1C for 6h, RH also flat (0% range) @start=2026-0
 CONSTANT TEMP: WHITE RIVER - 7.8C for 6h, RH also flat (0% range) @start=2026-06-29T00:00@end=2026-06-29T05:00
 
 === PRECIPITATION ===
-RAIN AT RH 10-25%: DARKWOODS - 3 hours, 0.6mm total @first=2026-06-20T17:00@last=2026-07-12T18:00
+RAIN AT RH 10-25%: DARKWOODS - 3 hours, 0.6mm total, rank=1 @first=2026-06-20T17:00@last=2026-07-12T18:00
+SILENT GAUGE: DARKWOODS - silent 7 of 7 neighbour rain hours (100.0%) @first=2026-06-26T09:00@last=2026-07-17T08:00
+SILENT GAUGE: NORNS - silent 8 of 8 neighbour rain hours (100.0%) @first=2026-06-30T02:00@last=2026-07-17T08:00
+SILENT GAUGE: FLATHEAD 2 - silent 14 of 15 neighbour rain hours (93.3%) @first=2026-06-28T14:00@last=2026-07-17T04:00
+SILENT GAUGE: BEAVERDELL - silent 6 of 8 neighbour rain hours (75.0%) @first=2026-06-27T01:00@last=2026-06-30T08:00
+SILENT GAUGE: MARION - silent 3 of 4 neighbour rain hours (75.0%) @first=2026-06-30T16:00@last=2026-07-01T12:00
 HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
 

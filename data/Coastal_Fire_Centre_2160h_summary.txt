@@ -9,11 +9,11 @@ SENSOR NA: MACHMELL KLINIKLINI - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=
 SENSOR NA: MESACHIE 2 - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH CHANGE >50%/h: ALLISON PASS - 1 events @first=2026-07-16T15:00@last=2026-07-16T15:00
-RH CHANGE >50%/h: DARCY - 1 events @first=2026-05-10T17:00@last=2026-05-10T17:00
-RH CHANGE >50%/h: TALCHAKO - 1 events @first=2026-06-20T18:00@last=2026-06-20T18:00
-RH CHANGE >50%/h: TS ELPHINSTONE - 2 events @first=2026-05-13T10:00@last=2026-05-13T11:00
-RH CHANGE >50%/h: TS SAN JUAN - 1 events @first=2026-04-25T09:00@last=2026-04-25T09:00
+RH CHANGE >50%/h: TS ELPHINSTONE - 2 events, peak=+80.0%/h @first=2026-05-13T10:00@last=2026-05-13T11:00
+RH CHANGE >50%/h: TS SAN JUAN - 1 events, peak=-62.0%/h @first=2026-04-25T09:00@last=2026-04-25T09:00
+RH CHANGE >50%/h: ALLISON PASS - 1 events, peak=+61.0%/h @first=2026-07-16T15:00@last=2026-07-16T15:00
+RH CHANGE >50%/h: TALCHAKO - 1 events, peak=+57.0%/h @first=2026-06-20T18:00@last=2026-06-20T18:00
+RH CHANGE >50%/h: DARCY - 1 events, peak=+55.0%/h @first=2026-05-10T17:00@last=2026-05-10T17:00
 CONSTANT RH: MOUNT CAYLEY - Constant 100%, avg=100%, 56h, precip=0.4mm @start=2026-06-28T22:00@end=2026-07-01T05:00
 CONSTANT RH: HOMATHKO - Constant 100%, avg=100%, 52h, precip=1.4mm @start=2026-07-17T06:00@end=2026-07-19T09:00
 CONSTANT RH: MACHMELL KLINIKLINI - Constant 100%, avg=100%, 48h, precip=23.0mm @start=2026-07-17T12:00@end=2026-07-19T11:00
@@ -43,13 +43,16 @@ TEMP>35C: PEMBERTON BASE - max=36.4C @ts=2026-06-23T17:00
 TEMP>35C: SCAR CREEK - max=36.7C @ts=2026-06-23T17:00
 TEMP>35C: TS BURMAN - max=35.2C @ts=2026-06-23T16:00
 TEMP>35C: WOSS CAMP - max=35.7C @ts=2026-06-14T16:00
-ISOLATED TEMP SPIKE: FRANK CREEK - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-06-21T16:00@last=2026-06-21T16:00
-ISOLATED TEMP SPIKE: SALTSPRING 2 - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-07-07T12:00@last=2026-07-07T12:00
+ISOLATED TEMP SPIKE: SALTSPRING 2 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.8C, mag=7.5 @first=2026-07-07T12:00@last=2026-07-07T12:00
+ISOLATED TEMP SPIKE: FRANK CREEK - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.1C, mag=6.2 @first=2026-06-21T16:00@last=2026-06-21T16:00
 CONSTANT TEMP: BIG SILVER 2 - 11.7C for 6h, RH also flat (0% range) @start=2026-07-03T01:00@end=2026-07-03T06:00
 CONSTANT TEMP: KLINAKLINI - 5.6C for 6h, RH also flat (0% range) @start=2026-07-09T20:00@end=2026-07-10T01:00
 
 === PRECIPITATION ===
-None.
+SILENT GAUGE: DARCY - silent 16 of 20 neighbour rain hours (80.0%) @first=2026-05-25T05:00@last=2026-07-17T02:00
+SILENT GAUGE: ALLISON PASS - silent 26 of 38 neighbour rain hours (68.4%) @first=2026-05-13T04:00@last=2026-07-12T03:00
+SILENT GAUGE: HONNA - silent 26 of 38 neighbour rain hours (68.4%) @first=2026-05-10T10:00@last=2026-07-04T11:00
+SILENT GAUGE: BOOTHROYD - silent 23 of 37 neighbour rain hours (62.2%) @first=2026-05-13T13:00@last=2026-07-02T15:00
 
 === POWER ===
 LOW VBAT: SCAR CREEK - min=11.40V, mean=12.33V, severity=low @ts=2026-06-04T03:00

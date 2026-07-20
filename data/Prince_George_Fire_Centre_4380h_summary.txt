@@ -13,11 +13,11 @@ OUTLIER Rh: MANSON - min=3.0, max=32.0 @ts=2026-06-23T11:00
 OUTLIER Rh: TABLE RIVER - min=1.0, max=5.0 @ts=2026-03-03T21:00
 OUTLIER Rh: VALEMOUNT 2 - min=14.0, max=16.0 @ts=2026-04-25T15:00
 RH>100%: TABLE RIVER - 248 readings, max=116.0% @first=2026-01-27T16:00@last=2026-05-12T10:00
-RH CHANGE >50%/h: BEAR LAKE - 1 events @first=2026-07-17T17:00@last=2026-07-17T17:00
-RH CHANGE >50%/h: BEDNESTI - 1 events @first=2026-07-17T15:00@last=2026-07-17T15:00
-RH CHANGE >50%/h: CATFISH - 1 events @first=2026-06-24T14:00@last=2026-06-24T14:00
-RH CHANGE >50%/h: ELK MOUNTAIN - 1 events @first=2026-06-23T18:00@last=2026-06-23T18:00
-RH CHANGE >50%/h: FORT NELSON FS - 2 events @first=2026-06-24T18:00@last=2026-07-19T04:00
+RH CHANGE >50%/h: TABLE RIVER - 21 events, peak=-114.0%/h @first=2026-01-27T18:00@last=2026-05-12T11:00
+RH CHANGE >50%/h: ELK MOUNTAIN - 1 events, peak=+68.0%/h @first=2026-06-23T18:00@last=2026-06-23T18:00
+RH CHANGE >50%/h: INGENIKA POINT - 2 events, peak=-64.0%/h @first=2026-03-17T12:00@last=2026-03-19T10:00
+RH CHANGE >50%/h: NORTH CHILCO - 1 events, peak=+64.0%/h @first=2026-06-24T16:00@last=2026-06-24T16:00
+RH CHANGE >50%/h: FORT NELSON FS - 2 events, peak=+61.0%/h @first=2026-06-24T18:00@last=2026-07-19T04:00
 CONSTANT RH: MANSON - Constant 100%, avg=100%, 378h, precip=24.6mm @start=2026-03-27T11:00@end=2026-04-12T04:00
 CONSTANT RH: SIFTON - Constant 100%, avg=100%, 135h, precip=31.8mm @start=2026-02-02T14:00@end=2026-02-08T04:00
 CONSTANT RH: BLUE RIVER 2 - Constant 100%, avg=100%, 66h, precip=10.0mm @start=2026-01-31T17:00@end=2026-02-03T10:00
@@ -52,11 +52,11 @@ TEMP<-35C: MUSKWA - min=-36.3C @ts=2026-02-27T07:00
 TEMP<-35C: PINK MOUNTAIN - min=-40.6C @ts=2026-02-27T06:00
 TEMP<-35C: SIERRA - min=-38.9C @ts=2026-02-23T07:00
 TEMP<-35C: TOAD RIVER - min=-41.1C @ts=2026-02-27T08:00
-ISOLATED TEMP SPIKE: GOSNEL - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-04-08T15:00@last=2026-04-08T15:00
-ISOLATED TEMP SPIKE: HELMUT - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-04-03T05:00@last=2026-04-03T05:00
-ISOLATED TEMP SPIKE: HUDSON HOPE - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-02-28T00:00@last=2026-02-28T00:00
-ISOLATED TEMP SPIKE: MANSON - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-05-26T13:00@last=2026-05-26T13:00
-ISOLATED TEMP SPIKE: MOOSE LAKE - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-04-14T20:00@last=2026-04-14T20:00
+ISOLATED TEMP SPIKE: TABLE RIVER - 15 readings deviated >=5C then returned, no inverse RH shift, peak=30.8C, mag=40.1 @first=2026-03-12T14:00@last=2026-05-03T12:00
+ISOLATED TEMP SPIKE: HELMUT - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.6C, mag=12.7 @first=2026-04-03T05:00@last=2026-04-03T05:00
+ISOLATED TEMP SPIKE: NELSON FORKS - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.0C, mag=11.8 @first=2026-03-07T07:00@last=2026-03-07T07:00
+ISOLATED TEMP SPIKE: MANSON - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.6C, mag=11.3 @first=2026-05-26T13:00@last=2026-05-26T13:00
+ISOLATED TEMP SPIKE: VANDERHOOF HUB - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.1C, mag=10.0 @first=2026-03-28T12:00@last=2026-03-28T12:00
 CONSTANT TEMP: MANSON - 0.1C for 24h, RH also flat (0% range) @start=2026-04-05T22:00@end=2026-04-06T21:00
 CONSTANT TEMP: LOVELL COVE - 0.1C for 11h, RH also flat (0% range) @start=2026-01-29T18:00@end=2026-01-30T04:00
 CONSTANT TEMP: TABLE RIVER - 1.8C for 10h, RH varied 8% during span @start=2026-02-09T20:00@end=2026-02-10T05:00
@@ -64,9 +64,12 @@ CONSTANT TEMP: BLUE RIVER 2 - 0.2C for 9h, RH also flat (0% range) @start=2026-0
 CONSTANT TEMP: CATFISH - 0.1C for 7h, RH also flat (0% range) @start=2026-03-02T19:00@end=2026-03-03T01:00
 
 === PRECIPITATION ===
-RAIN AT RH 10-25%: BLUE RIVER 2 - 1 hours, 0.8mm total @first=2026-03-12T14:00@last=2026-03-12T14:00
-RAIN AT RH 10-25%: CHILAKO - 2 hours, 1.4mm total @first=2026-03-29T16:00@last=2026-03-29T17:00
-RAIN AT RH 10-25%: ELK MOUNTAIN - 1 hours, 0.8mm total @first=2026-03-14T17:00@last=2026-03-14T17:00
+RAIN AT RH 10-25%: ELK MOUNTAIN - 1 hours, 0.8mm total, rank=3 @first=2026-03-14T17:00@last=2026-03-14T17:00
+RAIN AT RH 10-25%: WITCH - 2 hours, 2.6mm total, rank=4 @first=2026-04-10T15:00@last=2026-04-10T16:00
+RAIN AT RH 10-25%: PADDY - 2 hours, 0.6mm total, rank=5 @first=2026-03-15T12:00@last=2026-03-15T14:00
+SILENT GAUGE: BLUE RIVER 2 - silent 4 of 4 neighbour rain hours (100.0%) @first=2026-07-19T21:00@last=2026-07-20T00:00
+SILENT GAUGE: NORTH CHILCO - silent 23 of 34 neighbour rain hours (67.6%) @first=2026-01-28T12:00@last=2026-07-19T05:00
+SILENT GAUGE: FIRESIDE - silent 19 of 29 neighbour rain hours (65.5%) @first=2026-04-19T06:00@last=2026-07-08T16:00
 HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
 
 === POWER ===

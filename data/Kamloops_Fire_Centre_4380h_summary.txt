@@ -12,11 +12,11 @@ SENSOR NA: PASKA LAKE - Vbat=50% NA, Vslr=50% NA, Ibat=50% NA
 RH=0%: MABEL LAKE 2 - 2 readings @first=2026-04-30T20:00@last=2026-04-30T21:00
 RH=0%: SILVERSTAR SF - 4371 readings @first=2026-01-18T20:00@last=2026-07-20T08:00
 RH=0%: TURTLE - 157 readings @first=2026-01-25T20:00@last=2026-02-02T12:00
-RH CHANGE >50%/h: ASPEN GROVE - 1 events @first=2026-06-03T14:00@last=2026-06-03T14:00
-RH CHANGE >50%/h: AUGUST LAKE - 2 events @first=2026-03-25T17:00@last=2026-05-21T18:00
-RH CHANGE >50%/h: BRENDA MINES - 1 events @first=2026-01-20T00:00@last=2026-01-20T00:00
-RH CHANGE >50%/h: CLEARWATER HUB - 3 events @first=2026-03-08T05:00@last=2026-07-12T09:00
-RH CHANGE >50%/h: COLDSCAUR LAKE - 1 events @first=2026-06-25T23:00@last=2026-06-25T23:00
+RH CHANGE >50%/h: TURTLE - 9 events, peak=+92.0%/h @first=2026-01-26T11:00@last=2026-06-25T18:00
+RH CHANGE >50%/h: SICAMOUS - 3 events, peak=+64.0%/h @first=2026-06-11T18:00@last=2026-07-19T17:00
+RH CHANGE >50%/h: CLEARWATER HUB - 3 events, peak=+61.0%/h @first=2026-03-08T05:00@last=2026-07-12T09:00
+RH CHANGE >50%/h: WELLS GRAY - 1 events, peak=+57.0%/h @first=2026-06-03T20:00@last=2026-06-03T20:00
+RH CHANGE >50%/h: AUGUST LAKE - 2 events, peak=+55.0%/h @first=2026-03-25T17:00@last=2026-05-21T18:00
 CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 4371h, no precip @start=2026-01-18T20:00@end=2026-07-20T08:00
 CONSTANT RH: MABEL LAKE 2 - Constant 100%, avg=100%, 262h, precip=13.4mm @start=2026-01-28T17:00@end=2026-02-08T14:00
 CONSTANT RH: TURTLE - Constant low (<50%), avg=0%, 92h, precip=5.8mm @start=2026-01-27T20:00@end=2026-01-31T15:00
@@ -54,7 +54,7 @@ TEMP>35C: PENTICTON RS - max=36.2C @ts=2026-07-14T17:00
 TEMP>35C: SPLINTLUM - max=37.4C @ts=2026-07-16T16:00
 TEMP>35C: TURTLE - max=36.1C @ts=2026-07-17T16:00
 TEMP>35C: WEST KELOWNA - max=35.5C @ts=2026-07-14T17:00
-ISOLATED TEMP SPIKE: KETTLE 2 - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-03-01T13:00@last=2026-03-01T13:00
+ISOLATED TEMP SPIKE: KETTLE 2 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.1C, mag=9.8 @first=2026-03-01T13:00@last=2026-03-01T13:00
 CONSTANT TEMP: CLEARWATER HUB - 0.1C for 11h, RH also flat (1% range) @start=2026-02-13T21:00@end=2026-02-14T07:00
 CONSTANT TEMP: EAST BARRIERE - 0.1C for 11h, RH also flat (0% range) @start=2026-02-13T20:00@end=2026-02-14T06:00
 CONSTANT TEMP: WELLS GRAY - 0.0C for 10h, RH also flat (0% range) @start=2026-01-28T21:00@end=2026-01-29T06:00
@@ -62,10 +62,14 @@ CONSTANT TEMP: LARCH HILLS WEST - -5.2C for 8h, RH also flat (0% range) @start=2
 CONSTANT TEMP: CURWEN CREEK - 0.6C for 7h, RH also flat (0% range) @start=2026-02-03T23:00@end=2026-02-04T05:00
 
 === PRECIPITATION ===
-RAIN AT RH<10%: TURTLE - 17 hours, 9.0mm total @first=2026-01-29T11:00@last=2026-02-02T13:00
-RAIN AT RH 10-25%: CURWEN CREEK - 6 hours, 31.8mm total @first=2026-04-20T14:00@last=2026-04-21T14:00
-RAIN AT RH 10-25%: FRENCH BAR - 1 hours, 0.2mm total @first=2026-04-22T15:00@last=2026-04-22T15:00
-RAIN AT RH 10-25%: KETTLE 2 - 1 hours, 1.4mm total @first=2026-03-26T14:00@last=2026-03-26T14:00
+RAIN AT RH<10%: TURTLE - 17 hours, 9.0mm total, rank=1 @first=2026-01-29T11:00@last=2026-02-02T13:00
+RAIN AT RH 10-25%: CURWEN CREEK - 6 hours, 31.8mm total, rank=3 @first=2026-04-20T14:00@last=2026-04-21T14:00
+RAIN AT RH 10-25%: KETTLE 2 - 1 hours, 1.4mm total, rank=4 @first=2026-03-26T14:00@last=2026-03-26T14:00
+RAIN AT RH 10-25%: FRENCH BAR - 1 hours, 0.2mm total, rank=6 @first=2026-04-22T15:00@last=2026-04-22T15:00
+SILENT GAUGE: GREENSTONE HUB - silent 16 of 16 neighbour rain hours (100.0%) @first=2026-01-31T16:00@last=2026-07-02T17:00
+SILENT GAUGE: HARBOUR LAKE - silent 69 of 71 neighbour rain hours (97.2%) @first=2026-01-29T12:00@last=2026-06-27T08:00
+SILENT GAUGE: FRENCH BAR - silent 11 of 14 neighbour rain hours (78.6%) @first=2026-03-19T04:00@last=2026-07-12T04:00
+SILENT GAUGE: MUDPIT - silent 5 of 7 neighbour rain hours (71.4%) @first=2026-06-27T09:00@last=2026-07-19T18:00
 
 === POWER ===
 LOW VBAT: AFTON - min=7.50V, mean=13.11V, severity=low @ts=2026-01-22T18:00

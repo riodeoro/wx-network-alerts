@@ -13,7 +13,7 @@ None.
 === TEMPERATURE ===
 HIGHEST TEMP: QD #1 - 32.0C @ts=2026-07-19T15:00
 LOWEST TEMP: QD #19 - 7.4C @ts=2026-07-20T05:00
-ISOLATED TEMP SPIKE: QD #20 - 1 readings deviated >=5C then returned, no inverse RH shift @first=2026-07-19T15:00@last=2026-07-19T15:00
+ISOLATED TEMP SPIKE: QD #20 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.2C, mag=6.2 @first=2026-07-19T15:00@last=2026-07-19T15:00
 
 === PRECIPITATION ===
 None.
