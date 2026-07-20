@@ -1,7 +1,7 @@
 const BUCKET_BASE = "./data/";
 const CONFIG_BASE = "./data/";
 
-const CHART_WINDOWS = [24, 72, 168, 720, 2160, 4380];
+const CHART_WINDOWS = [24, 48, 72, 168, 720, 1440, 2160, 4380];
 
 function resolveChartWindow(hours) {
   for (const w of CHART_WINDOWS) if (w >= hours) return w;
