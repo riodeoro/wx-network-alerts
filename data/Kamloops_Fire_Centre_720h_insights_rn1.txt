@@ -1,7 +1,10 @@
-<!-- hash:f9f4c2060a81 -->
+<!-- hash:375fd13069d1 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 MABEL LAKE 2:     2 hours, Rn_1 (17.4mm)                                [Jun 23 14:00–16:00]
 MAYSON:           1 hour, Rn_1 (0.4mm)                                         [Jul 6 16:00]
 SPLINTLUM:        1 hour, Rn_1 (0.2mm)                                        [Jun 24 16:00]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+GREENSTONE HUB:   silent 3 of 3 neighbour rain hours (100%)     [Jun 30 06:00 → Jul 2 17:00]
+MUDPIT:           silent 5 of 7 neighbour rain hours (71%)     [Jun 27 09:00 → Jul 19 18:00]
 ```

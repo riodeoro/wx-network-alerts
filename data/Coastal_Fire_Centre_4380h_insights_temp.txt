@@ -1,4 +1,4 @@
-<!-- hash:c028c6c5514f -->
+<!-- hash:46c7fe4d3772 -->
 ```
 EXTREME VALUES
 TOBA CAMP:        Highest (37.4°C)                                                  [Jun 23]
@@ -13,8 +13,8 @@ WOSS CAMP:        35.7°C                                                       
 FRANK CREEK:      35.2°C                                                            [Jun 14]
 TS BURMAN:        35.2°C                                                            [Jun 23]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
-FRANK CREEK:      1 spike                                                     [Jun 21 16:00]
-SALTSPRING 2:     1 spike                                                      [Jul 7 12:00]
+SALTSPRING 2:     1 spike, peak Δ 5.8°C                                        [Jul 7 12:00]
+FRANK CREEK:      1 spike, peak Δ 5.1°C                                       [Jun 21 16:00]
 PERSISTENT STATES
 SCAR CREEK:       constant (0.1°C) for 13h, RH varied 1%       [Mar 16 20:00 – Mar 17 08:00]
 TOBA CAMP:        constant (0.1°C) for 11h, RH varied 0%       [Mar 15 22:00 – Mar 16 08:00]

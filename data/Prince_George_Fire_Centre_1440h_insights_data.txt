@@ -1,4 +1,4 @@
-<!-- hash:96f936b20155 -->
+<!-- hash:5f248123a67c -->
 ```
 LOW DATA COVERAGE
 GOSNEL:           12% (173/1441h)                                    [since Jul 13, ongoing]

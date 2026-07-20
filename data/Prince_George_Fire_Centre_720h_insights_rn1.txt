@@ -1,5 +1,11 @@
-<!-- hash:d67005135276 -->
+<!-- hash:f23594d8bb45 -->
 ```
 HIGH PRECIPITATION
 KOMIE:            37.0 mm/h                                                   [Jun 30 23:00]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+BLUE RIVER 2:     silent 4 of 4 neighbour rain hours (100%)    [Jul 19 21:00 → Jul 20 00:00]
+FIRESIDE:         silent 14 of 16 neighbour rain hours (88%)    [Jun 29 01:00 → Jul 8 16:00]
+MUSKWA:           silent 6 of 8 neighbour rain hours (75%)     [Jun 26 18:00 → Jul 18 19:00]
+RED DEER:         silent 6 of 8 neighbour rain hours (75%)     [Jun 28 05:00 → Jul 19 08:00]
+SUSTUT:           silent 17 of 23 neighbour rain hours (74%)   [Jun 26 15:00 → Jul 13 10:00]
 ```

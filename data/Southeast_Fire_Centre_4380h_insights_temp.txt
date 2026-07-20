@@ -1,4 +1,4 @@
-<!-- hash:a6f590c2013a -->
+<!-- hash:bdbef0c0850f -->
 ```
 EXTREME VALUES
 CARIBOO CREEK:    Highest (69.2°C)                                                  [May 15]
@@ -14,11 +14,11 @@ BRISCO:           35.6°C                                                       
 JOHNSON LAKE:     35.6°C                                                            [Jul 16]
 TOBY HUB:         35.1°C                                                            [Jul 16]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
-CARIBOO CREEK:    6 spikes                                     [May 14 09:00 → May 19 07:00]
-DUNCAN:           4 spikes                                     [May 13 12:00 → May 14 03:00]
-PALLISER:         1 spike                                                     [Feb 22 00:00]
-RORY CREEK:       1 spike                                                     [Apr 26 14:00]
-ROUND PRAIRIE:    1 spike                                                     [Apr 23 13:00]
+CARIBOO CREEK:    6 spikes, peak Δ 61.2°C                      [May 14 09:00 → May 19 07:00]
+DUNCAN:           4 spikes, peak Δ 27.6°C                      [May 13 12:00 → May 14 03:00]
+PALLISER:         1 spike, peak Δ 5.0°C                                       [Feb 22 00:00]
+RORY CREEK:       1 spike, peak Δ 5.2°C                                       [Apr 26 14:00]
+ROUND PRAIRIE:    1 spike, peak Δ 5.6°C                                       [Apr 23 13:00]
 PERSISTENT STATES
 DUNCAN:           constant (0.0°C) for 225h, RH varied 0%      [Mar 21 10:00 – Mar 30 18:00]
 NORNS:            constant (-0.1°C) for 55h, RH varied 0%      [Apr 20 19:00 – Apr 23 01:00]

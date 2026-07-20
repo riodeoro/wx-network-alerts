@@ -1,11 +1,11 @@
-<!-- hash:c68ebfccdc32 -->
+<!-- hash:a12bf9d9b506 -->
 ```
 RH CHANGED >50%/H
-GAVIN:            3 events                                     [Jun 24 15:00 → Jul 17 16:00]
-BALDFACE:         2 events                                              [Jun 24 08:00–16:00]
-PLACE LAKE:       2 events                                      [Jun 25 23:00 → Jul 7 08:00]
-LIKELY RS:        1 event                                                     [Jun 21 18:00]
-LONE BUTTE:       1 event                                                     [Jul 18 17:00]
+GAVIN:            3 events, peak Δ +61%/h                      [Jun 24 15:00 → Jul 17 16:00]
+BALDFACE:         2 events, peak Δ +59%/h                               [Jun 24 08:00–16:00]
+LONE BUTTE:       1 event, peak Δ +56%/h                                      [Jul 18 17:00]
+PLACE LAKE:       2 events, peak Δ -56%/h                       [Jun 25 23:00 → Jul 7 08:00]
+TIMOTHY:          2 events, peak Δ +56%/h                      [Jun 25 23:00 → Jul 11 17:00]
 PERSISTENT STATES
 BIG VALLEY:       RH constant 99% for 12h, Rn_1 (4.4mm)                 [Jul 19 00:00–11:00]
 DECEPTION:        RH constant 100% for 12h, zero Rn_1          [May 29 21:00 – May 30 08:00]

@@ -1,4 +1,4 @@
-<!-- hash:a6f590c2013a -->
+<!-- hash:bdbef0c0850f -->
 ```
 LOW BATTERY VOLTAGE
 SMALLWOOD:        min 6.90V, mean 12.63V [low]                                       [Feb 9]

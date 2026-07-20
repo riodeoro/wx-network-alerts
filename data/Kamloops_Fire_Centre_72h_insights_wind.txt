@@ -1,4 +1,4 @@
-<!-- hash:40c76a113c24 -->
+<!-- hash:2ea942612882 -->
 ```
 DAILY DIRECTION CONCENTRATION
 MERRITT 2 HUB:    up to 54% of a day within ±5° of 208° (1 day(s) at 50%+)

@@ -1,11 +1,11 @@
-<!-- hash:957241d790d5 -->
+<!-- hash:fada026c4e11 -->
 ```
 RH CHANGED >50%/H
-TS ELPHINSTONE:   2 events                                              [May 13 10:00–11:00]
-ALLISON PASS:     1 event                                                     [Jul 16 15:00]
-DARCY:            1 event                                                     [May 10 17:00]
-TALCHAKO:         1 event                                                     [Jun 20 18:00]
-TS SAN JUAN:      1 event                                                     [Apr 25 09:00]
+TS ELPHINSTONE:   2 events, peak Δ +80%/h                               [May 13 10:00–11:00]
+TS SAN JUAN:      1 event, peak Δ -62%/h                                      [Apr 25 09:00]
+ALLISON PASS:     1 event, peak Δ +61%/h                                      [Jul 16 15:00]
+TALCHAKO:         1 event, peak Δ +57%/h                                      [Jun 20 18:00]
+DARCY:            1 event, peak Δ +55%/h                                      [May 10 17:00]
 PERSISTENT STATES
 MOUNT CAYLEY:     RH constant 100% for 56h, Rn_1 (0.4mm)        [Jun 28 22:00 – Jul 1 05:00]
 HOMATHKO:         RH constant 100% for 52h, Rn_1 (1.4mm)       [Jul 17 06:00 – Jul 19 09:00]

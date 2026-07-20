@@ -1,4 +1,4 @@
-<!-- hash:c70618676ff4 -->
+<!-- hash:2e6f5f7e40be -->
 ```
 UNCONFIGURED SENSORS
   BEAR LAKE, CHILAKO, FORT NELSON FS, GOSNEL, MOOSE LAKE: battery voltage, charge current, and solar voltage unconfigured

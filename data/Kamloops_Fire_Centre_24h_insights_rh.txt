@@ -1,9 +1,9 @@
-<!-- hash:568f609d8624 -->
+<!-- hash:21d02324ced0 -->
 ```
 RH READ 0%
 SILVERSTAR SF:    25 readings                         [Jul 19 08:00 → Jul 20 08:00, ongoing]
 RH CHANGED >50%/H
-SICAMOUS:         1 event                                                     [Jul 19 17:00]
+SICAMOUS:         1 event, peak Δ +54%/h                                      [Jul 19 17:00]
 PERSISTENT STATES
 SILVERSTAR SF:    RH constant 0% for 25h, zero Rn_1   [Jul 19 08:00 – Jul 20 08:00, ongoing]
 ```

@@ -1,14 +1,17 @@
-<!-- hash:946fbdcdd96b -->
+<!-- hash:49e9ea9307d2 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
-DEWAR CREEK:      13 hours, Rn_1 (9.8mm)                        [Apr 23 16:00 → Jun 5 12:00]
+DEWAR CREEK:      12 hours, Rn_1 (9.6mm)                        [Apr 23 16:00 → Jun 5 01:00]
 CARIBOO CREEK:    3 hours, Rn_1 (7.0mm)                        [Jun 11 22:00 → Jun 12 12:00]
 DUNCAN:           3 hours, Rn_1 (3.0mm)                                 [May 29 12:00–15:00]
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
-RORY CREEK:       9 hours, Rn_1 (39.0mm)                         [May 3 13:00 → May 5 18:00]
 DARKWOODS:        11 hours, Rn_1 (2.8mm)                        [May 2 15:00 → Jul 12 18:00]
-WHISKEY:          1 hour, Rn_1 (0.2mm)                                         [Jun 8 13:00]
+RORY CREEK:       9 hours, Rn_1 (39.0mm)                         [May 3 13:00 → May 5 18:00]
 HIGH PRECIPITATION
 OCTOPUS CREEK:    27.4 mm/h                                                         [Jun 29]
 NICOLL:           23.2 mm/h                                                         [Jun 29]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+NORNS:            silent 25 of 25 neighbour rain hours (100%)  [May 13 14:00 → Jul 17 08:00]
+DARKWOODS:        silent 28 of 32 neighbour rain hours (88%)   [Apr 22 09:00 → Jul 17 08:00]
+FLATHEAD 2:       silent 16 of 19 neighbour rain hours (84%)    [Jun 9 06:00 → Jul 17 04:00]
 ```

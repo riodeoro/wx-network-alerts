@@ -1,11 +1,12 @@
-<!-- hash:f76063155e02 -->
+<!-- hash:6e23ffc4bace -->
 ```
-PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
-TAUTRI:           2 hours, Rn_1 (1.0mm)                        [Apr 21 18:00 → Apr 23 14:00]
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
-BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]
 GASPARD:          1 hour, Rn_1 (0.2mm)                                        [Mar 30 13:00]
-MEADOW LAKE:      1 hour, Rn_1 (0.2mm)                                        [Mar 30 15:00]
+BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]
+NAZKO:            1 hour, Rn_1 (0.2mm)                                         [Apr 6 18:00]
 HIGH PRECIPITATION
 PLUMMER HUT:      90.2 mm/h                                                          [Feb 4]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+ALEXIS CREEK:     silent 3 of 3 neighbour rain hours (100%)    [Mar 12 14:00 → Jun 26 16:00]
+NEMIAH:           silent 8 of 11 neighbour rain hours (73%)    [Mar 19 23:00 → Jun 10 07:00]
 ```

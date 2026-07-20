@@ -1,11 +1,11 @@
-<!-- hash:0fec1e3cf83c -->
+<!-- hash:6bd93c2d5216 -->
 ```
 RH CHANGED >50%/H
-CEDARVALE:        2 events                                               [May 8 13:00–14:00]
-BELL-IRVING:      1 event                                                      [Jun 9 15:00]
-BOYA LAKE:        1 event                                                      [Jun 9 22:00]
-GANOKWA:          1 event                                                     [Jun 21 17:00]
-NADINA:           1 event                                                     [Jun 20 16:00]
+BELL-IRVING:      1 event, peak Δ +59%/h                                       [Jun 9 15:00]
+GANOKWA:          1 event, peak Δ -57%/h                                      [Jun 21 17:00]
+CEDARVALE:        2 events, peak Δ +56%/h                                [May 8 13:00–14:00]
+NADINA:           1 event, peak Δ +54%/h                                      [Jun 20 16:00]
+VAN DYKE:         1 event, peak Δ +53%/h                                      [Jun 20 17:00]
 RH DROPPED AS LOW AS
 CEDARVALE:        3.0%                                                               [May 8]
 ROSSWOOD:         13.0%                                                              [Jun 2]

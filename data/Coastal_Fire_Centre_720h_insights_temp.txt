@@ -1,4 +1,4 @@
-<!-- hash:32c867ce6c26 -->
+<!-- hash:f43a3f8bb516 -->
 ```
 EXTREME VALUES
 TOBA CAMP:        Highest (37.4°C)                                            [Jun 23 16:00]
@@ -11,8 +11,8 @@ DARCY:            35.7°C                                                      [
 FRANK CREEK:      35.2°C                                                      [Jun 23 14:00]
 TS BURMAN:        35.2°C                                                      [Jun 23 16:00]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
-FRANK CREEK:      1 spike                                                     [Jun 21 16:00]
-SALTSPRING 2:     1 spike                                                      [Jul 7 12:00]
+SALTSPRING 2:     1 spike, peak Δ 5.8°C                                        [Jul 7 12:00]
+FRANK CREEK:      1 spike, peak Δ 5.1°C                                       [Jun 21 16:00]
 PERSISTENT STATES
 BIG SILVER 2:     constant (11.7°C) for 6h, RH varied 0%                 [Jul 3 01:00–06:00]
 KLINAKLINI:       constant (5.6°C) for 6h, RH varied 0%         [Jul 9 20:00 – Jul 10 01:00]

@@ -1,4 +1,4 @@
-<!-- hash:51c80d4a81f8 -->
+<!-- hash:d6cc7b136aa2 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
 TURTLE:           17 hours, Rn_1 (9.0mm)                        [Jan 29 11:00 → Feb 2 13:00]
@@ -6,4 +6,9 @@ PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 CURWEN CREEK:     6 hours, Rn_1 (31.8mm)                       [Apr 20 14:00 → Apr 21 14:00]
 KETTLE 2:         1 hour, Rn_1 (1.4mm)                                        [Mar 26 14:00]
 FRENCH BAR:       1 hour, Rn_1 (0.2mm)                                        [Apr 22 15:00]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+GREENSTONE HUB:   silent 16 of 16 neighbour rain hours (100%)   [Jan 31 16:00 → Jul 2 17:00]
+HARBOUR LAKE:     silent 69 of 71 neighbour rain hours (97%)   [Jan 29 12:00 → Jun 27 08:00]
+FRENCH BAR:       silent 11 of 14 neighbour rain hours (79%)   [Mar 19 04:00 → Jul 12 04:00]
+MUDPIT:           silent 5 of 7 neighbour rain hours (71%)     [Jun 27 09:00 → Jul 19 18:00]
 ```

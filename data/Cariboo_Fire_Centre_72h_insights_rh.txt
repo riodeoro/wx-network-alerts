@@ -1,8 +1,8 @@
-<!-- hash:2e3744a7bba2 -->
+<!-- hash:0f9b2ff48ebd -->
 ```
 RH CHANGED >50%/H
-GAVIN:            1 event                                                     [Jul 17 16:00]
-LONE BUTTE:       1 event                                                     [Jul 18 17:00]
+GAVIN:            1 event, peak Δ +61%/h                                      [Jul 17 16:00]
+LONE BUTTE:       1 event, peak Δ +56%/h                                      [Jul 18 17:00]
 RH DROPPED AS LOW AS
 NEMIAH:           14.0%                                                       [Jul 17 17:00]
 PERSISTENT STATES

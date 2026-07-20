@@ -1,13 +1,13 @@
-<!-- hash:3d1a58342d0a -->
+<!-- hash:ee4c56ffe2af -->
 ```
 RH EXCEEDED 100%
 TABLE RIVER:      52 readings, max 115.0%                      [Apr 22 06:00 → May 12 10:00]
 RH CHANGED >50%/H
-FORT NELSON FS:   2 events                                     [Jun 24 18:00 → Jul 19 04:00]
-BEAR LAKE:        1 event                                                     [Jul 17 17:00]
-BEDNESTI:         1 event                                                     [Jul 17 15:00]
-CATFISH:          1 event                                                     [Jun 24 14:00]
-ELK MOUNTAIN:     1 event                                                     [Jun 23 18:00]
+TABLE RIVER:      4 events, peak Δ -104%/h                     [Apr 23 08:00 → May 12 11:00]
+ELK MOUNTAIN:     1 event, peak Δ +68%/h                                      [Jun 23 18:00]
+NORTH CHILCO:     1 event, peak Δ +64%/h                                      [Jun 24 16:00]
+FORT NELSON FS:   2 events, peak Δ +61%/h                      [Jun 24 18:00 → Jul 19 04:00]
+MANSON:           3 events, peak Δ +60%/h                      [May 16 16:00 → Jun 25 14:00]
 PERSISTENT STATES
 SILVER:           RH constant 100% for 33h, Rn_1 (11.4mm)      [May 15 00:00 – May 16 08:00]
 NELSON FORKS:     RH constant 100% for 31h, Rn_1 (45.2mm)        [Jun 5 02:00 – Jun 6 08:00]

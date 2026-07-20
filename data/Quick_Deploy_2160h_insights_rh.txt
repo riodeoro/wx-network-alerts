@@ -1,7 +1,7 @@
-<!-- hash:ff3d9884cbf7 -->
+<!-- hash:c7da3eae7407 -->
 ```
 RH CHANGED >50%/H
-QD #6:            1 event                                                     [May 29 19:00]
+QD #6:            1 event, peak Δ +51%/h                                      [May 29 19:00]
 PERSISTENT STATES
 QD #20:           RH constant 3% for 156h, Rn_1 (1.0mm)  [Jul 13 20:00 – Jul 20 08:00, ongoing]
 QD #7:            RH constant 94% for 12h, Rn_1 (10.2mm)       [May 30 22:00 – May 31 09:00]

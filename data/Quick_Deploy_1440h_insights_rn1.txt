@@ -1,4 +1,4 @@
-<!-- hash:0b22823f8e8b -->
+<!-- hash:01cf9a2de220 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
 QD #20:           3 hours, Rn_1 (1.0mm)                                 [Jul 16 08:00–18:00]

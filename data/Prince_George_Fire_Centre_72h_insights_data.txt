@@ -1,4 +1,4 @@
-<!-- hash:355117a833d3 -->
+<!-- hash:4162caa12d96 -->
 ```
 LOW DATA COVERAGE
 MCLEOD LAKE:      45% (33/73h)                                                   [Jul 17–18]

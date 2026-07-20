@@ -1,10 +1,10 @@
-<!-- hash:0fec1e3cf83c -->
+<!-- hash:6bd93c2d5216 -->
 ```
 EXTREME VALUES
 CEDARVALE:        Highest (36.3°C)                                                  [Jul 17]
 BOYA LAKE:        Lowest (-35.8°C)                                                  [Feb 18]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
-EAST OOTSA:       1 spike                                                     [Apr 11 10:00]
+EAST OOTSA:       1 spike, peak Δ 5.0°C                                       [Apr 11 10:00]
 PERSISTENT STATES
 PINE CREEK:       constant (0.0°C) for 14h, RH varied 1%       [Mar 16 12:00 – Mar 17 01:00]
 BELL-IRVING:      constant (0.0°C) for 12h, RH varied 0%       [Jan 28 19:00 – Jan 29 06:00]

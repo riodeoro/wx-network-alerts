@@ -1,4 +1,4 @@
-<!-- hash:3d1a58342d0a -->
+<!-- hash:ee4c56ffe2af -->
 ```
 LOW BATTERY VOLTAGE
 LEMORAY:          min 11.70V, mean 11.76V [low]                                     [May 12]

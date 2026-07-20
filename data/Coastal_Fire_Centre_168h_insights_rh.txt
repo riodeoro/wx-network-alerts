@@ -1,7 +1,7 @@
-<!-- hash:7402ecda6580 -->
+<!-- hash:34a89aa2f1c5 -->
 ```
 RH CHANGED >50%/H
-ALLISON PASS:     1 event                                                     [Jul 16 15:00]
+ALLISON PASS:     1 event, peak Δ +61%/h                                      [Jul 16 15:00]
 PERSISTENT STATES
 HOMATHKO:         RH constant 100% for 52h, Rn_1 (1.4mm)       [Jul 17 06:00 – Jul 19 09:00]
 MACHMELL KLINIKLINI: RH constant 100% for 48h, Rn_1 (23.0mm)   [Jul 17 12:00 – Jul 19 11:00]

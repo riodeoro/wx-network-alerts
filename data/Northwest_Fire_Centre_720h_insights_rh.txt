@@ -1,9 +1,9 @@
-<!-- hash:39ddcc3ecfb5 -->
+<!-- hash:437b43760d1b -->
 ```
 RH CHANGED >50%/H
-GANOKWA:          1 event                                                     [Jun 21 17:00]
-NADINA:           1 event                                                     [Jun 20 16:00]
-VAN DYKE:         1 event                                                     [Jun 20 17:00]
+GANOKWA:          1 event, peak Δ -57%/h                                      [Jun 21 17:00]
+NADINA:           1 event, peak Δ +54%/h                                      [Jun 20 16:00]
+VAN DYKE:         1 event, peak Δ +53%/h                                      [Jun 20 17:00]
 PERSISTENT STATES
 OLD FADDY:        RH constant 100% for 13h, zero Rn_1          [Jul 10 22:00 – Jul 11 10:00]
 ```

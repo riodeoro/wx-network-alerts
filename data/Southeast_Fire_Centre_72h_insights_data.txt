@@ -1,4 +1,4 @@
-<!-- hash:4be769bfafed -->
+<!-- hash:986054290d00 -->
 ```
 UNCONFIGURED SENSORS
   BAKER: RH, battery voltage, charge current, gust speed, precipitation, solar voltage, temperature, wind direction, and wind speed unconfigured

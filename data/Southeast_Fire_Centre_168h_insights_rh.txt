@@ -1,6 +1,6 @@
-<!-- hash:4bc27a7ad312 -->
+<!-- hash:ef04aa7d7ed1 -->
 ```
 RH CHANGED >50%/H
-DOWNIE:           1 event                                                     [Jul 18 15:00]
-NICOLL:           1 event                                                     [Jul 15 18:00]
+NICOLL:           1 event, peak Δ +64%/h                                      [Jul 15 18:00]
+DOWNIE:           1 event, peak Δ +57%/h                                      [Jul 18 15:00]
 ```

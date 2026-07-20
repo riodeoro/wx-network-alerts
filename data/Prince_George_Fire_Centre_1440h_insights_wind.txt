@@ -1,4 +1,4 @@
-<!-- hash:96f936b20155 -->
+<!-- hash:5f248123a67c -->
 ```
 GUSTS EXCEEDED 80 KM/H
 VALEMOUNT 2:      1367.0 km/h (66 readings >80)                [May 21 08:00 – Jun 20 05:00]

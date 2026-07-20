@@ -1,4 +1,4 @@
-<!-- hash:227b91b5ee9b -->
+<!-- hash:fda6a76876ee -->
 ```
 LOW BATTERY VOLTAGE
 QD #20 (AC):      min 11.70V, mean 12.41V [low]                               [Jul 14 06:00]

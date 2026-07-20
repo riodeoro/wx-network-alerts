@@ -1,4 +1,4 @@
-<!-- hash:2e3744a7bba2 -->
+<!-- hash:0f9b2ff48ebd -->
 ```
 GUSTS EXCEEDED 80 KM/H
 HORSEFLY:         80.6 km/h (1 reading >80)                                   [Jul 17 19:00]

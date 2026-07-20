@@ -1,8 +1,8 @@
-<!-- hash:32c867ce6c26 -->
+<!-- hash:f43a3f8bb516 -->
 ```
 RH CHANGED >50%/H
-ALLISON PASS:     1 event                                                     [Jul 16 15:00]
-TALCHAKO:         1 event                                                     [Jun 20 18:00]
+ALLISON PASS:     1 event, peak Δ +61%/h                                      [Jul 16 15:00]
+TALCHAKO:         1 event, peak Δ +57%/h                                      [Jun 20 18:00]
 PERSISTENT STATES
 MOUNT CAYLEY:     RH constant 100% for 56h, Rn_1 (0.4mm)        [Jun 28 22:00 – Jul 1 05:00]
 HOMATHKO:         RH constant 100% for 52h, Rn_1 (1.4mm)       [Jul 17 06:00 – Jul 19 09:00]

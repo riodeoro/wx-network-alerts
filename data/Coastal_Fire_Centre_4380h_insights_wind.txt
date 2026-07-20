@@ -1,4 +1,4 @@
-<!-- hash:c028c6c5514f -->
+<!-- hash:46c7fe4d3772 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 TS SAN JUAN:      366.1 km/h (1 reading >80)                                  [Mar 10 13:00]

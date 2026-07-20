@@ -1,4 +1,4 @@
-<!-- hash:f4416d3e4556 -->
+<!-- hash:34957b54015b -->
 ```
 EXTREME VALUES
 BLUE RIVER 2:     Highest (35.9°C)                                                  [Jul 17]
@@ -13,11 +13,11 @@ ELK MOUNTAIN:     -38.7°C                                                      
 KOMIE:            -38.6°C                                                           [Feb 27]
 MUSKWA:           -36.3°C                                                           [Feb 27]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
-GOSNEL:           1 spike                                                      [Apr 8 15:00]
-HELMUT:           1 spike                                                      [Apr 3 05:00]
-HUDSON HOPE:      1 spike                                                     [Feb 28 00:00]
-MANSON:           1 spike                                                     [May 26 13:00]
-MOOSE LAKE:       1 spike                                                     [Apr 14 20:00]
+TABLE RIVER:      15 spikes, peak Δ 30.8°C                      [Mar 12 14:00 → May 3 12:00]
+HELMUT:           1 spike, peak Δ 5.6°C                                        [Apr 3 05:00]
+NELSON FORKS:     1 spike, peak Δ 6.0°C                                        [Mar 7 07:00]
+MANSON:           1 spike, peak Δ 5.6°C                                       [May 26 13:00]
+VANDERHOOF HUB:   1 spike, peak Δ 5.1°C                                       [Mar 28 12:00]
 PERSISTENT STATES
 MANSON:           constant (0.1°C) for 24h, RH varied 0%         [Apr 5 22:00 – Apr 6 21:00]
 LOVELL COVE:      constant (0.1°C) for 11h, RH varied 0%       [Jan 29 18:00 – Jan 30 04:00]

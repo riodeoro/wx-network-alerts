@@ -1,7 +1,8 @@
-<!-- hash:177a9a7fba1f -->
+<!-- hash:f95edf22b967 -->
 ```
-PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
-TAUTRI:           2 hours, Rn_1 (1.0mm)                        [Apr 21 18:00 → Apr 23 14:00]
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+MIDDLE LAKE:      silent 5 of 6 neighbour rain hours (83%)       [Jun 9 08:00 → Jul 2 09:00]
+NEMIAH:           silent 3 of 4 neighbour rain hours (75%)     [May 29 07:00 → Jun 10 07:00]
 ```

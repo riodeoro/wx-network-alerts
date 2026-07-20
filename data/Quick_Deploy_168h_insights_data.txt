@@ -1,4 +1,4 @@
-<!-- hash:227b91b5ee9b -->
+<!-- hash:fda6a76876ee -->
 ```
 UNCONFIGURED SENSORS
   QD #14: battery voltage and gust speed unconfigured

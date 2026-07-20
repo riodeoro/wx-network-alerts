@@ -1,8 +1,8 @@
-<!-- hash:6462fa28db08 -->
+<!-- hash:c3f52403dab2 -->
 ```
 EXTREME VALUES
 QD #1:            Highest (39.2°C)                                            [Jul 17 16:00]
 QD #7:            Lowest (3.6°C)                                              [Jun 22 05:00]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
-QD #20:           1 spike                                                     [Jul 19 15:00]
+QD #20:           1 spike, peak Δ 6.2°C                                       [Jul 19 15:00]
 ```

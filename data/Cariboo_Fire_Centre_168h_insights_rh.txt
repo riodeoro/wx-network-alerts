@@ -1,8 +1,8 @@
-<!-- hash:87a41a976e4a -->
+<!-- hash:1e3083859461 -->
 ```
 RH CHANGED >50%/H
-GAVIN:            1 event                                                     [Jul 17 16:00]
-LONE BUTTE:       1 event                                                     [Jul 18 17:00]
+GAVIN:            1 event, peak Δ +61%/h                                      [Jul 17 16:00]
+LONE BUTTE:       1 event, peak Δ +56%/h                                      [Jul 18 17:00]
 PERSISTENT STATES
 BIG VALLEY:       RH constant 99% for 12h, Rn_1 (4.4mm)                 [Jul 19 00:00–11:00]
 ```

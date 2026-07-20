@@ -1,4 +1,4 @@
-<!-- hash:f4416d3e4556 -->
+<!-- hash:34957b54015b -->
 ```
 LOW BATTERY VOLTAGE
 LEMORAY:          min 11.70V, mean 11.84V [low]                                     [May 12]
@@ -8,7 +8,7 @@ HIXON:            min 12.00V, mean 13.11V                                       
 BLUE RIVER 2:     min 12.20V, mean 13.07V                                           [Jan 19]
 NO DAYTIME CHARGING
 NELSON FORKS:     no charge 376 daytime readings (Vbat 12.60V, Vslr 5.90V)  [Jan 19 08:00 – Jul 1 15:00]
-LEMORAY:          no charge 375 daytime readings (Vbat 11.90V, Vslr 5.80V) [low]  [Jan 19 08:00 – Jul 19 19:00, ongoing]
+LEMORAY:          no charge 375 daytime readings (Vbat 11.90V, Vslr 5.80V) [low]  [Jan 19 08:00 – Jul 19 19:00]
 GOSNEL:           no charge 283 daytime readings (Vbat 12.20V, Vslr 9.20V)  [Jan 19 08:00 – Apr 16 09:00]
 MACKENZIE FS:     no charge 187 daytime readings (Vbat 12.20V, Vslr 6.70V) [low]  [Jan 19 08:00 – Mar 27 08:00]
 GRAHAM:           no charge 178 daytime readings (Vbat 12.60V, Vslr 11.90V)  [Jan 22 08:00 – Jul 19 15:00]

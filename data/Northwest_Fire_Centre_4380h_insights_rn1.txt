@@ -1,7 +1,10 @@
-<!-- hash:0fec1e3cf83c -->
+<!-- hash:6bd93c2d5216 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 BOYA LAKE:        4 hours, Rn_1 (1.0mm)                        [Mar 20 16:00 → Mar 28 16:00]
 EAST OOTSA:       1 hour, Rn_1 (0.2mm)                                         [Mar 1 12:00]
 OLD FADDY:        1 hour, Rn_1 (0.2mm)                                        [Mar 27 15:00]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+ATLIN:            silent 21 of 23 neighbour rain hours (91%)    [Feb 4 16:00 → Jun 18 22:00]
+OLD FADDY:        silent 12 of 19 neighbour rain hours (63%)    [Feb 4 20:00 → Jun 26 02:00]
 ```
