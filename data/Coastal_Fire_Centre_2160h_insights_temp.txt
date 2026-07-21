@@ -1,4 +1,4 @@
-<!-- hash:a4a08f1cf32a -->
+<!-- hash:d53f27ca063c -->
 ```
 EXTREME VALUES
 TOBA CAMP:        Highest (37.4°C)                                                  [Jun 23]
@@ -9,8 +9,8 @@ PEMBERTON BASE:   36.4°C                                                       
 BOOTHROYD:        36.1°C                                                            [Jul 15]
 BEAVER CREEK:     35.8°C                                                            [Jun 14]
 DARCY:            35.7°C                                                            [Jul 15]
+FRANK CREEK:      35.7°C                                             [since Jul 20, ongoing]
 WOSS CAMP:        35.7°C                                                            [Jun 14]
-FRANK CREEK:      35.2°C                                                            [Jun 14]
 TS BURMAN:        35.2°C                                                            [Jun 23]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 SALTSPRING 2:     1 spike, peak Δ 5.8°C                                        [Jul 7 12:00]

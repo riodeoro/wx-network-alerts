@@ -1,12 +1,6 @@
-<!-- hash:e26d69f22a3f -->
+<!-- hash:9370acb39a9e -->
 ```
 EXTREME VALUES
-SEYMOUR ARM:      Highest (38.6°C)                                            [Jul 17 17:00]
+SPLINTLUM:        Highest (35.1°C)                                            [Jul 20 17:00]
 THYNNE:           Lowest (3.4°C)                                              [Jul 19 04:00]
-TEMPERATURE EXCEEDED 35°C
-AFTON:            36.2°C                                                      [Jul 17 15:00]
-EAST BARRIERE:    36.1°C                                                      [Jul 17 14:00]
-TURTLE:           36.1°C                                                      [Jul 17 16:00]
-FINTRY:           35.8°C                                                      [Jul 17 15:00]
-WEST KELOWNA:     35.2°C                                                      [Jul 17 15:00]
 ```

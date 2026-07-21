@@ -1,4 +1,4 @@
-<!-- hash:a99ab13aa2c9 -->
+<!-- hash:7e94b2671849 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
@@ -7,11 +7,11 @@ SPARWOOD:         85.4 km/h (1 reading >80)                                   [F
 SUSTAINED WIND EXCEEDED 60 KM/H
 TABERNACLE WIND:  70.0 km/h (11 readings >60)                  [Feb 26 06:00 – Mar 19 04:00]
 PERSISTENT STATES
-BAKER:            zero wind 853h, 17 shifts >90°, max 5.6km/h  [Jan 19 01:00 – Feb 23 13:00]
 NANCY GREENE:     zero wind 398h, 65 shifts >90°, max 29.2km/h  [May 3 12:00 – May 20 16:00]
 FLATHEAD 2:       zero wind 90h, 9 shifts >90°, max 6.5km/h    [Feb 16 21:00 – Feb 20 14:00]
 GOATHAVEN:        zero wind 83h, 9 shifts >90°, max 8.6km/h    [Feb 17 00:00 – Feb 20 10:00]
-BIG MOUTH 2:      zero wind 93h, 23 shifts >90° (max 179°)     [Jan 19 01:00 – Jan 22 21:00]
+BAKER:            zero wind 847h, 41 shifts >90° (max 180°)    [May 14 00:00 – Jun 18 06:00]
+BIG MOUTH 2:      zero wind 75h, 20 shifts >90° (max 179°)     [Jan 19 19:00 – Jan 22 21:00]
 MARION:           zero wind 1597h, no gusts, no dir changes     [Jan 28 20:00 – Apr 5 08:00]
 SMALLWOOD:        zero wind 150h, no gusts, no dir changes     [May 14 13:00 – May 20 19:00]
 DAILY DIRECTION CONCENTRATION

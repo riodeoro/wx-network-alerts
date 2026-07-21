@@ -1,6 +1,6 @@
-<!-- hash:de1bc37272ed -->
+<!-- hash:83e68854582f -->
 ```
 EXTREME VALUES
-BRISCO:           Highest (34.6°C)                                            [Jul 18 16:00]
+GRAND FORKS:      Highest (34.0°C)                                            [Jul 20 16:00]
 MARION:           Lowest (3.1°C)                                              [Jul 20 05:00]
 ```

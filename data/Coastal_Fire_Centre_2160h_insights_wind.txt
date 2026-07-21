@@ -1,4 +1,4 @@
-<!-- hash:a4a08f1cf32a -->
+<!-- hash:d53f27ca063c -->
 ```
 PERSISTENT STATES
 HAIG CAMP:        zero wind 696h, 104 shifts >90°, max 16.7km/h  [Apr 29 13:00 – May 28 12:00]
@@ -9,7 +9,7 @@ FRANK CREEK:      zero wind 14h, 2 shifts >90°, max 5.8km/h     [May 9 20:00 �
 DAILY DIRECTION CONCENTRATION
 FRANK CREEK:      up to 67% of a day within ±5° of 201° (12 day(s) at 50%+)
 TS BLACKWATER:    up to 67% of a day within ±5° of 115° (6 day(s) at 50%+)
-TS ATLUCK:        up to 67% of a day within ±5° of 319° (6 day(s) at 50%+)
 APE LAKE:         up to 62% of a day within ±5° of 353° (3 day(s) at 50%+)
 TS NAKA CREEK:    up to 62% of a day within ±5° of 336° (2 day(s) at 50%+)
+TS ATLUCK:        up to 62% of a day within ±5° of 312° (5 day(s) at 50%+)
 ```

@@ -1,4 +1,4 @@
-<!-- hash:744a5cb60518 -->
+<!-- hash:ca1987264d75 -->
 ```
 RH CHANGED >50%/H
 TS ELPHINSTONE:   2 events, peak Δ +80%/h                               [May 13 10:00–11:00]
@@ -8,7 +8,7 @@ ALLISON PASS:     1 event, peak Δ +61%/h                                      [
 KLINAKLINI:       1 event, peak Δ +61%/h                                      [Feb 28 13:00]
 RH DROPPED AS LOW AS
 TS ARTLISH:       3.0%                                                               [Apr 9]
-TS TSITIKA:       16.0%                                                              [Jun 2]
+MACHMELL:         13.0%                                                              [Jun 2]
 TS SAN JUAN:      18.0%                                                             [Apr 25]
 PERSISTENT STATES
 UBC RESEARCH:     RH constant 100% for 202h, Rn_1 (131.2mm)     [Jan 28 03:00 – Feb 5 12:00]

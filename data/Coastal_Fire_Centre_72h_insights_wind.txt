@@ -1,8 +1,5 @@
-<!-- hash:49719c6916fd -->
+<!-- hash:6f5e68ba3d50 -->
 ```
-PERSISTENT STATES
-QUINSAM BASE FWX: zero wind 13h, 1 shifts >90°, max 4.3km/h    [Jul 17 20:00 – Jul 18 08:00]
 DAILY DIRECTION CONCENTRATION
-APE LAKE:         up to 62% of a day within ±5° of 353° (1 day(s) at 50%+)
-CHEAKAMUS:        up to 54% of a day within ±5° of 290° (1 day(s) at 50%+)
+CHEAKAMUS:        up to 50% of a day within ±5° of 82° (1 day(s) at 50%+)
 ```

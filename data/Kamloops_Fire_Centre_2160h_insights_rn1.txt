@@ -1,11 +1,11 @@
-<!-- hash:33e7042a5548 -->
+<!-- hash:b3894cc0ed92 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
-CURWEN CREEK:     2 hours, Rn_1 (11.8mm)                                [Apr 21 13:00–14:00]
 MABEL LAKE 2:     2 hours, Rn_1 (17.4mm)                                [Jun 23 14:00–16:00]
 FRENCH BAR:       1 hour, Rn_1 (0.2mm)                                        [Apr 22 15:00]
+MAYSON:           1 hour, Rn_1 (0.4mm)                                         [Jul 6 16:00]
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
-GREENSTONE HUB:   silent 15 of 15 neighbour rain hours (100%)   [Apr 21 21:00 → Jul 2 17:00]
+GREENSTONE HUB:   silent 14 of 14 neighbour rain hours (100%)   [May 13 07:00 → Jul 2 17:00]
 HARBOUR LAKE:     silent 38 of 40 neighbour rain hours (95%)   [May 13 13:00 → Jun 27 08:00]
 FRENCH BAR:       silent 6 of 8 neighbour rain hours (75%)     [May 15 13:00 → Jul 12 04:00]
 MUDPIT:           silent 5 of 7 neighbour rain hours (71%)     [Jun 27 09:00 → Jul 19 18:00]

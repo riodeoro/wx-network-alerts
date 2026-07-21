@@ -1,5 +1,1 @@
-<!-- hash:de1bc37272ed -->
-```
-RH CHANGED >50%/H
-DOWNIE:           1 event, peak Δ +57%/h                                      [Jul 18 15:00]
-```
+<!-- hash:83e68854582f -->

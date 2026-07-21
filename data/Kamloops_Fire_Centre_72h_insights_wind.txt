@@ -1,7 +1,5 @@
-<!-- hash:e26d69f22a3f -->
+<!-- hash:9370acb39a9e -->
 ```
-DAILY DIRECTION CONCENTRATION
-MERRITT 2 HUB:    up to 54% of a day within ±5° of 208° (1 day(s) at 50%+)
-LITTLE CHOPAKA:   up to 50% of a day within ±5° of 319° (1 day(s) at 50%+)
-GWYNETH LAKE:     up to 50% of a day within ±5° of 198° (1 day(s) at 50%+)
+PERSISTENT STATES
+SILVERSTAR SF:    zero wind 18h, gusts max 3.9km/h    [Jul 20 13:00 – Jul 21 06:00, ongoing]
 ```

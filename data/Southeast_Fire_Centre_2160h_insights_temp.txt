@@ -1,4 +1,4 @@
-<!-- hash:5aca073cd1ba -->
+<!-- hash:21526b9f91e9 -->
 ```
 EXTREME VALUES
 CARIBOO CREEK:    Highest (69.2°C)                                                  [May 15]
@@ -19,7 +19,7 @@ DUNCAN:           4 spikes, peak Δ 27.6°C                      [May 13 12:00 �
 ROUND PRAIRIE:    1 spike, peak Δ 5.6°C                                       [Apr 23 13:00]
 RORY CREEK:       1 spike, peak Δ 5.2°C                                       [Apr 26 14:00]
 PERSISTENT STATES
-NORNS:            constant (-0.1°C) for 37h, RH varied 0%      [Apr 21 13:00 – Apr 23 01:00]
+NORNS:            constant (-0.1°C) for 19h, RH varied 0%      [Apr 22 07:00 – Apr 23 01:00]
 NANCY GREENE:     constant (9.1°C) for 6h, RH varied 0%                  [Jul 1 00:00–05:00]
 WHITE RIVER:      constant (7.8°C) for 6h, RH varied 0%                 [Jun 29 00:00–05:00]
 ```

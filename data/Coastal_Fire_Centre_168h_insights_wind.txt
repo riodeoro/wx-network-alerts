@@ -1,10 +1,10 @@
-<!-- hash:b1992f6e5e8b -->
+<!-- hash:ec0258e70eff -->
 ```
 PERSISTENT STATES
 QUINSAM BASE FWX: zero wind 13h, 1 shifts >90°, max 4.3km/h    [Jul 17 20:00 – Jul 18 08:00]
 DAILY DIRECTION CONCENTRATION
 APE LAKE:         up to 62% of a day within ±5° of 353° (1 day(s) at 50%+)
-CHEAKAMUS:        up to 54% of a day within ±5° of 290° (1 day(s) at 50%+)
+CHEAKAMUS:        up to 54% of a day within ±5° of 290° (2 day(s) at 50%+)
 POWELL RIVER WEST LAKE: up to 50% of a day within ±5° of 155° (1 day(s) at 50%+)
 TALCHAKO:         up to 50% of a day within ±5° of 263° (1 day(s) at 50%+)
 ```

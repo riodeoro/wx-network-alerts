@@ -1,8 +1,8 @@
-<!-- hash:852f2706e7e1 -->
+<!-- hash:6336801ddb80 -->
 ```
 EXTREME VALUES
 PENDOREILLE:      Highest (37.3°C)                                            [Jul 16 18:00]
-PALLISER:         Lowest (2.0°C)                                              [Jul 14 05:00]
+MARION:           Lowest (3.1°C)                                              [Jul 20 05:00]
 TEMPERATURE EXCEEDED 35°C
 ROCK CREEK:       36.8°C                                                      [Jul 16 17:00]
 BEAVERDELL:       35.8°C                                                      [Jul 16 17:00]

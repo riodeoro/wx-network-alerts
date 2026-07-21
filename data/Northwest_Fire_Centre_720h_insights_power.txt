@@ -1,8 +1,8 @@
-<!-- hash:e303f2812c9f -->
+<!-- hash:99de0a34a338 -->
 ```
 NO DAYTIME CHARGING
-NASS CAMP:        no charge 33 daytime readings (Vbat 12.60V, Vslr 12.40V)  [Jun 20 18:00 – Jul 20 10:00, ongoing]
-NORTH BABINE:     no charge 9 daytime readings (Vbat 12.70V, Vslr 12.40V)  [Jun 26 08:00 – Jul 20 08:00, ongoing]
+NASS CAMP:        no charge 35 daytime readings (Vbat 12.60V, Vslr 12.50V)  [Jun 26 08:00 – Jul 20 19:00, ongoing]
+NORTH BABINE:     no charge 9 daytime readings (Vbat 12.70V, Vslr 12.40V)  [Jun 26 08:00 – Jul 20 08:00]
 NILKITKWA:        no charge 7 daytime readings (Vbat 12.70V, Vslr 12.50V)  [Jun 26 08:00 – Jul 18 08:00]
 MCBRIDE LAKE:     no charge 5 daytime readings (Vbat 12.40V, Vslr 12.30V)  [Jul 4 08:00 – Jul 19 08:00]
 ```

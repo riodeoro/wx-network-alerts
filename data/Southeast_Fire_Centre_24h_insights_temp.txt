@@ -1,6 +1,6 @@
-<!-- hash:2dfed717b14b -->
+<!-- hash:55a793d175d0 -->
 ```
 EXTREME VALUES
-ROCK CREEK:       Highest (33.3°C)                                            [Jul 19 17:00]
-MARION:           Lowest (3.1°C)                                              [Jul 20 05:00]
+GRAND FORKS:      Highest (34.0°C)                                            [Jul 20 16:00]
+CARIBOO CREEK:    Lowest (5.9°C)                                              [Jul 20 07:00]
 ```

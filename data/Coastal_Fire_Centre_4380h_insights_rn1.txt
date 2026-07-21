@@ -1,4 +1,4 @@
-<!-- hash:744a5cb60518 -->
+<!-- hash:ca1987264d75 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 APE LAKE:         1 hour, Rn_1 (0.2mm)                                         [Mar 1 12:00]
@@ -8,5 +8,5 @@ TS EFFINGHAM:     25.0 mm/h                                                     
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 TS ELPHINSTONE:   silent 123 of 172 neighbour rain hours (72%)  [Jan 30 12:00 → Apr 14 19:00]
 ALLISON PASS:     silent 107 of 157 neighbour rain hours (68%)  [Jan 28 16:00 → Jul 12 03:00]
-HONNA:            silent 158 of 240 neighbour rain hours (66%)  [Jan 19 16:00 → Jul 4 11:00]
+HONNA:            silent 157 of 239 neighbour rain hours (66%)  [Jan 28 19:00 → Jul 4 11:00]
 ```

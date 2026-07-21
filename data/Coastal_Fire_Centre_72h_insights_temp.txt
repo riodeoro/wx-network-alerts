@@ -1,6 +1,9 @@
-<!-- hash:49719c6916fd -->
+<!-- hash:6f5e68ba3d50 -->
 ```
 EXTREME VALUES
-FORD MOUNTAIN:    Highest (33.2°C)                                   [since Jul 20, ongoing]
+SCAR CREEK:       Highest (35.8°C)                                   [since Jul 20, ongoing]
 ALLISON PASS:     Lowest (2.6°C)                                              [Jul 19 06:00]
+TEMPERATURE EXCEEDED 35°C
+FRANK CREEK:      35.7°C                                             [since Jul 20, ongoing]
+PEMBERTON BASE:   35.6°C                                             [since Jul 20, ongoing]
 ```

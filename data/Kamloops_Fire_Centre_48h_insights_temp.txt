@@ -1,6 +1,6 @@
-<!-- hash:208f7306d527 -->
+<!-- hash:6a7178714fca -->
 ```
 EXTREME VALUES
-SPLINTLUM:        Highest (31.7°C)                                            [Jul 19 16:00]
-THYNNE:           Lowest (3.4°C)                                              [Jul 19 04:00]
+SPLINTLUM:        Highest (35.1°C)                                            [Jul 20 17:00]
+COLDSCAUR LAKE:   Lowest (4.3°C)                                              [Jul 20 05:00]
 ```

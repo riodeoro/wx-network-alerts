@@ -1,6 +1,8 @@
-<!-- hash:008b0aa6cca9 -->
+<!-- hash:cda031fbe533 -->
 ```
 EXTREME VALUES
-CEDARVALE:        Highest (31.5°C)                                            [Jul 19 16:00]
-ISKUT:            Lowest (5.0°C)                                     [since Jul 20, ongoing]
+KITPARK:          Highest (36.9°C)                                   [since Jul 20, ongoing]
+ISKUT:            Lowest (5.0°C)                                              [Jul 20 07:00]
+TEMPERATURE EXCEEDED 35°C
+CEDARVALE:        36.2°C                                             [since Jul 20, ongoing]
 ```

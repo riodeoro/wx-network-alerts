@@ -1,4 +1,4 @@
-<!-- hash:a29ebc7e16e5 -->
+<!-- hash:11d13b5abab8 -->
 ```
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 ALLISON PASS:     silent 9 of 9 neighbour rain hours (100%)    [Jun 26 16:00 → Jul 12 03:00]

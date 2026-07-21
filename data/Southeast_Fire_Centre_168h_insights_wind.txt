@@ -1,10 +1,10 @@
-<!-- hash:852f2706e7e1 -->
+<!-- hash:6336801ddb80 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
 PERSISTENT STATES
-BAKER:            zero wind 169h, 11 shifts >90° (max 179°)  [Jul 13 13:00 – Jul 20 13:00, ongoing]
+BAKER:            zero wind 169h, 13 shifts >90° (max 179°)  [Jul 14 07:00 – Jul 21 07:00, ongoing]
 DAILY DIRECTION CONCENTRATION
-TSAR CREEK:       up to 50% of a day within ±5° of 30° (1 day(s) at 50%+)
 BAKER:            up to 50% of a day within ±5° of 244° (1 day(s) at 50%+)
+TSAR CREEK:       up to 50% of a day within ±5° of 30° (1 day(s) at 50%+)
 ```

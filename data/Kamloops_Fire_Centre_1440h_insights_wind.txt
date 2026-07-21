@@ -1,4 +1,4 @@
-<!-- hash:b290bbc9aa14 -->
+<!-- hash:c16392bea087 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]
@@ -12,6 +12,6 @@ DAILY DIRECTION CONCENTRATION
 GREENSTONE HUB:   up to 83% of a day within ±5° of 309° (12 day(s) at 50%+)
 ASHNOLA:          up to 79% of a day within ±5° of 268° (11 day(s) at 50%+)
 LITTLE CHOPAKA:   up to 62% of a day within ±5° of 312° (7 day(s) at 50%+)
-THYNNE:           up to 62% of a day within ±5° of 247° (2 day(s) at 50%+)
+LEIGHTON LAKE:    up to 62% of a day within ±5° of 188° (2 day(s) at 50%+)
 PASKA LAKE:       up to 54% of a day within ±5° of 346° (5 day(s) at 50%+)
 ```

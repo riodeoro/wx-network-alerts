@@ -1,4 +1,4 @@
-<!-- hash:33e7042a5548 -->
+<!-- hash:b3894cc0ed92 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]
@@ -12,9 +12,9 @@ CLEARWATER HUB:   zero wind 13h, 5 shifts >90°, max 5.2km/h      [May 7 20:00 �
 GWYNETH LAKE:     zero wind 13h, 1 shifts >90°, max 9.3km/h    [Jun 22 20:00 – Jun 23 08:00]
 SILVERSTAR SF:    zero wind 20h, gusts max 14.9km/h              [Jul 6 16:00 – Jul 7 11:00]
 DAILY DIRECTION CONCENTRATION
-GREENSTONE HUB:   up to 83% of a day within ±5° of 309° (19 day(s) at 50%+)
+GREENSTONE HUB:   up to 83% of a day within ±5° of 309° (18 day(s) at 50%+)
 ASHNOLA:          up to 79% of a day within ±5° of 268° (18 day(s) at 50%+)
 PASKA LAKE:       up to 62% of a day within ±5° of 342° (9 day(s) at 50%+)
-SILVERSTAR SF:    up to 58% of a day within ±5° of 265° (4 day(s) at 50%+)
+SILVERSTAR SF:    up to 58% of a day within ±5° of 265° (3 day(s) at 50%+)
 SICAMOUS:         up to 50% of a day within ±5° of 3° (1 day(s) at 50%+)
 ```

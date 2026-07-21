@@ -1,5 +1,5 @@
-<!-- hash:2dfed717b14b -->
+<!-- hash:55a793d175d0 -->
 ```
 PERSISTENT STATES
-BAKER:            zero wind 25h, 3 shifts >90° (max 177°)  [Jul 19 13:00 – Jul 20 13:00, ongoing]
+BAKER:            zero wind 25h, 5 shifts >90° (max 177°)  [Jul 20 07:00 – Jul 21 07:00, ongoing]
 ```

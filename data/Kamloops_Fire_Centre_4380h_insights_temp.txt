@@ -1,4 +1,4 @@
-<!-- hash:766c71c23262 -->
+<!-- hash:0401b93e555d -->
 ```
 EXTREME VALUES
 SEYMOUR ARM:      Highest (38.6°C)                                                  [Jul 17]

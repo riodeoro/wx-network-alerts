@@ -1,11 +1,11 @@
-<!-- hash:8eb73720fa85 -->
+<!-- hash:363998cab90d -->
 ```
 PERSISTENT STATES
 MESACHIE 2:       zero wind 17h, 3 shifts >90°, max 10.2km/h     [Jul 2 17:00 – Jul 3 09:00]
 TS ARTLISH:       zero wind 15h, 3 shifts >90°, max 2.3km/h    [Jun 25 19:00 – Jun 26 09:00]
 UBC RESEARCH:     zero wind 14h, 3 shifts >90°, max 4.1km/h      [Jul 2 19:00 – Jul 3 08:00]
 SCAR CREEK:       zero wind 14h, 3 shifts >90°, max 7.7km/h    [Jun 25 19:00 – Jun 26 08:00]
-HAIG CAMP:        zero wind 168h, 33 shifts >90° (max 178°)    [May 21 13:00 – May 28 12:00]
+HAIG CAMP:        zero wind 150h, 30 shifts >90° (max 178°)    [May 22 07:00 – May 28 12:00]
 DAILY DIRECTION CONCENTRATION
 TS BLACKWATER:    up to 67% of a day within ±5° of 115° (4 day(s) at 50%+)
 FRANK CREEK:      up to 67% of a day within ±5° of 201° (8 day(s) at 50%+)
