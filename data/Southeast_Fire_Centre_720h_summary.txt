@@ -1,5 +1,5 @@
 FIRE CENTRE: Southeast Fire Centre
-WINDOW: 720h | STATIONS: 48 | RECORDS: 34,594
+WINDOW: 720h | STATIONS: 48 | RECORDS: 34,596
 
 === STATION OUTAGES ===
 SENSOR NA: NORNS - Wspd=NOT CONFIGURED, Dir=NOT CONFIGURED, Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -21,7 +21,7 @@ CONSTANT RH: FLATHEAD 2 - Constant 100%, avg=100%, 12h, no precip @start=2026-06
 
 === WIND ===
 EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
-ZERO WIND 398h: BAKER - Wspd=0 but 13 direction changes >90deg detected (max_delta=179deg) @start=2026-07-04T00:00@end=2026-07-20T13:00
+ZERO WIND 416h: BAKER - Wspd=0 but 15 direction changes >90deg detected (max_delta=179deg) @start=2026-07-04T00:00@end=2026-07-21T07:00
 ZERO WIND 12h: EIGHT MILE - Wspd=0 but gusts nonzero (max=5.3km/h, avg=1.3km/h), no direction changes >90deg @start=2026-07-05T20:00@end=2026-07-06T07:00
 DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (5 day(s) at 50%+)
 DIRECTION CONCENTRATION: SLOCAN - up to 54% of a day in the 17 deg bin (2 day(s) at 50%+)
@@ -39,12 +39,11 @@ TEMP>35C: GRAND FORKS - max=35.8C @ts=2026-07-16T17:00
 TEMP>35C: JOHNSON LAKE - max=35.6C @ts=2026-07-16T17:00
 TEMP>35C: ROCK CREEK - max=36.8C @ts=2026-07-16T17:00
 TEMP>35C: TOBY HUB - max=35.1C @ts=2026-07-16T17:00
-ISOLATED TEMP SPIKE: SUCCOUR CREEK - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.2C, mag=8.7 @first=2026-06-20T14:00@last=2026-06-20T14:00
 CONSTANT TEMP: NANCY GREENE - 9.1C for 6h, RH also flat (0% range) @start=2026-07-01T00:00@end=2026-07-01T05:00
 CONSTANT TEMP: WHITE RIVER - 7.8C for 6h, RH also flat (0% range) @start=2026-06-29T00:00@end=2026-06-29T05:00
 
 === PRECIPITATION ===
-RAIN AT RH 10-25%: DARKWOODS - 3 hours, 0.6mm total, rank=1 @first=2026-06-20T17:00@last=2026-07-12T18:00
+RAIN AT RH 10-25%: DARKWOODS - 2 hours, 0.4mm total, rank=1 @first=2026-07-11T19:00@last=2026-07-12T18:00
 SILENT GAUGE: DARKWOODS - silent 7 of 7 neighbour rain hours (100.0%) @first=2026-06-26T09:00@last=2026-07-17T08:00
 SILENT GAUGE: NORNS - silent 8 of 8 neighbour rain hours (100.0%) @first=2026-06-30T02:00@last=2026-07-17T08:00
 SILENT GAUGE: FLATHEAD 2 - silent 14 of 15 neighbour rain hours (93.3%) @first=2026-06-28T14:00@last=2026-07-17T04:00

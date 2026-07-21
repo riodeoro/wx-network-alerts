@@ -1,5 +1,5 @@
 FIRE CENTRE: Southeast Fire Centre
-WINDOW: 168h | STATIONS: 48 | RECORDS: 8,107
+WINDOW: 168h | STATIONS: 48 | RECORDS: 8,109
 
 === STATION OUTAGES ===
 SENSOR NA: NORNS - Wspd=NOT CONFIGURED, Dir=NOT CONFIGURED, Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -14,13 +14,13 @@ RH CHANGE >50%/h: DOWNIE - 1 events, peak=+57.0%/h @first=2026-07-18T15:00@last=
 
 === WIND ===
 EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
-ZERO WIND 169h: BAKER - Wspd=0 but 11 direction changes >90deg detected (max_delta=179deg) @start=2026-07-13T13:00@end=2026-07-20T13:00
-DIRECTION CONCENTRATION: TSAR CREEK - up to 50% of a day in the 30 deg bin (1 day(s) at 50%+)
+ZERO WIND 169h: BAKER - Wspd=0 but 13 direction changes >90deg detected (max_delta=179deg) @start=2026-07-14T07:00@end=2026-07-21T07:00
 DIRECTION CONCENTRATION: BAKER - up to 50% of a day in the 244 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: TSAR CREEK - up to 50% of a day in the 30 deg bin (1 day(s) at 50%+)
 
 === TEMPERATURE ===
 HIGHEST TEMP: PENDOREILLE - 37.3C @ts=2026-07-16T18:00
-LOWEST TEMP: PALLISER - 2.0C @ts=2026-07-14T05:00
+LOWEST TEMP: MARION - 3.1C @ts=2026-07-20T05:00
 TEMP>35C: BEAVERDELL - max=35.8C @ts=2026-07-16T17:00
 TEMP>35C: BRISCO - max=35.6C @ts=2026-07-16T17:00
 TEMP>35C: DOWNIE - max=35.8C @ts=2026-07-17T16:00
