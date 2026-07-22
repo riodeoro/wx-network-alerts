@@ -1,6 +1,14 @@
-<!-- hash:0fd66739b5db -->
+<!-- hash:acb5baae831f -->
 ```
 EXTREME VALUES
-SPLINTLUM:        Highest (35.1°C)                                            [Jul 20 17:00]
-COLDSCAUR LAKE:   Lowest (6.3°C)                                     [since Jul 21, ongoing]
+SPLINTLUM:        Highest (38.7°C)                                            [Jul 21 16:00]
+COLDSCAUR LAKE:   Lowest (6.3°C)                                              [Jul 21 06:00]
+TEMPERATURE EXCEEDED 35°C
+LITTLE CHOPAKA:   37.4°C                                                      [Jul 21 17:00]
+LILLOOET:         37.2°C                                                      [Jul 21 17:00]
+AUGUST LAKE:      36.2°C                                                      [Jul 21 16:00]
+MERRITT 2 HUB:    36.2°C                                                      [Jul 21 17:00]
+FINTRY:           35.5°C                                                      [Jul 21 16:00]
+EAST BARRIERE:    35.3°C                                                      [Jul 21 16:00]
+CLEARWATER HUB:   35.2°C                                                      [Jul 21 17:00]
 ```

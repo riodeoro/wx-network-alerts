@@ -1,16 +1,24 @@
-<!-- hash:363998cab90d -->
+<!-- hash:fcf17b437b7f -->
 ```
 EXTREME VALUES
-TOBA CAMP:        Highest (37.4°C)                                                  [Jun 23]
+BOOTHROYD:        Highest (38.0°C)                                   [since Jul 21, ongoing]
 ALLISON PASS:     Lowest (-4.2°C)                                                    [Jun 8]
 TEMPERATURE EXCEEDED 35°C
-SCAR CREEK:       36.7°C                                                            [Jun 23]
-PEMBERTON BASE:   36.4°C                                                            [Jun 23]
-BOOTHROYD:        36.1°C                                                            [Jul 15]
+PEMBERTON BASE:   37.9°C                                             [since Jul 21, ongoing]
+DARCY:            37.7°C                                                            [Jul 21]
+FRANK CREEK:      37.7°C                                                            [Jul 21]
+MESACHIE 2:       37.4°C                                             [since Jul 21, ongoing]
+TOBA CAMP:        37.4°C                                                            [Jun 23]
+ANDERSON CREEK:   37.3°C                                             [since Jul 21, ongoing]
+NAHATLATCH:       37.3°C                                             [since Jul 21, ongoing]
+SCAR CREEK:       36.8°C                                             [since Jul 21, ongoing]
+TALCHAKO:         36.6°C                                             [since Jul 21, ongoing]
+BIG SILVER 2:     36.3°C                                             [since Jul 21, ongoing]
+MEAGER CREEK:     36.3°C                                             [since Jul 21, ongoing]
+MESACHIE 3:       36.3°C                                             [since Jul 21, ongoing]
 BEAVER CREEK:     35.8°C                                                            [Jun 14]
-DARCY:            35.7°C                                                            [Jul 15]
-FRANK CREEK:      35.7°C                                             [since Jul 20, ongoing]
 WOSS CAMP:        35.7°C                                                            [Jun 14]
+CHEAKAMUS:        35.3°C                                                            [Jul 21]
 TS BURMAN:        35.2°C                                                            [Jun 23]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 SALTSPRING 2:     1 spike, peak Δ 5.8°C                                        [Jul 7 12:00]

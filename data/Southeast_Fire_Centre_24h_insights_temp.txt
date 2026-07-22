@@ -1,6 +1,9 @@
-<!-- hash:55a793d175d0 -->
+<!-- hash:2d226d46b718 -->
 ```
 EXTREME VALUES
-GRAND FORKS:      Highest (34.0°C)                                            [Jul 20 16:00]
-CARIBOO CREEK:    Lowest (5.9°C)                                              [Jul 20 07:00]
+ROCK CREEK:       Highest (37.4°C)                                            [Jul 21 17:00]
+PALLISER:         Lowest (4.8°C)                                     [since Jul 22, ongoing]
+TEMPERATURE EXCEEDED 35°C
+GRAND FORKS:      37.3°C                                                      [Jul 21 16:00]
+BEAVERDELL:       35.9°C                                                      [Jul 21 18:00]
 ```

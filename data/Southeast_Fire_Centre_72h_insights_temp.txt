@@ -1,6 +1,9 @@
-<!-- hash:05f4edad9e44 -->
+<!-- hash:f90d64b14926 -->
 ```
 EXTREME VALUES
-BRISCO:           Highest (34.6°C)                                            [Jul 18 16:00]
+ROCK CREEK:       Highest (37.4°C)                                            [Jul 21 17:00]
 MARION:           Lowest (3.1°C)                                              [Jul 20 05:00]
+TEMPERATURE EXCEEDED 35°C
+GRAND FORKS:      37.3°C                                                      [Jul 21 16:00]
+BEAVERDELL:       35.9°C                                                      [Jul 21 18:00]
 ```

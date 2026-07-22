@@ -1,15 +1,15 @@
-<!-- hash:c16392bea087 -->
+<!-- hash:834d79c68e27 -->
 ```
 RH READ 0%
-SILVERSTAR SF:    1430 readings                       [May 22 07:00 → Jul 21 06:00, ongoing]
+SILVERSTAR SF:    1430 readings                       [May 23 06:00 → Jul 22 05:00, ongoing]
 RH CHANGED >50%/H
 SICAMOUS:         3 events, peak Δ +64%/h                      [Jun 11 18:00 → Jul 19 17:00]
 CLEARWATER HUB:   2 events, peak Δ +61%/h                      [Jun 25 23:00 → Jul 12 09:00]
 WELLS GRAY:       1 event, peak Δ +57%/h                                       [Jun 3 20:00]
 ASPEN GROVE:      1 event, peak Δ +53%/h                                       [Jun 3 14:00]
-KETTLE 2:         1 event, peak Δ +52%/h                                      [May 22 14:00]
+PENTICTON RS:     1 event, peak Δ +52%/h                                      [Jun 26 20:00]
 PERSISTENT STATES
-SILVERSTAR SF:    RH constant 0% for 1430h, zero Rn_1  [May 22 07:00 – Jul 21 06:00, ongoing]
+SILVERSTAR SF:    RH constant 0% for 1430h, zero Rn_1  [May 23 06:00 – Jul 22 05:00, ongoing]
 WELLS GRAY:       RH constant 100% for 12h, zero Rn_1          [May 29 20:00 – May 30 07:00]
 SICAMOUS:         RH constant 100% for 12h, zero Rn_1          [May 26 20:00 – May 27 07:00]
 ```

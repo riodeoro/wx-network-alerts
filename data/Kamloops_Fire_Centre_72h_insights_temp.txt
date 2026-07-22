@@ -1,6 +1,14 @@
-<!-- hash:9370acb39a9e -->
+<!-- hash:2b03643fc1c3 -->
 ```
 EXTREME VALUES
-SPLINTLUM:        Highest (35.1°C)                                            [Jul 20 17:00]
-THYNNE:           Lowest (3.4°C)                                              [Jul 19 04:00]
+SPLINTLUM:        Highest (38.7°C)                                            [Jul 21 16:00]
+THYNNE:           Lowest (3.9°C)                                              [Jul 19 06:00]
+TEMPERATURE EXCEEDED 35°C
+LITTLE CHOPAKA:   37.4°C                                                      [Jul 21 17:00]
+LILLOOET:         37.2°C                                                      [Jul 21 17:00]
+AUGUST LAKE:      36.2°C                                                      [Jul 21 16:00]
+MERRITT 2 HUB:    36.2°C                                                      [Jul 21 17:00]
+FINTRY:           35.5°C                                                      [Jul 21 16:00]
+EAST BARRIERE:    35.3°C                                                      [Jul 21 16:00]
+CLEARWATER HUB:   35.2°C                                                      [Jul 21 17:00]
 ```

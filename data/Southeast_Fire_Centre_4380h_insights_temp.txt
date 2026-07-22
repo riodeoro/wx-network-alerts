@@ -1,15 +1,15 @@
-<!-- hash:7e94b2671849 -->
+<!-- hash:f6ba28d229bf -->
 ```
 EXTREME VALUES
 CARIBOO CREEK:    Highest (69.2°C)                                                  [May 15]
 PALLISER:         Lowest (-26.9°C)                                                  [Feb 20]
 TEMPERATURE EXCEEDED 35°C
 DUNCAN:           63.6°C                                                            [May 13]
+ROCK CREEK:       37.4°C                                             [since Jul 21, ongoing]
+GRAND FORKS:      37.3°C                                             [since Jul 21, ongoing]
 PENDOREILLE:      37.3°C                                                            [Jul 16]
-ROCK CREEK:       36.8°C                                                            [Jul 16]
-BEAVERDELL:       35.8°C                                                            [Jul 16]
+BEAVERDELL:       35.9°C                                             [since Jul 21, ongoing]
 DOWNIE:           35.8°C                                                            [Jul 17]
-GRAND FORKS:      35.8°C                                                            [Jul 16]
 BRISCO:           35.6°C                                                            [Jul 16]
 JOHNSON LAKE:     35.6°C                                                            [Jul 16]
 TOBY HUB:         35.1°C                                                            [Jul 16]
@@ -23,6 +23,6 @@ PERSISTENT STATES
 DUNCAN:           constant (0.0°C) for 225h, RH varied 0%      [Mar 21 10:00 – Mar 30 18:00]
 NORNS:            constant (-0.1°C) for 55h, RH varied 0%      [Apr 20 19:00 – Apr 23 01:00]
 BIG MOUTH 2:      constant (0.0°C) for 15h, RH varied 0%       [Mar 18 18:00 – Mar 19 08:00]
-SUCCOUR CREEK:    constant (0.1°C) for 14h, RH varied 1%         [Feb 7 18:00 – Feb 8 07:00]
 DOWNIE:           constant (0.1°C) for 14h, RH varied 0%         [Mar 3 18:00 – Mar 4 07:00]
+SUCCOUR CREEK:    constant (0.1°C) for 14h, RH varied 1%         [Feb 7 18:00 – Feb 8 07:00]
 ```

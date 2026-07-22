@@ -1,4 +1,4 @@
-<!-- hash:21526b9f91e9 -->
+<!-- hash:4fe472765742 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
 DEWAR CREEK:      12 hours, Rn_1 (9.6mm)                        [Apr 23 16:00 → Jun 5 01:00]
@@ -12,7 +12,8 @@ OCTOPUS CREEK:    27.4 mm/h                                                     
 NICOLL:           23.2 mm/h                                                         [Jun 29]
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 NORNS:            silent 25 of 25 neighbour rain hours (100%)  [May 13 14:00 → Jul 17 08:00]
-DARKWOODS:        silent 28 of 32 neighbour rain hours (88%)   [Apr 22 09:00 → Jul 17 08:00]
-FLATHEAD 2:       silent 16 of 19 neighbour rain hours (84%)    [Jun 9 06:00 → Jul 17 04:00]
+FLATHEAD 2:       silent 16 of 17 neighbour rain hours (94%)    [Jun 9 06:00 → Jul 17 04:00]
+DARKWOODS:        silent 27 of 31 neighbour rain hours (87%)   [May 13 18:00 → Jul 17 08:00]
 TSAR CREEK:       silent 18 of 22 neighbour rain hours (82%)     [May 8 19:00 → Jun 9 21:00]
+KOOCANUSA:        silent 3 of 4 neighbour rain hours (75%)       [May 6 22:00 → May 7 00:00]
 ```

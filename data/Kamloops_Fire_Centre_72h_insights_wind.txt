@@ -1,5 +1,7 @@
-<!-- hash:9370acb39a9e -->
+<!-- hash:2b03643fc1c3 -->
 ```
 PERSISTENT STATES
-SILVERSTAR SF:    zero wind 18h, gusts max 3.9km/h    [Jul 20 13:00 – Jul 21 06:00, ongoing]
+SILVERSTAR SF:    zero wind 22h, gusts max 3.9km/h             [Jul 20 13:00 – Jul 21 10:00]
+DAILY DIRECTION CONCENTRATION
+MAYSON:           up to 54% of a day within ±5° of 237° (1 day(s) at 50%+)
 ```

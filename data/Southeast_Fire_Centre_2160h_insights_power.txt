@@ -1,7 +1,7 @@
-<!-- hash:21526b9f91e9 -->
+<!-- hash:4fe472765742 -->
 ```
 NO DAYTIME CHARGING
 CRAWFORD:         no charge 7 daytime readings (Vbat 12.70V, Vslr 12.40V)  [May 13 08:00 – Jul 17 08:00]
-PENDOREILLE:      no charge 6 daytime readings (Vbat 12.70V, Vslr 12.20V)  [Apr 22 08:00 – Jul 17 08:00]
+PENDOREILLE:      no charge 5 daytime readings (Vbat 12.70V, Vslr 12.30V)  [May 26 08:00 – Jul 17 08:00]
 DUNCAN:           no charge 5 daytime readings (Vbat 12.70V, Vslr 12.60V)  [May 19 08:00 – Jul 6 08:00]
 ```

@@ -1,8 +1,8 @@
-<!-- hash:3717e07867c7 -->
+<!-- hash:288326c2dd6c -->
 ```
 EXTREME VALUES
-KITPARK:          Highest (36.9°C)                                   [since Jul 20, ongoing]
-GANOKWA:          Lowest (1.7°C)                                              [Jul 14 07:00]
+CEDARVALE:        Highest (37.2°C)                                            [Jul 21 15:00]
+ISKUT:            Lowest (2.3°C)                                              [Jul 19 06:00]
 TEMPERATURE EXCEEDED 35°C
-CEDARVALE:        36.3°C                                                      [Jul 17 17:00]
+KITPARK:          36.9°C                                                      [Jul 20 18:00]
 ```

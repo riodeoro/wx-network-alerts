@@ -1,5 +1,5 @@
-<!-- hash:0fd66739b5db -->
+<!-- hash:acb5baae831f -->
 ```
 PERSISTENT STATES
-SILVERSTAR SF:    zero wind 18h, gusts max 3.9km/h    [Jul 20 13:00 – Jul 21 06:00, ongoing]
+SILVERSTAR SF:    zero wind 16h, 1 shifts >90°, max 3.9km/h  [Jul 21 14:00 – Jul 22 05:00, ongoing]
 ```

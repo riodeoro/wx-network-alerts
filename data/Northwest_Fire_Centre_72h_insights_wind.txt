@@ -1,5 +1,1 @@
-<!-- hash:a331ad70d510 -->
-```
-DAILY DIRECTION CONCENTRATION
-CRANBERRY:        up to 50% of a day within ±5° of 221° (1 day(s) at 50%+)
-```
+<!-- hash:cc20ed62065a -->

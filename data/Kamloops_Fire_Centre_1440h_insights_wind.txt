@@ -1,4 +1,4 @@
-<!-- hash:c16392bea087 -->
+<!-- hash:834d79c68e27 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]
@@ -7,11 +7,11 @@ LILLOOET:         84.1 km/h (1 reading >80)                                   [J
 LITTLE CHOPAKA:   80.8 km/h (1 reading >80)                                   [Jul 15 21:00]
 PERSISTENT STATES
 GWYNETH LAKE:     zero wind 13h, 1 shifts >90°, max 9.3km/h    [Jun 22 20:00 – Jun 23 08:00]
-SILVERSTAR SF:    zero wind 20h, gusts max 14.9km/h              [Jul 6 16:00 – Jul 7 11:00]
+SILVERSTAR SF:    zero wind 22h, gusts max 3.9km/h             [Jul 20 13:00 – Jul 21 10:00]
 DAILY DIRECTION CONCENTRATION
-GREENSTONE HUB:   up to 83% of a day within ±5° of 309° (12 day(s) at 50%+)
+GREENSTONE HUB:   up to 83% of a day within ±5° of 309° (11 day(s) at 50%+)
 ASHNOLA:          up to 79% of a day within ±5° of 268° (11 day(s) at 50%+)
 LITTLE CHOPAKA:   up to 62% of a day within ±5° of 312° (7 day(s) at 50%+)
-LEIGHTON LAKE:    up to 62% of a day within ±5° of 188° (2 day(s) at 50%+)
 PASKA LAKE:       up to 54% of a day within ±5° of 346° (5 day(s) at 50%+)
+SPLINTLUM:        up to 54% of a day within ±5° of 332° (4 day(s) at 50%+)
 ```

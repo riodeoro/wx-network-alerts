@@ -1,10 +1,10 @@
-<!-- hash:ccc3f67d2664 -->
+<!-- hash:d902245cc8d0 -->
 ```
 EXTREME VALUES
-KITPARK:          Highest (36.9°C)                                   [since Jul 20, ongoing]
+CEDARVALE:        Highest (37.2°C)                                                  [Jul 21]
 BOYA LAKE:        Lowest (-35.8°C)                                                  [Feb 18]
 TEMPERATURE EXCEEDED 35°C
-CEDARVALE:        36.3°C                                                            [Jul 17]
+KITPARK:          36.9°C                                                            [Jul 20]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 EAST OOTSA:       1 spike, peak Δ 5.0°C                                       [Apr 11 10:00]
 PERSISTENT STATES

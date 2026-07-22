@@ -1,9 +1,9 @@
-<!-- hash:b3894cc0ed92 -->
+<!-- hash:cc6f833859b0 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 MABEL LAKE 2:     2 hours, Rn_1 (17.4mm)                                [Jun 23 14:00–16:00]
-FRENCH BAR:       1 hour, Rn_1 (0.2mm)                                        [Apr 22 15:00]
 MAYSON:           1 hour, Rn_1 (0.4mm)                                         [Jul 6 16:00]
+SPLINTLUM:        1 hour, Rn_1 (0.2mm)                                        [Jun 24 16:00]
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 GREENSTONE HUB:   silent 14 of 14 neighbour rain hours (100%)   [May 13 07:00 → Jul 2 17:00]
 HARBOUR LAKE:     silent 38 of 40 neighbour rain hours (95%)   [May 13 13:00 → Jun 27 08:00]

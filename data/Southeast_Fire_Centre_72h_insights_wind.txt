@@ -1,7 +1,5 @@
-<!-- hash:05f4edad9e44 -->
+<!-- hash:f90d64b14926 -->
 ```
 PERSISTENT STATES
-BAKER:            zero wind 73h, 6 shifts >90° (max 177°)  [Jul 18 07:00 – Jul 21 07:00, ongoing]
-DAILY DIRECTION CONCENTRATION
-BAKER:            up to 50% of a day within ±5° of 244° (1 day(s) at 50%+)
+BAKER:            zero wind 72h, 9 shifts >90° (max 177°)  [Jul 19 06:00 – Jul 22 05:00, ongoing]
 ```

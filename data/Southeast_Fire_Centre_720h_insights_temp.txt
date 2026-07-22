@@ -1,13 +1,13 @@
-<!-- hash:17ce83668768 -->
+<!-- hash:351e3e99affc -->
 ```
 EXTREME VALUES
-PENDOREILLE:      Highest (37.3°C)                                            [Jul 16 18:00]
-MARION:           Lowest (-1.4°C)                                             [Jun 22 05:00]
+ROCK CREEK:       Highest (37.4°C)                                            [Jul 21 17:00]
+MARION:           Lowest (-0.5°C)                                              [Jul 6 05:00]
 TEMPERATURE EXCEEDED 35°C
-ROCK CREEK:       36.8°C                                                      [Jul 16 17:00]
-BEAVERDELL:       35.8°C                                                      [Jul 16 17:00]
+GRAND FORKS:      37.3°C                                                      [Jul 21 16:00]
+PENDOREILLE:      37.3°C                                                      [Jul 16 18:00]
+BEAVERDELL:       35.9°C                                                      [Jul 21 18:00]
 DOWNIE:           35.8°C                                                      [Jul 17 16:00]
-GRAND FORKS:      35.8°C                                                      [Jul 16 17:00]
 BRISCO:           35.6°C                                                      [Jul 16 17:00]
 JOHNSON LAKE:     35.6°C                                                      [Jul 16 17:00]
 TOBY HUB:         35.1°C                                                      [Jul 16 17:00]

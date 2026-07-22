@@ -1,9 +1,21 @@
-<!-- hash:a98c9575bf6b -->
+<!-- hash:96b62d39650c -->
 ```
 EXTREME VALUES
-SCAR CREEK:       Highest (35.8°C)                                   [since Jul 20, ongoing]
-ALLISON PASS:     Lowest (5.7°C)                                              [Jul 20 07:00]
+BOOTHROYD:        Highest (38.0°C)                                            [Jul 21 18:00]
+ALLISON PASS:     Lowest (6.8°C)                                     [since Jul 22, ongoing]
 TEMPERATURE EXCEEDED 35°C
-FRANK CREEK:      35.7°C                                             [since Jul 20, ongoing]
-PEMBERTON BASE:   35.6°C                                             [since Jul 20, ongoing]
+PEMBERTON BASE:   37.9°C                                                      [Jul 21 18:00]
+DARCY:            37.7°C                                                      [Jul 21 15:00]
+FRANK CREEK:      37.7°C                                                      [Jul 21 15:00]
+MESACHIE 2:       37.4°C                                                      [Jul 21 16:00]
+ANDERSON CREEK:   37.3°C                                                      [Jul 21 16:00]
+NAHATLATCH:       37.3°C                                                      [Jul 21 16:00]
+SCAR CREEK:       36.8°C                                                      [Jul 21 17:00]
+TALCHAKO:         36.6°C                                                      [Jul 21 16:00]
+BIG SILVER 2:     36.3°C                                                      [Jul 21 16:00]
+MEAGER CREEK:     36.3°C                                                      [Jul 21 16:00]
+MESACHIE 3:       36.3°C                                                      [Jul 21 16:00]
+BEAVER CREEK:     35.8°C                                                      [Jul 21 17:00]
+TOBA CAMP:        35.6°C                                                      [Jul 21 14:00]
+CHEAKAMUS:        35.3°C                                                      [Jul 21 15:00]
 ```

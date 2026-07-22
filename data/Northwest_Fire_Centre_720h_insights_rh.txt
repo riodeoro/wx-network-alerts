@@ -1,7 +1,5 @@
-<!-- hash:99de0a34a338 -->
+<!-- hash:d98bab296e18 -->
 ```
-RH CHANGED >50%/H
-GANOKWA:          1 event, peak Δ -57%/h                                      [Jun 21 17:00]
 PERSISTENT STATES
 OLD FADDY:        RH constant 100% for 13h, zero Rn_1          [Jul 10 22:00 – Jul 11 10:00]
 ```

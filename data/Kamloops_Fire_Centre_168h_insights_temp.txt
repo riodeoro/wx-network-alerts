@@ -1,17 +1,19 @@
-<!-- hash:5a998eee2778 -->
+<!-- hash:f02d3ae68750 -->
 ```
 EXTREME VALUES
-SEYMOUR ARM:      Highest (38.6°C)                                            [Jul 17 17:00]
+SPLINTLUM:        Highest (38.7°C)                                            [Jul 21 16:00]
 THYNNE:           Lowest (3.4°C)                                              [Jul 19 04:00]
 TEMPERATURE EXCEEDED 35°C
+SEYMOUR ARM:      38.6°C                                                      [Jul 17 17:00]
 LITTLE CHOPAKA:   37.5°C                                                      [Jul 16 17:00]
-SPLINTLUM:        37.4°C                                                      [Jul 16 16:00]
+LILLOOET:         37.2°C                                                      [Jul 21 17:00]
 AUGUST LAKE:      36.5°C                                                      [Jul 15 16:00]
 AFTON:            36.2°C                                                      [Jul 17 15:00]
-PENTICTON RS:     36.2°C                                                      [Jul 14 17:00]
+MERRITT 2 HUB:    36.2°C                                                      [Jul 21 17:00]
 EAST BARRIERE:    36.1°C                                                      [Jul 17 14:00]
-LILLOOET:         36.1°C                                                      [Jul 16 17:00]
 TURTLE:           36.1°C                                                      [Jul 17 16:00]
 FINTRY:           36.0°C                                                      [Jul 16 16:00]
-WEST KELOWNA:     35.5°C                                                      [Jul 14 17:00]
+PENTICTON RS:     35.7°C                                                      [Jul 16 18:00]
+CLEARWATER HUB:   35.2°C                                                      [Jul 21 17:00]
+WEST KELOWNA:     35.2°C                                                      [Jul 17 15:00]
 ```

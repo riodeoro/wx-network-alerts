@@ -1,4 +1,4 @@
-<!-- hash:0401b93e555d -->
+<!-- hash:a5d7604c1fbc -->
 ```
 GUSTS EXCEEDED 80 KM/H
 KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]
@@ -11,11 +11,11 @@ AFTON:            63.1 km/h (3 readings >60)                            [Mar 24 
 PERSISTENT STATES
 SILVERSTAR SF:    zero wind 39h, 1 shifts >90°, max 13.7km/h   [Apr 11 11:00 – Apr 13 01:00]
 WELLS GRAY:       zero wind 22h, 5 shifts >90°, max 6.1km/h    [Feb 13 15:00 – Feb 14 12:00]
-GWYNETH LAKE:     zero wind 22h, 2 shifts >90°, max 4.6km/h    [Jan 20 14:00 – Jan 21 11:00]
+GWYNETH LAKE:     zero wind 21h, 1 shifts >90°, max 3.9km/h    [Jan 23 15:00 – Jan 24 11:00]
 CLEARWATER HUB:   zero wind 21h, 9 shifts >90°, max 3.0km/h    [Feb 13 13:00 – Feb 14 09:00]
 HARBOUR LAKE:     zero wind 52h, 1 shifts >90° (max 101°)      [Jan 21 04:00 – Jan 23 07:00]
 DAILY DIRECTION CONCENTRATION
-GREENSTONE HUB:   up to 96% of a day within ±5° of 302° (52 day(s) at 50%+)
+GREENSTONE HUB:   up to 96% of a day within ±5° of 302° (51 day(s) at 50%+)
 ASHNOLA:          up to 79% of a day within ±5° of 268° (33 day(s) at 50%+)
 GWYNETH LAKE:     up to 79% of a day within ±5° of 189° (31 day(s) at 50%+)
 SILVERSTAR SF:    up to 75% of a day within ±5° of 262° (16 day(s) at 50%+)

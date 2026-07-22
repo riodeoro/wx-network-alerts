@@ -1,5 +1,7 @@
-<!-- hash:6f5e68ba3d50 -->
+<!-- hash:c7da8d0030ae -->
 ```
+PERSISTENT STATES
+MESACHIE 2:       zero wind 13h, 3 shifts >90°, max 7.9km/h    [Jul 20 23:00 – Jul 21 11:00]
 DAILY DIRECTION CONCENTRATION
 CHEAKAMUS:        up to 50% of a day within ±5° of 82° (1 day(s) at 50%+)
 ```

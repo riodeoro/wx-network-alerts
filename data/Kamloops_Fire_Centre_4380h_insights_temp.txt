@@ -1,25 +1,27 @@
-<!-- hash:0401b93e555d -->
+<!-- hash:a5d7604c1fbc -->
 ```
 EXTREME VALUES
-SEYMOUR ARM:      Highest (38.6°C)                                                  [Jul 17]
+SPLINTLUM:        Highest (38.7°C)                                                  [Jul 21]
 FRENCH BAR:       Lowest (-28.8°C)                                                  [Feb 19]
 TEMPERATURE EXCEEDED 35°C
+SEYMOUR ARM:      38.6°C                                                            [Jul 17]
 LITTLE CHOPAKA:   37.5°C                                                            [Jul 16]
-SPLINTLUM:        37.4°C                                                            [Jul 16]
+LILLOOET:         37.2°C                                                            [Jul 21]
 AUGUST LAKE:      36.5°C                                                            [Jul 15]
 AFTON:            36.2°C                                                            [Jul 17]
+MERRITT 2 HUB:    36.2°C                                                            [Jul 21]
 PENTICTON RS:     36.2°C                                                            [Jul 14]
 EAST BARRIERE:    36.1°C                                                            [Jul 17]
-LILLOOET:         36.1°C                                                            [Jul 16]
 TURTLE:           36.1°C                                                            [Jul 17]
 FINTRY:           36.0°C                                                            [Jul 16]
 WEST KELOWNA:     35.5°C                                                            [Jul 14]
+CLEARWATER HUB:   35.2°C                                                            [Jul 21]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 KETTLE 2:         1 spike, peak Δ 6.1°C                                        [Mar 1 13:00]
 PERSISTENT STATES
 CLEARWATER HUB:   constant (0.1°C) for 11h, RH varied 1%       [Feb 13 21:00 – Feb 14 07:00]
 EAST BARRIERE:    constant (0.1°C) for 11h, RH varied 0%       [Feb 13 20:00 – Feb 14 06:00]
 WELLS GRAY:       constant (0.0°C) for 10h, RH varied 0%       [Jan 28 21:00 – Jan 29 06:00]
-LARCH HILLS WEST: constant (-5.2°C) for 8h, RH varied 0%                [Jan 20 01:00–08:00]
 CURWEN CREEK:     constant (0.6°C) for 7h, RH varied 0%          [Feb 3 23:00 – Feb 4 05:00]
+ASHNOLA:          constant (-8.0°C) for 6h, RH varied 0%       [Mar 12 21:00 – Mar 13 02:00]
 ```
