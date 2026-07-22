@@ -1,5 +1,5 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 720h | STATIONS: 32 | RECORDS: 22,934
+WINDOW: 720h | STATIONS: 32 | RECORDS: 22,935
 
 === STATION OUTAGES ===
 None.
@@ -30,5 +30,5 @@ SILENT GAUGE: UPPER KISPIOX - silent 14 of 20 neighbour rain hours (70.0%) @firs
 NO CHARGE: NASS CAMP - 37 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-21T10:00
 NO CHARGE: NORTH BABINE - 9 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.40V @start=2026-06-26T08:00@end=2026-07-20T08:00
 NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00
-NO CHARGE: MCBRIDE LAKE - 5 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=12.30V @start=2026-07-04T08:00@end=2026-07-19T08:00
 NO CHARGE: KISPIOX HUB (AC) - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-20T19:00@end=2026-07-21T19:00
+NO CHARGE: MCBRIDE LAKE - 5 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=12.30V @start=2026-07-04T08:00@end=2026-07-19T08:00

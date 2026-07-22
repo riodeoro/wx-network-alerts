@@ -1,15 +1,15 @@
 FIRE CENTRE: Southeast Fire Centre
-WINDOW: 1440h | STATIONS: 48 | RECORDS: 68,971
+WINDOW: 1440h | STATIONS: 48 | RECORDS: 68,972
 
 === STATION OUTAGES ===
 SENSOR NA: NORNS - Wspd=NOT CONFIGURED, Dir=NOT CONFIGURED, Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
-SENSOR NA: BAKER - Rh=59% NA, Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: BAKER - Rh=60% NA, Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: BRISCO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: DARKWOODS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH=0%: BAKER - 584 readings @first=2026-05-23T06:00@last=2026-06-16T13:00
+RH=0%: BAKER - 582 readings @first=2026-05-23T08:00@last=2026-06-16T13:00
 RH=0%: CARIBOO CREEK - 13 readings @first=2026-06-09T01:00@last=2026-06-12T13:00
 RH=0%: DEWAR CREEK - 49 readings @first=2026-05-25T15:00@last=2026-06-05T01:00
 RH>100%: CARIBOO CREEK - 359 readings, max=116.0% @first=2026-05-23T11:00@last=2026-06-12T07:00
@@ -18,7 +18,7 @@ RH CHANGE >50%/h: DEWAR CREEK - 29 events, peak=-100.0%/h @first=2026-05-26T16:0
 RH CHANGE >50%/h: DUNCAN - 6 events, peak=+100.0%/h @first=2026-05-29T09:00@last=2026-06-11T13:00
 RH CHANGE >50%/h: FLATHEAD 2 - 2 events, peak=-80.0%/h @first=2026-06-06T08:00@last=2026-06-06T09:00
 RH CHANGE >50%/h: NICOLL - 1 events, peak=+64.0%/h @first=2026-07-15T18:00@last=2026-07-15T18:00
-CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 584h, no precip @start=2026-05-23T06:00@end=2026-06-16T13:00
+CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 582h, no precip @start=2026-05-23T08:00@end=2026-06-16T13:00
 CONSTANT RH: NORNS - Constant 100%, avg=100%, 43h, no precip @start=2026-06-29T22:00@end=2026-07-01T16:00
 CONSTANT RH: DUNCAN - Constant 100%, avg=100%, 19h, precip=11.0mm @start=2026-06-30T17:00@end=2026-07-01T11:00
 CONSTANT RH: ROUND PRAIRIE - Constant high (90-99%), avg=99%, 16h, precip=13.8mm @start=2026-05-31T20:00@end=2026-06-01T11:00
@@ -26,11 +26,11 @@ CONSTANT RH: DEWAR CREEK - Constant 100%, avg=100%, 14h, precip=0.4mm @start=202
 
 === WIND ===
 EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
-ZERO WIND 625h: BAKER - Wspd=0 but 24 direction changes >90deg detected (max_delta=164deg) @start=2026-05-23T06:00@end=2026-06-18T06:00
+ZERO WIND 623h: BAKER - Wspd=0 but 24 direction changes >90deg detected (max_delta=164deg) @start=2026-05-23T08:00@end=2026-06-18T06:00
 ZERO WIND 13h: EIGHT MILE - Wspd=0 but gusts nonzero (max=6.8km/h, avg=0.9km/h), no direction changes >90deg @start=2026-06-02T21:00@end=2026-06-03T09:00
 ZERO WIND 12h: FLATHEAD 2 - Wspd=0 but 3 direction changes >90deg detected (max_delta=159deg), gusts nonzero (max=2.7km/h, avg=1.0km/h) @start=2026-05-31T18:00@end=2026-06-01T05:00
 ZERO WIND 12h: GOATFELL - Wspd=0 but 4 direction changes >90deg detected (max_delta=130deg), gusts nonzero (max=4.1km/h, avg=0.8km/h) @start=2026-05-30T20:00@end=2026-05-31T07:00
-ZERO WIND 393h: MARION - Wspd=0, gusts=0, no direction changes >90deg @start=2026-05-23T06:00@end=2026-06-08T14:00
+ZERO WIND 391h: MARION - Wspd=0, gusts=0, no direction changes >90deg @start=2026-05-23T08:00@end=2026-06-08T14:00
 DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (9 day(s) at 50%+)
 DIRECTION CONCENTRATION: SLOCAN - up to 79% of a day in the 22 deg bin (3 day(s) at 50%+)
 DIRECTION CONCENTRATION: POWDER CREEK - up to 54% of a day in the 172 deg bin (2 day(s) at 50%+)

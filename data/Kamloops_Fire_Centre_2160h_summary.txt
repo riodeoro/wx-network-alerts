@@ -10,13 +10,13 @@ SENSOR NA: PASKA LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFI
 
 === RH ===
 RH=0%: MABEL LAKE 2 - 2 readings @first=2026-04-30T20:00@last=2026-04-30T21:00
-RH=0%: SILVERSTAR SF - 2150 readings @first=2026-04-23T06:00@last=2026-07-22T05:00
+RH=0%: SILVERSTAR SF - 2150 readings @first=2026-04-23T08:00@last=2026-07-22T07:00
 RH CHANGE >50%/h: TURTLE - 2 events, peak=+70.0%/h @first=2026-05-06T18:00@last=2026-06-25T18:00
 RH CHANGE >50%/h: SICAMOUS - 3 events, peak=+64.0%/h @first=2026-06-11T18:00@last=2026-07-19T17:00
 RH CHANGE >50%/h: CLEARWATER HUB - 2 events, peak=+61.0%/h @first=2026-06-25T23:00@last=2026-07-12T09:00
 RH CHANGE >50%/h: WELLS GRAY - 1 events, peak=+57.0%/h @first=2026-06-03T20:00@last=2026-06-03T20:00
 RH CHANGE >50%/h: ASPEN GROVE - 1 events, peak=+53.0%/h @first=2026-06-03T14:00@last=2026-06-03T14:00
-CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 2150h, no precip @start=2026-04-23T06:00@end=2026-07-22T05:00
+CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 2150h, no precip @start=2026-04-23T08:00@end=2026-07-22T07:00
 CONSTANT RH: SICAMOUS - Constant 100%, avg=100%, 20h, precip=21.4mm @start=2026-05-13T13:00@end=2026-05-14T08:00
 CONSTANT RH: CAHILTY - Constant high (90-99%), avg=99%, 12h, precip=11.4mm @start=2026-05-13T22:00@end=2026-05-14T09:00
 CONSTANT RH: WELLS GRAY - Constant 100%, avg=100%, 12h, no precip @start=2026-05-29T20:00@end=2026-05-30T07:00
@@ -29,8 +29,9 @@ EXTREME GUST: LILLOOET - max=84.1km/h, 1 readings >80km/h @start=2026-06-19T23:0
 EXTREME GUST: ASHNOLA - max=80.8km/h, 1 readings >80km/h @start=2026-05-13T19:00@end=2026-05-13T19:00
 ZERO WIND 22h: SILVERSTAR SF - Wspd=0 but gusts nonzero (max=3.9km/h, avg=0.6km/h), no direction changes >90deg @start=2026-07-20T13:00@end=2026-07-21T10:00
 ZERO WIND 14h: COLDSCAUR LAKE - Wspd=0 but 5 direction changes >90deg detected (max_delta=178deg), gusts nonzero (max=2.6km/h, avg=0.6km/h) @start=2026-04-28T20:00@end=2026-04-29T09:00
-ZERO WIND 13h: CLEARWATER HUB - Wspd=0 but 5 direction changes >90deg detected (max_delta=143deg), gusts nonzero (max=5.2km/h, avg=0.5km/h) @start=2026-05-07T20:00@end=2026-05-08T08:00
 ZERO WIND 13h: GWYNETH LAKE - Wspd=0 but 1 direction changes >90deg detected (max_delta=99deg), gusts nonzero (max=9.3km/h, avg=2.5km/h) @start=2026-06-22T20:00@end=2026-06-23T08:00
+ZERO WIND 13h: CLEARWATER HUB - Wspd=0 but 5 direction changes >90deg detected (max_delta=143deg), gusts nonzero (max=5.2km/h, avg=0.5km/h) @start=2026-05-07T20:00@end=2026-05-08T08:00
+ZERO WIND 12h: EAST BARRIERE - Wspd=0 but 3 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=4.7km/h, avg=2.1km/h) @start=2026-07-21T20:00@end=2026-07-22T07:00
 DIRECTION CONCENTRATION: ASHNOLA - up to 79% of a day in the 268 deg bin (18 day(s) at 50%+)
 DIRECTION CONCENTRATION: GREENSTONE HUB - up to 83% of a day in the 309 deg bin (17 day(s) at 50%+)
 DIRECTION CONCENTRATION: PASKA LAKE - up to 62% of a day in the 342 deg bin (8 day(s) at 50%+)
@@ -64,10 +65,10 @@ SILENT GAUGE: FRENCH BAR - silent 6 of 8 neighbour rain hours (75.0%) @first=202
 SILENT GAUGE: MUDPIT - silent 5 of 7 neighbour rain hours (71.4%) @first=2026-06-27T09:00@last=2026-07-19T18:00
 
 === POWER ===
-LOW VBAT: MABEL LAKE 2 (AC) - min=10.60V, mean=13.09V, severity=low @ts=2026-06-22T16:00
+LOW VBAT: MABEL LAKE 2 (AC) - min=10.60V, mean=13.08V, severity=low @ts=2026-06-22T16:00
 LOW VBAT: GLIMPSE - min=11.50V, mean=12.46V, severity=low @ts=2026-05-13T22:00
 NO CHARGE: MABEL LAKE 2 (AC) - 287 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=0.10V, severity=low @start=2026-06-18T16:00@end=2026-07-21T19:00
 NO CHARGE: GLIMPSE - 24 daytime readings (Vslr<Vbat), median Vbat=11.70V, median Vslr=11.55V, severity=low @start=2026-04-24T08:00@end=2026-06-12T19:00
 NO CHARGE: CAHILTY - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.80V @start=2026-05-13T08:00@end=2026-05-29T10:00
 NO CHARGE: COLDSCAUR LAKE - 6 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.55V @start=2026-05-13T08:00@end=2026-07-01T08:00
-VBAT DECLINING: MABEL LAKE 2 (AC) - 14.07V → 11.40V (dropped 2.67V) @start=2026-04-23T00:00@end=2026-07-22T00:00
+VBAT DECLINING: MABEL LAKE 2 (AC) - 14.07V → 11.40V (dropped 2.67V) @start=2026-04-24T00:00@end=2026-07-22T00:00

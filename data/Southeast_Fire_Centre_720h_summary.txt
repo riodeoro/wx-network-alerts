@@ -1,5 +1,5 @@
 FIRE CENTRE: Southeast Fire Centre
-WINDOW: 720h | STATIONS: 48 | RECORDS: 34,551
+WINDOW: 720h | STATIONS: 48 | RECORDS: 34,552
 
 === STATION OUTAGES ===
 SENSOR NA: NORNS - Wspd=NOT CONFIGURED, Dir=NOT CONFIGURED, Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -21,7 +21,7 @@ CONSTANT RH: FLATHEAD 2 - Constant 100%, avg=100%, 12h, no precip @start=2026-06
 
 === WIND ===
 EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
-ZERO WIND 438h: BAKER - Wspd=0 but 19 direction changes >90deg detected (max_delta=179deg) @start=2026-07-04T00:00@end=2026-07-22T05:00
+ZERO WIND 440h: BAKER - Wspd=0 but 19 direction changes >90deg detected (max_delta=179deg) @start=2026-07-04T00:00@end=2026-07-22T07:00
 ZERO WIND 12h: EIGHT MILE - Wspd=0 but gusts nonzero (max=5.3km/h, avg=1.3km/h), no direction changes >90deg @start=2026-07-05T20:00@end=2026-07-06T07:00
 DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (5 day(s) at 50%+)
 DIRECTION CONCENTRATION: SLOCAN - up to 54% of a day in the 198 deg bin (1 day(s) at 50%+)

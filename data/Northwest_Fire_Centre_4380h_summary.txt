@@ -1,5 +1,5 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 4380h | STATIONS: 32 | RECORDS: 137,558
+WINDOW: 4380h | STATIONS: 32 | RECORDS: 137,560
 
 === STATION OUTAGES ===
 SENSOR NA: NILKITKWA - Vbat=85% NA, Vslr=85% NA, Ibat=86% NA
@@ -24,7 +24,7 @@ EXTREME GUST: NASS CAMP - max=84.3km/h, 1 readings >80km/h @start=2026-03-07T18:
 ZERO WIND 108h: KISPIOX HUB - Wspd=0 but 33 direction changes >90deg detected (max_delta=171deg), gusts nonzero (max=6.8km/h, avg=0.2km/h) @start=2026-01-22T16:00@end=2026-01-27T03:00
 ZERO WIND 92h: ROSSWOOD - Wspd=0 but 17 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=16.2km/h, avg=0.2km/h) @start=2026-01-23T16:00@end=2026-01-27T11:00
 ZERO WIND 74h: OLD FADDY - Wspd=0 but 10 direction changes >90deg detected (max_delta=178deg), gusts nonzero (max=5.4km/h, avg=0.1km/h) @start=2026-01-31T23:00@end=2026-02-04T00:00
-ZERO WIND 71h: BOB QUINN LAKE - Wspd=0 but 26 direction changes >90deg detected (max_delta=178deg) @start=2026-01-20T18:00@end=2026-01-23T16:00
+ZERO WIND 69h: BOB QUINN LAKE - Wspd=0 but 26 direction changes >90deg detected (max_delta=178deg) @start=2026-01-20T20:00@end=2026-01-23T16:00
 ZERO WIND 51h: BOYA LAKE - Wspd=0 but 4 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=1.9km/h, avg=0.0km/h) @start=2026-01-20T22:00@end=2026-01-23T00:00
 DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 88% of a day in the 234 deg bin (56 day(s) at 50%+)
 DIRECTION CONCENTRATION: PARROTT - up to 83% of a day in the 85 deg bin (32 day(s) at 50%+)
@@ -55,16 +55,16 @@ LOW VBAT: NORTH BABINE - min=12.00V, mean=12.91V @ts=2026-02-27T18:00
 LOW VBAT: NADINA - min=12.10V, mean=13.07V @ts=2026-02-06T01:00
 LOW VBAT: AUGIER LAKE - min=12.20V, mean=13.02V @ts=2026-02-02T05:00
 LOW VBAT: BURNS LAKE 850M - min=12.20V, mean=13.26V @ts=2026-02-19T08:00
-NO CHARGE: NORTH BABINE - 339 daytime readings (Vslr<Vbat), median Vbat=12.30V, median Vslr=8.90V @start=2026-01-20T18:00@end=2026-07-20T08:00
+NO CHARGE: NORTH BABINE - 337 daytime readings (Vslr<Vbat), median Vbat=12.30V, median Vslr=8.90V @start=2026-01-21T08:00@end=2026-07-20T08:00
 NO CHARGE: UPPER FULTON - 321 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.30V @start=2026-01-22T08:00@end=2026-07-12T08:00
 NO CHARGE: NASS CAMP - 282 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.65V @start=2026-01-21T08:00@end=2026-07-21T10:00
-NO CHARGE: AUGIER LAKE - 190 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=5.80V @start=2026-01-20T18:00@end=2026-07-18T10:00
-NO CHARGE: NADINA - 185 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=5.80V @start=2026-01-20T18:00@end=2026-04-02T08:00
+NO CHARGE: AUGIER LAKE - 188 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=5.85V @start=2026-01-21T08:00@end=2026-07-18T10:00
+NO CHARGE: NADINA - 183 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=5.80V @start=2026-01-21T08:00@end=2026-04-02T08:00
 NO CHARGE: BURNS LAKE 850M - 148 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=5.45V @start=2026-01-21T08:00@end=2026-04-19T08:00
 NO CHARGE: GANOKWA - 134 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=6.30V @start=2026-01-21T08:00@end=2026-04-02T08:00
 NO CHARGE: ROSSWOOD - 119 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.50V @start=2026-01-23T08:00@end=2026-04-30T08:00
-NO CHARGE: DEASE LAKE FS - 118 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.15V @start=2026-01-21T08:00@end=2026-04-17T08:00
 NO CHARGE: ATLIN - 118 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=2.65V @start=2026-01-23T08:00@end=2026-05-22T08:00
+NO CHARGE: DEASE LAKE FS - 118 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.15V @start=2026-01-21T08:00@end=2026-04-17T08:00
 NO CHARGE: EAST OOTSA - 108 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=6.70V @start=2026-01-21T08:00@end=2026-05-21T08:00
 NO CHARGE: PEDEN - 91 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=7.20V @start=2026-01-21T08:00@end=2026-04-15T08:00
 NO CHARGE: TERRACE - 83 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.20V @start=2026-01-21T08:00@end=2026-04-06T08:00
@@ -72,7 +72,6 @@ NO CHARGE: PARROTT - 76 daytime readings (Vslr<Vbat), median Vbat=12.60V, median
 NO CHARGE: TELEGRAPH CREEK - 74 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.05V @start=2026-01-24T08:00@end=2026-04-06T08:00
 NO CHARGE: BELL-IRVING - 71 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=3.00V @start=2026-01-21T08:00@end=2026-03-30T08:00
 NO CHARGE: MCBRIDE LAKE - 29 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.20V @start=2026-04-02T08:00@end=2026-07-19T08:00
-NO CHARGE: HOUSTON (AC) - 12 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=0.10V @start=2026-03-08T08:00@end=2026-07-09T13:00
 NO CHARGE: OLD FADDY - 11 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.20V @start=2026-02-16T08:00@end=2026-03-25T08:00
 NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00
 NO CHARGE: BOB QUINN LAKE - 6 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=4.15V @start=2026-02-18T08:00@end=2026-02-23T09:00
