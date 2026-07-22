@@ -1,5 +1,5 @@
 FIRE CENTRE: Coastal Fire Centre
-WINDOW: 720h | STATIONS: 48 | RECORDS: 34,545
+WINDOW: 720h | STATIONS: 48 | RECORDS: 34,506
 
 === STATION OUTAGES ===
 SENSOR NA: APE LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -20,26 +20,34 @@ CONSTANT RH: APE LAKE - Constant high (90-99%), avg=99%, 39h, precip=33.4mm @sta
 === WIND ===
 ZERO WIND 17h: MESACHIE 2 - Wspd=0 but 3 direction changes >90deg detected (max_delta=127deg), gusts nonzero (max=10.2km/h, avg=1.3km/h) @start=2026-07-02T17:00@end=2026-07-03T09:00
 ZERO WIND 15h: TS ARTLISH - Wspd=0 but 3 direction changes >90deg detected (max_delta=178deg), gusts nonzero (max=2.3km/h, avg=0.7km/h) @start=2026-06-25T19:00@end=2026-06-26T09:00
-ZERO WIND 14h: SCAR CREEK - Wspd=0 but 3 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=7.7km/h, avg=1.6km/h) @start=2026-06-25T19:00@end=2026-06-26T08:00
 ZERO WIND 14h: UBC RESEARCH - Wspd=0 but 3 direction changes >90deg detected (max_delta=163deg), gusts nonzero (max=4.1km/h, avg=1.0km/h) @start=2026-07-02T19:00@end=2026-07-03T08:00
+ZERO WIND 14h: SCAR CREEK - Wspd=0 but 3 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=7.7km/h, avg=1.6km/h) @start=2026-06-25T19:00@end=2026-06-26T08:00
 ZERO WIND 14h: QUINSAM BASE FWX - Wspd=0 but 4 direction changes >90deg detected (max_delta=115deg), gusts nonzero (max=5.2km/h, avg=1.9km/h) @start=2026-07-09T18:00@end=2026-07-10T07:00
 DIRECTION CONCENTRATION: HAGENSBORG 2 - up to 50% of a day in the 262 deg bin (2 day(s) at 50%+)
 DIRECTION CONCENTRATION: FRANK CREEK - up to 67% of a day in the 201 deg bin (5 day(s) at 50%+)
-DIRECTION CONCENTRATION: APE LAKE - up to 62% of a day in the 353 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: TS NAKA CREEK - up to 62% of a day in the 336 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: TS BLACKWATER - up to 67% of a day in the 115 deg bin (3 day(s) at 50%+)
+DIRECTION CONCENTRATION: TS NAKA CREEK - up to 62% of a day in the 336 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: BOOTHROYD - up to 50% of a day in the 152 deg bin (2 day(s) at 50%+)
 
 === TEMPERATURE ===
-HIGHEST TEMP: TOBA CAMP - 37.4C @ts=2026-06-23T16:00
+HIGHEST TEMP: BOOTHROYD - 38.0C @ts=2026-07-21T18:00
 LOWEST TEMP: ALLISON PASS - 0.0C @ts=2026-07-06T06:00
-TEMP>35C: BOOTHROYD - max=36.1C @ts=2026-07-15T18:00
-TEMP>35C: DARCY - max=35.7C @ts=2026-07-15T15:00
-TEMP>35C: FRANK CREEK - max=35.7C @ts=2026-07-20T16:00
-TEMP>35C: PEMBERTON BASE - max=36.4C @ts=2026-06-23T17:00
-TEMP>35C: SCAR CREEK - max=36.7C @ts=2026-06-23T17:00
+TEMP>35C: ANDERSON CREEK - max=37.3C @ts=2026-07-21T16:00
+TEMP>35C: BEAVER CREEK - max=35.8C @ts=2026-07-21T17:00
+TEMP>35C: BIG SILVER 2 - max=36.3C @ts=2026-07-21T16:00
+TEMP>35C: CHEAKAMUS - max=35.3C @ts=2026-07-21T15:00
+TEMP>35C: DARCY - max=37.7C @ts=2026-07-21T15:00
+TEMP>35C: FRANK CREEK - max=37.7C @ts=2026-07-21T15:00
+TEMP>35C: MEAGER CREEK - max=36.3C @ts=2026-07-21T16:00
+TEMP>35C: MESACHIE 2 - max=37.4C @ts=2026-07-21T16:00
+TEMP>35C: MESACHIE 3 - max=36.3C @ts=2026-07-21T16:00
+TEMP>35C: NAHATLATCH - max=37.3C @ts=2026-07-21T16:00
+TEMP>35C: PEMBERTON BASE - max=37.9C @ts=2026-07-21T18:00
+TEMP>35C: SCAR CREEK - max=36.8C @ts=2026-07-21T17:00
+TEMP>35C: TALCHAKO - max=36.6C @ts=2026-07-21T16:00
+TEMP>35C: TOBA CAMP - max=37.4C @ts=2026-06-23T16:00
 TEMP>35C: TS BURMAN - max=35.2C @ts=2026-06-23T16:00
 ISOLATED TEMP SPIKE: SALTSPRING 2 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.8C, mag=6.5 @first=2026-07-07T12:00@last=2026-07-07T12:00
-ISOLATED TEMP SPIKE: FRANK CREEK - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.1C, mag=6.0 @first=2026-06-21T16:00@last=2026-06-21T16:00
 CONSTANT TEMP: BIG SILVER 2 - 11.7C for 6h, RH also flat (0% range) @start=2026-07-03T01:00@end=2026-07-03T06:00
 CONSTANT TEMP: KLINAKLINI - 5.6C for 6h, RH also flat (0% range) @start=2026-07-09T20:00@end=2026-07-10T01:00
 
@@ -49,6 +57,6 @@ SILENT GAUGE: BOOTHROYD - silent 7 of 8 neighbour rain hours (87.5%) @first=2026
 SILENT GAUGE: HONNA - silent 15 of 18 neighbour rain hours (83.3%) @first=2026-06-26T05:00@last=2026-07-04T11:00
 
 === POWER ===
-LOW VBAT: QUINSAM BASE FWX - min=12.30V, mean=12.83V @ts=2026-06-21T07:00
-NO CHARGE: FRANK CREEK - 34 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.80V @start=2026-06-21T08:00@end=2026-07-20T08:00
-NO CHARGE: TALCHAKO - 11 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.40V @start=2026-06-21T08:00@end=2026-07-18T10:00
+LOW VBAT: QUINSAM BASE FWX - min=12.30V, mean=12.83V @ts=2026-06-22T06:00
+NO CHARGE: FRANK CREEK - 33 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.90V @start=2026-06-22T08:00@end=2026-07-21T08:00
+NO CHARGE: TALCHAKO - 10 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.40V @start=2026-06-22T08:00@end=2026-07-18T10:00

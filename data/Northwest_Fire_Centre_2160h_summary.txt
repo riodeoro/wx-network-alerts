@@ -1,8 +1,8 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 2160h | STATIONS: 32 | RECORDS: 69,012
+WINDOW: 2160h | STATIONS: 32 | RECORDS: 68,983
 
 === STATION OUTAGES ===
-SENSOR NA: NILKITKWA - Vbat=72% NA, Vslr=72% NA, Ibat=72% NA
+SENSOR NA: NILKITKWA - Vbat=71% NA, Vslr=71% NA, Ibat=71% NA
 
 === RH ===
 RH CHANGE >50%/h: BELL-IRVING - 1 events, peak=+59.0%/h @first=2026-06-09T15:00@last=2026-06-09T15:00
@@ -28,16 +28,17 @@ DIRECTION CONCENTRATION: NASS CAMP - up to 88% of a day in the 189 deg bin (21 d
 DIRECTION CONCENTRATION: ATLIN - up to 54% of a day in the 187 deg bin (2 day(s) at 50%+)
 
 === TEMPERATURE ===
-HIGHEST TEMP: KITPARK - 36.9C @ts=2026-07-20T18:00
-LOWEST TEMP: ATLIN - -6.2C @ts=2026-04-22T08:00
-TEMP>35C: CEDARVALE - max=36.3C @ts=2026-07-17T17:00
+HIGHEST TEMP: CEDARVALE - 37.2C @ts=2026-07-21T15:00
+LOWEST TEMP: HOUSTON - -5.9C @ts=2026-04-23T06:00
+TEMP>35C: KITPARK - max=36.9C @ts=2026-07-20T18:00
 
 === PRECIPITATION ===
 SILENT GAUGE: ATLIN - silent 15 of 16 neighbour rain hours (93.8%) @first=2026-06-05T00:00@last=2026-06-18T22:00
 
 === POWER ===
 NO CHARGE: UPPER FULTON - 136 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.20V @start=2026-05-15T08:00@end=2026-07-12T08:00
-NO CHARGE: NASS CAMP - 63 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-04-27T08:00@end=2026-07-20T19:00
+NO CHARGE: NASS CAMP - 65 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-04-27T08:00@end=2026-07-21T10:00
 NO CHARGE: NORTH BABINE - 15 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.30V @start=2026-04-28T08:00@end=2026-07-20T08:00
 NO CHARGE: MCBRIDE LAKE - 11 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.30V @start=2026-04-27T08:00@end=2026-07-19T08:00
 NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00
+NO CHARGE: KISPIOX HUB (AC) - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-20T19:00@end=2026-07-21T19:00

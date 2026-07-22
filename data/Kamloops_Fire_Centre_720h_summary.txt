@@ -1,5 +1,5 @@
 FIRE CENTRE: Kamloops Fire Centre
-WINDOW: 720h | STATIONS: 42 | RECORDS: 30,245
+WINDOW: 720h | STATIONS: 42 | RECORDS: 30,201
 
 === STATION OUTAGES ===
 SENSOR NA: SILVERSTAR SF - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -9,38 +9,40 @@ SENSOR NA: MCLEAN LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONF
 SENSOR NA: PASKA LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH=0%: SILVERSTAR SF - 712 readings @first=2026-06-21T07:00@last=2026-07-21T06:00
+RH=0%: SILVERSTAR SF - 712 readings @first=2026-06-22T06:00@last=2026-07-22T05:00
 RH CHANGE >50%/h: SICAMOUS - 2 events, peak=+64.0%/h @first=2026-07-17T19:00@last=2026-07-19T17:00
 RH CHANGE >50%/h: CLEARWATER HUB - 2 events, peak=+61.0%/h @first=2026-06-25T23:00@last=2026-07-12T09:00
 RH CHANGE >50%/h: PENTICTON RS - 1 events, peak=+52.0%/h @first=2026-06-26T20:00@last=2026-06-26T20:00
 RH CHANGE >50%/h: SEYMOUR ARM - 1 events, peak=+52.0%/h @first=2026-06-26T19:00@last=2026-06-26T19:00
 RH CHANGE >50%/h: THYNNE - 1 events, peak=+52.0%/h @first=2026-06-24T17:00@last=2026-06-24T17:00
-CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 712h, no precip @start=2026-06-21T07:00@end=2026-07-21T06:00
+CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 712h, no precip @start=2026-06-22T06:00@end=2026-07-22T05:00
 CONSTANT RH: WELLS GRAY - Constant 100%, avg=100%, 12h, no precip @start=2026-07-04T21:00@end=2026-07-05T08:00
 
 === WIND ===
 EXTREME GUST: KETTLE 2 - max=835.1km/h, 2 readings >80km/h @start=2026-07-08T06:00@end=2026-07-08T07:00
 EXTREME GUST: MERRITT 2 HUB - max=86.6km/h, 1 readings >80km/h @start=2026-07-16T18:00@end=2026-07-16T18:00
 EXTREME GUST: LITTLE CHOPAKA - max=80.8km/h, 1 readings >80km/h @start=2026-07-15T21:00@end=2026-07-15T21:00
-ZERO WIND 20h: SILVERSTAR SF - Wspd=0 but gusts nonzero (max=14.9km/h, avg=2.4km/h), no direction changes >90deg @start=2026-07-06T16:00@end=2026-07-07T11:00
+ZERO WIND 22h: SILVERSTAR SF - Wspd=0 but gusts nonzero (max=3.9km/h, avg=0.6km/h), no direction changes >90deg @start=2026-07-20T13:00@end=2026-07-21T10:00
 ZERO WIND 13h: GWYNETH LAKE - Wspd=0 but 1 direction changes >90deg detected (max_delta=99deg), gusts nonzero (max=9.3km/h, avg=2.5km/h) @start=2026-06-22T20:00@end=2026-06-23T08:00
-DIRECTION CONCENTRATION: LITTLE CHOPAKA - up to 58% of a day in the 311 deg bin (2 day(s) at 50%+)
 DIRECTION CONCENTRATION: ASHNOLA - up to 79% of a day in the 268 deg bin (6 day(s) at 50%+)
-DIRECTION CONCENTRATION: PASKA LAKE - up to 50% of a day in the 221 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: GWYNETH LAKE - up to 58% of a day in the 204 deg bin (4 day(s) at 50%+)
+DIRECTION CONCENTRATION: GREENSTONE HUB - up to 62% of a day in the 200 deg bin (5 day(s) at 50%+)
+DIRECTION CONCENTRATION: PASKA LAKE - up to 50% of a day in the 221 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: MERRITT 2 HUB - up to 54% of a day in the 208 deg bin (2 day(s) at 50%+)
 
 === TEMPERATURE ===
-HIGHEST TEMP: SEYMOUR ARM - 38.6C @ts=2026-07-17T17:00
+HIGHEST TEMP: SPLINTLUM - 38.7C @ts=2026-07-21T16:00
 LOWEST TEMP: FRENCH BAR - -1.7C @ts=2026-06-27T05:00
 TEMP>35C: AFTON - max=36.2C @ts=2026-07-17T15:00
 TEMP>35C: AUGUST LAKE - max=36.5C @ts=2026-07-15T16:00
+TEMP>35C: CLEARWATER HUB - max=35.2C @ts=2026-07-21T17:00
 TEMP>35C: EAST BARRIERE - max=36.1C @ts=2026-07-17T14:00
 TEMP>35C: FINTRY - max=36.0C @ts=2026-07-16T16:00
-TEMP>35C: LILLOOET - max=36.1C @ts=2026-07-16T17:00
+TEMP>35C: LILLOOET - max=37.2C @ts=2026-07-21T17:00
 TEMP>35C: LITTLE CHOPAKA - max=37.5C @ts=2026-07-16T17:00
+TEMP>35C: MERRITT 2 HUB - max=36.2C @ts=2026-07-21T17:00
 TEMP>35C: PENTICTON RS - max=36.2C @ts=2026-07-14T17:00
-TEMP>35C: SPLINTLUM - max=37.4C @ts=2026-07-16T16:00
+TEMP>35C: SEYMOUR ARM - max=38.6C @ts=2026-07-17T17:00
 TEMP>35C: TURTLE - max=36.1C @ts=2026-07-17T16:00
 TEMP>35C: WEST KELOWNA - max=35.5C @ts=2026-07-14T17:00
 
@@ -52,5 +54,5 @@ SILENT GAUGE: GREENSTONE HUB - silent 3 of 3 neighbour rain hours (100.0%) @firs
 SILENT GAUGE: MUDPIT - silent 5 of 7 neighbour rain hours (71.4%) @first=2026-06-27T09:00@last=2026-07-19T18:00
 
 === POWER ===
-LOW VBAT: MABEL LAKE 2 (AC) - min=10.60V, mean=11.82V, severity=low @ts=2026-06-22T16:00
-NO CHARGE: MABEL LAKE 2 (AC) - 249 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=0.10V, severity=low @start=2026-06-21T08:00@end=2026-07-20T19:00
+LOW VBAT: MABEL LAKE 2 (AC) - min=10.60V, mean=11.80V, severity=low @ts=2026-06-22T16:00
+NO CHARGE: MABEL LAKE 2 (AC) - 247 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=0.10V, severity=low @start=2026-06-22T08:00@end=2026-07-21T19:00

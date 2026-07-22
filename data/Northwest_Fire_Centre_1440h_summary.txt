@@ -1,8 +1,8 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 1440h | STATIONS: 32 | RECORDS: 45,982
+WINDOW: 1440h | STATIONS: 32 | RECORDS: 45,952
 
 === STATION OUTAGES ===
-SENSOR NA: NILKITKWA - Vbat=57% NA, Vslr=57% NA, Ibat=58% NA
+SENSOR NA: NILKITKWA - Vbat=56% NA, Vslr=56% NA, Ibat=57% NA
 
 === RH ===
 RH CHANGE >50%/h: BELL-IRVING - 1 events, peak=+59.0%/h @first=2026-06-09T15:00@last=2026-06-09T15:00
@@ -21,24 +21,25 @@ ZERO WIND 14h: ROSSWOOD - Wspd=0 but 7 direction changes >90deg detected (max_de
 ZERO WIND 13h: KISPIOX HUB - Wspd=0 but 2 direction changes >90deg detected (max_delta=156deg), gusts nonzero (max=11.5km/h, avg=0.9km/h) @start=2026-05-27T21:00@end=2026-05-28T09:00
 ZERO WIND 13h: VAN DYKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=176deg), gusts nonzero (max=5.6km/h, avg=1.9km/h) @start=2026-06-25T20:00@end=2026-06-26T08:00
 ZERO WIND 12h: BELL-IRVING - Wspd=0 but 3 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=4.9km/h, avg=0.8km/h) @start=2026-07-03T21:00@end=2026-07-04T08:00
-DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 67% of a day in the 247 deg bin (23 day(s) at 50%+)
+DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 67% of a day in the 247 deg bin (22 day(s) at 50%+)
 DIRECTION CONCENTRATION: PARROTT - up to 67% of a day in the 280 deg bin (12 day(s) at 50%+)
-DIRECTION CONCENTRATION: NASS CAMP - up to 88% of a day in the 189 deg bin (18 day(s) at 50%+)
 DIRECTION CONCENTRATION: AUGIER LAKE - up to 62% of a day in the 225 deg bin (3 day(s) at 50%+)
+DIRECTION CONCENTRATION: NASS CAMP - up to 88% of a day in the 189 deg bin (17 day(s) at 50%+)
 DIRECTION CONCENTRATION: ATLIN - up to 54% of a day in the 187 deg bin (2 day(s) at 50%+)
 
 === TEMPERATURE ===
-HIGHEST TEMP: KITPARK - 36.9C @ts=2026-07-20T18:00
+HIGHEST TEMP: CEDARVALE - 37.2C @ts=2026-07-21T15:00
 LOWEST TEMP: HOUSTON - -5.5C @ts=2026-05-31T05:00
-TEMP>35C: CEDARVALE - max=36.3C @ts=2026-07-17T17:00
+TEMP>35C: KITPARK - max=36.9C @ts=2026-07-20T18:00
 
 === PRECIPITATION ===
 SILENT GAUGE: ATLIN - silent 15 of 16 neighbour rain hours (93.8%) @first=2026-06-05T00:00@last=2026-06-18T22:00
-SILENT GAUGE: UPPER KISPIOX - silent 20 of 33 neighbour rain hours (60.6%) @first=2026-05-23T07:00@last=2026-07-12T10:00
+SILENT GAUGE: UPPER KISPIOX - silent 20 of 30 neighbour rain hours (66.7%) @first=2026-05-23T07:00@last=2026-07-12T10:00
 
 === POWER ===
-NO CHARGE: UPPER FULTON - 79 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.20V @start=2026-05-22T08:00@end=2026-07-12T08:00
-NO CHARGE: NASS CAMP - 50 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-05-22T08:00@end=2026-07-20T19:00
+NO CHARGE: UPPER FULTON - 72 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.20V @start=2026-05-23T08:00@end=2026-07-12T08:00
+NO CHARGE: NASS CAMP - 51 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-05-23T08:00@end=2026-07-21T10:00
 NO CHARGE: NORTH BABINE - 14 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.10V @start=2026-05-25T08:00@end=2026-07-20T08:00
 NO CHARGE: MCBRIDE LAKE - 9 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.30V @start=2026-05-28T08:00@end=2026-07-19T08:00
 NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00
+NO CHARGE: KISPIOX HUB (AC) - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-20T19:00@end=2026-07-21T19:00

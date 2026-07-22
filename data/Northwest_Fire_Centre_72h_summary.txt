@@ -1,5 +1,5 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 72h | STATIONS: 32 | RECORDS: 2,333
+WINDOW: 72h | STATIONS: 32 | RECORDS: 2,302
 
 === STATION OUTAGES ===
 None.
@@ -8,15 +8,16 @@ None.
 None.
 
 === WIND ===
-DIRECTION CONCENTRATION: CRANBERRY - up to 50% of a day in the 221 deg bin (1 day(s) at 50%+)
+None.
 
 === TEMPERATURE ===
-HIGHEST TEMP: KITPARK - 36.9C @ts=2026-07-20T18:00
+HIGHEST TEMP: CEDARVALE - 37.2C @ts=2026-07-21T15:00
 LOWEST TEMP: ISKUT - 2.3C @ts=2026-07-19T06:00
-TEMP>35C: CEDARVALE - max=36.2C @ts=2026-07-20T17:00
+TEMP>35C: KITPARK - max=36.9C @ts=2026-07-20T18:00
 
 === PRECIPITATION ===
 None.
 
 === POWER ===
-NO CHARGE: NASS CAMP - 10 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-07-18T08:00@end=2026-07-20T19:00
+NO CHARGE: NASS CAMP - 11 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-07-19T08:00@end=2026-07-21T10:00
+NO CHARGE: KISPIOX HUB (AC) - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-20T19:00@end=2026-07-21T19:00
