@@ -1,4 +1,4 @@
-<!-- hash:96b62d39650c -->
+<!-- hash:a6cf880520dd -->
 ```
 UNCONFIGURED SENSORS
   APE LAKE, HOMATHKO, KLINAKLINI, MACHMELL KLINIKLINI, MESACHIE 2: battery voltage, charge current, and solar voltage unconfigured

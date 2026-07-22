@@ -1,8 +1,8 @@
-<!-- hash:acb5baae831f -->
+<!-- hash:cb2783d011bd -->
 ```
 EXTREME VALUES
 SPLINTLUM:        Highest (38.7°C)                                            [Jul 21 16:00]
-COLDSCAUR LAKE:   Lowest (6.3°C)                                              [Jul 21 06:00]
+COLDSCAUR LAKE:   Lowest (8.0°C)                                     [since Jul 22, ongoing]
 TEMPERATURE EXCEEDED 35°C
 LITTLE CHOPAKA:   37.4°C                                                      [Jul 21 17:00]
 LILLOOET:         37.2°C                                                      [Jul 21 17:00]

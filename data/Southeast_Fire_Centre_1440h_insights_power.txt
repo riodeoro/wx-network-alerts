@@ -1,4 +1,4 @@
-<!-- hash:3c258a166582 -->
+<!-- hash:b4d007e7f9dc -->
 ```
 NO DAYTIME CHARGING
 CRAWFORD:         no charge 6 daytime readings (Vbat 12.70V, Vslr 12.45V)  [May 27 08:00 – Jul 17 08:00]

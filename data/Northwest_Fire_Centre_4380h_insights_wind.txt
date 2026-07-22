@@ -1,4 +1,4 @@
-<!-- hash:d902245cc8d0 -->
+<!-- hash:af5e2f321fc7 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 PINE CREEK:       95.0 km/h (5 readings >80)                     [Feb 8 00:00 – Mar 7 20:00]
@@ -10,7 +10,7 @@ KISPIOX HUB:      zero wind 108h, 33 shifts >90°, max 6.8km/h  [Jan 22 16:00 �
 ROSSWOOD:         zero wind 92h, 17 shifts >90°, max 16.2km/h  [Jan 23 16:00 – Jan 27 11:00]
 OLD FADDY:        zero wind 74h, 10 shifts >90°, max 5.4km/h    [Jan 31 23:00 – Feb 4 00:00]
 BOYA LAKE:        zero wind 51h, 4 shifts >90°, max 1.9km/h    [Jan 20 22:00 – Jan 23 00:00]
-BOB QUINN LAKE:   zero wind 71h, 26 shifts >90° (max 178°)     [Jan 20 18:00 – Jan 23 16:00]
+BOB QUINN LAKE:   zero wind 69h, 26 shifts >90° (max 178°)     [Jan 20 20:00 – Jan 23 16:00]
 DAILY DIRECTION CONCENTRATION
 AUGIER LAKE:      up to 96% of a day within ±5° of 59° (14 day(s) at 50%+)
 TELEGRAPH CREEK:  up to 88% of a day within ±5° of 234° (56 day(s) at 50%+)

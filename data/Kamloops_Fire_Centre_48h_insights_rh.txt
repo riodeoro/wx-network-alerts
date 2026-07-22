@@ -1,7 +1,7 @@
-<!-- hash:095b7c9b7544 -->
+<!-- hash:e2c6ba657fdb -->
 ```
 RH READ 0%
-SILVERSTAR SF:    48 readings                         [Jul 20 06:00 → Jul 22 05:00, ongoing]
+SILVERSTAR SF:    48 readings                         [Jul 20 08:00 → Jul 22 07:00, ongoing]
 PERSISTENT STATES
-SILVERSTAR SF:    RH constant 0% for 48h, zero Rn_1   [Jul 20 06:00 – Jul 22 05:00, ongoing]
+SILVERSTAR SF:    RH constant 0% for 48h, zero Rn_1   [Jul 20 08:00 – Jul 22 07:00, ongoing]
 ```

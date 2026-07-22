@@ -1,4 +1,4 @@
-<!-- hash:22c0a06463cd -->
+<!-- hash:55ddff4e6ace -->
 ```
 NO DAYTIME CHARGING
 UPPER FULTON:     no charge 72 daytime readings (Vbat 12.70V, Vslr 0.20V)  [May 23 08:00 – Jul 12 08:00]

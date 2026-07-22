@@ -1,4 +1,4 @@
-<!-- hash:a5d7604c1fbc -->
+<!-- hash:a9dd4b6aa9eb -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
 TURTLE:           17 hours, Rn_1 (9.0mm)                        [Jan 29 11:00 → Feb 2 13:00]

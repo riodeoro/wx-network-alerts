@@ -1,4 +1,4 @@
-<!-- hash:4fe472765742 -->
+<!-- hash:89158f7735f8 -->
 ```
 EXTREME VALUES
 CARIBOO CREEK:    Highest (69.2°C)                                                  [May 15]
@@ -15,7 +15,7 @@ JOHNSON LAKE:     35.6°C                                                       
 TOBY HUB:         35.1°C                                                            [Jul 16]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 CARIBOO CREEK:    6 spikes, peak Δ 61.2°C                      [May 14 09:00 → May 19 07:00]
-DUNCAN:           4 spikes, peak Δ 27.6°C                      [May 13 12:00 → May 14 03:00]
+DUNCAN:           5 spikes, peak Δ 27.6°C                      [Apr 23 09:00 → May 14 03:00]
 ROUND PRAIRIE:    1 spike, peak Δ 5.6°C                                       [Apr 23 13:00]
 RORY CREEK:       1 spike, peak Δ 5.2°C                                       [Apr 26 14:00]
 PERSISTENT STATES

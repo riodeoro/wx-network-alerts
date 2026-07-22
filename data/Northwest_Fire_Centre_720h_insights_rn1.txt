@@ -1,4 +1,4 @@
-<!-- hash:d98bab296e18 -->
+<!-- hash:356941ef67a0 -->
 ```
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 UPPER KISPIOX:    silent 14 of 20 neighbour rain hours (70%)   [Jun 26 04:00 → Jul 12 10:00]

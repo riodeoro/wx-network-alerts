@@ -1,4 +1,4 @@
-<!-- hash:c5aa7147f26d -->
+<!-- hash:b94f303de57c -->
 ```
 EXTREME VALUES
 BOOTHROYD:        Highest (38.0°C)                                                  [Jul 21]

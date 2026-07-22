@@ -1,8 +1,8 @@
-<!-- hash:c769c7ac3d3f -->
+<!-- hash:72382c8169e0 -->
 ```
 EXTREME VALUES
 CEDARVALE:        Highest (37.2°C)                                                  [Jul 21]
-HOUSTON:          Lowest (-5.9°C)                                                   [Apr 23]
+HOUSTON:          Lowest (-5.5°C)                                                   [May 31]
 TEMPERATURE EXCEEDED 35°C
 KITPARK:          36.9°C                                                            [Jul 20]
 ```

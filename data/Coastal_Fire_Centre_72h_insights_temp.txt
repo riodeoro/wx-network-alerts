@@ -1,8 +1,8 @@
-<!-- hash:c7da8d0030ae -->
+<!-- hash:f29e6dadba70 -->
 ```
 EXTREME VALUES
 BOOTHROYD:        Highest (38.0°C)                                   [since Jul 21, ongoing]
-ALLISON PASS:     Lowest (2.6°C)                                              [Jul 19 06:00]
+APE LAKE:         Lowest (4.2°C)                                              [Jul 19 08:00]
 TEMPERATURE EXCEEDED 35°C
 PEMBERTON BASE:   37.9°C                                             [since Jul 21, ongoing]
 DARCY:            37.7°C                                                      [Jul 21 15:00]
