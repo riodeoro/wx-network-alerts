@@ -1,7 +1,7 @@
-<!-- hash:f1f38dcca10d -->
+<!-- hash:add3a47da60d -->
 ```
 GUSTS EXCEEDED 80 KM/H
-VALEMOUNT 2:      1654.6 km/h (186 readings >80)               [Apr 23 07:00 – Jun 20 05:00]
+VALEMOUNT 2:      1654.6 km/h (185 readings >80)               [Apr 23 09:00 – Jun 20 05:00]
 BEDNESTI:         330.4 km/h (1 reading >80)                                  [Jun 19 17:00]
 KLUSKUS:          180.6 km/h (2 readings >80)                   [May 25 17:00 – Jun 3 15:00]
 GRAHAM:           125.4 km/h (1 reading >80)                                  [Jun 10 16:00]
@@ -12,8 +12,8 @@ NOEL:             zero wind 12h, 2 shifts >90°, max 15.4km/h   [Apr 23 21:00 �
 FIRESIDE:         zero wind 12h, gusts max 7.3km/h             [Apr 27 20:00 – Apr 28 07:00]
 DAILY DIRECTION CONCENTRATION
 NOEL:             up to 62% of a day within ±5° of 236° (8 day(s) at 50%+)
+KOMIE:            up to 62% of a day within ±5° of 138° (4 day(s) at 50%+)
 HOLY CROSS 2:     up to 58% of a day within ±5° of 328° (7 day(s) at 50%+)
-FIRESIDE:         up to 54% of a day within ±5° of 250° (1 day(s) at 50%+)
 LEO CREEK:        up to 50% of a day within ±5° of 82° (2 day(s) at 50%+)
 MCLEOD LAKE:      up to 50% of a day within ±5° of 209° (2 day(s) at 50%+)
 ```

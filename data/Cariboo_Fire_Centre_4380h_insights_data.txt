@@ -1,5 +1,7 @@
-<!-- hash:9ca5a6820450 -->
+<!-- hash:51b91ff29915 -->
 ```
+LOW DATA COVERAGE
+PLUMMER HUT:      49% (2149/4381h)                                           [Jan 20–Apr 20]
 UNCONFIGURED SENSORS
   BENSON, GASPARD, GAVIN, KNIFE, LONE BUTTE: battery voltage, charge current, and solar voltage unconfigured
 ```

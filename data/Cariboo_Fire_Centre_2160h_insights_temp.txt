@@ -1,8 +1,8 @@
-<!-- hash:741523891f21 -->
+<!-- hash:1b027dbf4c31 -->
 ```
 EXTREME VALUES
 ALEXIS CREEK:     Highest (34.2°C)                                                  [Jul 16]
-NAZKO:            Lowest (-9.6°C)                                                   [Apr 23]
+NAZKO:            Lowest (-9.6°C)                                                   [Apr 24]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 NAZKO:            1 spike, peak Δ 5.8°C                                        [May 5 21:00]
 PERSISTENT STATES

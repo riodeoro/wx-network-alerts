@@ -1,4 +1,4 @@
-<!-- hash:997542c6fb1c -->
+<!-- hash:05a184d4fd60 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 ELK MOUNTAIN:     1 hour, Rn_1 (0.8mm)                                        [Mar 14 17:00]
@@ -7,7 +7,7 @@ PADDY:            2 hours, Rn_1 (0.6mm)                                 [Mar 15 
 HIGH PRECIPITATION
 KOMIE:            37.0 mm/h                                                         [Jun 30]
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
-BLUE RIVER 2:     silent 4 of 4 neighbour rain hours (100%)  [Jul 19 21:00 → Jul 20 00:00, ongoing]
+BLUE RIVER 2:     silent 4 of 4 neighbour rain hours (100%)    [Jul 19 21:00 → Jul 20 00:00]
 NORTH CHILCO:     silent 23 of 34 neighbour rain hours (68%)   [Jan 28 12:00 → Jul 19 05:00]
 FIRESIDE:         silent 19 of 29 neighbour rain hours (66%)    [Apr 19 06:00 → Jul 8 16:00]
 ```

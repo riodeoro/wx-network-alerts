@@ -1,8 +1,5 @@
-<!-- hash:0c1f9f3ebc26 -->
+<!-- hash:31b720e1632d -->
 ```
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 BLUE RIVER 2:     silent 4 of 4 neighbour rain hours (100%)    [Jul 19 21:00 → Jul 20 00:00]
-MUSKWA:           silent 3 of 3 neighbour rain hours (100%)             [Jul 18 17:00–19:00]
-NABESHE:          silent 3 of 3 neighbour rain hours (100%)             [Jul 18 17:00–19:00]
-RED DEER:         silent 3 of 3 neighbour rain hours (100%)    [Jul 18 19:00 → Jul 19 08:00]
 ```

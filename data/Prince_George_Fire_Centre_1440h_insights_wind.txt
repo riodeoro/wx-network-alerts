@@ -1,4 +1,4 @@
-<!-- hash:b5886367716a -->
+<!-- hash:f7c5fb737d09 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 VALEMOUNT 2:      1367.0 km/h (65 readings >80)                [May 24 07:00 – Jun 20 05:00]
@@ -9,9 +9,9 @@ SAWTOOTH:         101.9 km/h (1 reading >80)                                  [J
 PERSISTENT STATES
 MANSON:           zero wind 14h, 1 shifts >90°, max 4.9km/h    [Jun 26 18:00 – Jun 27 07:00]
 DAILY DIRECTION CONCENTRATION
-MUSKWA:           up to 67% of a day within ±5° of 243° (3 day(s) at 50%+)
+WONOWON:          up to 71% of a day within ±5° of 208° (3 day(s) at 50%+)
+MOOSE LAKE:       up to 62% of a day within ±5° of 253° (2 day(s) at 50%+)
 HOLY CROSS 2:     up to 58% of a day within ±5° of 267° (4 day(s) at 50%+)
-NOEL:             up to 58% of a day within ±5° of 226° (4 day(s) at 50%+)
-FIRESIDE:         up to 54% of a day within ±5° of 250° (1 day(s) at 50%+)
-WITCH:            up to 54% of a day within ±5° of 168° (2 day(s) at 50%+)
+NOEL:             up to 58% of a day within ±5° of 226° (3 day(s) at 50%+)
+KOMIE:            up to 54% of a day within ±5° of 272° (2 day(s) at 50%+)
 ```

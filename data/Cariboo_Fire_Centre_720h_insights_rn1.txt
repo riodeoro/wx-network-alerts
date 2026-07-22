@@ -1,10 +1,9 @@
-<!-- hash:66709d2d51eb -->
+<!-- hash:c7fbcf6b9d96 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 MIDDLE LAKE:      silent 3 of 3 neighbour rain hours (100%)     [Jun 26 15:00 → Jul 2 09:00]
-MEADOW LAKE:      silent 3 of 4 neighbour rain hours (75%)      [Jun 20 15:00 → Jul 4 19:00]
 PRAIRIE CREEK:    silent 11 of 16 neighbour rain hours (69%)   [Jun 26 18:00 → Jul 12 08:00]
 BIG VALLEY:       silent 7 of 11 neighbour rain hours (64%)      [Jul 2 19:00 → Jul 9 22:00]
 ```

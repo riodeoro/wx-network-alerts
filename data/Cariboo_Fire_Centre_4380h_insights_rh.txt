@@ -1,4 +1,4 @@
-<!-- hash:9ca5a6820450 -->
+<!-- hash:51b91ff29915 -->
 ```
 RH CHANGED >50%/H
 GAVIN:            4 events, peak Δ +61%/h                       [Apr 6 18:00 → Jul 17 16:00]
@@ -6,6 +6,8 @@ PLUMMER HUT:      1 event, peak Δ -60%/h                                       
 ALEXIS CREEK:     1 event, peak Δ +59%/h                                      [Apr 14 19:00]
 BALDFACE:         3 events, peak Δ +59%/h                      [Apr 10 09:00 → Jun 24 16:00]
 LONE BUTTE:       1 event, peak Δ +56%/h                                      [Jul 18 17:00]
+RH DROPPED AS LOW AS
+PLUMMER HUT:      8.0%                                                              [Jan 20]
 PERSISTENT STATES
 TAUTRI:           RH constant 3% for 45h, Rn_1 (1.0mm)         [Apr 21 18:00 – Apr 23 14:00]
 PLUMMER HUT:      RH constant 99% for 30h, zero Rn_1           [Jan 29 10:00 – Jan 30 15:00]

@@ -1,9 +1,9 @@
-<!-- hash:f1f38dcca10d -->
+<!-- hash:add3a47da60d -->
 ```
 EXTREME VALUES
 BLUE RIVER 2:     Highest (35.9°C)                                                  [Jul 17]
 TABLE RIVER:      Lowest (-59.4°C)                                                  [Apr 26]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
-TABLE RIVER:      5 spikes, peak Δ 8.3°C                        [Apr 21 14:00 → May 3 12:00]
+TABLE RIVER:      3 spikes, peak Δ 8.3°C                        [Apr 25 15:00 → May 3 12:00]
 MANSON:           1 spike, peak Δ 5.6°C                                       [May 26 13:00]
 ```

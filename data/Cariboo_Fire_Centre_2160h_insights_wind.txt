@@ -1,4 +1,4 @@
-<!-- hash:741523891f21 -->
+<!-- hash:1b027dbf4c31 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 ANAHIM LAKE:      282.2 km/h (1 reading >80)                                  [Jul 11 16:00]
@@ -6,9 +6,9 @@ TAUTRI:           226.9 km/h (1 reading >80)                                   [
 TATLA LAKE:       202.2 km/h (1 reading >80)                                   [Jun 6 13:00]
 HORSEFLY:         130.3 km/h (3 readings >80)                   [Jun 4 11:00 – Jul 17 19:00]
 DAILY DIRECTION CONCENTRATION
-YOUNG LAKE:       up to 67% of a day within ±5° of 159° (2 day(s) at 50%+)
 BALDFACE:         up to 58% of a day within ±5° of 285° (5 day(s) at 50%+)
 NEMIAH:           up to 54% of a day within ±5° of 288° (1 day(s) at 50%+)
 ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (2 day(s) at 50%+)
 BIG VALLEY:       up to 50% of a day within ±5° of 250° (2 day(s) at 50%+)
+DECEPTION:        up to 50% of a day within ±5° of 56° (1 day(s) at 50%+)
 ```

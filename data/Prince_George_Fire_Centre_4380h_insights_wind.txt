@@ -1,4 +1,4 @@
-<!-- hash:997542c6fb1c -->
+<!-- hash:05a184d4fd60 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 VALEMOUNT 2:      1654.6 km/h (307 readings >80)               [Jan 21 01:00 – Jun 20 05:00]
@@ -9,8 +9,8 @@ SEVEREID:         105.9 km/h (2 readings >80)                  [Feb 17 02:00 –
 PERSISTENT STATES
 HOLY CROSS 2:     zero wind 46h, 5 shifts >90°, max 2.8km/h    [Jan 24 18:00 – Jan 26 15:00]
 BLACKPINE:        zero wind 44h, 12 shifts >90°, max 3.2km/h   [Jan 21 05:00 – Jan 23 00:00]
-LOVELL COVE:      zero wind 228h, 31 shifts >90° (max 177°)    [Jan 19 01:00 – Jan 28 12:00]
-SIFTON:           zero wind 75h, 4 shifts >90° (max 142°)      [Jan 19 01:00 – Jan 22 06:00]
+ELK MOUNTAIN:     zero wind 44h, 6 shifts >90°, max 2.9km/h    [Jan 25 16:00 – Jan 27 11:00]
+LOVELL COVE:      zero wind 185h, 27 shifts >90° (max 177°)    [Jan 20 20:00 – Jan 28 12:00]
 GOSNEL:           zero wind 101h, gusts max 10.9km/h            [Jan 30 23:00 – Feb 4 03:00]
 DAILY DIRECTION CONCENTRATION
 GOSNEL:           up to 96% of a day within ±5° of 187° (41 day(s) at 50%+)

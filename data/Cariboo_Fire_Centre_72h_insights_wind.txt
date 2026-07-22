@@ -1,8 +1,1 @@
-<!-- hash:fdab3c72dfb0 -->
-```
-GUSTS EXCEEDED 80 KM/H
-HORSEFLY:         80.6 km/h (1 reading >80)                                   [Jul 17 19:00]
-DAILY DIRECTION CONCENTRATION
-NEMIAH:           up to 54% of a day within ±5° of 288° (1 day(s) at 50%+)
-ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (1 day(s) at 50%+)
-```
+<!-- hash:25b91fdcdf4b -->

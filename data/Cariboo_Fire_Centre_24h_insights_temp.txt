@@ -1,6 +1,6 @@
-<!-- hash:ea6ec19d7bb3 -->
+<!-- hash:6ab24f41b82d -->
 ```
 EXTREME VALUES
-MIDDLE LAKE:      Highest (29.7°C)                                   [since Jul 20, ongoing]
-BALDFACE:         Lowest (2.4°C)                                              [Jul 20 05:00]
+MIDDLE LAKE:      Highest (32.7°C)                                            [Jul 21 16:00]
+ANAHIM LAKE:      Lowest (6.2°C)                                     [since Jul 22, ongoing]
 ```

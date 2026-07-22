@@ -1,11 +1,11 @@
-<!-- hash:6313ea0ce216 -->
+<!-- hash:421329c59963 -->
 ```
 PERSISTENT STATES
 MANSON:           zero wind 14h, 1 shifts >90°, max 4.9km/h    [Jun 26 18:00 – Jun 27 07:00]
 DAILY DIRECTION CONCENTRATION
+WONOWON:          up to 71% of a day within ±5° of 208° (2 day(s) at 50%+)
 MUSKWA:           up to 67% of a day within ±5° of 243° (2 day(s) at 50%+)
 HOLY CROSS 2:     up to 58% of a day within ±5° of 267° (1 day(s) at 50%+)
-WITCH:            up to 54% of a day within ±5° of 168° (1 day(s) at 50%+)
+OSBORN:           up to 50% of a day within ±5° of 187° (1 day(s) at 50%+)
 NOEL:             up to 50% of a day within ±5° of 218° (1 day(s) at 50%+)
-TUMBLER HUB:      up to 50% of a day within ±5° of 230° (1 day(s) at 50%+)
 ```

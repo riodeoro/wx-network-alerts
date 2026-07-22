@@ -1,11 +1,6 @@
-<!-- hash:0c1f9f3ebc26 -->
+<!-- hash:31b720e1632d -->
 ```
-RH CHANGED >50%/H
-ROCKINGHAM:       1 event, peak Δ +59%/h                                      [Jul 18 16:00]
-FORT NELSON FS:   1 event, peak Δ -58%/h                                      [Jul 19 04:00]
-BEAR LAKE:        1 event, peak Δ +56%/h                                      [Jul 17 17:00]
-BEDNESTI:         1 event, peak Δ +52%/h                                      [Jul 17 15:00]
 PERSISTENT STATES
-HIXON:            RH constant 100% for 12h, zero Rn_1  [Jul 19 23:00 – Jul 20 10:00, ongoing]
-CATFISH:          RH constant 100% for 12h, zero Rn_1  [Jul 19 21:00 – Jul 20 08:00, ongoing]
+HIXON:            RH constant 100% for 12h, zero Rn_1          [Jul 19 23:00 – Jul 20 10:00]
+CATFISH:          RH constant 100% for 12h, zero Rn_1          [Jul 19 21:00 – Jul 20 08:00]
 ```

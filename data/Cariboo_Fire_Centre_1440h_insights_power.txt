@@ -1,7 +1,6 @@
-<!-- hash:34a50d63d156 -->
+<!-- hash:3884bf0bc7fa -->
 ```
 NO DAYTIME CHARGING
-MATHEW (AC):      no charge 21 daytime readings (Vbat 12.70V, Vslr 0.10V)  [May 22 08:00 – Jul 20 08:00, ongoing]
+MATHEW (AC):      no charge 20 daytime readings (Vbat 12.70V, Vslr 0.15V)  [May 25 08:00 – Jul 20 08:00, ongoing]
 NAZKO (AC):       no charge 9 daytime readings (Vbat 12.70V, Vslr 0.10V)  [May 23 08:00 – Jul 19 08:00]
-ANAHIM LAKE (AC): no charge 7 daytime readings (Vbat 12.60V, Vslr 0.10V)  [May 30 08:00 – Jun 6 11:00]
 ```

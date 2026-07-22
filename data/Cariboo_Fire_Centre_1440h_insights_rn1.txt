@@ -1,9 +1,8 @@
-<!-- hash:34a50d63d156 -->
+<!-- hash:3884bf0bc7fa -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 MIDDLE LAKE:      silent 5 of 6 neighbour rain hours (83%)       [Jun 9 08:00 → Jul 2 09:00]
 NEMIAH:           silent 3 of 4 neighbour rain hours (75%)     [May 29 07:00 → Jun 10 07:00]
-RISKE CREEK:      silent 6 of 10 neighbour rain hours (60%)     [May 21 13:00 → Jul 4 22:00]
 ```

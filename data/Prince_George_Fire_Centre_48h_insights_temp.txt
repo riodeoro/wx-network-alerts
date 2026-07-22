@@ -1,6 +1,6 @@
-<!-- hash:cc3a110fef84 -->
+<!-- hash:13b631ad3977 -->
 ```
 EXTREME VALUES
-ELK MOUNTAIN:     Highest (29.7°C)                                            [Jul 19 18:00]
-PINK MOUNTAIN:    Lowest (3.4°C)                                              [Jul 20 05:00]
+FORT NELSON FS:   Highest (33.2°C)                                   [since Jul 21, ongoing]
+TUMBLER HUB:      Lowest (4.6°C)                                              [Jul 21 05:00]
 ```

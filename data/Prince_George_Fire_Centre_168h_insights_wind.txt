@@ -1,6 +1,5 @@
-<!-- hash:de33d17cfb7c -->
+<!-- hash:761283b2a3a7 -->
 ```
 DAILY DIRECTION CONCENTRATION
-MUSKWA:           up to 67% of a day within ±5° of 243° (1 day(s) at 50%+)
 KOMIE:            up to 50% of a day within ±5° of 292° (1 day(s) at 50%+)
 ```

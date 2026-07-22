@@ -1,6 +1,6 @@
-<!-- hash:fdab3c72dfb0 -->
+<!-- hash:25b91fdcdf4b -->
 ```
 EXTREME VALUES
-KNIFE:            Highest (34.2°C)                                            [Jul 17 14:00]
-BALDFACE:         Lowest (2.4°C)                                     [since Jul 20, ongoing]
+MIDDLE LAKE:      Highest (32.7°C)                                   [since Jul 21, ongoing]
+BALDFACE:         Lowest (2.4°C)                                              [Jul 20 05:00]
 ```
