@@ -1,9 +1,9 @@
 FIRE CENTRE: Coastal Fire Centre
-WINDOW: 4380h | STATIONS: 49 | RECORDS: 205,356
+WINDOW: 4380h | STATIONS: 49 | RECORDS: 205,375
 
 === STATION OUTAGES ===
 LOW COVERAGE: CHEF CREEK TEST - 2% (99/4381 hours) @start=2026-04-16T21:00@end=2026-04-20T23:00
-LOW COVERAGE: TS MAURELLE - 36% (1595/4381 hours) @start=2026-01-20T20:00@end=2026-07-22T07:00
+LOW COVERAGE: TS MAURELLE - 36% (1595/4381 hours) @start=2026-01-21T05:00@end=2026-07-22T16:00
 SENSOR NA: APE LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: HOMATHKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: KLINAKLINI - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -13,7 +13,7 @@ SENSOR NA: MESACHIE 2 - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFI
 === RH ===
 OUTLIER Rh: TS ARTLISH - min=3.0, max=59.0 @ts=2026-04-09T12:00
 OUTLIER Rh: TS SAN JUAN - min=18.0, max=45.0 @ts=2026-04-25T11:00
-OUTLIER Rh: MACHMELL - min=13.0, max=23.0 @ts=2026-06-02T14:00
+OUTLIER Rh: TS NAKA CREEK - min=16.0, max=29.0 @ts=2026-06-02T12:00
 RH CHANGE >50%/h: TS ELPHINSTONE - 2 events, peak=+80.0%/h @first=2026-05-13T10:00@last=2026-05-13T11:00
 RH CHANGE >50%/h: TS ARTLISH - 2 events, peak=-75.0%/h @first=2026-04-09T12:00@last=2026-04-09T13:00
 RH CHANGE >50%/h: TS SAN JUAN - 1 events, peak=-62.0%/h @first=2026-04-25T09:00@last=2026-04-25T09:00
@@ -31,7 +31,7 @@ EXTREME GUST: SUMMIT - max=313.3km/h, 1 readings >80km/h @start=2026-04-05T14:00
 EXTREME GUST: HAIG CAMP - max=101.4km/h, 1 readings >80km/h @start=2026-03-12T00:00@end=2026-03-12T00:00
 EXTREME GUST: APE LAKE - max=96.4km/h, 1 readings >80km/h @start=2026-02-26T09:00@end=2026-02-26T09:00
 ZERO WIND 696h: HAIG CAMP - Wspd=0 but 104 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=16.7km/h, avg=0.0km/h) @start=2026-04-29T13:00@end=2026-05-28T12:00
-ZERO WIND 186h: TALCHAKO - Wspd=0 but 41 direction changes >90deg detected (max_delta=179deg) @start=2026-01-20T20:00@end=2026-01-28T13:00
+ZERO WIND 177h: TALCHAKO - Wspd=0 but 39 direction changes >90deg detected (max_delta=179deg) @start=2026-01-21T05:00@end=2026-01-28T13:00
 ZERO WIND 138h: NAHATLATCH - Wspd=0 but 30 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=11.0km/h, avg=0.1km/h) @start=2026-02-17T12:00@end=2026-02-23T05:00
 ZERO WIND 103h: QUINSAM BASE FWX - Wspd=0 but 21 direction changes >90deg detected (max_delta=174deg), gusts nonzero (max=7.4km/h, avg=0.1km/h) @start=2026-01-23T16:00@end=2026-01-27T22:00
 ZERO WIND 93h: HOMATHKO - Wspd=0 but 16 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=9.8km/h, avg=0.1km/h) @start=2026-03-09T15:00@end=2026-03-13T11:00
@@ -42,23 +42,28 @@ DIRECTION CONCENTRATION: POWELL RIVER WEST LAKE - up to 88% of a day in the 153 
 DIRECTION CONCENTRATION: HAIG CAMP - up to 62% of a day in the 323 deg bin (5 day(s) at 50%+)
 
 === TEMPERATURE ===
-HIGHEST TEMP: BOOTHROYD - 38.0C @ts=2026-07-21T18:00
+HIGHEST TEMP: DARCY - 39.3C @ts=2026-07-22T15:00
 LOWEST TEMP: ALLISON PASS - -21.8C @ts=2026-02-20T02:00
-TEMP>35C: ANDERSON CREEK - max=37.3C @ts=2026-07-21T16:00
-TEMP>35C: BEAVER CREEK - max=35.8C @ts=2026-06-14T17:00
-TEMP>35C: BIG SILVER 2 - max=36.3C @ts=2026-07-21T16:00
-TEMP>35C: CHEAKAMUS - max=35.3C @ts=2026-07-21T15:00
-TEMP>35C: DARCY - max=37.7C @ts=2026-07-21T15:00
+TEMP>35C: ANDERSON CREEK - max=37.9C @ts=2026-07-22T15:00
+TEMP>35C: BEAVER CREEK - max=36.4C @ts=2026-07-22T16:00
+TEMP>35C: BIG SILVER 2 - max=37.7C @ts=2026-07-22T16:00
+TEMP>35C: BOOTHROYD - max=38.0C @ts=2026-07-21T18:00
+TEMP>35C: CHEAKAMUS - max=35.7C @ts=2026-07-22T16:00
+TEMP>35C: FORD MOUNTAIN - max=35.7C @ts=2026-07-22T15:00
 TEMP>35C: FRANK CREEK - max=37.7C @ts=2026-07-21T15:00
+TEMP>35C: HAIG CAMP - max=35.7C @ts=2026-07-22T16:00
 TEMP>35C: MEAGER CREEK - max=36.3C @ts=2026-07-21T16:00
-TEMP>35C: MESACHIE 2 - max=37.4C @ts=2026-07-21T16:00
-TEMP>35C: MESACHIE 3 - max=36.3C @ts=2026-07-21T16:00
+TEMP>35C: MENZIES CAMP - max=35.4C @ts=2026-07-22T15:00
+TEMP>35C: MESACHIE 2 - max=37.7C @ts=2026-07-22T17:00
+TEMP>35C: MESACHIE 3 - max=36.7C @ts=2026-07-22T16:00
 TEMP>35C: NAHATLATCH - max=37.3C @ts=2026-07-21T16:00
-TEMP>35C: PEMBERTON BASE - max=37.9C @ts=2026-07-21T18:00
-TEMP>35C: SCAR CREEK - max=36.8C @ts=2026-07-21T17:00
-TEMP>35C: TALCHAKO - max=36.6C @ts=2026-07-21T16:00
+TEMP>35C: PEMBERTON BASE - max=38.7C @ts=2026-07-22T17:00
+TEMP>35C: SCAR CREEK - max=37.8C @ts=2026-07-22T16:00
+TEMP>35C: TALCHAKO - max=37.5C @ts=2026-07-22T16:00
 TEMP>35C: TOBA CAMP - max=37.4C @ts=2026-06-23T16:00
 TEMP>35C: TS BURMAN - max=35.2C @ts=2026-06-23T16:00
+TEMP>35C: TS NAHMINT - max=35.3C @ts=2026-07-22T16:00
+TEMP>35C: UBC RESEARCH - max=35.2C @ts=2026-07-22T15:00
 TEMP>35C: WOSS CAMP - max=35.7C @ts=2026-06-14T16:00
 ISOLATED TEMP SPIKE: SALTSPRING 2 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.8C, mag=7.5 @first=2026-07-07T12:00@last=2026-07-07T12:00
 ISOLATED TEMP SPIKE: FRANK CREEK - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.1C, mag=6.4 @first=2026-06-21T16:00@last=2026-06-21T16:00
@@ -77,11 +82,11 @@ SILENT GAUGE: HONNA - silent 157 of 239 neighbour rain hours (65.7%) @first=2026
 HIGH PRECIP: TS EFFINGHAM - max=25.0mm/h @ts=2026-01-30T01:00
 
 === POWER ===
-LOW VBAT: QUINSAM BASE FWX - min=7.00V, mean=12.65V, severity=low @ts=2026-02-02T17:00
+LOW VBAT: QUINSAM BASE FWX - min=7.00V, mean=12.66V, severity=low @ts=2026-02-02T17:00
 LOW VBAT: SCAR CREEK - min=11.40V, mean=12.07V, severity=low @ts=2026-06-04T03:00
-LOW VBAT: TS MAURELLE - min=11.50V, mean=12.96V, severity=low @ts=2026-01-21T02:00
+LOW VBAT: TS MAURELLE - min=11.50V, mean=12.97V, severity=low @ts=2026-01-21T05:00
 LOW VBAT: TALCHAKO - min=12.30V, mean=12.99V @ts=2026-01-23T00:00
-NO CHARGE: FRANK CREEK - 391 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=9.70V @start=2026-01-21T08:00@end=2026-07-21T08:00
+NO CHARGE: FRANK CREEK - 393 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=9.80V @start=2026-01-21T08:00@end=2026-07-22T09:00
 NO CHARGE: SCAR CREEK - 297 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=7.50V, severity=low @start=2026-01-21T08:00@end=2026-06-09T12:00
 NO CHARGE: TS ARTLISH - 263 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.40V @start=2026-01-21T08:00@end=2026-02-28T09:00
 NO CHARGE: TALCHAKO - 248 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.80V @start=2026-01-21T08:00@end=2026-07-18T10:00
@@ -105,3 +110,4 @@ NO CHARGE: MEAGER CREEK - 16 daytime readings (Vslr<Vbat), median Vbat=12.70V, m
 NO CHARGE: TS NAKA CREEK - 15 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.90V @start=2026-02-10T08:00@end=2026-07-09T08:00
 NO CHARGE: TOBA CAMP - 12 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.10V @start=2026-02-23T08:00@end=2026-04-14T08:00
 NO CHARGE: TS ELPHINSTONE - 11 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.20V @start=2026-02-01T09:00@end=2026-07-17T08:00
+VBAT DECLINING: PEMBERTON BASE (AC) - 14.53V → 13.90V (dropped 0.63V) @start=2026-01-21T00:00@end=2026-07-22T00:00

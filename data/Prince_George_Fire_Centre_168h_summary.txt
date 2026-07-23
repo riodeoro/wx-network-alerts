@@ -1,5 +1,5 @@
 FIRE CENTRE: Prince George Fire Centre
-WINDOW: 168h | STATIONS: 55 | RECORDS: 9,236
+WINDOW: 168h | STATIONS: 55 | RECORDS: 9,231
 
 === STATION OUTAGES ===
 SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -18,12 +18,11 @@ CONSTANT RH: HIXON - Constant 100%, avg=100%, 12h, no precip @start=2026-07-19T2
 CONSTANT RH: CATFISH - Constant 100%, avg=100%, 12h, no precip @start=2026-07-19T21:00@end=2026-07-20T08:00
 
 === WIND ===
-DIRECTION CONCENTRATION: MUSKWA - up to 67% of a day in the 243 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: KOMIE - up to 50% of a day in the 292 deg bin (1 day(s) at 50%+)
 
 === TEMPERATURE ===
 HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00
-LOWEST TEMP: PINK MOUNTAIN - 0.2C @ts=2026-07-15T05:00
+LOWEST TEMP: PINK MOUNTAIN - 2.1C @ts=2026-07-16T05:00
 
 === PRECIPITATION ===
 SILENT GAUGE: BLUE RIVER 2 - silent 4 of 4 neighbour rain hours (100.0%) @first=2026-07-19T21:00@last=2026-07-20T00:00
@@ -32,5 +31,5 @@ SILENT GAUGE: NABESHE - silent 3 of 3 neighbour rain hours (100.0%) @first=2026-
 SILENT GAUGE: RED DEER - silent 3 of 3 neighbour rain hours (100.0%) @first=2026-07-18T19:00@last=2026-07-19T08:00
 
 === POWER ===
-LOW VBAT: LEMORAY - min=11.70V, mean=11.70V, severity=low @ts=2026-07-13T13:00
-NO CHARGE: GRAHAM - 15 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=11.90V @start=2026-07-13T19:00@end=2026-07-19T15:00
+LOW VBAT: LEMORAY - min=11.70V, mean=11.70V, severity=low @ts=2026-07-15T17:00
+NO CHARGE: GRAHAM - 14 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=11.95V @start=2026-07-15T18:00@end=2026-07-22T09:00

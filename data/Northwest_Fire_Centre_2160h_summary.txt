@@ -1,5 +1,5 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 2160h | STATIONS: 32 | RECORDS: 68,983
+WINDOW: 2160h | STATIONS: 32 | RECORDS: 69,008
 
 === STATION OUTAGES ===
 SENSOR NA: NILKITKWA - Vbat=70% NA, Vslr=70% NA, Ibat=71% NA
@@ -37,8 +37,8 @@ SILENT GAUGE: ATLIN - silent 15 of 16 neighbour rain hours (93.8%) @first=2026-0
 
 === POWER ===
 NO CHARGE: UPPER FULTON - 136 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.20V @start=2026-05-15T08:00@end=2026-07-12T08:00
-NO CHARGE: NASS CAMP - 65 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-04-27T08:00@end=2026-07-21T10:00
-NO CHARGE: NORTH BABINE - 15 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.30V @start=2026-04-28T08:00@end=2026-07-20T08:00
+NO CHARGE: NASS CAMP - 68 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.45V @start=2026-04-27T08:00@end=2026-07-22T10:00
+NO CHARGE: NORTH BABINE - 16 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.35V @start=2026-04-28T08:00@end=2026-07-22T08:00
 NO CHARGE: MCBRIDE LAKE - 11 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.30V @start=2026-04-27T08:00@end=2026-07-19T08:00
 NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00
 NO CHARGE: KISPIOX HUB (AC) - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-20T19:00@end=2026-07-21T19:00

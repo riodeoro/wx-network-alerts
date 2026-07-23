@@ -1,5 +1,5 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 168h | STATIONS: 32 | RECORDS: 5,371
+WINDOW: 168h | STATIONS: 32 | RECORDS: 5,399
 
 === STATION OUTAGES ===
 None.
@@ -22,5 +22,5 @@ TEMP>35C: KITPARK - max=36.9C @ts=2026-07-20T18:00
 None.
 
 === POWER ===
-NO CHARGE: NASS CAMP - 17 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-07-16T08:00@end=2026-07-21T10:00
+NO CHARGE: NASS CAMP - 20 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.50V @start=2026-07-16T08:00@end=2026-07-22T10:00
 NO CHARGE: KISPIOX HUB (AC) - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-20T19:00@end=2026-07-21T19:00

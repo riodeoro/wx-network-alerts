@@ -1,8 +1,8 @@
 FIRE CENTRE: Southeast Fire Centre
-WINDOW: 4380h | STATIONS: 49 | RECORDS: 209,227
+WINDOW: 4380h | STATIONS: 49 | RECORDS: 209,268
 
 === STATION OUTAGES ===
-LOW COVERAGE: TABERNACLE WIND - 50% (2172/4381 hours) @start=2026-01-20T20:00@end=2026-04-21T23:00
+LOW COVERAGE: TABERNACLE WIND - 49% (2163/4381 hours) @start=2026-01-21T05:00@end=2026-04-21T23:00
 SENSOR NA: NORNS - Wspd=NOT CONFIGURED, Dir=NOT CONFIGURED, Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: BAKER - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: BRISCO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -13,7 +13,7 @@ SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFI
 OUTLIER Rh: DOWNIE - min=3.0, max=17.0 @ts=2026-06-18T11:00
 OUTLIER Rh: CARIBOO CREEK - min=0.0, max=11.0 @ts=2026-05-18T14:00
 OUTLIER Rh: TABERNACLE WIND - min=17.0, max=33.0 @ts=2026-01-22T03:00
-RH=0%: BAKER - 3522 readings @first=2026-01-20T20:00@last=2026-06-16T13:00
+RH=0%: BAKER - 3513 readings @first=2026-01-21T05:00@last=2026-06-16T13:00
 RH=0%: CARIBOO CREEK - 14 readings @first=2026-05-18T14:00@last=2026-06-12T13:00
 RH=0%: DEWAR CREEK - 422 readings @first=2026-01-31T19:00@last=2026-06-05T01:00
 RH>100%: CARIBOO CREEK - 408 readings, max=116.0% @first=2026-05-15T21:00@last=2026-06-12T07:00
@@ -23,7 +23,7 @@ RH CHANGE >50%/h: DEWAR CREEK - 127 events, peak=-100.0%/h @first=2026-01-31T19:
 RH CHANGE >50%/h: DUNCAN - 7 events, peak=+100.0%/h @first=2026-05-20T10:00@last=2026-06-11T13:00
 RH CHANGE >50%/h: PENDOREILLE - 2 events, peak=-91.0%/h @first=2026-04-15T11:00@last=2026-04-15T12:00
 RH CHANGE >50%/h: FLATHEAD 2 - 2 events, peak=-80.0%/h @first=2026-06-06T08:00@last=2026-06-06T09:00
-CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 3522h, no precip @start=2026-01-20T20:00@end=2026-06-16T13:00
+CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 3513h, no precip @start=2026-01-21T05:00@end=2026-06-16T13:00
 CONSTANT RH: DUNCAN - Constant 100%, avg=100%, 604h, precip=99.2mm @start=2026-03-21T09:00@end=2026-04-15T12:00
 CONSTANT RH: NORNS - Constant 100%, avg=100%, 470h, no precip @start=2026-04-04T18:00@end=2026-04-24T07:00
 CONSTANT RH: REVELSTOKE - Constant 100%, avg=100%, 215h, no precip @start=2026-01-28T15:00@end=2026-02-06T13:00
@@ -38,27 +38,29 @@ ZERO WIND 847h: BAKER - Wspd=0 but 41 direction changes >90deg detected (max_del
 ZERO WIND 398h: NANCY GREENE - Wspd=0 but 65 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=29.2km/h, avg=0.1km/h) @start=2026-05-03T12:00@end=2026-05-20T16:00
 ZERO WIND 90h: FLATHEAD 2 - Wspd=0 but 9 direction changes >90deg detected (max_delta=165deg), gusts nonzero (max=6.5km/h, avg=0.1km/h) @start=2026-02-16T21:00@end=2026-02-20T14:00
 ZERO WIND 83h: GOATHAVEN - Wspd=0 but 9 direction changes >90deg detected (max_delta=161deg), gusts nonzero (max=8.6km/h, avg=0.2km/h) @start=2026-02-17T00:00@end=2026-02-20T10:00
-ZERO WIND 50h: BIG MOUTH 2 - Wspd=0 but 13 direction changes >90deg detected (max_delta=172deg) @start=2026-01-20T20:00@end=2026-01-22T21:00
+ZERO WIND 41h: BIG MOUTH 2 - Wspd=0 but 8 direction changes >90deg detected (max_delta=147deg) @start=2026-01-21T05:00@end=2026-01-22T21:00
 ZERO WIND 1597h: MARION - Wspd=0, gusts=0, no direction changes >90deg @start=2026-01-28T20:00@end=2026-04-05T08:00
 ZERO WIND 150h: SMALLWOOD - Wspd=0, gusts=0, no direction changes >90deg @start=2026-05-14T13:00@end=2026-05-20T19:00
 DIRECTION CONCENTRATION: BAKER - up to 75% of a day in the 250 deg bin (37 day(s) at 50%+)
 DIRECTION CONCENTRATION: DUNCAN - up to 83% of a day in the 14 deg bin (23 day(s) at 50%+)
-DIRECTION CONCENTRATION: TABERNACLE WIND - up to 75% of a day in the 286 deg bin (13 day(s) at 50%+)
+DIRECTION CONCENTRATION: TABERNACLE WIND - up to 75% of a day in the 286 deg bin (12 day(s) at 50%+)
 DIRECTION CONCENTRATION: BIG MOUTH 2 - up to 92% of a day in the 15 deg bin (8 day(s) at 50%+)
 DIRECTION CONCENTRATION: REVELSTOKE - up to 58% of a day in the 312 deg bin (6 day(s) at 50%+)
 
 === TEMPERATURE ===
 HIGHEST TEMP: CARIBOO CREEK - 69.2C @ts=2026-05-15T00:00
 LOWEST TEMP: PALLISER - -26.9C @ts=2026-02-20T07:00
-TEMP>35C: BEAVERDELL - max=35.9C @ts=2026-07-21T18:00
+TEMP>35C: BEAVERDELL - max=38.6C @ts=2026-07-22T16:00
 TEMP>35C: BRISCO - max=35.6C @ts=2026-07-16T17:00
 TEMP>35C: DOWNIE - max=35.8C @ts=2026-07-17T16:00
 TEMP>35C: DUNCAN - max=63.6C @ts=2026-05-13T20:00
+TEMP>35C: GOATFELL - max=35.6C @ts=2026-07-22T14:00
 TEMP>35C: GRAND FORKS - max=37.3C @ts=2026-07-21T16:00
-TEMP>35C: JOHNSON LAKE - max=35.6C @ts=2026-07-16T17:00
-TEMP>35C: PENDOREILLE - max=37.3C @ts=2026-07-16T18:00
-TEMP>35C: ROCK CREEK - max=37.4C @ts=2026-07-21T17:00
-TEMP>35C: TOBY HUB - max=35.1C @ts=2026-07-16T17:00
+TEMP>35C: JOHNSON LAKE - max=35.7C @ts=2026-07-22T16:00
+TEMP>35C: NICOLL - max=36.3C @ts=2026-07-22T16:00
+TEMP>35C: PENDOREILLE - max=37.6C @ts=2026-07-22T16:00
+TEMP>35C: ROCK CREEK - max=40.1C @ts=2026-07-22T16:00
+TEMP>35C: TOBY HUB - max=35.5C @ts=2026-07-22T17:00
 ISOLATED TEMP SPIKE: CARIBOO CREEK - 6 readings deviated >=5C then returned, no inverse RH shift, peak=61.2C, mag=65.1 @first=2026-05-14T09:00@last=2026-05-19T07:00
 ISOLATED TEMP SPIKE: DUNCAN - 4 readings deviated >=5C then returned, no inverse RH shift, peak=27.6C, mag=38.2 @first=2026-05-13T12:00@last=2026-05-14T03:00
 ISOLATED TEMP SPIKE: PALLISER - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.0C, mag=13.3 @first=2026-02-22T00:00@last=2026-02-22T00:00
@@ -82,8 +84,8 @@ HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
 
 === POWER ===
-LOW VBAT: SMALLWOOD - min=6.90V, mean=12.65V, severity=low @ts=2026-02-09T10:00
-LOW VBAT: BLAEBERRY - min=10.90V, mean=12.63V, severity=low @ts=2026-02-05T04:00
+LOW VBAT: SMALLWOOD - min=6.90V, mean=12.66V, severity=low @ts=2026-02-09T10:00
+LOW VBAT: BLAEBERRY - min=10.90V, mean=12.64V, severity=low @ts=2026-02-05T04:00
 LOW VBAT: ROUND PRAIRIE - min=11.50V, mean=13.38V, severity=low @ts=2026-02-19T20:00
 LOW VBAT: ROCK CREEK - min=11.80V, mean=13.02V, severity=low @ts=2026-02-08T00:00
 LOW VBAT: REVELSTOKE - min=12.00V, mean=13.05V @ts=2026-01-23T01:00

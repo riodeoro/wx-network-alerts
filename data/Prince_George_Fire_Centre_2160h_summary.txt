@@ -1,8 +1,8 @@
 FIRE CENTRE: Prince George Fire Centre
-WINDOW: 2160h | STATIONS: 56 | RECORDS: 118,489
+WINDOW: 2160h | STATIONS: 56 | RECORDS: 118,473
 
 === STATION OUTAGES ===
-LOW COVERAGE: GOSNEL - 9% (192/2161 hours) @start=2026-04-21T13:00@end=2026-07-20T12:00
+LOW COVERAGE: GOSNEL - 11% (233/2161 hours) @start=2026-07-13T00:00@end=2026-07-22T16:00
 SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: CHILAKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: FORT NELSON FS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -10,8 +10,8 @@ SENSOR NA: GOSNEL - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURE
 SENSOR NA: MCLEOD LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH>100%: TABLE RIVER - 52 readings, max=115.0% @first=2026-04-22T06:00@last=2026-05-12T10:00
-RH CHANGE >50%/h: TABLE RIVER - 4 events, peak=-104.0%/h @first=2026-04-23T08:00@last=2026-05-12T11:00
+RH>100%: TABLE RIVER - 48 readings, max=115.0% @first=2026-05-02T02:00@last=2026-05-12T10:00
+RH CHANGE >50%/h: TABLE RIVER - 2 events, peak=-104.0%/h @first=2026-04-26T06:00@last=2026-05-12T11:00
 RH CHANGE >50%/h: ELK MOUNTAIN - 1 events, peak=+68.0%/h @first=2026-06-23T18:00@last=2026-06-23T18:00
 RH CHANGE >50%/h: NORTH CHILCO - 1 events, peak=+64.0%/h @first=2026-06-24T16:00@last=2026-06-24T16:00
 RH CHANGE >50%/h: FORT NELSON FS - 2 events, peak=+61.0%/h @first=2026-06-24T18:00@last=2026-07-19T04:00
@@ -23,7 +23,7 @@ CONSTANT RH: NOEL - Constant 100%, avg=100%, 19h, precip=29.6mm @start=2026-06-2
 CONSTANT RH: WONOWON - Constant 100%, avg=100%, 16h, precip=0.4mm @start=2026-05-15T18:00@end=2026-05-16T09:00
 
 === WIND ===
-EXTREME GUST: VALEMOUNT 2 - max=1654.6km/h, 186 readings >80km/h @start=2026-04-23T07:00@end=2026-06-20T05:00
+EXTREME GUST: VALEMOUNT 2 - max=1654.6km/h, 183 readings >80km/h @start=2026-04-24T05:00@end=2026-06-20T05:00
 EXTREME GUST: BEDNESTI - max=330.4km/h, 1 readings >80km/h @start=2026-06-19T17:00@end=2026-06-19T17:00
 EXTREME GUST: KLUSKUS - max=180.6km/h, 2 readings >80km/h @start=2026-05-25T17:00@end=2026-06-03T15:00
 EXTREME GUST: GRAHAM - max=125.4km/h, 1 readings >80km/h @start=2026-06-10T16:00@end=2026-06-10T16:00
@@ -33,14 +33,14 @@ ZERO WIND 12h: FIRESIDE - Wspd=0 but gusts nonzero (max=7.3km/h, avg=0.6km/h), n
 ZERO WIND 12h: NOEL - Wspd=0 but 2 direction changes >90deg detected (max_delta=164deg), gusts nonzero (max=15.4km/h, avg=1.3km/h) @start=2026-04-23T21:00@end=2026-04-24T08:00
 DIRECTION CONCENTRATION: HOLY CROSS 2 - up to 58% of a day in the 328 deg bin (7 day(s) at 50%+)
 DIRECTION CONCENTRATION: NOEL - up to 62% of a day in the 236 deg bin (8 day(s) at 50%+)
-DIRECTION CONCENTRATION: FIRESIDE - up to 54% of a day in the 250 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: LEO CREEK - up to 50% of a day in the 82 deg bin (2 day(s) at 50%+)
 DIRECTION CONCENTRATION: MCLEOD LAKE - up to 50% of a day in the 209 deg bin (2 day(s) at 50%+)
+DIRECTION CONCENTRATION: KOMIE - up to 62% of a day in the 138 deg bin (4 day(s) at 50%+)
 
 === TEMPERATURE ===
 HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00
 LOWEST TEMP: TABLE RIVER - -59.4C @ts=2026-04-26T04:00
-ISOLATED TEMP SPIKE: TABLE RIVER - 5 readings deviated >=5C then returned, no inverse RH shift, peak=8.3C, mag=21.2 @first=2026-04-21T14:00@last=2026-05-03T12:00
+ISOLATED TEMP SPIKE: TABLE RIVER - 3 readings deviated >=5C then returned, no inverse RH shift, peak=8.3C, mag=21.2 @first=2026-04-25T15:00@last=2026-05-03T12:00
 ISOLATED TEMP SPIKE: MANSON - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.6C, mag=11.3 @first=2026-05-26T13:00@last=2026-05-26T13:00
 
 === PRECIPITATION ===
@@ -52,7 +52,7 @@ SILENT GAUGE: MUSKWA - silent 9 of 15 neighbour rain hours (60.0%) @first=2026-0
 HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
 
 === POWER ===
-LOW VBAT: LEMORAY - min=11.70V, mean=11.76V, severity=low @ts=2026-05-12T05:00
-NO CHARGE: GRAHAM - 121 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.00V @start=2026-05-12T08:00@end=2026-07-19T15:00
-NO CHARGE: LEMORAY - 40 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=11.20V, severity=low @start=2026-04-22T08:00@end=2026-07-19T19:00
-NO CHARGE: NELSON FORKS - 13 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.20V @start=2026-05-02T08:00@end=2026-07-01T15:00
+LOW VBAT: LEMORAY - min=11.70V, mean=11.75V, severity=low @ts=2026-05-12T05:00
+NO CHARGE: GRAHAM - 125 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.00V @start=2026-05-12T08:00@end=2026-07-22T09:00
+NO CHARGE: LEMORAY - 37 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=11.10V, severity=low @start=2026-04-24T14:00@end=2026-07-19T19:00
+NO CHARGE: NELSON FORKS - 16 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.00V @start=2026-05-02T08:00@end=2026-07-22T10:00

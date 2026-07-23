@@ -1,8 +1,8 @@
 FIRE CENTRE: Prince George Fire Centre
-WINDOW: 1440h | STATIONS: 56 | RECORDS: 78,893
+WINDOW: 1440h | STATIONS: 56 | RECORDS: 78,887
 
 === STATION OUTAGES ===
-LOW COVERAGE: GOSNEL - 13% (181/1441 hours) @start=2026-07-13T00:00@end=2026-07-20T12:00
+LOW COVERAGE: GOSNEL - 16% (233/1441 hours) @start=2026-07-13T00:00@end=2026-07-22T16:00
 SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: CHILAKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: FORT NELSON FS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -28,11 +28,11 @@ EXTREME GUST: KLUSKUS - max=180.6km/h, 2 readings >80km/h @start=2026-05-25T17:0
 EXTREME GUST: GRAHAM - max=125.4km/h, 1 readings >80km/h @start=2026-06-10T16:00@end=2026-06-10T16:00
 EXTREME GUST: SAWTOOTH - max=101.9km/h, 1 readings >80km/h @start=2026-06-19T10:00@end=2026-06-19T10:00
 ZERO WIND 14h: MANSON - Wspd=0 but 1 direction changes >90deg detected (max_delta=93deg), gusts nonzero (max=4.9km/h, avg=1.7km/h) @start=2026-06-26T18:00@end=2026-06-27T07:00
-DIRECTION CONCENTRATION: MUSKWA - up to 67% of a day in the 243 deg bin (3 day(s) at 50%+)
 DIRECTION CONCENTRATION: HOLY CROSS 2 - up to 58% of a day in the 267 deg bin (4 day(s) at 50%+)
-DIRECTION CONCENTRATION: NOEL - up to 58% of a day in the 226 deg bin (4 day(s) at 50%+)
-DIRECTION CONCENTRATION: FIRESIDE - up to 54% of a day in the 250 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: WITCH - up to 54% of a day in the 168 deg bin (2 day(s) at 50%+)
+DIRECTION CONCENTRATION: NOEL - up to 58% of a day in the 226 deg bin (3 day(s) at 50%+)
+DIRECTION CONCENTRATION: WONOWON - up to 71% of a day in the 208 deg bin (3 day(s) at 50%+)
+DIRECTION CONCENTRATION: MOOSE LAKE - up to 62% of a day in the 253 deg bin (2 day(s) at 50%+)
+DIRECTION CONCENTRATION: KOMIE - up to 54% of a day in the 272 deg bin (2 day(s) at 50%+)
 
 === TEMPERATURE ===
 HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00
@@ -41,13 +41,14 @@ ISOLATED TEMP SPIKE: MANSON - 1 readings deviated >=5C then returned, no inverse
 
 === PRECIPITATION ===
 SILENT GAUGE: BLUE RIVER 2 - silent 4 of 4 neighbour rain hours (100.0%) @first=2026-07-19T21:00@last=2026-07-20T00:00
+SILENT GAUGE: SILVER - silent 3 of 4 neighbour rain hours (75.0%) @first=2026-06-06T03:00@last=2026-06-26T17:00
 SILENT GAUGE: FIRESIDE - silent 17 of 24 neighbour rain hours (70.8%) @first=2026-06-04T21:00@last=2026-07-08T16:00
-SILENT GAUGE: SUSTUT - silent 24 of 36 neighbour rain hours (66.7%) @first=2026-05-25T13:00@last=2026-07-13T10:00
-SILENT GAUGE: SILVER - silent 3 of 5 neighbour rain hours (60.0%) @first=2026-06-06T03:00@last=2026-06-26T17:00
+SILENT GAUGE: SUSTUT - silent 24 of 35 neighbour rain hours (68.6%) @first=2026-05-25T13:00@last=2026-07-13T10:00
+SILENT GAUGE: MUSKWA - silent 6 of 10 neighbour rain hours (60.0%) @first=2026-06-26T18:00@last=2026-07-18T19:00
 HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
 
 === POWER ===
-LOW VBAT: LEMORAY - min=11.70V, mean=11.74V, severity=low @ts=2026-05-22T02:00
-NO CHARGE: GRAHAM - 108 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.00V @start=2026-05-23T09:00@end=2026-07-19T15:00
+LOW VBAT: LEMORAY - min=11.70V, mean=11.74V, severity=low @ts=2026-05-23T21:00
+NO CHARGE: GRAHAM - 111 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.00V @start=2026-05-24T10:00@end=2026-07-22T09:00
 NO CHARGE: LEMORAY - 24 daytime readings (Vslr<Vbat), median Vbat=11.75V, median Vslr=11.05V, severity=low @start=2026-05-24T17:00@end=2026-07-19T19:00
-NO CHARGE: NELSON FORKS - 11 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.20V @start=2026-05-29T08:00@end=2026-07-01T15:00
+NO CHARGE: NELSON FORKS - 14 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.60V @start=2026-05-29T08:00@end=2026-07-22T10:00
