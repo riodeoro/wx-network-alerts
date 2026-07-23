@@ -1,7 +1,7 @@
-<!-- hash:89158f7735f8 -->
+<!-- hash:b21050572db0 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
-DEWAR CREEK:      12 hours, Rn_1 (9.6mm)                        [Apr 23 16:00 → Jun 5 01:00]
+DEWAR CREEK:      11 hours, Rn_1 (9.4mm)                        [Apr 24 10:00 → Jun 5 01:00]
 CARIBOO CREEK:    3 hours, Rn_1 (7.0mm)                        [Jun 11 22:00 → Jun 12 12:00]
 DUNCAN:           3 hours, Rn_1 (3.0mm)                                 [May 29 12:00–15:00]
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%

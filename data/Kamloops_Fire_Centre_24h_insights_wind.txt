@@ -1,6 +1,6 @@
-<!-- hash:cb2783d011bd -->
+<!-- hash:350dd07fe3c2 -->
 ```
 PERSISTENT STATES
-SILVERSTAR SF:    zero wind 18h, 1 shifts >90°, max 4.5km/h  [Jul 21 14:00 – Jul 22 07:00, ongoing]
-EAST BARRIERE:    zero wind 12h, 3 shifts >90°, max 4.7km/h  [Jul 21 20:00 – Jul 22 07:00, ongoing]
+EAST BARRIERE:    zero wind 12h, 3 shifts >90°, max 4.7km/h    [Jul 21 20:00 – Jul 22 07:00]
+SILVERSTAR SF:    zero wind 17h, gusts max 5.6km/h             [Jul 21 17:00 – Jul 22 09:00]
 ```

@@ -1,9 +1,14 @@
-<!-- hash:7ec228f69462 -->
+<!-- hash:93ee233f494e -->
 ```
 EXTREME VALUES
-ROCK CREEK:       Highest (37.4°C)                                            [Jul 21 17:00]
-PALLISER:         Lowest (4.8°C)                                     [since Jul 22, ongoing]
+ROCK CREEK:       Highest (40.1°C)                                   [since Jul 22, ongoing]
+PALLISER:         Lowest (4.8°C)                                              [Jul 22 05:00]
 TEMPERATURE EXCEEDED 35°C
-GRAND FORKS:      37.3°C                                                      [Jul 21 16:00]
-BEAVERDELL:       35.9°C                                                      [Jul 21 18:00]
+BEAVERDELL:       38.6°C                                             [since Jul 22, ongoing]
+PENDOREILLE:      37.6°C                                             [since Jul 22, ongoing]
+GRAND FORKS:      37.0°C                                             [since Jul 22, ongoing]
+NICOLL:           36.3°C                                             [since Jul 22, ongoing]
+JOHNSON LAKE:     35.7°C                                             [since Jul 22, ongoing]
+GOATFELL:         35.6°C                                                      [Jul 22 14:00]
+TOBY HUB:         35.5°C                                             [since Jul 22, ongoing]
 ```

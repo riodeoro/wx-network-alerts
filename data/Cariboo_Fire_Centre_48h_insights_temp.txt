@@ -1,6 +1,6 @@
-<!-- hash:2b29daea6c37 -->
+<!-- hash:2d13c604c7e2 -->
 ```
 EXTREME VALUES
-MIDDLE LAKE:      Highest (32.7°C)                                   [since Jul 21, ongoing]
+ALEXIS CREEK:     Highest (34.7°C)                                   [since Jul 22, ongoing]
 BALDFACE:         Lowest (2.6°C)                                              [Jul 21 05:00]
 ```

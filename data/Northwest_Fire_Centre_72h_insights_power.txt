@@ -1,6 +1,6 @@
-<!-- hash:1e4ba634ede0 -->
+<!-- hash:f36c958d9eb0 -->
 ```
 NO DAYTIME CHARGING
-NASS CAMP:        no charge 11 daytime readings (Vbat 12.60V, Vslr 12.50V)  [Jul 19 08:00 – Jul 21 10:00]
+NASS CAMP:        no charge 12 daytime readings (Vbat 12.60V, Vslr 12.50V)  [Jul 20 08:00 – Jul 22 10:00, ongoing]
 KISPIOX HUB (AC): no charge 5 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Jul 20 19:00 – Jul 21 19:00]
 ```

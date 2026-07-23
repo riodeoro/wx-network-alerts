@@ -1,14 +1,21 @@
-<!-- hash:7d737a147f36 -->
+<!-- hash:e4c2dc5858e7 -->
 ```
 EXTREME VALUES
-SPLINTLUM:        Highest (38.7°C)                                            [Jul 21 16:00]
+LITTLE CHOPAKA:   Highest (39.2°C)                                   [since Jul 22, ongoing]
 COLDSCAUR LAKE:   Lowest (4.3°C)                                              [Jul 20 05:00]
 TEMPERATURE EXCEEDED 35°C
-LITTLE CHOPAKA:   37.4°C                                                      [Jul 21 17:00]
-LILLOOET:         37.2°C                                                      [Jul 21 17:00]
+SPLINTLUM:        38.8°C                                             [since Jul 22, ongoing]
+LILLOOET:         38.7°C                                             [since Jul 22, ongoing]
+FINTRY:           37.8°C                                             [since Jul 22, ongoing]
+MERRITT 2 HUB:    36.5°C                                             [since Jul 22, ongoing]
+WEST KELOWNA:     36.5°C                                             [since Jul 22, ongoing]
 AUGUST LAKE:      36.2°C                                                      [Jul 21 16:00]
-MERRITT 2 HUB:    36.2°C                                                      [Jul 21 17:00]
-FINTRY:           35.5°C                                                      [Jul 21 16:00]
+MABEL LAKE 2:     35.6°C                                             [since Jul 22, ongoing]
+PENTICTON RS:     35.6°C                                             [since Jul 22, ongoing]
+AFTON:            35.5°C                                             [since Jul 22, ongoing]
+STATION BAY 2:    35.5°C                                             [since Jul 22, ongoing]
 EAST BARRIERE:    35.3°C                                                      [Jul 21 16:00]
 CLEARWATER HUB:   35.2°C                                                      [Jul 21 17:00]
+FIVE MILE:        35.2°C                                             [since Jul 22, ongoing]
+TURTLE:           35.2°C                                             [since Jul 22, ongoing]
 ```

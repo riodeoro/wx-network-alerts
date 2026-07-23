@@ -1,14 +1,14 @@
-<!-- hash:a9dd4b6aa9eb -->
+<!-- hash:5ed44f9a22dd -->
 ```
 LOW BATTERY VOLTAGE
 AFTON:            min 7.50V, mean 13.12V [low]                                      [Jan 22]
-MABEL LAKE 2:     min 10.60V, mean 13.60V [low]                                     [Jun 22]
+MABEL LAKE 2:     min 10.60V, mean 13.59V [low]                                     [Jun 22]
 FINTRY:           min 11.00V, mean 13.05V [low]                                     [Jan 22]
-GLIMPSE:          min 11.50V, mean 12.18V [low]                                     [May 13]
+GLIMPSE:          min 11.50V, mean 12.19V [low]                                     [May 13]
 THYNNE:           min 11.90V, mean 13.23V [low]                                     [Jan 27]
 NO DAYTIME CHARGING
 KETTLE 2:         no charge 320 daytime readings (Vbat 12.20V, Vslr 9.40V)  [Jan 21 08:00 – Mar 30 10:00]
-MABEL LAKE 2:     no charge 287 daytime readings (Vbat 11.80V, Vslr 0.10V) [low]  [Jun 18 16:00 – Jul 21 19:00]
+MABEL LAKE 2:     no charge 295 daytime readings (Vbat 11.80V, Vslr 0.10V) [low]  [Jun 18 16:00 – Jul 22 15:00, ongoing]
 GLIMPSE:          no charge 263 daytime readings (Vbat 11.90V, Vslr 10.00V) [low]  [Jan 21 08:00 – Jun 12 19:00]
 HARBOUR LAKE:     no charge 231 daytime readings (Vbat 12.50V, Vslr 12.00V)  [Jan 21 08:00 – Mar 18 08:00]
 COLDSCAUR LAKE:   no charge 218 daytime readings (Vbat 12.60V, Vslr 10.75V)  [Jan 21 08:00 – Jul 1 08:00]
@@ -28,6 +28,7 @@ CURWEN CREEK:     no charge 59 daytime readings (Vbat 12.60V, Vslr 10.90V)  [Jan
 STATION BAY 2:    no charge 49 daytime readings (Vbat 12.70V, Vslr 10.50V)  [Jan 21 08:00 – Apr 14 08:00]
 AUGUST LAKE:      no charge 47 daytime readings (Vbat 12.60V, Vslr 9.80V)  [Jan 21 08:00 – Mar 16 08:00]
 GWYNETH LAKE:     no charge 46 daytime readings (Vbat 12.70V, Vslr 9.40V)  [Jan 21 08:00 – Jun 18 15:00]
+GREENSTONE HUB (AC): no charge 34 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Feb 2 18:00 – May 7 10:00]
 LARCH HILLS WEST: no charge 22 daytime readings (Vbat 12.50V, Vslr 5.15V)  [Jan 21 08:00 – Feb 6 09:00]
 MUDPIT:           no charge 18 daytime readings (Vbat 12.70V, Vslr 9.25V)  [Jan 21 08:00 – Mar 24 08:00]
 SPARKS LAKE:      no charge 14 daytime readings (Vbat 12.70V, Vslr 8.15V)  [Jan 22 08:00 – Mar 24 08:00]

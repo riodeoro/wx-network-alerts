@@ -1,4 +1,4 @@
-<!-- hash:761283b2a3a7 -->
+<!-- hash:d42c875423c1 -->
 ```
 DAILY DIRECTION CONCENTRATION
 KOMIE:            up to 50% of a day within ±5° of 292° (1 day(s) at 50%+)

@@ -1,12 +1,12 @@
-<!-- hash:b94f303de57c -->
+<!-- hash:acac1b11d4b0 -->
 ```
 LOW BATTERY VOLTAGE
-QUINSAM BASE FWX: min 7.00V, mean 12.65V [low]                                       [Feb 2]
+QUINSAM BASE FWX: min 7.00V, mean 12.66V [low]                                       [Feb 2]
 SCAR CREEK:       min 11.40V, mean 12.07V [low]                                      [Jun 4]
-TS MAURELLE:      min 11.50V, mean 12.96V [low]                                     [Jan 21]
+TS MAURELLE:      min 11.50V, mean 12.97V [low]                                     [Jan 21]
 TALCHAKO:         min 12.30V, mean 12.99V                                           [Jan 23]
 NO DAYTIME CHARGING
-FRANK CREEK:      no charge 391 daytime readings (Vbat 12.60V, Vslr 9.70V)  [Jan 21 08:00 – Jul 21 08:00]
+FRANK CREEK:      no charge 393 daytime readings (Vbat 12.60V, Vslr 9.80V)  [Jan 21 08:00 – Jul 22 09:00]
 SCAR CREEK:       no charge 297 daytime readings (Vbat 11.80V, Vslr 7.50V) [low]  [Jan 21 08:00 – Jun 9 12:00]
 TS ARTLISH:       no charge 263 daytime readings (Vbat 12.60V, Vslr 8.40V)  [Jan 21 08:00 – Feb 28 09:00]
 TALCHAKO:         no charge 248 daytime readings (Vbat 12.60V, Vslr 8.80V)  [Jan 21 08:00 – Jul 18 10:00]
@@ -30,4 +30,6 @@ MEAGER CREEK:     no charge 16 daytime readings (Vbat 12.70V, Vslr 12.20V)  [Jan
 TS NAKA CREEK:    no charge 15 daytime readings (Vbat 12.70V, Vslr 10.90V)  [Feb 10 08:00 – Jul 9 08:00]
 TOBA CAMP:        no charge 12 daytime readings (Vbat 12.70V, Vslr 12.10V)  [Feb 23 08:00 – Apr 14 08:00]
 TS ELPHINSTONE:   no charge 11 daytime readings (Vbat 12.70V, Vslr 8.20V)  [Feb 1 09:00 – Jul 17 08:00]
+BATTERY VOLTAGE DECLINING
+PEMBERTON BASE (AC): 14.53V → 13.90V (dropped 0.63V)                         [Jan 21–Jul 22]
 ```

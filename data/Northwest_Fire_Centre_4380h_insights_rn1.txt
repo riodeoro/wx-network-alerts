@@ -1,4 +1,4 @@
-<!-- hash:af5e2f321fc7 -->
+<!-- hash:875180bac0b5 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 BOYA LAKE:        4 hours, Rn_1 (1.0mm)                        [Mar 20 16:00 → Mar 28 16:00]

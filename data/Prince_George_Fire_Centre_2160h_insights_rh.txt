@@ -1,9 +1,9 @@
-<!-- hash:add3a47da60d -->
+<!-- hash:f91fcb9baa57 -->
 ```
 RH EXCEEDED 100%
-TABLE RIVER:      49 readings, max 115.0%                      [Apr 23 08:00 → May 12 10:00]
+TABLE RIVER:      48 readings, max 115.0%                       [May 2 02:00 → May 12 10:00]
 RH CHANGED >50%/H
-TABLE RIVER:      3 events, peak Δ -104%/h                     [Apr 23 09:00 → May 12 11:00]
+TABLE RIVER:      2 events, peak Δ -104%/h                     [Apr 26 06:00 → May 12 11:00]
 ELK MOUNTAIN:     1 event, peak Δ +68%/h                                      [Jun 23 18:00]
 NORTH CHILCO:     1 event, peak Δ +64%/h                                      [Jun 24 16:00]
 FORT NELSON FS:   2 events, peak Δ +61%/h                      [Jun 24 18:00 → Jul 19 04:00]

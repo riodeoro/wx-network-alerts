@@ -1,6 +1,6 @@
-<!-- hash:6ab24f41b82d -->
+<!-- hash:d5424744c787 -->
 ```
 EXTREME VALUES
-MIDDLE LAKE:      Highest (32.7°C)                                            [Jul 21 16:00]
-ANAHIM LAKE:      Lowest (6.2°C)                                     [since Jul 22, ongoing]
+ALEXIS CREEK:     Highest (34.7°C)                                   [since Jul 22, ongoing]
+ANAHIM LAKE:      Lowest (6.2°C)                                              [Jul 22 06:00]
 ```

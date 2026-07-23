@@ -1,4 +1,4 @@
-<!-- hash:c7fbcf6b9d96 -->
+<!-- hash:58b1dc7f5142 -->
 ```
 UNCONFIGURED SENSORS
   BENSON, GASPARD, GAVIN, KNIFE, LONE BUTTE: battery voltage, charge current, and solar voltage unconfigured

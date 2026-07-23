@@ -1,9 +1,7 @@
-<!-- hash:b376d24b931b -->
+<!-- hash:302a4fcfc56e -->
 ```
 RH CHANGED >50%/H
 ALLISON PASS:     1 event, peak Δ +61%/h                                      [Jul 16 15:00]
-RH DROPPED AS LOW AS
-MACHMELL:         18.0%                                                       [Jun 22 14:00]
 PERSISTENT STATES
 MOUNT CAYLEY:     RH constant 100% for 56h, Rn_1 (0.4mm)        [Jun 28 22:00 – Jul 1 05:00]
 HOMATHKO:         RH constant 100% for 52h, Rn_1 (1.4mm)       [Jul 17 06:00 – Jul 19 09:00]

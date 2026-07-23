@@ -1,4 +1,4 @@
-<!-- hash:421329c59963 -->
+<!-- hash:da861f2c5b87 -->
 ```
 PERSISTENT STATES
 MANSON:           zero wind 14h, 1 shifts >90°, max 4.9km/h    [Jun 26 18:00 – Jun 27 07:00]

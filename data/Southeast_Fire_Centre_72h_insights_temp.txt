@@ -1,9 +1,14 @@
-<!-- hash:3725d9fdc507 -->
+<!-- hash:f7c8930d7552 -->
 ```
 EXTREME VALUES
-ROCK CREEK:       Highest (37.4°C)                                            [Jul 21 17:00]
+ROCK CREEK:       Highest (40.1°C)                                   [since Jul 22, ongoing]
 MARION:           Lowest (3.1°C)                                              [Jul 20 05:00]
 TEMPERATURE EXCEEDED 35°C
+BEAVERDELL:       38.6°C                                             [since Jul 22, ongoing]
+PENDOREILLE:      37.6°C                                             [since Jul 22, ongoing]
 GRAND FORKS:      37.3°C                                                      [Jul 21 16:00]
-BEAVERDELL:       35.9°C                                                      [Jul 21 18:00]
+NICOLL:           36.3°C                                             [since Jul 22, ongoing]
+JOHNSON LAKE:     35.7°C                                             [since Jul 22, ongoing]
+GOATFELL:         35.6°C                                                      [Jul 22 14:00]
+TOBY HUB:         35.5°C                                             [since Jul 22, ongoing]
 ```

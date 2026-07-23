@@ -1,9 +1,9 @@
-<!-- hash:b4d007e7f9dc -->
+<!-- hash:610cc1c96b3e -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
 DEWAR CREEK:      6 hours, Rn_1 (4.6mm)                         [May 29 21:00 → Jun 5 01:00]
-CARIBOO CREEK:    3 hours, Rn_1 (7.0mm)                        [Jun 11 22:00 → Jun 12 12:00]
 DUNCAN:           3 hours, Rn_1 (3.0mm)                                 [May 29 12:00–15:00]
+CARIBOO CREEK:    3 hours, Rn_1 (7.0mm)                        [Jun 11 22:00 → Jun 12 12:00]
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 DARKWOODS:        5 hours, Rn_1 (1.0mm)                        [Jun 16 15:00 → Jul 12 18:00]
 WHISKEY:          1 hour, Rn_1 (0.2mm)                                         [Jun 8 13:00]

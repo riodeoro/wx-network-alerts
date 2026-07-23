@@ -1,4 +1,4 @@
-<!-- hash:ff482ff5f3b1 -->
+<!-- hash:a328bf145c2c -->
 ```
 GUSTS EXCEEDED 80 KM/H
 KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]
@@ -10,7 +10,7 @@ PERSISTENT STATES
 COLDSCAUR LAKE:   zero wind 14h, 5 shifts >90°, max 2.6km/h    [Apr 28 20:00 – Apr 29 09:00]
 GWYNETH LAKE:     zero wind 13h, 1 shifts >90°, max 9.3km/h    [Jun 22 20:00 – Jun 23 08:00]
 CLEARWATER HUB:   zero wind 13h, 5 shifts >90°, max 5.2km/h      [May 7 20:00 – May 8 08:00]
-EAST BARRIERE:    zero wind 12h, 3 shifts >90°, max 4.7km/h  [Jul 21 20:00 – Jul 22 07:00, ongoing]
+EAST BARRIERE:    zero wind 12h, 3 shifts >90°, max 4.7km/h    [Jul 21 20:00 – Jul 22 07:00]
 SILVERSTAR SF:    zero wind 22h, gusts max 3.9km/h             [Jul 20 13:00 – Jul 21 10:00]
 DAILY DIRECTION CONCENTRATION
 GREENSTONE HUB:   up to 83% of a day within ±5° of 309° (17 day(s) at 50%+)

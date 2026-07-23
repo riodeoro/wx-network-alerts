@@ -1,6 +1,6 @@
-<!-- hash:c7fbcf6b9d96 -->
+<!-- hash:58b1dc7f5142 -->
 ```
 NO DAYTIME CHARGING
-MATHEW (AC):      no charge 8 daytime readings (Vbat 12.60V, Vslr 0.20V)  [Jun 26 08:00 – Jul 20 08:00, ongoing]
+MATHEW (AC):      no charge 8 daytime readings (Vbat 12.60V, Vslr 0.20V)  [Jun 26 08:00 – Jul 20 08:00]
 NAZKO (AC):       no charge 5 daytime readings (Vbat 12.60V, Vslr 0.10V)  [Jun 29 08:00 – Jul 19 08:00]
 ```

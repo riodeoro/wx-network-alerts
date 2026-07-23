@@ -1,22 +1,23 @@
-<!-- hash:89158f7735f8 -->
+<!-- hash:b21050572db0 -->
 ```
 EXTREME VALUES
 CARIBOO CREEK:    Highest (69.2°C)                                                  [May 15]
 CARIBOO CREEK:    Lowest (-10.6°C)                                                  [May 14]
 TEMPERATURE EXCEEDED 35°C
 DUNCAN:           63.6°C                                                            [May 13]
-ROCK CREEK:       37.4°C                                             [since Jul 21, ongoing]
-GRAND FORKS:      37.3°C                                             [since Jul 21, ongoing]
-PENDOREILLE:      37.3°C                                                            [Jul 16]
-BEAVERDELL:       35.9°C                                             [since Jul 21, ongoing]
+ROCK CREEK:       40.1°C                                             [since Jul 22, ongoing]
+BEAVERDELL:       38.6°C                                             [since Jul 22, ongoing]
+PENDOREILLE:      37.6°C                                             [since Jul 22, ongoing]
+GRAND FORKS:      37.3°C                                                            [Jul 21]
+NICOLL:           36.3°C                                             [since Jul 22, ongoing]
 DOWNIE:           35.8°C                                                            [Jul 17]
+JOHNSON LAKE:     35.7°C                                             [since Jul 22, ongoing]
 BRISCO:           35.6°C                                                            [Jul 16]
-JOHNSON LAKE:     35.6°C                                                            [Jul 16]
-TOBY HUB:         35.1°C                                                            [Jul 16]
+GOATFELL:         35.6°C                                                            [Jul 22]
+TOBY HUB:         35.5°C                                             [since Jul 22, ongoing]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 CARIBOO CREEK:    6 spikes, peak Δ 61.2°C                      [May 14 09:00 → May 19 07:00]
-DUNCAN:           5 spikes, peak Δ 27.6°C                      [Apr 23 09:00 → May 14 03:00]
-ROUND PRAIRIE:    1 spike, peak Δ 5.6°C                                       [Apr 23 13:00]
+DUNCAN:           4 spikes, peak Δ 27.6°C                      [May 13 12:00 → May 14 03:00]
 RORY CREEK:       1 spike, peak Δ 5.2°C                                       [Apr 26 14:00]
 PERSISTENT STATES
 NORNS:            constant (-0.1°C) for 13h, RH varied 0%      [Apr 29 14:00 – Apr 30 02:00]
