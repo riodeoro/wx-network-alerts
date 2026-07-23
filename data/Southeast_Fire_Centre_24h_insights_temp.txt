@@ -2,7 +2,7 @@
 ```
 EXTREME VALUES
 ROCK CREEK:       Highest (40.1°C)                                            [Jul 22 16:00]
-PALLISER:         Lowest (5.9°C)                                     [since Jul 23, ongoing]
+PALLISER:         Lowest (5.9°C)                                              [Jul 23 05:00]
 TEMPERATURE EXCEEDED 35°C
 BEAVERDELL:       39.0°C                                                      [Jul 22 17:00]
 PENDOREILLE:      37.6°C                                                      [Jul 22 16:00]

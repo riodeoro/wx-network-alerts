@@ -1,19 +1,19 @@
 <!-- hash:abda8b09d842 -->
 ```
 EXTREME VALUES
-ROCK CREEK:       Highest (40.1°C)                                   [since Jul 22, ongoing]
+ROCK CREEK:       Highest (40.1°C)                                                  [Jul 22]
 NORNS:            Lowest (-4.3°C)                                                    [Jun 7]
 TEMPERATURE EXCEEDED 35°C
-BEAVERDELL:       39.0°C                                             [since Jul 22, ongoing]
-PENDOREILLE:      37.6°C                                             [since Jul 22, ongoing]
+BEAVERDELL:       39.0°C                                                            [Jul 22]
+PENDOREILLE:      37.6°C                                                            [Jul 22]
 GRAND FORKS:      37.3°C                                                            [Jul 21]
 DUNCAN:           36.9°C                                                            [May 28]
-JOHNSON LAKE:     36.5°C                                             [since Jul 22, ongoing]
-NICOLL:           36.3°C                                             [since Jul 22, ongoing]
+JOHNSON LAKE:     36.5°C                                                            [Jul 22]
+NICOLL:           36.3°C                                                            [Jul 22]
 DOWNIE:           35.8°C                                                            [Jul 17]
 BRISCO:           35.6°C                                                            [Jul 16]
 GOATFELL:         35.6°C                                                            [Jul 22]
-TOBY HUB:         35.5°C                                             [since Jul 22, ongoing]
+TOBY HUB:         35.5°C                                                            [Jul 22]
 PERSISTENT STATES
 NANCY GREENE:     constant (9.1°C) for 6h, RH varied 0%                  [Jul 1 00:00–05:00]
 WHITE RIVER:      constant (7.8°C) for 6h, RH varied 0%                 [Jun 29 00:00–05:00]

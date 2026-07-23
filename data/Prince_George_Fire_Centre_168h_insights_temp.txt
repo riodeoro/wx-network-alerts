@@ -2,5 +2,5 @@
 ```
 EXTREME VALUES
 BLUE RIVER 2:     Highest (35.9°C)                                            [Jul 17 16:00]
-PINK MOUNTAIN:    Lowest (2.8°C)                                     [since Jul 23, ongoing]
+PINK MOUNTAIN:    Lowest (2.8°C)                                              [Jul 23 05:00]
 ```

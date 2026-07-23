@@ -1,6 +1,6 @@
 <!-- hash:a5e542c8bcfb -->
 ```
 EXTREME VALUES
-ALEXIS CREEK:     Highest (34.7°C)                                   [since Jul 22, ongoing]
+ALEXIS CREEK:     Highest (34.7°C)                                            [Jul 22 16:00]
 BALDFACE:         Lowest (2.4°C)                                              [Jul 20 05:00]
 ```
