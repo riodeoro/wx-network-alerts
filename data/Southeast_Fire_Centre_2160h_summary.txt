@@ -10,8 +10,8 @@ SENSOR NA: DARKWOODS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIG
 
 === RH ===
 RH=0%: BAKER - 1278 readings @first=2026-04-24T08:00@last=2026-06-16T13:00
-RH=0%: CARIBOO CREEK - 14 readings @first=2026-05-18T14:00@last=2026-06-12T13:00
 RH=0%: DEWAR CREEK - 257 readings @first=2026-04-24T10:00@last=2026-06-05T01:00
+RH=0%: CARIBOO CREEK - 14 readings @first=2026-05-18T14:00@last=2026-06-12T13:00
 RH>100%: CARIBOO CREEK - 408 readings, max=116.0% @first=2026-05-15T21:00@last=2026-06-12T07:00
 RH>100%: DUNCAN - 102 readings, max=111.0% @first=2026-05-11T06:00@last=2026-05-18T08:00
 RH CHANGE >50%/h: CARIBOO CREEK - 18 events, peak=-108.0%/h @first=2026-05-16T14:00@last=2026-06-12T08:00
@@ -72,8 +72,8 @@ SILENT GAUGE: FLATHEAD 2 - silent 16 of 17 neighbour rain hours (94.1%) @first=2
 SILENT GAUGE: DARKWOODS - silent 27 of 31 neighbour rain hours (87.1%) @first=2026-05-13T18:00@last=2026-07-17T08:00
 SILENT GAUGE: TSAR CREEK - silent 18 of 22 neighbour rain hours (81.8%) @first=2026-05-08T19:00@last=2026-06-09T21:00
 SILENT GAUGE: KOOCANUSA - silent 3 of 4 neighbour rain hours (75.0%) @first=2026-05-06T22:00@last=2026-05-07T00:00
-HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
+HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 
 === POWER ===
 NO CHARGE: CRAWFORD - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.40V @start=2026-05-13T08:00@end=2026-07-17T08:00

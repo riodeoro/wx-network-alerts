@@ -14,8 +14,8 @@ OUTLIER Rh: DOWNIE - min=3.0, max=17.0 @ts=2026-06-18T11:00
 OUTLIER Rh: CARIBOO CREEK - min=0.0, max=7.0 @ts=2026-05-18T14:00
 OUTLIER Rh: TABERNACLE WIND - min=17.0, max=32.0 @ts=2026-01-22T03:00
 RH=0%: BAKER - 3498 readings @first=2026-01-21T20:00@last=2026-06-16T13:00
-RH=0%: CARIBOO CREEK - 14 readings @first=2026-05-18T14:00@last=2026-06-12T13:00
 RH=0%: DEWAR CREEK - 422 readings @first=2026-01-31T19:00@last=2026-06-05T01:00
+RH=0%: CARIBOO CREEK - 14 readings @first=2026-05-18T14:00@last=2026-06-12T13:00
 RH>100%: CARIBOO CREEK - 408 readings, max=116.0% @first=2026-05-15T21:00@last=2026-06-12T07:00
 RH>100%: DUNCAN - 102 readings, max=111.0% @first=2026-05-11T06:00@last=2026-05-18T08:00
 RH CHANGE >50%/h: CARIBOO CREEK - 18 events, peak=-108.0%/h @first=2026-05-16T14:00@last=2026-06-12T08:00
@@ -80,8 +80,8 @@ RAIN AT RH 10-25%: RORY CREEK - 9 hours, 39.0mm total, rank=2 @first=2026-05-03T
 RAIN AT RH 10-25%: WHITE RIVER - 4 hours, 3.4mm total, rank=4 @first=2026-03-02T15:00@last=2026-03-31T14:00
 SILENT GAUGE: NORNS - silent 25 of 25 neighbour rain hours (100.0%) @first=2026-05-13T14:00@last=2026-07-17T08:00
 SILENT GAUGE: DARKWOODS - silent 40 of 49 neighbour rain hours (81.6%) @first=2026-01-30T14:00@last=2026-07-17T08:00
-HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
+HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 
 === POWER ===
 LOW VBAT: SMALLWOOD - min=6.90V, mean=12.67V, severity=low @ts=2026-02-09T10:00

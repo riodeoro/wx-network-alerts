@@ -9,9 +9,9 @@ SENSOR NA: MCLEAN LAKE - Vbat=51% NA, Vslr=51% NA, Ibat=51% NA
 SENSOR NA: PASKA LAKE - Vbat=51% NA, Vslr=51% NA, Ibat=51% NA
 
 === RH ===
-RH=0%: MABEL LAKE 2 - 2 readings @first=2026-04-30T20:00@last=2026-04-30T21:00
 RH=0%: SILVERSTAR SF - 4370 readings @first=2026-01-21T20:00@last=2026-07-23T07:00
 RH=0%: TURTLE - 157 readings @first=2026-01-25T20:00@last=2026-02-02T12:00
+RH=0%: MABEL LAKE 2 - 2 readings @first=2026-04-30T20:00@last=2026-04-30T21:00
 RH CHANGE >50%/h: TURTLE - 9 events, peak=+92.0%/h @first=2026-01-26T11:00@last=2026-06-25T18:00
 RH CHANGE >50%/h: SICAMOUS - 3 events, peak=+64.0%/h @first=2026-06-11T18:00@last=2026-07-19T17:00
 RH CHANGE >50%/h: CLEARWATER HUB - 3 events, peak=+61.0%/h @first=2026-03-08T05:00@last=2026-07-12T09:00

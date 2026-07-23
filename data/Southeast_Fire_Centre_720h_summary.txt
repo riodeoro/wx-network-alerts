@@ -51,8 +51,8 @@ SILENT GAUGE: NORNS - silent 8 of 8 neighbour rain hours (100.0%) @first=2026-06
 SILENT GAUGE: FLATHEAD 2 - silent 14 of 15 neighbour rain hours (93.3%) @first=2026-06-28T14:00@last=2026-07-17T04:00
 SILENT GAUGE: BEAVERDELL - silent 6 of 8 neighbour rain hours (75.0%) @first=2026-06-27T01:00@last=2026-06-30T08:00
 SILENT GAUGE: MARION - silent 3 of 4 neighbour rain hours (75.0%) @first=2026-06-30T16:00@last=2026-07-01T12:00
-HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
+HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 
 === POWER ===
 None.
