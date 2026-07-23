@@ -1,5 +1,5 @@
 FIRE CENTRE: Cariboo Fire Centre
-WINDOW: 168h | STATIONS: 26 | RECORDS: 4,384
+WINDOW: 168h | STATIONS: 26 | RECORDS: 4,391
 
 === STATION OUTAGES ===
 SENSOR NA: BENSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -16,6 +16,7 @@ CONSTANT RH: BIG VALLEY - Constant high (90-99%), avg=99%, 12h, precip=4.4mm @st
 === WIND ===
 EXTREME GUST: HORSEFLY - max=80.6km/h, 1 readings >80km/h @start=2026-07-17T19:00@end=2026-07-17T19:00
 DIRECTION CONCENTRATION: NEMIAH - up to 54% of a day in the 288 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: BENSON - up to 50% of a day in the 134 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: ANAHIM LAKE - up to 54% of a day in the 260 deg bin (1 day(s) at 50%+)
 
 === TEMPERATURE ===

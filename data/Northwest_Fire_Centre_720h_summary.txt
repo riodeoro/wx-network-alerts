@@ -1,5 +1,5 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 720h | STATIONS: 32 | RECORDS: 22,965
+WINDOW: 720h | STATIONS: 32 | RECORDS: 22,943
 
 === STATION OUTAGES ===
 None.
@@ -13,8 +13,8 @@ ZERO WIND 14h: ROSSWOOD - Wspd=0 but 7 direction changes >90deg detected (max_de
 ZERO WIND 13h: VAN DYKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=176deg), gusts nonzero (max=5.6km/h, avg=1.9km/h) @start=2026-06-25T20:00@end=2026-06-26T08:00
 ZERO WIND 12h: BELL-IRVING - Wspd=0 but 3 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=4.9km/h, avg=0.8km/h) @start=2026-07-03T21:00@end=2026-07-04T08:00
 DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 67% of a day in the 244 deg bin (10 day(s) at 50%+)
-DIRECTION CONCENTRATION: PARROTT - up to 62% of a day in the 284 deg bin (6 day(s) at 50%+)
 DIRECTION CONCENTRATION: NASS CAMP - up to 88% of a day in the 189 deg bin (11 day(s) at 50%+)
+DIRECTION CONCENTRATION: PARROTT - up to 62% of a day in the 284 deg bin (6 day(s) at 50%+)
 DIRECTION CONCENTRATION: KITPARK - up to 50% of a day in the 237 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: AUGIER LAKE - up to 50% of a day in the 224 deg bin (1 day(s) at 50%+)
 
@@ -31,4 +31,3 @@ NO CHARGE: NASS CAMP - 40 daytime readings (Vslr<Vbat), median Vbat=12.60V, medi
 NO CHARGE: NORTH BABINE - 10 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.45V @start=2026-06-26T08:00@end=2026-07-22T08:00
 NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00
 NO CHARGE: MCBRIDE LAKE - 5 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=12.30V @start=2026-07-04T08:00@end=2026-07-19T08:00
-NO CHARGE: KISPIOX HUB (AC) - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-20T19:00@end=2026-07-21T19:00

@@ -1,9 +1,9 @@
 FIRE CENTRE: Prince George Fire Centre
-WINDOW: 720h | STATIONS: 56 | RECORDS: 39,308
+WINDOW: 720h | STATIONS: 56 | RECORDS: 39,260
 
 === STATION OUTAGES ===
-LOW COVERAGE: SAWTOOTH - 32% (232/721 hours) @start=2026-06-22T17:00@end=2026-07-02T12:00
-LOW COVERAGE: GOSNEL - 32% (233/721 hours) @start=2026-07-13T00:00@end=2026-07-22T16:00
+LOW COVERAGE: SAWTOOTH - 30% (217/721 hours) @start=2026-06-23T08:00@end=2026-07-02T12:00
+LOW COVERAGE: GOSNEL - 34% (247/721 hours) @start=2026-07-13T00:00@end=2026-07-23T06:00
 SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: CHILAKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: FORT NELSON FS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -24,10 +24,10 @@ CONSTANT RH: CATFISH - Constant 100%, avg=100%, 12h, no precip @start=2026-07-19
 === WIND ===
 ZERO WIND 14h: MANSON - Wspd=0 but 1 direction changes >90deg detected (max_delta=93deg), gusts nonzero (max=4.9km/h, avg=1.7km/h) @start=2026-06-26T18:00@end=2026-06-27T07:00
 DIRECTION CONCENTRATION: HOLY CROSS 2 - up to 58% of a day in the 267 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: OSBORN - up to 50% of a day in the 187 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: NOEL - up to 50% of a day in the 218 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: MUSKWA - up to 67% of a day in the 243 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: WONOWON - up to 71% of a day in the 208 deg bin (2 day(s) at 50%+)
+DIRECTION CONCENTRATION: SIFTON - up to 50% of a day in the 351 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: OSBORN - up to 50% of a day in the 187 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: NOEL - up to 54% of a day in the 212 deg bin (2 day(s) at 50%+)
 
 === TEMPERATURE ===
 HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00
@@ -42,7 +42,7 @@ SILENT GAUGE: SUSTUT - silent 17 of 23 neighbour rain hours (73.9%) @first=2026-
 HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
 
 === POWER ===
-LOW VBAT: LEMORAY - min=11.70V, mean=11.72V, severity=low @ts=2026-06-25T02:00
+LOW VBAT: LEMORAY - min=11.70V, mean=11.71V, severity=low @ts=2026-06-25T02:00
 NO CHARGE: GRAHAM - 57 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=11.90V @start=2026-06-23T08:00@end=2026-07-22T09:00
 NO CHARGE: NELSON FORKS - 9 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.40V @start=2026-07-01T08:00@end=2026-07-22T10:00
 NO CHARGE: LEMORAY - 8 daytime readings (Vslr<Vbat), median Vbat=11.70V, median Vslr=10.00V, severity=low @start=2026-06-24T11:00@end=2026-07-19T19:00

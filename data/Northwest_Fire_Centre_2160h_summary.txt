@@ -1,8 +1,8 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 2160h | STATIONS: 32 | RECORDS: 69,008
+WINDOW: 2160h | STATIONS: 32 | RECORDS: 68,983
 
 === STATION OUTAGES ===
-SENSOR NA: NILKITKWA - Vbat=70% NA, Vslr=70% NA, Ibat=71% NA
+SENSOR NA: NILKITKWA - Vbat=69% NA, Vslr=69% NA, Ibat=70% NA
 
 === RH ===
 RH CHANGE >50%/h: BELL-IRVING - 1 events, peak=+59.0%/h @first=2026-06-09T15:00@last=2026-06-09T15:00
@@ -21,7 +21,7 @@ ZERO WIND 14h: KISPIOX HUB - Wspd=0 but 7 direction changes >90deg detected (max
 ZERO WIND 14h: ROSSWOOD - Wspd=0 but 7 direction changes >90deg detected (max_delta=156deg), gusts nonzero (max=5.3km/h, avg=0.9km/h) @start=2026-07-12T19:00@end=2026-07-13T08:00
 ZERO WIND 13h: VAN DYKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=176deg), gusts nonzero (max=5.6km/h, avg=1.9km/h) @start=2026-06-25T20:00@end=2026-06-26T08:00
 ZERO WIND 12h: BELL-IRVING - Wspd=0 but 2 direction changes >90deg detected (max_delta=129deg), gusts nonzero (max=5.0km/h, avg=1.6km/h) @start=2026-06-25T23:00@end=2026-06-26T10:00
-DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 75% of a day in the 234 deg bin (38 day(s) at 50%+)
+DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 75% of a day in the 234 deg bin (39 day(s) at 50%+)
 DIRECTION CONCENTRATION: PARROTT - up to 67% of a day in the 273 deg bin (17 day(s) at 50%+)
 DIRECTION CONCENTRATION: AUGIER LAKE - up to 62% of a day in the 225 deg bin (4 day(s) at 50%+)
 DIRECTION CONCENTRATION: NASS CAMP - up to 88% of a day in the 189 deg bin (21 day(s) at 50%+)
@@ -41,4 +41,3 @@ NO CHARGE: NASS CAMP - 68 daytime readings (Vslr<Vbat), median Vbat=12.60V, medi
 NO CHARGE: NORTH BABINE - 16 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.35V @start=2026-04-28T08:00@end=2026-07-22T08:00
 NO CHARGE: MCBRIDE LAKE - 11 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.30V @start=2026-04-27T08:00@end=2026-07-19T08:00
 NO CHARGE: NILKITKWA - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-18T08:00
-NO CHARGE: KISPIOX HUB (AC) - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-20T19:00@end=2026-07-21T19:00

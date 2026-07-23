@@ -1,5 +1,5 @@
 FIRE CENTRE: Cariboo Fire Centre
-WINDOW: 1440h | STATIONS: 26 | RECORDS: 37,357
+WINDOW: 1440h | STATIONS: 26 | RECORDS: 37,365
 
 === STATION OUTAGES ===
 SENSOR NA: BENSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -22,11 +22,11 @@ EXTREME GUST: ANAHIM LAKE - max=282.2km/h, 1 readings >80km/h @start=2026-07-11T
 EXTREME GUST: TAUTRI - max=226.9km/h, 1 readings >80km/h @start=2026-06-05T15:00@end=2026-06-05T15:00
 EXTREME GUST: TATLA LAKE - max=202.2km/h, 1 readings >80km/h @start=2026-06-06T13:00@end=2026-06-06T13:00
 EXTREME GUST: HORSEFLY - max=130.3km/h, 3 readings >80km/h @start=2026-06-04T11:00@end=2026-07-17T19:00
+DIRECTION CONCENTRATION: BALDFACE - up to 50% of a day in the 278 deg bin (3 day(s) at 50%+)
 DIRECTION CONCENTRATION: BIG VALLEY - up to 50% of a day in the 250 deg bin (2 day(s) at 50%+)
 DIRECTION CONCENTRATION: NEMIAH - up to 54% of a day in the 288 deg bin (1 day(s) at 50%+)
 DIRECTION CONCENTRATION: ANAHIM LAKE - up to 54% of a day in the 260 deg bin (2 day(s) at 50%+)
 DIRECTION CONCENTRATION: DECEPTION - up to 50% of a day in the 56 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: BALDFACE - up to 50% of a day in the 278 deg bin (3 day(s) at 50%+)
 
 === TEMPERATURE ===
 HIGHEST TEMP: ALEXIS CREEK - 34.7C @ts=2026-07-22T16:00
