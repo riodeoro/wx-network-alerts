@@ -1,4 +1,4 @@
-<!-- hash:cab1149fb4a8 -->
+<!-- hash:68a65cb34366 -->
 ```
 HIGH PRECIPITATION
 KOMIE:            37.0 mm/h                                                   [Jun 30 23:00]

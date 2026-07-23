@@ -1,4 +1,4 @@
-<!-- hash:6f222c1fff50 -->
+<!-- hash:c45f43777c8f -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 GASPARD:          1 hour, Rn_1 (0.2mm)                                        [Mar 30 13:00]

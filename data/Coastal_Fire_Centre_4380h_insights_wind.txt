@@ -1,4 +1,4 @@
-<!-- hash:6cfbaf3161e5 -->
+<!-- hash:18c07e5cfc29 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 TS SAN JUAN:      366.1 km/h (1 reading >80)                                  [Mar 10 13:00]
@@ -12,9 +12,9 @@ QUINSAM BASE FWX: zero wind 103h, 21 shifts >90°, max 7.4km/h  [Jan 23 16:00 �
 HOMATHKO:         zero wind 93h, 16 shifts >90°, max 9.8km/h    [Mar 9 15:00 – Mar 13 11:00]
 TALCHAKO:         zero wind 162h, 35 shifts >90° (max 179°)    [Jan 21 20:00 – Jan 28 13:00]
 DAILY DIRECTION CONCENTRATION
-CHEAKAMUS:        up to 96% of a day within ±5° of 91° (13 day(s) at 50%+)
-POWELL RIVER WEST LAKE: up to 88% of a day within ±5° of 153° (21 day(s) at 50%+)
-KLINAKLINI:       up to 88% of a day within ±5° of 169° (11 day(s) at 50%+)
-APE LAKE:         up to 62% of a day within ±5° of 353° (5 day(s) at 50%+)
-HAIG CAMP:        up to 62% of a day within ±5° of 323° (5 day(s) at 50%+)
+CHEAKAMUS:        up to 96% of a day within ±5° of 91° (13 day(s) at 50%+)          [Feb 19]
+DARCY:            up to 96% of a day within ±5° of 6° (7 day(s) at 50%+)            [Jan 25]
+TS ELPHINSTONE:   up to 92% of a day within ±5° of 106° (18 day(s) at 50%+)         [Mar 19]
+KLINAKLINI:       up to 88% of a day within ±5° of 169° (11 day(s) at 50%+)         [Mar 17]
+POWELL RIVER WEST LAKE: up to 88% of a day within ±5° of 153° (21 day(s) at 50%+)   [Jan 28]
 ```

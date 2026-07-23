@@ -1,4 +1,4 @@
-<!-- hash:6cfbaf3161e5 -->
+<!-- hash:18c07e5cfc29 -->
 ```
 EXTREME VALUES
 DARCY:            Highest (39.3°C)                                                  [Jul 22]

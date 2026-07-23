@@ -1,4 +1,4 @@
-<!-- hash:d3aaaf4ef855 -->
+<!-- hash:be832e166a57 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 VALEMOUNT 2:      1367.0 km/h (64 readings >80)                [May 26 02:00 – Jun 20 05:00]
@@ -9,9 +9,9 @@ SAWTOOTH:         101.9 km/h (1 reading >80)                                  [J
 PERSISTENT STATES
 MANSON:           zero wind 14h, 1 shifts >90°, max 4.9km/h    [Jun 26 18:00 – Jun 27 07:00]
 DAILY DIRECTION CONCENTRATION
-MOOSE LAKE:       up to 62% of a day within ±5° of 253° (2 day(s) at 50%+)
-NOEL:             up to 58% of a day within ±5° of 226° (4 day(s) at 50%+)
-HOLY CROSS 2:     up to 58% of a day within ±5° of 267° (4 day(s) at 50%+)
-TUMBLER HUB:      up to 50% of a day within ±5° of 230° (1 day(s) at 50%+)
-MCLEOD LAKE:      up to 50% of a day within ±5° of 209° (2 day(s) at 50%+)
+NELSON FORKS:     up to 71% of a day within ±5° of 12° (1 day(s) at 50%+)           [May 25]
+WONOWON:          up to 71% of a day within ±5° of 208° (3 day(s) at 50%+)          [Jul 13]
+MUSKWA:           up to 67% of a day within ±5° of 243° (3 day(s) at 50%+)          [Jul 15]
+MOOSE LAKE:       up to 62% of a day within ±5° of 253° (2 day(s) at 50%+)          [Jun 16]
+HOLY CROSS 2:     up to 58% of a day within ±5° of 267° (4 day(s) at 50%+)          [Jun 30]
 ```

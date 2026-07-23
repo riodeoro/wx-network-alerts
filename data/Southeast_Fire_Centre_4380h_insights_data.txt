@@ -1,4 +1,4 @@
-<!-- hash:6c10acf0fc82 -->
+<!-- hash:94dab1d30fe9 -->
 ```
 LOW DATA COVERAGE
 TABERNACLE WIND:  49% (2148/4381h)                                           [Jan 21–Apr 21]

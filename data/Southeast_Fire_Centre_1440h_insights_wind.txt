@@ -1,4 +1,4 @@
-<!-- hash:abda8b09d842 -->
+<!-- hash:fb26b2d12650 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
@@ -9,9 +9,9 @@ BAKER:            zero wind 599h, 24 shifts >90° (max 164°)    [May 24 08:00 �
 EIGHT MILE:       zero wind 13h, gusts max 6.8km/h               [Jun 2 21:00 – Jun 3 09:00]
 MARION:           zero wind 367h, no gusts, no dir changes      [May 24 08:00 – Jun 8 14:00]
 DAILY DIRECTION CONCENTRATION
-ROUND PRAIRIE:    up to 92% of a day within ±5° of 161° (7 day(s) at 50%+)
-SLOCAN:           up to 79% of a day within ±5° of 22° (3 day(s) at 50%+)
-BAKER:            up to 71% of a day within ±5° of 242° (8 day(s) at 50%+)
-POWDER CREEK:     up to 54% of a day within ±5° of 172° (2 day(s) at 50%+)
-DUNCAN:           up to 50% of a day within ±5° of 16° (1 day(s) at 50%+)
+ROUND PRAIRIE:    up to 92% of a day within ±5° of 161° (7 day(s) at 50%+)          [Jul 12]
+SLOCAN:           up to 79% of a day within ±5° of 22° (3 day(s) at 50%+)            [Jun 1]
+BAKER:            up to 71% of a day within ±5° of 242° (8 day(s) at 50%+)           [Jul 3]
+JOHNSON LAKE:     up to 58% of a day within ±5° of 6° (3 day(s) at 50%+)            [May 31]
+SPARWOOD:         up to 58% of a day within ±5° of 184° (2 day(s) at 50%+)           [Jun 4]
 ```

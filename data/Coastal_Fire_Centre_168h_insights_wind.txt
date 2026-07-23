@@ -1,10 +1,10 @@
-<!-- hash:33ac0857434c -->
+<!-- hash:09710884a060 -->
 ```
 PERSISTENT STATES
 MESACHIE 2:       zero wind 13h, 3 shifts >90°, max 7.9km/h    [Jul 20 23:00 – Jul 21 11:00]
 QUINSAM BASE FWX: zero wind 13h, 1 shifts >90°, max 4.3km/h    [Jul 17 20:00 – Jul 18 08:00]
 DAILY DIRECTION CONCENTRATION
-APE LAKE:         up to 62% of a day within ±5° of 353° (1 day(s) at 50%+)
-CHEAKAMUS:        up to 54% of a day within ±5° of 290° (2 day(s) at 50%+)
-POWELL RIVER WEST LAKE: up to 50% of a day within ±5° of 155° (1 day(s) at 50%+)
+APE LAKE:         up to 62% of a day within ±5° of 353° (1 day(s) at 50%+)          [Jul 18]
+CHEAKAMUS:        up to 54% of a day within ±5° of 290° (2 day(s) at 50%+)          [Jul 18]
+POWELL RIVER WEST LAKE: up to 50% of a day within ±5° of 155° (1 day(s) at 50%+)    [Jul 17]
 ```

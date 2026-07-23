@@ -1,4 +1,4 @@
-<!-- hash:9e6269746b48 -->
+<!-- hash:b66abf106ed9 -->
 ```
 SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
 DARCY:            silent 16 of 20 neighbour rain hours (80%)   [May 25 05:00 → Jul 17 02:00]

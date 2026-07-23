@@ -1,4 +1,4 @@
-<!-- hash:fe304e1a0e77 -->
+<!-- hash:1cc1ed96eb6e -->
 ```
 GUSTS EXCEEDED 80 KM/H
 PINE CREEK:       95.0 km/h (5 readings >80)                     [Feb 8 00:00 – Mar 7 20:00]
@@ -12,9 +12,10 @@ OLD FADDY:        zero wind 74h, 10 shifts >90°, max 5.4km/h    [Jan 31 23:00 �
 VAN DYKE:         zero wind 47h, 15 shifts >90°, max 2.7km/h   [Jan 26 18:00 – Jan 28 16:00]
 BOB QUINN LAKE:   zero wind 45h, 18 shifts >90° (max 178°)     [Jan 21 20:00 – Jan 23 16:00]
 DAILY DIRECTION CONCENTRATION
-AUGIER LAKE:      up to 96% of a day within ±5° of 59° (14 day(s) at 50%+)
-TELEGRAPH CREEK:  up to 88% of a day within ±5° of 234° (57 day(s) at 50%+)
-PARROTT:          up to 83% of a day within ±5° of 85° (32 day(s) at 50%+)
-KITPARK:          up to 75% of a day within ±5° of 17° (25 day(s) at 50%+)
-CEDARVALE:        up to 75% of a day within ±5° of 276° (13 day(s) at 50%+)
+BELL-IRVING:      up to 100% of a day within ±5° of 35° (2 day(s) at 50%+)          [Jan 27]
+DEASE LAKE FS:    up to 100% of a day within ±5° of 343° (8 day(s) at 50%+)         [Feb 21]
+KISPIOX HUB:      up to 100% of a day within ±5° of 5° (20 day(s) at 50%+)          [May 29]
+AUGIER LAKE:      up to 96% of a day within ±5° of 59° (14 day(s) at 50%+)          [Feb 17]
+PINE CREEK:       up to 96% of a day within ±5° of 243° (23 day(s) at 50%+)         [Feb 25]
+FORRESTKERR:      up to 92% of a day within ±5° of 178° (9 day(s) at 50%+)          [Feb 22]
 ```

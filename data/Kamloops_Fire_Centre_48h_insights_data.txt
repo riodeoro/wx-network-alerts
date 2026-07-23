@@ -1,4 +1,4 @@
-<!-- hash:895acba0a12d -->
+<!-- hash:7929c155db8a -->
 ```
 LOW DATA COVERAGE
 ASHNOLA:          12% (6/49h)                                           [Jul 21 08:00–13:00]

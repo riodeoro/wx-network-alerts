@@ -1,4 +1,4 @@
-<!-- hash:5b0f6a7e9d0b -->
+<!-- hash:fa52b12fadfe -->
 ```
 LOW BATTERY VOLTAGE
 AFTON:            min 7.50V, mean 13.13V [low]                                      [Jan 22]

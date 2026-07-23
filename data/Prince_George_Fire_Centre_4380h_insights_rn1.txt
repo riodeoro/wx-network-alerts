@@ -1,4 +1,4 @@
-<!-- hash:3dab1120a4bd -->
+<!-- hash:eee4f4e6c02e -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 ELK MOUNTAIN:     1 hour, Rn_1 (0.8mm)                                        [Mar 14 17:00]

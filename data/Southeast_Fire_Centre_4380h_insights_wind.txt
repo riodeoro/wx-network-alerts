@@ -1,4 +1,4 @@
-<!-- hash:6c10acf0fc82 -->
+<!-- hash:94dab1d30fe9 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
@@ -15,9 +15,9 @@ GOLDSTREAM 2:     zero wind 36h, gusts max 1.8km/h             [Jan 29 01:00 –
 MARION:           zero wind 1597h, no gusts, no dir changes     [Jan 28 20:00 – Apr 5 08:00]
 SMALLWOOD:        zero wind 150h, no gusts, no dir changes     [May 14 13:00 – May 20 19:00]
 DAILY DIRECTION CONCENTRATION
-BIG MOUTH 2:      up to 92% of a day within ±5° of 15° (8 day(s) at 50%+)
-DUNCAN:           up to 83% of a day within ±5° of 14° (23 day(s) at 50%+)
-BAKER:            up to 75% of a day within ±5° of 250° (37 day(s) at 50%+)
-TABERNACLE WIND:  up to 75% of a day within ±5° of 286° (12 day(s) at 50%+)
-REVELSTOKE:       up to 58% of a day within ±5° of 312° (6 day(s) at 50%+)
+BIG MOUTH 2:      up to 92% of a day within ±5° of 15° (8 day(s) at 50%+)           [Feb 17]
+RORY CREEK:       up to 92% of a day within ±5° of 150° (5 day(s) at 50%+)          [Feb 27]
+ROUND PRAIRIE:    up to 92% of a day within ±5° of 161° (10 day(s) at 50%+)         [Jul 12]
+SPARWOOD:         up to 88% of a day within ±5° of 175° (17 day(s) at 50%+)         [Mar 11]
+DUNCAN:           up to 83% of a day within ±5° of 14° (23 day(s) at 50%+)          [Feb 18]
 ```

@@ -1,4 +1,4 @@
-<!-- hash:3dab1120a4bd -->
+<!-- hash:eee4f4e6c02e -->
 ```
 GUSTS EXCEEDED 80 KM/H
 VALEMOUNT 2:      1654.6 km/h (302 readings >80)               [Jan 22 13:00 – Jun 20 05:00]
@@ -13,9 +13,9 @@ SIFTON:           zero wind 41h, 13 shifts >90°, max 8.8km/h   [Jan 22 20:00 �
 LOVELL COVE:      zero wind 161h, 20 shifts >90° (max 175°)    [Jan 21 20:00 – Jan 28 12:00]
 GOSNEL:           zero wind 101h, gusts max 10.9km/h            [Jan 30 23:00 – Feb 4 03:00]
 DAILY DIRECTION CONCENTRATION
-GOSNEL:           up to 96% of a day within ±5° of 187° (41 day(s) at 50%+)
-NELSON FORKS:     up to 96% of a day within ±5° of 3° (30 day(s) at 50%+)
-NOEL:             up to 79% of a day within ±5° of 212° (22 day(s) at 50%+)
-BEAR LAKE:        up to 67% of a day within ±5° of 102° (5 day(s) at 50%+)
-KOMIE:            up to 62% of a day within ±5° of 32° (20 day(s) at 50%+)
+MOOSE LAKE:       up to 100% of a day within ±5° of 246° (12 day(s) at 50%+)        [Feb 25]
+GOSNEL:           up to 96% of a day within ±5° of 187° (41 day(s) at 50%+)          [Feb 3]
+NELSON FORKS:     up to 96% of a day within ±5° of 3° (30 day(s) at 50%+)           [Feb 25]
+LEO CREEK:        up to 92% of a day within ±5° of 8° (8 day(s) at 50%+)            [Jan 26]
+MCLEOD LAKE:      up to 90% of a day within ±5° of 331° (7 day(s) at 50%+)           [Mar 3]
 ```

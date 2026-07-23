@@ -1,4 +1,4 @@
-<!-- hash:9c24f71e6192 -->
+<!-- hash:1fb23b97bf20 -->
 ```
 UNCONFIGURED SENSORS
   NILKITKWA: battery voltage, charge current, and solar voltage unconfigured

@@ -1,9 +1,9 @@
-<!-- hash:a5e542c8bcfb -->
+<!-- hash:7b5742fddbc2 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 HORSEFLY:         80.6 km/h (1 reading >80)                                   [Jul 17 19:00]
 DAILY DIRECTION CONCENTRATION
-NEMIAH:           up to 54% of a day within ±5° of 288° (1 day(s) at 50%+)
-ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (1 day(s) at 50%+)
-BENSON:           up to 50% of a day within ±5° of 134° (1 day(s) at 50%+)
+ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (1 day(s) at 50%+)          [Jul 18]
+NEMIAH:           up to 54% of a day within ±5° of 288° (1 day(s) at 50%+)          [Jul 18]
+BENSON:           up to 50% of a day within ±5° of 134° (1 day(s) at 50%+)  [since Jul 22, ongoing]
 ```

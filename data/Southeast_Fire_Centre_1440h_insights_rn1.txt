@@ -1,4 +1,4 @@
-<!-- hash:abda8b09d842 -->
+<!-- hash:fb26b2d12650 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%
 DEWAR CREEK:      6 hours, Rn_1 (4.6mm)                         [May 29 21:00 → Jun 5 01:00]

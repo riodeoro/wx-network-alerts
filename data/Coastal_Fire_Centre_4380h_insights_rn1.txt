@@ -1,4 +1,4 @@
-<!-- hash:6cfbaf3161e5 -->
+<!-- hash:18c07e5cfc29 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 APE LAKE:         1 hour, Rn_1 (0.2mm)                                         [Mar 1 12:00]

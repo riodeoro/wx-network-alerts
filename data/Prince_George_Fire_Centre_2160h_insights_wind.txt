@@ -1,4 +1,4 @@
-<!-- hash:cf25748685c8 -->
+<!-- hash:3513faa470ec -->
 ```
 GUSTS EXCEEDED 80 KM/H
 VALEMOUNT 2:      1654.6 km/h (182 readings >80)               [Apr 24 16:00 – Jun 20 05:00]
@@ -10,9 +10,9 @@ PERSISTENT STATES
 MANSON:           zero wind 14h, 1 shifts >90°, max 4.9km/h    [Jun 26 18:00 – Jun 27 07:00]
 FIRESIDE:         zero wind 12h, gusts max 7.3km/h             [Apr 27 20:00 – Apr 28 07:00]
 DAILY DIRECTION CONCENTRATION
-NOEL:             up to 62% of a day within ±5° of 236° (9 day(s) at 50%+)
-KOMIE:            up to 62% of a day within ±5° of 138° (4 day(s) at 50%+)
-MOOSE LAKE:       up to 62% of a day within ±5° of 253° (5 day(s) at 50%+)
-HOLY CROSS 2:     up to 58% of a day within ±5° of 328° (7 day(s) at 50%+)
-MCLEOD LAKE:      up to 50% of a day within ±5° of 209° (2 day(s) at 50%+)
+NELSON FORKS:     up to 75% of a day within ±5° of 357° (4 day(s) at 50%+)          [May 14]
+WONOWON:          up to 71% of a day within ±5° of 208° (3 day(s) at 50%+)          [Jul 13]
+MUSKWA:           up to 67% of a day within ±5° of 243° (4 day(s) at 50%+)          [Jul 15]
+KOMIE:            up to 62% of a day within ±5° of 138° (4 day(s) at 50%+)           [May 5]
+MOOSE LAKE:       up to 62% of a day within ±5° of 253° (5 day(s) at 50%+)          [Jun 16]
 ```
