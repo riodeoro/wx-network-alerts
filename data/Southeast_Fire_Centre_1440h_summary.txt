@@ -31,11 +31,11 @@ ZERO WIND 13h: EIGHT MILE - Wspd=0 but gusts nonzero (max=6.8km/h, avg=0.9km/h),
 ZERO WIND 12h: FLATHEAD 2 - Wspd=0 but 3 direction changes >90deg detected (max_delta=159deg), gusts nonzero (max=2.7km/h, avg=1.0km/h) @start=2026-05-31T18:00@end=2026-06-01T05:00
 ZERO WIND 12h: GOATFELL - Wspd=0 but 4 direction changes >90deg detected (max_delta=130deg), gusts nonzero (max=4.1km/h, avg=0.8km/h) @start=2026-05-30T20:00@end=2026-05-31T07:00
 ZERO WIND 367h: MARION - Wspd=0, gusts=0, no direction changes >90deg @start=2026-05-24T08:00@end=2026-06-08T14:00
-DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (8 day(s) at 50%+)
-DIRECTION CONCENTRATION: SLOCAN - up to 79% of a day in the 22 deg bin (3 day(s) at 50%+)
-DIRECTION CONCENTRATION: POWDER CREEK - up to 54% of a day in the 172 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: ROUND PRAIRIE - up to 92% of a day in the 161 deg bin (7 day(s) at 50%+)
-DIRECTION CONCENTRATION: DUNCAN - up to 50% of a day in the 16 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: ROUND PRAIRIE - up to 92% of a day in the 161 deg bin (7 day(s) at 50%+) @ts=2026-07-12T00:00
+DIRECTION CONCENTRATION: SLOCAN - up to 79% of a day in the 22 deg bin (3 day(s) at 50%+) @ts=2026-06-01T00:00
+DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (8 day(s) at 50%+) @ts=2026-07-03T00:00
+DIRECTION CONCENTRATION: JOHNSON LAKE - up to 58% of a day in the 6 deg bin (3 day(s) at 50%+) @ts=2026-05-31T00:00
+DIRECTION CONCENTRATION: SPARWOOD - up to 58% of a day in the 184 deg bin (2 day(s) at 50%+) @ts=2026-06-04T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: ROCK CREEK - 40.1C @ts=2026-07-22T16:00

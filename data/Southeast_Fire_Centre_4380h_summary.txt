@@ -41,11 +41,11 @@ ZERO WIND 83h: GOATHAVEN - Wspd=0 but 9 direction changes >90deg detected (max_d
 ZERO WIND 36h: GOLDSTREAM 2 - Wspd=0 but gusts nonzero (max=1.8km/h, avg=0.1km/h), no direction changes >90deg @start=2026-01-29T01:00@end=2026-01-30T12:00
 ZERO WIND 1597h: MARION - Wspd=0, gusts=0, no direction changes >90deg @start=2026-01-28T20:00@end=2026-04-05T08:00
 ZERO WIND 150h: SMALLWOOD - Wspd=0, gusts=0, no direction changes >90deg @start=2026-05-14T13:00@end=2026-05-20T19:00
-DIRECTION CONCENTRATION: BAKER - up to 75% of a day in the 250 deg bin (37 day(s) at 50%+)
-DIRECTION CONCENTRATION: DUNCAN - up to 83% of a day in the 14 deg bin (23 day(s) at 50%+)
-DIRECTION CONCENTRATION: TABERNACLE WIND - up to 75% of a day in the 286 deg bin (12 day(s) at 50%+)
-DIRECTION CONCENTRATION: BIG MOUTH 2 - up to 92% of a day in the 15 deg bin (8 day(s) at 50%+)
-DIRECTION CONCENTRATION: REVELSTOKE - up to 58% of a day in the 312 deg bin (6 day(s) at 50%+)
+DIRECTION CONCENTRATION: BIG MOUTH 2 - up to 92% of a day in the 15 deg bin (8 day(s) at 50%+) @ts=2026-02-17T00:00
+DIRECTION CONCENTRATION: RORY CREEK - up to 92% of a day in the 150 deg bin (5 day(s) at 50%+) @ts=2026-02-27T00:00
+DIRECTION CONCENTRATION: ROUND PRAIRIE - up to 92% of a day in the 161 deg bin (10 day(s) at 50%+) @ts=2026-07-12T00:00
+DIRECTION CONCENTRATION: SPARWOOD - up to 88% of a day in the 175 deg bin (17 day(s) at 50%+) @ts=2026-03-11T00:00
+DIRECTION CONCENTRATION: DUNCAN - up to 83% of a day in the 14 deg bin (23 day(s) at 50%+) @ts=2026-02-18T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: CARIBOO CREEK - 69.2C @ts=2026-05-15T00:00

@@ -28,11 +28,11 @@ EXTREME GUST: KLUSKUS - max=180.6km/h, 2 readings >80km/h @start=2026-05-25T17:0
 EXTREME GUST: GRAHAM - max=125.4km/h, 1 readings >80km/h @start=2026-06-10T16:00@end=2026-06-10T16:00
 EXTREME GUST: SAWTOOTH - max=101.9km/h, 1 readings >80km/h @start=2026-06-19T10:00@end=2026-06-19T10:00
 ZERO WIND 14h: MANSON - Wspd=0 but 1 direction changes >90deg detected (max_delta=93deg), gusts nonzero (max=4.9km/h, avg=1.7km/h) @start=2026-06-26T18:00@end=2026-06-27T07:00
-DIRECTION CONCENTRATION: NOEL - up to 58% of a day in the 226 deg bin (4 day(s) at 50%+)
-DIRECTION CONCENTRATION: HOLY CROSS 2 - up to 58% of a day in the 267 deg bin (4 day(s) at 50%+)
-DIRECTION CONCENTRATION: TUMBLER HUB - up to 50% of a day in the 230 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: MOOSE LAKE - up to 62% of a day in the 253 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: MCLEOD LAKE - up to 50% of a day in the 209 deg bin (2 day(s) at 50%+)
+DIRECTION CONCENTRATION: NELSON FORKS - up to 71% of a day in the 12 deg bin (1 day(s) at 50%+) @ts=2026-05-25T00:00
+DIRECTION CONCENTRATION: WONOWON - up to 71% of a day in the 208 deg bin (3 day(s) at 50%+) @ts=2026-07-13T00:00
+DIRECTION CONCENTRATION: MUSKWA - up to 67% of a day in the 243 deg bin (3 day(s) at 50%+) @ts=2026-07-15T00:00
+DIRECTION CONCENTRATION: MOOSE LAKE - up to 62% of a day in the 253 deg bin (2 day(s) at 50%+) @ts=2026-06-16T00:00
+DIRECTION CONCENTRATION: HOLY CROSS 2 - up to 58% of a day in the 267 deg bin (4 day(s) at 50%+) @ts=2026-06-30T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00

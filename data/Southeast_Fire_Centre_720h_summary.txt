@@ -23,11 +23,11 @@ CONSTANT RH: FLATHEAD 2 - Constant 100%, avg=100%, 12h, no precip @start=2026-06
 EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
 ZERO WIND 464h: BAKER - Wspd=0 but 21 direction changes >90deg detected (max_delta=179deg) @start=2026-07-04T00:00@end=2026-07-23T07:00
 ZERO WIND 12h: EIGHT MILE - Wspd=0 but gusts nonzero (max=5.3km/h, avg=1.3km/h), no direction changes >90deg @start=2026-07-05T20:00@end=2026-07-06T07:00
-DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (5 day(s) at 50%+)
-DIRECTION CONCENTRATION: SLOCAN - up to 54% of a day in the 198 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: CRAWFORD - up to 50% of a day in the 48 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: POWDER CREEK - up to 54% of a day in the 172 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: DUNCAN - up to 50% of a day in the 16 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: ROUND PRAIRIE - up to 92% of a day in the 161 deg bin (2 day(s) at 50%+) @ts=2026-07-12T00:00
+DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (5 day(s) at 50%+) @ts=2026-07-03T00:00
+DIRECTION CONCENTRATION: JOHNSON LAKE - up to 54% of a day in the 358 deg bin (1 day(s) at 50%+) @ts=2026-07-05T00:00
+DIRECTION CONCENTRATION: POWDER CREEK - up to 54% of a day in the 172 deg bin (2 day(s) at 50%+) @ts=2026-07-12T00:00
+DIRECTION CONCENTRATION: SLOCAN - up to 54% of a day in the 198 deg bin (1 day(s) at 50%+) @ts=2026-06-30T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: ROCK CREEK - 40.1C @ts=2026-07-22T16:00

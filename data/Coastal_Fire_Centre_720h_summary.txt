@@ -22,11 +22,11 @@ ZERO WIND 15h: TS ARTLISH - Wspd=0 but 3 direction changes >90deg detected (max_
 ZERO WIND 14h: UBC RESEARCH - Wspd=0 but 3 direction changes >90deg detected (max_delta=163deg), gusts nonzero (max=4.1km/h, avg=1.0km/h) @start=2026-07-02T19:00@end=2026-07-03T08:00
 ZERO WIND 14h: QUINSAM BASE FWX - Wspd=0 but 4 direction changes >90deg detected (max_delta=115deg), gusts nonzero (max=5.2km/h, avg=1.9km/h) @start=2026-07-09T18:00@end=2026-07-10T07:00
 ZERO WIND 14h: SCAR CREEK - Wspd=0 but 3 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=7.7km/h, avg=1.6km/h) @start=2026-06-25T19:00@end=2026-06-26T08:00
-DIRECTION CONCENTRATION: HAGENSBORG 2 - up to 50% of a day in the 262 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: FRANK CREEK - up to 67% of a day in the 201 deg bin (5 day(s) at 50%+)
-DIRECTION CONCENTRATION: TS BLACKWATER - up to 67% of a day in the 115 deg bin (3 day(s) at 50%+)
-DIRECTION CONCENTRATION: BOOTHROYD - up to 50% of a day in the 152 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: CHEAKAMUS - up to 71% of a day in the 294 deg bin (3 day(s) at 50%+)
+DIRECTION CONCENTRATION: CHEAKAMUS - up to 71% of a day in the 294 deg bin (3 day(s) at 50%+) @ts=2026-06-30T00:00
+DIRECTION CONCENTRATION: FRANK CREEK - up to 67% of a day in the 201 deg bin (5 day(s) at 50%+) @ts=2026-06-29T00:00
+DIRECTION CONCENTRATION: TS BLACKWATER - up to 67% of a day in the 115 deg bin (3 day(s) at 50%+) @ts=2026-07-02T00:00
+DIRECTION CONCENTRATION: APE LAKE - up to 62% of a day in the 353 deg bin (2 day(s) at 50%+) @ts=2026-07-18T00:00
+DIRECTION CONCENTRATION: TS ATLUCK - up to 62% of a day in the 312 deg bin (3 day(s) at 50%+) @ts=2026-06-30T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: DARCY - 39.3C @ts=2026-07-22T15:00

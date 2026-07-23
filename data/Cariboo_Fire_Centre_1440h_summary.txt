@@ -22,11 +22,11 @@ EXTREME GUST: ANAHIM LAKE - max=282.2km/h, 1 readings >80km/h @start=2026-07-11T
 EXTREME GUST: TAUTRI - max=226.9km/h, 1 readings >80km/h @start=2026-06-05T15:00@end=2026-06-05T15:00
 EXTREME GUST: TATLA LAKE - max=202.2km/h, 1 readings >80km/h @start=2026-06-06T13:00@end=2026-06-06T13:00
 EXTREME GUST: HORSEFLY - max=130.3km/h, 3 readings >80km/h @start=2026-06-04T11:00@end=2026-07-17T19:00
-DIRECTION CONCENTRATION: BALDFACE - up to 50% of a day in the 278 deg bin (3 day(s) at 50%+)
-DIRECTION CONCENTRATION: BIG VALLEY - up to 50% of a day in the 250 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: NEMIAH - up to 54% of a day in the 288 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: ANAHIM LAKE - up to 54% of a day in the 260 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: DECEPTION - up to 50% of a day in the 56 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: MEADOW LAKE - up to 71% of a day in the 178 deg bin (2 day(s) at 50%+) @ts=2026-06-08T00:00
+DIRECTION CONCENTRATION: YOUNG LAKE - up to 67% of a day in the 159 deg bin (1 day(s) at 50%+) @ts=2026-07-02T00:00
+DIRECTION CONCENTRATION: CHURN CREEK - up to 62% of a day in the 160 deg bin (1 day(s) at 50%+) @ts=2026-05-25T00:00
+DIRECTION CONCENTRATION: GASPARD - up to 62% of a day in the 173 deg bin (2 day(s) at 50%+) @ts=2026-07-02T00:00
+DIRECTION CONCENTRATION: ANAHIM LAKE - up to 54% of a day in the 260 deg bin (2 day(s) at 50%+) @ts=2026-07-18T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: ALEXIS CREEK - 34.7C @ts=2026-07-22T16:00

@@ -35,11 +35,11 @@ ZERO WIND 101h: GOSNEL - Wspd=0 but gusts nonzero (max=10.9km/h, avg=0.1km/h), n
 ZERO WIND 46h: HOLY CROSS 2 - Wspd=0 but 5 direction changes >90deg detected (max_delta=122deg), gusts nonzero (max=2.8km/h, avg=0.1km/h) @start=2026-01-24T18:00@end=2026-01-26T15:00
 ZERO WIND 44h: ELK MOUNTAIN - Wspd=0 but 6 direction changes >90deg detected (max_delta=162deg), gusts nonzero (max=2.9km/h, avg=0.1km/h) @start=2026-01-25T16:00@end=2026-01-27T11:00
 ZERO WIND 41h: SIFTON - Wspd=0 but 13 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=8.8km/h, avg=0.6km/h) @start=2026-01-22T20:00@end=2026-01-24T12:00
-DIRECTION CONCENTRATION: GOSNEL - up to 96% of a day in the 187 deg bin (41 day(s) at 50%+)
-DIRECTION CONCENTRATION: NELSON FORKS - up to 96% of a day in the 3 deg bin (30 day(s) at 50%+)
-DIRECTION CONCENTRATION: NOEL - up to 79% of a day in the 212 deg bin (22 day(s) at 50%+)
-DIRECTION CONCENTRATION: KOMIE - up to 62% of a day in the 32 deg bin (20 day(s) at 50%+)
-DIRECTION CONCENTRATION: BEAR LAKE - up to 67% of a day in the 102 deg bin (5 day(s) at 50%+)
+DIRECTION CONCENTRATION: MOOSE LAKE - up to 100% of a day in the 246 deg bin (12 day(s) at 50%+) @ts=2026-02-25T00:00
+DIRECTION CONCENTRATION: GOSNEL - up to 96% of a day in the 187 deg bin (41 day(s) at 50%+) @ts=2026-02-03T00:00
+DIRECTION CONCENTRATION: NELSON FORKS - up to 96% of a day in the 3 deg bin (30 day(s) at 50%+) @ts=2026-02-25T00:00
+DIRECTION CONCENTRATION: LEO CREEK - up to 92% of a day in the 8 deg bin (8 day(s) at 50%+) @ts=2026-01-26T00:00
+DIRECTION CONCENTRATION: MCLEOD LAKE - up to 90% of a day in the 331 deg bin (7 day(s) at 50%+) @ts=2026-03-03T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00

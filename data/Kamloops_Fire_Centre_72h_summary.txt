@@ -16,8 +16,8 @@ CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 72h, no precip @start=
 === WIND ===
 ZERO WIND 22h: SILVERSTAR SF - Wspd=0 but gusts nonzero (max=3.9km/h, avg=0.6km/h), no direction changes >90deg @start=2026-07-20T13:00@end=2026-07-21T10:00
 ZERO WIND 12h: EAST BARRIERE - Wspd=0 but 3 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=4.7km/h, avg=2.1km/h) @start=2026-07-21T20:00@end=2026-07-22T07:00
-DIRECTION CONCENTRATION: MAYSON - up to 54% of a day in the 237 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: SICAMOUS - up to 50% of a day in the 346 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: MAYSON - up to 54% of a day in the 237 deg bin (2 day(s) at 50%+) @start=2026-07-21T00:00@end=2026-07-22T23:00
+DIRECTION CONCENTRATION: SICAMOUS - up to 50% of a day in the 346 deg bin (1 day(s) at 50%+) @start=2026-07-22T00:00@end=2026-07-22T23:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: LITTLE CHOPAKA - 39.2C @ts=2026-07-22T15:00

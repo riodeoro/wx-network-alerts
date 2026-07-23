@@ -24,11 +24,11 @@ EXTREME GUST: MERRITT 2 HUB - max=86.6km/h, 1 readings >80km/h @start=2026-07-16
 EXTREME GUST: LITTLE CHOPAKA - max=80.8km/h, 1 readings >80km/h @start=2026-07-15T21:00@end=2026-07-15T21:00
 ZERO WIND 22h: SILVERSTAR SF - Wspd=0 but gusts nonzero (max=3.9km/h, avg=0.6km/h), no direction changes >90deg @start=2026-07-20T13:00@end=2026-07-21T10:00
 ZERO WIND 12h: EAST BARRIERE - Wspd=0 but 3 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=4.7km/h, avg=2.1km/h) @start=2026-07-21T20:00@end=2026-07-22T07:00
-DIRECTION CONCENTRATION: ASHNOLA - up to 79% of a day in the 268 deg bin (6 day(s) at 50%+)
-DIRECTION CONCENTRATION: LITTLE CHOPAKA - up to 58% of a day in the 311 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: GWYNETH LAKE - up to 58% of a day in the 204 deg bin (4 day(s) at 50%+)
-DIRECTION CONCENTRATION: GREENSTONE HUB - up to 62% of a day in the 200 deg bin (5 day(s) at 50%+)
-DIRECTION CONCENTRATION: SICAMOUS - up to 50% of a day in the 346 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: ASHNOLA - up to 79% of a day in the 268 deg bin (6 day(s) at 50%+) @ts=2026-06-28T00:00
+DIRECTION CONCENTRATION: CAHILTY - up to 62% of a day in the 293 deg bin (1 day(s) at 50%+) @ts=2026-06-28T00:00
+DIRECTION CONCENTRATION: GREENSTONE HUB - up to 62% of a day in the 200 deg bin (5 day(s) at 50%+) @ts=2026-07-10T00:00
+DIRECTION CONCENTRATION: AFTON - up to 58% of a day in the 271 deg bin (1 day(s) at 50%+) @ts=2026-06-29T00:00
+DIRECTION CONCENTRATION: GWYNETH LAKE - up to 58% of a day in the 204 deg bin (4 day(s) at 50%+) @ts=2026-07-11T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: LITTLE CHOPAKA - 39.2C @ts=2026-07-22T15:00

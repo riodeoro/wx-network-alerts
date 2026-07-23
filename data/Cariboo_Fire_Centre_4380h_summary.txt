@@ -35,11 +35,11 @@ ZERO WIND 22h: PLUMMER HUT - Wspd=0 but 7 direction changes >90deg detected (max
 ZERO WIND 19h: PLACE LAKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=142deg), gusts nonzero (max=2.7km/h, avg=0.3km/h) @start=2026-01-23T17:00@end=2026-01-24T11:00
 ZERO WIND 13h: YOUNG LAKE - Wspd=0 but 3 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=8.2km/h, avg=0.6km/h) @start=2026-03-20T23:00@end=2026-03-21T11:00
 ZERO WIND 70h: CHURN CREEK - Wspd=0, gusts=0, no direction changes >90deg @start=2026-04-01T15:00@end=2026-04-04T12:00
-DIRECTION CONCENTRATION: MEADOW LAKE - up to 100% of a day in the 37 deg bin (69 day(s) at 50%+)
-DIRECTION CONCENTRATION: BIG VALLEY - up to 88% of a day in the 225 deg bin (25 day(s) at 50%+)
-DIRECTION CONCENTRATION: PLUMMER HUT - up to 58% of a day in the 188 deg bin (6 day(s) at 50%+)
-DIRECTION CONCENTRATION: YOUNG LAKE - up to 88% of a day in the 164 deg bin (27 day(s) at 50%+)
-DIRECTION CONCENTRATION: GASPARD - up to 88% of a day in the 51 deg bin (28 day(s) at 50%+)
+DIRECTION CONCENTRATION: MEADOW LAKE - up to 100% of a day in the 37 deg bin (69 day(s) at 50%+) @ts=2026-01-22T00:00
+DIRECTION CONCENTRATION: BIG VALLEY - up to 88% of a day in the 225 deg bin (25 day(s) at 50%+) @ts=2026-02-25T00:00
+DIRECTION CONCENTRATION: GASPARD - up to 88% of a day in the 51 deg bin (28 day(s) at 50%+) @ts=2026-02-03T00:00
+DIRECTION CONCENTRATION: YOUNG LAKE - up to 88% of a day in the 164 deg bin (27 day(s) at 50%+) @ts=2026-01-28T00:00
+DIRECTION CONCENTRATION: BENSON - up to 86% of a day in the 136 deg bin (19 day(s) at 50%+) @start=2026-07-22T00:00@end=2026-07-22T23:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: ALEXIS CREEK - 34.7C @ts=2026-07-22T16:00

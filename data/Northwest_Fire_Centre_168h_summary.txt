@@ -8,11 +8,11 @@ None.
 None.
 
 === WIND ===
-DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 54% of a day in the 255 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: NASS CAMP - up to 62% of a day in the 186 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: CRANBERRY - up to 50% of a day in the 221 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: GRASSY PLAINS HUB - up to 58% of a day in the 264 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: UPPER KISPIOX - up to 54% of a day in the 328 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: NASS CAMP - up to 62% of a day in the 186 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
+DIRECTION CONCENTRATION: GRASSY PLAINS HUB - up to 58% of a day in the 264 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
+DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 54% of a day in the 255 deg bin (1 day(s) at 50%+) @start=2026-07-22T00:00@end=2026-07-22T23:00
+DIRECTION CONCENTRATION: UPPER KISPIOX - up to 54% of a day in the 328 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
+DIRECTION CONCENTRATION: CRANBERRY - up to 50% of a day in the 221 deg bin (1 day(s) at 50%+) @ts=2026-07-19T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: CEDARVALE - 37.2C @ts=2026-07-21T15:00

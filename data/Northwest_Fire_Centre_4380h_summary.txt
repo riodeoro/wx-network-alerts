@@ -26,11 +26,12 @@ ZERO WIND 92h: ROSSWOOD - Wspd=0 but 17 direction changes >90deg detected (max_d
 ZERO WIND 74h: OLD FADDY - Wspd=0 but 10 direction changes >90deg detected (max_delta=178deg), gusts nonzero (max=5.4km/h, avg=0.1km/h) @start=2026-01-31T23:00@end=2026-02-04T00:00
 ZERO WIND 47h: VAN DYKE - Wspd=0 but 15 direction changes >90deg detected (max_delta=177deg), gusts nonzero (max=2.7km/h, avg=0.1km/h) @start=2026-01-26T18:00@end=2026-01-28T16:00
 ZERO WIND 45h: BOB QUINN LAKE - Wspd=0 but 18 direction changes >90deg detected (max_delta=178deg) @start=2026-01-21T20:00@end=2026-01-23T16:00
-DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 88% of a day in the 234 deg bin (57 day(s) at 50%+)
-DIRECTION CONCENTRATION: PARROTT - up to 83% of a day in the 85 deg bin (32 day(s) at 50%+)
-DIRECTION CONCENTRATION: KITPARK - up to 75% of a day in the 17 deg bin (25 day(s) at 50%+)
-DIRECTION CONCENTRATION: AUGIER LAKE - up to 96% of a day in the 59 deg bin (14 day(s) at 50%+)
-DIRECTION CONCENTRATION: CEDARVALE - up to 75% of a day in the 276 deg bin (13 day(s) at 50%+)
+DIRECTION CONCENTRATION: BELL-IRVING - up to 100% of a day in the 35 deg bin (2 day(s) at 50%+) @ts=2026-01-27T00:00
+DIRECTION CONCENTRATION: DEASE LAKE FS - up to 100% of a day in the 343 deg bin (8 day(s) at 50%+) @ts=2026-02-21T00:00
+DIRECTION CONCENTRATION: KISPIOX HUB - up to 100% of a day in the 5 deg bin (20 day(s) at 50%+) @ts=2026-05-29T00:00
+DIRECTION CONCENTRATION: AUGIER LAKE - up to 96% of a day in the 59 deg bin (14 day(s) at 50%+) @ts=2026-02-17T00:00
+DIRECTION CONCENTRATION: PINE CREEK - up to 96% of a day in the 243 deg bin (23 day(s) at 50%+) @ts=2026-02-25T00:00
+DIRECTION CONCENTRATION: FORRESTKERR - up to 92% of a day in the 178 deg bin (9 day(s) at 50%+) @ts=2026-02-22T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: CEDARVALE - 37.2C @ts=2026-07-21T15:00

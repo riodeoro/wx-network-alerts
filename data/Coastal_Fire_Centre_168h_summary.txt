@@ -19,9 +19,9 @@ CONSTANT RH: MOUNT CAYLEY - Constant 100%, avg=100%, 36h, precip=0.2mm @start=20
 === WIND ===
 ZERO WIND 13h: MESACHIE 2 - Wspd=0 but 3 direction changes >90deg detected (max_delta=158deg), gusts nonzero (max=7.9km/h, avg=1.5km/h) @start=2026-07-20T23:00@end=2026-07-21T11:00
 ZERO WIND 13h: QUINSAM BASE FWX - Wspd=0 but 1 direction changes >90deg detected (max_delta=171deg), gusts nonzero (max=4.3km/h, avg=1.1km/h) @start=2026-07-17T20:00@end=2026-07-18T08:00
-DIRECTION CONCENTRATION: CHEAKAMUS - up to 54% of a day in the 290 deg bin (2 day(s) at 50%+)
-DIRECTION CONCENTRATION: POWELL RIVER WEST LAKE - up to 50% of a day in the 155 deg bin (1 day(s) at 50%+)
-DIRECTION CONCENTRATION: APE LAKE - up to 62% of a day in the 353 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: APE LAKE - up to 62% of a day in the 353 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
+DIRECTION CONCENTRATION: CHEAKAMUS - up to 54% of a day in the 290 deg bin (2 day(s) at 50%+) @ts=2026-07-18T00:00
+DIRECTION CONCENTRATION: POWELL RIVER WEST LAKE - up to 50% of a day in the 155 deg bin (1 day(s) at 50%+) @ts=2026-07-17T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: DARCY - 39.3C @ts=2026-07-22T15:00

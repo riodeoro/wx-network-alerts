@@ -36,11 +36,11 @@ ZERO WIND 21h: GWYNETH LAKE - Wspd=0 but 1 direction changes >90deg detected (ma
 ZERO WIND 21h: CLEARWATER HUB - Wspd=0 but 9 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=3.0km/h, avg=0.4km/h) @start=2026-02-13T13:00@end=2026-02-14T09:00
 ZERO WIND 20h: EAST BARRIERE - Wspd=0 but 1 direction changes >90deg detected (max_delta=148deg), gusts nonzero (max=3.8km/h, avg=0.6km/h) @start=2026-02-13T16:00@end=2026-02-14T11:00
 ZERO WIND 36h: HARBOUR LAKE - Wspd=0, gusts=0, no direction changes >90deg @start=2026-01-21T20:00@end=2026-01-23T07:00
-DIRECTION CONCENTRATION: ASHNOLA - up to 79% of a day in the 268 deg bin (33 day(s) at 50%+)
-DIRECTION CONCENTRATION: GREENSTONE HUB - up to 96% of a day in the 302 deg bin (50 day(s) at 50%+)
-DIRECTION CONCENTRATION: GWYNETH LAKE - up to 79% of a day in the 189 deg bin (31 day(s) at 50%+)
-DIRECTION CONCENTRATION: SILVERSTAR SF - up to 75% of a day in the 262 deg bin (16 day(s) at 50%+)
-DIRECTION CONCENTRATION: PASKA LAKE - up to 62% of a day in the 225 deg bin (15 day(s) at 50%+)
+DIRECTION CONCENTRATION: GREENSTONE HUB - up to 96% of a day in the 302 deg bin (50 day(s) at 50%+) @ts=2026-01-24T00:00
+DIRECTION CONCENTRATION: MCLEAN LAKE - up to 83% of a day in the 79 deg bin (15 day(s) at 50%+) @ts=2026-02-06T00:00
+DIRECTION CONCENTRATION: THYNNE - up to 83% of a day in the 233 deg bin (12 day(s) at 50%+) @ts=2026-03-17T00:00
+DIRECTION CONCENTRATION: ASHNOLA - up to 79% of a day in the 268 deg bin (33 day(s) at 50%+) @ts=2026-06-28T00:00
+DIRECTION CONCENTRATION: GWYNETH LAKE - up to 79% of a day in the 189 deg bin (31 day(s) at 50%+) @ts=2026-03-19T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: LITTLE CHOPAKA - 39.2C @ts=2026-07-22T15:00

@@ -12,7 +12,7 @@ SENSOR NA: LONE BUTTE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFI
 None.
 
 === WIND ===
-DIRECTION CONCENTRATION: BENSON - up to 50% of a day in the 134 deg bin (1 day(s) at 50%+)
+DIRECTION CONCENTRATION: BENSON - up to 50% of a day in the 134 deg bin (1 day(s) at 50%+) @start=2026-07-22T00:00@end=2026-07-22T23:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: ALEXIS CREEK - 34.7C @ts=2026-07-22T16:00

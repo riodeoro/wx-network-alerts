@@ -21,11 +21,11 @@ ZERO WIND 14h: ROSSWOOD - Wspd=0 but 7 direction changes >90deg detected (max_de
 ZERO WIND 13h: KISPIOX HUB - Wspd=0 but 2 direction changes >90deg detected (max_delta=156deg), gusts nonzero (max=11.5km/h, avg=0.9km/h) @start=2026-05-27T21:00@end=2026-05-28T09:00
 ZERO WIND 13h: VAN DYKE - Wspd=0 but 2 direction changes >90deg detected (max_delta=176deg), gusts nonzero (max=5.6km/h, avg=1.9km/h) @start=2026-06-25T20:00@end=2026-06-26T08:00
 ZERO WIND 12h: BELL-IRVING - Wspd=0 but 3 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=4.9km/h, avg=0.8km/h) @start=2026-07-03T21:00@end=2026-07-04T08:00
-DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 67% of a day in the 247 deg bin (23 day(s) at 50%+)
-DIRECTION CONCENTRATION: PARROTT - up to 67% of a day in the 280 deg bin (12 day(s) at 50%+)
-DIRECTION CONCENTRATION: NASS CAMP - up to 88% of a day in the 189 deg bin (17 day(s) at 50%+)
-DIRECTION CONCENTRATION: AUGIER LAKE - up to 62% of a day in the 225 deg bin (3 day(s) at 50%+)
-DIRECTION CONCENTRATION: ATLIN - up to 54% of a day in the 187 deg bin (2 day(s) at 50%+)
+DIRECTION CONCENTRATION: KISPIOX HUB - up to 100% of a day in the 5 deg bin (20 day(s) at 50%+) @ts=2026-05-29T00:00
+DIRECTION CONCENTRATION: NASS CAMP - up to 88% of a day in the 189 deg bin (17 day(s) at 50%+) @ts=2026-07-12T00:00
+DIRECTION CONCENTRATION: CEDARVALE - up to 75% of a day in the 276 deg bin (3 day(s) at 50%+) @ts=2026-06-15T00:00
+DIRECTION CONCENTRATION: CRANBERRY - up to 75% of a day in the 215 deg bin (7 day(s) at 50%+) @ts=2026-07-01T00:00
+DIRECTION CONCENTRATION: GRASSY PLAINS HUB - up to 71% of a day in the 256 deg bin (6 day(s) at 50%+) @ts=2026-06-07T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: CEDARVALE - 37.2C @ts=2026-07-21T15:00
