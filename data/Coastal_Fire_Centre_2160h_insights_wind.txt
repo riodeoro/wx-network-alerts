@@ -1,11 +1,11 @@
-<!-- hash:b66abf106ed9 -->
+<!-- hash:5bfd376448e0 -->
 ```
 PERSISTENT STATES
 HAIG CAMP:        zero wind 696h, 104 shifts >90°, max 16.7km/h  [Apr 29 13:00 – May 28 12:00]
 MESACHIE 2:       zero wind 17h, 3 shifts >90°, max 10.2km/h     [Jul 2 17:00 – Jul 3 09:00]
 TS ARTLISH:       zero wind 15h, 3 shifts >90°, max 2.3km/h    [Jun 25 19:00 – Jun 26 09:00]
-QUINSAM BASE FWX: zero wind 14h, 4 shifts >90°, max 5.2km/h     [Jul 9 18:00 – Jul 10 07:00]
 UBC RESEARCH:     zero wind 14h, 3 shifts >90°, max 4.1km/h      [Jul 2 19:00 – Jul 3 08:00]
+QUINSAM BASE FWX: zero wind 14h, 4 shifts >90°, max 5.2km/h     [Jul 9 18:00 – Jul 10 07:00]
 DAILY DIRECTION CONCENTRATION
 CHEAKAMUS:        up to 71% of a day within ±5° of 294° (5 day(s) at 50%+)          [Jun 30]
 FRANK CREEK:      up to 67% of a day within ±5° of 201° (12 day(s) at 50%+)         [Jun 29]

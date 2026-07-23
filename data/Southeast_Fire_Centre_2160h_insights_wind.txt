@@ -1,4 +1,4 @@
-<!-- hash:0329e72dec32 -->
+<!-- hash:3adf78c13def -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
