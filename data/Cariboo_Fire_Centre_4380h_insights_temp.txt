@@ -1,4 +1,4 @@
-<!-- hash:3ed24fad2375 -->
+<!-- hash:6f222c1fff50 -->
 ```
 EXTREME VALUES
 ALEXIS CREEK:     Highest (34.7°C)                                   [since Jul 22, ongoing]
@@ -8,7 +8,7 @@ BALDFACE:         1 spike, peak Δ 6.0°C                                       
 NAZKO:            1 spike, peak Δ 5.8°C                                        [May 5 21:00]
 PLUMMER HUT:      1 spike, peak Δ 5.5°C                                       [Feb 17 11:00]
 PERSISTENT STATES
-HORSEFLY:         constant (-6.8°C) for 7h, RH varied 2%       [Jan 21 18:00 – Jan 22 00:00]
 LONE BUTTE:       constant (0.1°C) for 7h, RH varied 1%        [May 15 22:00 – May 16 04:00]
 MATHEW:           constant (0.0°C) for 7h, RH varied 0%        [Jan 30 19:00 – Jan 31 01:00]
+HORSEFLY:         constant (-6.8°C) for 6h, RH varied 2%       [Jan 21 19:00 – Jan 22 00:00]
 ```

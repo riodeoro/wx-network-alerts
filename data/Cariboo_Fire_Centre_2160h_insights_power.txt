@@ -1,4 +1,4 @@
-<!-- hash:0ec419e17870 -->
+<!-- hash:82b409ac74b3 -->
 ```
 NO DAYTIME CHARGING
 MATHEW (AC):      no charge 24 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Apr 28 08:00 – Jul 20 08:00]

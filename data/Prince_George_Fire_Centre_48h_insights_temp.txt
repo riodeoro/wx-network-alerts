@@ -1,6 +1,6 @@
-<!-- hash:eef257ecaca0 -->
+<!-- hash:11fa8315d9d4 -->
 ```
 EXTREME VALUES
-FORT NELSON FS:   Highest (33.2°C)                                   [since Jul 21, ongoing]
-TUMBLER HUB:      Lowest (4.6°C)                                              [Jul 21 05:00]
+BLUE RIVER 2:     Highest (34.0°C)                                            [Jul 22 18:00]
+PINK MOUNTAIN:    Lowest (2.8°C)                                     [since Jul 23, ongoing]
 ```

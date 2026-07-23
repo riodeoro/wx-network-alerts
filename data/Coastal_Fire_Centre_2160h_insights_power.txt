@@ -1,7 +1,7 @@
-<!-- hash:6a832fad6514 -->
+<!-- hash:9e6269746b48 -->
 ```
 LOW BATTERY VOLTAGE
-SCAR CREEK:       min 11.40V, mean 12.37V [low]                                      [Jun 4]
+SCAR CREEK:       min 11.40V, mean 12.38V [low]                                      [Jun 4]
 QUINSAM BASE FWX: min 12.30V, mean 12.88V                                           [Apr 24]
 NO DAYTIME CHARGING
 FRANK CREEK:      no charge 109 daytime readings (Vbat 12.60V, Vslr 11.50V)  [Apr 24 08:00 – Jul 22 09:00]

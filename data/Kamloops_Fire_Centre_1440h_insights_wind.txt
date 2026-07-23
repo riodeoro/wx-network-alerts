@@ -1,4 +1,4 @@
-<!-- hash:f7cf16d90f11 -->
+<!-- hash:88150ca89b07 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]
@@ -14,5 +14,5 @@ GREENSTONE HUB:   up to 83% of a day within ±5° of 309° (11 day(s) at 50%+)
 ASHNOLA:          up to 79% of a day within ±5° of 268° (11 day(s) at 50%+)
 LITTLE CHOPAKA:   up to 62% of a day within ±5° of 312° (7 day(s) at 50%+)
 PASKA LAKE:       up to 54% of a day within ±5° of 346° (5 day(s) at 50%+)
-SPLINTLUM:        up to 54% of a day within ±5° of 332° (4 day(s) at 50%+)
+SICAMOUS:         up to 50% of a day within ±5° of 346° (1 day(s) at 50%+)
 ```

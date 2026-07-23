@@ -1,4 +1,4 @@
-<!-- hash:7347f66186a9 -->
+<!-- hash:9c24f71e6192 -->
 ```
 PERSISTENT STATES
 BOYA LAKE:        zero wind 15h, 1 shifts >90°, max 11.7km/h   [Jun 23 22:00 – Jun 24 12:00]
@@ -8,7 +8,7 @@ VAN DYKE:         zero wind 13h, 2 shifts >90°, max 5.6km/h    [Jun 25 20:00 �
 BELL:             zero wind 12h, 3 shifts >90°, max 4.9km/h      [Jul 3 21:00 – Jul 4 08:00]
 DAILY DIRECTION CONCENTRATION
 NASS CAMP:        up to 88% of a day within ±5° of 189° (17 day(s) at 50%+)
-TELEGRAPH CREEK:  up to 67% of a day within ±5° of 247° (22 day(s) at 50%+)
+TELEGRAPH CREEK:  up to 67% of a day within ±5° of 247° (23 day(s) at 50%+)
 PARROTT:          up to 67% of a day within ±5° of 280° (12 day(s) at 50%+)
 AUGIER LAKE:      up to 62% of a day within ±5° of 225° (3 day(s) at 50%+)
 ATLIN:            up to 54% of a day within ±5° of 187° (2 day(s) at 50%+)

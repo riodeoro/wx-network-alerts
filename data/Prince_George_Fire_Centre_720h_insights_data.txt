@@ -1,8 +1,8 @@
-<!-- hash:da861f2c5b87 -->
+<!-- hash:cab1149fb4a8 -->
 ```
 LOW DATA COVERAGE
-SAWTOOTH:         32% (232/721h)                                              [Jun 22–Jul 2]
-GOSNEL:           32% (233/721h)                                     [since Jul 13, ongoing]
+SAWTOOTH:         30% (217/721h)                                              [Jun 23–Jul 2]
+GOSNEL:           34% (247/721h)                                     [since Jul 13, ongoing]
 UNCONFIGURED SENSORS
   BEAR LAKE, CHILAKO, FORT NELSON FS, GOSNEL, MCLEOD LAKE: battery voltage, charge current, and solar voltage unconfigured
 ```

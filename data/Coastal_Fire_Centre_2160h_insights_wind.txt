@@ -1,4 +1,4 @@
-<!-- hash:6a832fad6514 -->
+<!-- hash:9e6269746b48 -->
 ```
 PERSISTENT STATES
 HAIG CAMP:        zero wind 696h, 104 shifts >90°, max 16.7km/h  [Apr 29 13:00 – May 28 12:00]

@@ -1,6 +1,6 @@
-<!-- hash:2d13c604c7e2 -->
+<!-- hash:e698bd62e421 -->
 ```
 EXTREME VALUES
-ALEXIS CREEK:     Highest (34.7°C)                                   [since Jul 22, ongoing]
-BALDFACE:         Lowest (2.6°C)                                              [Jul 21 05:00]
+ALEXIS CREEK:     Highest (34.7°C)                                            [Jul 22 16:00]
+TAUTRI:           Lowest (4.8°C)                                     [since Jul 23, ongoing]
 ```

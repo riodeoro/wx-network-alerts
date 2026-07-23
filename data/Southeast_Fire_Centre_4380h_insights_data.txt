@@ -1,7 +1,7 @@
-<!-- hash:d5806113a2d0 -->
+<!-- hash:6c10acf0fc82 -->
 ```
 LOW DATA COVERAGE
-TABERNACLE WIND:  49% (2163/4381h)                                           [Jan 21–Apr 21]
+TABERNACLE WIND:  49% (2148/4381h)                                           [Jan 21–Apr 21]
 UNCONFIGURED SENSORS
   NORNS: battery voltage, charge current, gust speed, solar voltage, wind direction, and wind speed unconfigured
   BAKER: battery voltage, charge current, solar voltage, and temperature unconfigured

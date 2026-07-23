@@ -1,14 +1,14 @@
-<!-- hash:7511f7f0acfd -->
+<!-- hash:bdfca7f0a688 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 MERRITT 2 HUB:    86.6 km/h (1 reading >80)                                   [Jul 16 18:00]
-LITTLE CHOPAKA:   80.8 km/h (1 reading >80)                                   [Jul 15 21:00]
 PERSISTENT STATES
 EAST BARRIERE:    zero wind 12h, 3 shifts >90°, max 4.7km/h    [Jul 21 20:00 – Jul 22 07:00]
 SILVERSTAR SF:    zero wind 22h, gusts max 3.9km/h             [Jul 20 13:00 – Jul 21 10:00]
 DAILY DIRECTION CONCENTRATION
-MAYSON:           up to 54% of a day within ±5° of 237° (1 day(s) at 50%+)
+MAYSON:           up to 54% of a day within ±5° of 237° (2 day(s) at 50%+)
 MERRITT 2 HUB:    up to 54% of a day within ±5° of 208° (1 day(s) at 50%+)
 LITTLE CHOPAKA:   up to 50% of a day within ±5° of 319° (1 day(s) at 50%+)
+SICAMOUS:         up to 50% of a day within ±5° of 346° (1 day(s) at 50%+)
 GWYNETH LAKE:     up to 50% of a day within ±5° of 198° (1 day(s) at 50%+)
 ```

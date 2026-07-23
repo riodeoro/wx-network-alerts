@@ -1,1 +1,6 @@
-<!-- hash:4b2e38bb7c5a -->
+<!-- hash:b15eed3c7c1e -->
+```
+DAILY DIRECTION CONCENTRATION
+NOEL:             up to 54% of a day within ±5° of 212° (1 day(s) at 50%+)
+SIFTON:           up to 50% of a day within ±5° of 351° (1 day(s) at 50%+)
+```

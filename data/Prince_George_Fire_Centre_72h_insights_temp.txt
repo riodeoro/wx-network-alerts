@@ -1,6 +1,6 @@
-<!-- hash:4b2e38bb7c5a -->
+<!-- hash:b15eed3c7c1e -->
 ```
 EXTREME VALUES
-FORT NELSON FS:   Highest (33.2°C)                                   [since Jul 21, ongoing]
-PINK MOUNTAIN:    Lowest (3.4°C)                                              [Jul 20 05:00]
+BLUE RIVER 2:     Highest (34.0°C)                                            [Jul 22 18:00]
+PINK MOUNTAIN:    Lowest (2.8°C)                                     [since Jul 23, ongoing]
 ```

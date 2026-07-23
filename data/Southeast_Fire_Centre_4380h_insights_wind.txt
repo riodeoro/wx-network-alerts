@@ -1,4 +1,4 @@
-<!-- hash:d5806113a2d0 -->
+<!-- hash:6c10acf0fc82 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
@@ -11,7 +11,7 @@ NANCY GREENE:     zero wind 398h, 65 shifts >90°, max 29.2km/h  [May 3 12:00 �
 FLATHEAD 2:       zero wind 90h, 9 shifts >90°, max 6.5km/h    [Feb 16 21:00 – Feb 20 14:00]
 GOATHAVEN:        zero wind 83h, 9 shifts >90°, max 8.6km/h    [Feb 17 00:00 – Feb 20 10:00]
 BAKER:            zero wind 847h, 41 shifts >90° (max 180°)    [May 14 00:00 – Jun 18 06:00]
-BIG MOUTH 2:      zero wind 41h, 8 shifts >90° (max 147°)      [Jan 21 05:00 – Jan 22 21:00]
+GOLDSTREAM 2:     zero wind 36h, gusts max 1.8km/h             [Jan 29 01:00 – Jan 30 12:00]
 MARION:           zero wind 1597h, no gusts, no dir changes     [Jan 28 20:00 – Apr 5 08:00]
 SMALLWOOD:        zero wind 150h, no gusts, no dir changes     [May 14 13:00 – May 20 19:00]
 DAILY DIRECTION CONCENTRATION

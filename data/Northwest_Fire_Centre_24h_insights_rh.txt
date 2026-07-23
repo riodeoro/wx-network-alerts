@@ -1,5 +1,1 @@
-<!-- hash:3cae0690ffe8 -->
-```
-RH DROPPED AS LOW AS
-BOYA LAKE:        13.0%                                                       [Jul 21 18:00]
-```
+<!-- hash:fe8a0f54d788 -->

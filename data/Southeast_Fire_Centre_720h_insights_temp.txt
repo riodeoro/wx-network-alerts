@@ -1,18 +1,18 @@
-<!-- hash:1e3598927497 -->
+<!-- hash:e1bc0600bd08 -->
 ```
 EXTREME VALUES
-ROCK CREEK:       Highest (40.1°C)                                   [since Jul 22, ongoing]
+ROCK CREEK:       Highest (40.1°C)                                            [Jul 22 16:00]
 MARION:           Lowest (-0.5°C)                                              [Jul 6 05:00]
 TEMPERATURE EXCEEDED 35°C
-BEAVERDELL:       38.6°C                                             [since Jul 22, ongoing]
-PENDOREILLE:      37.6°C                                             [since Jul 22, ongoing]
+BEAVERDELL:       39.0°C                                                      [Jul 22 17:00]
+PENDOREILLE:      37.6°C                                                      [Jul 22 16:00]
 GRAND FORKS:      37.3°C                                                      [Jul 21 16:00]
-NICOLL:           36.3°C                                             [since Jul 22, ongoing]
+JOHNSON LAKE:     36.5°C                                                      [Jul 22 17:00]
+NICOLL:           36.3°C                                                      [Jul 22 16:00]
 DOWNIE:           35.8°C                                                      [Jul 17 16:00]
-JOHNSON LAKE:     35.7°C                                             [since Jul 22, ongoing]
 BRISCO:           35.6°C                                                      [Jul 16 17:00]
 GOATFELL:         35.6°C                                                      [Jul 22 14:00]
-TOBY HUB:         35.5°C                                             [since Jul 22, ongoing]
+TOBY HUB:         35.5°C                                                      [Jul 22 17:00]
 PERSISTENT STATES
 NANCY GREENE:     constant (9.1°C) for 6h, RH varied 0%                  [Jul 1 00:00–05:00]
 WHITE RIVER:      constant (7.8°C) for 6h, RH varied 0%                 [Jun 29 00:00–05:00]

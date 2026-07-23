@@ -1,5 +1,7 @@
-<!-- hash:cc3afafd6ba5 -->
+<!-- hash:d92e59902d6f -->
 ```
+LOW DATA COVERAGE
+WITCH:            20% (5/25h)                                           [Jul 22 08:00–12:00]
 UNCONFIGURED SENSORS
   BEAR LAKE, CHILAKO, FORT NELSON FS, GOSNEL, MCLEOD LAKE: battery voltage, charge current, and solar voltage unconfigured
 ```

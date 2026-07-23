@@ -1,6 +1,6 @@
-<!-- hash:d5424744c787 -->
+<!-- hash:79d4d657c2de -->
 ```
 EXTREME VALUES
-ALEXIS CREEK:     Highest (34.7°C)                                   [since Jul 22, ongoing]
-ANAHIM LAKE:      Lowest (6.2°C)                                              [Jul 22 06:00]
+ALEXIS CREEK:     Highest (34.7°C)                                            [Jul 22 16:00]
+TAUTRI:           Lowest (4.8°C)                                     [since Jul 23, ongoing]
 ```

@@ -1,4 +1,4 @@
-<!-- hash:58b1dc7f5142 -->
+<!-- hash:060d0bd964f9 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 ANAHIM LAKE:      282.2 km/h (1 reading >80)                                  [Jul 11 16:00]
@@ -8,5 +8,5 @@ NEMIAH:           up to 54% of a day within ±5° of 288° (1 day(s) at 50%+)
 ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (1 day(s) at 50%+)
 BIG VALLEY:       up to 50% of a day within ±5° of 30° (1 day(s) at 50%+)
 BALDFACE:         up to 50% of a day within ±5° of 289° (1 day(s) at 50%+)
-DECEPTION:        up to 50% of a day within ±5° of 56° (1 day(s) at 50%+)
+BENSON:           up to 50% of a day within ±5° of 134° (1 day(s) at 50%+)
 ```

@@ -1,21 +1,21 @@
-<!-- hash:72316a20bdce -->
+<!-- hash:3dab1120a4bd -->
 ```
 GUSTS EXCEEDED 80 KM/H
-VALEMOUNT 2:      1654.6 km/h (304 readings >80)               [Jan 21 07:00 – Jun 20 05:00]
+VALEMOUNT 2:      1654.6 km/h (302 readings >80)               [Jan 22 13:00 – Jun 20 05:00]
 BEDNESTI:         330.4 km/h (1 reading >80)                                  [Jun 19 17:00]
 KLUSKUS:          180.6 km/h (2 readings >80)                   [May 25 17:00 – Jun 3 15:00]
 GRAHAM:           138.2 km/h (2 readings >80)                  [Apr 14 20:00 – Jun 10 16:00]
 SEVEREID:         105.9 km/h (2 readings >80)                  [Feb 17 02:00 – Mar 24 22:00]
 PERSISTENT STATES
 HOLY CROSS 2:     zero wind 46h, 5 shifts >90°, max 2.8km/h    [Jan 24 18:00 – Jan 26 15:00]
-BLACKPINE:        zero wind 44h, 12 shifts >90°, max 3.2km/h   [Jan 21 05:00 – Jan 23 00:00]
 ELK MOUNTAIN:     zero wind 44h, 6 shifts >90°, max 2.9km/h    [Jan 25 16:00 – Jan 27 11:00]
-LOVELL COVE:      zero wind 176h, 25 shifts >90° (max 177°)    [Jan 21 05:00 – Jan 28 12:00]
+SIFTON:           zero wind 41h, 13 shifts >90°, max 8.8km/h   [Jan 22 20:00 – Jan 24 12:00]
+LOVELL COVE:      zero wind 161h, 20 shifts >90° (max 175°)    [Jan 21 20:00 – Jan 28 12:00]
 GOSNEL:           zero wind 101h, gusts max 10.9km/h            [Jan 30 23:00 – Feb 4 03:00]
 DAILY DIRECTION CONCENTRATION
 GOSNEL:           up to 96% of a day within ±5° of 187° (41 day(s) at 50%+)
 NELSON FORKS:     up to 96% of a day within ±5° of 3° (30 day(s) at 50%+)
-NOEL:             up to 79% of a day within ±5° of 212° (21 day(s) at 50%+)
+NOEL:             up to 79% of a day within ±5° of 212° (22 day(s) at 50%+)
 BEAR LAKE:        up to 67% of a day within ±5° of 102° (5 day(s) at 50%+)
 KOMIE:            up to 62% of a day within ±5° of 32° (20 day(s) at 50%+)
 ```

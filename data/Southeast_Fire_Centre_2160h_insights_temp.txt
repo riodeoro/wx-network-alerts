@@ -1,4 +1,4 @@
-<!-- hash:b21050572db0 -->
+<!-- hash:f1419c21ed43 -->
 ```
 EXTREME VALUES
 CARIBOO CREEK:    Highest (69.2°C)                                                  [May 15]
@@ -6,12 +6,12 @@ CARIBOO CREEK:    Lowest (-10.6°C)                                             
 TEMPERATURE EXCEEDED 35°C
 DUNCAN:           63.6°C                                                            [May 13]
 ROCK CREEK:       40.1°C                                             [since Jul 22, ongoing]
-BEAVERDELL:       38.6°C                                             [since Jul 22, ongoing]
+BEAVERDELL:       39.0°C                                             [since Jul 22, ongoing]
 PENDOREILLE:      37.6°C                                             [since Jul 22, ongoing]
 GRAND FORKS:      37.3°C                                                            [Jul 21]
+JOHNSON LAKE:     36.5°C                                             [since Jul 22, ongoing]
 NICOLL:           36.3°C                                             [since Jul 22, ongoing]
 DOWNIE:           35.8°C                                                            [Jul 17]
-JOHNSON LAKE:     35.7°C                                             [since Jul 22, ongoing]
 BRISCO:           35.6°C                                                            [Jul 16]
 GOATFELL:         35.6°C                                                            [Jul 22]
 TOBY HUB:         35.5°C                                             [since Jul 22, ongoing]

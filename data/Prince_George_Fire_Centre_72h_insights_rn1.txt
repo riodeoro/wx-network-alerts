@@ -1,5 +1,1 @@
-<!-- hash:4b2e38bb7c5a -->
-```
-SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
-BLUE RIVER 2:     silent 4 of 4 neighbour rain hours (100%)    [Jul 19 21:00 → Jul 20 00:00]
-```
+<!-- hash:b15eed3c7c1e -->

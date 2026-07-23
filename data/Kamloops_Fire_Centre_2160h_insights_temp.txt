@@ -1,24 +1,24 @@
-<!-- hash:a328bf145c2c -->
+<!-- hash:4d75e1f0fc79 -->
 ```
 EXTREME VALUES
-LITTLE CHOPAKA:   Highest (39.2°C)                                   [since Jul 22, ongoing]
+LITTLE CHOPAKA:   Highest (39.2°C)                                                  [Jul 22]
 COLDSCAUR LAKE:   Lowest (-8.9°C)                                                   [Apr 27]
 TEMPERATURE EXCEEDED 35°C
-SPLINTLUM:        38.8°C                                             [since Jul 22, ongoing]
-LILLOOET:         38.7°C                                             [since Jul 22, ongoing]
+SPLINTLUM:        38.8°C                                                            [Jul 22]
+LILLOOET:         38.7°C                                                            [Jul 22]
 SEYMOUR ARM:      38.6°C                                                            [Jul 17]
-FINTRY:           37.8°C                                             [since Jul 22, ongoing]
-AUGUST LAKE:      36.5°C                                                            [Jul 15]
-MERRITT 2 HUB:    36.5°C                                             [since Jul 22, ongoing]
-WEST KELOWNA:     36.5°C                                             [since Jul 22, ongoing]
+AUGUST LAKE:      38.5°C                                                            [Jul 22]
+PENTICTON RS:     38.3°C                                                            [Jul 22]
+FINTRY:           37.8°C                                                            [Jul 22]
+MERRITT 2 HUB:    36.5°C                                                            [Jul 22]
+WEST KELOWNA:     36.5°C                                                            [Jul 22]
 AFTON:            36.2°C                                                            [Jul 17]
-PENTICTON RS:     36.2°C                                                            [Jul 14]
 EAST BARRIERE:    36.1°C                                                            [Jul 17]
 TURTLE:           36.1°C                                                            [Jul 17]
-MABEL LAKE 2:     35.6°C                                             [since Jul 22, ongoing]
-STATION BAY 2:    35.5°C                                             [since Jul 22, ongoing]
+MABEL LAKE 2:     35.8°C                                                            [Jul 22]
+STATION BAY 2:    35.5°C                                                            [Jul 22]
 CLEARWATER HUB:   35.2°C                                                            [Jul 21]
-FIVE MILE:        35.2°C                                             [since Jul 22, ongoing]
+FIVE MILE:        35.2°C                                                            [Jul 22]
 PERSISTENT STATES
 PASKA LAKE:       constant (0.1°C) for 6h, RH varied 1%                 [May 17 00:00–05:00]
 ```

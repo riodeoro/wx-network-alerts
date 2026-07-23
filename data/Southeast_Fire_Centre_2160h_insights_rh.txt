@@ -1,20 +1,20 @@
-<!-- hash:b21050572db0 -->
+<!-- hash:f1419c21ed43 -->
 ```
 RH READ 0%
-BAKER:            1293 readings                                [Apr 23 17:00 → Jun 16 13:00]
-DEWAR CREEK:      258 readings                                  [Apr 23 17:00 → Jun 5 01:00]
+BAKER:            1278 readings                                [Apr 24 08:00 → Jun 16 13:00]
+DEWAR CREEK:      257 readings                                  [Apr 24 10:00 → Jun 5 01:00]
 CARIBOO CREEK:    14 readings                                  [May 18 14:00 → Jun 12 13:00]
 RH EXCEEDED 100%
 CARIBOO CREEK:    408 readings, max 116.0%                     [May 15 21:00 → Jun 12 07:00]
 DUNCAN:           102 readings, max 111.0%                     [May 11 06:00 → May 18 08:00]
 RH CHANGED >50%/H
 CARIBOO CREEK:    18 events, peak Δ -108%/h                    [May 16 14:00 → Jun 12 08:00]
-DEWAR CREEK:      61 events, peak Δ -100%/h                     [Apr 23 18:00 → Jun 5 12:00]
+DEWAR CREEK:      60 events, peak Δ -100%/h                     [Apr 24 10:00 → Jun 5 12:00]
 DUNCAN:           7 events, peak Δ +100%/h                     [May 20 10:00 → Jun 11 13:00]
 FLATHEAD 2:       2 events, peak Δ -80%/h                                [Jun 6 08:00–09:00]
 NICOLL:           2 events, peak Δ +64%/h                      [May 14 19:00 → Jul 15 18:00]
 PERSISTENT STATES
-BAKER:            RH constant 0% for 1293h, zero Rn_1          [Apr 23 17:00 – Jun 16 13:00]
+BAKER:            RH constant 0% for 1278h, zero Rn_1          [Apr 24 08:00 – Jun 16 13:00]
 NORNS:            RH constant 100% for 86h, zero Rn_1           [Apr 28 10:00 – May 1 23:00]
 DEWAR CREEK:      RH constant 0% for 34h, Rn_1 (4.2mm)           [May 7 13:00 – May 8 22:00]
 DUNCAN:           RH constant 100% for 19h, Rn_1 (11.0mm)       [Jun 30 17:00 – Jul 1 11:00]

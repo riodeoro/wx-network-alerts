@@ -1,29 +1,30 @@
-<!-- hash:302a4fcfc56e -->
+<!-- hash:23478c976135 -->
 ```
 EXTREME VALUES
-DARCY:            Highest (39.3°C)                                   [since Jul 22, ongoing]
+DARCY:            Highest (39.3°C)                                            [Jul 22 15:00]
 ALLISON PASS:     Lowest (0.0°C)                                               [Jul 6 06:00]
 TEMPERATURE EXCEEDED 35°C
 PEMBERTON BASE:   38.7°C                                             [since Jul 22, ongoing]
 BOOTHROYD:        38.0°C                                                      [Jul 21 18:00]
-ANDERSON CREEK:   37.9°C                                             [since Jul 22, ongoing]
+ANDERSON CREEK:   37.9°C                                                      [Jul 22 15:00]
+FRANK CREEK:      37.8°C                                             [since Jul 22, ongoing]
 SCAR CREEK:       37.8°C                                             [since Jul 22, ongoing]
 BIG SILVER 2:     37.7°C                                             [since Jul 22, ongoing]
-FRANK CREEK:      37.7°C                                                      [Jul 21 15:00]
 MESACHIE 2:       37.7°C                                             [since Jul 22, ongoing]
 TALCHAKO:         37.5°C                                             [since Jul 22, ongoing]
 TOBA CAMP:        37.4°C                                                      [Jun 23 16:00]
 NAHATLATCH:       37.3°C                                                      [Jul 21 16:00]
 MESACHIE 3:       36.7°C                                             [since Jul 22, ongoing]
 BEAVER CREEK:     36.4°C                                             [since Jul 22, ongoing]
-MEAGER CREEK:     36.3°C                                                      [Jul 21 16:00]
+MEAGER CREEK:     36.4°C                                             [since Jul 22, ongoing]
+HAIG CAMP:        36.0°C                                             [since Jul 22, ongoing]
 CHEAKAMUS:        35.7°C                                             [since Jul 22, ongoing]
-FORD MOUNTAIN:    35.7°C                                             [since Jul 22, ongoing]
-HAIG CAMP:        35.7°C                                             [since Jul 22, ongoing]
-MENZIES CAMP:     35.4°C                                             [since Jul 22, ongoing]
+FORD MOUNTAIN:    35.7°C                                                      [Jul 22 15:00]
+MENZIES CAMP:     35.4°C                                                      [Jul 22 15:00]
 TS NAHMINT:       35.3°C                                             [since Jul 22, ongoing]
+UBC RESEARCH:     35.3°C                                             [since Jul 22, ongoing]
 TS BURMAN:        35.2°C                                                      [Jun 23 16:00]
-UBC RESEARCH:     35.2°C                                             [since Jul 22, ongoing]
+TS MAURELLE:      35.1°C                                             [since Jul 22, ongoing]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 SALTSPRING 2:     1 spike, peak Δ 5.8°C                                        [Jul 7 12:00]
 PERSISTENT STATES

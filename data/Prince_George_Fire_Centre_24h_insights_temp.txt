@@ -1,6 +1,6 @@
-<!-- hash:cc3afafd6ba5 -->
+<!-- hash:d92e59902d6f -->
 ```
 EXTREME VALUES
-FORT NELSON FS:   Highest (33.2°C)                                            [Jul 21 17:00]
-MOOSE LAKE:       Lowest (5.9°C)                                     [since Jul 22, ongoing]
+BLUE RIVER 2:     Highest (34.0°C)                                            [Jul 22 18:00]
+PINK MOUNTAIN:    Lowest (2.8°C)                                     [since Jul 23, ongoing]
 ```

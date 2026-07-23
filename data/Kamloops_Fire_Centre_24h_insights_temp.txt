@@ -1,21 +1,19 @@
-<!-- hash:350dd07fe3c2 -->
+<!-- hash:48d12395df08 -->
 ```
 EXTREME VALUES
-LITTLE CHOPAKA:   Highest (39.2°C)                                   [since Jul 22, ongoing]
-COLDSCAUR LAKE:   Lowest (8.0°C)                                              [Jul 22 06:00]
+LITTLE CHOPAKA:   Highest (39.2°C)                                            [Jul 22 15:00]
+COLDSCAUR LAKE:   Lowest (8.6°C)                                     [since Jul 23, ongoing]
 TEMPERATURE EXCEEDED 35°C
-SPLINTLUM:        38.8°C                                             [since Jul 22, ongoing]
-LILLOOET:         38.7°C                                             [since Jul 22, ongoing]
-FINTRY:           37.8°C                                             [since Jul 22, ongoing]
-MERRITT 2 HUB:    36.5°C                                             [since Jul 22, ongoing]
-WEST KELOWNA:     36.5°C                                             [since Jul 22, ongoing]
-AUGUST LAKE:      35.7°C                                                      [Jul 21 17:00]
-MABEL LAKE 2:     35.6°C                                             [since Jul 22, ongoing]
-PENTICTON RS:     35.6°C                                             [since Jul 22, ongoing]
-AFTON:            35.5°C                                             [since Jul 22, ongoing]
-STATION BAY 2:    35.5°C                                             [since Jul 22, ongoing]
-EAST BARRIERE:    35.3°C                                                      [Jul 21 17:00]
-CLEARWATER HUB:   35.2°C                                                      [Jul 21 17:00]
-FIVE MILE:        35.2°C                                             [since Jul 22, ongoing]
-TURTLE:           35.2°C                                             [since Jul 22, ongoing]
+SPLINTLUM:        38.8°C                                                      [Jul 22 16:00]
+LILLOOET:         38.7°C                                                      [Jul 22 16:00]
+AUGUST LAKE:      38.5°C                                                      [Jul 22 16:00]
+PENTICTON RS:     38.3°C                                                      [Jul 22 18:00]
+FINTRY:           37.8°C                                                      [Jul 22 16:00]
+MERRITT 2 HUB:    36.5°C                                                      [Jul 22 14:00]
+WEST KELOWNA:     36.5°C                                                      [Jul 22 16:00]
+AFTON:            35.8°C                                                      [Jul 22 17:00]
+MABEL LAKE 2:     35.8°C                                                      [Jul 22 17:00]
+STATION BAY 2:    35.5°C                                                      [Jul 22 16:00]
+FIVE MILE:        35.2°C                                                      [Jul 22 16:00]
+TURTLE:           35.2°C                                                      [Jul 22 15:00]
 ```

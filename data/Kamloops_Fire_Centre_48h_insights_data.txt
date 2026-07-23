@@ -1,7 +1,7 @@
-<!-- hash:ff1f4424c39a -->
+<!-- hash:895acba0a12d -->
 ```
 LOW DATA COVERAGE
-ASHNOLA:          43% (21/49h)                                                   [Jul 20–21]
+ASHNOLA:          12% (6/49h)                                           [Jul 21 08:00–13:00]
 UNCONFIGURED SENSORS
   SILVERSTAR SF: battery voltage, charge current, solar voltage, and temperature unconfigured
   AFTON, LEIGHTON LAKE, MAYSON, MCLEAN LAKE: battery voltage, charge current, and solar voltage unconfigured

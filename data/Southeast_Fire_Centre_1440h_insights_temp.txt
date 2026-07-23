@@ -1,16 +1,16 @@
-<!-- hash:610cc1c96b3e -->
+<!-- hash:abda8b09d842 -->
 ```
 EXTREME VALUES
 ROCK CREEK:       Highest (40.1°C)                                   [since Jul 22, ongoing]
 NORNS:            Lowest (-4.3°C)                                                    [Jun 7]
 TEMPERATURE EXCEEDED 35°C
-BEAVERDELL:       38.6°C                                             [since Jul 22, ongoing]
+BEAVERDELL:       39.0°C                                             [since Jul 22, ongoing]
 PENDOREILLE:      37.6°C                                             [since Jul 22, ongoing]
 GRAND FORKS:      37.3°C                                                            [Jul 21]
 DUNCAN:           36.9°C                                                            [May 28]
+JOHNSON LAKE:     36.5°C                                             [since Jul 22, ongoing]
 NICOLL:           36.3°C                                             [since Jul 22, ongoing]
 DOWNIE:           35.8°C                                                            [Jul 17]
-JOHNSON LAKE:     35.7°C                                             [since Jul 22, ongoing]
 BRISCO:           35.6°C                                                            [Jul 16]
 GOATFELL:         35.6°C                                                            [Jul 22]
 TOBY HUB:         35.5°C                                             [since Jul 22, ongoing]

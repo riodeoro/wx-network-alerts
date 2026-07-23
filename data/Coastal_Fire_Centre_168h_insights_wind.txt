@@ -1,4 +1,4 @@
-<!-- hash:645bd4feee97 -->
+<!-- hash:33ac0857434c -->
 ```
 PERSISTENT STATES
 MESACHIE 2:       zero wind 13h, 3 shifts >90°, max 7.9km/h    [Jul 20 23:00 – Jul 21 11:00]
@@ -7,5 +7,4 @@ DAILY DIRECTION CONCENTRATION
 APE LAKE:         up to 62% of a day within ±5° of 353° (1 day(s) at 50%+)
 CHEAKAMUS:        up to 54% of a day within ±5° of 290° (2 day(s) at 50%+)
 POWELL RIVER WEST LAKE: up to 50% of a day within ±5° of 155° (1 day(s) at 50%+)
-TALCHAKO:         up to 50% of a day within ±5° of 263° (1 day(s) at 50%+)
 ```

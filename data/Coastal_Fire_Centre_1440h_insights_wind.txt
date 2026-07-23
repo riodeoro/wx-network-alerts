@@ -1,15 +1,15 @@
-<!-- hash:f9153d1b5b4e -->
+<!-- hash:335363b0ce42 -->
 ```
 PERSISTENT STATES
 MESACHIE 2:       zero wind 17h, 3 shifts >90°, max 10.2km/h     [Jul 2 17:00 – Jul 3 09:00]
 TS ARTLISH:       zero wind 15h, 3 shifts >90°, max 2.3km/h    [Jun 25 19:00 – Jun 26 09:00]
 UBC RESEARCH:     zero wind 14h, 3 shifts >90°, max 4.1km/h      [Jul 2 19:00 – Jul 3 08:00]
 QUINSAM BASE FWX: zero wind 14h, 4 shifts >90°, max 5.2km/h     [Jul 9 18:00 – Jul 10 07:00]
-HAIG CAMP:        zero wind 116h, 26 shifts >90° (max 178°)    [May 23 17:00 – May 28 12:00]
+HAIG CAMP:        zero wind 101h, 26 shifts >90° (max 178°)    [May 24 08:00 – May 28 12:00]
 DAILY DIRECTION CONCENTRATION
 FRANK CREEK:      up to 67% of a day within ±5° of 201° (8 day(s) at 50%+)
 TS BLACKWATER:    up to 67% of a day within ±5° of 115° (4 day(s) at 50%+)
 APE LAKE:         up to 62% of a day within ±5° of 353° (3 day(s) at 50%+)
-TS NAKA CREEK:    up to 62% of a day within ±5° of 336° (2 day(s) at 50%+)
 BOOTHROYD:        up to 62% of a day within ±5° of 337° (4 day(s) at 50%+)
+TS ARTLISH:       up to 54% of a day within ±5° of 111° (1 day(s) at 50%+)
 ```
