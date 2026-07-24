@@ -1,7 +1,7 @@
-<!-- hash:972e489834fe -->
+<!-- hash:c13e68ff44f1 -->
 ```
 RH READ 0%
-BAKER:            3498 readings                                [Jan 21 20:00 → Jun 16 13:00]
+BAKER:            3477 readings                                [Jan 22 17:00 → Jun 16 13:00]
 DEWAR CREEK:      422 readings                                  [Jan 31 19:00 → Jun 5 01:00]
 CARIBOO CREEK:    14 readings                                  [May 18 14:00 → Jun 12 13:00]
 RH EXCEEDED 100%
@@ -15,10 +15,10 @@ PENDOREILLE:      2 events, peak Δ -91%/h                               [Apr 15
 FLATHEAD 2:       2 events, peak Δ -80%/h                                [Jun 6 08:00–09:00]
 RH DROPPED AS LOW AS
 CARIBOO CREEK:    0.0%                                                              [May 18]
+DUNCAN:           0.0%                                                              [Jun 11]
 DOWNIE:           3.0%                                                              [Jun 18]
-TABERNACLE WIND:  17.0%                                                             [Jan 22]
 PERSISTENT STATES
-BAKER:            RH constant 0% for 3498h, zero Rn_1          [Jan 21 20:00 – Jun 16 13:00]
+BAKER:            RH constant 0% for 3477h, zero Rn_1          [Jan 22 17:00 – Jun 16 13:00]
 DUNCAN:           RH constant 100% for 604h, Rn_1 (99.2mm)     [Mar 21 09:00 – Apr 15 12:00]
 NORNS:            RH constant 100% for 470h, zero Rn_1          [Apr 4 18:00 – Apr 24 07:00]
 REVELSTOKE:       RH constant 100% for 215h, zero Rn_1          [Jan 28 15:00 – Feb 6 13:00]

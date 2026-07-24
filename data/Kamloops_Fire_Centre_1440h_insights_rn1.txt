@@ -1,4 +1,4 @@
-<!-- hash:49cea1d54691 -->
+<!-- hash:e1b6b4543f4a -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 MABEL LAKE 2:     2 hours, Rn_1 (17.4mm)                                [Jun 23 14:00–16:00]

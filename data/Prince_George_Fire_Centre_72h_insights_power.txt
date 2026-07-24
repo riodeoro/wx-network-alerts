@@ -1,5 +1,7 @@
-<!-- hash:4a6f616658ae -->
+<!-- hash:3ae61acd7679 -->
 ```
 LOW BATTERY VOLTAGE
-LEMORAY:          min 11.70V, mean 11.70V [low]                               [Jul 20 08:00]
+LEMORAY:          min 11.70V, mean 11.70V [low]                               [Jul 21 05:00]
+NO DAYTIME CHARGING
+GRAHAM:           no charge 6 daytime readings (Vbat 12.40V, Vslr 11.95V)  [Jul 21 09:00 – Jul 23 17:00]
 ```

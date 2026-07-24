@@ -1,4 +1,4 @@
-<!-- hash:80edc8c488c6 -->
+<!-- hash:5ed715eeab78 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]

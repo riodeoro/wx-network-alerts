@@ -1,4 +1,4 @@
-<!-- hash:eee4f4e6c02e -->
+<!-- hash:72ea583325a0 -->
 ```
 RH EXCEEDED 100%
 TABLE RIVER:      248 readings, max 116.0%                     [Jan 27 16:00 → May 12 10:00]
@@ -11,7 +11,6 @@ FORT NELSON FS:   2 events, peak Δ +61%/h                      [Jun 24 18:00 �
 RH DROPPED AS LOW AS
 TABLE RIVER:      1.0%                                                               [Mar 3]
 MANSON:           3.0%                                                              [Jun 23]
-VALEMOUNT 2:      14.0%                                                             [Apr 25]
 PERSISTENT STATES
 MANSON:           RH constant 100% for 378h, Rn_1 (24.6mm)     [Mar 27 11:00 – Apr 12 04:00]
 SIFTON:           RH constant 100% for 135h, Rn_1 (31.8mm)       [Feb 2 14:00 – Feb 8 04:00]

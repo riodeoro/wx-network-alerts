@@ -1,4 +1,4 @@
-<!-- hash:ffbbf4c99c85 -->
+<!-- hash:2f2c92918a4e -->
 ```
 EXTREME VALUES
 ROCK CREEK:       Highest (40.1°C)                                                  [Jul 22]
@@ -11,7 +11,9 @@ DUNCAN:           36.9°C                                                       
 JOHNSON LAKE:     36.5°C                                                            [Jul 22]
 NICOLL:           36.3°C                                                            [Jul 22]
 DOWNIE:           35.8°C                                                            [Jul 17]
+KOOCANUSA:        35.8°C                                                            [Jul 23]
 BRISCO:           35.6°C                                                            [Jul 16]
+ELKO:             35.6°C                                                            [Jul 23]
 GOATFELL:         35.6°C                                                            [Jul 22]
 TOBY HUB:         35.5°C                                                            [Jul 22]
 PERSISTENT STATES

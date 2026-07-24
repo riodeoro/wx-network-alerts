@@ -1,9 +1,9 @@
-<!-- hash:be832e166a57 -->
+<!-- hash:1d91783fd58a -->
 ```
 LOW BATTERY VOLTAGE
-LEMORAY:          min 11.70V, mean 11.74V [low]                                     [May 24]
+LEMORAY:          min 11.70V, mean 11.74V [low]                                     [May 25]
 NO DAYTIME CHARGING
-GRAHAM:           no charge 111 daytime readings (Vbat 12.60V, Vslr 12.00V)  [May 24 10:00 – Jul 22 09:00]
-LEMORAY:          no charge 24 daytime readings (Vbat 11.75V, Vslr 11.05V) [low]  [May 24 17:00 – Jul 19 19:00]
+GRAHAM:           no charge 109 daytime readings (Vbat 12.60V, Vslr 12.00V)  [May 25 08:00 – Jul 23 17:00]
+LEMORAY:          no charge 23 daytime readings (Vbat 11.70V, Vslr 11.00V) [low]  [May 25 08:00 – Jul 19 19:00]
 NELSON FORKS:     no charge 14 daytime readings (Vbat 12.70V, Vslr 11.60V)  [May 29 08:00 – Jul 22 10:00]
 ```

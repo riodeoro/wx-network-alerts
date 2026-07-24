@@ -1,1 +1,7 @@
-<!-- hash:671e52f0e0fc -->
+<!-- hash:e98a9c0fb501 -->
+```
+RH CHANGED >50%/H
+BEAVERDELL:       1 event, peak Δ +62%/h                                      [Jul 23 20:00]
+RH DROPPED AS LOW AS
+POWDER CREEK:     16.0%                                                       [Jul 22 16:00]
+```

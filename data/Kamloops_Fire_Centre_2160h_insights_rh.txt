@@ -1,7 +1,7 @@
-<!-- hash:80edc8c488c6 -->
+<!-- hash:5ed715eeab78 -->
 ```
 RH READ 0%
-SILVERSTAR SF:    2150 readings                       [Apr 24 08:00 → Jul 23 07:00, ongoing]
+SILVERSTAR SF:    2150 readings                       [Apr 25 05:00 → Jul 24 04:00, ongoing]
 MABEL LAKE 2:     2 readings                                            [Apr 30 20:00–21:00]
 RH CHANGED >50%/H
 TURTLE:           2 events, peak Δ +70%/h                       [May 6 18:00 → Jun 25 18:00]
@@ -10,7 +10,7 @@ CLEARWATER HUB:   2 events, peak Δ +61%/h                      [Jun 25 23:00 �
 WELLS GRAY:       1 event, peak Δ +57%/h                                       [Jun 3 20:00]
 ASPEN GROVE:      1 event, peak Δ +53%/h                                       [Jun 3 14:00]
 PERSISTENT STATES
-SILVERSTAR SF:    RH constant 0% for 2150h, zero Rn_1  [Apr 24 08:00 – Jul 23 07:00, ongoing]
+SILVERSTAR SF:    RH constant 0% for 2150h, zero Rn_1  [Apr 25 05:00 – Jul 24 04:00, ongoing]
 SICAMOUS:         RH constant 100% for 20h, Rn_1 (21.4mm)      [May 13 13:00 – May 14 08:00]
 CAHILTY:          RH constant 99% for 12h, Rn_1 (11.4mm)       [May 13 22:00 – May 14 09:00]
 WELLS GRAY:       RH constant 100% for 12h, zero Rn_1          [May 29 20:00 – May 30 07:00]

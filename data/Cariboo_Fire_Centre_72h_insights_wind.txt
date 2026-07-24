@@ -1,5 +1,5 @@
-<!-- hash:e62d3dc9e361 -->
+<!-- hash:ce666a3bd9f8 -->
 ```
 DAILY DIRECTION CONCENTRATION
-BENSON:           up to 50% of a day within ±5° of 134° (1 day(s) at 50%+)  [since Jul 22, ongoing]
+BENSON:           up to 50% of a day within ±5° of 134° (1 day(s) at 50%+)          [Jul 22]
 ```

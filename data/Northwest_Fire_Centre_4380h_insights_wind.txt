@@ -1,4 +1,4 @@
-<!-- hash:1cc1ed96eb6e -->
+<!-- hash:689dec263ce2 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 PINE CREEK:       95.0 km/h (5 readings >80)                     [Feb 8 00:00 – Mar 7 20:00]
@@ -6,11 +6,11 @@ PARROTT:          90.5 km/h (16 readings >80)                   [Feb 12 10:00 �
 GRASSY PLAINS HUB: 84.7 km/h (1 reading >80)                                  [Feb 26 07:00]
 NASS CAMP:        84.3 km/h (1 reading >80)                                    [Mar 7 18:00]
 PERSISTENT STATES
-KISPIOX HUB:      zero wind 108h, 33 shifts >90°, max 6.8km/h  [Jan 22 16:00 – Jan 27 03:00]
+KISPIOX HUB:      zero wind 107h, 33 shifts >90°, max 6.8km/h  [Jan 22 17:00 – Jan 27 03:00]
 ROSSWOOD:         zero wind 92h, 17 shifts >90°, max 16.2km/h  [Jan 23 16:00 – Jan 27 11:00]
 OLD FADDY:        zero wind 74h, 10 shifts >90°, max 5.4km/h    [Jan 31 23:00 – Feb 4 00:00]
 VAN DYKE:         zero wind 47h, 15 shifts >90°, max 2.7km/h   [Jan 26 18:00 – Jan 28 16:00]
-BOB QUINN LAKE:   zero wind 45h, 18 shifts >90° (max 178°)     [Jan 21 20:00 – Jan 23 16:00]
+PINE CREEK:       zero wind 30h, 2 shifts >90°, max 28.0km/h   [Mar 17 06:00 – Mar 18 11:00]
 DAILY DIRECTION CONCENTRATION
 BELL-IRVING:      up to 100% of a day within ±5° of 35° (2 day(s) at 50%+)          [Jan 27]
 DEASE LAKE FS:    up to 100% of a day within ±5° of 343° (8 day(s) at 50%+)         [Feb 21]

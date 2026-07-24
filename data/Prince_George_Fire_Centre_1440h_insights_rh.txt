@@ -1,4 +1,4 @@
-<!-- hash:be832e166a57 -->
+<!-- hash:1d91783fd58a -->
 ```
 RH CHANGED >50%/H
 ELK MOUNTAIN:     1 event, peak Δ +68%/h                                      [Jun 23 18:00]
@@ -11,5 +11,5 @@ NELSON FORKS:     RH constant 100% for 31h, Rn_1 (45.2mm)        [Jun 5 02:00 �
 MANSON:           RH constant 100% for 22h, Rn_1 (15.6mm)      [Jun 18 19:00 – Jun 19 16:00]
 NOEL:             RH constant 100% for 19h, Rn_1 (29.6mm)      [Jun 27 16:00 – Jun 28 10:00]
 KOMIE:            RH constant 100% for 16h, Rn_1 (0.4mm)         [Jul 1 16:00 – Jul 2 07:00]
-HIXON:            RH constant 100% for 12h, zero Rn_1          [Jul 19 23:00 – Jul 20 10:00]
+CATFISH:          RH constant 100% for 12h, zero Rn_1          [Jul 19 21:00 – Jul 20 08:00]
 ```

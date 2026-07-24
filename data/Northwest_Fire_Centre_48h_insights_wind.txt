@@ -1,5 +1,5 @@
-<!-- hash:a214844a4090 -->
+<!-- hash:9c416396ac3d -->
 ```
 DAILY DIRECTION CONCENTRATION
-TELEGRAPH CREEK:  up to 54% of a day within ±5° of 255° (1 day(s) at 50%+)  [since Jul 22, ongoing]
+TELEGRAPH CREEK:  up to 62% of a day within ±5° of 246° (1 day(s) at 50%+)  [since Jul 23, ongoing]
 ```

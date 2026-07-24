@@ -1,1 +1,5 @@
-<!-- hash:646ec83df9ab -->
+<!-- hash:93a9b769b369 -->
+```
+RH CHANGED >50%/H
+BEAVERDELL:       1 event, peak Δ +62%/h                                      [Jul 23 20:00]
+```

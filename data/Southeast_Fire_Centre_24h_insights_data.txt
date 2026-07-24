@@ -1,5 +1,7 @@
-<!-- hash:646ec83df9ab -->
+<!-- hash:93a9b769b369 -->
 ```
+LOW DATA COVERAGE
+DARKWOODS:        32% (8/25h)                                           [Jul 23 05:00–13:00]
 UNCONFIGURED SENSORS
   NORNS: battery voltage, charge current, gust speed, solar voltage, wind direction, and wind speed unconfigured
   BAKER: RH, battery voltage, charge current, solar voltage, and temperature unconfigured

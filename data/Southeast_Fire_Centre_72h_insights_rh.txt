@@ -1,1 +1,7 @@
-<!-- hash:ad9cf0e9bc96 -->
+<!-- hash:b8dac8f8527c -->
+```
+RH CHANGED >50%/H
+BEAVERDELL:       1 event, peak Δ +62%/h                                      [Jul 23 20:00]
+RH DROPPED AS LOW AS
+GOLD HILL:        19.0%                                                       [Jul 21 14:00]
+```

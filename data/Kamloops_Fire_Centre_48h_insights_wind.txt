@@ -1,9 +1,1 @@
-<!-- hash:7929c155db8a -->
-```
-PERSISTENT STATES
-SILVERSTAR SF:    zero wind 20h, 1 shifts >90°, max 5.6km/h    [Jul 21 14:00 – Jul 22 09:00]
-EAST BARRIERE:    zero wind 12h, 3 shifts >90°, max 4.7km/h    [Jul 21 20:00 – Jul 22 07:00]
-DAILY DIRECTION CONCENTRATION
-MAYSON:           up to 54% of a day within ±5° of 237° (1 day(s) at 50%+)  [since Jul 22, ongoing]
-SICAMOUS:         up to 50% of a day within ±5° of 346° (1 day(s) at 50%+)  [since Jul 22, ongoing]
-```
+<!-- hash:b18c625fe030 -->

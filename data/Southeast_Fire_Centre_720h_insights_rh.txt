@@ -1,8 +1,9 @@
-<!-- hash:7daf7de0dbec -->
+<!-- hash:3e45f32b77d0 -->
 ```
 RH CHANGED >50%/H
 NICOLL:           1 event, peak Δ +64%/h                                      [Jul 15 18:00]
 ELKO:             1 event, peak Δ -63%/h                                       [Jul 1 17:00]
+BEAVERDELL:       1 event, peak Δ +62%/h                                      [Jul 23 20:00]
 DOWNIE:           1 event, peak Δ +57%/h                                      [Jul 18 15:00]
 BLAEBERRY:        1 event, peak Δ +55%/h                                      [Jun 25 20:00]
 PERSISTENT STATES

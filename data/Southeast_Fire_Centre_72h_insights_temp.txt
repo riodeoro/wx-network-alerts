@@ -1,4 +1,4 @@
-<!-- hash:ad9cf0e9bc96 -->
+<!-- hash:b8dac8f8527c -->
 ```
 EXTREME VALUES
 ROCK CREEK:       Highest (40.1°C)                                            [Jul 22 16:00]
@@ -9,6 +9,8 @@ PENDOREILLE:      37.6°C                                                      [
 GRAND FORKS:      37.3°C                                                      [Jul 21 16:00]
 JOHNSON LAKE:     36.5°C                                                      [Jul 22 17:00]
 NICOLL:           36.3°C                                                      [Jul 22 16:00]
+KOOCANUSA:        35.8°C                                                      [Jul 23 15:00]
+ELKO:             35.6°C                                                      [Jul 23 17:00]
 GOATFELL:         35.6°C                                                      [Jul 22 14:00]
 TOBY HUB:         35.5°C                                                      [Jul 22 17:00]
 ```

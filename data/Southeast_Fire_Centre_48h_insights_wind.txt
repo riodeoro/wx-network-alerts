@@ -1,5 +1,7 @@
-<!-- hash:671e52f0e0fc -->
+<!-- hash:e98a9c0fb501 -->
 ```
+GUSTS EXCEEDED 80 KM/H
+JOHNSON LAKE:     82.6 km/h (1 reading >80)                                   [Jul 24 01:00]
 PERSISTENT STATES
-BAKER:            zero wind 48h, 6 shifts >90° (max 170°)  [Jul 21 08:00 – Jul 23 07:00, ongoing]
+BAKER:            zero wind 49h, 2 shifts >90° (max 170°)  [Jul 22 05:00 – Jul 24 05:00, ongoing]
 ```

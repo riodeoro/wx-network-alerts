@@ -1,8 +1,8 @@
-<!-- hash:18c07e5cfc29 -->
+<!-- hash:97a6ac92df20 -->
 ```
 LOW DATA COVERAGE
 CHEF CREEK TEST:  2% (99/4381h)                                                  [Apr 16–20]
-TS MAURELLE:      36% (1595/4381h)                                   [since Jan 21, ongoing]
+TS MAURELLE:      36% (1595/4381h)                                   [since Jan 22, ongoing]
 UNCONFIGURED SENSORS
   APE LAKE, HOMATHKO, KLINAKLINI, MACHMELL KLINIKLINI, MESACHIE 2: battery voltage, charge current, and solar voltage unconfigured
 ```

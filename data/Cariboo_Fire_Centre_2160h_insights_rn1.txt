@@ -1,4 +1,4 @@
-<!-- hash:8f768817f6a9 -->
+<!-- hash:84162910c712 -->
 ```
 PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
 BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]

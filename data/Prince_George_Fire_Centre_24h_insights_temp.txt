@@ -1,6 +1,6 @@
-<!-- hash:d92e59902d6f -->
+<!-- hash:b37265421a45 -->
 ```
 EXTREME VALUES
-BLUE RIVER 2:     Highest (34.0°C)                                            [Jul 22 18:00]
+VALEMOUNT AIRPORT: Highest (32.3°C)                                           [Jul 23 16:00]
 PINK MOUNTAIN:    Lowest (2.8°C)                                              [Jul 23 05:00]
 ```

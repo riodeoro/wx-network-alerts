@@ -1,4 +1,4 @@
-<!-- hash:3d7c35d7cf58 -->
+<!-- hash:eb31c1324093 -->
 ```
 EXTREME VALUES
 DARCY:            Highest (39.3°C)                                            [Jul 22 15:00]
@@ -12,7 +12,6 @@ SCAR CREEK:       37.8°C                                                      [
 BIG SILVER 2:     37.7°C                                                      [Jul 22 16:00]
 MESACHIE 2:       37.7°C                                                      [Jul 22 17:00]
 TALCHAKO:         37.5°C                                                      [Jul 22 16:00]
-TOBA CAMP:        37.4°C                                                      [Jun 23 16:00]
 NAHATLATCH:       37.3°C                                                      [Jul 21 16:00]
 MESACHIE 3:       36.7°C                                                      [Jul 22 16:00]
 BEAVER CREEK:     36.4°C                                                      [Jul 22 16:00]
@@ -20,10 +19,10 @@ MEAGER CREEK:     36.4°C                                                      [
 HAIG CAMP:        36.0°C                                                      [Jul 22 18:00]
 CHEAKAMUS:        35.7°C                                                      [Jul 22 16:00]
 FORD MOUNTAIN:    35.7°C                                                      [Jul 22 15:00]
+TOBA CAMP:        35.6°C                                                      [Jul 21 14:00]
 MENZIES CAMP:     35.4°C                                                      [Jul 22 15:00]
 TS NAHMINT:       35.3°C                                                      [Jul 22 16:00]
 UBC RESEARCH:     35.3°C                                                      [Jul 22 17:00]
-TS BURMAN:        35.2°C                                                      [Jun 23 16:00]
 TS MAURELLE:      35.1°C                                                      [Jul 22 17:00]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 SALTSPRING 2:     1 spike, peak Δ 5.8°C                                        [Jul 7 12:00]

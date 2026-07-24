@@ -1,9 +1,10 @@
-<!-- hash:972e489834fe -->
+<!-- hash:c13e68ff44f1 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
 TABERNACLE WIND:  128.9 km/h (106 readings >80)                  [Feb 8 00:00 – Apr 7 07:00]
 SPARWOOD:         85.4 km/h (1 reading >80)                                   [Feb 26 13:00]
+JOHNSON LAKE:     82.6 km/h (1 reading >80)                                   [Jul 24 01:00]
 SUSTAINED WIND EXCEEDED 60 KM/H
 TABERNACLE WIND:  70.0 km/h (11 readings >60)                  [Feb 26 06:00 – Mar 19 04:00]
 PERSISTENT STATES

@@ -1,6 +1,6 @@
-<!-- hash:79d4d657c2de -->
+<!-- hash:d502147f2c32 -->
 ```
 EXTREME VALUES
-ALEXIS CREEK:     Highest (34.7°C)                                            [Jul 22 16:00]
+ALEXIS CREEK:     Highest (34.8°C)                                            [Jul 23 15:00]
 TAUTRI:           Lowest (4.8°C)                                              [Jul 23 05:00]
 ```

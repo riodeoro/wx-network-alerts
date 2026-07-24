@@ -1,5 +1,6 @@
-<!-- hash:7118090b6b34 -->
+<!-- hash:fa709a28118b -->
 ```
 RH CHANGED >50%/H
+BEAVERDELL:       1 event, peak Δ +62%/h                                      [Jul 23 20:00]
 DOWNIE:           1 event, peak Δ +57%/h                                      [Jul 18 15:00]
 ```

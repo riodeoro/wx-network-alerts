@@ -1,4 +1,4 @@
-<!-- hash:68a65cb34366 -->
+<!-- hash:156a4669a7f7 -->
 ```
 PERSISTENT STATES
 MANSON:           zero wind 14h, 1 shifts >90°, max 4.9km/h    [Jun 26 18:00 – Jun 27 07:00]
@@ -7,5 +7,5 @@ WONOWON:          up to 71% of a day within ±5° of 208° (2 day(s) at 50%+)   
 MUSKWA:           up to 67% of a day within ±5° of 243° (2 day(s) at 50%+)          [Jul 15]
 HOLY CROSS 2:     up to 58% of a day within ±5° of 267° (1 day(s) at 50%+)          [Jun 30]
 KLUSKUS:          up to 54% of a day within ±5° of 276° (1 day(s) at 50%+)          [Jun 28]
-NOEL:             up to 54% of a day within ±5° of 212° (2 day(s) at 50%+)  [since Jul 22, ongoing]
+NOEL:             up to 54% of a day within ±5° of 212° (2 day(s) at 50%+)          [Jul 22]
 ```

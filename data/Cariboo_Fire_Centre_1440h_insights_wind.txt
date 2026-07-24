@@ -1,4 +1,4 @@
-<!-- hash:4e12c30962fb -->
+<!-- hash:1743f8962adf -->
 ```
 GUSTS EXCEEDED 80 KM/H
 ANAHIM LAKE:      282.2 km/h (1 reading >80)                                  [Jul 11 16:00]
@@ -8,7 +8,7 @@ HORSEFLY:         130.3 km/h (3 readings >80)                   [Jun 4 11:00 –
 DAILY DIRECTION CONCENTRATION
 MEADOW LAKE:      up to 71% of a day within ±5° of 178° (2 day(s) at 50%+)           [Jun 8]
 YOUNG LAKE:       up to 67% of a day within ±5° of 159° (1 day(s) at 50%+)           [Jul 2]
-CHURN CREEK:      up to 62% of a day within ±5° of 160° (1 day(s) at 50%+)          [May 25]
 GASPARD:          up to 62% of a day within ±5° of 173° (2 day(s) at 50%+)           [Jul 2]
 ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (2 day(s) at 50%+)          [Jul 18]
+NEMIAH:           up to 54% of a day within ±5° of 288° (1 day(s) at 50%+)          [Jul 18]
 ```

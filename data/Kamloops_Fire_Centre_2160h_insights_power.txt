@@ -1,14 +1,15 @@
-<!-- hash:80edc8c488c6 -->
+<!-- hash:5ed715eeab78 -->
 ```
 LOW BATTERY VOLTAGE
-MABEL LAKE 2 (AC): min 10.50V, mean 13.04V [low]                                    [Jul 22]
-GLIMPSE:          min 11.50V, mean 12.48V [low]                                     [May 13]
+MABEL LAKE 2 (AC): min 10.50V, mean 13.03V [low]                                    [Jul 22]
+GLIMPSE:          min 11.50V, mean 12.49V [low]                                     [May 13]
 NO DAYTIME CHARGING
 MABEL LAKE 2 (AC): no charge 298 daytime readings (Vbat 11.80V, Vslr 0.10V) [low]  [Jun 18 16:00 – Jul 22 19:00]
-GLIMPSE:          no charge 24 daytime readings (Vbat 11.70V, Vslr 11.55V) [low]  [Apr 24 08:00 – Jun 12 19:00]
-CAHILTY:          no charge 7 daytime readings (Vbat 12.70V, Vslr 11.80V)  [May 13 08:00 – May 29 10:00]
+GLIMPSE:          no charge 23 daytime readings (Vbat 11.70V, Vslr 11.50V) [low]  [Apr 25 08:00 – Jun 12 19:00]
+CAHILTY:          no charge 9 daytime readings (Vbat 12.70V, Vslr 11.80V)  [May 13 08:00 – Jul 23 09:00]
 COLDSCAUR LAKE:   no charge 6 daytime readings (Vbat 12.70V, Vslr 12.55V)  [May 13 08:00 – Jul 1 08:00]
+SPLINTLUM:        no charge 5 daytime readings (Vbat 12.70V, Vslr 12.40V)  [May 13 08:00 – Jul 23 08:00]
 BATTERY VOLTAGE DECLINING
-MABEL LAKE 2 (AC): 14.03V → 10.97V (dropped 3.07V)                           [Apr 25–Jul 23]
-CLEARWATER HUB:   13.93V → 13.27V (dropped 0.67V)                            [Apr 25–Jul 23]
+MABEL LAKE 2 (AC): 14.07V → 10.97V (dropped 3.10V)                           [Apr 25–Jul 23]
+CLEARWATER HUB:   13.97V → 13.40V (dropped 0.57V)                            [Apr 25–Jul 24]
 ```

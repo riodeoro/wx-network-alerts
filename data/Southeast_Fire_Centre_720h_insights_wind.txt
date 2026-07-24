@@ -1,9 +1,10 @@
-<!-- hash:7daf7de0dbec -->
+<!-- hash:3e45f32b77d0 -->
 ```
 GUSTS EXCEEDED 80 KM/H
 FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
+JOHNSON LAKE:     82.6 km/h (1 reading >80)                                   [Jul 24 01:00]
 PERSISTENT STATES
-BAKER:            zero wind 464h, 21 shifts >90° (max 179°)  [Jul 4 00:00 – Jul 23 07:00, ongoing]
+BAKER:            zero wind 486h, 21 shifts >90° (max 179°)  [Jul 4 00:00 – Jul 24 05:00, ongoing]
 EIGHT MILE:       zero wind 12h, gusts max 5.3km/h               [Jul 5 20:00 – Jul 6 07:00]
 DAILY DIRECTION CONCENTRATION
 ROUND PRAIRIE:    up to 92% of a day within ±5° of 161° (2 day(s) at 50%+)          [Jul 12]

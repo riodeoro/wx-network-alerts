@@ -1,7 +1,7 @@
-<!-- hash:c45f43777c8f -->
+<!-- hash:18d12718ca1f -->
 ```
 EXTREME VALUES
-ALEXIS CREEK:     Highest (34.7°C)                                                  [Jul 22]
+ALEXIS CREEK:     Highest (34.8°C)                                                  [Jul 23]
 BALDFACE:         Lowest (-32.7°C)                                                  [Feb 19]
 ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
 BALDFACE:         1 spike, peak Δ 6.0°C                                       [Feb 28 00:00]
@@ -10,5 +10,4 @@ PLUMMER HUT:      1 spike, peak Δ 5.5°C                                       
 PERSISTENT STATES
 LONE BUTTE:       constant (0.1°C) for 7h, RH varied 1%        [May 15 22:00 – May 16 04:00]
 MATHEW:           constant (0.0°C) for 7h, RH varied 0%        [Jan 30 19:00 – Jan 31 01:00]
-HORSEFLY:         constant (-6.8°C) for 6h, RH varied 2%       [Jan 21 19:00 – Jan 22 00:00]
 ```
