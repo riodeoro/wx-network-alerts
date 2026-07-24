@@ -1,28 +1,27 @@
 FIRE CENTRE: Kamloops Fire Centre
-WINDOW: 168h | STATIONS: 42 | RECORDS: 7,012
+WINDOW: 168h | STATIONS: 42 | RECORDS: 6,996
 
 === STATION OUTAGES ===
 SENSOR NA: SILVERSTAR SF - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
-SENSOR NA: AFTON - Vbat=47% NA, Vslr=47% NA, Ibat=47% NA
+SENSOR NA: AFTON - Vbat=44% NA, Vslr=44% NA, Ibat=44% NA
 SENSOR NA: LEIGHTON LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: MAYSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: MCLEAN LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH=0%: SILVERSTAR SF - 168 readings @first=2026-07-16T08:00@last=2026-07-23T07:00
+RH=0%: SILVERSTAR SF - 168 readings @first=2026-07-17T05:00@last=2026-07-24T04:00
 RH CHANGE >50%/h: SICAMOUS - 2 events, peak=+64.0%/h @first=2026-07-17T19:00@last=2026-07-19T17:00
-CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 168h, no precip @start=2026-07-16T08:00@end=2026-07-23T07:00
+CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 168h, no precip @start=2026-07-17T05:00@end=2026-07-24T04:00
 CONSTANT RH: WELLS GRAY - Constant 100%, avg=100%, 12h, no precip @start=2026-07-18T21:00@end=2026-07-19T08:00
 
 === WIND ===
-EXTREME GUST: MERRITT 2 HUB - max=86.6km/h, 1 readings >80km/h @start=2026-07-16T18:00@end=2026-07-16T18:00
 ZERO WIND 22h: SILVERSTAR SF - Wspd=0 but gusts nonzero (max=3.9km/h, avg=0.6km/h), no direction changes >90deg @start=2026-07-20T13:00@end=2026-07-21T10:00
 ZERO WIND 12h: EAST BARRIERE - Wspd=0 but 3 direction changes >90deg detected (max_delta=175deg), gusts nonzero (max=4.7km/h, avg=2.1km/h) @start=2026-07-21T20:00@end=2026-07-22T07:00
-DIRECTION CONCENTRATION: MAYSON - up to 54% of a day in the 237 deg bin (2 day(s) at 50%+) @start=2026-07-21T00:00@end=2026-07-22T23:00
+DIRECTION CONCENTRATION: MAYSON - up to 54% of a day in the 237 deg bin (2 day(s) at 50%+) @ts=2026-07-21T00:00
 DIRECTION CONCENTRATION: MERRITT 2 HUB - up to 54% of a day in the 208 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
 DIRECTION CONCENTRATION: GWYNETH LAKE - up to 50% of a day in the 198 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
 DIRECTION CONCENTRATION: LITTLE CHOPAKA - up to 50% of a day in the 319 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
-DIRECTION CONCENTRATION: SICAMOUS - up to 50% of a day in the 346 deg bin (1 day(s) at 50%+) @start=2026-07-22T00:00@end=2026-07-22T23:00
+DIRECTION CONCENTRATION: SICAMOUS - up to 50% of a day in the 346 deg bin (1 day(s) at 50%+) @ts=2026-07-22T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: LITTLE CHOPAKA - 39.2C @ts=2026-07-22T15:00
@@ -47,6 +46,6 @@ TEMP>35C: WEST KELOWNA - max=36.5C @ts=2026-07-22T16:00
 None.
 
 === POWER ===
-LOW VBAT: MABEL LAKE 2 (AC) - min=10.50V, mean=11.51V, severity=low @ts=2026-07-22T22:00
-NO CHARGE: MABEL LAKE 2 (AC) - 79 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=0.10V, severity=low @start=2026-07-16T08:00@end=2026-07-22T19:00
-VBAT DECLINING: MABEL LAKE 2 (AC) - 11.80V → 10.97V (dropped 0.83V) @start=2026-07-17T00:00@end=2026-07-23T00:00
+LOW VBAT: MABEL LAKE 2 (AC) - min=10.50V, mean=11.46V, severity=low @ts=2026-07-22T22:00
+NO CHARGE: MABEL LAKE 2 (AC) - 67 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=0.10V, severity=low @start=2026-07-17T09:00@end=2026-07-22T19:00
+VBAT DECLINING: MABEL LAKE 2 (AC) - 11.87V → 10.97V (dropped 0.90V) @start=2026-07-17T00:00@end=2026-07-23T00:00

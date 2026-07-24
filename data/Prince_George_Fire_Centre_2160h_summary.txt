@@ -1,8 +1,8 @@
 FIRE CENTRE: Prince George Fire Centre
-WINDOW: 2160h | STATIONS: 56 | RECORDS: 118,424
+WINDOW: 2160h | STATIONS: 56 | RECORDS: 118,446
 
 === STATION OUTAGES ===
-LOW COVERAGE: GOSNEL - 11% (247/2161 hours) @start=2026-07-13T00:00@end=2026-07-23T06:00
+LOW COVERAGE: GOSNEL - 12% (269/2161 hours) @start=2026-07-13T00:00@end=2026-07-24T04:00
 SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: CHILAKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: FORT NELSON FS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -23,7 +23,7 @@ CONSTANT RH: NOEL - Constant 100%, avg=100%, 19h, precip=29.6mm @start=2026-06-2
 CONSTANT RH: WONOWON - Constant 100%, avg=100%, 16h, precip=0.4mm @start=2026-05-15T18:00@end=2026-05-16T09:00
 
 === WIND ===
-EXTREME GUST: VALEMOUNT 2 - max=1654.6km/h, 182 readings >80km/h @start=2026-04-24T16:00@end=2026-06-20T05:00
+EXTREME GUST: VALEMOUNT 2 - max=1654.6km/h, 180 readings >80km/h @start=2026-04-25T06:00@end=2026-06-20T05:00
 EXTREME GUST: BEDNESTI - max=330.4km/h, 1 readings >80km/h @start=2026-06-19T17:00@end=2026-06-19T17:00
 EXTREME GUST: KLUSKUS - max=180.6km/h, 2 readings >80km/h @start=2026-05-25T17:00@end=2026-06-03T15:00
 EXTREME GUST: GRAHAM - max=125.4km/h, 1 readings >80km/h @start=2026-06-10T16:00@end=2026-06-10T16:00
@@ -52,6 +52,6 @@ HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
 
 === POWER ===
 LOW VBAT: LEMORAY - min=11.70V, mean=11.75V, severity=low @ts=2026-05-12T05:00
-NO CHARGE: GRAHAM - 125 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.00V @start=2026-05-12T08:00@end=2026-07-22T09:00
-NO CHARGE: LEMORAY - 37 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=11.10V, severity=low @start=2026-04-24T14:00@end=2026-07-19T19:00
+NO CHARGE: GRAHAM - 127 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.00V @start=2026-05-12T08:00@end=2026-07-23T17:00
+NO CHARGE: LEMORAY - 36 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=11.10V, severity=low @start=2026-04-25T18:00@end=2026-07-19T19:00
 NO CHARGE: NELSON FORKS - 16 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.00V @start=2026-05-02T08:00@end=2026-07-22T10:00

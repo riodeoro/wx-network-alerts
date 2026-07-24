@@ -1,5 +1,5 @@
 FIRE CENTRE: Coastal Fire Centre
-WINDOW: 2160h | STATIONS: 48 | RECORDS: 102,746
+WINDOW: 2160h | STATIONS: 48 | RECORDS: 102,797
 
 === STATION OUTAGES ===
 SENSOR NA: APE LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -24,8 +24,8 @@ CONSTANT RH: APE LAKE - Constant high (90-99%), avg=99%, 39h, precip=33.4mm @sta
 ZERO WIND 696h: HAIG CAMP - Wspd=0 but 104 direction changes >90deg detected (max_delta=180deg), gusts nonzero (max=16.7km/h, avg=0.0km/h) @start=2026-04-29T13:00@end=2026-05-28T12:00
 ZERO WIND 17h: MESACHIE 2 - Wspd=0 but 3 direction changes >90deg detected (max_delta=127deg), gusts nonzero (max=10.2km/h, avg=1.3km/h) @start=2026-07-02T17:00@end=2026-07-03T09:00
 ZERO WIND 15h: TS ARTLISH - Wspd=0 but 3 direction changes >90deg detected (max_delta=178deg), gusts nonzero (max=2.3km/h, avg=0.7km/h) @start=2026-06-25T19:00@end=2026-06-26T09:00
-ZERO WIND 14h: UBC RESEARCH - Wspd=0 but 3 direction changes >90deg detected (max_delta=163deg), gusts nonzero (max=4.1km/h, avg=1.0km/h) @start=2026-07-02T19:00@end=2026-07-03T08:00
 ZERO WIND 14h: QUINSAM BASE FWX - Wspd=0 but 4 direction changes >90deg detected (max_delta=115deg), gusts nonzero (max=5.2km/h, avg=1.9km/h) @start=2026-07-09T18:00@end=2026-07-10T07:00
+ZERO WIND 14h: UBC RESEARCH - Wspd=0 but 3 direction changes >90deg detected (max_delta=163deg), gusts nonzero (max=4.1km/h, avg=1.0km/h) @start=2026-07-02T19:00@end=2026-07-03T08:00
 DIRECTION CONCENTRATION: CHEAKAMUS - up to 71% of a day in the 294 deg bin (5 day(s) at 50%+) @ts=2026-06-30T00:00
 DIRECTION CONCENTRATION: FRANK CREEK - up to 67% of a day in the 201 deg bin (12 day(s) at 50%+) @ts=2026-06-29T00:00
 DIRECTION CONCENTRATION: TS BLACKWATER - up to 67% of a day in the 115 deg bin (6 day(s) at 50%+) @ts=2026-07-02T00:00
@@ -69,10 +69,10 @@ SILENT GAUGE: HONNA - silent 26 of 38 neighbour rain hours (68.4%) @first=2026-0
 SILENT GAUGE: BOOTHROYD - silent 23 of 37 neighbour rain hours (62.2%) @first=2026-05-13T13:00@last=2026-07-02T15:00
 
 === POWER ===
-LOW VBAT: SCAR CREEK - min=11.40V, mean=12.38V, severity=low @ts=2026-06-04T03:00
-LOW VBAT: QUINSAM BASE FWX - min=12.30V, mean=12.88V @ts=2026-04-24T08:00
-NO CHARGE: FRANK CREEK - 109 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.50V @start=2026-04-24T08:00@end=2026-07-22T09:00
-NO CHARGE: TALCHAKO - 33 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.30V @start=2026-04-24T08:00@end=2026-07-18T10:00
+LOW VBAT: SCAR CREEK - min=11.40V, mean=12.40V, severity=low @ts=2026-06-04T03:00
+LOW VBAT: QUINSAM BASE FWX - min=12.30V, mean=12.88V @ts=2026-04-25T05:00
+NO CHARGE: FRANK CREEK - 108 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.45V @start=2026-04-25T08:00@end=2026-07-23T08:00
+NO CHARGE: TALCHAKO - 33 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.30V @start=2026-04-25T08:00@end=2026-07-23T08:00
 NO CHARGE: BIG SILVER 2 - 18 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.40V @start=2026-04-26T08:00@end=2026-06-18T08:00
-NO CHARGE: SCAR CREEK - 10 daytime readings (Vslr<Vbat), median Vbat=11.60V, median Vslr=11.30V, severity=low @start=2026-04-24T14:00@end=2026-06-09T12:00
-NO CHARGE: ALLISON PASS - 9 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.20V @start=2026-04-24T08:00@end=2026-06-08T08:00
+NO CHARGE: SCAR CREEK - 8 daytime readings (Vslr<Vbat), median Vbat=11.55V, median Vslr=11.20V, severity=low @start=2026-04-30T19:00@end=2026-06-09T12:00
+NO CHARGE: ALLISON PASS - 8 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.20V @start=2026-04-25T08:00@end=2026-06-08T08:00

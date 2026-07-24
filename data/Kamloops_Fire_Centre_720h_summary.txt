@@ -1,5 +1,5 @@
 FIRE CENTRE: Kamloops Fire Centre
-WINDOW: 720h | STATIONS: 42 | RECORDS: 30,175
+WINDOW: 720h | STATIONS: 42 | RECORDS: 30,159
 
 === STATION OUTAGES ===
 SENSOR NA: SILVERSTAR SF - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -9,13 +9,13 @@ SENSOR NA: MCLEAN LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONF
 SENSOR NA: PASKA LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH=0%: SILVERSTAR SF - 712 readings @first=2026-06-23T08:00@last=2026-07-23T07:00
+RH=0%: SILVERSTAR SF - 712 readings @first=2026-06-24T05:00@last=2026-07-24T04:00
 RH CHANGE >50%/h: SICAMOUS - 2 events, peak=+64.0%/h @first=2026-07-17T19:00@last=2026-07-19T17:00
 RH CHANGE >50%/h: CLEARWATER HUB - 2 events, peak=+61.0%/h @first=2026-06-25T23:00@last=2026-07-12T09:00
 RH CHANGE >50%/h: PENTICTON RS - 1 events, peak=+52.0%/h @first=2026-06-26T20:00@last=2026-06-26T20:00
 RH CHANGE >50%/h: SEYMOUR ARM - 1 events, peak=+52.0%/h @first=2026-06-26T19:00@last=2026-06-26T19:00
 RH CHANGE >50%/h: THYNNE - 1 events, peak=+52.0%/h @first=2026-06-24T17:00@last=2026-06-24T17:00
-CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 712h, no precip @start=2026-06-23T08:00@end=2026-07-23T07:00
+CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 712h, no precip @start=2026-06-24T05:00@end=2026-07-24T04:00
 CONSTANT RH: WELLS GRAY - Constant 100%, avg=100%, 12h, no precip @start=2026-07-04T21:00@end=2026-07-05T08:00
 
 === WIND ===
@@ -50,12 +50,11 @@ TEMP>35C: TURTLE - max=36.1C @ts=2026-07-17T16:00
 TEMP>35C: WEST KELOWNA - max=36.5C @ts=2026-07-22T16:00
 
 === PRECIPITATION ===
-RAIN AT RH 10-25%: MABEL LAKE 2 - 2 hours, 17.4mm total, rank=1 @first=2026-06-23T14:00@last=2026-06-23T16:00
-RAIN AT RH 10-25%: MAYSON - 1 hours, 0.4mm total, rank=7 @first=2026-07-06T16:00@last=2026-07-06T16:00
-RAIN AT RH 10-25%: SPLINTLUM - 1 hours, 0.2mm total, rank=9 @first=2026-06-24T16:00@last=2026-06-24T16:00
+RAIN AT RH 10-25%: MAYSON - 1 hours, 0.4mm total, rank=6 @first=2026-07-06T16:00@last=2026-07-06T16:00
+RAIN AT RH 10-25%: SPLINTLUM - 1 hours, 0.2mm total, rank=8 @first=2026-06-24T16:00@last=2026-06-24T16:00
 SILENT GAUGE: GREENSTONE HUB - silent 3 of 3 neighbour rain hours (100.0%) @first=2026-06-30T06:00@last=2026-07-02T17:00
 SILENT GAUGE: MUDPIT - silent 5 of 7 neighbour rain hours (71.4%) @first=2026-06-27T09:00@last=2026-07-19T18:00
 
 === POWER ===
-LOW VBAT: MABEL LAKE 2 (AC) - min=10.50V, mean=11.78V, severity=low @ts=2026-07-22T22:00
-NO CHARGE: MABEL LAKE 2 (AC) - 246 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=0.10V, severity=low @start=2026-06-23T08:00@end=2026-07-22T19:00
+LOW VBAT: MABEL LAKE 2 (AC) - min=10.50V, mean=11.81V, severity=low @ts=2026-07-22T22:00
+NO CHARGE: MABEL LAKE 2 (AC) - 234 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=0.10V, severity=low @start=2026-06-24T08:00@end=2026-07-22T19:00

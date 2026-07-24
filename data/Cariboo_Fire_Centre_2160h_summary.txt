@@ -29,7 +29,7 @@ DIRECTION CONCENTRATION: GASPARD - up to 62% of a day in the 173 deg bin (3 day(
 DIRECTION CONCENTRATION: BALDFACE - up to 58% of a day in the 285 deg bin (5 day(s) at 50%+) @ts=2026-05-16T00:00
 
 === TEMPERATURE ===
-HIGHEST TEMP: ALEXIS CREEK - 34.7C @ts=2026-07-22T16:00
+HIGHEST TEMP: ALEXIS CREEK - 34.8C @ts=2026-07-23T15:00
 LOWEST TEMP: LONE BUTTE - -8.8C @ts=2026-04-25T06:00
 ISOLATED TEMP SPIKE: NAZKO - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.8C, mag=8.3 @first=2026-05-05T21:00@last=2026-05-05T21:00
 CONSTANT TEMP: LONE BUTTE - 0.1C for 7h, RH also flat (1% range) @start=2026-05-15T22:00@end=2026-05-16T04:00
@@ -41,5 +41,5 @@ SILENT GAUGE: NEMIAH - silent 3 of 4 neighbour rain hours (75.0%) @first=2026-05
 
 === POWER ===
 NO CHARGE: MATHEW (AC) - 24 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-04-28T08:00@end=2026-07-20T08:00
-NO CHARGE: NAZKO (AC) - 21 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-04-24T08:00@end=2026-07-19T08:00
+NO CHARGE: NAZKO (AC) - 20 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-04-25T08:00@end=2026-07-19T08:00
 NO CHARGE: DECEPTION - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.60V @start=2026-05-13T08:00@end=2026-07-01T09:00

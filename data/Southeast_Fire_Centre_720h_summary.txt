@@ -1,5 +1,5 @@
 FIRE CENTRE: Southeast Fire Centre
-WINDOW: 720h | STATIONS: 48 | RECORDS: 34,553
+WINDOW: 720h | STATIONS: 48 | RECORDS: 34,579
 
 === STATION OUTAGES ===
 SENSOR NA: NORNS - Wspd=NOT CONFIGURED, Dir=NOT CONFIGURED, Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -11,6 +11,7 @@ SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFI
 === RH ===
 RH CHANGE >50%/h: NICOLL - 1 events, peak=+64.0%/h @first=2026-07-15T18:00@last=2026-07-15T18:00
 RH CHANGE >50%/h: ELKO - 1 events, peak=-63.0%/h @first=2026-07-01T17:00@last=2026-07-01T17:00
+RH CHANGE >50%/h: BEAVERDELL - 1 events, peak=+62.0%/h @first=2026-07-23T20:00@last=2026-07-23T20:00
 RH CHANGE >50%/h: DOWNIE - 1 events, peak=+57.0%/h @first=2026-07-18T15:00@last=2026-07-18T15:00
 RH CHANGE >50%/h: BLAEBERRY - 1 events, peak=+55.0%/h @first=2026-06-25T20:00@last=2026-06-25T20:00
 CONSTANT RH: NORNS - Constant 100%, avg=100%, 43h, no precip @start=2026-06-29T22:00@end=2026-07-01T16:00
@@ -21,7 +22,8 @@ CONSTANT RH: FLATHEAD 2 - Constant 100%, avg=100%, 12h, no precip @start=2026-06
 
 === WIND ===
 EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
-ZERO WIND 464h: BAKER - Wspd=0 but 21 direction changes >90deg detected (max_delta=179deg) @start=2026-07-04T00:00@end=2026-07-23T07:00
+EXTREME GUST: JOHNSON LAKE - max=82.6km/h, 1 readings >80km/h @start=2026-07-24T01:00@end=2026-07-24T01:00
+ZERO WIND 486h: BAKER - Wspd=0 but 21 direction changes >90deg detected (max_delta=179deg) @start=2026-07-04T00:00@end=2026-07-24T05:00
 ZERO WIND 12h: EIGHT MILE - Wspd=0 but gusts nonzero (max=5.3km/h, avg=1.3km/h), no direction changes >90deg @start=2026-07-05T20:00@end=2026-07-06T07:00
 DIRECTION CONCENTRATION: ROUND PRAIRIE - up to 92% of a day in the 161 deg bin (2 day(s) at 50%+) @ts=2026-07-12T00:00
 DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (5 day(s) at 50%+) @ts=2026-07-03T00:00
@@ -35,9 +37,11 @@ LOWEST TEMP: MARION - -0.5C @ts=2026-07-06T05:00
 TEMP>35C: BEAVERDELL - max=39.0C @ts=2026-07-22T17:00
 TEMP>35C: BRISCO - max=35.6C @ts=2026-07-16T17:00
 TEMP>35C: DOWNIE - max=35.8C @ts=2026-07-17T16:00
+TEMP>35C: ELKO - max=35.6C @ts=2026-07-23T17:00
 TEMP>35C: GOATFELL - max=35.6C @ts=2026-07-22T14:00
 TEMP>35C: GRAND FORKS - max=37.3C @ts=2026-07-21T16:00
 TEMP>35C: JOHNSON LAKE - max=36.5C @ts=2026-07-22T17:00
+TEMP>35C: KOOCANUSA - max=35.8C @ts=2026-07-23T15:00
 TEMP>35C: NICOLL - max=36.3C @ts=2026-07-22T16:00
 TEMP>35C: PENDOREILLE - max=37.6C @ts=2026-07-22T16:00
 TEMP>35C: TOBY HUB - max=35.5C @ts=2026-07-22T17:00
@@ -55,4 +59,4 @@ HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
 HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 
 === POWER ===
-None.
+NO CHARGE: CRAWFORD - 10 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-23T13:00

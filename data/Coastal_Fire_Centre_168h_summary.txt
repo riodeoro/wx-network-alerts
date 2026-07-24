@@ -1,5 +1,5 @@
 FIRE CENTRE: Coastal Fire Centre
-WINDOW: 168h | STATIONS: 48 | RECORDS: 8,058
+WINDOW: 168h | STATIONS: 48 | RECORDS: 8,089
 
 === STATION OUTAGES ===
 SENSOR NA: APE LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -9,7 +9,6 @@ SENSOR NA: MACHMELL KLINIKLINI - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=
 SENSOR NA: MESACHIE 2 - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH CHANGE >50%/h: ALLISON PASS - 1 events, peak=+61.0%/h @first=2026-07-16T15:00@last=2026-07-16T15:00
 CONSTANT RH: HOMATHKO - Constant 100%, avg=100%, 52h, precip=1.4mm @start=2026-07-17T06:00@end=2026-07-19T09:00
 CONSTANT RH: MACHMELL KLINIKLINI - Constant 100%, avg=100%, 48h, precip=23.0mm @start=2026-07-17T12:00@end=2026-07-19T11:00
 CONSTANT RH: KLINAKLINI - Constant 100%, avg=100%, 44h, precip=4.8mm @start=2026-07-17T09:00@end=2026-07-19T04:00
@@ -21,7 +20,6 @@ ZERO WIND 13h: MESACHIE 2 - Wspd=0 but 3 direction changes >90deg detected (max_
 ZERO WIND 13h: QUINSAM BASE FWX - Wspd=0 but 1 direction changes >90deg detected (max_delta=171deg), gusts nonzero (max=4.3km/h, avg=1.1km/h) @start=2026-07-17T20:00@end=2026-07-18T08:00
 DIRECTION CONCENTRATION: APE LAKE - up to 62% of a day in the 353 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
 DIRECTION CONCENTRATION: CHEAKAMUS - up to 54% of a day in the 290 deg bin (2 day(s) at 50%+) @ts=2026-07-18T00:00
-DIRECTION CONCENTRATION: POWELL RIVER WEST LAKE - up to 50% of a day in the 155 deg bin (1 day(s) at 50%+) @ts=2026-07-17T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: DARCY - 39.3C @ts=2026-07-22T15:00
@@ -51,5 +49,5 @@ TEMP>35C: UBC RESEARCH - max=35.3C @ts=2026-07-22T17:00
 None.
 
 === POWER ===
-LOW VBAT: QUINSAM BASE FWX - min=12.30V, mean=12.80V @ts=2026-07-17T06:00
-NO CHARGE: FRANK CREEK - 11 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.90V @start=2026-07-16T08:00@end=2026-07-22T09:00
+LOW VBAT: QUINSAM BASE FWX - min=12.30V, mean=12.81V @ts=2026-07-17T06:00
+NO CHARGE: FRANK CREEK - 10 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.85V @start=2026-07-17T08:00@end=2026-07-23T08:00

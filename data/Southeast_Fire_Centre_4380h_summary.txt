@@ -1,8 +1,8 @@
 FIRE CENTRE: Southeast Fire Centre
-WINDOW: 4380h | STATIONS: 49 | RECORDS: 209,269
+WINDOW: 4380h | STATIONS: 49 | RECORDS: 209,348
 
 === STATION OUTAGES ===
-LOW COVERAGE: TABERNACLE WIND - 49% (2148/4381 hours) @start=2026-01-21T20:00@end=2026-04-21T23:00
+LOW COVERAGE: TABERNACLE WIND - 49% (2127/4381 hours) @start=2026-01-22T17:00@end=2026-04-21T23:00
 SENSOR NA: NORNS - Wspd=NOT CONFIGURED, Dir=NOT CONFIGURED, Mx_Spd=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: BAKER - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: BRISCO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -12,8 +12,8 @@ SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFI
 === RH ===
 OUTLIER Rh: DOWNIE - min=3.0, max=17.0 @ts=2026-06-18T11:00
 OUTLIER Rh: CARIBOO CREEK - min=0.0, max=7.0 @ts=2026-05-18T14:00
-OUTLIER Rh: TABERNACLE WIND - min=17.0, max=32.0 @ts=2026-01-22T03:00
-RH=0%: BAKER - 3498 readings @first=2026-01-21T20:00@last=2026-06-16T13:00
+OUTLIER Rh: DUNCAN - min=0.0, max=4.0 @ts=2026-06-11T09:00
+RH=0%: BAKER - 3477 readings @first=2026-01-22T17:00@last=2026-06-16T13:00
 RH=0%: DEWAR CREEK - 422 readings @first=2026-01-31T19:00@last=2026-06-05T01:00
 RH=0%: CARIBOO CREEK - 14 readings @first=2026-05-18T14:00@last=2026-06-12T13:00
 RH>100%: CARIBOO CREEK - 408 readings, max=116.0% @first=2026-05-15T21:00@last=2026-06-12T07:00
@@ -23,7 +23,7 @@ RH CHANGE >50%/h: DEWAR CREEK - 127 events, peak=-100.0%/h @first=2026-01-31T19:
 RH CHANGE >50%/h: DUNCAN - 7 events, peak=+100.0%/h @first=2026-05-20T10:00@last=2026-06-11T13:00
 RH CHANGE >50%/h: PENDOREILLE - 2 events, peak=-91.0%/h @first=2026-04-15T11:00@last=2026-04-15T12:00
 RH CHANGE >50%/h: FLATHEAD 2 - 2 events, peak=-80.0%/h @first=2026-06-06T08:00@last=2026-06-06T09:00
-CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 3498h, no precip @start=2026-01-21T20:00@end=2026-06-16T13:00
+CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 3477h, no precip @start=2026-01-22T17:00@end=2026-06-16T13:00
 CONSTANT RH: DUNCAN - Constant 100%, avg=100%, 604h, precip=99.2mm @start=2026-03-21T09:00@end=2026-04-15T12:00
 CONSTANT RH: NORNS - Constant 100%, avg=100%, 470h, no precip @start=2026-04-04T18:00@end=2026-04-24T07:00
 CONSTANT RH: REVELSTOKE - Constant 100%, avg=100%, 215h, no precip @start=2026-01-28T15:00@end=2026-02-06T13:00
@@ -33,6 +33,7 @@ CONSTANT RH: BIG MOUTH 2 - Constant 100%, avg=100%, 115h, no precip @start=2026-
 EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
 EXTREME GUST: TABERNACLE WIND - max=128.9km/h, 106 readings >80km/h @start=2026-02-08T00:00@end=2026-04-07T07:00
 EXTREME GUST: SPARWOOD - max=85.4km/h, 1 readings >80km/h @start=2026-02-26T13:00@end=2026-02-26T13:00
+EXTREME GUST: JOHNSON LAKE - max=82.6km/h, 1 readings >80km/h @start=2026-07-24T01:00@end=2026-07-24T01:00
 EXTREME WIND: TABERNACLE WIND - max=70.0km/h, 11 readings >60km/h @start=2026-02-26T06:00@end=2026-03-19T04:00
 ZERO WIND 847h: BAKER - Wspd=0 but 41 direction changes >90deg detected (max_delta=180deg) @start=2026-05-14T00:00@end=2026-06-18T06:00
 ZERO WIND 398h: NANCY GREENE - Wspd=0 but 65 direction changes >90deg detected (max_delta=179deg), gusts nonzero (max=29.2km/h, avg=0.1km/h) @start=2026-05-03T12:00@end=2026-05-20T16:00
@@ -54,9 +55,11 @@ TEMP>35C: BEAVERDELL - max=39.0C @ts=2026-07-22T17:00
 TEMP>35C: BRISCO - max=35.6C @ts=2026-07-16T17:00
 TEMP>35C: DOWNIE - max=35.8C @ts=2026-07-17T16:00
 TEMP>35C: DUNCAN - max=63.6C @ts=2026-05-13T20:00
+TEMP>35C: ELKO - max=35.6C @ts=2026-07-23T17:00
 TEMP>35C: GOATFELL - max=35.6C @ts=2026-07-22T14:00
 TEMP>35C: GRAND FORKS - max=37.3C @ts=2026-07-21T16:00
 TEMP>35C: JOHNSON LAKE - max=36.5C @ts=2026-07-22T17:00
+TEMP>35C: KOOCANUSA - max=35.8C @ts=2026-07-23T15:00
 TEMP>35C: NICOLL - max=36.3C @ts=2026-07-22T16:00
 TEMP>35C: PENDOREILLE - max=37.6C @ts=2026-07-22T16:00
 TEMP>35C: ROCK CREEK - max=40.1C @ts=2026-07-22T16:00
@@ -69,8 +72,8 @@ ISOLATED TEMP SPIKE: ROUND PRAIRIE - 1 readings deviated >=5C then returned, no 
 CONSTANT TEMP: DUNCAN - 0.0C for 225h, RH also flat (0% range) @start=2026-03-21T10:00@end=2026-03-30T18:00
 CONSTANT TEMP: NORNS - -0.1C for 55h, RH also flat (0% range) @start=2026-04-20T19:00@end=2026-04-23T01:00
 CONSTANT TEMP: BIG MOUTH 2 - 0.0C for 15h, RH also flat (0% range) @start=2026-03-18T18:00@end=2026-03-19T08:00
-CONSTANT TEMP: SUCCOUR CREEK - 0.1C for 14h, RH also flat (1% range) @start=2026-02-07T18:00@end=2026-02-08T07:00
 CONSTANT TEMP: DOWNIE - 0.1C for 14h, RH also flat (0% range) @start=2026-03-03T18:00@end=2026-03-04T07:00
+CONSTANT TEMP: SUCCOUR CREEK - 0.1C for 14h, RH also flat (1% range) @start=2026-02-07T18:00@end=2026-02-08T07:00
 
 === PRECIPITATION ===
 RAIN AT RH<10%: DEWAR CREEK - 22 hours, 16.6mm total, rank=3 @first=2026-03-05T13:00@last=2026-06-05T01:00
@@ -84,37 +87,36 @@ HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
 HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
 
 === POWER ===
-LOW VBAT: SMALLWOOD - min=6.90V, mean=12.67V, severity=low @ts=2026-02-09T10:00
-LOW VBAT: BLAEBERRY - min=10.90V, mean=12.64V, severity=low @ts=2026-02-05T04:00
+LOW VBAT: SMALLWOOD - min=6.90V, mean=12.68V, severity=low @ts=2026-02-09T10:00
+LOW VBAT: BLAEBERRY - min=10.90V, mean=12.65V, severity=low @ts=2026-02-05T04:00
 LOW VBAT: ROUND PRAIRIE - min=11.50V, mean=13.38V, severity=low @ts=2026-02-19T20:00
-LOW VBAT: ROCK CREEK - min=11.80V, mean=13.02V, severity=low @ts=2026-02-08T00:00
-LOW VBAT: REVELSTOKE - min=12.00V, mean=13.05V @ts=2026-01-23T01:00
+LOW VBAT: ROCK CREEK - min=11.80V, mean=13.03V, severity=low @ts=2026-02-08T00:00
+LOW VBAT: REVELSTOKE - min=12.00V, mean=13.06V @ts=2026-01-23T01:00
 NO CHARGE: RORY CREEK - 303 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=6.00V @start=2026-03-11T19:00@end=2026-04-09T09:00
-NO CHARGE: SMALLWOOD - 230 daytime readings (Vslr<Vbat), median Vbat=12.10V, median Vslr=7.45V, severity=low @start=2026-01-22T10:00@end=2026-04-22T09:00
-NO CHARGE: BLAEBERRY - 197 daytime readings (Vslr<Vbat), median Vbat=11.50V, median Vslr=6.80V, severity=low @start=2026-01-22T08:00@end=2026-05-13T08:00
-NO CHARGE: REVELSTOKE - 173 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=4.50V @start=2026-01-22T08:00@end=2026-03-31T08:00
-NO CHARGE: ROCK CREEK - 157 daytime readings (Vslr<Vbat), median Vbat=12.30V, median Vslr=6.40V, severity=low @start=2026-01-22T08:00@end=2026-04-14T08:00
-NO CHARGE: CRAWFORD - 142 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.15V @start=2026-01-22T08:00@end=2026-07-17T08:00
-NO CHARGE: GRAND FORKS - 120 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=6.45V @start=2026-01-22T08:00@end=2026-04-11T08:00
-NO CHARGE: SUCCOUR CREEK - 120 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.40V @start=2026-01-22T08:00@end=2026-04-12T08:00
-NO CHARGE: GOLD HILL - 99 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=7.60V @start=2026-01-22T08:00@end=2026-05-26T19:00
-NO CHARGE: PENDOREILLE - 96 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.50V @start=2026-01-22T08:00@end=2026-07-17T08:00
+NO CHARGE: SMALLWOOD - 229 daytime readings (Vslr<Vbat), median Vbat=12.10V, median Vslr=7.50V, severity=low @start=2026-01-23T18:00@end=2026-04-22T09:00
+NO CHARGE: BLAEBERRY - 194 daytime readings (Vslr<Vbat), median Vbat=11.50V, median Vslr=6.85V, severity=low @start=2026-01-22T18:00@end=2026-05-13T08:00
+NO CHARGE: REVELSTOKE - 170 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=4.50V @start=2026-01-22T18:00@end=2026-03-31T08:00
+NO CHARGE: ROCK CREEK - 154 daytime readings (Vslr<Vbat), median Vbat=12.30V, median Vslr=6.30V, severity=low @start=2026-01-22T17:00@end=2026-04-14T08:00
+NO CHARGE: CRAWFORD - 146 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.65V @start=2026-01-22T18:00@end=2026-07-23T13:00
+NO CHARGE: GRAND FORKS - 118 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=6.45V @start=2026-01-22T17:00@end=2026-04-11T08:00
+NO CHARGE: SUCCOUR CREEK - 118 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=8.40V @start=2026-01-22T17:00@end=2026-04-12T08:00
+NO CHARGE: GOLD HILL - 97 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=7.60V @start=2026-01-22T17:00@end=2026-05-26T19:00
+NO CHARGE: PENDOREILLE - 94 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.50V @start=2026-01-23T08:00@end=2026-07-17T08:00
 NO CHARGE: DUNCAN - 94 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.90V @start=2026-02-17T19:00@end=2026-07-06T08:00
-NO CHARGE: AKOKLI CREEK - 92 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.50V @start=2026-01-22T08:00@end=2026-07-17T08:00
-NO CHARGE: MARION - 70 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.05V @start=2026-01-22T08:00@end=2026-05-16T08:00
-NO CHARGE: KOOCANUSA - 58 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.60V @start=2026-01-22T08:00@end=2026-06-01T08:00
-NO CHARGE: PALLISER - 48 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.85V @start=2026-01-22T08:00@end=2026-04-17T08:00
-NO CHARGE: FLATHEAD 2 - 46 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.35V @start=2026-01-22T08:00@end=2026-04-15T08:00
+NO CHARGE: AKOKLI CREEK - 90 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.60V @start=2026-01-22T18:00@end=2026-07-17T08:00
+NO CHARGE: MARION - 68 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.05V @start=2026-01-22T18:00@end=2026-05-16T08:00
+NO CHARGE: KOOCANUSA - 56 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.60V @start=2026-01-22T18:00@end=2026-06-01T08:00
 NO CHARGE: SLOCAN - 46 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.75V @start=2026-02-08T08:00@end=2026-04-12T08:00
-NO CHARGE: TSAR CREEK - 43 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=7.20V @start=2026-01-22T08:00@end=2026-03-13T08:00
-NO CHARGE: FALLS CREEK - 43 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=10.70V @start=2026-01-22T08:00@end=2026-04-13T08:00
-NO CHARGE: WHITE RIVER - 40 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.30V @start=2026-01-22T08:00@end=2026-04-16T09:00
-NO CHARGE: NICOLL - 39 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.10V @start=2026-01-22T08:00@end=2026-03-24T08:00
-NO CHARGE: EMILY CREEK - 34 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.25V @start=2026-01-22T08:00@end=2026-04-16T10:00
-NO CHARGE: OCTOPUS CREEK - 34 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.45V @start=2026-01-22T08:00@end=2026-03-22T08:00
-NO CHARGE: CARIBOO CREEK - 31 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.60V @start=2026-01-22T08:00@end=2026-03-20T08:00
-NO CHARGE: CHERRY LAKE - 20 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.85V @start=2026-01-22T08:00@end=2026-02-22T08:00
-NO CHARGE: GOATHAVEN - 15 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.70V @start=2026-01-22T08:00@end=2026-03-19T08:00
+NO CHARGE: PALLISER - 46 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.85V @start=2026-01-23T08:00@end=2026-04-17T08:00
+NO CHARGE: FLATHEAD 2 - 45 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.50V @start=2026-01-23T08:00@end=2026-04-15T08:00
+NO CHARGE: FALLS CREEK - 42 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=10.70V @start=2026-01-23T08:00@end=2026-04-13T08:00
+NO CHARGE: TSAR CREEK - 41 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=7.20V @start=2026-01-22T17:00@end=2026-03-13T08:00
+NO CHARGE: WHITE RIVER - 39 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.30V @start=2026-01-23T08:00@end=2026-04-16T09:00
+NO CHARGE: NICOLL - 38 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.15V @start=2026-01-23T08:00@end=2026-03-24T08:00
+NO CHARGE: EMILY CREEK - 33 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.40V @start=2026-01-24T08:00@end=2026-04-16T10:00
+NO CHARGE: OCTOPUS CREEK - 33 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.50V @start=2026-01-23T08:00@end=2026-03-22T08:00
+NO CHARGE: CARIBOO CREEK - 30 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.10V @start=2026-01-23T08:00@end=2026-03-20T08:00
+NO CHARGE: CHERRY LAKE - 18 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.85V @start=2026-01-23T08:00@end=2026-02-22T08:00
+NO CHARGE: GOATHAVEN - 14 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.85V @start=2026-01-24T08:00@end=2026-03-19T08:00
 NO CHARGE: TROUT LAKE - 13 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.70V @start=2026-03-10T08:00@end=2026-03-17T10:00
-NO CHARGE: JOHNSON LAKE - 11 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.20V @start=2026-01-22T08:00@end=2026-04-02T08:00
-NO CHARGE: CRANBROOK - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=7.30V @start=2026-01-22T08:00@end=2026-02-20T08:00
+NO CHARGE: JOHNSON LAKE - 9 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.20V @start=2026-01-22T19:00@end=2026-04-02T08:00

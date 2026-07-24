@@ -1,5 +1,5 @@
 FIRE CENTRE: Kamloops Fire Centre
-WINDOW: 2160h | STATIONS: 42 | RECORDS: 90,450
+WINDOW: 2160h | STATIONS: 42 | RECORDS: 90,454
 
 === STATION OUTAGES ===
 SENSOR NA: SILVERSTAR SF - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -9,14 +9,14 @@ SENSOR NA: MCLEAN LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONF
 SENSOR NA: PASKA LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH=0%: SILVERSTAR SF - 2150 readings @first=2026-04-24T08:00@last=2026-07-23T07:00
+RH=0%: SILVERSTAR SF - 2150 readings @first=2026-04-25T05:00@last=2026-07-24T04:00
 RH=0%: MABEL LAKE 2 - 2 readings @first=2026-04-30T20:00@last=2026-04-30T21:00
 RH CHANGE >50%/h: TURTLE - 2 events, peak=+70.0%/h @first=2026-05-06T18:00@last=2026-06-25T18:00
 RH CHANGE >50%/h: SICAMOUS - 3 events, peak=+64.0%/h @first=2026-06-11T18:00@last=2026-07-19T17:00
 RH CHANGE >50%/h: CLEARWATER HUB - 2 events, peak=+61.0%/h @first=2026-06-25T23:00@last=2026-07-12T09:00
 RH CHANGE >50%/h: WELLS GRAY - 1 events, peak=+57.0%/h @first=2026-06-03T20:00@last=2026-06-03T20:00
 RH CHANGE >50%/h: ASPEN GROVE - 1 events, peak=+53.0%/h @first=2026-06-03T14:00@last=2026-06-03T14:00
-CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 2150h, no precip @start=2026-04-24T08:00@end=2026-07-23T07:00
+CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 2150h, no precip @start=2026-04-25T05:00@end=2026-07-24T04:00
 CONSTANT RH: SICAMOUS - Constant 100%, avg=100%, 20h, precip=21.4mm @start=2026-05-13T13:00@end=2026-05-14T08:00
 CONSTANT RH: CAHILTY - Constant high (90-99%), avg=99%, 12h, precip=11.4mm @start=2026-05-13T22:00@end=2026-05-14T09:00
 CONSTANT RH: WELLS GRAY - Constant 100%, avg=100%, 12h, no precip @start=2026-05-29T20:00@end=2026-05-30T07:00
@@ -68,11 +68,12 @@ SILENT GAUGE: FRENCH BAR - silent 6 of 8 neighbour rain hours (75.0%) @first=202
 SILENT GAUGE: MUDPIT - silent 5 of 7 neighbour rain hours (71.4%) @first=2026-06-27T09:00@last=2026-07-19T18:00
 
 === POWER ===
-LOW VBAT: MABEL LAKE 2 (AC) - min=10.50V, mean=13.04V, severity=low @ts=2026-07-22T22:00
-LOW VBAT: GLIMPSE - min=11.50V, mean=12.48V, severity=low @ts=2026-05-13T22:00
+LOW VBAT: MABEL LAKE 2 (AC) - min=10.50V, mean=13.03V, severity=low @ts=2026-07-22T22:00
+LOW VBAT: GLIMPSE - min=11.50V, mean=12.49V, severity=low @ts=2026-05-13T22:00
 NO CHARGE: MABEL LAKE 2 (AC) - 298 daytime readings (Vslr<Vbat), median Vbat=11.80V, median Vslr=0.10V, severity=low @start=2026-06-18T16:00@end=2026-07-22T19:00
-NO CHARGE: GLIMPSE - 24 daytime readings (Vslr<Vbat), median Vbat=11.70V, median Vslr=11.55V, severity=low @start=2026-04-24T08:00@end=2026-06-12T19:00
-NO CHARGE: CAHILTY - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.80V @start=2026-05-13T08:00@end=2026-05-29T10:00
+NO CHARGE: GLIMPSE - 23 daytime readings (Vslr<Vbat), median Vbat=11.70V, median Vslr=11.50V, severity=low @start=2026-04-25T08:00@end=2026-06-12T19:00
+NO CHARGE: CAHILTY - 9 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.80V @start=2026-05-13T08:00@end=2026-07-23T09:00
 NO CHARGE: COLDSCAUR LAKE - 6 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.55V @start=2026-05-13T08:00@end=2026-07-01T08:00
-VBAT DECLINING: MABEL LAKE 2 (AC) - 14.03V → 10.97V (dropped 3.07V) @start=2026-04-25T00:00@end=2026-07-23T00:00
-VBAT DECLINING: CLEARWATER HUB - 13.93V → 13.27V (dropped 0.67V) @start=2026-04-25T00:00@end=2026-07-23T00:00
+NO CHARGE: SPLINTLUM - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.40V @start=2026-05-13T08:00@end=2026-07-23T08:00
+VBAT DECLINING: MABEL LAKE 2 (AC) - 14.07V → 10.97V (dropped 3.10V) @start=2026-04-25T00:00@end=2026-07-23T00:00
+VBAT DECLINING: CLEARWATER HUB - 13.97V → 13.40V (dropped 0.57V) @start=2026-04-25T00:00@end=2026-07-24T00:00

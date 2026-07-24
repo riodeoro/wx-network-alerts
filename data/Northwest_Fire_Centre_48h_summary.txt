@@ -1,5 +1,5 @@
 FIRE CENTRE: Northwest Fire Centre
-WINDOW: 48h | STATIONS: 32 | RECORDS: 1,536
+WINDOW: 48h | STATIONS: 32 | RECORDS: 1,566
 
 === STATION OUTAGES ===
 None.
@@ -8,14 +8,14 @@ None.
 None.
 
 === WIND ===
-DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 54% of a day in the 255 deg bin (1 day(s) at 50%+) @start=2026-07-22T00:00@end=2026-07-22T23:00
+DIRECTION CONCENTRATION: TELEGRAPH CREEK - up to 62% of a day in the 246 deg bin (1 day(s) at 50%+) @start=2026-07-23T00:00@end=2026-07-23T23:00
 
 === TEMPERATURE ===
-HIGHEST TEMP: CEDARVALE - 37.2C @ts=2026-07-21T15:00
+HIGHEST TEMP: CEDARVALE - 34.3C @ts=2026-07-22T17:00
 LOWEST TEMP: ISKUT - 4.0C @ts=2026-07-22T06:00
 
 === PRECIPITATION ===
 None.
 
 === POWER ===
-NO CHARGE: NASS CAMP - 5 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.40V @start=2026-07-21T08:00@end=2026-07-22T10:00
+NO CHARGE: NASS CAMP - 6 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.30V @start=2026-07-22T08:00@end=2026-07-23T10:00

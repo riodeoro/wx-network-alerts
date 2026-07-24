@@ -1,5 +1,5 @@
 FIRE CENTRE: Prince George Fire Centre
-WINDOW: 4380h | STATIONS: 56 | RECORDS: 238,259
+WINDOW: 4380h | STATIONS: 56 | RECORDS: 238,323
 
 === STATION OUTAGES ===
 SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -9,9 +9,8 @@ SENSOR NA: MCLEOD LAKE - Vbat=58% NA, Vslr=58% NA, Ibat=58% NA
 SENSOR NA: MOOSE LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-OUTLIER Rh: MANSON - min=3.0, max=29.0 @ts=2026-06-23T11:00
+OUTLIER Rh: MANSON - min=3.0, max=26.0 @ts=2026-06-23T11:00
 OUTLIER Rh: TABLE RIVER - min=1.0, max=5.0 @ts=2026-03-03T21:00
-OUTLIER Rh: VALEMOUNT 2 - min=14.0, max=14.0 @ts=2026-04-25T15:00
 RH>100%: TABLE RIVER - 248 readings, max=116.0% @first=2026-01-27T16:00@last=2026-05-12T10:00
 RH CHANGE >50%/h: TABLE RIVER - 21 events, peak=-114.0%/h @first=2026-01-27T18:00@last=2026-05-12T11:00
 RH CHANGE >50%/h: ELK MOUNTAIN - 1 events, peak=+68.0%/h @first=2026-06-23T18:00@last=2026-06-23T18:00
@@ -25,18 +24,18 @@ CONSTANT RH: WITCH - Constant 100%, avg=100%, 46h, precip=40.6mm @start=2026-02-
 CONSTANT RH: SEVEREID - Constant 100%, avg=100%, 45h, precip=21.6mm @start=2026-01-31T17:00@end=2026-02-03T10:00
 
 === WIND ===
-EXTREME GUST: VALEMOUNT 2 - max=1654.6km/h, 302 readings >80km/h @start=2026-01-22T13:00@end=2026-06-20T05:00
+EXTREME GUST: VALEMOUNT 2 - max=1654.6km/h, 299 readings >80km/h @start=2026-01-23T10:00@end=2026-06-20T05:00
 EXTREME GUST: BEDNESTI - max=330.4km/h, 1 readings >80km/h @start=2026-06-19T17:00@end=2026-06-19T17:00
 EXTREME GUST: KLUSKUS - max=180.6km/h, 2 readings >80km/h @start=2026-05-25T17:00@end=2026-06-03T15:00
 EXTREME GUST: GRAHAM - max=138.2km/h, 2 readings >80km/h @start=2026-04-14T20:00@end=2026-06-10T16:00
 EXTREME GUST: SEVEREID - max=105.9km/h, 2 readings >80km/h @start=2026-02-17T02:00@end=2026-03-24T22:00
-ZERO WIND 161h: LOVELL COVE - Wspd=0 but 20 direction changes >90deg detected (max_delta=175deg) @start=2026-01-21T20:00@end=2026-01-28T12:00
+ZERO WIND 140h: LOVELL COVE - Wspd=0 but 18 direction changes >90deg detected (max_delta=175deg) @start=2026-01-22T17:00@end=2026-01-28T12:00
 ZERO WIND 101h: GOSNEL - Wspd=0 but gusts nonzero (max=10.9km/h, avg=0.1km/h), no direction changes >90deg @start=2026-01-30T23:00@end=2026-02-04T03:00
 ZERO WIND 46h: HOLY CROSS 2 - Wspd=0 but 5 direction changes >90deg detected (max_delta=122deg), gusts nonzero (max=2.8km/h, avg=0.1km/h) @start=2026-01-24T18:00@end=2026-01-26T15:00
 ZERO WIND 44h: ELK MOUNTAIN - Wspd=0 but 6 direction changes >90deg detected (max_delta=162deg), gusts nonzero (max=2.9km/h, avg=0.1km/h) @start=2026-01-25T16:00@end=2026-01-27T11:00
 ZERO WIND 41h: SIFTON - Wspd=0 but 13 direction changes >90deg detected (max_delta=172deg), gusts nonzero (max=8.8km/h, avg=0.6km/h) @start=2026-01-22T20:00@end=2026-01-24T12:00
 DIRECTION CONCENTRATION: MOOSE LAKE - up to 100% of a day in the 246 deg bin (12 day(s) at 50%+) @ts=2026-02-25T00:00
-DIRECTION CONCENTRATION: GOSNEL - up to 96% of a day in the 187 deg bin (41 day(s) at 50%+) @ts=2026-02-03T00:00
+DIRECTION CONCENTRATION: GOSNEL - up to 96% of a day in the 187 deg bin (42 day(s) at 50%+) @start=2026-07-23T00:00@end=2026-07-23T23:00
 DIRECTION CONCENTRATION: NELSON FORKS - up to 96% of a day in the 3 deg bin (30 day(s) at 50%+) @ts=2026-02-25T00:00
 DIRECTION CONCENTRATION: LEO CREEK - up to 92% of a day in the 8 deg bin (8 day(s) at 50%+) @ts=2026-01-26T00:00
 DIRECTION CONCENTRATION: MCLEOD LAKE - up to 90% of a day in the 331 deg bin (7 day(s) at 50%+) @ts=2026-03-03T00:00
@@ -74,39 +73,39 @@ HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
 
 === POWER ===
 LOW VBAT: LEMORAY - min=11.70V, mean=11.83V, severity=low @ts=2026-05-12T05:00
-LOW VBAT: MACKENZIE FS - min=11.80V, mean=12.95V, severity=low @ts=2026-01-22T06:00
+LOW VBAT: MACKENZIE FS - min=11.80V, mean=12.96V, severity=low @ts=2026-02-08T03:00
 LOW VBAT: GOSNEL - min=12.00V, mean=12.28V @ts=2026-02-18T22:00
 LOW VBAT: HIXON - min=12.00V, mean=13.12V @ts=2026-01-22T23:00
 LOW VBAT: BLUE RIVER 2 - min=12.20V, mean=13.08V @ts=2026-02-06T08:00
-NO CHARGE: NELSON FORKS - 362 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=5.95V @start=2026-01-22T08:00@end=2026-07-22T10:00
-NO CHARGE: LEMORAY - 359 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=6.20V, severity=low @start=2026-01-22T08:00@end=2026-07-19T19:00
-NO CHARGE: GOSNEL - 271 daytime readings (Vslr<Vbat), median Vbat=12.20V, median Vslr=9.50V @start=2026-01-22T08:00@end=2026-04-16T09:00
-NO CHARGE: GRAHAM - 182 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.90V @start=2026-01-22T08:00@end=2026-07-22T09:00
-NO CHARGE: MACKENZIE FS - 171 daytime readings (Vslr<Vbat), median Vbat=12.20V, median Vslr=6.80V, severity=low @start=2026-01-22T08:00@end=2026-03-27T08:00
-NO CHARGE: BLACKPINE - 135 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=2.70V @start=2026-01-22T08:00@end=2026-03-27T08:00
-NO CHARGE: BLUE RIVER 2 - 133 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=5.60V @start=2026-01-22T08:00@end=2026-03-24T08:00
-NO CHARGE: KLUSKUS - 119 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.80V @start=2026-01-22T08:00@end=2026-06-26T09:00
-NO CHARGE: HIXON - 86 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=6.55V @start=2026-01-22T08:00@end=2026-03-25T08:00
-NO CHARGE: MANSON - 79 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=7.10V @start=2026-01-22T08:00@end=2026-07-12T08:00
-NO CHARGE: ELK MOUNTAIN - 69 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.30V @start=2026-01-22T08:00@end=2026-03-24T08:00
-NO CHARGE: TOAD RIVER - 67 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=3.30V @start=2026-01-22T08:00@end=2026-03-28T08:00
-NO CHARGE: LEO CREEK - 66 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.00V @start=2026-01-22T08:00@end=2026-04-15T09:00
-NO CHARGE: INGENIKA POINT - 62 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=4.70V @start=2026-01-22T08:00@end=2026-03-27T08:00
-NO CHARGE: HOLY CROSS 2 - 60 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=6.55V @start=2026-01-22T08:00@end=2026-04-02T08:00
-NO CHARGE: MUSKWA - 59 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.10V @start=2026-01-22T08:00@end=2026-03-27T08:00
-NO CHARGE: HELMUT - 53 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.80V @start=2026-01-22T08:00@end=2026-03-17T08:00
+NO CHARGE: NELSON FORKS - 358 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=5.95V @start=2026-01-22T18:00@end=2026-07-22T10:00
+NO CHARGE: LEMORAY - 355 daytime readings (Vslr<Vbat), median Vbat=11.90V, median Vslr=6.20V, severity=low @start=2026-01-22T17:00@end=2026-07-19T19:00
+NO CHARGE: GOSNEL - 270 daytime readings (Vslr<Vbat), median Vbat=12.20V, median Vslr=9.55V @start=2026-01-22T17:00@end=2026-04-16T09:00
+NO CHARGE: GRAHAM - 181 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.90V @start=2026-01-23T08:00@end=2026-07-23T17:00
+NO CHARGE: MACKENZIE FS - 169 daytime readings (Vslr<Vbat), median Vbat=12.20V, median Vslr=6.80V, severity=low @start=2026-01-22T17:00@end=2026-03-27T08:00
+NO CHARGE: BLUE RIVER 2 - 132 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=5.60V @start=2026-01-22T18:00@end=2026-03-24T08:00
+NO CHARGE: BLACKPINE - 131 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=2.50V @start=2026-01-22T17:00@end=2026-03-27T08:00
+NO CHARGE: KLUSKUS - 117 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.80V @start=2026-01-23T08:00@end=2026-06-26T09:00
+NO CHARGE: HIXON - 84 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=6.55V @start=2026-01-22T17:00@end=2026-03-25T08:00
+NO CHARGE: MANSON - 77 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=7.10V @start=2026-01-23T08:00@end=2026-07-12T08:00
+NO CHARGE: ELK MOUNTAIN - 67 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.40V @start=2026-01-23T08:00@end=2026-03-24T08:00
+NO CHARGE: LEO CREEK - 64 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.00V @start=2026-01-23T08:00@end=2026-04-15T09:00
+NO CHARGE: TOAD RIVER - 64 daytime readings (Vslr<Vbat), median Vbat=12.65V, median Vslr=3.40V @start=2026-01-22T17:00@end=2026-03-28T08:00
+NO CHARGE: INGENIKA POINT - 60 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=4.70V @start=2026-01-23T08:00@end=2026-03-27T08:00
+NO CHARGE: HOLY CROSS 2 - 58 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=6.55V @start=2026-01-23T08:00@end=2026-04-02T08:00
+NO CHARGE: MUSKWA - 56 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.10V @start=2026-01-23T08:00@end=2026-03-27T08:00
+NO CHARGE: HELMUT - 51 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.80V @start=2026-01-23T08:00@end=2026-03-17T08:00
 NO CHARGE: SIFTON - 50 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=4.80V @start=2026-01-24T08:00@end=2026-04-01T08:00
-NO CHARGE: BEDNESTI - 48 daytime readings (Vslr<Vbat), median Vbat=12.65V, median Vslr=9.80V @start=2026-01-22T08:00@end=2026-03-25T08:00
+NO CHARGE: BEDNESTI - 46 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.80V @start=2026-01-23T08:00@end=2026-03-25T08:00
 NO CHARGE: NABESHE - 46 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=6.75V @start=2026-01-23T08:00@end=2026-06-28T08:00
-NO CHARGE: TUMBLER HUB - 44 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.20V @start=2026-01-22T08:00@end=2026-03-20T08:00
-NO CHARGE: BOWRON HAGGEN - 43 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.10V @start=2026-01-22T08:00@end=2026-03-25T08:00
-NO CHARGE: MCBRIDE - 40 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.85V @start=2026-01-22T08:00@end=2026-03-16T08:00
-NO CHARGE: FIRESIDE - 37 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=6.80V @start=2026-01-22T09:00@end=2026-02-18T08:00
+NO CHARGE: TUMBLER HUB - 42 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.20V @start=2026-01-23T08:00@end=2026-03-20T08:00
+NO CHARGE: BOWRON HAGGEN - 42 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.15V @start=2026-01-23T08:00@end=2026-03-25T08:00
+NO CHARGE: MCBRIDE - 39 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.90V @start=2026-01-23T08:00@end=2026-03-16T08:00
+NO CHARGE: FIRESIDE - 36 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=6.40V @start=2026-01-23T08:00@end=2026-02-18T08:00
 NO CHARGE: LOVELL COVE - 29 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.10V @start=2026-01-24T09:00@end=2026-03-30T08:00
-NO CHARGE: JERRY - 21 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.00V @start=2026-01-22T08:00@end=2026-03-24T08:00
+NO CHARGE: JERRY - 20 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.00V @start=2026-01-23T08:00@end=2026-03-24T08:00
 NO CHARGE: MCGREGOR 2 - 18 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.05V @start=2026-01-24T08:00@end=2026-03-25T08:00
 NO CHARGE: SUSTUT - 18 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=5.40V @start=2026-02-18T08:00@end=2026-04-15T08:00
 NO CHARGE: PINK MOUNTAIN - 17 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=6.60V @start=2026-01-29T09:00@end=2026-06-30T10:00
 NO CHARGE: SEVEREID - 16 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.90V @start=2026-01-24T08:00@end=2026-04-15T08:00
 NO CHARGE: PADDY - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.90V @start=2026-01-23T08:00@end=2026-02-18T08:00
-VBAT DECLINING: OSBORN - 13.37V → 12.80V (dropped 0.57V) @start=2026-01-22T00:00@end=2026-07-23T00:00
+VBAT DECLINING: OSBORN - 13.37V → 12.80V (dropped 0.57V) @start=2026-01-23T00:00@end=2026-07-24T00:00

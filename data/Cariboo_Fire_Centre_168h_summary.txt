@@ -17,10 +17,10 @@ CONSTANT RH: BIG VALLEY - Constant high (90-99%), avg=99%, 12h, precip=4.4mm @st
 EXTREME GUST: HORSEFLY - max=80.6km/h, 1 readings >80km/h @start=2026-07-17T19:00@end=2026-07-17T19:00
 DIRECTION CONCENTRATION: ANAHIM LAKE - up to 54% of a day in the 260 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
 DIRECTION CONCENTRATION: NEMIAH - up to 54% of a day in the 288 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
-DIRECTION CONCENTRATION: BENSON - up to 50% of a day in the 134 deg bin (1 day(s) at 50%+) @start=2026-07-22T00:00@end=2026-07-22T23:00
+DIRECTION CONCENTRATION: BENSON - up to 50% of a day in the 134 deg bin (1 day(s) at 50%+) @ts=2026-07-22T00:00
 
 === TEMPERATURE ===
-HIGHEST TEMP: ALEXIS CREEK - 34.7C @ts=2026-07-22T16:00
+HIGHEST TEMP: ALEXIS CREEK - 34.8C @ts=2026-07-23T15:00
 LOWEST TEMP: BALDFACE - 2.4C @ts=2026-07-20T05:00
 
 === PRECIPITATION ===

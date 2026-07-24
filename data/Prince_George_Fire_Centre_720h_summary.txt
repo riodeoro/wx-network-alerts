@@ -1,9 +1,9 @@
 FIRE CENTRE: Prince George Fire Centre
-WINDOW: 720h | STATIONS: 56 | RECORDS: 39,260
+WINDOW: 720h | STATIONS: 56 | RECORDS: 39,286
 
 === STATION OUTAGES ===
-LOW COVERAGE: SAWTOOTH - 30% (217/721 hours) @start=2026-06-23T08:00@end=2026-07-02T12:00
-LOW COVERAGE: GOSNEL - 34% (247/721 hours) @start=2026-07-13T00:00@end=2026-07-23T06:00
+LOW COVERAGE: SAWTOOTH - 27% (197/721 hours) @start=2026-06-24T05:00@end=2026-07-02T12:00
+LOW COVERAGE: GOSNEL - 37% (269/721 hours) @start=2026-07-13T00:00@end=2026-07-24T04:00
 SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: CHILAKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 SENSOR NA: FORT NELSON FS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
@@ -11,11 +11,11 @@ SENSOR NA: GOSNEL - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURE
 SENSOR NA: MCLEOD LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
 
 === RH ===
-RH CHANGE >50%/h: ELK MOUNTAIN - 1 events, peak=+68.0%/h @first=2026-06-23T18:00@last=2026-06-23T18:00
 RH CHANGE >50%/h: NORTH CHILCO - 1 events, peak=+64.0%/h @first=2026-06-24T16:00@last=2026-06-24T16:00
 RH CHANGE >50%/h: FORT NELSON FS - 2 events, peak=+61.0%/h @first=2026-06-24T18:00@last=2026-07-19T04:00
 RH CHANGE >50%/h: ROCKINGHAM - 1 events, peak=+59.0%/h @first=2026-07-18T16:00@last=2026-07-18T16:00
 RH CHANGE >50%/h: NELSON FORKS - 1 events, peak=+58.0%/h @first=2026-06-26T17:00@last=2026-06-26T17:00
+RH CHANGE >50%/h: BEAR LAKE - 1 events, peak=+56.0%/h @first=2026-07-17T17:00@last=2026-07-17T17:00
 CONSTANT RH: NOEL - Constant 100%, avg=100%, 19h, precip=29.6mm @start=2026-06-27T16:00@end=2026-06-28T10:00
 CONSTANT RH: KOMIE - Constant 100%, avg=100%, 16h, precip=0.4mm @start=2026-07-01T16:00@end=2026-07-02T07:00
 CONSTANT RH: HIXON - Constant 100%, avg=100%, 12h, no precip @start=2026-07-19T23:00@end=2026-07-20T10:00
@@ -27,7 +27,7 @@ DIRECTION CONCENTRATION: WONOWON - up to 71% of a day in the 208 deg bin (2 day(
 DIRECTION CONCENTRATION: MUSKWA - up to 67% of a day in the 243 deg bin (2 day(s) at 50%+) @ts=2026-07-15T00:00
 DIRECTION CONCENTRATION: HOLY CROSS 2 - up to 58% of a day in the 267 deg bin (1 day(s) at 50%+) @ts=2026-06-30T00:00
 DIRECTION CONCENTRATION: KLUSKUS - up to 54% of a day in the 276 deg bin (1 day(s) at 50%+) @ts=2026-06-28T00:00
-DIRECTION CONCENTRATION: NOEL - up to 54% of a day in the 212 deg bin (2 day(s) at 50%+) @start=2026-07-22T00:00@end=2026-07-22T23:00
+DIRECTION CONCENTRATION: NOEL - up to 54% of a day in the 212 deg bin (2 day(s) at 50%+) @ts=2026-07-22T00:00
 
 === TEMPERATURE ===
 HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00
@@ -43,6 +43,6 @@ HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
 
 === POWER ===
 LOW VBAT: LEMORAY - min=11.70V, mean=11.71V, severity=low @ts=2026-06-25T02:00
-NO CHARGE: GRAHAM - 57 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=11.90V @start=2026-06-23T08:00@end=2026-07-22T09:00
+NO CHARGE: GRAHAM - 56 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=11.90V @start=2026-06-24T18:00@end=2026-07-23T17:00
 NO CHARGE: NELSON FORKS - 9 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.40V @start=2026-07-01T08:00@end=2026-07-22T10:00
 NO CHARGE: LEMORAY - 8 daytime readings (Vslr<Vbat), median Vbat=11.70V, median Vslr=10.00V, severity=low @start=2026-06-24T11:00@end=2026-07-19T19:00
