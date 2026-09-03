@@ -1,0 +1,5 @@
+<!-- hash:102cfe1f3c32 -->
+```
+PERSISTENT STATES
+OLD FADDY:        RH constant 100% for 13h, zero Rn_1          [Jul 10 22:00 – Jul 11 10:00]
+```

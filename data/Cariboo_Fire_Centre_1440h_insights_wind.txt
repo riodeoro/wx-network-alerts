@@ -1,0 +1,13 @@
+<!-- hash:ca128dc32722 -->
+```
+GUSTS EXCEEDED 80 KM/H
+ANAHIM LAKE:      282.2 km/h (1 reading >80)                                  [Jul 11 16:00]
+TATLA LAKE:       202.2 km/h (1 reading >80)                                   [Jun 6 13:00]
+HORSEFLY:         130.3 km/h (3 readings >80)                   [Jul 4 13:00 – Jul 28 13:00]
+DAILY DIRECTION CONCENTRATION
+MEADOW LAKE:      up to 71% of a day within ±5° of 178° (2 day(s) at 50%+)           [Jun 8]
+YOUNG LAKE:       up to 67% of a day within ±5° of 159° (1 day(s) at 50%+)           [Jul 2]
+GASPARD:          up to 62% of a day within ±5° of 173° (2 day(s) at 50%+)           [Jul 2]
+BIG VALLEY:       up to 58% of a day within ±5° of 206° (3 day(s) at 50%+)          [Jul 26]
+ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (2 day(s) at 50%+)          [Jul 18]
+```

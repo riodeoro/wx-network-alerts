@@ -1,0 +1,27 @@
+<!-- hash:30c3af12b8e0 -->
+```
+EXTREME VALUES
+ROCK CREEK:       Highest (40.1°C)                                                  [Jul 22]
+NORNS:            Lowest (-4.3°C)                                                    [Jun 7]
+TEMPERATURE EXCEEDED 35°C
+BEAVERDELL:       39.0°C                                                            [Jul 22]
+PENDOREILLE:      37.6°C                                                            [Jul 22]
+GRAND FORKS:      37.3°C                                                            [Jul 21]
+JOHNSON LAKE:     36.5°C                                                            [Jul 22]
+NICOLL:           36.3°C                                                            [Jul 22]
+DOWNIE:           35.8°C                                                            [Jul 17]
+KOOCANUSA:        35.8°C                                                            [Jul 23]
+BRISCO:           35.7°C                                                             [Aug 1]
+ELKO:             35.6°C                                                            [Jul 23]
+GOATFELL:         35.6°C                                                            [Jul 22]
+TOBY HUB:         35.6°C                                                             [Aug 1]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+SLOCAN:           1 spike, peak Δ 13.0°C                                       [Aug 4 11:00]
+CHERRY LAKE:      2 spikes, peak Δ 6.4°C                                 [Aug 2 12:00–18:00]
+BLAEBERRY:        1 spike, peak Δ 5.1°C                                       [Jul 28 17:00]
+ROUND PRAIRIE:    2 spikes, peak Δ 6.4°C                                 [Aug 2 12:00–18:00]
+TROUT LAKE:       1 spike, peak Δ 6.1°C                                        [Aug 3 16:00]
+PERSISTENT STATES
+NANCY GREENE:     constant (9.1°C) for 6h, RH varied 0%                  [Jul 1 00:00–05:00]
+WHITE RIVER:      constant (7.8°C) for 6h, RH varied 0%                 [Jun 29 00:00–05:00]
+```

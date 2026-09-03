@@ -1,0 +1,28 @@
+<!-- hash:7b6174f6e169 -->
+```
+EXTREME VALUES
+LITTLE CHOPAKA:   Highest (39.2°C)                                            [Jul 22 15:00]
+FRENCH BAR:       Lowest (-2.7°C)                                              [Aug 2 06:00]
+TEMPERATURE EXCEEDED 35°C
+SPLINTLUM:        38.8°C                                                      [Jul 22 16:00]
+LILLOOET:         38.7°C                                                      [Jul 22 16:00]
+SEYMOUR ARM:      38.6°C                                                      [Jul 17 17:00]
+AUGUST LAKE:      38.5°C                                                      [Jul 22 16:00]
+PENTICTON RS:     38.3°C                                                      [Jul 22 18:00]
+FINTRY:           37.8°C                                                      [Jul 22 16:00]
+MERRITT 2 HUB:    36.5°C                                                      [Jul 22 14:00]
+WEST KELOWNA:     36.5°C                                                      [Jul 22 16:00]
+AFTON:            36.2°C                                                      [Jul 17 15:00]
+EAST BARRIERE:    36.1°C                                                      [Jul 17 14:00]
+TURTLE:           36.1°C                                                      [Jul 17 16:00]
+MABEL LAKE 2:     35.8°C                                                      [Jul 22 17:00]
+STATION BAY 2:    35.5°C                                                      [Jul 22 16:00]
+CLEARWATER HUB:   35.2°C                                                      [Jul 21 17:00]
+FIVE MILE:        35.2°C                                                      [Jul 22 16:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+SICAMOUS:         1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+BRENDA MINES:     1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+FINTRY:           1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+IDABEL LAKE 3:    1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+KETTLE 2:         1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+```

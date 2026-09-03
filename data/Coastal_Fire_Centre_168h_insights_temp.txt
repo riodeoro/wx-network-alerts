@@ -1,0 +1,6 @@
+<!-- hash:9a15bbeb9936 -->
+```
+EXTREME VALUES
+BOOTHROYD:        Highest (34.6°C)                                            [Jul 31 17:00]
+ALLISON PASS:     Lowest (-0.6°C)                                              [Aug 3 06:00]
+```

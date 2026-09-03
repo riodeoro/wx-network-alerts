@@ -1,0 +1,5 @@
+<!-- hash:f500c9db05e5 -->
+```
+PERSISTENT STATES
+SILVERSTAR SF:    zero wind 17h, 4 shifts >90°, max 3.3km/h      [Aug 3 23:00 – Aug 4 15:00]
+```

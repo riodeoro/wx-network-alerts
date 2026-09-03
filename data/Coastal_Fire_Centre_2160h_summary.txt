@@ -1,0 +1,82 @@
+FIRE CENTRE: Coastal Fire Centre
+WINDOW: 2160h | STATIONS: 48 | RECORDS: 103,011
+
+=== STATION OUTAGES ===
+SENSOR NA: APE LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: HOMATHKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: KLINAKLINI - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MACHMELL KLINIKLINI - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MESACHIE 2 - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+OUTLIER Rh: TS NAKA CREEK - min=16.0, max=18.0 @ts=2026-06-02T12:00
+OUTLIER Rh: TS TSITIKA - min=16.0, max=20.0 @ts=2026-06-02T15:00
+RH CHANGE >50%/h: TS ELPHINSTONE - 2 events, peak=+80.0%/h @first=2026-05-13T10:00@last=2026-05-13T11:00
+RH CHANGE >50%/h: ALLISON PASS - 1 events, peak=+61.0%/h @first=2026-07-16T15:00@last=2026-07-16T15:00
+RH CHANGE >50%/h: TALCHAKO - 1 events, peak=+57.0%/h @first=2026-06-20T18:00@last=2026-06-20T18:00
+RH CHANGE >50%/h: DARCY - 1 events, peak=+55.0%/h @first=2026-05-10T17:00@last=2026-05-10T17:00
+CONSTANT RH: MOUNT CAYLEY - Constant 100%, avg=100%, 56h, precip=0.4mm @start=2026-06-28T22:00@end=2026-07-01T05:00
+CONSTANT RH: HOMATHKO - Constant 100%, avg=100%, 52h, precip=1.4mm @start=2026-07-17T06:00@end=2026-07-19T09:00
+CONSTANT RH: MACHMELL KLINIKLINI - Constant 100%, avg=100%, 48h, precip=23.0mm @start=2026-07-17T12:00@end=2026-07-19T11:00
+CONSTANT RH: SUMMIT - Constant 100%, avg=100%, 46h, precip=107.8mm @start=2026-07-25T17:00@end=2026-07-27T14:00
+CONSTANT RH: KLINAKLINI - Constant 100%, avg=100%, 44h, precip=4.8mm @start=2026-07-17T09:00@end=2026-07-19T04:00
+
+=== WIND ===
+ZERO WIND 511h: HAIG CAMP - Wspd=0 but 79 direction changes >90deg detected (max_delta=180deg) @start=2026-05-07T06:00@end=2026-05-28T12:00
+ZERO WIND 17h: MESACHIE 2 - Wspd=0 but 3 direction changes >90deg detected (max_delta=127deg), gusts nonzero (max=10.2km/h, avg=1.3km/h) @start=2026-07-02T17:00@end=2026-07-03T09:00
+ZERO WIND 15h: TS ARTLISH - Wspd=0 but 4 direction changes >90deg detected (max_delta=177deg), gusts nonzero (max=6.7km/h, avg=1.2km/h) @start=2026-07-28T21:00@end=2026-07-29T11:00
+ZERO WIND 15h: QUINSAM BASE FWX - Wspd=0 but 6 direction changes >90deg detected (max_delta=174deg), gusts nonzero (max=4.7km/h, avg=2.0km/h) @start=2026-07-30T20:00@end=2026-07-31T10:00
+ZERO WIND 14h: MACHMELL KLINIKLINI - Wspd=0 but 7 direction changes >90deg detected (max_delta=143deg), gusts nonzero (max=15.0km/h, avg=1.1km/h) @start=2026-06-04T21:00@end=2026-06-05T10:00
+DIRECTION CONCENTRATION: TS ELPHINSTONE - up to 79% of a day in the 107 deg bin (3 day(s) at 50%+) @ts=2026-07-26T00:00
+DIRECTION CONCENTRATION: CHEAKAMUS - up to 71% of a day in the 294 deg bin (6 day(s) at 50%+) @ts=2026-06-30T00:00
+DIRECTION CONCENTRATION: FRANK CREEK - up to 67% of a day in the 201 deg bin (11 day(s) at 50%+) @ts=2026-06-29T00:00
+DIRECTION CONCENTRATION: TS BLACKWATER - up to 67% of a day in the 115 deg bin (7 day(s) at 50%+) @ts=2026-07-02T00:00
+DIRECTION CONCENTRATION: APE LAKE - up to 62% of a day in the 353 deg bin (4 day(s) at 50%+) @ts=2026-07-18T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: DARCY - 39.3C @ts=2026-07-22T15:00
+LOWEST TEMP: ALLISON PASS - -4.2C @ts=2026-06-08T06:00
+TEMP>35C: ANDERSON CREEK - max=37.9C @ts=2026-07-22T15:00
+TEMP>35C: BEAVER CREEK - max=36.4C @ts=2026-07-22T16:00
+TEMP>35C: BIG SILVER 2 - max=37.7C @ts=2026-07-22T16:00
+TEMP>35C: BOOTHROYD - max=38.0C @ts=2026-07-21T18:00
+TEMP>35C: CHEAKAMUS - max=35.7C @ts=2026-07-22T16:00
+TEMP>35C: FORD MOUNTAIN - max=35.7C @ts=2026-07-22T15:00
+TEMP>35C: FRANK CREEK - max=37.8C @ts=2026-07-22T17:00
+TEMP>35C: HAIG CAMP - max=36.0C @ts=2026-07-22T18:00
+TEMP>35C: MEAGER CREEK - max=36.4C @ts=2026-07-22T17:00
+TEMP>35C: MENZIES CAMP - max=35.4C @ts=2026-07-22T15:00
+TEMP>35C: MESACHIE 2 - max=37.7C @ts=2026-07-22T17:00
+TEMP>35C: MESACHIE 3 - max=36.7C @ts=2026-07-22T16:00
+TEMP>35C: NAHATLATCH - max=37.3C @ts=2026-07-21T16:00
+TEMP>35C: PEMBERTON BASE - max=38.7C @ts=2026-07-22T17:00
+TEMP>35C: SCAR CREEK - max=37.8C @ts=2026-07-22T16:00
+TEMP>35C: TALCHAKO - max=37.5C @ts=2026-07-22T16:00
+TEMP>35C: TOBA CAMP - max=37.4C @ts=2026-06-23T16:00
+TEMP>35C: TS BURMAN - max=35.2C @ts=2026-06-23T16:00
+TEMP>35C: TS MAURELLE - max=35.1C @ts=2026-07-22T17:00
+TEMP>35C: TS NAHMINT - max=35.3C @ts=2026-07-22T16:00
+TEMP>35C: UBC RESEARCH - max=35.3C @ts=2026-07-22T17:00
+TEMP>35C: WOSS CAMP - max=35.7C @ts=2026-06-14T16:00
+ISOLATED TEMP SPIKE: SALTSPRING 2 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.8C, mag=6.9 @first=2026-07-07T12:00@last=2026-07-07T12:00
+ISOLATED TEMP SPIKE: FRANK CREEK - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.1C, mag=6.0 @first=2026-06-21T16:00@last=2026-06-21T16:00
+CONSTANT TEMP: BIG SILVER 2 - 11.7C for 6h, RH also flat (0% range) @start=2026-07-03T01:00@end=2026-07-03T06:00
+CONSTANT TEMP: KLINAKLINI - 5.6C for 6h, RH also flat (0% range) @start=2026-07-09T20:00@end=2026-07-10T01:00
+CONSTANT TEMP: MOUNT CAYLEY - 7.9C for 6h, RH also flat (0% range) @start=2026-07-26T06:00@end=2026-07-26T11:00
+CONSTANT TEMP: SUMMIT - 11.3C for 6h, RH also flat (0% range) @start=2026-07-26T21:00@end=2026-07-27T02:00
+
+=== PRECIPITATION ===
+SILENT GAUGE: HONNA - silent 52 of 69 neighbour rain hours (75.4%) @first=2026-05-10T10:00@last=2026-08-01T10:00
+SILENT GAUGE: ALLISON PASS - silent 32 of 44 neighbour rain hours (72.7%) @first=2026-05-13T04:00@last=2026-08-01T19:00
+SILENT GAUGE: DARCY - silent 27 of 41 neighbour rain hours (65.9%) @first=2026-05-25T05:00@last=2026-08-01T10:00
+SILENT GAUGE: BOOTHROYD - silent 25 of 39 neighbour rain hours (64.1%) @first=2026-05-13T13:00@last=2026-08-01T14:00
+
+=== POWER ===
+LOW VBAT: SCAR CREEK - min=11.40V, mean=12.65V, severity=low @ts=2026-06-04T03:00
+LOW VBAT: QUINSAM BASE FWX - min=12.30V, mean=12.87V @ts=2026-05-07T06:00
+NO CHARGE: FRANK CREEK - 110 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=11.50V @start=2026-05-07T08:00@end=2026-08-04T08:00
+NO CHARGE: TALCHAKO - 35 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.20V @start=2026-05-07T08:00@end=2026-08-04T19:00
+NO CHARGE: BIG SILVER 2 - 11 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.30V @start=2026-05-13T08:00@end=2026-06-18T08:00
+NO CHARGE: QUINSAM BASE FWX - 9 daytime readings (Vslr<Vbat), median Vbat=12.30V, median Vslr=12.00V @start=2026-06-26T08:00@end=2026-08-02T08:00
+NO CHARGE: ALLISON PASS - 6 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.25V @start=2026-05-19T08:00@end=2026-08-03T08:00
+NO CHARGE: SCAR CREEK - 5 daytime readings (Vslr<Vbat), median Vbat=11.40V, median Vslr=11.00V, severity=low @start=2026-05-17T17:00@end=2026-06-09T12:00

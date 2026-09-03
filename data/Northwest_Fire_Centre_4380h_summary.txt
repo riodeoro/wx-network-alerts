@@ -1,0 +1,78 @@
+FIRE CENTRE: Northwest Fire Centre
+WINDOW: 4380h | STATIONS: 32 | RECORDS: 137,927
+
+=== STATION OUTAGES ===
+SENSOR NA: NILKITKWA - Vbat=78% NA, Vslr=78% NA, Ibat=78% NA
+
+=== RH ===
+OUTLIER Rh: PINE CREEK - min=13.0, max=15.0 @ts=2026-05-07T16:00
+RH CHANGE >50%/h: BELL-IRVING - 1 events, peak=+59.0%/h @first=2026-06-09T15:00@last=2026-06-09T15:00
+RH CHANGE >50%/h: GANOKWA - 1 events, peak=-57.0%/h @first=2026-06-21T17:00@last=2026-06-21T17:00
+RH CHANGE >50%/h: CEDARVALE - 2 events, peak=+56.0%/h @first=2026-05-08T13:00@last=2026-05-08T14:00
+RH CHANGE >50%/h: NADINA - 1 events, peak=+54.0%/h @first=2026-06-20T16:00@last=2026-06-20T16:00
+RH CHANGE >50%/h: VAN DYKE - 1 events, peak=+53.0%/h @first=2026-06-20T17:00@last=2026-06-20T17:00
+CONSTANT RH: DEASE LAKE FS - Constant 100%, avg=100%, 116h, precip=7.6mm @start=2026-02-03T18:00@end=2026-02-08T13:00
+CONSTANT RH: CRANBERRY - Constant 100%, avg=100%, 100h, precip=34.0mm @start=2026-02-03T18:00@end=2026-02-07T21:00
+CONSTANT RH: NILKITKWA - Constant 100%, avg=100%, 66h, precip=8.0mm @start=2026-02-04T18:00@end=2026-02-07T11:00
+CONSTANT RH: HOUSTON - Constant 100%, avg=100%, 64h, precip=4.2mm @start=2026-02-05T00:00@end=2026-02-07T15:00
+CONSTANT RH: UPPER KISPIOX - Constant 100%, avg=100%, 54h, precip=7.6mm @start=2026-02-04T09:00@end=2026-02-06T14:00
+
+=== WIND ===
+EXTREME GUST: PINE CREEK - max=95.0km/h, 5 readings >80km/h @start=2026-02-08T00:00@end=2026-03-07T20:00
+EXTREME GUST: PARROTT - max=90.5km/h, 16 readings >80km/h @start=2026-02-12T10:00@end=2026-04-06T18:00
+EXTREME GUST: GRASSY PLAINS HUB - max=84.7km/h, 1 readings >80km/h @start=2026-02-26T07:00@end=2026-02-26T07:00
+EXTREME GUST: NASS CAMP - max=84.3km/h, 1 readings >80km/h @start=2026-03-07T18:00@end=2026-03-07T18:00
+ZERO WIND 48h: KISPIOX HUB - Wspd=0 but 21 direction changes >90deg detected (max_delta=177deg), gusts nonzero (max=10.2km/h, avg=1.0km/h) @start=2026-02-23T13:00@end=2026-02-25T12:00
+ZERO WIND 30h: PINE CREEK - Wspd=0 but 2 direction changes >90deg detected (max_delta=150deg), gusts nonzero (max=28.0km/h, avg=0.9km/h) @start=2026-03-17T06:00@end=2026-03-18T11:00
+ZERO WIND 26h: VAN DYKE - Wspd=0 but 7 direction changes >90deg detected (max_delta=163deg), gusts nonzero (max=3.5km/h, avg=0.4km/h) @start=2026-03-15T17:00@end=2026-03-16T18:00
+ZERO WIND 24h: FORRESTKERR - Wspd=0 but 5 direction changes >90deg detected (max_delta=144deg), gusts nonzero (max=4.8km/h, avg=0.2km/h) @start=2026-03-16T12:00@end=2026-03-17T11:00
+ZERO WIND 23h: ROSSWOOD - Wspd=0 but 7 direction changes >90deg detected (max_delta=176deg), gusts nonzero (max=6.8km/h, avg=0.5km/h) @start=2026-02-23T17:00@end=2026-02-24T15:00
+DIRECTION CONCENTRATION: DEASE LAKE FS - up to 100% of a day in the 343 deg bin (5 day(s) at 50%+) @ts=2026-02-21T00:00
+DIRECTION CONCENTRATION: KISPIOX HUB - up to 100% of a day in the 5 deg bin (20 day(s) at 50%+) @ts=2026-05-29T00:00
+DIRECTION CONCENTRATION: AUGIER LAKE - up to 96% of a day in the 59 deg bin (14 day(s) at 50%+) @ts=2026-02-17T00:00
+DIRECTION CONCENTRATION: PINE CREEK - up to 96% of a day in the 243 deg bin (20 day(s) at 50%+) @ts=2026-02-25T00:00
+DIRECTION CONCENTRATION: FORRESTKERR - up to 92% of a day in the 178 deg bin (9 day(s) at 50%+) @ts=2026-02-22T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: CEDARVALE - 37.2C @ts=2026-07-21T15:00
+LOWEST TEMP: BOYA LAKE - -35.8C @ts=2026-02-18T07:00
+TEMP>35C: KITPARK - max=36.9C @ts=2026-07-20T18:00
+ISOLATED TEMP SPIKE: EAST OOTSA - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.0C, mag=7.7 @first=2026-04-11T10:00@last=2026-04-11T10:00
+CONSTANT TEMP: PINE CREEK - 0.0C for 14h, RH also flat (1% range) @start=2026-03-16T12:00@end=2026-03-17T01:00
+CONSTANT TEMP: NILKITKWA - -13.2C for 8h, RH also flat (2% range) @start=2026-02-22T20:00@end=2026-02-23T03:00
+CONSTANT TEMP: UPPER FULTON - 0.0C for 8h, RH also flat (0% range) @start=2026-02-07T01:00@end=2026-02-07T08:00
+CONSTANT TEMP: BELL-IRVING - 0.3C for 7h, RH also flat (0% range) @start=2026-02-05T00:00@end=2026-02-05T06:00
+CONSTANT TEMP: KITPARK - 0.2C for 7h, RH also flat (0% range) @start=2026-02-16T00:00@end=2026-02-16T06:00
+
+=== PRECIPITATION ===
+RAIN AT RH 10-25%: BOYA LAKE - 4 hours, 1.0mm total, rank=1 @first=2026-03-20T16:00@last=2026-03-28T16:00
+RAIN AT RH 10-25%: EAST OOTSA - 1 hours, 0.2mm total, rank=2 @first=2026-03-01T12:00@last=2026-03-01T12:00
+RAIN AT RH 10-25%: OLD FADDY - 1 hours, 0.2mm total, rank=3 @first=2026-03-27T15:00@last=2026-03-27T15:00
+SILENT GAUGE: ATLIN - silent 33 of 35 neighbour rain hours (94.3%) @first=2026-02-04T16:00@last=2026-07-27T03:00
+
+=== POWER ===
+LOW VBAT: NORTH BABINE - min=12.00V, mean=12.96V @ts=2026-02-27T18:00
+LOW VBAT: NADINA - min=12.10V, mean=13.12V @ts=2026-02-06T01:00
+LOW VBAT: AUGIER LAKE - min=12.20V, mean=13.06V @ts=2026-02-04T05:00
+LOW VBAT: BURNS LAKE 850M - min=12.20V, mean=13.29V @ts=2026-02-19T08:00
+NO CHARGE: NORTH BABINE - 268 daytime readings (Vslr<Vbat), median Vbat=12.30V, median Vslr=10.50V @start=2026-02-03T18:00@end=2026-08-03T08:00
+NO CHARGE: UPPER FULTON - 266 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.20V @start=2026-02-03T18:00@end=2026-08-03T08:00
+NO CHARGE: NASS CAMP - 259 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=12.20V @start=2026-02-03T18:00@end=2026-08-04T09:00
+NO CHARGE: AUGIER LAKE - 117 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=6.80V @start=2026-02-03T18:00@end=2026-08-02T08:00
+NO CHARGE: NADINA - 115 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=6.60V @start=2026-02-03T18:00@end=2026-04-02T08:00
+NO CHARGE: ATLIN - 113 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=4.20V @start=2026-02-14T08:00@end=2026-07-27T08:00
+NO CHARGE: BURNS LAKE 850M - 111 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=7.20V @start=2026-02-03T19:00@end=2026-07-28T08:00
+NO CHARGE: ROSSWOOD - 97 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.90V @start=2026-02-04T08:00@end=2026-08-02T08:00
+NO CHARGE: DEASE LAKE FS - 91 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=9.90V @start=2026-02-04T08:00@end=2026-04-17T08:00
+NO CHARGE: GANOKWA - 83 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=7.80V @start=2026-02-03T18:00@end=2026-04-02T08:00
+NO CHARGE: EAST OOTSA - 80 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.10V @start=2026-02-04T08:00@end=2026-05-21T08:00
+NO CHARGE: TELEGRAPH CREEK - 70 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=9.85V @start=2026-02-06T08:00@end=2026-04-06T08:00
+NO CHARGE: PEDEN - 62 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=8.00V @start=2026-02-04T08:00@end=2026-04-15T08:00
+NO CHARGE: TERRACE - 57 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.30V @start=2026-02-04T08:00@end=2026-04-06T08:00
+NO CHARGE: PARROTT - 50 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=9.25V @start=2026-02-04T08:00@end=2026-03-26T08:00
+NO CHARGE: MCBRIDE LAKE - 46 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=12.20V @start=2026-04-02T08:00@end=2026-08-04T08:00
+NO CHARGE: BELL-IRVING - 42 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=3.50V @start=2026-02-03T18:00@end=2026-03-30T08:00
+NO CHARGE: NILKITKWA - 17 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-08-03T08:00
+NO CHARGE: OLD FADDY - 11 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=10.20V @start=2026-02-16T08:00@end=2026-03-25T08:00
+NO CHARGE: BOB QUINN LAKE - 6 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=4.15V @start=2026-02-18T08:00@end=2026-02-23T09:00
+NO CHARGE: UPPER KISPIOX - 6 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.40V @start=2026-03-16T08:00@end=2026-08-02T08:00

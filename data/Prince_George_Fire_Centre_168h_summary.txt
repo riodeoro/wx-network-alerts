@@ -1,0 +1,40 @@
+FIRE CENTRE: Prince George Fire Centre
+WINDOW: 168h | STATIONS: 55 | RECORDS: 9,253
+
+=== STATION OUTAGES ===
+SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: CHILAKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: FORT NELSON FS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GOSNEL - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MCLEOD LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+CONSTANT RH: SILVER - Constant 100%, avg=100%, 20h, precip=48.6mm @start=2026-08-01T06:00@end=2026-08-02T01:00
+CONSTANT RH: LOVELL COVE - Constant high (90-99%), avg=97%, 12h, no precip @start=2026-08-02T23:00@end=2026-08-03T10:00
+
+=== WIND ===
+EXTREME GUST: SILVER - max=152.2km/h, 1 readings >80km/h @start=2026-07-29T13:00@end=2026-07-29T13:00
+DIRECTION CONCENTRATION: KOMIE - up to 50% of a day in the 26 deg bin (1 day(s) at 50%+) @ts=2026-08-01T00:00
+DIRECTION CONCENTRATION: MUSKWA - up to 50% of a day in the 243 deg bin (1 day(s) at 50%+) @ts=2026-08-03T00:00
+DIRECTION CONCENTRATION: NELSON FORKS - up to 50% of a day in the 358 deg bin (1 day(s) at 50%+) @ts=2026-08-01T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: BLUE RIVER 2 - 30.0C @ts=2026-07-30T17:00
+LOWEST TEMP: BEDNESTI - -0.6C @ts=2026-08-05T05:00
+ISOLATED TEMP SPIKE: BEDNESTI - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: CHILAKO - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: HOLY CROSS 2 - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: MOOSE LAKE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: NORTH CHILCO - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+
+=== PRECIPITATION ===
+SILENT GAUGE: HELMUT - silent 3 of 3 neighbour rain hours (100.0%) @first=2026-07-29T08:00@last=2026-07-29T11:00
+SILENT GAUGE: OSBORN - silent 13 of 14 neighbour rain hours (92.9%) @first=2026-08-01T15:00@last=2026-08-02T04:00
+SILENT GAUGE: BLUE RIVER 2 - silent 3 of 4 neighbour rain hours (75.0%) @first=2026-08-01T19:00@last=2026-08-02T18:00
+
+=== POWER ===
+LOW VBAT: LEMORAY - min=11.60V, mean=12.36V, severity=low @ts=2026-07-29T05:00
+LOW VBAT: GRAHAM - min=12.30V, mean=12.38V @ts=2026-08-02T00:00
+NO CHARGE: GRAHAM - 9 daytime readings (Vslr<Vbat), median Vbat=12.40V, median Vslr=11.80V @start=2026-07-29T08:00@end=2026-08-04T08:00
+NO CHARGE: NELSON FORKS - 6 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.65V @start=2026-07-29T08:00@end=2026-07-29T13:00
+NO CHARGE: KLUSKUS - 5 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-07-31T08:00@end=2026-08-02T08:00

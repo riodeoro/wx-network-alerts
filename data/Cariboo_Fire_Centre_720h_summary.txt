@@ -1,0 +1,39 @@
+FIRE CENTRE: Cariboo Fire Centre
+WINDOW: 720h | STATIONS: 26 | RECORDS: 18,738
+
+=== STATION OUTAGES ===
+SENSOR NA: BENSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GASPARD - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GAVIN - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: KNIFE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: LONE BUTTE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+RH CHANGE >50%/h: GAVIN - 1 events, peak=+61.0%/h @first=2026-07-17T16:00@last=2026-07-17T16:00
+RH CHANGE >50%/h: LONE BUTTE - 1 events, peak=+56.0%/h @first=2026-07-18T17:00@last=2026-07-18T17:00
+RH CHANGE >50%/h: PLACE LAKE - 1 events, peak=-56.0%/h @first=2026-07-07T08:00@last=2026-07-07T08:00
+RH CHANGE >50%/h: TIMOTHY - 1 events, peak=+52.0%/h @first=2026-07-11T17:00@last=2026-07-11T17:00
+CONSTANT RH: BIG VALLEY - Constant high (90-99%), avg=99%, 12h, precip=4.4mm @start=2026-07-19T00:00@end=2026-07-19T11:00
+
+=== WIND ===
+EXTREME GUST: ANAHIM LAKE - max=282.2km/h, 1 readings >80km/h @start=2026-07-11T16:00@end=2026-07-11T16:00
+EXTREME GUST: HORSEFLY - max=80.7km/h, 2 readings >80km/h @start=2026-07-17T19:00@end=2026-07-28T13:00
+DIRECTION CONCENTRATION: BIG VALLEY - up to 58% of a day in the 206 deg bin (2 day(s) at 50%+) @ts=2026-07-26T00:00
+DIRECTION CONCENTRATION: ANAHIM LAKE - up to 54% of a day in the 260 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
+DIRECTION CONCENTRATION: GASPARD - up to 54% of a day in the 185 deg bin (1 day(s) at 50%+) @ts=2026-07-26T00:00
+DIRECTION CONCENTRATION: NEMIAH - up to 54% of a day in the 288 deg bin (1 day(s) at 50%+) @ts=2026-07-18T00:00
+DIRECTION CONCENTRATION: BENSON - up to 50% of a day in the 134 deg bin (1 day(s) at 50%+) @ts=2026-07-22T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: ALEXIS CREEK - 34.8C @ts=2026-07-23T15:00
+LOWEST TEMP: BALDFACE - -2.6C @ts=2026-07-29T04:00
+ISOLATED TEMP SPIKE: BALDFACE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: TATLA LAKE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+
+=== PRECIPITATION ===
+SILENT GAUGE: NAZKO - silent 3 of 4 neighbour rain hours (75.0%) @first=2026-07-09T06:00@last=2026-08-01T04:00
+SILENT GAUGE: NEMIAH - silent 3 of 5 neighbour rain hours (60.0%) @first=2026-07-31T19:00@last=2026-08-01T04:00
+
+=== POWER ===
+NO CHARGE: NAZKO (AC) - 15 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-09T08:00@end=2026-08-04T08:00
+NO CHARGE: MATHEW (AC) - 10 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=0.20V @start=2026-07-19T08:00@end=2026-08-02T08:00

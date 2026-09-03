@@ -1,0 +1,10 @@
+<!-- hash:97b72193234f -->
+```
+HIGH PRECIPITATION
+KOMIE:            37.0 mm/h                                                         [Jun 30]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+BLUE RIVER 2:     silent 9 of 10 neighbour rain hours (90%)     [Jul 19 21:00 → Aug 2 18:00]
+OSBORN:           silent 22 of 32 neighbour rain hours (69%)    [May 15 10:00 → Aug 2 04:00]
+MUSKWA:           silent 9 of 15 neighbour rain hours (60%)    [May 15 08:00 → Jul 18 19:00]
+SUSTUT:           silent 27 of 45 neighbour rain hours (60%)    [May 25 13:00 → Aug 1 23:00]
+```

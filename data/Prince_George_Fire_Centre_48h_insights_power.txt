@@ -1,0 +1,6 @@
+<!-- hash:8db005c72703 -->
+```
+LOW BATTERY VOLTAGE
+GRAHAM:           min 12.30V, mean 12.36V                                      [Aug 3 05:00]
+LEMORAY:          min 12.30V, mean 12.38V                                      [Aug 3 05:00]
+```

@@ -1,0 +1,20 @@
+<!-- hash:1e9b7be3d75e -->
+```
+GUSTS EXCEEDED 80 KM/H
+PINE CREEK:       95.0 km/h (5 readings >80)                     [Feb 8 00:00 – Mar 7 20:00]
+PARROTT:          90.5 km/h (16 readings >80)                   [Feb 12 10:00 – Apr 6 18:00]
+GRASSY PLAINS HUB: 84.7 km/h (1 reading >80)                                  [Feb 26 07:00]
+NASS CAMP:        84.3 km/h (1 reading >80)                                    [Mar 7 18:00]
+PERSISTENT STATES
+KISPIOX HUB:      zero wind 48h, 21 shifts >90°, max 10.2km/h  [Feb 23 13:00 – Feb 25 12:00]
+PINE CREEK:       zero wind 30h, 2 shifts >90°, max 28.0km/h   [Mar 17 06:00 – Mar 18 11:00]
+VAN DYKE:         zero wind 26h, 7 shifts >90°, max 3.5km/h    [Mar 15 17:00 – Mar 16 18:00]
+FORRESTKERR:      zero wind 24h, 5 shifts >90°, max 4.8km/h    [Mar 16 12:00 – Mar 17 11:00]
+ROSSWOOD:         zero wind 23h, 7 shifts >90°, max 6.8km/h    [Feb 23 17:00 – Feb 24 15:00]
+DAILY DIRECTION CONCENTRATION
+DEASE LAKE FS:    up to 100% of a day within ±5° of 343° (5 day(s) at 50%+)         [Feb 21]
+KISPIOX HUB:      up to 100% of a day within ±5° of 5° (20 day(s) at 50%+)          [May 29]
+AUGIER LAKE:      up to 96% of a day within ±5° of 59° (14 day(s) at 50%+)          [Feb 17]
+PINE CREEK:       up to 96% of a day within ±5° of 243° (20 day(s) at 50%+)         [Feb 25]
+FORRESTKERR:      up to 92% of a day within ±5° of 178° (9 day(s) at 50%+)          [Feb 22]
+```

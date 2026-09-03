@@ -1,0 +1,10 @@
+<!-- hash:316dae28c8a5 -->
+```
+EXTREME VALUES
+CEDARVALE:        Highest (37.2°C)                                                  [Jul 21]
+HOUSTON:          Lowest (-5.5°C)                                                   [May 31]
+TEMPERATURE EXCEEDED 35°C
+KITPARK:          36.9°C                                                            [Jul 20]
+PERSISTENT STATES
+NASS CAMP:        constant (11.2°C) for 6h, RH varied 2%                 [Aug 2 00:00–05:00]
+```

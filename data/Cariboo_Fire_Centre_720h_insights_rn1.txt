@@ -1,0 +1,6 @@
+<!-- hash:2fded2746f5f -->
+```
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+NAZKO:            silent 3 of 4 neighbour rain hours (75%)       [Jul 9 06:00 → Aug 1 04:00]
+NEMIAH:           silent 3 of 5 neighbour rain hours (60%)      [Jul 31 19:00 → Aug 1 04:00]
+```

@@ -1,0 +1,6 @@
+<!-- hash:d34bec265ae2 -->
+```
+PERSISTENT STATES
+SILVER:           RH constant 100% for 20h, Rn_1 (48.6mm)        [Aug 1 06:00 – Aug 2 01:00]
+LOVELL COVE:      RH constant 97% for 12h, zero Rn_1             [Aug 2 23:00 – Aug 3 10:00]
+```

@@ -1,0 +1,6 @@
+<!-- hash:ca340ec0bac3 -->
+```
+PERSISTENT STATES
+APE LAKE:         RH constant 99% for 13h, Rn_1 (0.4mm)          [Aug 2 20:00 – Aug 3 08:00]
+TS ARTLISH:       RH constant 100% for 12h, zero Rn_1            [Aug 2 23:00 – Aug 3 10:00]
+```

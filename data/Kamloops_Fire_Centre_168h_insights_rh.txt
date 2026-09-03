@@ -1,0 +1,11 @@
+<!-- hash:11949e31b815 -->
+```
+RH READ 0%
+SILVERSTAR SF:    164 readings                         [Jul 29 06:00 → Aug 5 05:00, ongoing]
+RH CHANGED >50%/H
+COLDSCAUR LAKE:   2 events, peak Δ -53%/h                        [Aug 1 13:00 → Aug 2 13:00]
+MAYSON:           1 event, peak Δ -53%/h                                       [Aug 2 13:00]
+WELLS GRAY:       1 event, peak Δ -53%/h                                       [Aug 2 13:00]
+PERSISTENT STATES
+SILVERSTAR SF:    RH constant 0% for 164h, zero Rn_1   [Jul 29 06:00 – Aug 5 05:00, ongoing]
+```

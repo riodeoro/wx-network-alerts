@@ -1,0 +1,28 @@
+FIRE CENTRE: Cariboo Fire Centre
+WINDOW: 168h | STATIONS: 26 | RECORDS: 4,394
+
+=== STATION OUTAGES ===
+SENSOR NA: BENSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GASPARD - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GAVIN - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: KNIFE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: LONE BUTTE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+None.
+
+=== WIND ===
+DIRECTION CONCENTRATION: MEADOW LAKE - up to 50% of a day in the 182 deg bin (1 day(s) at 50%+) @ts=2026-08-01T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: ALEXIS CREEK - 30.4C @ts=2026-08-04T17:00
+LOWEST TEMP: BALDFACE - -2.5C @ts=2026-07-29T05:00
+ISOLATED TEMP SPIKE: BALDFACE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: TATLA LAKE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+
+=== PRECIPITATION ===
+SILENT GAUGE: NEMIAH - silent 3 of 5 neighbour rain hours (60.0%) @first=2026-07-31T19:00@last=2026-08-01T04:00
+
+=== POWER ===
+NO CHARGE: NAZKO (AC) - 8 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-07-29T08:00@end=2026-08-04T08:00
+NO CHARGE: MATHEW (AC) - 6 daytime readings (Vslr<Vbat), median Vbat=12.60V, median Vslr=0.20V @start=2026-07-31T08:00@end=2026-08-02T08:00

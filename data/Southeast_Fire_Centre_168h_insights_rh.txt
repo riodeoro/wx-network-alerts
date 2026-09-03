@@ -1,0 +1,7 @@
+<!-- hash:d590132a6fd9 -->
+```
+RH CHANGED >50%/H
+DUNCAN:           1 event, peak Δ +57%/h                                       [Aug 1 18:00]
+MARION:           1 event, peak Δ -54%/h                                       [Aug 2 08:00]
+DOWNIE:           2 events, peak Δ +53%/h                                [Aug 1 19:00–23:00]
+```

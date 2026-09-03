@@ -1,0 +1,21 @@
+<!-- hash:5df350842780 -->
+```
+GUSTS EXCEEDED 80 KM/H
+VALEMOUNT 2:      1654.6 km/h (274 readings >80)                [Feb 3 19:00 – Jun 20 05:00]
+BEDNESTI:         330.4 km/h (1 reading >80)                                  [Jun 19 17:00]
+KLUSKUS:          180.6 km/h (2 readings >80)                   [May 25 17:00 – Jun 3 15:00]
+SILVER:           152.2 km/h (1 reading >80)                                  [Jul 29 13:00]
+GRAHAM:           138.2 km/h (2 readings >80)                  [Apr 14 20:00 – Jun 10 16:00]
+PERSISTENT STATES
+GOSNEL:           zero wind 63h, 5 shifts >90°, max 10.1km/h    [Mar 7 22:00 – Mar 10 12:00]
+PADDY:            zero wind 34h, 4 shifts >90°, max 4.5km/h     [Feb 8 23:00 – Feb 10 08:00]
+SUSTUT:           zero wind 18h, 3 shifts >90°, max 9.9km/h      [Mar 1 16:00 – Mar 2 09:00]
+BLUEBERRY:        zero wind 16h, 6 shifts >90°, max 3.9km/h      [Mar 2 19:00 – Mar 3 10:00]
+BEAR LAKE:        zero wind 15h, 2 shifts >90°, max 8.3km/h    [Apr 14 22:00 – Apr 15 12:00]
+DAILY DIRECTION CONCENTRATION
+MOOSE LAKE:       up to 100% of a day within ±5° of 246° (12 day(s) at 50%+)        [Feb 25]
+GOSNEL:           up to 96% of a day within ±5° of 177° (34 day(s) at 50%+)         [Mar 18]
+NELSON FORKS:     up to 96% of a day within ±5° of 3° (29 day(s) at 50%+)           [Feb 25]
+MCLEOD LAKE:      up to 90% of a day within ±5° of 331° (7 day(s) at 50%+)           [Mar 3]
+WONOWON:          up to 88% of a day within ±5° of 22° (13 day(s) at 50%+)          [Feb 17]
+```

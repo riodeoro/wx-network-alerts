@@ -1,0 +1,37 @@
+<!-- hash:a6f5a8abf1f5 -->
+```
+LOW BATTERY VOLTAGE
+AFTON:            min 7.90V, mean 13.18V [low]                                       [Feb 5]
+MABEL LAKE 2:     min 10.50V, mean 13.51V [low]                                     [Jul 22]
+GLIMPSE:          min 11.50V, mean 12.29V [low]                                     [May 13]
+KETTLE 2:         min 12.00V, mean 12.98V                                            [Feb 5]
+ASPEN GROVE:      min 12.20V, mean 13.06V                                            [Feb 3]
+NO DAYTIME CHARGING
+MABEL LAKE 2:     no charge 299 daytime readings (Vbat 11.80V, Vslr 0.10V) [low]  [Jun 18 16:00 – Jul 30 11:00]
+KETTLE 2:         no charge 228 daytime readings (Vbat 12.30V, Vslr 9.90V)  [Feb 3 18:00 – Mar 30 10:00]
+GLIMPSE:          no charge 202 daytime readings (Vbat 11.90V, Vslr 11.00V) [low]  [Feb 3 18:00 – Jun 12 19:00]
+COLDSCAUR LAKE:   no charge 167 daytime readings (Vbat 12.60V, Vslr 11.10V)  [Feb 3 18:00 – Jul 1 08:00]
+WELLS GRAY:       no charge 140 daytime readings (Vbat 12.60V, Vslr 8.50V)  [Feb 3 18:00 – May 29 16:00]
+HARBOUR LAKE:     no charge 108 daytime readings (Vbat 12.70V, Vslr 12.20V)  [Feb 3 18:00 – Mar 18 08:00]
+ASPEN GROVE:      no charge 98 daytime readings (Vbat 12.60V, Vslr 10.00V)  [Feb 3 18:00 – May 13 09:00]
+LITTLE CHOPAKA:   no charge 94 daytime readings (Vbat 12.60V, Vslr 8.25V)  [Feb 3 18:00 – Apr 14 08:00]
+SPLINTLUM:        no charge 78 daytime readings (Vbat 12.70V, Vslr 11.55V)  [Feb 4 08:00 – Jul 27 08:00]
+CAHILTY:          no charge 71 daytime readings (Vbat 12.60V, Vslr 10.30V)  [Feb 4 08:00 – Jul 23 09:00]
+THYNNE:           no charge 63 daytime readings (Vbat 12.70V, Vslr 11.30V)  [Feb 4 08:00 – Jun 17 08:00]
+FIVE MILE:        no charge 45 daytime readings (Vbat 12.60V, Vslr 9.60V)  [Feb 4 08:00 – Apr 6 08:00]
+FRENCH BAR:       no charge 43 daytime readings (Vbat 12.60V, Vslr 10.90V)  [Feb 4 08:00 – Apr 2 08:00]
+CURWEN CREEK:     no charge 41 daytime readings (Vbat 12.60V, Vslr 11.50V)  [Feb 4 08:00 – Jun 30 08:00]
+STATION BAY 2:    no charge 33 daytime readings (Vbat 12.70V, Vslr 11.00V)  [Feb 4 08:00 – Apr 14 08:00]
+AFTON:            no charge 32 daytime readings (Vbat 12.60V, Vslr 11.95V) [low]  [Feb 3 18:00 – Apr 2 08:00]
+GWYNETH LAKE:     no charge 31 daytime readings (Vbat 12.70V, Vslr 10.80V)  [Feb 4 08:00 – Jun 18 15:00]
+AUGUST LAKE:      no charge 27 daytime readings (Vbat 12.60V, Vslr 11.90V)  [Feb 3 18:00 – Mar 16 08:00]
+MCCUDDY:          no charge 27 daytime readings (Vbat 12.70V, Vslr 11.00V)  [Feb 3 18:00 – Mar 17 08:00]
+FINTRY:           no charge 23 daytime readings (Vbat 12.50V, Vslr 5.10V)  [Feb 3 18:00 – Mar 16 08:00]
+MAYSON:           no charge 13 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Feb 4 08:00 – Feb 7 10:00]
+MUDPIT:           no charge 9 daytime readings (Vbat 12.70V, Vslr 11.80V)  [Feb 7 09:00 – Mar 24 08:00]
+SPARKS LAKE:      no charge 8 daytime readings (Vbat 12.70V, Vslr 10.30V)  [Feb 6 08:00 – Mar 24 08:00]
+LEIGHTON LAKE:    no charge 5 daytime readings (Vbat 12.70V, Vslr 11.50V)  [Feb 15 08:00 – Feb 20 08:00]
+PASKA LAKE:       no charge 5 daytime readings (Vbat 12.70V, Vslr 9.40V)  [Feb 9 08:00 – Feb 25 08:00]
+BATTERY VOLTAGE DECLINING
+MABEL LAKE 2:     14.10V → 12.77V (dropped 1.33V)                              [Feb 4–Aug 5]
+```

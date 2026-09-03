@@ -1,0 +1,7 @@
+<!-- hash:95fcf443a5cc -->
+```
+PERSISTENT STATES
+ROSSWOOD:         zero wind 13h, 5 shifts >90°, max 8.8km/h      [Aug 2 20:00 – Aug 3 08:00]
+DAILY DIRECTION CONCENTRATION
+NASS CAMP:        up to 50% of a day within ±5° of 185° (1 day(s) at 50%+)           [Aug 3]
+```

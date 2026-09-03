@@ -1,0 +1,6 @@
+<!-- hash:2025b16e5122 -->
+```
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+HONNA:            silent 45 of 55 neighbour rain hours (82%)     [Jun 9 06:00 → Aug 1 10:00]
+ALLISON PASS:     silent 22 of 27 neighbour rain hours (82%)     [Jun 8 23:00 → Aug 1 19:00]
+```

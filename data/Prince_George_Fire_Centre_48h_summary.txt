@@ -1,0 +1,31 @@
+FIRE CENTRE: Prince George Fire Centre
+WINDOW: 48h | STATIONS: 55 | RECORDS: 2,692
+
+=== STATION OUTAGES ===
+SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: CHILAKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: FORT NELSON FS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GOSNEL - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MCLEOD LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+None.
+
+=== WIND ===
+None.
+
+=== TEMPERATURE ===
+HIGHEST TEMP: FORT NELSON FS - 29.3C @ts=2026-08-03T17:00
+LOWEST TEMP: BEDNESTI - -0.6C @ts=2026-08-05T05:00
+ISOLATED TEMP SPIKE: BEDNESTI - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: CHILAKO - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: HOLY CROSS 2 - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: MOOSE LAKE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: NORTH CHILCO - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+
+=== PRECIPITATION ===
+None.
+
+=== POWER ===
+LOW VBAT: GRAHAM - min=12.30V, mean=12.36V @ts=2026-08-03T05:00
+LOW VBAT: LEMORAY - min=12.30V, mean=12.38V @ts=2026-08-03T05:00

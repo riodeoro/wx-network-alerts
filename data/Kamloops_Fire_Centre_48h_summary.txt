@@ -1,0 +1,31 @@
+FIRE CENTRE: Kamloops Fire Centre
+WINDOW: 48h | STATIONS: 42 | RECORDS: 2,017
+
+=== STATION OUTAGES ===
+SENSOR NA: SILVERSTAR SF - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: LEIGHTON LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MAYSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MCLEAN LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: PASKA LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+RH=0%: SILVERSTAR SF - 48 readings @first=2026-08-03T06:00@last=2026-08-05T05:00
+CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 48h, no precip @start=2026-08-03T06:00@end=2026-08-05T05:00
+
+=== WIND ===
+ZERO WIND 17h: SILVERSTAR SF - Wspd=0 but 4 direction changes >90deg detected (max_delta=157deg), gusts nonzero (max=3.3km/h, avg=0.2km/h) @start=2026-08-03T23:00@end=2026-08-04T15:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: SPLINTLUM - 32.7C @ts=2026-08-04T17:00
+LOWEST TEMP: FRENCH BAR - 2.1C @ts=2026-08-03T06:00
+ISOLATED TEMP SPIKE: BRENDA MINES - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+ISOLATED TEMP SPIKE: FINTRY - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+ISOLATED TEMP SPIKE: IDABEL LAKE 3 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+ISOLATED TEMP SPIKE: KETTLE 2 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+ISOLATED TEMP SPIKE: LARCH HILLS WEST - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+
+=== PRECIPITATION ===
+None.
+
+=== POWER ===
+None.

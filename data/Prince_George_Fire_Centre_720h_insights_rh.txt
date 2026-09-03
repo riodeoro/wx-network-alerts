@@ -1,0 +1,14 @@
+<!-- hash:45c31cc2ee90 -->
+```
+RH CHANGED >50%/H
+ROCKINGHAM:       1 event, peak Δ +59%/h                                      [Jul 18 16:00]
+FORT NELSON FS:   1 event, peak Δ -58%/h                                      [Jul 19 04:00]
+BEAR LAKE:        1 event, peak Δ +56%/h                                      [Jul 17 17:00]
+BEDNESTI:         1 event, peak Δ +52%/h                                      [Jul 17 15:00]
+GRAHAM:           1 event, peak Δ +52%/h                                      [Jul 16 21:00]
+PERSISTENT STATES
+SILVER:           RH constant 100% for 20h, Rn_1 (48.6mm)        [Aug 1 06:00 – Aug 2 01:00]
+HIXON:            RH constant 100% for 12h, zero Rn_1          [Jul 19 23:00 – Jul 20 10:00]
+CATFISH:          RH constant 100% for 12h, zero Rn_1          [Jul 19 21:00 – Jul 20 08:00]
+LOVELL COVE:      RH constant 97% for 12h, zero Rn_1             [Aug 2 23:00 – Aug 3 10:00]
+```

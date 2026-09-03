@@ -1,0 +1,8 @@
+<!-- hash:345d6797b925 -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+DARKWOODS:        2 hours, Rn_1 (0.4mm)                        [Jul 11 19:00 → Jul 12 18:00]
+WHITE RIVER:      1 hour, Rn_1 (0.2mm)                                         [Aug 1 15:00]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+BLAEBERRY:        silent 3 of 5 neighbour rain hours (60%)               [Aug 1 20:00–22:00]
+```

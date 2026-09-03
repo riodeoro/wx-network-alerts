@@ -1,0 +1,62 @@
+FIRE CENTRE: Prince George Fire Centre
+WINDOW: 1440h | STATIONS: 56 | RECORDS: 78,820
+
+=== STATION OUTAGES ===
+LOW COVERAGE: GOSNEL - 39% (555/1441 hours) @start=2026-07-13T00:00@end=2026-08-05T04:00
+LOW COVERAGE: SAWTOOTH - 44% (628/1441 hours) @start=2026-06-06T05:00@end=2026-07-02T12:00
+SENSOR NA: BEAR LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: CHILAKO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: FORT NELSON FS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: GOSNEL - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MCLEOD LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+RH CHANGE >50%/h: ELK MOUNTAIN - 1 events, peak=+68.0%/h @first=2026-06-23T18:00@last=2026-06-23T18:00
+RH CHANGE >50%/h: NORTH CHILCO - 1 events, peak=+64.0%/h @first=2026-06-24T16:00@last=2026-06-24T16:00
+RH CHANGE >50%/h: FORT NELSON FS - 2 events, peak=+61.0%/h @first=2026-06-24T18:00@last=2026-07-19T04:00
+RH CHANGE >50%/h: MANSON - 2 events, peak=+60.0%/h @first=2026-06-18T18:00@last=2026-06-25T14:00
+RH CHANGE >50%/h: ROCKINGHAM - 1 events, peak=+59.0%/h @first=2026-07-18T16:00@last=2026-07-18T16:00
+CONSTANT RH: MANSON - Constant 100%, avg=100%, 22h, precip=15.6mm @start=2026-06-18T19:00@end=2026-06-19T16:00
+CONSTANT RH: SILVER - Constant 100%, avg=100%, 20h, precip=48.6mm @start=2026-08-01T06:00@end=2026-08-02T01:00
+CONSTANT RH: NOEL - Constant 100%, avg=100%, 19h, precip=29.6mm @start=2026-06-27T16:00@end=2026-06-28T10:00
+CONSTANT RH: KOMIE - Constant 100%, avg=100%, 16h, precip=0.4mm @start=2026-07-01T16:00@end=2026-07-02T07:00
+CONSTANT RH: HIXON - Constant 100%, avg=100%, 12h, no precip @start=2026-07-19T23:00@end=2026-07-20T10:00
+
+=== WIND ===
+EXTREME GUST: VALEMOUNT 2 - max=1367.0km/h, 36 readings >80km/h @start=2026-06-06T06:00@end=2026-06-20T05:00
+EXTREME GUST: BEDNESTI - max=330.4km/h, 1 readings >80km/h @start=2026-06-19T17:00@end=2026-06-19T17:00
+EXTREME GUST: SILVER - max=152.2km/h, 1 readings >80km/h @start=2026-07-29T13:00@end=2026-07-29T13:00
+EXTREME GUST: HIXON - max=137.6km/h, 1 readings >80km/h @start=2026-07-28T13:00@end=2026-07-28T13:00
+EXTREME GUST: GRAHAM - max=125.4km/h, 1 readings >80km/h @start=2026-06-10T16:00@end=2026-06-10T16:00
+ZERO WIND 14h: MANSON - Wspd=0 but 1 direction changes >90deg detected (max_delta=93deg), gusts nonzero (max=4.9km/h, avg=1.7km/h) @start=2026-06-26T18:00@end=2026-06-27T07:00
+DIRECTION CONCENTRATION: WONOWON - up to 71% of a day in the 208 deg bin (2 day(s) at 50%+) @ts=2026-07-13T00:00
+DIRECTION CONCENTRATION: MUSKWA - up to 67% of a day in the 243 deg bin (4 day(s) at 50%+) @ts=2026-07-15T00:00
+DIRECTION CONCENTRATION: MOOSE LAKE - up to 62% of a day in the 253 deg bin (2 day(s) at 50%+) @ts=2026-06-16T00:00
+DIRECTION CONCENTRATION: NELSON FORKS - up to 62% of a day in the 5 deg bin (3 day(s) at 50%+) @ts=2026-07-26T00:00
+DIRECTION CONCENTRATION: HOLY CROSS 2 - up to 58% of a day in the 267 deg bin (2 day(s) at 50%+) @ts=2026-06-30T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: BLUE RIVER 2 - 35.9C @ts=2026-07-17T16:00
+LOWEST TEMP: MOOSE LAKE - -3.3C @ts=2026-06-08T05:00
+ISOLATED TEMP SPIKE: NORTH CHILCO - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=13.6 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: BEDNESTI - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: CHILAKO - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: HOLY CROSS 2 - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+ISOLATED TEMP SPIKE: MOOSE LAKE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=7.1C, mag=11.5 @first=2026-08-03T22:00@last=2026-08-03T23:00
+CONSTANT TEMP: KOMIE - 10.0C for 6h, RH also flat (0% range) @start=2026-07-26T21:00@end=2026-07-27T02:00
+
+=== PRECIPITATION ===
+SILENT GAUGE: BLUE RIVER 2 - silent 9 of 10 neighbour rain hours (90.0%) @first=2026-07-19T21:00@last=2026-08-02T18:00
+SILENT GAUGE: MUSKWA - silent 6 of 8 neighbour rain hours (75.0%) @first=2026-06-26T18:00@last=2026-07-18T19:00
+SILENT GAUGE: OSBORN - silent 18 of 26 neighbour rain hours (69.2%) @first=2026-06-10T15:00@last=2026-08-02T04:00
+SILENT GAUGE: RED DEER - silent 15 of 24 neighbour rain hours (62.5%) @first=2026-06-28T05:00@last=2026-08-02T08:00
+SILENT GAUGE: SUSTUT - silent 20 of 33 neighbour rain hours (60.6%) @first=2026-06-26T15:00@last=2026-08-01T23:00
+HIGH PRECIP: KOMIE - max=37.0mm/h @ts=2026-06-30T23:00
+
+=== POWER ===
+LOW VBAT: LEMORAY - min=11.60V, mean=11.80V, severity=low @ts=2026-07-25T04:00
+LOW VBAT: GRAHAM - min=12.30V, mean=12.52V @ts=2026-08-02T00:00
+NO CHARGE: GRAHAM - 103 daytime readings (Vslr<Vbat), median Vbat=12.50V, median Vslr=11.90V @start=2026-06-06T13:00@end=2026-08-04T08:00
+NO CHARGE: LEMORAY - 19 daytime readings (Vslr<Vbat), median Vbat=11.70V, median Vslr=11.10V, severity=low @start=2026-06-10T19:00@end=2026-07-28T16:00
+NO CHARGE: NELSON FORKS - 19 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=11.40V @start=2026-07-01T08:00@end=2026-07-29T13:00
+NO CHARGE: KLUSKUS - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-08-02T08:00

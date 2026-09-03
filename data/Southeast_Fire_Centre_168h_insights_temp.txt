@@ -1,0 +1,16 @@
+<!-- hash:d590132a6fd9 -->
+```
+EXTREME VALUES
+ROCK CREEK:       Highest (36.5°C)                                            [Jul 31 17:00]
+BRISCO:           Lowest (-3.6°C)                                              [Aug 4 04:00]
+TEMPERATURE EXCEEDED 35°C
+BRISCO:           35.7°C                                                       [Aug 1 16:00]
+TOBY HUB:         35.6°C                                                       [Aug 1 15:00]
+PENDOREILLE:      35.5°C                                                      [Jul 31 16:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+SLOCAN:           1 spike, peak Δ 13.0°C                                       [Aug 4 11:00]
+TROUT LAKE:       1 spike, peak Δ 6.1°C                                        [Aug 3 16:00]
+ELKO:             2 spikes, peak Δ 6.4°C                                 [Aug 2 12:00–18:00]
+BIGATTINI:        2 spikes, peak Δ 6.4°C                                 [Aug 2 12:00–18:00]
+KOOCANUSA:        2 spikes, peak Δ 6.4°C                                 [Aug 2 12:00–18:00]
+```

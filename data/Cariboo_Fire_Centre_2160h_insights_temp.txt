@@ -1,0 +1,12 @@
+<!-- hash:9b145ba3e673 -->
+```
+EXTREME VALUES
+ALEXIS CREEK:     Highest (34.8°C)                                                  [Jul 23]
+BALDFACE:         Lowest (-5.6°C)                                                   [May 14]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+BALDFACE:         2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+TATLA LAKE:       2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+LONE BUTTE:       1 spike, peak Δ 5.1°C                                        [May 7 06:00]
+PERSISTENT STATES
+LONE BUTTE:       constant (0.1°C) for 7h, RH varied 1%        [May 15 22:00 – May 16 04:00]
+```

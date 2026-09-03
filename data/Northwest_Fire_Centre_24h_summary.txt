@@ -1,0 +1,21 @@
+FIRE CENTRE: Northwest Fire Centre
+WINDOW: 24h | STATIONS: 32 | RECORDS: 767
+
+=== STATION OUTAGES ===
+None.
+
+=== RH ===
+None.
+
+=== WIND ===
+None.
+
+=== TEMPERATURE ===
+HIGHEST TEMP: CEDARVALE - 28.5C @ts=2026-08-04T18:00
+LOWEST TEMP: GANOKWA - 2.4C @ts=2026-08-04T06:00
+
+=== PRECIPITATION ===
+None.
+
+=== POWER ===
+None.

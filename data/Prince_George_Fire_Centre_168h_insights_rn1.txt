@@ -1,0 +1,7 @@
+<!-- hash:d34bec265ae2 -->
+```
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+HELMUT:           silent 3 of 3 neighbour rain hours (100%)             [Jul 29 08:00–11:00]
+OSBORN:           silent 13 of 14 neighbour rain hours (93%)     [Aug 1 15:00 → Aug 2 04:00]
+BLUE RIVER 2:     silent 3 of 4 neighbour rain hours (75%)       [Aug 1 19:00 → Aug 2 18:00]
+```

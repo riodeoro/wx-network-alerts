@@ -1,0 +1,16 @@
+<!-- hash:1e9b7be3d75e -->
+```
+EXTREME VALUES
+CEDARVALE:        Highest (37.2°C)                                                  [Jul 21]
+BOYA LAKE:        Lowest (-35.8°C)                                                  [Feb 18]
+TEMPERATURE EXCEEDED 35°C
+KITPARK:          36.9°C                                                            [Jul 20]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+EAST OOTSA:       1 spike, peak Δ 5.0°C                                       [Apr 11 10:00]
+PERSISTENT STATES
+PINE CREEK:       constant (0.0°C) for 14h, RH varied 1%       [Mar 16 12:00 – Mar 17 01:00]
+NILKITKWA:        constant (-13.2°C) for 8h, RH varied 2%      [Feb 22 20:00 – Feb 23 03:00]
+UPPER FULTON:     constant (0.0°C) for 8h, RH varied 0%                  [Feb 7 01:00–08:00]
+BELL-IRVING:      constant (0.3°C) for 7h, RH varied 0%                  [Feb 5 00:00–06:00]
+KITPARK:          constant (0.2°C) for 7h, RH varied 0%                 [Feb 16 00:00–06:00]
+```

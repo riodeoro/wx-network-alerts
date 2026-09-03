@@ -1,0 +1,6 @@
+<!-- hash:a3ef83f1c2d0 -->
+```
+UNCONFIGURED SENSORS
+  BAKER: RH, battery voltage, charge current, solar voltage, and temperature unconfigured
+  BRISCO, DARKWOODS, EIGHT MILE, NORNS: battery voltage, charge current, and solar voltage unconfigured
+```

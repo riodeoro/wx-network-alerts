@@ -1,0 +1,6 @@
+<!-- hash:2fded2746f5f -->
+```
+NO DAYTIME CHARGING
+NAZKO (AC):       no charge 15 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Jul 9 08:00 – Aug 4 08:00, ongoing]
+MATHEW (AC):      no charge 10 daytime readings (Vbat 12.60V, Vslr 0.20V)  [Jul 19 08:00 – Aug 2 08:00]
+```

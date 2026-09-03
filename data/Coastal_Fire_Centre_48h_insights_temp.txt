@@ -1,0 +1,6 @@
+<!-- hash:4ce576e19ad4 -->
+```
+EXTREME VALUES
+DARCY:            Highest (33.1°C)                                             [Aug 4 16:00]
+ALLISON PASS:     Lowest (-0.6°C)                                              [Aug 3 06:00]
+```

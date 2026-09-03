@@ -1,0 +1,11 @@
+<!-- hash:11949e31b815 -->
+```
+GUSTS EXCEEDED 80 KM/H
+FINTRY:           80.6 km/h (1 reading >80)                                    [Aug 1 18:00]
+PERSISTENT STATES
+SILVERSTAR SF:    zero wind 17h, 4 shifts >90°, max 3.3km/h      [Aug 3 23:00 – Aug 4 15:00]
+DAILY DIRECTION CONCENTRATION
+GREENSTONE HUB:   up to 58% of a day within ±5° of 196° (3 day(s) at 50%+)          [Jul 30]
+HARBOUR LAKE:     up to 54% of a day within ±5° of 158° (1 day(s) at 50%+)          [Jul 31]
+SPLINTLUM:        up to 50% of a day within ±5° of 163° (2 day(s) at 50%+)          [Jul 30]
+```

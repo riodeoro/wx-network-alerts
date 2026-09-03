@@ -1,0 +1,10 @@
+<!-- hash:0217e34b437e -->
+```
+LOW BATTERY VOLTAGE
+MABEL LAKE 2:     min 10.50V, mean 12.49V [low]                                     [Jul 22]
+GLIMPSE:          min 12.20V, mean 13.19V                                            [Jun 6]
+NO DAYTIME CHARGING
+MABEL LAKE 2:     no charge 299 daytime readings (Vbat 11.80V, Vslr 0.10V) [low]  [Jun 18 16:00 – Jul 30 11:00]
+BATTERY VOLTAGE DECLINING
+MABEL LAKE 2:     13.73V → 12.77V (dropped 0.97V)                              [Jun 6–Aug 5]
+```

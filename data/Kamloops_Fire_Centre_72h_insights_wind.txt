@@ -1,0 +1,7 @@
+<!-- hash:2e26cb7595c2 -->
+```
+PERSISTENT STATES
+SILVERSTAR SF:    zero wind 17h, 4 shifts >90°, max 3.3km/h      [Aug 3 23:00 – Aug 4 15:00]
+DAILY DIRECTION CONCENTRATION
+GREENSTONE HUB:   up to 58% of a day within ±5° of 309° (1 day(s) at 50%+)           [Aug 3]
+```

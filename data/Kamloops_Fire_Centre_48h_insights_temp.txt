@@ -1,0 +1,12 @@
+<!-- hash:f500c9db05e5 -->
+```
+EXTREME VALUES
+SPLINTLUM:        Highest (32.7°C)                                             [Aug 4 17:00]
+FRENCH BAR:       Lowest (2.1°C)                                               [Aug 3 06:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+BRENDA MINES:     1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+FINTRY:           1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+IDABEL LAKE 3:    1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+KETTLE 2:         1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+LARCH HILLS WEST: 1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+```

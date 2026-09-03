@@ -1,0 +1,12 @@
+<!-- hash:5df350842780 -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+ELK MOUNTAIN:     1 hour, Rn_1 (0.8mm)                                        [Mar 14 17:00]
+WITCH:            2 hours, Rn_1 (2.6mm)                                 [Apr 10 15:00–16:00]
+PADDY:            2 hours, Rn_1 (0.6mm)                                 [Mar 15 12:00–14:00]
+HIGH PRECIPITATION
+KOMIE:            37.0 mm/h                                                         [Jun 30]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+BLUE RIVER 2:     silent 9 of 10 neighbour rain hours (90%)     [Jul 19 21:00 → Aug 2 18:00]
+OSBORN:           silent 22 of 32 neighbour rain hours (69%)    [May 15 10:00 → Aug 2 04:00]
+```

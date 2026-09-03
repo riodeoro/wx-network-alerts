@@ -1,0 +1,30 @@
+<!-- hash:0124146c94c0 -->
+```
+EXTREME VALUES
+LITTLE CHOPAKA:   Highest (39.2°C)                                                  [Jul 22]
+PASKA LAKE:       Lowest (-4.7°C)                                                   [May 16]
+TEMPERATURE EXCEEDED 35°C
+SPLINTLUM:        38.8°C                                                            [Jul 22]
+LILLOOET:         38.7°C                                                            [Jul 22]
+SEYMOUR ARM:      38.6°C                                                            [Jul 17]
+AUGUST LAKE:      38.5°C                                                            [Jul 22]
+PENTICTON RS:     38.3°C                                                            [Jul 22]
+FINTRY:           37.8°C                                                            [Jul 22]
+MERRITT 2 HUB:    36.5°C                                                            [Jul 22]
+WEST KELOWNA:     36.5°C                                                            [Jul 22]
+AFTON:            36.2°C                                                            [Jul 17]
+EAST BARRIERE:    36.1°C                                                            [Jul 17]
+TURTLE:           36.1°C                                                            [Jul 17]
+MABEL LAKE 2:     35.8°C                                                            [Jul 22]
+STATION BAY 2:    35.5°C                                                            [Jul 22]
+CLEARWATER HUB:   35.2°C                                                            [Jul 21]
+FIVE MILE:        35.2°C                                                            [Jul 22]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+SICAMOUS:         1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+BRENDA MINES:     1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+FINTRY:           1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+IDABEL LAKE 3:    1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+KETTLE 2:         1 spike, peak Δ 8.0°C                                        [Aug 3 19:00]
+PERSISTENT STATES
+PASKA LAKE:       constant (0.1°C) for 6h, RH varied 1%                 [May 17 00:00–05:00]
+```

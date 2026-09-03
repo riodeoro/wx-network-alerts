@@ -1,0 +1,11 @@
+<!-- hash:345d6797b925 -->
+```
+RH READ 0%
+ELKO:             2 readings                                   [Jul 27 09:00 → Jul 28 09:00]
+RH CHANGED >50%/H
+ELKO:             2 events, peak Δ -100%/h                     [Jul 27 09:00 → Jul 28 10:00]
+BEAVERDELL:       2 events, peak Δ +68%/h                      [Jul 23 20:00 → Jul 24 20:00]
+NICOLL:           2 events, peak Δ +64%/h                      [Jul 15 18:00 → Jul 24 20:00]
+TOBY HUB:         1 event, peak Δ +59%/h                                      [Jul 25 01:00]
+DOWNIE:           4 events, peak Δ +58%/h                       [Jul 18 15:00 → Aug 1 23:00]
+```

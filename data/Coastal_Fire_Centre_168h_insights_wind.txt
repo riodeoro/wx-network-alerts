@@ -1,0 +1,8 @@
+<!-- hash:9a15bbeb9936 -->
+```
+PERSISTENT STATES
+QUINSAM BASE FWX: zero wind 15h, 6 shifts >90°, max 4.7km/h    [Jul 30 20:00 – Jul 31 10:00]
+TS ARTLISH:       zero wind 15h, 5 shifts >90°, max 7.2km/h    [Jul 29 23:00 – Jul 30 13:00]
+DAILY DIRECTION CONCENTRATION
+APE LAKE:         up to 54% of a day within ±5° of 344° (1 day(s) at 50%+)           [Aug 2]
+```

@@ -1,0 +1,24 @@
+<!-- hash:345d6797b925 -->
+```
+EXTREME VALUES
+ROCK CREEK:       Highest (40.1°C)                                            [Jul 22 16:00]
+BRISCO:           Lowest (-3.6°C)                                              [Aug 4 04:00]
+TEMPERATURE EXCEEDED 35°C
+BEAVERDELL:       39.0°C                                                      [Jul 22 17:00]
+PENDOREILLE:      37.6°C                                                      [Jul 22 16:00]
+GRAND FORKS:      37.3°C                                                      [Jul 21 16:00]
+JOHNSON LAKE:     36.5°C                                                      [Jul 22 17:00]
+NICOLL:           36.3°C                                                      [Jul 22 16:00]
+DOWNIE:           35.8°C                                                      [Jul 17 16:00]
+KOOCANUSA:        35.8°C                                                      [Jul 23 15:00]
+BRISCO:           35.7°C                                                       [Aug 1 16:00]
+ELKO:             35.6°C                                                      [Jul 23 17:00]
+GOATFELL:         35.6°C                                                      [Jul 22 14:00]
+TOBY HUB:         35.6°C                                                       [Aug 1 15:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+SLOCAN:           1 spike, peak Δ 13.0°C                                       [Aug 4 11:00]
+CHERRY LAKE:      2 spikes, peak Δ 6.4°C                                 [Aug 2 12:00–18:00]
+KOOCANUSA:        2 spikes, peak Δ 6.4°C                                 [Aug 2 12:00–18:00]
+TROUT LAKE:       1 spike, peak Δ 6.1°C                                        [Aug 3 16:00]
+BLAEBERRY:        1 spike, peak Δ 5.1°C                                       [Jul 28 17:00]
+```

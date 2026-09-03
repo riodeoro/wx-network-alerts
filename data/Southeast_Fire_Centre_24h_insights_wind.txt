@@ -1,0 +1,5 @@
+<!-- hash:1ae24da2d64a -->
+```
+PERSISTENT STATES
+BAKER:            zero wind 24h, 3 shifts >90° (max 137°)  [Aug 4 06:00 – Aug 5 05:00, ongoing]
+```

@@ -1,0 +1,17 @@
+<!-- hash:1e9b7be3d75e -->
+```
+RH CHANGED >50%/H
+BELL-IRVING:      1 event, peak Δ +59%/h                                       [Jun 9 15:00]
+GANOKWA:          1 event, peak Δ -57%/h                                      [Jun 21 17:00]
+CEDARVALE:        2 events, peak Δ +56%/h                                [May 8 13:00–14:00]
+NADINA:           1 event, peak Δ +54%/h                                      [Jun 20 16:00]
+VAN DYKE:         1 event, peak Δ +53%/h                                      [Jun 20 17:00]
+RH DROPPED AS LOW AS
+PINE CREEK:       13.0%                                                              [May 7]
+PERSISTENT STATES
+DEASE LAKE FS:    RH constant 100% for 116h, Rn_1 (7.6mm)        [Feb 3 18:00 – Feb 8 13:00]
+CRANBERRY:        RH constant 100% for 100h, Rn_1 (34.0mm)       [Feb 3 18:00 – Feb 7 21:00]
+NILKITKWA:        RH constant 100% for 66h, Rn_1 (8.0mm)         [Feb 4 18:00 – Feb 7 11:00]
+HOUSTON:          RH constant 100% for 64h, Rn_1 (4.2mm)         [Feb 5 00:00 – Feb 7 15:00]
+UPPER KISPIOX:    RH constant 100% for 54h, Rn_1 (7.6mm)         [Feb 4 09:00 – Feb 6 14:00]
+```

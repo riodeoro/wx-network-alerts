@@ -1,0 +1,8 @@
+<!-- hash:d590132a6fd9 -->
+```
+PERSISTENT STATES
+BAKER:            zero wind 168h, 11 shifts >90° (max 179°)  [Jul 29 06:00 – Aug 5 05:00, ongoing]
+DAILY DIRECTION CONCENTRATION
+REVELSTOKE:       up to 54% of a day within ±5° of 317° (2 day(s) at 50%+)          [Jul 31]
+GOLD HILL:        up to 50% of a day within ±5° of 243° (1 day(s) at 50%+)          [Jul 31]
+```

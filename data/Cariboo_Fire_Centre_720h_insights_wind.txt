@@ -1,0 +1,12 @@
+<!-- hash:2fded2746f5f -->
+```
+GUSTS EXCEEDED 80 KM/H
+ANAHIM LAKE:      282.2 km/h (1 reading >80)                                  [Jul 11 16:00]
+HORSEFLY:         80.7 km/h (2 readings >80)                   [Jul 17 19:00 – Jul 28 13:00]
+DAILY DIRECTION CONCENTRATION
+BIG VALLEY:       up to 58% of a day within ±5° of 206° (2 day(s) at 50%+)          [Jul 26]
+ANAHIM LAKE:      up to 54% of a day within ±5° of 260° (1 day(s) at 50%+)          [Jul 18]
+GASPARD:          up to 54% of a day within ±5° of 185° (1 day(s) at 50%+)          [Jul 26]
+NEMIAH:           up to 54% of a day within ±5° of 288° (1 day(s) at 50%+)          [Jul 18]
+BENSON:           up to 50% of a day within ±5° of 134° (1 day(s) at 50%+)          [Jul 22]
+```

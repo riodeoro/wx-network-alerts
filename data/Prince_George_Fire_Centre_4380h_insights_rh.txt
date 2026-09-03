@@ -1,0 +1,20 @@
+<!-- hash:5df350842780 -->
+```
+RH EXCEEDED 100%
+TABLE RIVER:      246 readings, max 116.0%                     [Feb 13 07:00 → May 12 10:00]
+RH CHANGED >50%/H
+TABLE RIVER:      17 events, peak Δ -114%/h                    [Feb 13 07:00 → May 12 11:00]
+ELK MOUNTAIN:     1 event, peak Δ +68%/h                                      [Jun 23 18:00]
+INGENIKA POINT:   2 events, peak Δ -64%/h                      [Mar 17 12:00 → Mar 19 10:00]
+NORTH CHILCO:     1 event, peak Δ +64%/h                                      [Jun 24 16:00]
+FORT NELSON FS:   2 events, peak Δ +61%/h                      [Jun 24 18:00 → Jul 19 04:00]
+RH DROPPED AS LOW AS
+TABLE RIVER:      1.0%                                                               [Mar 3]
+MANSON:           3.0%                                                              [Jun 23]
+PERSISTENT STATES
+MANSON:           RH constant 100% for 378h, Rn_1 (24.6mm)     [Mar 27 11:00 – Apr 12 04:00]
+SIFTON:           RH constant 100% for 108h, Rn_1 (31.4mm)       [Feb 3 17:00 – Feb 8 04:00]
+BLUE RIVER 2:     RH constant 100% for 43h, Rn_1 (4.6mm)         [Feb 3 17:00 – Feb 5 11:00]
+MCGREGOR 2:       RH constant 100% for 37h, Rn_1 (24.0mm)        [Feb 3 17:00 – Feb 5 05:00]
+GOSNEL:           RH constant 100% for 34h, zero Rn_1          [Mar 17 17:00 – Mar 19 02:00]
+```

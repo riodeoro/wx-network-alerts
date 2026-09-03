@@ -1,0 +1,5 @@
+<!-- hash:316dae28c8a5 -->
+```
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+ATLIN:            silent 27 of 28 neighbour rain hours (96%)    [Jun 5 00:00 → Jul 27 03:00]
+```

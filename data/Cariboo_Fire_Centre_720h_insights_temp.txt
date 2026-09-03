@@ -1,0 +1,9 @@
+<!-- hash:2fded2746f5f -->
+```
+EXTREME VALUES
+ALEXIS CREEK:     Highest (34.8°C)                                            [Jul 23 15:00]
+BALDFACE:         Lowest (-2.6°C)                                             [Jul 29 04:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+BALDFACE:         2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+TATLA LAKE:       2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+```

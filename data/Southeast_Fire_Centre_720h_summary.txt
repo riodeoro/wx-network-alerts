@@ -1,0 +1,57 @@
+FIRE CENTRE: Southeast Fire Centre
+WINDOW: 720h | STATIONS: 48 | RECORDS: 34,550
+
+=== STATION OUTAGES ===
+SENSOR NA: NORNS - Wspd=91% NA, Dir=91% NA, Mx_Spd=91% NA, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: BAKER - Rh=NOT CONFIGURED, Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: BRISCO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: DARKWOODS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+RH=0%: ELKO - 2 readings @first=2026-07-27T09:00@last=2026-07-28T09:00
+RH CHANGE >50%/h: ELKO - 2 events, peak=-100.0%/h @first=2026-07-27T09:00@last=2026-07-28T10:00
+RH CHANGE >50%/h: BEAVERDELL - 2 events, peak=+68.0%/h @first=2026-07-23T20:00@last=2026-07-24T20:00
+RH CHANGE >50%/h: NICOLL - 2 events, peak=+64.0%/h @first=2026-07-15T18:00@last=2026-07-24T20:00
+RH CHANGE >50%/h: TOBY HUB - 1 events, peak=+59.0%/h @first=2026-07-25T01:00@last=2026-07-25T01:00
+RH CHANGE >50%/h: DOWNIE - 4 events, peak=+58.0%/h @first=2026-07-18T15:00@last=2026-08-01T23:00
+
+=== WIND ===
+EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
+EXTREME GUST: BIG MOUTH 2 - max=90.6km/h, 1 readings >80km/h @start=2026-07-25T19:00@end=2026-07-25T19:00
+EXTREME GUST: JOHNSON LAKE - max=82.6km/h, 1 readings >80km/h @start=2026-07-24T01:00@end=2026-07-24T01:00
+ZERO WIND 720h: BAKER - Wspd=0 but 34 direction changes >90deg detected (max_delta=179deg) @start=2026-07-06T06:00@end=2026-08-05T05:00
+DIRECTION CONCENTRATION: ROUND PRAIRIE - up to 92% of a day in the 161 deg bin (3 day(s) at 50%+) @ts=2026-07-12T00:00
+DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 245 deg bin (5 day(s) at 50%+) @ts=2026-07-09T00:00
+DIRECTION CONCENTRATION: POWDER CREEK - up to 54% of a day in the 172 deg bin (1 day(s) at 50%+) @ts=2026-07-12T00:00
+DIRECTION CONCENTRATION: REVELSTOKE - up to 54% of a day in the 317 deg bin (2 day(s) at 50%+) @ts=2026-07-31T00:00
+DIRECTION CONCENTRATION: GOLD HILL - up to 50% of a day in the 243 deg bin (1 day(s) at 50%+) @ts=2026-07-31T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: ROCK CREEK - 40.1C @ts=2026-07-22T16:00
+LOWEST TEMP: BRISCO - -3.6C @ts=2026-08-04T04:00
+TEMP>35C: BEAVERDELL - max=39.0C @ts=2026-07-22T17:00
+TEMP>35C: BRISCO - max=35.7C @ts=2026-08-01T16:00
+TEMP>35C: DOWNIE - max=35.8C @ts=2026-07-17T16:00
+TEMP>35C: ELKO - max=35.6C @ts=2026-07-23T17:00
+TEMP>35C: GOATFELL - max=35.6C @ts=2026-07-22T14:00
+TEMP>35C: GRAND FORKS - max=37.3C @ts=2026-07-21T16:00
+TEMP>35C: JOHNSON LAKE - max=36.5C @ts=2026-07-22T17:00
+TEMP>35C: KOOCANUSA - max=35.8C @ts=2026-07-23T15:00
+TEMP>35C: NICOLL - max=36.3C @ts=2026-07-22T16:00
+TEMP>35C: PENDOREILLE - max=37.6C @ts=2026-07-22T16:00
+TEMP>35C: TOBY HUB - max=35.6C @ts=2026-08-01T15:00
+ISOLATED TEMP SPIKE: SLOCAN - 1 readings deviated >=5C then returned, no inverse RH shift, peak=13.0C, mag=15.2 @first=2026-08-04T11:00@last=2026-08-04T11:00
+ISOLATED TEMP SPIKE: CHERRY LAKE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=6.4C, mag=8.9 @first=2026-08-02T12:00@last=2026-08-02T18:00
+ISOLATED TEMP SPIKE: KOOCANUSA - 2 readings deviated >=5C then returned, no inverse RH shift, peak=6.4C, mag=7.9 @first=2026-08-02T12:00@last=2026-08-02T18:00
+ISOLATED TEMP SPIKE: TROUT LAKE - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.1C, mag=7.8 @first=2026-08-03T16:00@last=2026-08-03T16:00
+ISOLATED TEMP SPIKE: BLAEBERRY - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.1C, mag=7.7 @first=2026-07-28T17:00@last=2026-07-28T17:00
+
+=== PRECIPITATION ===
+RAIN AT RH 10-25%: DARKWOODS - 2 hours, 0.4mm total, rank=1 @first=2026-07-11T19:00@last=2026-07-12T18:00
+RAIN AT RH 10-25%: WHITE RIVER - 1 hours, 0.2mm total, rank=4 @first=2026-08-01T15:00@last=2026-08-01T15:00
+SILENT GAUGE: BLAEBERRY - silent 3 of 5 neighbour rain hours (60.0%) @first=2026-08-01T20:00@last=2026-08-01T22:00
+
+=== POWER ===
+NO CHARGE: TOBY HUB - 12 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-08-02T08:00@end=2026-08-02T19:00
+NO CHARGE: CRAWFORD - 7 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-07-17T08:00@end=2026-07-23T13:00

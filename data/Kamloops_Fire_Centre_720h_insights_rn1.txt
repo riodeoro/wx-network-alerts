@@ -1,0 +1,5 @@
+<!-- hash:7b6174f6e169 -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+MAYSON:           1 hour, Rn_1 (0.4mm)                                         [Jul 6 16:00]
+```

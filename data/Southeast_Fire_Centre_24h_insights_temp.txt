@@ -1,0 +1,8 @@
+<!-- hash:1ae24da2d64a -->
+```
+EXTREME VALUES
+ROCK CREEK:       Highest (32.5°C)                                             [Aug 4 17:00]
+GOATHAVEN:        Lowest (-0.9°C)                                              [Aug 4 06:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+SLOCAN:           1 spike, peak Δ 13.0°C                                       [Aug 4 11:00]
+```

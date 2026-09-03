@@ -1,0 +1,5 @@
+<!-- hash:ca340ec0bac3 -->
+```
+LOW BATTERY VOLTAGE
+QUINSAM BASE FWX: min 12.30V, mean 12.89V                                      [Aug 3 07:00]
+```

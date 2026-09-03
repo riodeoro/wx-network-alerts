@@ -1,0 +1,9 @@
+<!-- hash:b40a911f68b3 -->
+```
+EXTREME VALUES
+ROCK CREEK:       Highest (32.5°C)                                             [Aug 4 17:00]
+BRISCO:           Lowest (-3.6°C)                                              [Aug 4 04:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+SLOCAN:           1 spike, peak Δ 13.0°C                                       [Aug 4 11:00]
+TROUT LAKE:       1 spike, peak Δ 6.1°C                                        [Aug 3 16:00]
+```

@@ -1,0 +1,6 @@
+<!-- hash:7b630a803d44 -->
+```
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+ATLIN:            silent 17 of 18 neighbour rain hours (94%)   [Jun 15 06:00 → Jul 27 03:00]
+PINE CREEK:       silent 24 of 37 neighbour rain hours (65%)    [Jun 20 20:00 → Aug 2 08:00]
+```

@@ -1,0 +1,5 @@
+<!-- hash:a5f29d97574a -->
+```
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+NEMIAH:           silent 3 of 5 neighbour rain hours (60%)      [Jul 31 19:00 → Aug 1 04:00]
+```

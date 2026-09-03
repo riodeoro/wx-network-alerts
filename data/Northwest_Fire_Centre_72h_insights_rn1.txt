@@ -1,0 +1,5 @@
+<!-- hash:95fcf443a5cc -->
+```
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+PINE CREEK:       silent 3 of 3 neighbour rain hours (100%)              [Aug 2 06:00–08:00]
+```

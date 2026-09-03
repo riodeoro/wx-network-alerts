@@ -1,0 +1,20 @@
+<!-- hash:9082dfa78226 -->
+```
+GUSTS EXCEEDED 80 KM/H
+TS SAN JUAN:      366.1 km/h (1 reading >80)                                  [Mar 10 13:00]
+SUMMIT:           313.3 km/h (1 reading >80)                                   [Apr 5 14:00]
+HAIG CAMP:        101.4 km/h (1 reading >80)                                  [Mar 12 00:00]
+APE LAKE:         96.4 km/h (1 reading >80)                                   [Feb 26 09:00]
+PERSISTENT STATES
+HAIG CAMP:        zero wind 696h, 104 shifts >90°, max 16.7km/h  [Apr 29 13:00 – May 28 12:00]
+NAHATLATCH:       zero wind 138h, 30 shifts >90°, max 11.0km/h  [Feb 17 12:00 – Feb 23 05:00]
+HOMATHKO:         zero wind 93h, 16 shifts >90°, max 9.8km/h    [Mar 9 15:00 – Mar 13 11:00]
+MACHMELL KLINIKLINI: zero wind 88h, 20 shifts >90°, max 1.1km/h  [Mar 7 01:00 – Mar 10 16:00]
+TALCHAKO:         zero wind 60h, 17 shifts >90°, max 4.7km/h   [Feb 14 12:00 – Feb 16 23:00]
+DAILY DIRECTION CONCENTRATION
+CHEAKAMUS:        up to 96% of a day within ±5° of 91° (13 day(s) at 50%+)          [Feb 19]
+TS ELPHINSTONE:   up to 92% of a day within ±5° of 106° (14 day(s) at 50%+)         [Mar 19]
+KLINAKLINI:       up to 88% of a day within ±5° of 169° (10 day(s) at 50%+)         [Mar 17]
+POWELL RIVER WEST LAKE: up to 88% of a day within ±5° of 154° (16 day(s) at 50%+)   [Mar 17]
+SUMMIT:           up to 83% of a day within ±5° of 144° (20 day(s) at 50%+)          [Mar 3]
+```

@@ -1,0 +1,10 @@
+<!-- hash:2fded2746f5f -->
+```
+RH CHANGED >50%/H
+GAVIN:            1 event, peak Δ +61%/h                                      [Jul 17 16:00]
+LONE BUTTE:       1 event, peak Δ +56%/h                                      [Jul 18 17:00]
+PLACE LAKE:       1 event, peak Δ -56%/h                                       [Jul 7 08:00]
+TIMOTHY:          1 event, peak Δ +52%/h                                      [Jul 11 17:00]
+PERSISTENT STATES
+BIG VALLEY:       RH constant 99% for 12h, Rn_1 (4.4mm)                 [Jul 19 00:00–11:00]
+```

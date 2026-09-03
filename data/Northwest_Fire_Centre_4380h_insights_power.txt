@@ -1,0 +1,30 @@
+<!-- hash:1e9b7be3d75e -->
+```
+LOW BATTERY VOLTAGE
+NORTH BABINE:     min 12.00V, mean 12.96V                                           [Feb 27]
+NADINA:           min 12.10V, mean 13.12V                                            [Feb 6]
+AUGIER LAKE:      min 12.20V, mean 13.06V                                            [Feb 4]
+BURNS LAKE 850M:  min 12.20V, mean 13.29V                                           [Feb 19]
+NO DAYTIME CHARGING
+NORTH BABINE:     no charge 268 daytime readings (Vbat 12.30V, Vslr 10.50V)  [Feb 3 18:00 – Aug 3 08:00]
+UPPER FULTON:     no charge 266 daytime readings (Vbat 12.70V, Vslr 0.20V)  [Feb 3 18:00 – Aug 3 08:00]
+NASS CAMP:        no charge 259 daytime readings (Vbat 12.60V, Vslr 12.20V)  [Feb 3 18:00 – Aug 4 09:00, ongoing]
+AUGIER LAKE:      no charge 117 daytime readings (Vbat 12.50V, Vslr 6.80V)  [Feb 3 18:00 – Aug 2 08:00]
+NADINA:           no charge 115 daytime readings (Vbat 12.50V, Vslr 6.60V)  [Feb 3 18:00 – Apr 2 08:00]
+ATLIN:            no charge 113 daytime readings (Vbat 12.70V, Vslr 4.20V)  [Feb 14 08:00 – Jul 27 08:00]
+BURNS LAKE 850M:  no charge 111 daytime readings (Vbat 12.50V, Vslr 7.20V)  [Feb 3 19:00 – Jul 28 08:00]
+ROSSWOOD:         no charge 97 daytime readings (Vbat 12.70V, Vslr 8.90V)  [Feb 4 08:00 – Aug 2 08:00]
+DEASE LAKE FS:    no charge 91 daytime readings (Vbat 12.60V, Vslr 9.90V)  [Feb 4 08:00 – Apr 17 08:00]
+GANOKWA:          no charge 83 daytime readings (Vbat 12.60V, Vslr 7.80V)  [Feb 3 18:00 – Apr 2 08:00]
+EAST OOTSA:       no charge 80 daytime readings (Vbat 12.70V, Vslr 8.10V)  [Feb 4 08:00 – May 21 08:00]
+TELEGRAPH CREEK:  no charge 70 daytime readings (Vbat 12.70V, Vslr 9.85V)  [Feb 6 08:00 – Apr 6 08:00]
+PEDEN:            no charge 62 daytime readings (Vbat 12.70V, Vslr 8.00V)  [Feb 4 08:00 – Apr 15 08:00]
+TERRACE:          no charge 57 daytime readings (Vbat 12.70V, Vslr 10.30V)  [Feb 4 08:00 – Apr 6 08:00]
+PARROTT:          no charge 50 daytime readings (Vbat 12.60V, Vslr 9.25V)  [Feb 4 08:00 – Mar 26 08:00]
+MCBRIDE LAKE:     no charge 46 daytime readings (Vbat 12.50V, Vslr 12.20V)  [Apr 2 08:00 – Aug 4 08:00, ongoing]
+BELL-IRVING:      no charge 42 daytime readings (Vbat 12.70V, Vslr 3.50V)  [Feb 3 18:00 – Mar 30 08:00]
+NILKITKWA:        no charge 17 daytime readings (Vbat 12.70V, Vslr 12.50V)  [Jun 26 08:00 – Aug 3 08:00]
+OLD FADDY:        no charge 11 daytime readings (Vbat 12.70V, Vslr 10.20V)  [Feb 16 08:00 – Mar 25 08:00]
+BOB QUINN LAKE:   no charge 6 daytime readings (Vbat 12.70V, Vslr 4.15V)  [Feb 18 08:00 – Feb 23 09:00]
+UPPER KISPIOX:    no charge 6 daytime readings (Vbat 12.70V, Vslr 11.40V)  [Mar 16 08:00 – Aug 2 08:00]
+```

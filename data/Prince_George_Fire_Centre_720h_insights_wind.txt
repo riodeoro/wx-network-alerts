@@ -1,0 +1,12 @@
+<!-- hash:45c31cc2ee90 -->
+```
+GUSTS EXCEEDED 80 KM/H
+SILVER:           152.2 km/h (1 reading >80)                                  [Jul 29 13:00]
+HIXON:            137.6 km/h (1 reading >80)                                  [Jul 28 13:00]
+DAILY DIRECTION CONCENTRATION
+WONOWON:          up to 71% of a day within ±5° of 208° (2 day(s) at 50%+)          [Jul 13]
+MUSKWA:           up to 67% of a day within ±5° of 243° (2 day(s) at 50%+)          [Jul 15]
+NELSON FORKS:     up to 62% of a day within ±5° of 5° (3 day(s) at 50%+)            [Jul 26]
+NOEL:             up to 54% of a day within ±5° of 212° (2 day(s) at 50%+)          [Jul 22]
+PADDY:            up to 54% of a day within ±5° of 167° (1 day(s) at 50%+)          [Jul 28]
+```

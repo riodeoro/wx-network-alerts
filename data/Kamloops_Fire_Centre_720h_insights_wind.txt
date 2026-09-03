@@ -1,0 +1,17 @@
+<!-- hash:7b6174f6e169 -->
+```
+GUSTS EXCEEDED 80 KM/H
+KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]
+MERRITT 2 HUB:    86.6 km/h (1 reading >80)                                   [Jul 16 18:00]
+LITTLE CHOPAKA:   80.8 km/h (1 reading >80)                                   [Jul 15 21:00]
+FINTRY:           80.6 km/h (1 reading >80)                                    [Aug 1 18:00]
+PERSISTENT STATES
+EAST BARRIERE:    zero wind 12h, 3 shifts >90°, max 4.7km/h    [Jul 21 20:00 – Jul 22 07:00]
+SILVERSTAR SF:    zero wind 22h, gusts max 3.9km/h             [Jul 20 13:00 – Jul 21 10:00]
+DAILY DIRECTION CONCENTRATION
+GWYNETH LAKE:     up to 71% of a day within ±5° of 206° (5 day(s) at 50%+)          [Jul 25]
+GREENSTONE HUB:   up to 67% of a day within ±5° of 196° (8 day(s) at 50%+)          [Jul 26]
+ASHNOLA:          up to 58% of a day within ±5° of 278° (2 day(s) at 50%+)           [Jul 8]
+LITTLE CHOPAKA:   up to 58% of a day within ±5° of 311° (2 day(s) at 50%+)           [Jul 8]
+SPLINTLUM:        up to 58% of a day within ±5° of 155° (3 day(s) at 50%+)          [Jul 25]
+```

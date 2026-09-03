@@ -1,0 +1,10 @@
+<!-- hash:ca134fcd7f19 -->
+```
+LOW DATA COVERAGE
+QD #19:           20% (142/721h)                                     [since Jul 14, ongoing]
+QD #20:           22% (161/721h)                                     [since Jul 13, ongoing]
+QD #14:           28% (204/721h)                                     [since Jul 12, ongoing]
+QD #7:            39% (283/721h)                                              [Jun 20–Jul 2]
+UNCONFIGURED SENSORS
+  QD #14: battery voltage and gust speed unconfigured
+```

@@ -1,0 +1,14 @@
+<!-- hash:316dae28c8a5 -->
+```
+RH CHANGED >50%/H
+BELL-IRVING:      1 event, peak Δ +59%/h                                       [Jun 9 15:00]
+GANOKWA:          1 event, peak Δ -57%/h                                      [Jun 21 17:00]
+CEDARVALE:        2 events, peak Δ +56%/h                                [May 8 13:00–14:00]
+NADINA:           1 event, peak Δ +54%/h                                      [Jun 20 16:00]
+VAN DYKE:         1 event, peak Δ +53%/h                                      [Jun 20 17:00]
+PERSISTENT STATES
+DEASE LAKE FS:    RH constant 100% for 18h, Rn_1 (33.4mm)        [Jun 4 17:00 – Jun 5 10:00]
+OLD FADDY:        RH constant 100% for 13h, zero Rn_1          [Jul 10 22:00 – Jul 11 10:00]
+NORTH BABINE:     RH constant 100% for 12h, zero Rn_1          [May 25 21:00 – May 26 08:00]
+UPPER FULTON:     RH constant 99% for 12h, Rn_1 (22.0mm)       [May 24 23:00 – May 25 10:00]
+```

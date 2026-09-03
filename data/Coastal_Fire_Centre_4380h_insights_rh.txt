@@ -1,0 +1,19 @@
+<!-- hash:9082dfa78226 -->
+```
+RH CHANGED >50%/H
+TS ELPHINSTONE:   2 events, peak Δ +80%/h                               [May 13 10:00–11:00]
+TS ARTLISH:       2 events, peak Δ -75%/h                                [Apr 9 12:00–13:00]
+TS SAN JUAN:      1 event, peak Δ -62%/h                                      [Apr 25 09:00]
+ALLISON PASS:     1 event, peak Δ +61%/h                                      [Jul 16 15:00]
+KLINAKLINI:       1 event, peak Δ +61%/h                                      [Feb 28 13:00]
+RH DROPPED AS LOW AS
+TS ARTLISH:       3.0%                                                               [Apr 9]
+TS NAKA CREEK:    16.0%                                                              [Jun 2]
+TS SAN JUAN:      18.0%                                                             [Apr 25]
+PERSISTENT STATES
+TS ARTLISH:       RH constant 100% for 152h, Rn_1 (106.6mm)    [Feb 19 16:00 – Feb 25 23:00]
+KLINAKLINI:       RH constant 100% for 124h, Rn_1 (4.8mm)        [Mar 3 02:00 – Mar 8 05:00]
+HOMATHKO:         RH constant 100% for 118h, Rn_1 (77.6mm)     [Mar 15 18:00 – Mar 20 15:00]
+UBC RESEARCH:     RH constant 100% for 114h, Rn_1 (264.6mm)    [Mar 15 20:00 – Mar 20 13:00]
+SUMMIT:           RH constant 100% for 107h, Rn_1 (232.6mm)    [Mar 16 05:00 – Mar 20 15:00]
+```

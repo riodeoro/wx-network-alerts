@@ -1,0 +1,6 @@
+<!-- hash:79e341a6e554 -->
+```
+EXTREME VALUES
+CEDARVALE:        Highest (28.5°C)                                             [Aug 4 18:00]
+GANOKWA:          Lowest (2.4°C)                                               [Aug 4 06:00]
+```

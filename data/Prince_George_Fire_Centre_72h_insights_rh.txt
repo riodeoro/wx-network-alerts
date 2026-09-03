@@ -1,0 +1,5 @@
+<!-- hash:d2b94ba8a468 -->
+```
+PERSISTENT STATES
+LOVELL COVE:      RH constant 97% for 12h, zero Rn_1             [Aug 2 23:00 – Aug 3 10:00]
+```

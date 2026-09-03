@@ -1,0 +1,7 @@
+<!-- hash:9a15bbeb9936 -->
+```
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+ALLISON PASS:     silent 4 of 4 neighbour rain hours (100%)              [Aug 1 14:00–19:00]
+HONNA:            silent 13 of 15 neighbour rain hours (87%)    [Jul 31 01:00 → Aug 1 10:00]
+FRANK CREEK:      silent 3 of 4 neighbour rain hours (75%)       [Aug 1 10:00 → Aug 2 03:00]
+```

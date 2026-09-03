@@ -1,0 +1,15 @@
+<!-- hash:2025b16e5122 -->
+```
+PERSISTENT STATES
+MESACHIE 2:       zero wind 17h, 3 shifts >90°, max 10.2km/h     [Jul 2 17:00 – Jul 3 09:00]
+TS ARTLISH:       zero wind 15h, 5 shifts >90°, max 7.2km/h    [Jul 29 23:00 – Jul 30 13:00]
+QUINSAM BASE FWX: zero wind 15h, 6 shifts >90°, max 4.7km/h    [Jul 30 20:00 – Jul 31 10:00]
+UBC RESEARCH:     zero wind 14h, 3 shifts >90°, max 4.1km/h      [Jul 2 19:00 – Jul 3 08:00]
+SCAR CREEK:       zero wind 14h, 3 shifts >90°, max 7.7km/h    [Jun 25 19:00 – Jun 26 08:00]
+DAILY DIRECTION CONCENTRATION
+TS ELPHINSTONE:   up to 79% of a day within ±5° of 107° (3 day(s) at 50%+)          [Jul 26]
+CHEAKAMUS:        up to 71% of a day within ±5° of 294° (4 day(s) at 50%+)          [Jun 30]
+FRANK CREEK:      up to 67% of a day within ±5° of 201° (6 day(s) at 50%+)          [Jun 29]
+TS BLACKWATER:    up to 67% of a day within ±5° of 115° (5 day(s) at 50%+)           [Jul 2]
+APE LAKE:         up to 62% of a day within ±5° of 353° (3 day(s) at 50%+)          [Jul 18]
+```

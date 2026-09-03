@@ -1,0 +1,23 @@
+<!-- hash:a6f5a8abf1f5 -->
+```
+GUSTS EXCEEDED 80 KM/H
+KETTLE 2:         835.1 km/h (2 readings >80)                            [Jul 8 06:00–07:00]
+WEST KELOWNA:     126.6 km/h (1 reading >80)                                  [Mar 25 10:00]
+AFTON:            95.0 km/h (12 readings >80)                  [Mar 20 16:00 – Apr 14 22:00]
+GREENSTONE HUB:   90.1 km/h (4 readings >80)                            [Mar 24 18:00–21:00]
+LITTLE CHOPAKA:   88.0 km/h (2 readings >80)                   [Apr 23 18:00 – Jul 15 21:00]
+SUSTAINED WIND EXCEEDED 60 KM/H
+AFTON:            63.1 km/h (3 readings >60)                            [Mar 24 21:00–23:00]
+PERSISTENT STATES
+SILVERSTAR SF:    zero wind 39h, 1 shifts >90°, max 13.7km/h   [Apr 11 11:00 – Apr 13 01:00]
+WELLS GRAY:       zero wind 22h, 5 shifts >90°, max 6.1km/h    [Feb 13 15:00 – Feb 14 12:00]
+CLEARWATER HUB:   zero wind 21h, 9 shifts >90°, max 3.0km/h    [Feb 13 13:00 – Feb 14 09:00]
+EAST BARRIERE:    zero wind 20h, 1 shifts >90°, max 3.8km/h    [Feb 13 16:00 – Feb 14 11:00]
+MCLEAN LAKE:      zero wind 19h, gusts max 7.9km/h               [Feb 6 15:00 – Feb 7 09:00]
+DAILY DIRECTION CONCENTRATION
+GREENSTONE HUB:   up to 83% of a day within ±5° of 309° (52 day(s) at 50%+)         [Jun 20]
+MCLEAN LAKE:      up to 83% of a day within ±5° of 79° (10 day(s) at 50%+)           [Feb 6]
+THYNNE:           up to 83% of a day within ±5° of 233° (13 day(s) at 50%+)         [Mar 17]
+ASHNOLA:          up to 79% of a day within ±5° of 268° (31 day(s) at 50%+)         [Jun 28]
+GWYNETH LAKE:     up to 79% of a day within ±5° of 189° (30 day(s) at 50%+)         [Mar 19]
+```

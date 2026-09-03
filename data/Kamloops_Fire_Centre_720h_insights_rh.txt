@@ -1,0 +1,14 @@
+<!-- hash:7b6174f6e169 -->
+```
+RH READ 0%
+SILVERSTAR SF:    716 readings                          [Jul 6 06:00 → Aug 5 05:00, ongoing]
+RH CHANGED >50%/H
+SICAMOUS:         2 events, peak Δ +64%/h                      [Jul 17 19:00 → Jul 19 17:00]
+CLEARWATER HUB:   1 event, peak Δ -57%/h                                      [Jul 12 09:00]
+SEYMOUR ARM:      1 event, peak Δ +56%/h                                      [Jul 25 18:00]
+COLDSCAUR LAKE:   2 events, peak Δ -53%/h                        [Aug 1 13:00 → Aug 2 13:00]
+MAYSON:           1 event, peak Δ -53%/h                                       [Aug 2 13:00]
+PERSISTENT STATES
+SILVERSTAR SF:    RH constant 0% for 716h, zero Rn_1    [Jul 6 06:00 – Aug 5 05:00, ongoing]
+WELLS GRAY:       RH constant 100% for 12h, zero Rn_1          [Jul 18 21:00 – Jul 19 08:00]
+```

@@ -1,0 +1,38 @@
+FIRE CENTRE: Kamloops Fire Centre
+WINDOW: 168h | STATIONS: 42 | RECORDS: 7,053
+
+=== STATION OUTAGES ===
+SENSOR NA: SILVERSTAR SF - Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: LEIGHTON LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MAYSON - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: MCLEAN LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: PASKA LAKE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+RH=0%: SILVERSTAR SF - 164 readings @first=2026-07-29T06:00@last=2026-08-05T05:00
+RH CHANGE >50%/h: COLDSCAUR LAKE - 2 events, peak=-53.0%/h @first=2026-08-01T13:00@last=2026-08-02T13:00
+RH CHANGE >50%/h: MAYSON - 1 events, peak=-53.0%/h @first=2026-08-02T13:00@last=2026-08-02T13:00
+RH CHANGE >50%/h: WELLS GRAY - 1 events, peak=-53.0%/h @first=2026-08-02T13:00@last=2026-08-02T13:00
+CONSTANT RH: SILVERSTAR SF - Constant low (<50%), avg=0%, 164h, no precip @start=2026-07-29T06:00@end=2026-08-05T05:00
+
+=== WIND ===
+EXTREME GUST: FINTRY - max=80.6km/h, 1 readings >80km/h @start=2026-08-01T18:00@end=2026-08-01T18:00
+ZERO WIND 17h: SILVERSTAR SF - Wspd=0 but 4 direction changes >90deg detected (max_delta=157deg), gusts nonzero (max=3.3km/h, avg=0.2km/h) @start=2026-08-03T23:00@end=2026-08-04T15:00
+DIRECTION CONCENTRATION: GREENSTONE HUB - up to 58% of a day in the 196 deg bin (3 day(s) at 50%+) @ts=2026-07-30T00:00
+DIRECTION CONCENTRATION: HARBOUR LAKE - up to 54% of a day in the 158 deg bin (1 day(s) at 50%+) @ts=2026-07-31T00:00
+DIRECTION CONCENTRATION: SPLINTLUM - up to 50% of a day in the 163 deg bin (2 day(s) at 50%+) @ts=2026-07-30T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: SPLINTLUM - 34.3C @ts=2026-07-31T17:00
+LOWEST TEMP: FRENCH BAR - -2.7C @ts=2026-08-02T06:00
+ISOLATED TEMP SPIKE: BRENDA MINES - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+ISOLATED TEMP SPIKE: FINTRY - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+ISOLATED TEMP SPIKE: IDABEL LAKE 3 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+ISOLATED TEMP SPIKE: KETTLE 2 - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+ISOLATED TEMP SPIKE: LARCH HILLS WEST - 1 readings deviated >=5C then returned, no inverse RH shift, peak=8.0C, mag=10.3 @first=2026-08-03T19:00@last=2026-08-03T19:00
+
+=== PRECIPITATION ===
+None.
+
+=== POWER ===
+None.

@@ -1,0 +1,9 @@
+<!-- hash:d34bec265ae2 -->
+```
+GUSTS EXCEEDED 80 KM/H
+SILVER:           152.2 km/h (1 reading >80)                                  [Jul 29 13:00]
+DAILY DIRECTION CONCENTRATION
+KOMIE:            up to 50% of a day within ±5° of 26° (1 day(s) at 50%+)            [Aug 1]
+MUSKWA:           up to 50% of a day within ±5° of 243° (1 day(s) at 50%+)           [Aug 3]
+NELSON FORKS:     up to 50% of a day within ±5° of 358° (1 day(s) at 50%+)           [Aug 1]
+```

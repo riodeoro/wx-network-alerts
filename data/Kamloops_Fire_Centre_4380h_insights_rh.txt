@@ -1,0 +1,18 @@
+<!-- hash:a6f5a8abf1f5 -->
+```
+RH READ 0%
+SILVERSTAR SF:    4366 readings                         [Feb 3 18:00 → Aug 5 05:00, ongoing]
+MABEL LAKE 2:     2 readings                                            [Apr 30 20:00–21:00]
+RH CHANGED >50%/H
+TURTLE:           3 events, peak Δ +70%/h                      [Mar 24 21:00 → Jun 25 18:00]
+SICAMOUS:         3 events, peak Δ +64%/h                      [Jun 11 18:00 → Jul 19 17:00]
+CLEARWATER HUB:   3 events, peak Δ +61%/h                       [Mar 8 05:00 → Jul 12 09:00]
+WELLS GRAY:       2 events, peak Δ +57%/h                        [Jun 3 20:00 → Aug 2 13:00]
+SEYMOUR ARM:      2 events, peak Δ +56%/h                      [Jun 26 19:00 → Jul 25 18:00]
+PERSISTENT STATES
+SILVERSTAR SF:    RH constant 0% for 4366h, zero Rn_1   [Feb 3 18:00 – Aug 5 05:00, ongoing]
+MABEL LAKE 2:     RH constant 100% for 117h, Rn_1 (4.2mm)        [Feb 3 18:00 – Feb 8 14:00]
+MCLEAN LAKE:      RH constant 100% for 65h, Rn_1 (0.2mm)         [Feb 4 19:00 – Feb 7 11:00]
+SEYMOUR ARM:      RH constant 100% for 65h, Rn_1 (2.4mm)         [Feb 3 18:00 – Feb 6 10:00]
+KETTLE 2:         RH constant 100% for 44h, zero Rn_1            [Feb 3 18:00 – Feb 5 13:00]
+```

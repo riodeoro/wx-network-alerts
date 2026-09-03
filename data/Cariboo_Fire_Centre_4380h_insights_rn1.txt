@@ -1,0 +1,12 @@
+<!-- hash:4b9c5698dec8 -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+GASPARD:          1 hour, Rn_1 (0.2mm)                                        [Mar 30 13:00]
+BALDFACE:         1 hour, Rn_1 (6.4mm)                                        [Jun 25 14:00]
+NAZKO:            1 hour, Rn_1 (0.2mm)                                         [Apr 6 18:00]
+HIGH PRECIPITATION
+PLUMMER HUT:      90.2 mm/h                                                          [Feb 4]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+ALEXIS CREEK:     silent 3 of 3 neighbour rain hours (100%)    [Mar 12 14:00 → Jun 26 16:00]
+NEMIAH:           silent 11 of 16 neighbour rain hours (69%)    [Mar 19 23:00 → Aug 1 04:00]
+```

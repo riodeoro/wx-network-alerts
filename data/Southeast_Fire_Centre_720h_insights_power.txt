@@ -1,0 +1,6 @@
+<!-- hash:345d6797b925 -->
+```
+NO DAYTIME CHARGING
+TOBY HUB:         no charge 12 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Aug 2 08:00–19:00]
+CRAWFORD:         no charge 7 daytime readings (Vbat 12.70V, Vslr 12.50V)  [Jul 17 08:00 – Jul 23 13:00]
+```

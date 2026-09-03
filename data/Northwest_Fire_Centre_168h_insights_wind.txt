@@ -1,0 +1,12 @@
+<!-- hash:9b077ed07ee4 -->
+```
+PERSISTENT STATES
+ROSSWOOD:         zero wind 15h, 8 shifts >90°, max 3.4km/h    [Jul 30 18:00 – Jul 31 08:00]
+BELL:             zero wind 14h, 1 shifts >90°, max 5.1km/h    [Jul 29 19:00 – Jul 30 08:00]
+DAILY DIRECTION CONCENTRATION
+NASS CAMP:        up to 75% of a day within ±5° of 192° (3 day(s) at 50%+)           [Aug 2]
+CRANBERRY:        up to 58% of a day within ±5° of 218° (2 day(s) at 50%+)           [Aug 2]
+KITPARK:          up to 54% of a day within ±5° of 219° (1 day(s) at 50%+)           [Aug 1]
+TELEGRAPH CREEK:  up to 54% of a day within ±5° of 249° (1 day(s) at 50%+)           [Aug 2]
+TERRACE:          up to 54% of a day within ±5° of 171° (2 day(s) at 50%+)           [Aug 1]
+```

@@ -1,0 +1,17 @@
+<!-- hash:30c3af12b8e0 -->
+```
+GUSTS EXCEEDED 80 KM/H
+FLATHEAD 2:       410.5 km/h (1 reading >80)                                  [Jul 17 23:00]
+BIG MOUTH 2:      90.6 km/h (1 reading >80)                                   [Jul 25 19:00]
+JOHNSON LAKE:     82.6 km/h (1 reading >80)                                   [Jul 24 01:00]
+PERSISTENT STATES
+BAKER:            zero wind 774h, 34 shifts >90° (max 179°)  [Jul 4 00:00 – Aug 5 05:00, ongoing]
+EIGHT MILE:       zero wind 12h, gusts max 5.3km/h               [Jul 5 20:00 – Jul 6 07:00]
+MARION:           zero wind 57h, no gusts, no dir changes        [Jun 6 06:00 – Jun 8 14:00]
+DAILY DIRECTION CONCENTRATION
+ROUND PRAIRIE:    up to 92% of a day within ±5° of 161° (6 day(s) at 50%+)          [Jul 12]
+BAKER:            up to 71% of a day within ±5° of 242° (10 day(s) at 50%+)          [Jul 3]
+JOHNSON LAKE:     up to 58% of a day within ±5° of 3° (2 day(s) at 50%+)            [Jun 21]
+CRAWFORD:         up to 54% of a day within ±5° of 53° (2 day(s) at 50%+)           [Jun 15]
+POWDER CREEK:     up to 54% of a day within ±5° of 172° (2 day(s) at 50%+)          [Jul 12]
+```

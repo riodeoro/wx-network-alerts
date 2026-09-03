@@ -1,0 +1,10 @@
+<!-- hash:7b630a803d44 -->
+```
+EXTREME VALUES
+CEDARVALE:        Highest (37.2°C)                                                  [Jul 21]
+GANOKWA:          Lowest (-2.8°C)                                                    [Jun 6]
+TEMPERATURE EXCEEDED 35°C
+KITPARK:          36.9°C                                                            [Jul 20]
+PERSISTENT STATES
+NASS CAMP:        constant (11.2°C) for 6h, RH varied 2%                 [Aug 2 00:00–05:00]
+```

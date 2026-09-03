@@ -1,0 +1,12 @@
+<!-- hash:0217e34b437e -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+MABEL LAKE 2:     2 hours, Rn_1 (17.4mm)                                [Jun 23 14:00–16:00]
+MAYSON:           1 hour, Rn_1 (0.4mm)                                         [Jul 6 16:00]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+ASHNOLA:          silent 4 of 4 neighbour rain hours (100%)              [Jun 9 01:00–08:00]
+GREENSTONE HUB:   silent 5 of 5 neighbour rain hours (100%)      [Jun 9 05:00 → Jul 2 17:00]
+HARBOUR LAKE:     silent 13 of 16 neighbour rain hours (81%)    [Jun 9 08:00 → Jun 27 08:00]
+MUDPIT:           silent 5 of 8 neighbour rain hours (62%)     [Jun 27 09:00 → Jul 19 18:00]
+WEST KELOWNA:     silent 3 of 5 neighbour rain hours (60%)       [Jun 6 16:00 → Aug 3 13:00]
+```

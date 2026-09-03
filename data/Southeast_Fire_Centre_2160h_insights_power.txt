@@ -1,0 +1,8 @@
+<!-- hash:5ff004563457 -->
+```
+NO DAYTIME CHARGING
+CRAWFORD:         no charge 13 daytime readings (Vbat 12.70V, Vslr 12.50V)  [May 13 08:00 – Jul 23 13:00]
+TOBY HUB:         no charge 12 daytime readings (Vbat 12.70V, Vslr 0.10V)  [Aug 2 08:00–19:00]
+DUNCAN:           no charge 5 daytime readings (Vbat 12.70V, Vslr 12.60V)  [May 19 08:00 – Jul 6 08:00]
+PENDOREILLE:      no charge 5 daytime readings (Vbat 12.70V, Vslr 12.30V)  [May 26 08:00 – Jul 17 08:00]
+```

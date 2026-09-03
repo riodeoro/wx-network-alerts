@@ -1,0 +1,12 @@
+<!-- hash:d2b94ba8a468 -->
+```
+EXTREME VALUES
+FORT NELSON FS:   Highest (29.3°C)                                             [Aug 3 17:00]
+BEDNESTI:         Lowest (-0.6°C)                                              [Aug 5 05:00]
+ISOLATED TEMPERATURE SPIKES (≥5°C, NO INVERSE RH)
+BEDNESTI:         2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+CHILAKO:          2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+HOLY CROSS 2:     2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+MOOSE LAKE:       2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+NORTH CHILCO:     2 spikes, peak Δ 7.1°C                                 [Aug 3 22:00–23:00]
+```

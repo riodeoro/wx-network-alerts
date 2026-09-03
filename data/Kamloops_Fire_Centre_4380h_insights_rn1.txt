@@ -1,0 +1,12 @@
+<!-- hash:a6f5a8abf1f5 -->
+```
+PRECIPITATION (RN_1) RECORDED WHILE RH WAS 10–25%
+KETTLE 2:         1 hour, Rn_1 (1.4mm)                                        [Mar 26 14:00]
+CURWEN CREEK:     6 hours, Rn_1 (31.8mm)                       [Apr 20 14:00 → Apr 21 14:00]
+FRENCH BAR:       1 hour, Rn_1 (0.2mm)                                        [Apr 22 15:00]
+SILENT RAIN GAUGES (SILENT ≥60% OF NEIGHBOUR RAIN HOURS)
+GREENSTONE HUB:   silent 15 of 15 neighbour rain hours (100%)   [Apr 21 21:00 → Jul 2 17:00]
+HARBOUR LAKE:     silent 59 of 62 neighbour rain hours (95%)    [Feb 7 11:00 → Jun 27 08:00]
+FRENCH BAR:       silent 11 of 15 neighbour rain hours (73%)   [Mar 19 04:00 → Jul 12 04:00]
+MUDPIT:           silent 5 of 8 neighbour rain hours (62%)     [Jun 27 09:00 → Jul 19 18:00]
+```

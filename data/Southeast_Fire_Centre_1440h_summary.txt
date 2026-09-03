@@ -1,0 +1,76 @@
+FIRE CENTRE: Southeast Fire Centre
+WINDOW: 1440h | STATIONS: 48 | RECORDS: 68,971
+
+=== STATION OUTAGES ===
+SENSOR NA: NORNS - Wspd=95% NA, Dir=95% NA, Mx_Spd=95% NA, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: BAKER - Rh=83% NA, Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: BRISCO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: DARKWOODS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+RH=0%: BAKER - 248 readings @first=2026-06-06T06:00@last=2026-06-16T13:00
+RH=0%: CARIBOO CREEK - 13 readings @first=2026-06-09T01:00@last=2026-06-12T13:00
+RH=0%: DUNCAN - 2 readings @first=2026-06-11T09:00@last=2026-06-11T10:00
+RH>100%: CARIBOO CREEK - 55 readings, max=115.0% @first=2026-06-06T06:00@last=2026-06-12T07:00
+RH CHANGE >50%/h: CARIBOO CREEK - 8 events, peak=-108.0%/h @first=2026-06-08T13:00@last=2026-06-12T08:00
+RH CHANGE >50%/h: DUNCAN - 5 events, peak=+100.0%/h @first=2026-06-11T09:00@last=2026-08-01T18:00
+RH CHANGE >50%/h: ELKO - 3 events, peak=-100.0%/h @first=2026-07-01T17:00@last=2026-07-28T10:00
+RH CHANGE >50%/h: FLATHEAD 2 - 2 events, peak=-80.0%/h @first=2026-06-06T08:00@last=2026-06-06T09:00
+RH CHANGE >50%/h: BEAVERDELL - 2 events, peak=+68.0%/h @first=2026-07-23T20:00@last=2026-07-24T20:00
+CONSTANT RH: BAKER - Constant low (<50%), avg=0%, 248h, no precip @start=2026-06-06T06:00@end=2026-06-16T13:00
+CONSTANT RH: NORNS - Constant 100%, avg=100%, 43h, no precip @start=2026-06-29T22:00@end=2026-07-01T16:00
+CONSTANT RH: DUNCAN - Constant 100%, avg=100%, 19h, precip=11.0mm @start=2026-06-30T17:00@end=2026-07-01T11:00
+CONSTANT RH: DEWAR CREEK - Constant 100%, avg=100%, 14h, precip=0.4mm @start=2026-06-30T20:00@end=2026-07-01T09:00
+CONSTANT RH: BLAEBERRY - Constant 100%, avg=100%, 12h, precip=0.2mm @start=2026-06-27T23:00@end=2026-06-28T10:00
+
+=== WIND ===
+EXTREME GUST: FLATHEAD 2 - max=410.5km/h, 1 readings >80km/h @start=2026-07-17T23:00@end=2026-07-17T23:00
+EXTREME GUST: BIG MOUTH 2 - max=90.6km/h, 1 readings >80km/h @start=2026-07-25T19:00@end=2026-07-25T19:00
+EXTREME GUST: JOHNSON LAKE - max=82.6km/h, 1 readings >80km/h @start=2026-07-24T01:00@end=2026-07-24T01:00
+ZERO WIND 774h: BAKER - Wspd=0 but 34 direction changes >90deg detected (max_delta=179deg) @start=2026-07-04T00:00@end=2026-08-05T05:00
+ZERO WIND 12h: EIGHT MILE - Wspd=0 but gusts nonzero (max=5.3km/h, avg=1.3km/h), no direction changes >90deg @start=2026-07-05T20:00@end=2026-07-06T07:00
+ZERO WIND 57h: MARION - Wspd=0, gusts=0, no direction changes >90deg @start=2026-06-06T06:00@end=2026-06-08T14:00
+DIRECTION CONCENTRATION: ROUND PRAIRIE - up to 92% of a day in the 161 deg bin (6 day(s) at 50%+) @ts=2026-07-12T00:00
+DIRECTION CONCENTRATION: BAKER - up to 71% of a day in the 242 deg bin (10 day(s) at 50%+) @ts=2026-07-03T00:00
+DIRECTION CONCENTRATION: JOHNSON LAKE - up to 58% of a day in the 3 deg bin (2 day(s) at 50%+) @ts=2026-06-21T00:00
+DIRECTION CONCENTRATION: CRAWFORD - up to 54% of a day in the 53 deg bin (2 day(s) at 50%+) @ts=2026-06-15T00:00
+DIRECTION CONCENTRATION: POWDER CREEK - up to 54% of a day in the 172 deg bin (2 day(s) at 50%+) @ts=2026-07-12T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: ROCK CREEK - 40.1C @ts=2026-07-22T16:00
+LOWEST TEMP: NORNS - -4.3C @ts=2026-06-07T01:00
+TEMP>35C: BEAVERDELL - max=39.0C @ts=2026-07-22T17:00
+TEMP>35C: BRISCO - max=35.7C @ts=2026-08-01T16:00
+TEMP>35C: DOWNIE - max=35.8C @ts=2026-07-17T16:00
+TEMP>35C: ELKO - max=35.6C @ts=2026-07-23T17:00
+TEMP>35C: GOATFELL - max=35.6C @ts=2026-07-22T14:00
+TEMP>35C: GRAND FORKS - max=37.3C @ts=2026-07-21T16:00
+TEMP>35C: JOHNSON LAKE - max=36.5C @ts=2026-07-22T17:00
+TEMP>35C: KOOCANUSA - max=35.8C @ts=2026-07-23T15:00
+TEMP>35C: NICOLL - max=36.3C @ts=2026-07-22T16:00
+TEMP>35C: PENDOREILLE - max=37.6C @ts=2026-07-22T16:00
+TEMP>35C: TOBY HUB - max=35.6C @ts=2026-08-01T15:00
+ISOLATED TEMP SPIKE: SLOCAN - 1 readings deviated >=5C then returned, no inverse RH shift, peak=13.0C, mag=15.2 @first=2026-08-04T11:00@last=2026-08-04T11:00
+ISOLATED TEMP SPIKE: CHERRY LAKE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=6.4C, mag=10.1 @first=2026-08-02T12:00@last=2026-08-02T18:00
+ISOLATED TEMP SPIKE: BLAEBERRY - 1 readings deviated >=5C then returned, no inverse RH shift, peak=5.1C, mag=9.8 @first=2026-07-28T17:00@last=2026-07-28T17:00
+ISOLATED TEMP SPIKE: ROUND PRAIRIE - 2 readings deviated >=5C then returned, no inverse RH shift, peak=6.4C, mag=9.6 @first=2026-08-02T12:00@last=2026-08-02T18:00
+ISOLATED TEMP SPIKE: TROUT LAKE - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.1C, mag=8.6 @first=2026-08-03T16:00@last=2026-08-03T16:00
+CONSTANT TEMP: NANCY GREENE - 9.1C for 6h, RH also flat (0% range) @start=2026-07-01T00:00@end=2026-07-01T05:00
+CONSTANT TEMP: WHITE RIVER - 7.8C for 6h, RH also flat (0% range) @start=2026-06-29T00:00@end=2026-06-29T05:00
+
+=== PRECIPITATION ===
+RAIN AT RH<10%: CARIBOO CREEK - 3 hours, 7.0mm total, rank=2 @first=2026-06-11T22:00@last=2026-06-12T12:00
+RAIN AT RH 10-25%: DARKWOODS - 5 hours, 1.0mm total, rank=1 @first=2026-06-16T15:00@last=2026-07-12T18:00
+RAIN AT RH 10-25%: WHISKEY - 1 hours, 0.2mm total, rank=12 @first=2026-06-08T13:00@last=2026-06-08T13:00
+RAIN AT RH 10-25%: WHITE RIVER - 1 hours, 0.2mm total, rank=13 @first=2026-08-01T15:00@last=2026-08-01T15:00
+SILENT GAUGE: NORNS - silent 13 of 13 neighbour rain hours (100.0%) @first=2026-06-09T10:00@last=2026-07-17T08:00
+SILENT GAUGE: FLATHEAD 2 - silent 16 of 17 neighbour rain hours (94.1%) @first=2026-06-09T06:00@last=2026-07-17T04:00
+SILENT GAUGE: DARKWOODS - silent 18 of 21 neighbour rain hours (85.7%) @first=2026-06-06T16:00@last=2026-07-17T08:00
+SILENT GAUGE: MARION - silent 7 of 10 neighbour rain hours (70.0%) @first=2026-06-07T07:00@last=2026-07-01T12:00
+HIGH PRECIP: OCTOPUS CREEK - max=27.4mm/h @ts=2026-06-29T15:00
+HIGH PRECIP: NICOLL - max=23.2mm/h @ts=2026-06-29T22:00
+
+=== POWER ===
+NO CHARGE: TOBY HUB - 12 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-08-02T08:00@end=2026-08-02T19:00
+NO CHARGE: CRAWFORD - 10 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=12.50V @start=2026-06-26T08:00@end=2026-07-23T13:00

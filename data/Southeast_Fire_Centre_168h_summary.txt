@@ -1,0 +1,38 @@
+FIRE CENTRE: Southeast Fire Centre
+WINDOW: 168h | STATIONS: 48 | RECORDS: 8,064
+
+=== STATION OUTAGES ===
+SENSOR NA: NORNS - Wspd=60% NA, Dir=60% NA, Mx_Spd=60% NA, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: BAKER - Rh=NOT CONFIGURED, Temp=NOT CONFIGURED, Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: BRISCO - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: DARKWOODS - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+SENSOR NA: EIGHT MILE - Vbat=NOT CONFIGURED, Vslr=NOT CONFIGURED, Ibat=NOT CONFIGURED
+
+=== RH ===
+RH CHANGE >50%/h: DUNCAN - 1 events, peak=+57.0%/h @first=2026-08-01T18:00@last=2026-08-01T18:00
+RH CHANGE >50%/h: MARION - 1 events, peak=-54.0%/h @first=2026-08-02T08:00@last=2026-08-02T08:00
+RH CHANGE >50%/h: DOWNIE - 2 events, peak=+53.0%/h @first=2026-08-01T19:00@last=2026-08-01T23:00
+
+=== WIND ===
+ZERO WIND 168h: BAKER - Wspd=0 but 11 direction changes >90deg detected (max_delta=179deg) @start=2026-07-29T06:00@end=2026-08-05T05:00
+DIRECTION CONCENTRATION: REVELSTOKE - up to 54% of a day in the 317 deg bin (2 day(s) at 50%+) @ts=2026-07-31T00:00
+DIRECTION CONCENTRATION: GOLD HILL - up to 50% of a day in the 243 deg bin (1 day(s) at 50%+) @ts=2026-07-31T00:00
+
+=== TEMPERATURE ===
+HIGHEST TEMP: ROCK CREEK - 36.5C @ts=2026-07-31T17:00
+LOWEST TEMP: BRISCO - -3.6C @ts=2026-08-04T04:00
+TEMP>35C: BRISCO - max=35.7C @ts=2026-08-01T16:00
+TEMP>35C: PENDOREILLE - max=35.5C @ts=2026-07-31T16:00
+TEMP>35C: TOBY HUB - max=35.6C @ts=2026-08-01T15:00
+ISOLATED TEMP SPIKE: SLOCAN - 1 readings deviated >=5C then returned, no inverse RH shift, peak=13.0C, mag=15.2 @first=2026-08-04T11:00@last=2026-08-04T11:00
+ISOLATED TEMP SPIKE: TROUT LAKE - 1 readings deviated >=5C then returned, no inverse RH shift, peak=6.1C, mag=7.6 @first=2026-08-03T16:00@last=2026-08-03T16:00
+ISOLATED TEMP SPIKE: ELKO - 2 readings deviated >=5C then returned, no inverse RH shift, peak=6.4C, mag=7.2 @first=2026-08-02T12:00@last=2026-08-02T18:00
+ISOLATED TEMP SPIKE: BIGATTINI - 2 readings deviated >=5C then returned, no inverse RH shift, peak=6.4C, mag=7.0 @first=2026-08-02T12:00@last=2026-08-02T18:00
+ISOLATED TEMP SPIKE: KOOCANUSA - 2 readings deviated >=5C then returned, no inverse RH shift, peak=6.4C, mag=6.8 @first=2026-08-02T12:00@last=2026-08-02T18:00
+
+=== PRECIPITATION ===
+RAIN AT RH 10-25%: WHITE RIVER - 1 hours, 0.2mm total, rank=1 @first=2026-08-01T15:00@last=2026-08-01T15:00
+SILENT GAUGE: BLAEBERRY - silent 3 of 3 neighbour rain hours (100.0%) @first=2026-08-01T20:00@last=2026-08-01T22:00
+
+=== POWER ===
+NO CHARGE: TOBY HUB - 12 daytime readings (Vslr<Vbat), median Vbat=12.70V, median Vslr=0.10V @start=2026-08-02T08:00@end=2026-08-02T19:00
