@@ -1129,8 +1129,28 @@ function fitColorbars(pd) {
   } catch (e) {}
 }
 
+const TICK_OVERHANG_PAD = 8;
+
+function settleAngledTicks(pd) {
+  if (pd._wxTickFix) return;
+  const fl = pd._fullLayout;
+  if (!fl || !fl.xaxis) return;
+  const xa = fl.xaxis;
+  if (xa.type !== "category" || !xa.tickangle) return;
+  pd._wxTickFix = true;
+  if (xa.automargin === "bottom") return;
+  const size = fl._size || {};
+  const r = Math.max(
+    (fl.margin && fl.margin.r) || 0,
+    (size.r || 0) + TICK_OVERHANG_PAD
+  );
+  try {
+    Plotly.relayout(pd, { "xaxis.automargin": "bottom", "margin.r": r });
+  } catch (e) {}
+}
+
 function fitPlot(pd) {
-  if (!pd || !pd._fullLayout || !pd.clientWidth) return;
+  if (!pd || !pd._wxDrawn || !pd._fullLayout || !pd.clientWidth) return;
   fitRowAxis(pd);
   fitColorbars(pd);
 }
@@ -1153,6 +1173,7 @@ function graph(figDict, opts = {}) {
   wrap._wxFit = scheduleFit;
 
   wrap._wxResize = () => {
+    if (!plotDiv._wxDrawn || !plotDiv._fullLayout) return;
     if (plotDiv.isConnected && plotDiv.clientWidth) {
       try { Plotly.Plots.resize(plotDiv); } catch (e) {}
       scheduleFit();
@@ -1238,6 +1259,8 @@ function graph(figDict, opts = {}) {
       Plotly.newPlot(plotDiv, prepared.data, prepared.layout, config)
         .then(() => {
           mounted = true;
+          plotDiv._wxDrawn = true;
+          settleAngledTicks(plotDiv);
           if (!listening && typeof plotDiv.on === "function") {
             listening = true;
             plotDiv.on("plotly_restyle", syncScorecards);
@@ -1283,8 +1306,9 @@ function graph(figDict, opts = {}) {
   requestAnimationFrame(mount);
 
   watchResize(plotDiv, () => {
+    if (!plotDiv._wxDrawn || !plotDiv._fullLayout) return;
     if (!plotDiv.clientWidth) return;
-    Plotly.Plots.resize(plotDiv);
+    try { Plotly.Plots.resize(plotDiv); } catch (e) {}
     scheduleFit();
   });
 
@@ -4434,6 +4458,7 @@ window.addEventListener("resize", () => {
 function resizePlots(node) {
   if (!node || !node.querySelectorAll) return;
   for (const pd of node.querySelectorAll(".wx-plot")) {
+    if (!pd._wxDrawn || !pd._fullLayout) continue;
     const w = pd.clientWidth;
     if (!w || pd._wxWidth === w) continue;
     pd._wxWidth = w;
@@ -4467,6 +4492,136 @@ function restoreOpenDetail(saved) {
   openOverviewChart(panel, f, row);
 }
 
+const TAB_PREFETCH_DELAY_MS = 400;
+const TAB_PREBUILD_DELAY_MS = 700;
+const TAB_PREBUILD_SETTLE_MS = 6000;
+const TAB_PREBUILD_GAP_MS = 120;
+
+const tabBuilds = new Map();
+
+let _tabWarmToken = 0;
+let _prebuildHost = null;
+
+function prebuildHost() {
+  if (_prebuildHost && _prebuildHost.isConnected) return _prebuildHost;
+  const host = el("div", "wx-prebuild");
+  host.setAttribute("aria-hidden", "true");
+  host.style.cssText =
+    "position:fixed;top:0;left:-100000px;pointer-events:none;z-index:-1;";
+  document.body.appendChild(host);
+  _prebuildHost = host;
+  return host;
+}
+
+function plotsSettled(root, timeoutMs) {
+  return new Promise((resolve) => {
+    const t0 = performance.now();
+    const check = () => {
+      let pending = 0;
+      for (const p of root.querySelectorAll(".wx-plot")) {
+        if (!p._wxDrawn) pending++;
+      }
+      if (!pending || performance.now() - t0 > timeoutMs) {
+        resolve();
+        return;
+      }
+      setTimeout(check, 120);
+    };
+    setTimeout(check, 120);
+  });
+}
+
+async function prebuildTab(tab, token, stale) {
+  const key = tabCacheKey(tab.id);
+  if (tabCache.has(key) || tabBuilds.has(key)) return;
+  const host = prebuildHost();
+  host.style.width = ($main.clientWidth || window.innerWidth) + "px";
+  const slot = el("div", "tab-content");
+  host.appendChild(slot);
+
+  const job = tab.build(state.fc, state.hours);
+  tabBuilds.set(key, job);
+
+  let content = null;
+  try {
+    content = await job;
+  } catch (e) {
+    content = null;
+  }
+  tabBuilds.delete(key);
+
+  if (content && !stale(token)) {
+    slot.appendChild(content);
+    await plotsSettled(slot, TAB_PREBUILD_SETTLE_MS);
+  }
+  if (content && content.parentNode === slot) {
+    slot.removeChild(content);
+    if (!stale(token) && !tabCache.has(key)) tabCache.set(key, content);
+  }
+  if (slot.parentNode === host) host.removeChild(slot);
+}
+
+function warmTabPayloads() {
+  const fc = state.fc;
+  const hours = state.hours;
+  if (!fc) return;
+  const token = ++_tabWarmToken;
+  const queue = [];
+  for (const t of TABS) {
+    if (t.id === OVERVIEW_TAB || t.id === state.activeTab) continue;
+    queue.push(t);
+  }
+  if (!queue.length) return;
+
+  const stale = (tk) =>
+    tk !== _tabWarmToken || state.fc !== fc || state.hours !== hours;
+
+  const idle = (fn) => {
+    if (typeof requestIdleCallback === "function") {
+      requestIdleCallback(fn, { timeout: 3000 });
+    } else {
+      setTimeout(fn, TAB_PREBUILD_GAP_MS);
+    }
+  };
+
+  const build = () => {
+    if (stale(token)) return;
+    const tab = queue.shift();
+    if (!tab) return;
+    prebuildTab(tab, token, stale)
+      .catch(() => null)
+      .then(() => {
+        if (!stale(token)) idle(build);
+      });
+  };
+
+  const fetchOnly = () => {
+    if (stale(token)) return;
+    const tab = queue.shift();
+    if (!tab) return;
+    const suffix = TAB_SUFFIX[tab.id];
+    if (!suffix) {
+      fetchOnly();
+      return;
+    }
+    Promise.all([
+      loadCharts(fc, hours, suffix),
+      loadText(fc, hours, `insights_${suffix}`),
+      loadCharts(fc, hours, `insights_${suffix}`),
+    ])
+      .catch(() => null)
+      .then(() => {
+        if (!stale(token)) idle(fetchOnly);
+      });
+  };
+
+  if (isMobile()) {
+    setTimeout(fetchOnly, TAB_PREFETCH_DELAY_MS);
+  } else {
+    setTimeout(build, TAB_PREBUILD_DELAY_MS);
+  }
+}
+
 async function renderTab(tabId) {
   const tab = TABS.find(t => t.id === tabId) || TABS[0];
   state.activeTab = tab.id;
@@ -4493,6 +4648,7 @@ async function renderTab(tabId) {
       sizeOverviewShell();
     });
     scheduleWarm();
+    warmTabPayloads();
     return;
   }
 
@@ -4501,11 +4657,19 @@ async function renderTab(tabId) {
   loading.appendChild(el("span", null, "Loading\u2026"));
   body.appendChild(loading);
 
-  const content = await tab.build(state.fc, state.hours);
+  const pending = tabBuilds.get(key);
+  const content = pending
+    ? await pending
+    : await tab.build(state.fc, state.hours);
   tabCache.set(key, content);
   body.innerHTML = "";
   body.appendChild(content);
+  requestAnimationFrame(() => {
+    resizePlots(content);
+    sizeOverviewShell();
+  });
   scheduleWarm();
+  warmTabPayloads();
 }
 
 let runToken = 0;
