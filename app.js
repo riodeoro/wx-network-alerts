@@ -3134,9 +3134,9 @@ const EXTREME_SECTION = "EXTREME VALUES";
 
 const EXTREME_PREFIX_RE = /^(Highest|Lowest)\b/;
 
-const OVERVIEW_COLUMNS = ["Sensor", "Station", "Alert", "Type", "Time"];
+const OVERVIEW_COLUMNS = ["Sensor", "Station", "Type", "Alert", "Time"];
 
-const TAB_COLUMNS = ["Station", "Alert", "Type", "Time"];
+const TAB_COLUMNS = ["Station", "Type", "Alert", "Time"];
 
 const OVERVIEW_CELLS = {
   Sensor: (f) => ovText("td", "wx-ov-sensor", f.area),
