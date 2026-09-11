@@ -8,6 +8,90 @@ const CHART_WINDOWS = [24, 48, 72, 168, 336, 720, 1440, 2160, 4380];
 const MOBILE_QUERY = window.matchMedia("(max-width: 768px)");
 const isMobile = () => MOBILE_QUERY.matches;
 
+const _taskQueue = [];
+
+const _taskChannel =
+  typeof MessageChannel === "function" ? new MessageChannel() : null;
+
+if (_taskChannel) {
+  _taskChannel.port1.onmessage = () => {
+    const fn = _taskQueue.shift();
+    if (fn) fn();
+  };
+}
+
+function nextTask(fn) {
+  if (!_taskChannel) {
+    setTimeout(fn, 0);
+    return;
+  }
+  _taskQueue.push(fn);
+  _taskChannel.port2.postMessage(0);
+}
+
+function afterFrame(fn) {
+  requestAnimationFrame(() => nextTask(fn));
+}
+
+function afterPaint() {
+  return new Promise((resolve) => afterFrame(resolve));
+}
+
+function whenIdle(fn, timeout) {
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(fn, { timeout: timeout });
+  } else {
+    setTimeout(fn, 32);
+  }
+}
+
+function inputPending() {
+  const s = typeof navigator !== "undefined" ? navigator.scheduling : null;
+  if (!s || typeof s.isInputPending !== "function") return false;
+  try {
+    return s.isInputPending();
+  } catch (e) {
+    return false;
+  }
+}
+
+const PREBUILD_HOLD_MS = 1400;
+
+const PREBUILD_RECHECK_MS = 200;
+
+const TAB_INTENT_HOLD_MS = 700;
+
+const FREE_IDLE_TIMEOUT_MS = 1500;
+
+let _prebuildHoldUntil = 0;
+
+function holdPrebuild(msAhead) {
+  const until = performance.now() + (msAhead || PREBUILD_HOLD_MS);
+  if (until > _prebuildHoldUntil) _prebuildHoldUntil = until;
+}
+
+function held() {
+  return performance.now() < _prebuildHoldUntil;
+}
+
+function whenFree(fn) {
+  const attempt = () => {
+    const wait = _prebuildHoldUntil - performance.now();
+    if (wait > 0) {
+      setTimeout(attempt, Math.min(wait + 20, PREBUILD_RECHECK_MS));
+      return;
+    }
+    whenIdle(() => {
+      if (held() || inputPending()) {
+        attempt();
+        return;
+      }
+      fn();
+    }, FREE_IDLE_TIMEOUT_MS);
+  };
+  attempt();
+}
+
 function resolveChartWindow(hours) {
   for (const w of CHART_WINDOWS) if (w >= hours) return w;
   return null;
@@ -19,50 +103,114 @@ function safeFc(fcName) {
 
 const memCache = new Map();
 
-async function fetchJson(filename) {
-  if (memCache.has(filename)) return memCache.get(filename);
-  try {
-    const res = await fetch(BUCKET_BASE + filename, { cache: "default" });
-    if (!res.ok) return null;
-    const data = await res.json();
-    memCache.set(filename, data);
-    return data;
-  } catch (e) {
-    console.warn("fetchJson failed", filename, e);
-    return null;
+const rawCache = new Map();
+
+const GL_TRACE_TYPES = {
+  scattergl: "scatter",
+  scatterpolargl: "scatterpolar",
+  heatmapgl: "heatmap",
+};
+
+function stripWebgl(bundle) {
+  if (!bundle || typeof bundle !== "object" || Array.isArray(bundle)) {
+    return bundle;
   }
+  for (const key of Object.keys(bundle)) {
+    const fig = bundle[key];
+    if (!fig || typeof fig !== "object" || !Array.isArray(fig.data)) continue;
+    for (const tr of fig.data) {
+      if (!tr || typeof tr !== "object") continue;
+      const swap = GL_TRACE_TYPES[tr.type];
+      if (swap) tr.type = swap;
+    }
+  }
+  return bundle;
 }
 
-async function fetchText(filename) {
-  if (memCache.has(filename)) return memCache.get(filename);
-  try {
-    const res = await fetch(BUCKET_BASE + filename, { cache: "default" });
-    if (!res.ok) return null;
-    const data = await res.text();
-    memCache.set(filename, data);
-    return data;
-  } catch (e) {
-    return null;
+const inflight = new Map();
+
+function fetchBody(filename) {
+  const hit = rawCache.get(filename);
+  if (hit) return hit;
+  const job = fetch(BUCKET_BASE + filename, { cache: "default" }).then((res) =>
+    res.ok ? res.text() : null
+  );
+  rawCache.set(filename, job);
+  job.catch(() => {
+    if (rawCache.get(filename) === job) rawCache.delete(filename);
+  });
+  return job;
+}
+
+function warmFile(filename) {
+  if (!filename) return;
+  if (memCache.has(filename) || inflight.has(filename) || rawCache.has(filename)) {
+    return;
   }
+  fetchBody(filename).catch(() => null);
+}
+
+function fetchShared(filename, parse, onError) {
+  if (memCache.has(filename)) return Promise.resolve(memCache.get(filename));
+  const hit = inflight.get(filename);
+  if (hit) return hit;
+  const job = (async () => {
+    try {
+      const body = await fetchBody(filename);
+      const data = body === null ? null : parse(body);
+      memCache.set(filename, data);
+      return data;
+    } catch (e) {
+      if (onError) onError(e);
+      return null;
+    } finally {
+      inflight.delete(filename);
+      rawCache.delete(filename);
+    }
+  })();
+  inflight.set(filename, job);
+  return job;
+}
+
+function fetchJson(filename) {
+  return fetchShared(
+    filename,
+    (body) => stripWebgl(JSON.parse(body)),
+    (e) => console.warn("fetchJson failed", filename, e)
+  );
+}
+
+function fetchText(filename) {
+  return fetchShared(filename, (body) => body, null);
+}
+
+function chartFile(fc, hours, suffix) {
+  const w = resolveChartWindow(hours);
+  return w === null ? null : `${safeFc(fc)}_${w}h_${suffix}.json`;
+}
+
+function textFile(fc, hours, suffix) {
+  const w = resolveChartWindow(hours);
+  return w === null ? null : `${safeFc(fc)}_${w}h_${suffix}.txt`;
 }
 
 function peekCharts(fc, hours, suffix) {
-  const w = resolveChartWindow(hours);
-  if (w === null) return null;
-  const hit = memCache.get(`${safeFc(fc)}_${w}h_${suffix}.json`);
+  const file = chartFile(fc, hours, suffix);
+  if (file === null) return null;
+  const hit = memCache.get(file);
   return hit && typeof hit.then !== "function" ? hit : null;
 }
 
 function loadCharts(fc, hours, suffix) {
-  const w = resolveChartWindow(hours);
-  if (w === null) return Promise.resolve(null);
-  return fetchJson(`${safeFc(fc)}_${w}h_${suffix}.json`);
+  const file = chartFile(fc, hours, suffix);
+  if (file === null) return Promise.resolve(null);
+  return fetchJson(file);
 }
 
 function loadText(fc, hours, suffix) {
-  const w = resolveChartWindow(hours);
-  if (w === null) return Promise.resolve(null);
-  return fetchText(`${safeFc(fc)}_${w}h_${suffix}.txt`);
+  const file = textFile(fc, hours, suffix);
+  if (file === null) return Promise.resolve(null);
+  return fetchText(file);
 }
 
 async function extractDateRange(fc, hours) {
@@ -387,6 +535,66 @@ const NEIGHBOUR_SHOW = "Show neighbours";
 
 const NEIGHBOUR_HIDE = "Hide neighbours";
 
+const NEIGHBOUR_PALETTE = [
+  "#ea8a0b", "#dc2626", "#7c3aed", "#0d9488", "#16a34a",
+  "#db2777", "#a16207", "#4f46e5", "#b45309", "#0891b2",
+];
+
+const NEIGHBOUR_DASH = [
+  "solid", "dot", "dash", "longdash", "dashdot", "longdashdot",
+];
+
+const NEIGHBOUR_LINE_WIDTH = 1.3;
+
+const NEIGHBOUR_LINE_OPACITY = 0.9;
+
+const NEIGHBOUR_OVERLAY_ROWS = 1;
+
+const NEIGHBOUR_LEGEND_MARGIN = 24;
+
+const NEIGHBOUR_LEGEND_COLS = 5;
+
+const NEIGHBOUR_LEGEND_ROW_PX = 14;
+
+const OVERLAY_LABEL = "Overlay";
+
+const CHECK_ICON =
+  '<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false">' +
+  '<path d="M2.4 6.3 4.8 8.7 9.6 3.5"/></svg>';
+
+const DETAIL_HOVER_TIME = "%m-%d %H:%M";
+
+const DETAIL_HOVER_BG = "white";
+
+const DETAIL_HOVER_BORDER = "#e8e6e3";
+
+const DETAIL_HOVER_TEXT = "#26231f";
+
+const DETAIL_FONT_SIZE = 11;
+
+const DETAIL_FONT_COLOR = "#57534e";
+
+function applyDetailHoverStyle(layout) {
+  if (!layout) return layout;
+  layout.hovermode = "x unified";
+  layout.hoverlabel = {
+    bgcolor: DETAIL_HOVER_BG,
+    bordercolor: DETAIL_HOVER_BORDER,
+    font: { color: DETAIL_HOVER_TEXT },
+    align: "left",
+  };
+  layout.font = Object.assign({}, layout.font, {
+    size: DETAIL_FONT_SIZE,
+    color: DETAIL_FONT_COLOR,
+  });
+  for (const key of Object.keys(layout)) {
+    if (!/^xaxis\d*$/.test(key)) continue;
+    const ax = layout[key];
+    if (ax) ax.hoverformat = DETAIL_HOVER_TIME;
+  }
+  return layout;
+}
+
 let _nbGroups = null;
 
 function neighbourKey(name) {
@@ -545,6 +753,7 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
   });
 
   allOpt.addEventListener("click", () => {
+    setOpen(false);
     if (!selected.size && !nbOn) return;
     nbCancel();
     selected.clear();
@@ -554,6 +763,7 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
   if (nbOpt) {
     nbOpt.addEventListener("click", () => {
       if (nbOn) {
+        setOpen(false);
         nbRestore();
         emit();
         return;
@@ -561,6 +771,7 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
       const station = neighbours.focus();
       const picks = station ? neighbours.resolve(station) : [];
       if (!picks.length) return;
+      setOpen(false);
       nbPrev = new Set(selected);
       nbStation = station;
       nbOrder = picks.slice();
@@ -1267,6 +1478,7 @@ function settleAngledTicks(pd) {
   if (xa.type !== "category" || !xa.tickangle) return;
   pd._wxTickFix = true;
   if (xa.automargin === "bottom") return;
+  if (!plotRoomy(pd)) return;
   const size = fl._size || {};
   const r = Math.max(
     (fl.margin && fl.margin.r) || 0,
@@ -1277,11 +1489,184 @@ function settleAngledTicks(pd) {
   } catch (e) {}
 }
 
+const PLOT_AREA_MIN = 24;
+
+function plotFloor(pd) {
+  const m = pd && pd._fullLayout && pd._fullLayout.margin;
+  if (!m) return PLOT_AREA_MIN;
+  return Math.round((m.t || 0) + (m.b || 0)) + PLOT_AREA_MIN;
+}
+
+function plotRoomy(pd) {
+  if (!pd || !pd._fullLayout || !pd.isConnected) return false;
+  if (!pd.clientWidth) return false;
+  return pd.clientHeight >= plotFloor(pd);
+}
+
 function fitPlot(pd) {
-  if (!pd || !pd._wxDrawn || !pd._fullLayout || !pd.clientWidth) return;
+  if (!pd || !pd._wxDrawn || !plotRoomy(pd)) return;
   fitRowAxis(pd);
   fitColorbars(pd);
 }
+
+function paneIsActive(node) {
+  const pane = node && node.closest ? node.closest(".tab-pane") : null;
+  return !pane || pane.classList.contains("active");
+}
+
+function settlePlot(pd) {
+  if (!pd || !pd._wxSettlePending) return;
+  pd._wxSettlePending = false;
+  if (!pd.isConnected) return;
+  settleAngledTicks(pd);
+  syncSize(pd);
+  fitPlot(pd);
+}
+
+function needsResize(pd) {
+  if (!plotRoomy(pd)) return false;
+  const w = pd.clientWidth;
+  const h = pd.clientHeight;
+  return (
+    Math.abs(Math.round(pd._fullLayout.width || 0) - w) > 1 ||
+    Math.abs(Math.round(pd._fullLayout.height || 0) - h) > 1
+  );
+}
+
+function syncSize(pd) {
+  if (!needsResize(pd)) return false;
+  try {
+    Plotly.Plots.resize(pd);
+  } catch (e) {
+    void e;
+  }
+  return true;
+}
+
+const MOUNT_BUDGET_MS = 8;
+
+const MOUNT_MARGIN_PX = 700;
+
+const MOUNT_IDLE_MS = 250;
+
+const MOUNT_ORPHAN_MS = 20000;
+
+const _mountQueue = [];
+
+let _mountFront = false;
+
+let _mountPoll = 0;
+
+let _mountKick = 0;
+
+function mountRank(job) {
+  const pane = job.node.closest ? job.node.closest(".tab-pane") : null;
+  if (!pane) return 0;
+  return pane.classList.contains("active") ? 0 : 1;
+}
+
+function mountNear(node) {
+  const r = node.getBoundingClientRect();
+  if (!r.height && !r.width) return false;
+  const h = window.innerHeight || 0;
+  return r.bottom > -MOUNT_MARGIN_PX && r.top < h + MOUNT_MARGIN_PX;
+}
+
+function nextMountIndex() {
+  for (let i = 0; i < _mountQueue.length; i++) {
+    const job = _mountQueue[i];
+    if (!job.node.isConnected) continue;
+    if (mountRank(job) !== 0) continue;
+    if (!job.node.clientWidth) continue;
+    if (!mountNear(job.node)) continue;
+    return i;
+  }
+  return -1;
+}
+
+function activeMountsPending() {
+  for (const job of _mountQueue) {
+    if (job.node.isConnected && mountRank(job) === 0) return true;
+  }
+  return false;
+}
+
+function pruneMounts() {
+  const now = performance.now();
+  for (let i = _mountQueue.length - 1; i >= 0; i--) {
+    const job = _mountQueue[i];
+    if (job.node.isConnected) continue;
+    if (now - job.born < MOUNT_ORPHAN_MS) continue;
+    _mountQueue.splice(i, 1);
+  }
+}
+
+function runMount(idx) {
+  const job = _mountQueue.splice(idx, 1)[0];
+  try {
+    job.run();
+  } catch (e) {
+    void e;
+  }
+}
+
+function drainMounts() {
+  _mountFront = false;
+  const start = performance.now();
+  let yielded = false;
+  for (;;) {
+    if (inputPending()) {
+      yielded = true;
+      break;
+    }
+    const idx = nextMountIndex();
+    if (idx < 0) break;
+    runMount(idx);
+    if (performance.now() - start >= MOUNT_BUDGET_MS) {
+      yielded = true;
+      break;
+    }
+  }
+  pruneMounts();
+  if (!_mountQueue.length) return;
+  if (yielded) {
+    kickMounts();
+    return;
+  }
+  scheduleMountPoll();
+}
+
+function scheduleMountPoll() {
+  if (_mountPoll || !activeMountsPending()) return;
+  _mountPoll = setTimeout(() => {
+    _mountPoll = 0;
+    kickMounts();
+  }, MOUNT_IDLE_MS);
+}
+
+function kickMounts() {
+  if (!_mountQueue.length || _mountFront) return;
+  _mountFront = true;
+  afterFrame(drainMounts);
+}
+
+function kickMountsSoon() {
+  if (_mountKick) return;
+  _mountKick = requestAnimationFrame(() => {
+    _mountKick = 0;
+    kickMounts();
+    catchUpResize();
+  });
+}
+
+function queueMount(node, run) {
+  _mountQueue.push({ node: node, run: run, born: performance.now() });
+  kickMounts();
+}
+
+document.addEventListener("scroll", kickMountsSoon, true);
+
+window.addEventListener("resize", kickMountsSoon);
 
 function graph(figDict, opts = {}) {
   const wrap = el("div", "wx-graph");
@@ -1301,16 +1686,30 @@ function graph(figDict, opts = {}) {
   wrap._wxFit = scheduleFit;
 
   wrap._wxResize = () => {
+    if (wrap._wxHold) return;
     if (!plotDiv._wxDrawn || !plotDiv._fullLayout) return;
-    if (plotDiv.isConnected && plotDiv.clientWidth) {
-      try { Plotly.Plots.resize(plotDiv); } catch (e) {}
-      scheduleFit();
-    }
+    if (syncSize(plotDiv)) scheduleFit();
   };
+
+  const drawnHooks = [];
+  wrap._wxOnDrawn = (fn) => {
+    if (plotDiv._wxDrawn) fn();
+    else drawnHooks.push(fn);
+  };
+
   if (!figDict) {
     wrap.appendChild(el("div", "unavailable", "Chart data unavailable."));
     return wrap;
   }
+
+  const wait = el("div", "wx-plot-wait");
+  wait.setAttribute("role", "status");
+  wait.setAttribute("aria-label", "Loading chart");
+  wait.appendChild(el("div", "wx-plot-spin"));
+  plotDiv.appendChild(wait);
+  const clearWait = () => {
+    if (wait.parentNode) wait.parentNode.removeChild(wait);
+  };
 
   let fig = figDict;
   let layout;
@@ -1335,10 +1734,11 @@ function graph(figDict, opts = {}) {
 
   const height = layout.height;
   plotDiv.style.height = height + "px";
+  wrap._wxBaseHeight = height;
 
   const mobile = isMobile();
   const config = {
-    responsive: true,
+    responsive: false,
     displaylogo: false,
     displayModeBar: (mobile || opts.noModeBar) ? false : "hover",
   };
@@ -1380,21 +1780,24 @@ function graph(figDict, opts = {}) {
       const next = mergeView(prepared.layout, captureView(plotDiv));
       Plotly.react(plotDiv, prepared.data, next, config)
         .then(() => {
-          Plotly.Plots.resize(plotDiv);
+          syncSize(plotDiv);
           fitPlot(plotDiv);
         });
     } else {
+      clearWait();
       Plotly.newPlot(plotDiv, prepared.data, prepared.layout, config)
         .then(() => {
           mounted = true;
           plotDiv._wxDrawn = true;
-          settleAngledTicks(plotDiv);
+          plotDiv._wxWidth = plotDiv.clientWidth;
           if (!listening && typeof plotDiv.on === "function") {
             listening = true;
             plotDiv.on("plotly_restyle", syncScorecards);
           }
-          Plotly.Plots.resize(plotDiv);
-          fitPlot(plotDiv);
+          plotDiv._wxSettlePending = true;
+          if (paneIsActive(plotDiv)) settlePlot(plotDiv);
+          else nextTask(() => settlePlot(plotDiv));
+          for (const fn of drawnHooks.splice(0)) fn();
         });
     }
   };
@@ -1420,31 +1823,24 @@ function graph(figDict, opts = {}) {
     }
   }
 
-  const mount = () => {
-    if (!plotDiv.isConnected || plotDiv.clientWidth === 0) {
-      requestAnimationFrame(mount);
-      return;
-    }
+  queueMount(plotDiv, () => {
     try {
       draw();
     } catch (e) {
+      clearWait();
       plotDiv.appendChild(el("div", "unavailable", "Chart failed to render."));
     }
-  };
-  requestAnimationFrame(mount);
+  });
 
   watchResize(plotDiv, () => {
     if (!plotDiv._wxDrawn || !plotDiv._fullLayout) return;
-    if (!plotDiv.clientWidth) return;
-    try { Plotly.Plots.resize(plotDiv); } catch (e) {}
-    scheduleFit();
+    if (syncSize(plotDiv)) scheduleFit();
   });
 
   return wrap;
 }
 
-const CARD_ANIM_MS = 340;
-const CARD_EASE = "cubic-bezier(.4,0,.2,1)";
+const CARD_ANIM_MS = 0;
 
 const EXPAND_ICON =
   '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
@@ -1458,15 +1854,12 @@ function ensureCardExpandStyles() {
   if (document.getElementById("wx-cardexpand-styles")) return;
   const st = document.createElement("style");
   st.id = "wx-cardexpand-styles";
-  const ease = "cubic-bezier(.4,0,.2,1)";
   st.textContent = [
     ".wx-expandable{position:relative;overflow:hidden;box-sizing:border-box;",
     "display:flex;flex-direction:column;",
-    "transition:width .34s " + ease + ",height .34s " + ease + ",margin .34s " + ease + ",",
-    "padding .34s " + ease + ",border-width .34s " + ease + ",border-color .2s ease,",
-    "box-shadow .24s ease,opacity .22s ease;}",
+    "transition:border-color .2s ease,box-shadow .24s ease;}",
     ".wx-expandable > .wx-graph{flex:1 1 auto;min-height:0;}",
-    ".wx-expandable > .wx-graph > .wx-plot{height:100%!important;}",
+    ".wx-expandable.wx-sized > .wx-graph > .wx-plot{height:100%!important;}",
     ".wx-expandable.wx-expanded{border-color:#dcd9d4;box-shadow:0 6px 22px rgba(0,0,0,.07);}",
     ".wx-card-collapsed{opacity:0;overflow:hidden;pointer-events:none;",
     "padding-left:0;padding-right:0;border-left-width:0;border-right-width:0;}",
@@ -1485,8 +1878,6 @@ function ensureCardExpandStyles() {
     ".wx-expandable .js-plotly-plot .modebar{transform:translateX(-30px)!important;}",
     ".wx-expandable .wx-stnf-float{right:40px;}",
     "@media (max-width:768px){.wx-expand-btn{display:none;}}",
-    "@media (prefers-reduced-motion:reduce){.wx-expandable,.wx-expand-btn,",
-    ".wx-expandable > .wx-graph > .wx-plot{transition:none!important;}}",
   ].join("");
   document.head.appendChild(st);
 }
@@ -1512,9 +1903,7 @@ function siblingGraphResize(sib) {
   if (gw && typeof gw._wxResize === "function") return gw._wxResize;
   const pd = sib.querySelector(".wx-plot");
   return () => {
-    if (pd && pd.clientWidth) {
-      try { Plotly.Plots.resize(pd); } catch (e) {}
-    }
+    syncSize(pd);
   };
 }
 
@@ -1538,6 +1927,56 @@ function expandButton(onToggle) {
   return btn;
 }
 
+const SEED_ORPHAN_MS = 20000;
+
+const SEED_RETRY_MS = 120;
+
+const _seedQueue = [];
+
+let _seedRaf = 0;
+
+let _seedTimer = 0;
+
+function queueSeed(job) {
+  job.born = performance.now();
+  _seedQueue.push(job);
+  kickSeeds();
+}
+
+function kickSeeds() {
+  if (_seedRaf || !_seedQueue.length) return;
+  if (_seedTimer) {
+    clearTimeout(_seedTimer);
+    _seedTimer = 0;
+  }
+  _seedRaf = requestAnimationFrame(flushSeeds);
+}
+
+function flushSeeds() {
+  _seedRaf = 0;
+  const now = performance.now();
+  const jobs = _seedQueue.splice(0);
+  const writes = [];
+  for (const job of jobs) {
+    if (job.done && job.done()) continue;
+    if (!job.node.isConnected) {
+      if (now - job.born < SEED_ORPHAN_MS) _seedQueue.push(job);
+      continue;
+    }
+    const w = job.read();
+    if (w) writes.push(w);
+    else _seedQueue.push(job);
+  }
+  for (const w of writes) w.write();
+  for (const w of writes) if (w.after) w.after();
+  if (_seedQueue.length && !_seedTimer) {
+    _seedTimer = setTimeout(() => {
+      _seedTimer = 0;
+      kickSeeds();
+    }, SEED_RETRY_MS);
+  }
+}
+
 function makeCardExpandable(c, child) {
   const graphWrap = findGraphWrap(child);
   if (!graphWrap) return;
@@ -1546,9 +1985,7 @@ function makeCardExpandable(c, child) {
 
   const plotDiv = graphWrap._wxPlotDiv || graphWrap.querySelector(".wx-plot");
   const resize = graphWrap._wxResize || (() => {
-    if (plotDiv && plotDiv.clientWidth) {
-      try { Plotly.Plots.resize(plotDiv); } catch (e) {}
-    }
+    syncSize(plotDiv);
   });
 
   let baseH = 0;
@@ -1558,18 +1995,26 @@ function makeCardExpandable(c, child) {
   let quiet = false;
   let plain = false;
 
-  const seedHeight = () => {
-    if (c.style.height) return;
-    const h = Math.round(c.getBoundingClientRect().height);
-    if (!h) {
-      requestAnimationFrame(seedHeight);
-      return;
-    }
-    baseH = h;
-    c.style.height = h + "px";
-    resize();
-  };
-  requestAnimationFrame(seedHeight);
+  queueSeed({
+    node: c,
+    done: () => !!c.style.height,
+    read: () => {
+      const h = Math.round(c.getBoundingClientRect().height);
+      if (!h) return null;
+      const want = Math.round(graphWrap._wxBaseHeight || 0);
+      const have = plotDiv ? Math.round(plotDiv.getBoundingClientRect().height) : 0;
+      const next = want && have < want ? h + (want - have) : h;
+      return {
+        write: () => {
+          if (c.style.height) return;
+          baseH = next;
+          c.style.height = baseH + "px";
+          c.classList.add("wx-sized");
+        },
+        after: () => resize(),
+      };
+    },
+  });
 
   const rowOf = () => {
     const r = c.parentNode;
@@ -1593,34 +2038,24 @@ function makeCardExpandable(c, child) {
     if (!plotDiv || !chrome) return false;
     const fw = Math.round(finalW - chrome[0]);
     const fh = Math.round(finalH - chrome[1]);
-    if (!(fw > 40) || !(fh > 40)) return false;
-    if (from && Math.abs(fw - from[0]) < 2 && Math.abs(fh - from[1]) < 2) return false;
+    if (!(fw > 40) || fh < plotFloor(plotDiv)) return false;
     try {
       Plotly.relayout(plotDiv, { autosize: false, width: fw, height: fh });
     } catch (e) {
       return false;
     }
-    if (!from) return true;
-    plotDiv.style.transition = "none";
-    plotDiv.style.transformOrigin = "top left";
-    plotDiv.style.transform =
-      "scale(" + (from[0] / fw) + "," + (from[1] / fh) + ")";
-    void plotDiv.offsetWidth;
-    plotDiv.style.transition = "transform " + CARD_ANIM_MS + "ms " + CARD_EASE;
-    plotDiv.style.transform = "scale(1,1)";
     return true;
   };
 
   const settle = () => {
     if (!plotDiv) return;
-    plotDiv.style.transition = "";
-    plotDiv.style.transform = "";
-    plotDiv.style.transformOrigin = "";
+    if (plotDiv.layout) {
+      delete plotDiv.layout.width;
+      delete plotDiv.layout.height;
+    }
+    if (graphWrap && graphWrap._wxHold) return;
+    if (!plotRoomy(plotDiv)) return;
     try {
-      if (plotDiv.layout) {
-        delete plotDiv.layout.width;
-        delete plotDiv.layout.height;
-      }
       Plotly.relayout(plotDiv, { autosize: true });
     } catch (e) {}
     resize();
@@ -1632,9 +2067,6 @@ function makeCardExpandable(c, child) {
     expanded = on;
     setExpandButton(btn, on);
 
-    const from = !quiet && !plain && plotDiv && plotDiv.clientWidth
-      ? [plotDiv.clientWidth, plotDiv.clientHeight]
-      : null;
     const chrome = quiet ? null : chromeSize();
 
     c.classList.toggle("wx-expanded", on);
@@ -1673,7 +2105,7 @@ function makeCardExpandable(c, child) {
 
     const finalH = on ? targetHeight(!!(row && sib)) : baseH;
     c.style.height = finalH + "px";
-    growWith(from, chrome, finalW, finalH);
+    growWith(null, chrome, finalW, finalH);
 
     if (timer) clearTimeout(timer);
     const done = () => {
@@ -1882,6 +2314,22 @@ function ensureGridToggleStyles() {
     "transition:color .12s ease,border-color .12s ease;}",
     ".wx-grid-toggle label:hover{color:var(--text,#26231f);border-color:var(--line,#e8e6e3);}",
     ".wx-grid-toggle label.on{color:var(--text,#26231f);}",
+    ".wx-grid-mode{display:none;flex:0 0 auto;align-items:center;gap:4px;",
+    "font-family:inherit;font-size:11px;font-weight:500;letter-spacing:.01em;",
+    "line-height:1.4;color:var(--text-muted,#8a857d);background:transparent;",
+    "border:none;border-radius:0;padding:0;margin:0;cursor:pointer;",
+    "transition:color .12s ease;}",
+    ".wx-grid-mode.show{display:inline-flex;}",
+    ".wx-grid-mode:hover{color:var(--text,#26231f);}",
+    ".wx-grid-mode.on{color:var(--text,#26231f);}",
+    ".wx-grid-mode .box{width:11px;height:11px;flex:0 0 auto;border-radius:2px;",
+    "border:1px solid currentColor;background:transparent;opacity:.55;",
+    "box-sizing:border-box;display:inline-flex;align-items:center;",
+    "justify-content:center;}",
+    ".wx-grid-mode.on .box{opacity:1;}",
+    ".wx-grid-mode .box svg{width:9px;height:9px;fill:none;stroke:currentColor;",
+    "stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:0;}",
+    ".wx-grid-mode.on .box svg{opacity:1;}",
     ".wx-grid-toggle input[type=\"checkbox\"]{cursor:pointer;width:12px;height:12px;margin:0;",
     "accent-color:var(--accent,#2563eb);}",
     "@media (max-width:768px){.wx-grid-toggle{min-height:0;margin:2px 0;",
@@ -1890,23 +2338,70 @@ function ensureGridToggleStyles() {
   document.head.appendChild(st);
 }
 
+const GRID_STATION_RE = /<b>(.*?)<\/b>/;
+
+function gridTraceStation(tr) {
+  if (!tr) return null;
+  if (tr.meta && typeof tr.meta.station === "string") {
+    const name = tr.meta.station.trim();
+    if (name) return name;
+  }
+  const ht = tr.hovertemplate;
+  if (typeof ht !== "string") return null;
+  const m = GRID_STATION_RE.exec(ht);
+  return m ? m[1].trim() : null;
+}
+
 function gridAxisStations(fig) {
   const map = new Map();
   for (const tr of (fig && fig.data) || []) {
-    const ht = tr && tr.hovertemplate;
-    if (typeof ht !== "string") continue;
-    const m = /^<b>(.*?)<\/b>/.exec(ht);
-    if (!m) continue;
-    const id = tr.xaxis || "x";
-    if (!map.has(id)) map.set(id, m[1].trim());
+    const id = (tr && tr.xaxis) || "x";
+    if (map.has(id)) continue;
+    const name = gridTraceStation(tr);
+    if (name) map.set(id, name);
   }
   return map;
+}
+
+function cloneLayout(layout) {
+  if (!layout) return {};
+  const tpl = layout.template;
+  if (!tpl) return deepClone(layout);
+  const rest = Object.assign({}, layout);
+  delete rest.template;
+  const out = deepClone(rest);
+  out.template = tpl;
+  return out;
 }
 
 function isAlertTrace(tr) {
   if (!tr) return false;
   if (tr.meta && tr.meta.band_hover) return true;
   return tr.mode === "markers" && !tr.hovertemplate;
+}
+
+function bandHoverBody(text) {
+  const parts = String(text).split("<br>");
+  const rest = parts[0].indexOf("<b>") === 0 ? parts.slice(1) : parts;
+  const out = rest.join("<br>").trim();
+  return out || null;
+}
+
+function unifiedBandTrace(tr) {
+  if (!tr || !tr.meta || !tr.meta.band_hover) return tr;
+  if (tr.hovertemplate || typeof tr.text !== "string" || !tr.text) return tr;
+  const body = bandHoverBody(tr.text);
+  if (!body) return tr;
+  const out = Object.assign({}, tr);
+  out.hovertemplate = body + "<extra></extra>";
+  out.hoveron = "points";
+  delete out.hoverinfo;
+  return out;
+}
+
+function overlayHoverTemplate(ht) {
+  if (typeof ht !== "string") return ht;
+  return ht.replace(/<br>%\{x(\|[^}]*)?\}/g, "");
 }
 
 function gridStationNames(fig) {
@@ -2047,8 +2542,7 @@ function ensureInsightStyles() {
   st.id = "wx-insight-styles";
   st.textContent = [
     ".wx-insight-shell{position:relative;margin-bottom:16px;}",
-    ".wx-insight-shell > .wx-ov-wrap{max-height:180px;",
-    "transition:max-height .34s cubic-bezier(.4,0,.2,1);}",
+    ".wx-insight-shell > .wx-ov-wrap{max-height:180px;}",
     ".wx-insight-shell > .wx-expand-btn{right:16px;background:var(--surface,#fff);",
     "border-color:var(--line,#e8e6e3);}",
     ".wx-stn-link{cursor:pointer;border-bottom:1px dotted currentColor;}",
@@ -2082,15 +2576,18 @@ function makeBoxExpandable(shell, target) {
   });
   shell.appendChild(btn);
 
-  let tries = 0;
-  const checkFit = () => {
-    if (!shell.isConnected) {
-      if (tries++ < 180) requestAnimationFrame(checkFit);
-      return;
-    }
-    btn.style.display = target.scrollHeight > target.clientHeight + 4 ? "" : "none";
-  };
-  requestAnimationFrame(checkFit);
+  queueSeed({
+    node: shell,
+    done: null,
+    read: () => {
+      const over = target.scrollHeight > target.clientHeight + 4;
+      return {
+        write: () => {
+          btn.style.display = over ? "" : "none";
+        },
+      };
+    },
+  });
 }
 
 const GRID_H_SPACING = 0.012;
@@ -2101,14 +2598,18 @@ const GRID_PAD_PX = 40;
 const GRID_ZONE_PAD_Y = 0.005;
 const GRID_ZONE_EDGE_LEFT = 0.02;
 const GRID_ZONE_EDGE_RIGHT = 0.01;
-const GRID_HOVER_TEXT = "#26231f";
 const GRID_Y_PAD = 0.05;
-const GRID_COL_RE = /<\/b><br>([A-Za-z0-9_]+):/;
+const GRID_COL_RE = /<\/b><br>([A-Za-z0-9_]+)/;
 const DETAIL_COL_RE = /^([A-Za-z0-9_]+)/;
 
 function gridColumnName(fig) {
   for (const tr of (fig && fig.data) || []) {
-    const ht = tr && tr.hovertemplate;
+    if (!tr) continue;
+    if (tr.meta && tr.meta.band_hover) continue;
+    if (tr.meta && typeof tr.meta.col === "string" && tr.meta.col) {
+      return tr.meta.col;
+    }
+    const ht = tr.hovertemplate;
     if (typeof ht !== "string") continue;
     const m = GRID_COL_RE.exec(ht);
     if (m) return m[1];
@@ -2314,7 +2815,7 @@ function gridRowPx(fig, cells) {
 function buildGridFigure(fig, cells, fills, rowPx, selected, link, ranges, rank) {
   const stack = !!(selected && selected.size);
   const align = stack && link && link.align ? link.align : null;
-  const layout = deepClone(fig.layout || {});
+  const layout = cloneLayout(fig.layout);
   const pack = packGrid(cells, selected, stack, align, rank);
   const placed = pack.placed;
 
@@ -2481,21 +2982,14 @@ function buildGridFigure(fig, cells, fills, rowPx, selected, link, ranges, rank)
   for (const tr of fig.data || []) {
     const on = placed.has(tr.xaxis || "x");
     if (stack && !on) continue;
-    const out = Object.assign({}, tr);
+    const out = Object.assign({}, unifiedBandTrace(tr));
     out.visible = on ? true : false;
     data.push(out);
   }
 
+  applyDetailHoverStyle(layout);
+
   if (stack) {
-    layout.hovermode = "x unified";
-    layout.hoverlabel = Object.assign({}, layout.hoverlabel, {
-      bgcolor: "white",
-      bordercolor: "#e8e6e3",
-      align: "left",
-      font: Object.assign({ size: 11 }, (layout.hoverlabel || {}).font, {
-        color: GRID_HOVER_TEXT,
-      }),
-    });
     if (link && link.range && anchorKey && layout[anchorKey]) {
       layout[anchorKey].range = link.range.slice();
       layout[anchorKey].autorange = false;
@@ -2522,6 +3016,178 @@ function buildGridFigure(fig, cells, fills, rowPx, selected, link, ranges, rank)
   return { data: data, layout: layout, yRange: yRange };
 }
 
+function overlayColor(i) {
+  return NEIGHBOUR_PALETTE[i % NEIGHBOUR_PALETTE.length];
+}
+
+function overlayDash(i) {
+  return NEIGHBOUR_DASH[i % NEIGHBOUR_DASH.length];
+}
+
+function buildOverlayFigure(fig, cells, rowPx, selected, link, ranges, rank) {
+  if (!selected || !selected.size) return null;
+
+  const use = cells.filter((cell) => selected.has(cell.station));
+  if (!use.length) return null;
+
+  const seat =
+    rank && rank.size
+      ? (cell) => {
+          const at = rank.get(cell.station);
+          return at === undefined ? Infinity : at;
+        }
+      : null;
+  use.sort(
+    seat
+      ? (a, b) => seat(a) - seat(b) || a.x0 - b.x0 || b.y0 - a.y0
+      : (a, b) => a.x0 - b.x0 || b.y0 - a.y0
+  );
+
+  const layout = cloneLayout(fig.layout);
+  const host = use[0];
+  const ax = layout[host.xkey];
+  const ay = layout[host.ykey];
+  if (!ax || !ay) return null;
+
+  const hostX = host.id;
+  const hostY = host.ykey === "yaxis" ? "y" : "y" + host.ykey.slice(5);
+
+  for (const key of Object.keys(layout)) {
+    if (!/^xaxis\d*$/.test(key) || key === host.xkey) continue;
+    const other = layout[key];
+    const idx = key === "xaxis" ? "" : key.slice(5);
+    const anchor =
+      other && typeof other.anchor === "string" && /^y\d*$/.test(other.anchor)
+        ? other.anchor
+        : "y" + idx;
+    const ykey = "yaxis" + anchor.slice(1);
+    if (ykey !== host.ykey) delete layout[ykey];
+    delete layout[key];
+  }
+
+  const spread = !!(link && link.align && link.align[1] > link.align[0]);
+  delete ax.matches;
+  ax.visible = true;
+  ax.domain = spread ? link.align.slice() : [0, 1];
+  ay.visible = true;
+  ay.domain = [0, 1];
+
+  let range = link && link.range ? link.range.slice() : null;
+  if (!range && ranges) {
+    for (const cell of use) {
+      const hit = ranges.get(cell.station);
+      if (hit) {
+        range = [hit[0], hit[1]];
+        break;
+      }
+    }
+  }
+  if (range) {
+    ax.range = range;
+    ax.autorange = false;
+  }
+
+  const placed = new Map();
+  const slot = new Map();
+  use.forEach((cell, i) => {
+    placed.set(cell.id, {
+      cell: cell,
+      col: 0,
+      x0: ax.domain[0],
+      x1: ax.domain[1],
+      y0: 0,
+      y1: 1,
+    });
+    slot.set(cell.id, i);
+  });
+
+  const built = [];
+  for (const tr of fig.data || []) {
+    const id = tr.xaxis || "x";
+    if (!slot.has(id) || isAlertTrace(tr)) continue;
+    const i = slot.get(id);
+    const station = use[i].station;
+    const color = overlayColor(i);
+    const out = Object.assign({}, tr);
+    out.xaxis = hostX;
+    out.yaxis = hostY;
+    out.visible = true;
+    out.name = station;
+    out.showlegend = true;
+    out.legendrank = i;
+    out.opacity = NEIGHBOUR_LINE_OPACITY;
+    if (tr.hovertemplate) out.hovertemplate = overlayHoverTemplate(tr.hovertemplate);
+    out.line = Object.assign({}, tr.line, {
+      color: color,
+      width: NEIGHBOUR_LINE_WIDTH,
+      dash: overlayDash(i),
+    });
+    if (tr.marker) out.marker = Object.assign({}, tr.marker, { color: color });
+    delete out.fill;
+    delete out.fillcolor;
+    built.push({ rank: i, trace: out });
+  }
+  if (!built.length) return null;
+
+  built.sort((a, b) => b.rank - a.rank);
+  const data = built.map((b) => b.trace);
+
+  const known = new Set(cells.map((cell) => cell.station));
+  if (Array.isArray(layout.annotations)) {
+    layout.annotations = layout.annotations.filter((a) => {
+      if (!a || typeof a.text !== "string") return true;
+      return !known.has(a.text.replace(/<[^>]*>/g, "").trim());
+    });
+  }
+
+  layout.shapes = [];
+  applyDetailHoverStyle(layout);
+  layout.showlegend = true;
+  layout.legend = {
+    orientation: "h",
+    x: 0,
+    xanchor: "left",
+    y: 1,
+    yanchor: "bottom",
+    bgcolor: "rgba(255,255,255,0)",
+    font: { size: 9, color: "#57534e" },
+    tracegroupgap: 3,
+    entrywidth: 1 / NEIGHBOUR_LEGEND_COLS,
+    entrywidthmode: "fraction",
+  };
+
+  const legendRows = Math.max(
+    1,
+    Math.ceil(use.length / NEIGHBOUR_LEGEND_COLS)
+  );
+  const legendPx =
+    NEIGHBOUR_LEGEND_MARGIN + (legendRows - 1) * NEIGHBOUR_LEGEND_ROW_PX;
+
+  layout.margin = Object.assign({}, layout.margin, {
+    t: Math.max(((layout.margin || {}).t) || 0, legendPx),
+  });
+
+  const yRange = stackYRange(
+    fig,
+    placed,
+    link && link.yRange ? link.yRange : null
+  );
+  if (yRange) {
+    ay.range = yRange.slice();
+    ay.autorange = false;
+  }
+
+  delete layout.width;
+  layout.autosize = true;
+  layout.height = Math.round(
+    rowPx * NEIGHBOUR_OVERLAY_ROWS +
+      GRID_PAD_PX +
+      (legendRows - 1) * NEIGHBOUR_LEGEND_ROW_PX
+  );
+
+  return { data: data, layout: layout, yRange: yRange };
+}
+
 function stationGrid(c, views) {
   const list = (views && views.length ? views : [{ key: "station_grid" }])
     .filter((v) => c && c[v.key]);
@@ -2544,9 +3210,14 @@ function stationGrid(c, views) {
   let gridCol = null;
   let baseSlots = null;
   let pendingRanges = null;
+  let viewKey = null;
+  let lastSig = null;
+  let lastPd = null;
 
   const useFigure = (key) => {
     fig = c[key];
+    viewKey = key;
+    applyDetailHoverStyle(fig && fig.layout);
     captureStationAnnotations(fig, wrap._wxStations);
     wrap._wxAxisStations.clear();
     for (const [id, name] of gridAxisStations(fig)) {
@@ -2556,6 +3227,7 @@ function stationGrid(c, views) {
     fills = gridZoneFills(fig, cells);
     rowPx = gridRowPx(fig, cells);
     gridCol = gridColumnName(fig);
+    if (fig && Array.isArray(fig.data)) fig.data = fig.data.map(unifiedBandTrace);
     if (!baseSlots) {
       baseSlots = new Map();
       for (const cell of cells) {
@@ -2578,8 +3250,14 @@ function stationGrid(c, views) {
 
   let selected = null;
   let order = null;
+  let overlay = false;
   let autoExpanded = false;
   wrap._wxStacked = false;
+
+  const quietly = (fn) => {
+    if (typeof wrap._wxNoAnim === "function") wrap._wxNoAnim(fn);
+    else fn();
+  };
 
   const linkGeom = () => {
     const pd = g._wxPlotDiv;
@@ -2629,6 +3307,7 @@ function stationGrid(c, views) {
 
     const filtered = !!(selected && selected.size);
     wrap._wxStacked = filtered;
+    wrap._wxOverlay = false;
     if (!filtered) {
       if (typeof wrap._wxSpikeOff === "function") wrap._wxSpikeOff();
       const open = panelPlot(wrap._wxPanel);
@@ -2643,11 +3322,20 @@ function stationGrid(c, views) {
       }
     }
     const link = filtered ? linkGeom() : null;
-    let next;
+    const wantOverlay = filtered && overlay;
+    let next = null;
     try {
-      next = buildGridFigure(
-        fig, cells, fills, rowPx, selected, link, useRanges, order
-      );
+      if (wantOverlay) {
+        next = buildOverlayFigure(
+          fig, cells, rowPx, selected, link, useRanges, order
+        );
+      }
+      wrap._wxOverlay = !!next;
+      if (!next) {
+        next = buildGridFigure(
+          fig, cells, fills, rowPx, selected, link, useRanges, order
+        );
+      }
     } catch (e) {
       console.warn("station grid filter failed", e);
       return true;
@@ -2669,43 +3357,75 @@ function stationGrid(c, views) {
     const canExpand = typeof wrap._wxExpand === "function";
     const isOpen = () => !!(wrap._wxIsExpanded && wrap._wxIsExpanded());
 
+    const sig = [
+      viewKey,
+      wantOverlay ? "1" : "0",
+      selected ? Array.from(selected).sort().join("\u0001") : "",
+      order ? Array.from(order.keys()).join("\u0002") : "",
+      Math.round(rowPx),
+      Math.round(natural),
+      chrome,
+      isOpen() ? "1" : "0",
+      link
+        ? [
+            (link.align || []).join(","),
+            (link.range || []).join(","),
+            (link.yRange || []).join(","),
+          ].join("|")
+        : "",
+    ].join("~");
+
+    if (!useRanges && pd === lastPd && pd._wxDrawn && sig === lastSig) return true;
+    lastPd = pd;
+    lastSig = sig;
+
     const collapsing = canExpand && !filtered && autoExpanded;
-    const applyHeight = () => {
-      if (collapsing) {
-        autoExpanded = false;
-        wrap._wxExpand(false);
-      }
-      if (typeof wrap._wxRebase === "function") wrap._wxRebase(natural + chrome);
-    };
 
-    if (collapsing && typeof wrap._wxNoAnim === "function") wrap._wxNoAnim(applyHeight);
-    else applyHeight();
-
-    if (canExpand && isOpen()) {
-      delete next.layout.height;
-      next.layout.autosize = true;
-    } else {
-      pd.style.height = natural + "px";
-    }
-
+    g._wxHold = true;
     try {
-      Plotly.react(pd, next.data, next.layout, g._wxConfig);
-    } catch (e) {
-      console.warn("station grid redraw failed", e);
-      return true;
-    }
+      quietly(() => {
+        if (collapsing) {
+          autoExpanded = false;
+          wrap._wxExpand(false);
+        }
+        if (typeof wrap._wxRebase === "function") wrap._wxRebase(natural + chrome);
+      });
 
-    if (link && link.yRange && next.yRange) {
-      const dpd = panelPlot(wrap._wxPanel);
-      if (dpd) {
-        wrap._wxYPushed = true;
-        pushRange(dpd, "yaxis", next.yRange);
+      if (canExpand && isOpen()) {
+        delete next.layout.height;
+        next.layout.autosize = true;
+      } else {
+        pd.style.height = natural + "px";
       }
+
+      try {
+        Plotly.react(pd, next.data, next.layout, g._wxConfig);
+      } catch (e) {
+        console.warn("station grid redraw failed", e);
+        lastSig = null;
+        return true;
+      }
+
+      if (link && link.yRange && next.yRange) {
+        const dpd = panelPlot(wrap._wxPanel);
+        if (dpd) {
+          wrap._wxYPushed = true;
+          pushRange(dpd, "yaxis", next.yRange);
+        }
+      }
+
+      if (canExpand && filtered && !isOpen()) {
+        autoExpanded = true;
+        quietly(() => wrap._wxExpand(true, true));
+      }
+    } finally {
+      g._wxHold = false;
     }
 
-    if (canExpand && filtered && !isOpen()) {
-      autoExpanded = true;
-      wrap._wxExpand(true, true);
+    const fl = pd._fullLayout;
+    const want = Math.round(pd.clientHeight || 0);
+    if (fl && want && Math.abs(Math.round(fl.height || 0) - want) > 1) {
+      if (typeof g._wxResize === "function") g._wxResize();
     } else if (typeof g._wxFit === "function") {
       g._wxFit();
     }
@@ -2713,10 +3433,7 @@ function stationGrid(c, views) {
   };
 
   const apply = () => {
-    const tryApply = () => {
-      if (!render()) requestAnimationFrame(tryApply);
-    };
-    tryApply();
+    if (!render()) requestAnimationFrame(apply);
   };
 
   wrap._wxRefresh = () => {
@@ -2756,11 +3473,38 @@ function stationGrid(c, views) {
 
   if (bar && names.length > 1) {
     warmNeighbours();
+
+    const modeBtn = el("button", "wx-grid-mode");
+    modeBtn.type = "button";
+    modeBtn.appendChild(el("span", "box", CHECK_ICON));
+    modeBtn.appendChild(el("span", null, OVERLAY_LABEL));
+    modeBtn.title = "Draw the selected stations on one shared chart";
+
+    const syncMode = () => {
+      const pick = !!(selected && selected.size);
+      modeBtn.className =
+        "wx-grid-mode" + (pick ? " show" : "") + (overlay ? " on" : "");
+      modeBtn.setAttribute("aria-pressed", overlay ? "true" : "false");
+    };
+
+    modeBtn.addEventListener("click", () => {
+      if (!selected || !selected.size) return;
+      pendingRanges = captureRanges();
+      overlay = !overlay;
+      syncMode();
+      apply();
+    });
+
+    syncMode();
+    bar.appendChild(modeBtn);
+
     const ctl = stationFilterControl(names, (sel, rank) => {
       selected = sel;
       order = rank && rank.length
         ? new Map(rank.map((name, i) => [name, i]))
         : null;
+      if (!selected || !selected.size) overlay = false;
+      syncMode();
       apply();
     }, false, {
       focus: () => {
@@ -2783,7 +3527,7 @@ function stationGrid(c, views) {
   wrap._wxGridPlot = g._wxPlotDiv;
   wrap._wxGraphWrap = g;
   if (!isMobile()) makeCardExpandable(wrap, g);
-  wireGridStationClicks(wrap);
+  wireGridStationClicks(wrap, g);
 
   return wrap;
 }
@@ -3237,9 +3981,7 @@ function ensureOverviewStyles() {
     ".wx-ov-shell{display:flex;flex-direction:column;min-height:320px;}",
     ".wx-ov-chart{flex:0 0 auto;background:var(--surface);overflow:hidden;",
     "border:1px solid var(--line);border-radius:10px;padding:12px;",
-    "box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:10px;",
-    "transition:height " + PANEL_ANIM_MS + "ms cubic-bezier(.4,0,.2,1);}",
-    "@media (prefers-reduced-motion:reduce){.wx-ov-chart{transition:none;}}",
+    "box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:10px;}",
     ".wx-ov-wrap{flex:0 1 auto;min-height:0;overflow:auto;",
     "background:var(--surface);border:1px solid var(--line);",
     "border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.04);}",
@@ -3298,7 +4040,6 @@ const OVERVIEW_CELLS = {
 
 const OVERVIEW_PLOT_MAX = 420;
 
-const PANEL_ANIM_MS = 120;
 
 const PANEL_CHROME = 96;
 
@@ -3412,9 +4153,9 @@ function showPanel(panel) {
   if (rect.top >= guard && rect.bottom <= room) return;
   const top = rect.top + window.scrollY - guard;
   try {
-    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
-  } catch (e) {
     window.scrollTo(0, Math.max(0, top));
+  } catch (e) {
+    void e;
   }
 }
 
@@ -3482,14 +4223,7 @@ function openOverviewChart(panel, f, row) {
   if (row) row.classList.add("sel");
 
   if (!wasOpen) {
-    panel.style.height = "0px";
-    requestAnimationFrame(() => {
-      if (panel._wxRow !== row) return;
-      panel.style.height = overviewPlotCap(panel) + PANEL_CHROME + "px";
-    });
-    setTimeout(() => {
-      if (panel._wxRow === row) panel.style.height = "";
-    }, PANEL_ANIM_MS + 40);
+    panel.style.height = "";
   }
 
   const head = el("div", "wx-detail-head");
@@ -3714,11 +4448,52 @@ function overviewTable(findings, panel, columns) {
   return wrap;
 }
 
+const OVERVIEW_SHELL_GAP = 8;
+
+function overviewReserve(shell) {
+  let reserve = OVERVIEW_SHELL_GAP;
+  const px = (v) => parseFloat(v) || 0;
+
+  let node = shell;
+  while (node && node !== document.body && node.nodeType === 1) {
+    let cs = null;
+    try {
+      cs = window.getComputedStyle(node);
+    } catch (e) {
+      cs = null;
+    }
+    if (cs) {
+      reserve += px(cs.marginBottom);
+      if (node !== shell) {
+        reserve += px(cs.paddingBottom) + px(cs.borderBottomWidth);
+      }
+    }
+    node = node.parentNode;
+  }
+
+  const footer = document.querySelector(".al-footer");
+  if (footer) {
+    const box = footer.getBoundingClientRect();
+    if (box.height) {
+      let cs = null;
+      try {
+        cs = window.getComputedStyle(footer);
+      } catch (e) {
+        cs = null;
+      }
+      reserve += box.height + (cs ? px(cs.marginTop) + px(cs.marginBottom) : 0);
+    }
+  }
+
+  return Math.round(reserve);
+}
+
 function sizeOverviewShell() {
-  const shell = $main.querySelector(".wx-ov-shell");
+  const root = activePane() || $main;
+  const shell = root && root.querySelector(".wx-ov-shell");
   if (!shell) return;
   const top = shell.getBoundingClientRect().top;
-  const avail = window.innerHeight - top - 16;
+  const avail = window.innerHeight - top - overviewReserve(shell);
   shell.style.height = Math.max(320, Math.round(avail)) + "px";
 }
 
@@ -3751,13 +4526,15 @@ async function buildOverview(fc, hours) {
   requestAnimationFrame(sizeOverviewShell);
 
   if (!isMobile()) {
-    warmDetail(true);
     const first = findings[0];
-    if (first) {
+    whenFree(() => {
+      if (state.fc !== fc || state.hours !== hours) return;
+      warmDetail(true);
+      if (!first) return;
       detailModule()
         .then((m) => m.prefetch(detailOpts(first.station, first.tab)))
         .catch(() => {});
-    }
+    });
   }
 
   return box;
@@ -3880,12 +4657,7 @@ function warmDetail(engine) {
 function scheduleWarm() {
   if (_warmScheduled) return;
   _warmScheduled = true;
-  const run = () => warmDetail(!isMobile());
-  if (typeof requestIdleCallback === "function") {
-    requestIdleCallback(run, { timeout: 4000 });
-  } else {
-    setTimeout(run, 1500);
-  }
+  whenFree(() => warmDetail(!isMobile()));
 }
 
 const TAB_SUFFIX = {
@@ -3913,18 +4685,25 @@ function detailOpts(station, tabId) {
   };
 }
 
+const PREFETCH_DWELL_MS = 350;
+
 let _prefetchTimer = 0;
 
 function prefetchDetail(station, tabId) {
   if (!station || !state.fc) return;
-  warmDetail(true);
   if (_prefetchTimer) clearTimeout(_prefetchTimer);
+  const fc = state.fc;
+  const hours = state.hours;
   _prefetchTimer = setTimeout(() => {
     _prefetchTimer = 0;
-    detailModule()
-      .then((m) => m.prefetch(detailOpts(station, tabId)))
-      .catch(() => {});
-  }, 120);
+    whenFree(() => {
+      if (state.fc !== fc || state.hours !== hours) return;
+      warmDetail(true);
+      detailModule()
+        .then((m) => m.prefetch(detailOpts(station, tabId)))
+        .catch(() => {});
+    });
+  }, PREFETCH_DWELL_MS);
 }
 
 function cancelPrefetch() {
@@ -3986,10 +4765,69 @@ function wireGridAlertClicks(wrap) {
     const name = stationAt(ev);
     pd.style.cursor = name ? "pointer" : "";
     if (name) prefetchDetail(name, state.activeTab);
+    else cancelPrefetch();
   });
   pd.on("plotly_unhover", () => {
     pd.style.cursor = "";
+    cancelPrefetch();
   });
+}
+
+const ZOOM_DRAG_MIN_PX = 3;
+
+function ensureGridZoomStyles() {
+  if (document.getElementById("wx-gridzoom-styles")) return;
+  const st = document.createElement("style");
+  st.id = "wx-gridzoom-styles";
+  st.textContent = [
+    ".station-grid .js-plotly-plot.wx-zooming .zoombox{",
+    "fill:rgba(38,35,31,.16)!important;}",
+    ".station-grid .js-plotly-plot .zoombox-corners{fill:var(--surface,#fff)!important;",
+    "stroke:var(--text,#26231f)!important;stroke-width:1.5!important;}",
+  ].join("");
+  document.head.appendChild(st);
+}
+
+function wireGridZoom(wrap) {
+  const pd = wrap._wxGridPlot;
+  if (!pd || pd._wxZoomWired) return;
+  pd._wxZoomWired = true;
+  ensureGridZoomStyles();
+
+  let active = false;
+  let x0 = 0;
+  let y0 = 0;
+
+  const onMove = (ev) => {
+    if (active) return;
+    if (
+      Math.abs(ev.clientX - x0) < ZOOM_DRAG_MIN_PX &&
+      Math.abs(ev.clientY - y0) < ZOOM_DRAG_MIN_PX
+    ) {
+      return;
+    }
+    active = true;
+    pd.classList.add("wx-zooming");
+  };
+
+  const stop = () => {
+    document.removeEventListener("mousemove", onMove, true);
+    document.removeEventListener("mouseup", stop, true);
+    window.removeEventListener("blur", stop);
+    if (!active) return;
+    active = false;
+    pd.classList.remove("wx-zooming");
+  };
+
+  pd.addEventListener("mousedown", (ev) => {
+    if (ev.button !== 0) return;
+    active = false;
+    x0 = ev.clientX;
+    y0 = ev.clientY;
+    document.addEventListener("mousemove", onMove, true);
+    document.addEventListener("mouseup", stop, true);
+    window.addEventListener("blur", stop);
+  }, true);
 }
 
 function ensureGridSpikeStyles() {
@@ -4034,7 +4872,7 @@ function hoverAxis(pd, pt) {
   return fullXAxis(fl, (pt.data && pt.data.xaxis) || "x");
 }
 
-function gridSpikeSpan(pd, xa, xval) {
+function gridSpikeVertical(pd, xa) {
   const fl = pd && pd._fullLayout;
   if (!fl || !xa || typeof xa._offset !== "number") return null;
 
@@ -4060,14 +4898,7 @@ function gridSpikeSpan(pd, xa, xval) {
     bottom = ya._offset + ya._length;
   }
 
-  let px;
-  try {
-    px = xa.c2p(xval);
-  } catch (e) {
-    return null;
-  }
-  if (!isFinite(px)) return null;
-  return { x: xa._offset + px, top: top, height: bottom - top };
+  return { top: top, height: bottom - top };
 }
 
 const HOVER_ECHO_MS = 120;
@@ -4152,6 +4983,7 @@ function gridHoverAt(wrap, station, xval) {
   }
   if (!xa) return;
   if (typeof wrap._wxSpikeAt === "function") wrap._wxSpikeAt(xa, xval);
+  if (wrap._wxOverlay) return;
   const ya = anchoredYAxis(fl, xa);
   if (ya && ya._id) pushHover(pd, xval, xa._id + ya._id);
 }
@@ -4396,6 +5228,11 @@ function wireGridSpike(wrap) {
   host.appendChild(line);
 
   let timer = 0;
+  let raf = 0;
+  let pending = null;
+  let offsets = null;
+  const spans = new Map();
+
   const cancel = () => {
     if (timer) {
       clearTimeout(timer);
@@ -4403,23 +5240,67 @@ function wireGridSpike(wrap) {
     }
   };
 
+  const invalidate = () => {
+    offsets = null;
+    spans.clear();
+  };
+
+  const originOf = () => {
+    if (offsets) return offsets;
+    const base = pd.getBoundingClientRect();
+    const box = host.getBoundingClientRect();
+    offsets = { x: base.left - box.left, y: base.top - box.top };
+    return offsets;
+  };
+
+  const spanOf = (xa) => {
+    const key = (xa && xa._id) || "x";
+    if (spans.has(key)) return spans.get(key);
+    const span = gridSpikeVertical(pd, xa);
+    spans.set(key, span);
+    return span;
+  };
+
   const hide = () => {
     cancel();
+    pending = null;
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
     line.className = "wx-grid-spike";
   };
 
+  const paint = () => {
+    raf = 0;
+    const job = pending;
+    pending = null;
+    if (!job) return;
+    const span = spanOf(job.xa);
+    let px = NaN;
+    try {
+      px = job.xa.c2p(job.xval);
+    } catch (e) {
+      void e;
+    }
+    if (!span || !isFinite(px)) {
+      line.className = "wx-grid-spike";
+      return;
+    }
+    const origin = originOf();
+    line.style.left = Math.round(origin.x + job.xa._offset + px) + "px";
+    line.style.top = Math.round(origin.y + span.top) + "px";
+    line.style.height = Math.round(span.height) + "px";
+    line.className = "wx-grid-spike on";
+  };
+
   const place = (xa, xval) => {
-    const span = gridSpikeSpan(pd, xa, xval);
-    if (!span) {
+    if (!xa || typeof xa._offset !== "number") {
       hide();
       return false;
     }
-    const base = pd.getBoundingClientRect();
-    const box = host.getBoundingClientRect();
-    line.style.left = Math.round(base.left - box.left + span.x) + "px";
-    line.style.top = Math.round(base.top - box.top + span.top) + "px";
-    line.style.height = Math.round(span.height) + "px";
-    line.className = "wx-grid-spike on";
+    pending = { xa: xa, xval: xval };
+    if (!raf) raf = requestAnimationFrame(paint);
     return true;
   };
 
@@ -4452,7 +5333,11 @@ function wireGridSpike(wrap) {
       if (dpd) dropHover(dpd);
     }, HOVER_HOLD_MS);
   });
-  pd.on("plotly_relayout", hide);
+  pd.on("plotly_relayout", () => {
+    invalidate();
+    hide();
+  });
+  pd.on("plotly_afterplot", invalidate);
   pd.addEventListener("mouseleave", hide);
 }
 
@@ -4487,40 +5372,39 @@ function markStationCursors(pd, known) {
     n.addEventListener("mouseenter", () => {
       prefetchDetail(name, state.activeTab);
     });
+    n.addEventListener("mouseleave", cancelPrefetch);
   }
   return true;
 }
 
-function wireGridStationClicks(wrap) {
+function wireGridStationClicks(wrap, g) {
   const known = new Set(wrap._wxStations || []);
-  let tries = 0;
 
-  const poll = () => {
+  const run = () => {
     const pd = wrap._wxGridPlot;
-    if (pd && typeof pd.on === "function") {
-      if (!pd._wxGridWired) {
-        pd._wxGridWired = true;
-        if (known.size) {
-          pd.on("plotly_clickannotation", (ev) => {
-            const name = annotationStation(ev, known);
-            if (name) openStationChart(wrap._wxPanel, name, state.activeTab);
-          });
-          pd.on("plotly_hoverannotation", (ev) => {
-            const name = annotationStation(ev, known);
-            if (name) prefetchDetail(name, state.activeTab);
-          });
-          pd.on("plotly_afterplot", () => markStationCursors(pd, known));
-          markStationCursors(pd, known);
-        }
+    if (!pd || typeof pd.on !== "function") return;
+    if (!pd._wxGridWired) {
+      pd._wxGridWired = true;
+      if (known.size) {
+        pd.on("plotly_clickannotation", (ev) => {
+          const name = annotationStation(ev, known);
+          if (name) openStationChart(wrap._wxPanel, name, state.activeTab);
+        });
+        pd.on("plotly_hoverannotation", (ev) => {
+          const name = annotationStation(ev, known);
+          if (name) prefetchDetail(name, state.activeTab);
+        });
+        pd.on("plotly_afterplot", () => markStationCursors(pd, known));
+        markStationCursors(pd, known);
       }
-      wireGridAlertClicks(wrap);
-      wireGridSpike(wrap);
-      wireGridRangeSync(wrap);
-      return;
     }
-    if (tries++ < 180) requestAnimationFrame(poll);
+    wireGridAlertClicks(wrap);
+    wireGridSpike(wrap);
+    wireGridRangeSync(wrap);
+    wireGridZoom(wrap);
   };
-  requestAnimationFrame(poll);
+
+  if (g && typeof g._wxOnDrawn === "function") g._wxOnDrawn(run);
 }
 
 const TABS = [
@@ -4554,52 +5438,48 @@ function clearConnError() {
   $connError.style.display = "none";
 }
 
-function showLoading() {
-  $main.innerHTML = "";
-  const l = el("div", "al-loading");
-  l.appendChild(el("div", "spinner"));
-  l.appendChild(el("span", null, "Loading\u2026"));
-  $main.appendChild(l);
-}
-
-const tabCache = new Map();
-
-function tabCacheKey(tabId) {
-  return `${state.fc}|${state.hours}|${tabId}`;
-}
-
 const _resizeHooks = new Set();
 
 let _resizeTimer = 0;
 
-function hookCached(node) {
-  for (const cached of tabCache.values()) {
-    if (cached === node || (cached.contains && cached.contains(node))) return true;
-  }
-  return false;
-}
-
 function keepRowVisible() {
-  const panel = $main.querySelector(".wx-ov-chart");
+  const root = activePane();
+  const panel = root && root.querySelector(".wx-ov-chart");
   if (panel && panel._wxRow && panel._wxRow.isConnected) {
     revealRow(panel._wxRow);
   }
 }
 
+let _resizeDirty = false;
+
 function runResizeHooks() {
+  const active = activePane();
+  _resizeDirty = false;
   for (const hook of Array.from(_resizeHooks)) {
-    if (hook.node.isConnected) {
-      try {
-        hook.run();
-      } catch (e) {
-        void e;
-      }
-    } else if (!hookCached(hook.node)) {
+    if (!hook.node.isConnected) {
       _resizeHooks.delete(hook);
+      continue;
+    }
+    const pane = hook.node.closest ? hook.node.closest(".tab-pane") : null;
+    if (pane && pane !== active) {
+      _resizeDirty = true;
+      continue;
+    }
+    if (!mountNear(hook.node)) {
+      _resizeDirty = true;
+      continue;
+    }
+    try {
+      hook.run();
+    } catch (e) {
+      void e;
     }
   }
-  sizeOverviewShell();
-  keepRowVisible();
+}
+
+function catchUpResize() {
+  if (!_resizeDirty) return;
+  runResizeHooks();
 }
 
 function watchResize(node, run) {
@@ -4611,6 +5491,8 @@ window.addEventListener("resize", () => {
   _resizeTimer = setTimeout(() => {
     _resizeTimer = 0;
     runResizeHooks();
+    sizeOverviewShell();
+    keepRowVisible();
   }, 140);
 });
 
@@ -4618,26 +5500,27 @@ function resizePlots(node) {
   if (!node || !node.querySelectorAll) return;
   for (const pd of node.querySelectorAll(".wx-plot")) {
     if (!pd._wxDrawn || !pd._fullLayout) continue;
-    const w = pd.clientWidth;
-    if (!w || pd._wxWidth === w) continue;
-    pd._wxWidth = w;
-    try { Plotly.Plots.resize(pd); } catch (e) {}
+    if (pd._wxSettlePending) settlePlot(pd);
+    if (!syncSize(pd)) continue;
+    pd._wxWidth = pd.clientWidth;
     fitPlot(pd);
   }
 }
 
 function captureOpenDetail() {
-  const panel = $main.querySelector(".wx-ov-chart");
+  const root = activePane();
+  const panel = root && root.querySelector(".wx-ov-chart");
   if (!panel || panel.style.display === "none" || !panel._wxStation) return null;
   return { station: panel._wxStation, tab: panel._wxTab || null };
 }
 
 function restoreOpenDetail(saved) {
   if (!saved || !saved.station) return;
-  const panel = $main.querySelector(".wx-ov-chart");
+  const root = activePane();
+  const panel = root && root.querySelector(".wx-ov-chart");
   if (!panel) return;
   let row = null;
-  for (const r of $main.querySelectorAll(".wx-ov-row")) {
+  for (const r of root.querySelectorAll(".wx-ov-row")) {
     if (r._wxStation !== saved.station) continue;
     if (!row) row = r;
     if (saved.tab && r._wxFinding && r._wxFinding.tab === saved.tab) {
@@ -4651,73 +5534,135 @@ function restoreOpenDetail(saved) {
   openOverviewChart(panel, f, row);
 }
 
-const TAB_PREFETCH_DELAY_MS = 400;
-const TAB_PREBUILD_DELAY_MS = 700;
-const TAB_PREBUILD_SETTLE_MS = 6000;
-const TAB_PREBUILD_GAP_MS = 120;
-
-const tabBuilds = new Map();
+const TAB_PREFETCH_DELAY_MS = 150;
 
 let _tabWarmToken = 0;
-let _prebuildHost = null;
 
-function prebuildHost() {
-  if (_prebuildHost && _prebuildHost.isConnected) return _prebuildHost;
-  const host = el("div", "wx-prebuild");
-  host.setAttribute("aria-hidden", "true");
-  host.style.cssText =
-    "position:fixed;top:0;left:-100000px;pointer-events:none;z-index:-1;";
-  document.body.appendChild(host);
-  _prebuildHost = host;
-  return host;
+let _revealToken = 0;
+
+let $panes = null;
+
+const tabPanes = new Map();
+
+function activePane() {
+  return $panes ? $panes.querySelector(".tab-pane.active") : null;
 }
 
-function plotsSettled(root, timeoutMs) {
-  return new Promise((resolve) => {
-    const t0 = performance.now();
-    const check = () => {
-      let pending = 0;
-      for (const p of root.querySelectorAll(".wx-plot")) {
-        if (!p._wxDrawn) pending++;
-      }
-      if (!pending || performance.now() - t0 > timeoutMs) {
-        resolve();
+function tabShell() {
+  if ($panes && $panes.isConnected) return $panes;
+  $main.innerHTML = "";
+  tabPanes.clear();
+
+  const bar = el("div", "al-tabs");
+  bar.addEventListener(
+    "pointermove",
+    (ev) => {
+      if (ev.pointerType && ev.pointerType !== "mouse") return;
+      holdPrebuild(TAB_INTENT_HOLD_MS);
+    },
+    { passive: true }
+  );
+  for (const t of TABS) {
+    const btn = el("div", "al-tab", t.label);
+    btn.dataset.tab = t.id;
+    let pressed = false;
+    btn.addEventListener("pointerdown", (ev) => {
+      pressed = ev.pointerType === "mouse" && ev.button === 0;
+      if (!pressed) return;
+      cancelPrefetch();
+      renderTab(t.id);
+    });
+    btn.addEventListener("click", () => {
+      if (pressed) {
+        pressed = false;
         return;
       }
-      setTimeout(check, 120);
-    };
-    setTimeout(check, 120);
-  });
+      cancelPrefetch();
+      renderTab(t.id);
+    });
+    bar.appendChild(btn);
+  }
+  $main.appendChild(bar);
+
+  $panes = el("div", "tab-panes");
+  $main.appendChild($panes);
+  return $panes;
 }
 
-async function prebuildTab(tab, token, stale) {
-  const key = tabCacheKey(tab.id);
-  if (tabCache.has(key) || tabBuilds.has(key)) return;
-  const host = prebuildHost();
-  host.style.width = ($main.clientWidth || window.innerWidth) + "px";
-  const slot = el("div", "tab-content");
-  host.appendChild(slot);
-
-  const job = tab.build(state.fc, state.hours);
-  tabBuilds.set(key, job);
-
-  let content = null;
-  try {
-    content = await job;
-  } catch (e) {
-    content = null;
+function resetTabs() {
+  tabPanes.clear();
+  if ($panes) $panes.innerHTML = "";
+  for (let i = _mountQueue.length - 1; i >= 0; i--) {
+    if (!_mountQueue[i].node.isConnected) _mountQueue.splice(i, 1);
   }
-  tabBuilds.delete(key);
+}
 
-  if (content && !stale(token)) {
-    slot.appendChild(content);
-    await plotsSettled(slot, TAB_PREBUILD_SETTLE_MS);
+function paneFor(tab) {
+  let entry = tabPanes.get(tab.id);
+  if (entry && entry.pane.isConnected) return entry;
+  const host = tabShell();
+  const pane = el("div", "tab-content tab-pane");
+  pane.dataset.tab = tab.id;
+  const loading = el("div", "al-loading");
+  loading.appendChild(el("div", "spinner"));
+  loading.appendChild(el("span", null, "Loading\u2026"));
+  pane.appendChild(loading);
+  host.appendChild(pane);
+  entry = { pane: pane, ready: false, job: null };
+  tabPanes.set(tab.id, entry);
+  return entry;
+}
+
+function fillPane(tab) {
+  const entry = paneFor(tab);
+  if (entry.ready) return Promise.resolve(entry);
+  if (entry.job) return entry.job;
+
+  const fc = state.fc;
+  const hours = state.hours;
+  entry.job = afterPaint()
+    .then(() => {
+      if (state.fc !== fc || state.hours !== hours) return null;
+      return tab.build(fc, hours);
+    })
+    .then((content) => {
+      entry.job = null;
+      if (!content) return entry;
+      if (!entry.pane.isConnected) return entry;
+      if (state.fc !== fc || state.hours !== hours) return entry;
+      entry.pane.innerHTML = "";
+      entry.pane.appendChild(content);
+      entry.ready = true;
+      if (entry.pane.classList.contains("active")) {
+        requestAnimationFrame(sizeOverviewShell);
+      }
+      return entry;
+    })
+    .catch((e) => {
+      entry.job = null;
+      console.warn("tab build failed", tab.id, e);
+      entry.pane.innerHTML = "";
+      entry.pane.appendChild(unavailable());
+      entry.ready = true;
+      return entry;
+    });
+  return entry.job;
+}
+
+function tabPayloadFiles(fc, hours, tab) {
+  const suffix = TAB_SUFFIX[tab.id];
+  if (!suffix || tab.id === OVERVIEW_TAB) return [];
+  return [
+    chartFile(fc, hours, suffix),
+    textFile(fc, hours, `insights_${suffix}`),
+    chartFile(fc, hours, `insights_${suffix}`),
+  ];
+}
+
+function prefetchTabPayloads(fc, hours, tabs) {
+  for (const tab of tabs) {
+    for (const file of tabPayloadFiles(fc, hours, tab)) warmFile(file);
   }
-  if (content && content.parentNode === slot) {
-    slot.removeChild(content);
-    if (!stale(token) && !tabCache.has(key)) tabCache.set(key, content);
-  }
-  if (slot.parentNode === host) host.removeChild(slot);
 }
 
 function warmTabPayloads() {
@@ -4725,110 +5670,161 @@ function warmTabPayloads() {
   const hours = state.hours;
   if (!fc) return;
   const token = ++_tabWarmToken;
-  const queue = [];
-  for (const t of TABS) {
-    if (t.id === OVERVIEW_TAB || t.id === state.activeTab) continue;
-    queue.push(t);
-  }
+  const queue = TABS.filter(
+    (t) => t.id !== OVERVIEW_TAB && t.id !== state.activeTab
+  );
   if (!queue.length) return;
+  setTimeout(() => {
+    if (token !== _tabWarmToken || state.fc !== fc || state.hours !== hours) return;
+    prefetchTabPayloads(fc, hours, queue);
+  }, TAB_PREFETCH_DELAY_MS);
+}
 
-  const stale = (tk) =>
-    tk !== _tabWarmToken || state.fc !== fc || state.hours !== hours;
-
-  const idle = (fn) => {
-    if (typeof requestIdleCallback === "function") {
-      requestIdleCallback(fn, { timeout: 3000 });
-    } else {
-      setTimeout(fn, TAB_PREBUILD_GAP_MS);
-    }
-  };
-
-  const build = () => {
-    if (stale(token)) return;
-    const tab = queue.shift();
-    if (!tab) return;
-    prebuildTab(tab, token, stale)
-      .catch(() => null)
-      .then(() => {
-        if (!stale(token)) idle(build);
-      });
-  };
-
-  const fetchOnly = () => {
-    if (stale(token)) return;
-    const tab = queue.shift();
-    if (!tab) return;
-    const suffix = TAB_SUFFIX[tab.id];
-    if (!suffix) {
-      fetchOnly();
-      return;
-    }
-    Promise.all([
-      loadCharts(fc, hours, suffix),
-      loadText(fc, hours, `insights_${suffix}`),
-      loadCharts(fc, hours, `insights_${suffix}`),
-    ])
-      .catch(() => null)
-      .then(() => {
-        if (!stale(token)) idle(fetchOnly);
-      });
-  };
-
-  if (isMobile()) {
-    setTimeout(fetchOnly, TAB_PREFETCH_DELAY_MS);
-  } else {
-    setTimeout(build, TAB_PREBUILD_DELAY_MS);
+function markTabButtons(tabId) {
+  for (const btn of $main.querySelectorAll(".al-tab")) {
+    btn.classList.toggle("active", btn.dataset.tab === tabId);
   }
 }
 
-async function renderTab(tabId) {
-  const tab = TABS.find(t => t.id === tabId) || TABS[0];
-  state.activeTab = tab.id;
-
-  $main.innerHTML = "";
-
-  const tabsBar = el("div", "al-tabs");
-  for (const t of TABS) {
-    const btn = el("div", "al-tab" + (t.id === tab.id ? " active" : ""), t.label);
-    btn.addEventListener("click", () => renderTab(t.id));
-    tabsBar.appendChild(btn);
+function showPane(host, entry) {
+  for (const pane of host.children) {
+    if (!pane.classList.contains("tab-pane")) continue;
+    pane.classList.toggle("active", pane === entry.pane);
   }
-  $main.appendChild(tabsBar);
+}
 
-  const body = el("div", "tab-content");
-  $main.appendChild(body);
-
-  const key = tabCacheKey(tab.id);
-  const cached = tabCache.get(key);
-  if (cached) {
-    body.appendChild(cached);
-    requestAnimationFrame(() => {
-      resizePlots(cached);
-      sizeOverviewShell();
-    });
-    scheduleWarm();
-    warmTabPayloads();
-    return;
+function parkPlots(pane) {
+  const out = [];
+  for (const pd of pane.querySelectorAll(".wx-plot")) {
+    if (!pd._wxDrawn) continue;
+    pd.style.contentVisibility = "hidden";
+    out.push(pd);
   }
+  return out;
+}
 
-  const loading = el("div", "al-loading");
-  loading.appendChild(el("div", "spinner"));
-  loading.appendChild(el("span", null, "Loading\u2026"));
-  body.appendChild(loading);
+function viewportGap(node) {
+  const r = node.getBoundingClientRect();
+  const h = window.innerHeight || 0;
+  if (r.bottom < 0) return -r.bottom;
+  if (r.top > h) return r.top - h;
+  return 0;
+}
 
-  const pending = tabBuilds.get(key);
-  const content = pending
-    ? await pending
-    : await tab.build(state.fc, state.hours);
-  tabCache.set(key, content);
-  body.innerHTML = "";
-  body.appendChild(content);
-  requestAnimationFrame(() => {
-    resizePlots(content);
-    sizeOverviewShell();
+function unparkPlots(pane, plots) {
+  const token = (pane._wxParkToken || 0) + 1;
+  pane._wxParkToken = token;
+  if (!plots.length) return;
+  let queue = null;
+  const step = () => {
+    if (pane._wxParkToken !== token) return;
+    if (!pane.isConnected || !pane.classList.contains("active")) {
+      for (const pd of queue || plots) pd.style.contentVisibility = "";
+      return;
+    }
+    if (!queue) {
+      queue = plots
+        .map((pd, i) => ({ pd: pd, i: i, gap: viewportGap(pd) }))
+        .sort((a, b) => a.gap - b.gap || a.i - b.i)
+        .map((item) => item.pd);
+    }
+    const pd = queue.shift();
+    if (pd) pd.style.contentVisibility = "";
+    if (queue.length) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+function revealPane(host, entry, frames, built, staged) {
+  const token = ++_revealToken;
+  return new Promise((resolve) => {
+    const apply = () => {
+      if (token !== _revealToken) {
+        resolve(false);
+        return;
+      }
+      const parked = staged ? parkPlots(entry.pane) : null;
+      showPane(host, entry);
+      if (parked) unparkPlots(entry.pane, parked);
+      resolve(true);
+    };
+    if (built) {
+      let shown = false;
+      const once = () => {
+        if (shown) return;
+        shown = true;
+        apply();
+        if (token === _revealToken) sizeOverviewShell();
+      };
+      built.then(once, once);
+      afterPaint().then(() => nextTask(once));
+      return;
+    }
+    if (frames <= 0) {
+      apply();
+      return;
+    }
+    const step = (left) => {
+      requestAnimationFrame(() => {
+        if (token !== _revealToken) {
+          resolve(false);
+          return;
+        }
+        if (left > 1) step(left - 1);
+        else apply();
+      });
+    };
+    step(frames);
   });
-  scheduleWarm();
-  warmTabPayloads();
+}
+
+function renderTab(tabId) {
+  const tab = TABS.find((t) => t.id === tabId) || TABS[0];
+  const host = tabShell();
+  const entry = paneFor(tab);
+  const current = host.querySelector(".tab-pane.active");
+
+  if (state.activeTab === tab.id && current === entry.pane && entry.ready) {
+    return Promise.resolve();
+  }
+
+  state.activeTab = tab.id;
+  holdPrebuild(PREBUILD_HOLD_MS);
+  markTabButtons(tab.id);
+
+  const moving = !!current && current !== entry.pane;
+  const frames = moving ? 1 : 0;
+  const cold = moving && !entry.ready;
+  const job = entry.ready ? Promise.resolve(entry) : fillPane(tab);
+  const reveal = revealPane(
+    host,
+    entry,
+    frames,
+    cold ? job : null,
+    moving && entry.ready
+  );
+
+  reveal.then((ok) => {
+    if (!ok) return;
+    afterFrame(() => {
+      if (state.activeTab !== tab.id) return;
+      kickMounts();
+      kickSeeds();
+      scheduleWarm();
+      warmTabPayloads();
+    });
+  });
+
+  return Promise.all([job, reveal]).then((res) => {
+    if (!res[1] || state.activeTab !== tab.id) return;
+    return afterPaint().then(() => {
+      if (state.activeTab !== tab.id) return;
+      resizePlots(entry.pane);
+      catchUpResize();
+      sizeOverviewShell();
+      kickMounts();
+    });
+  });
 }
 
 let runToken = 0;
@@ -4837,7 +5833,9 @@ async function runAnalysis() {
   const fc = $fcSelect.value;
   const hours = parseInt($rangeSelect.value, 10);
   if (!fc) {
+    resetTabs();
     $main.innerHTML = "";
+    $panes = null;
     $footer.textContent = "";
     return;
   }
@@ -4849,13 +5847,14 @@ async function runAnalysis() {
   if (changed) state.range = null;
   if (changed) {
     memCache.clear();
-    tabCache.clear();
+    inflight.clear();
+    rawCache.clear();
+    resetTabs();
     cancelPrefetch();
   }
 
   const token = ++runToken;
   $footer.textContent = "";
-  showLoading();
 
   await renderTab(state.activeTab || OVERVIEW_TAB);
   if (token !== runToken) return;
@@ -4888,7 +5887,7 @@ async function populateDropdown() {
 }
 
 function handleBreakpointChange() {
-  tabCache.clear();
+  resetTabs();
   if (state.fc) renderTab(state.activeTab || OVERVIEW_TAB);
 }
 
@@ -4910,11 +5909,11 @@ if ($brand) {
   $brand.style.cursor = "pointer";
   $brand.addEventListener("click", () => {
     if (!state.fc) return;
-    Promise.resolve(renderTab(OVERVIEW_TAB)).then(() => closeOpenPanels($main));
+    Promise.resolve(renderTab(OVERVIEW_TAB)).then(() => closeOpenPanels(activePane()));
     try {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (e) {
       window.scrollTo(0, 0);
+    } catch (e) {
+      void e;
     }
   });
 }
