@@ -1247,10 +1247,16 @@ function sameRows(a, b) {
   return true;
 }
 
-function prepareScorecards(filtered) {
+function prepareScorecards(filtered, source) {
   const data = [];
   const layout = Object.assign({}, (filtered && filtered.layout) || {});
   const cards = [];
+  const srcByAxis = new Map();
+  for (const tr of source || []) {
+    if (!isHeatmap(tr) || !heatmapStationRows(tr)) continue;
+    const key = (tr.yaxis || "y") + "|" + (tr.xaxis || "x");
+    if (!srcByAxis.has(key)) srcByAxis.set(key, tr);
+  }
   ((filtered && filtered.data) || []).forEach((tr, i) => {
     if (!isHeatmap(tr) || !heatmapStationRows(tr)) {
       data.push(tr);
@@ -1264,7 +1270,14 @@ function prepareScorecards(filtered) {
       layout[ykey] = deepClone(ax);
       catKey = ykey + ".categoryarray";
     }
-    cards.push({ index: i, trace: deepClone(tr), catKey: catKey });
+    const key = (tr.yaxis || "y") + "|" + (tr.xaxis || "x");
+    const full = source ? (srcByAxis.get(key) || tr) : tr;
+    cards.push({
+      index: i,
+      trace: deepClone(full),
+      catKey: catKey,
+      defaults: source ? heatmapDefaultRows(full) : null,
+    });
   });
   return { data: data, layout: layout, cards: cards };
 }
@@ -1363,7 +1376,39 @@ function sameCells(a, b) {
   return true;
 }
 
-function scorecardUpdates(cards, current) {
+const SCORECARD_ROW_MIN_PX = 22;
+
+function scorecardRowBudget(pd, tr) {
+  if (!pd || !pd._fullLayout) return Infinity;
+  const ax = pd._fullLayout[axisLayoutKey(tr.yaxis, "y")];
+  const len = ax && ax._length;
+  if (!len || !isFinite(len)) return Infinity;
+  return Math.max(1, Math.floor(len / SCORECARD_ROW_MIN_PX));
+}
+
+function truncateScorecard(next, budget) {
+  if (!next || !Array.isArray(next.rows)) return next;
+  if (!isFinite(budget) || next.rows.length <= budget) return next;
+  if (next.z !== undefined && !Array.isArray(next.z)) return next;
+  if (next.text !== undefined && !Array.isArray(next.text)) return next;
+  const cut = (arr) => (Array.isArray(arr) ? arr.slice(0, budget) : arr);
+  const out = { rows: next.rows.slice(0, budget) };
+  if (next.z !== undefined) out.z = cut(next.z);
+  if (next.text !== undefined) out.text = cut(next.text);
+  if (next.source) {
+    const src = {};
+    for (const key of ["hovertext", "customdata"]) {
+      const v = next.source[key];
+      if (v === undefined) continue;
+      if (!Array.isArray(v)) return next;
+      src[key] = cut(v);
+    }
+    out.source = src;
+  }
+  return out;
+}
+
+function scorecardUpdates(cards, current, pd) {
   const sel = legendStationSet(current);
   const stats = sel ? pointStats(current) : null;
   const jobs = [];
@@ -1375,7 +1420,10 @@ function scorecardUpdates(cards, current) {
 
     let next = stats ? rebuildScorecard(src, stats, rows) : null;
     if (!next) {
-      const res = sel ? filterHeatmapTrace(src, sel) : { trace: src, rows: rows };
+      const keepSet = sel || (card.defaults ? new Set(card.defaults) : null);
+      const res = keepSet
+        ? filterHeatmapTrace(src, keepSet)
+        : { trace: src, rows: rows };
       if (!res.rows) continue;
       next = {
         rows: res.rows,
@@ -1384,6 +1432,8 @@ function scorecardUpdates(cards, current) {
         source: res.trace,
       };
     }
+
+    next = truncateScorecard(next, scorecardRowBudget(pd, src));
 
     const cur = current && current[card.index];
     if (cur && sameRows(heatmapStationRows(cur), next.rows) && sameCells(cur.text, next.text)) {
@@ -1760,7 +1810,7 @@ function graph(figDict, opts = {}) {
 
   const syncScorecards = () => {
     if (syncing || !cards.length || !plotDiv.data) return;
-    const res = scorecardUpdates(cards, plotDiv.data);
+    const res = scorecardUpdates(cards, plotDiv.data, plotDiv);
     if (!res.jobs.length) return;
     syncing = true;
     try {
@@ -1774,7 +1824,10 @@ function graph(figDict, opts = {}) {
 
   const draw = () => {
     const filtered = applyStationFilter({ data: fig.data || [], layout: layout }, selected);
-    const prepared = prepareScorecards(filtered);
+    const prepared = prepareScorecards(
+      filtered,
+      selected && selected.size ? null : fig.data || []
+    );
     cards = prepared.cards;
     if (mounted) {
       const next = mergeView(prepared.layout, captureView(plotDiv));
