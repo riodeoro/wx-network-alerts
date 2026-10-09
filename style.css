@@ -642,9 +642,10 @@ pre { line-height: 1.5; }
 
 .station-grid {
   margin-top: 8px;
-  background: #fafafa;
-  border-radius: 8px;
+  background: #ffffff;
+  border-radius: 10px;
   border: 1px solid #e8e6e3;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   padding: 4px;
   margin-bottom: 16px;
 }
@@ -685,7 +686,7 @@ pre { line-height: 1.5; }
   font-size: 13px;
 }
 
-.unavailable, .placeholder { color: #888; padding: 8px 0; }
+.unavailable, .placeholder { color: var(--text-muted); padding: 8px 0; }
 
 .al-footer {
   padding: 10px 20px;
@@ -693,7 +694,7 @@ pre { line-height: 1.5; }
   color: var(--text-muted);
   border-top: 1px solid var(--line);
 }
-.al-footer .muted { color: #94a3b8; }
+.al-footer .muted { color: #a9a49c; }
 
 .al-loading {
   display: flex; align-items: center; justify-content: center;

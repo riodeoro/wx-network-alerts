@@ -11,8 +11,8 @@ export const FONT_FAMILY =
 
 export const SERIES_COLOR = "#a8a29e";
 export const SERIES_FILL = "rgba(168, 162, 158, 0.12)";
-export const SERIES2_COLOR = "#ea8a0b";
-export const SERIES2_FILL = "rgba(234, 138, 11, 0.10)";
+export const SERIES2_COLOR = "#2563eb";
+export const SERIES2_FILL = "rgba(37, 99, 235, 0.10)";
 export const SERIES2_OPACITY = 0.45;
 export const MATCH_COLOR = "#dc2626";
 
@@ -158,7 +158,7 @@ export function emptyFig(msg, height) {
           x: 0.5,
           y: 0.5,
           showarrow: false,
-          font: { size: 13, color: "#94a3b8" },
+          font: { size: 13, color: "#a9a49c" },
         },
       ],
       height: height || 360,

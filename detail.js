@@ -33,7 +33,10 @@ const ATTR_TAB = {
 
 const DIR_CONC_RE = /^Direction concentration/;
 
-const SOIL_COLS = new Set(["SM1", "SM2", "SM3", "ST1", "ST2", "ST3"]);
+const OPTIONAL_COLS = new Set([
+  "SM1", "SM2", "SM3", "ST1", "ST2", "ST3",
+  "PrecipOP2", "PrecipPC2", "SDepth",
+]);
 
 const PLOT_PREF = {
   "tab-rh": ["Rh", "Temp"],
@@ -466,7 +469,7 @@ async function load(opts) {
       throw err;
     }
     const cols = want.filter(
-      (c) => !SOIL_COLS.has(c) || hasReadings(series, c)
+      (c) => !OPTIONAL_COLS.has(c) || hasReadings(series, c)
     );
     if (!cols.length) {
       const err = new Error("no sensor columns");
@@ -754,6 +757,23 @@ export async function mount(host, opts) {
   let primary = picked.primary;
   let secondary = picked.secondary;
 
+  const kept =
+    opts.pick && cols.includes(opts.pick.primary) ? opts.pick : null;
+  if (kept) {
+    primary = kept.primary;
+    secondary =
+      kept.secondary &&
+      kept.secondary !== primary &&
+      cols.includes(kept.secondary)
+        ? kept.secondary
+        : null;
+  }
+
+  const remember = () => {
+    host._wxPick = { primary: primary, secondary: secondary || null };
+  };
+  if (kept) remember();
+
   body.innerHTML = "";
   if (title) title.textContent = payload.name;
 
@@ -881,6 +901,12 @@ export async function mount(host, opts) {
   const plot = node("div", "wx-detail-plot");
   plot.style.width = "100%";
 
+  const wait = kept ? node("div", "wx-plot-wait") : null;
+  if (wait) {
+    wait.appendChild(node("div", "wx-plot-spin"));
+    plot.appendChild(wait);
+  }
+
   body.appendChild(controls);
   body.appendChild(plot);
 
@@ -896,6 +922,7 @@ export async function mount(host, opts) {
     return cap ? Math.min(h, cap) : h;
   };
   plot.style.minHeight = heightFor() + "px";
+  if (wait) wait.style.height = plot.style.minHeight;
 
   let alertsPrimary = null;
   let alertsSecondary = null;
@@ -1056,6 +1083,7 @@ export async function mount(host, opts) {
       Plotly.react(plot, fig.data, fig.layout, PLOT_CONFIG);
     } else {
       drawn = true;
+      if (wait && wait.parentNode) wait.parentNode.removeChild(wait);
       const p = Plotly.newPlot(plot, fig.data, fig.layout, PLOT_CONFIG);
       if (p && p.then) p.then(wire, () => {});
       else wire();
@@ -1119,10 +1147,10 @@ export async function mount(host, opts) {
     if (!plot.isConnected) return;
   }
 
-  await syncAlerts(true);
+  await syncAlerts(!kept);
   if (!plot.isConnected) return;
 
-  let touched = false;
+  let touched = !!kept;
 
   if (wantsDir(opts, cols) && primary !== "Dir") {
     dirBands(opts).then((hit) => {
@@ -1145,6 +1173,7 @@ export async function mount(host, opts) {
       secondary = "";
       selSecondary.value = "";
     }
+    remember();
     updateNormalsControl();
     syncAlerts(true);
   });
@@ -1155,6 +1184,7 @@ export async function mount(host, opts) {
       secondary = null;
       selSecondary.value = "";
     }
+    remember();
     updateNormalsControl();
     syncAlerts(true);
   });

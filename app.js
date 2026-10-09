@@ -536,8 +536,8 @@ const NEIGHBOUR_SHOW = "Show neighbours";
 const NEIGHBOUR_HIDE = "Hide neighbours";
 
 const NEIGHBOUR_PALETTE = [
-  "#ea8a0b", "#dc2626", "#7c3aed", "#0d9488", "#16a34a",
-  "#db2777", "#a16207", "#4f46e5", "#b45309", "#0891b2",
+  "#2563eb", "#65a30d", "#a21caf", "#0891b2", "#6d28d9",
+  "#059669", "#0369a1", "#4d7c0f", "#c026d3", "#0d9488",
 ];
 
 const NEIGHBOUR_LINE_WIDTH = 1.3;
@@ -559,6 +559,10 @@ const NEIGHBOUR_LEGEND_COLS = 5;
 const NEIGHBOUR_LEGEND_ROW_PX = 14;
 
 const OVERLAY_LABEL = "Overlay";
+
+const CUMULATIVE_LABEL = "Cumulative";
+
+const CUMULATIVE_HOVER_RE = /(<\/b><br>[A-Za-z0-9_]+):/;
 
 const CHECK_ICON =
   '<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false">' +
@@ -2273,7 +2277,7 @@ function ensureEmptyStyles() {
   st.textContent = [
     ".wx-plot-empty{display:flex;align-items:center;justify-content:center;",
     "min-height:120px;box-sizing:border-box;}",
-    ".wx-plot-empty > .unavailable{padding:0;font-size:12px;color:#94a3b8;",
+    ".wx-plot-empty > .unavailable{padding:0;font-size:12px;color:#a9a49c;",
     "text-align:center;}",
   ].join("");
   document.head.appendChild(st);
@@ -2336,7 +2340,7 @@ function annotateEmptyPanels(figDict, message, subtitle) {
       x: cx, y: subtitle ? cy + 0.03 : cy,
       xanchor: "center", yanchor: "middle",
       showarrow: false,
-      font: { size: 12, color: "#94a3b8" },
+      font: { size: 12, color: "#a9a49c" },
     });
     if (subtitle) {
       notes.push({
@@ -2345,7 +2349,7 @@ function annotateEmptyPanels(figDict, message, subtitle) {
         x: cx, y: cy - 0.05,
         xanchor: "center", yanchor: "middle",
         showarrow: false,
-        font: { size: 10.5, color: "#b4bcc8" },
+        font: { size: 10.5, color: "#c4c0b9" },
       });
     }
 
@@ -2477,6 +2481,42 @@ function unifiedBandTrace(tr) {
 function overlayHoverTemplate(ht) {
   if (typeof ht !== "string") return ht;
   return ht.replace(/<br>%\{x(\|[^}]*)?\}/g, "");
+}
+
+function cumulativeHoverTemplate(ht) {
+  if (typeof ht !== "string") return ht;
+  return ht.replace(CUMULATIVE_HOVER_RE, "$1 total:");
+}
+
+function cumulativeTraces(data) {
+  const totals = new Map();
+  const out = [];
+  for (const tr of data || []) {
+    const y = tr && !isAlertTrace(tr) ? decodeArray(tr.y) : null;
+    if (!y) {
+      out.push(tr);
+      continue;
+    }
+    const id = tr.xaxis || "x";
+    let total = totals.get(id) || 0;
+    const sums = new Array(y.length);
+    for (let i = 0; i < y.length; i++) {
+      const v = y[i] === null || y[i] === undefined ? NaN : Number(y[i]);
+      if (isFinite(v)) {
+        total += Math.max(0, v);
+        sums[i] = Math.round(total * 1000) / 1000;
+      } else {
+        sums[i] = null;
+      }
+    }
+    totals.set(id, total);
+    const next = Object.assign({}, tr, { y: sums });
+    if (tr.hovertemplate) {
+      next.hovertemplate = cumulativeHoverTemplate(tr.hovertemplate);
+    }
+    out.push(next);
+  }
+  return out;
 }
 
 function gridStationNames(fig) {
@@ -3397,7 +3437,7 @@ function buildOverlayFigure(fig, cells, rowPx, selected, link, ranges, rank, foc
   };
 }
 
-function stationGrid(c, views) {
+function stationGrid(c, views, opts) {
   const list = (views && views.length ? views : [{ key: "station_grid" }])
     .filter((v) => c && c[v.key]);
   if (!list.length) return el("div");
@@ -3422,6 +3462,10 @@ function stationGrid(c, views) {
   let viewKey = null;
   let lastSig = null;
   let lastPd = null;
+  let cumFrom = null;
+  let cumData = null;
+
+  const canCumulate = !!(opts && opts.cumulative);
 
   const useFigure = (key) => {
     fig = c[key];
@@ -3460,8 +3504,29 @@ function stationGrid(c, views) {
   let selected = null;
   let order = null;
   let overlay = false;
+  let cumulative = false;
   let autoExpanded = false;
   wrap._wxStacked = false;
+  wrap._wxCumulative = false;
+
+  const cumulativeSource = () => {
+    const data = (fig && fig.data) || [];
+    if (cumFrom !== data) {
+      cumFrom = data;
+      cumData = cumulativeTraces(data);
+    }
+    return { data: cumData, layout: fig.layout };
+  };
+
+  const releasePushed = (dpd) => {
+    if (!dpd || !wrap._wxYPushed) return;
+    wrap._wxYPushed = false;
+    try {
+      Plotly.relayout(dpd, { "yaxis.autorange": true });
+    } catch (e) {
+      void e;
+    }
+  };
 
   const quietly = (fn) => {
     if (typeof wrap._wxNoAnim === "function") wrap._wxNoAnim(fn);
@@ -3473,7 +3538,7 @@ function stationGrid(c, views) {
     return !!(gridCol && dcol && dcol.toLowerCase() === gridCol.toLowerCase());
   };
 
-  const linkGeom = () => {
+  const linkGeom = (totals) => {
     const pd = g._wxPlotDiv;
     const dpd = panelPlot(wrap._wxPanel);
     if (!pd || !dpd || !pd._fullLayout || !dpd._fullLayout) return null;
@@ -3491,7 +3556,8 @@ function stationGrid(c, views) {
     return {
       align: [Math.max(0, Math.min(1, x0)), Math.max(0, Math.min(1, x1))],
       range: range,
-      yRange: sharedColumn(dpd) ? detailFit(dpd, spanMs(range)) : null,
+      yRange:
+        !totals && sharedColumn(dpd) ? detailFit(dpd, spanMs(range)) : null,
     };
   };
 
@@ -3507,8 +3573,12 @@ function stationGrid(c, views) {
     const view = key ? spanMs(axisRange(fl, key)) : null;
     if (!view) return;
     const dpd = panelPlot(wrap._wxPanel);
-    const base = dpd && sharedColumn(dpd) ? detailFit(dpd, view) : null;
-    const range = stackYRange(fig, fitIds, base, view);
+    const totals = wrap._wxCumulative === true;
+    const base =
+      dpd && !totals && sharedColumn(dpd) ? detailFit(dpd, view) : null;
+    const range = stackYRange(
+      totals ? cumulativeSource() : fig, fitIds, base, view
+    );
     if (!range) return;
     const patch = {};
     let dirty = false;
@@ -3563,21 +3633,16 @@ function stationGrid(c, views) {
     const filtered = !!(selected && selected.size);
     wrap._wxStacked = filtered;
     wrap._wxOverlay = false;
+    wrap._wxCumulative = false;
     if (!filtered) {
       if (typeof wrap._wxSpikeOff === "function") wrap._wxSpikeOff();
       const open = panelPlot(wrap._wxPanel);
       if (open) dropHover(open);
-      if (open && wrap._wxYPushed) {
-        wrap._wxYPushed = false;
-        try {
-          Plotly.relayout(open, { "yaxis.autorange": true });
-        } catch (e) {
-          void e;
-        }
-      }
+      releasePushed(open);
     }
-    const link = filtered ? linkGeom() : null;
     const wantOverlay = filtered && overlay;
+    const wantCum = wantOverlay && canCumulate && cumulative && !!order;
+    const link = filtered ? linkGeom(wantCum) : null;
     const lit = wrap._wxPanel;
     const focus =
       wantOverlay && lit && lit.style.display !== "none"
@@ -3587,10 +3652,12 @@ function stationGrid(c, views) {
     try {
       if (wantOverlay) {
         next = buildOverlayFigure(
-          fig, cells, rowPx, selected, link, useRanges, order, focus
+          wantCum ? cumulativeSource() : fig,
+          cells, rowPx, selected, link, useRanges, order, focus
         );
       }
       wrap._wxOverlay = !!next;
+      wrap._wxCumulative = !!next && wantCum;
       if (!next) {
         next = buildGridFigure(
           fig, cells, fills, rowPx, selected, link, useRanges, order
@@ -3621,6 +3688,7 @@ function stationGrid(c, views) {
     const sig = [
       viewKey,
       wantOverlay ? "1" : "0",
+      wantCum ? "1" : "0",
       focus || "",
       selected ? Array.from(selected).sort().join("\u0001") : "",
       order ? Array.from(order.keys()).join("\u0002") : "",
@@ -3675,6 +3743,8 @@ function stationGrid(c, views) {
           wrap._wxYPushed = true;
           pushRange(dpd, "yaxis", next.yRange);
         }
+      } else if (wrap._wxCumulative) {
+        releasePushed(panelPlot(wrap._wxPanel));
       }
 
       if (canExpand && filtered && !isOpen()) {
@@ -3743,11 +3813,29 @@ function stationGrid(c, views) {
     modeBtn.appendChild(el("span", null, OVERLAY_LABEL));
     modeBtn.title = "Draw the selected stations on one shared chart";
 
+    let cumBtn = null;
+    if (canCumulate) {
+      cumBtn = el("button", "wx-grid-mode");
+      cumBtn.type = "button";
+      cumBtn.appendChild(el("span", "box", CHECK_ICON));
+      cumBtn.appendChild(el("span", null, CUMULATIVE_LABEL));
+      cumBtn.title = "Show the running total for each station";
+    }
+
+    const cumReady = () =>
+      !!(cumBtn && overlay && order && selected && selected.size);
+
     const syncMode = () => {
       const pick = !!(selected && selected.size);
       modeBtn.className =
         "wx-grid-mode" + (pick ? " show" : "") + (overlay ? " on" : "");
       modeBtn.setAttribute("aria-pressed", overlay ? "true" : "false");
+      if (!cumBtn) return;
+      const ready = cumReady();
+      if (!ready) cumulative = false;
+      cumBtn.className =
+        "wx-grid-mode" + (ready ? " show" : "") + (cumulative ? " on" : "");
+      cumBtn.setAttribute("aria-pressed", cumulative ? "true" : "false");
     };
 
     modeBtn.addEventListener("click", () => {
@@ -3758,8 +3846,19 @@ function stationGrid(c, views) {
       apply();
     });
 
+    if (cumBtn) {
+      cumBtn.addEventListener("click", () => {
+        if (!cumReady()) return;
+        pendingRanges = captureRanges();
+        cumulative = !cumulative;
+        syncMode();
+        apply();
+      });
+    }
+
     syncMode();
     bar.appendChild(modeBtn);
+    if (cumBtn) bar.appendChild(cumBtn);
 
     const ctl = stationFilterControl(names, (sel, rank) => {
       selected = sel;
@@ -4482,6 +4581,7 @@ function resetOverviewChart(panel) {
   panel._wxCleanup = null;
   panel._wxStation = null;
   panel._wxTab = null;
+  panel._wxPick = null;
   if (panel._wxRow) {
     panel._wxRow.classList.remove("sel");
     panel._wxRow = null;
@@ -4602,7 +4702,7 @@ function detailSpacer() {
   return wrap;
 }
 
-function openOverviewChart(panel, f, row) {
+function openOverviewChart(panel, f, row, pick) {
   ensureOverviewStyles();
   ensureDetailStyles();
   const wasOpen = panel.style.display !== "none";
@@ -4660,6 +4760,7 @@ function openOverviewChart(panel, f, row) {
     if (grid && typeof grid._wxRefit === "function") grid._wxRefit();
   };
   opts.foldHead = fold;
+  opts.pick = pick || null;
   detailModule()
     .then((m) => {
       if (fold && loading.isConnected && typeof m.plotHeight === "function") {
@@ -5519,7 +5620,7 @@ async function buildRn1(fc, hours) {
   const c = await loadCharts(fc, hours, "rn1");
   if (!c) return unavailable();
   const box = el("div");
-  const grid = stationGrid(c);
+  const grid = stationGrid(c, null, { cumulative: true });
   const panel = tabPanel(grid);
   box.appendChild(await insightBanner(fc, hours, "rn1", panel));
   box.appendChild(panel);
@@ -5826,7 +5927,7 @@ function ensureGridSpikeStyles() {
   st.textContent = [
     ".wx-graph{position:relative;}",
     ".wx-grid-spike{position:absolute;left:0;top:0;width:0;height:0;",
-    "border-left:1px dotted #6b7280;pointer-events:none;",
+    "border-left:1px dotted #78716c;pointer-events:none;",
     "opacity:0;z-index:4;}",
     ".wx-grid-spike.on{opacity:.9;}",
   ].join("");
@@ -6517,12 +6618,16 @@ function captureOpenDetail() {
   const root = activePane();
   const panel = root && root.querySelector(".wx-ov-chart");
   if (!panel || panel.style.display === "none" || !panel._wxStation) return null;
-  return { station: panel._wxStation, tab: panel._wxTab || null };
+  return {
+    station: panel._wxStation,
+    tab: panel._wxTab || null,
+    pick: panel._wxPick || null,
+  };
 }
 
-function restoreOpenDetail(saved) {
+function restoreOpenDetail(saved, pane) {
   if (!saved || !saved.station) return;
-  const root = activePane();
+  const root = pane || activePane();
   const panel = root && root.querySelector(".wx-ov-chart");
   if (!panel) return;
   let row = null;
@@ -6537,8 +6642,10 @@ function restoreOpenDetail(saved) {
   const f = row && row._wxFinding
     ? row._wxFinding
     : { station: saved.station, tab: saved.tab };
-  openOverviewChart(panel, f, row);
+  openOverviewChart(panel, f, row, saved.pick || null);
 }
+
+let _pendingDetail = null;
 
 const TAB_PREFETCH_DELAY_MS = 150;
 
@@ -6639,9 +6746,24 @@ function fillPane(tab) {
       entry.pane.innerHTML = "";
       entry.pane.appendChild(content);
       entry.ready = true;
-      if (entry.pane.classList.contains("active")) {
-        requestAnimationFrame(sizeOverviewShell);
+      const live = entry.pane.classList.contains("active");
+      const pending = _pendingDetail;
+      if (
+        live &&
+        pending &&
+        pending.fc === fc &&
+        pending.hours === hours &&
+        pending.tab === tab.id
+      ) {
+        _pendingDetail = null;
+        try {
+          sizeOverviewShell();
+          restoreOpenDetail(pending.saved, entry.pane);
+        } catch (e) {
+          console.warn("detail restore failed", e);
+        }
       }
+      if (live) requestAnimationFrame(sizeOverviewShell);
       return entry;
     })
     .catch((e) => {
@@ -6848,7 +6970,8 @@ async function runAnalysis() {
   }
   const sameFc = state.fc === fc;
   const changed = state.fc !== fc || state.hours !== hours;
-  const reopen = sameFc && changed ? captureOpenDetail() : null;
+  const carried = _pendingDetail ? _pendingDetail.saved : null;
+  const reopen = sameFc && changed ? captureOpenDetail() || carried : null;
   state.fc = fc;
   state.hours = hours;
   if (changed) state.range = null;
@@ -6863,10 +6986,23 @@ async function runAnalysis() {
   const token = ++runToken;
   $footer.textContent = "";
 
+  const pending = reopen
+    ? {
+        fc: fc,
+        hours: hours,
+        tab: state.activeTab || OVERVIEW_TAB,
+        saved: reopen,
+      }
+    : null;
+  _pendingDetail = pending;
+
   await renderTab(state.activeTab || OVERVIEW_TAB);
   if (token !== runToken) return;
 
-  if (reopen) restoreOpenDetail(reopen);
+  if (pending && _pendingDetail === pending) {
+    _pendingDetail = null;
+    restoreOpenDetail(reopen);
+  }
 
   const [dmin, dmax] = await extractDateRange(fc, hours);
   if (token !== runToken) return;

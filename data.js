@@ -47,7 +47,8 @@ export const FWI_COLS = ["FFMC", "ISI", "FWI", "DC", "DMC", "BUI"];
 
 export const ALL_SENSOR_COLS = [
   "Rh", "Wspd", "Dir", "Rn_1", "Mx_Spd", "Temp", "Vbat", "Vslr", "Ibat",
-  "PrecipOP2", "PrecipPC2", "SM1", "SM2", "SM3", "ST1", "ST2", "ST3", "PYR",
+  "PrecipOP2", "PrecipPC2", "SDepth",
+  "SM1", "SM2", "SM3", "ST1", "ST2", "ST3", "PYR",
 ].concat(FWI_COLS);
 
 export const ALL_COLS = ["STATION_NAME", "DATE_TIME_PARSED", "YEAR"].concat(
@@ -61,6 +62,7 @@ export const COL_FALLBACK = {
   Dir: ["HOURLY_WIND_DIRECTION"],
   Mx_Spd: ["HOURLY_WIND_GUST"],
   Rn_1: ["HOURLY_PRECIPITATION"],
+  PrecipOP2: ["PRECIPOP2"],
   FFMC: ["HOURLY_FINE_FUEL_MOISTURE", "FINE_FUEL_MOISTURE_CODE"],
   ISI: ["HOURLY_INITIAL_SPREAD_INDEX", "INITIAL_SPREAD_INDEX"],
   FWI: ["HOURLY_FIRE_WEATHER_INDEX", "FIRE_WEATHER_INDEX"],
