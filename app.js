@@ -8,6 +8,17 @@ const CHART_WINDOWS = [24, 48, 72, 168, 336, 720, 1440, 2160, 4380];
 const MOBILE_QUERY = window.matchMedia("(max-width: 768px)");
 const isMobile = () => MOBILE_QUERY.matches;
 
+const HEIGHT_BASE_PX = 900;
+
+const HEIGHT_SCALE_MAX = 1.6;
+
+function heightScale() {
+  if (isMobile()) return 1;
+  const h = window.innerHeight || 0;
+  const raw = Math.min(HEIGHT_SCALE_MAX, Math.max(1, h / HEIGHT_BASE_PX));
+  return Math.round(raw * 100) / 100;
+}
+
 const _taskQueue = [];
 
 const _taskChannel =
@@ -2254,7 +2265,7 @@ const BOX_CARD_HEIGHT = 340;
 const ROW_CARD_SCALE = 0.88;
 
 function boxHeight() {
-  return isMobile() ? undefined : BOX_CARD_HEIGHT;
+  return isMobile() ? undefined : Math.round(BOX_CARD_HEIGHT * heightScale());
 }
 
 function boxCard(fig) {
@@ -2265,7 +2276,7 @@ function rowGraph(fig, opts) {
   const o = Object.assign({}, opts);
   if (!isMobile() && !o.height) {
     const natural = (fig && fig.layout && fig.layout.height) || 420;
-    o.height = Math.round(natural * ROW_CARD_SCALE);
+    o.height = Math.round(natural * ROW_CARD_SCALE * heightScale());
   }
   return graph(fig, o);
 }
@@ -2657,7 +2668,7 @@ function ensureInsightStyles() {
   st.id = "wx-insight-styles";
   st.textContent = [
     ".wx-insight-shell{position:relative;margin-bottom:16px;}",
-    ".wx-insight-shell > .wx-ov-wrap{max-height:180px;}",
+    ".wx-insight-shell > .wx-ov-wrap{max-height:max(180px,20vh);}",
     ".wx-insight-shell > .wx-expand-btn{top:1px;right:4px;background:var(--surface,#fff);",
     "border-color:var(--line,#e8e6e3);}",
     ".wx-stn-link{cursor:pointer;border-bottom:1px dotted currentColor;}",
@@ -3443,7 +3454,12 @@ function stationGrid(c, views, opts) {
   if (!list.length) return el("div");
 
   let fig = c[list[0].key];
-  const h = (fig.layout && fig.layout.height) || 400;
+  const scale = heightScale();
+  const baseHeight = (fig.layout && fig.layout.height) || 400;
+  const h = Math.round(
+    Math.max(baseHeight - GRID_PAD_PX, 0) * scale +
+      Math.min(baseHeight, GRID_PAD_PX)
+  );
   const wrap = el("div", "station-grid");
 
   const known = new Set();
@@ -3478,7 +3494,7 @@ function stationGrid(c, views, opts) {
     }
     cells = gridCells(fig);
     fills = gridZoneFills(fig, cells);
-    rowPx = gridRowPx(fig, cells);
+    rowPx = gridRowPx(fig, cells) * scale;
     gridCol = gridColumnName(fig);
     if (fig && Array.isArray(fig.data)) fig.data = fig.data.map(unifiedBandTrace);
     if (!baseSlots) {
@@ -4599,16 +4615,20 @@ function closeOverviewChart(panel) {
   if (typeof grid._wxRefresh === "function") grid._wxRefresh();
 }
 
+function detailPlotMax() {
+  return Math.round(OVERVIEW_PLOT_MAX * heightScale());
+}
+
 function overviewPlotCap(panel) {
   const shell = panel.parentNode;
   if (!shell || !shell.classList.contains("wx-ov-shell")) {
-    return OVERVIEW_PLOT_MAX;
+    return detailPlotMax();
   }
   const room = shell.clientHeight;
-  if (!room) return OVERVIEW_PLOT_MAX;
+  if (!room) return detailPlotMax();
   return Math.max(
     OVERVIEW_PLOT_MIN,
-    Math.min(OVERVIEW_PLOT_MAX, Math.round(room * OVERVIEW_PLOT_SHARE))
+    Math.min(detailPlotMax(), Math.round(room * OVERVIEW_PLOT_SHARE))
   );
 }
 

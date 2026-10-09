@@ -426,8 +426,8 @@ pre { line-height: 1.5; }
 }
 .wx-controls-row { display: flex; align-items: flex-start; }
 .wx-control { display: inline-block; vertical-align: top; }
-.wx-control.fc   { width: 30%; }
-.wx-control.win  { width: 18%; margin-left: 2%; }
+.wx-control.fc   { width: 30%; max-width: 300px; }
+.wx-control.win  { width: 18%; max-width: 180px; margin-left: min(2%, 20px); }
 .wx-control.load { width: 10%; margin-left: 2%; }
 .wx-control label { display: block; margin-bottom: 5px; }
 .wx-control.load button { margin-top: 26px; width: 100%; }
@@ -462,6 +462,7 @@ pre { line-height: 1.5; }
 .al-tabs::-webkit-scrollbar { display: none; }
 .al-tab {
   flex: 1 1 0;
+  max-width: 140px;
   text-align: center;
   font-family: inherit;
   font-size: 13px;
@@ -751,7 +752,8 @@ pre { line-height: 1.5; }
 
   .wx-controls-row { display: block; }
   .wx-control.fc, .wx-control.win, .wx-control.load {
-    display: block; width: 100%; margin-left: 0; margin-bottom: 10px;
+    display: block; width: 100%; max-width: none; margin-left: 0;
+    margin-bottom: 10px;
   }
   .wx-control.load:last-child { margin-bottom: 0; }
   .wx-control.load button { margin-top: 0; min-height: 44px; width: 100%; }
@@ -759,7 +761,9 @@ pre { line-height: 1.5; }
   .wx-chart-row { display: block; }
   .wx-chart-row > .wx-card { width: 100%; margin-left: 0; }
 
-  .al-tab { flex: 0 0 auto; text-align: left; padding: 6px 14px; }
+  .al-tab {
+    flex: 0 0 auto; max-width: none; text-align: left; padding: 6px 14px;
+  }
 
   .main-content { padding: 4px 8px 8px; }
 
