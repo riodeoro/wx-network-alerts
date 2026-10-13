@@ -4221,8 +4221,8 @@ const SEVERITY_CATEGORIES = [
     freq: { re: SEV_RE.silentZero },
   }],
   ["Precip", "RAIN GAUGES MISSING NEIGHBOUR RAIN", 7, {
-    mag: { re: SEV_RE.behindMm },
-    freq: { re: SEV_RE.silentZero },
+    noOngoing: true,
+    noSpan: true,
   }],
   ["Precip", "PRECIPITATION (RN_1) RECORDED WHILE RH WAS BELOW 10%", 8, {
     freq: { re: SEV_RE.hours },
