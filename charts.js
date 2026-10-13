@@ -733,7 +733,7 @@ function seriesTrace(series, col, alerts, opts) {
   const traces = segments.map((seg) => {
     const lone = seg.x.length === 1;
     const trace = {
-      type: "scatter",
+      type: circular ? "scattergl" : "scatter",
       x: seg.x,
       y: seg.y,
       mode: circular ? "markers" : lone ? "lines+markers" : "lines",

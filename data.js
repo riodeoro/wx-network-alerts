@@ -313,6 +313,12 @@ function yearRange() {
   return out;
 }
 
+function coordinate(v, limit) {
+  if (v === null || v === undefined || v === "") return null;
+  const n = Number(v);
+  return Number.isFinite(n) && Math.abs(n) <= limit ? n : null;
+}
+
 export async function loadStationConfig() {
   const resp = await fetch(STATION_CONFIG_URL, {
     credentials: "omit",
@@ -339,11 +345,15 @@ export async function loadStationConfig() {
           .map((v) => String(v == null ? "" : v).trim())
           .filter(Boolean)
       : [];
+    const lat = coordinate(upper.LATITUDE, 90);
+    const lon = coordinate(upper.LONGITUDE, 180);
     rows.push({
       fire_centre: String(upper.FIRE_CENTRE == null ? "" : upper.FIRE_CENTRE).trim(),
       station_name: String(upper.STATION_NAME == null ? "" : upper.STATION_NAME).trim(),
       enabled,
       neighbours,
+      lat: lat !== null && lon !== null ? lat : null,
+      lon: lat !== null && lon !== null ? lon : null,
     });
   }
   return rows.filter((r) => r.station_name);

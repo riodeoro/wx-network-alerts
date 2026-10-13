@@ -121,6 +121,26 @@ export function neighbourGroups() {
   return _neighbourPromise;
 }
 
+let _coordPromise = null;
+
+export function stationCoords() {
+  if (!_coordPromise) {
+    _coordPromise = warmConfig()
+      .then((rows) => {
+        const map = new Map();
+        for (const r of rows || []) {
+          if (!r || !r.station_name) continue;
+          if (!Number.isFinite(r.lat) || !Number.isFinite(r.lon)) continue;
+          const key = normName(r.station_name);
+          if (key && !map.has(key)) map.set(key, { lat: r.lat, lon: r.lon });
+        }
+        return map;
+      })
+      .catch(() => new Map());
+  }
+  return _coordPromise;
+}
+
 function normName(s) {
   return String(s == null ? "" : s)
     .toUpperCase()
@@ -704,6 +724,14 @@ function currentView(plot) {
   return [lo, hi];
 }
 
+function startView(range) {
+  if (!Array.isArray(range) || range.length !== 2) return null;
+  const lo = parseStamp(range[0]);
+  const hi = parseStamp(range[1]);
+  if (!Number.isFinite(lo) || !Number.isFinite(hi) || hi <= lo) return null;
+  return [lo, hi];
+}
+
 function node(tag, className, text) {
   const n = document.createElement(tag);
   if (className) n.className = className;
@@ -1048,7 +1076,7 @@ export async function mount(host, opts) {
         );
       }
     }
-    const kept = drawn ? fullView(plot) || currentView(plot) : null;
+    const kept = drawn ? fullView(plot) || currentView(plot) : startView(opts.view);
     focusWindow(fig, payload.startMs, payload.endMs, kept);
     const view = kept || [payload.startMs, payload.endMs];
     const hasSecond = !!(secondary && fig.layout.yaxis2);
@@ -1062,10 +1090,14 @@ export async function mount(host, opts) {
     const slider = fig.layout.xaxis.rangeslider;
     slider.yaxis = sliderAxis(fig, "y");
     const heldAxis = yHeld && plot._fullLayout ? plot._fullLayout.yaxis : null;
-    const r1 =
+    let r1 =
       heldAxis && Array.isArray(heldAxis.range)
         ? heldAxis.range.slice()
         : fitRange(series, primary, view, year1);
+    if (r1 && !heldAxis && typeof opts.shareY === "function") {
+      const shared = opts.shareY(primary, r1, fig.layout.xaxis.range);
+      if (shared) r1 = shared;
+    }
     if (r1) {
       fig.layout.yaxis.range = r1;
       fig.layout.yaxis.autorange = false;

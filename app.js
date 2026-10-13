@@ -620,16 +620,27 @@ function neighbourKey(name) {
     .replace(/[^A-Z0-9]/g, "");
 }
 
+let _nbCoords = null;
+
 function warmNeighbours() {
-  if (_nbGroups) return;
+  if (_nbGroups && _nbCoords) return;
   detailModule()
     .then((m) =>
-      typeof m.neighbourGroups === "function" ? m.neighbourGroups() : null
+      Promise.all([
+        typeof m.neighbourGroups === "function" ? m.neighbourGroups() : null,
+        typeof m.stationCoords === "function" ? m.stationCoords() : null,
+      ])
     )
-    .then((map) => {
+    .then(([map, coords]) => {
       if (map && map.size) _nbGroups = map;
+      if (coords && coords.size) _nbCoords = coords;
     })
     .catch(() => {});
+}
+
+function stationCoord(name) {
+  if (!_nbCoords || !name) return null;
+  return _nbCoords.get(neighbourKey(name)) || null;
 }
 
 function neighboursFor(station, pool) {
@@ -736,7 +747,8 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     sync();
     onChange(
       selected.size ? new Set(selected) : null,
-      nbOn && nbOrder ? nbOrder.slice() : null
+      nbOn && nbOrder ? nbOrder.slice() : null,
+      nbOn ? nbStation : null
     );
   };
 
@@ -834,6 +846,37 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     }
     if (!selected.size) return false;
     selected.clear();
+    emit();
+    return true;
+  };
+  wrap._wxState = (withNeighbours) => {
+    if (nbOn && withNeighbours && nbStation) {
+      return {
+        selected: Array.from(selected),
+        nb: { station: nbStation, prev: nbPrev ? Array.from(nbPrev) : [] },
+      };
+    }
+    return { selected: Array.from(selected), nb: null };
+  };
+  wrap._wxRestore = (st) => {
+    if (!st) return false;
+    const known = new Set(stations);
+    nbCancel();
+    selected.clear();
+    if (st.nb && neighbours) {
+      const picks = neighbours.resolve(st.nb.station);
+      if (picks.length) {
+        nbOn = true;
+        nbStation = st.nb.station;
+        nbOrder = picks.slice();
+        nbPrev = new Set(st.nb.prev.filter((name) => known.has(name)));
+        for (const name of picks) selected.add(name);
+        emit();
+        return true;
+      }
+    }
+    for (const name of st.selected) if (known.has(name)) selected.add(name);
+    if (!selected.size) return false;
     emit();
     return true;
   };
@@ -1726,6 +1769,15 @@ function kickMountsSoon() {
   });
 }
 
+function mountWithin(root) {
+  if (!root) return;
+  for (let i = 0; i < _mountQueue.length; ) {
+    const job = _mountQueue[i];
+    if (job.node.isConnected && root.contains(job.node)) runMount(i);
+    else i++;
+  }
+}
+
 function queueMount(node, run) {
   _mountQueue.push({ node: node, run: run, born: performance.now() });
   kickMounts();
@@ -2422,6 +2474,10 @@ function ensureGridToggleStyles() {
     ".wx-grid-mode.on .box svg{opacity:1;}",
     ".wx-grid-toggle input[type=\"checkbox\"]{cursor:pointer;width:12px;height:12px;margin:0;",
     "accent-color:var(--accent,#2563eb);}",
+    ".wx-grid-head{display:none;margin-right:auto;min-width:0;flex:0 1 auto;",
+    "font-size:13px;font-weight:600;letter-spacing:-.015em;color:var(--text,#26231f);",
+    "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}",
+    ".wx-grid-head.show{display:block;}",
     "@media (max-width:768px){.wx-grid-toggle{min-height:0;margin:2px 0;",
     "padding:0 6px;}}",
   ].join("");
@@ -3257,6 +3313,741 @@ function overlayColor(i) {
   return NEIGHBOUR_PALETTE[i % NEIGHBOUR_PALETTE.length];
 }
 
+const NEIGHBOUR_MAP_DEM_TILES =
+  "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png";
+
+const NEIGHBOUR_MAP_ATTRIBUTION =
+  "Elevation: Terrain Tiles, Mapzen / AWS Open Data " +
+  "(SRTM, GMTED2010, ETOPO1, NRCan CDEM, USGS NED)";
+
+const NEIGHBOUR_MAP_WIDTH = 360;
+
+const NEIGHBOUR_MAP_HEIGHT = 200;
+
+const NEIGHBOUR_MAP_WIDTH_EXPANDED = 640;
+
+const NEIGHBOUR_MAP_HEIGHT_EXPANDED = 420;
+
+const NEIGHBOUR_MAP_ZOOM_PAD = 0.8;
+
+const NEIGHBOUR_MAP_LABEL_GAP = 3;
+
+const NEIGHBOUR_MAP_EDGE = 2;
+
+const NEIGHBOUR_MAP_ATTRIB_WAIT_MS = 15000;
+
+const NEIGHBOUR_MAP_MATCH_MS = 30 * 60 * 1000;
+
+const NEIGHBOUR_MAP_RAIN_COL = "Rn_1";
+
+const NEIGHBOUR_MAP_RING_PX = 2;
+
+const NEIGHBOUR_MAP_RING_FALLBACK = "#8a857d";
+
+const NEIGHBOUR_MAP_UNITS = {
+  Rh: { unit: "%", gap: "", digits: 0 },
+  Temp: { unit: "\u00b0C", gap: "", digits: 1 },
+  Wspd: { unit: "km/h", gap: " ", digits: 1 },
+  Mx_Spd: { unit: "km/h", gap: " ", digits: 1 },
+  Rn_1: { unit: "mm", gap: " ", digits: 1 },
+  Vbat: { unit: "V", gap: " ", digits: 1 },
+};
+
+const MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+const NEIGHBOUR_MAP_ZOOM_MIN = 3;
+
+const NEIGHBOUR_MAP_ZOOM_MAX = 12;
+
+const NEIGHBOUR_MAP_MIN_SPAN_DEG = 0.02;
+
+const NEIGHBOUR_MAP_HALO = "#ffffff";
+
+const NEIGHBOUR_MAP_PAPER = "#f3f2ef";
+
+const NEIGHBOUR_MAP_FONT =
+  '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
+const NEIGHBOUR_MAP_STYLE = {
+  version: 8,
+  sources: {
+    dem: {
+      type: "raster-dem",
+      tiles: [NEIGHBOUR_MAP_DEM_TILES],
+      tileSize: 256,
+      maxzoom: 15,
+      encoding: "terrarium",
+      attribution: NEIGHBOUR_MAP_ATTRIBUTION,
+    },
+  },
+  layers: [
+    {
+      id: "paper",
+      type: "background",
+      paint: { "background-color": NEIGHBOUR_MAP_PAPER },
+    },
+    {
+      id: "relief",
+      type: "hillshade",
+      source: "dem",
+      paint: {
+        "hillshade-illumination-direction": 315,
+        "hillshade-exaggeration": 0.55,
+        "hillshade-shadow-color": "#5f5a52",
+        "hillshade-highlight-color": "#ffffff",
+        "hillshade-accent-color": "#8a857d",
+      },
+    },
+  ],
+};
+
+const EARTH_RADIUS_KM = 6371;
+
+function ensureNeighbourMapStyles() {
+  if (document.getElementById("wx-nbmap-styles")) return;
+  ensureCardExpandStyles();
+  const st = document.createElement("style");
+  st.id = "wx-nbmap-styles";
+  st.textContent = [
+    ".wx-insight-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;}",
+    ".wx-insight-row > .wx-insight-shell{flex:1 1 auto;min-width:0;margin-bottom:0;}",
+    ".wx-nb-map-slot{flex:0 0 auto;max-width:100%;}",
+    ".wx-nb-map-slot:empty{display:none;}",
+    ".wx-nb-map{display:none;position:relative;flex:0 0 auto;",
+    "background:" + NEIGHBOUR_MAP_PAPER + ";border:1px solid var(--line,#e8e6e3);",
+    "border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden;",
+    "transition:border-color .2s ease,box-shadow .24s ease;}",
+    ".wx-nb-map.show{display:block;}",
+    ".wx-nb-map.wx-expanded{border-color:#dcd9d4;box-shadow:0 6px 22px rgba(0,0,0,.07);}",
+    ".wx-nb-map:hover .wx-expand-btn{opacity:1;}",
+    ".wx-nb-map .wx-expand-btn{background:rgba(255,255,255,.85);",
+    "border-color:var(--line,#e8e6e3);}",
+    ".wx-nb-map .wx-expand-btn:hover{background:#fff;}",
+    ".wx-nb-map-plot{display:block;}",
+    ".wx-nb-map-labels{position:absolute;left:0;top:0;right:0;bottom:0;",
+    "pointer-events:none;overflow:hidden;z-index:2;}",
+    ".wx-nb-map-labels > span{position:absolute;left:0;top:0;white-space:nowrap;",
+    "font-size:11px;line-height:14px;font-weight:600;color:var(--text,#26231f);",
+    "padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.86);",
+    "box-shadow:0 0 0 1px rgba(38,35,31,.06);}",
+    ".wx-nb-map-labels > span.focus{font-weight:700;}",
+    ".wx-nb-map-labels .km{color:#5f5a52;font-weight:500;}",
+    ".wx-nb-map-labels .val{font-weight:700;}",
+    ".wx-nb-map-labels .none{color:var(--text-muted,#8a857d);font-weight:500;}",
+    ".wx-nb-map-labels > span.off{color:var(--text-muted,#8a857d);}",
+    ".wx-nb-map-labels > i{position:absolute;left:0;top:0;box-sizing:border-box;",
+    "border-radius:50%;border:2px solid transparent;",
+    "box-shadow:0 0 0 2px #fff;}",
+    ".wx-nb-map-labels > i.hollow{background:#fff!important;}",
+    ".wx-nb-map-labels > i.off{opacity:.35;}",
+    ".wx-nb-map-time{position:absolute;left:8px;top:8px;z-index:3;display:none;",
+    "padding:2px 7px;border-radius:6px;font-size:10px;font-weight:600;",
+    "letter-spacing:.02em;color:var(--text,#26231f);background:rgba(255,255,255,.85);",
+    "border:1px solid var(--line,#e8e6e3);pointer-events:none;}",
+    ".wx-nb-map-time.on{display:block;}",
+    ".wx-nb-map .maplibregl-ctrl-attrib{font-size:9px;",
+    "background:rgba(255,255,255,.75)!important;color:var(--text-muted,#8a857d);}",
+    ".wx-nb-map .maplibregl-ctrl-attrib a{color:var(--text-muted,#8a857d);}",
+    "@media (max-width:768px){.wx-insight-row{flex-wrap:wrap;margin-bottom:10px;}",
+    ".wx-nb-map{max-width:100%;}}",
+  ].join("");
+  document.head.appendChild(st);
+}
+
+function distanceKm(a, b) {
+  const rad = Math.PI / 180;
+  const dLat = (b.lat - a.lat) * rad;
+  const dLon = (b.lon - a.lon) * rad;
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLon / 2) ** 2;
+  return 2 * EARTH_RADIUS_KM * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+}
+
+function distanceLabel(km) {
+  return km >= 1 ? `${Math.round(km)} km` : `${km.toFixed(1)} km`;
+}
+
+function neighbourMapView(points, w, h) {
+  const mercY = (lat) => Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360));
+  let lonLo = Infinity;
+  let lonHi = -Infinity;
+  let yLo = Infinity;
+  let yHi = -Infinity;
+  for (const p of points) {
+    const y = mercY(p.lat);
+    lonLo = Math.min(lonLo, p.lon);
+    lonHi = Math.max(lonHi, p.lon);
+    yLo = Math.min(yLo, y);
+    yHi = Math.max(yHi, y);
+  }
+  const lonSpan = Math.max(lonHi - lonLo, NEIGHBOUR_MAP_MIN_SPAN_DEG);
+  const ySpan = Math.max(yHi - yLo, (NEIGHBOUR_MAP_MIN_SPAN_DEG * Math.PI) / 180);
+  const zx = Math.log2((w * 360) / (512 * lonSpan));
+  const zy = Math.log2((h * 2 * Math.PI) / (512 * ySpan));
+  const zoom = Math.max(
+    NEIGHBOUR_MAP_ZOOM_MIN,
+    Math.min(NEIGHBOUR_MAP_ZOOM_MAX, Math.min(zx, zy) - NEIGHBOUR_MAP_ZOOM_PAD)
+  );
+  const yMid = (yLo + yHi) / 2;
+  return {
+    center: {
+      lon: (lonLo + lonHi) / 2,
+      lat: ((2 * Math.atan(Math.exp(yMid)) - Math.PI / 2) * 180) / Math.PI,
+    },
+    zoom: zoom,
+  };
+}
+
+function neighbourMapProject(view, w, h) {
+  const scale = 512 * Math.pow(2, view.zoom);
+  const fx = (lon) => ((lon + 180) / 360) * scale;
+  const fy = (lat) => {
+    const r = (lat * Math.PI) / 180;
+    return ((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2) * scale;
+  };
+  const cx = fx(view.center.lon);
+  const cy = fy(view.center.lat);
+  return (lon, lat) => ({ x: fx(lon) - cx + w / 2, y: fy(lat) - cy + h / 2 });
+}
+
+function gridTimeMs(v) {
+  if (typeof v === "number") return v;
+  const m = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})(?::(\d{2}))?/.exec(String(v));
+  if (!m) return NaN;
+  return Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +(m[6] || 0));
+}
+
+function mapTimeLabel(ms) {
+  const d = new Date(ms);
+  const hh = String(d.getUTCHours()).padStart(2, "0");
+  const mm = String(d.getUTCMinutes()).padStart(2, "0");
+  return `${MONTH_ABBR[d.getUTCMonth()]} ${d.getUTCDate()} ${hh}:${mm}`;
+}
+
+function mapValueText(v, col) {
+  const u = NEIGHBOUR_MAP_UNITS[col] || { unit: "", gap: "", digits: 1 };
+  return v.toFixed(u.digits) + (u.unit ? u.gap + u.unit : "");
+}
+
+function gridSeriesAt(series, xval) {
+  if (!series || !series.t.length) return null;
+  const t = series.t;
+  let lo = 0;
+  let hi = t.length - 1;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (t[mid] < xval) lo = mid + 1;
+    else hi = mid;
+  }
+  let best = -1;
+  let gap = Infinity;
+  for (const i of [lo - 1, lo]) {
+    if (i < 0 || i >= t.length) continue;
+    const d = Math.abs(t[i] - xval);
+    if (d < gap) {
+      gap = d;
+      best = i;
+    }
+  }
+  if (best < 0 || gap > NEIGHBOUR_MAP_MATCH_MS) return null;
+  const v = series.v[best];
+  return isFinite(v) ? v : null;
+}
+
+function gridStationSeries(data, source, axisStations, col) {
+  const out = new Map();
+  (source || []).forEach((tr, i) => {
+    if (!tr || isAlertTrace(tr)) return;
+    const ht = typeof tr.hovertemplate === "string" ? tr.hovertemplate : "";
+    const m = GRID_COL_RE.exec(ht);
+    const label = (tr.meta && tr.meta.col) || (m ? m[1] : null);
+    if (col && label !== col) return;
+    const name = axisStations.get(tr.xaxis || "x");
+    if (!name) return;
+    const use = data[i] || tr;
+    const xs = decodeArray(use.x);
+    const ys = decodeArray(use.y);
+    if (!xs || !ys) return;
+    let s = out.get(name);
+    if (!s) {
+      s = { pts: [] };
+      out.set(name, s);
+    }
+    for (let k = 0; k < xs.length && k < ys.length; k++) {
+      const t = gridTimeMs(xs[k]);
+      const y = ys[k] === null || ys[k] === undefined ? NaN : Number(ys[k]);
+      if (isFinite(t)) s.pts.push([t, y]);
+    }
+  });
+  for (const [name, s] of out) {
+    s.pts.sort((a, b) => a[0] - b[0]);
+    out.set(name, { t: s.pts.map((p) => p[0]), v: s.pts.map((p) => p[1]) });
+  }
+  return out;
+}
+
+function gridAlertMarks(fig, axisStations) {
+  const out = new Map();
+  const add = (name, mark) => {
+    const key = neighbourKey(name);
+    if (!out.has(key)) out.set(key, []);
+    out.get(key).push(mark);
+  };
+  for (const sh of (fig && fig.layout && fig.layout.shapes) || []) {
+    if (!sh || sh.type !== "rect" || typeof sh.xref !== "string") continue;
+    const name = axisStations.get(sh.xref);
+    const color = solid(sh.fillcolor);
+    if (!name || !color) continue;
+    const a = gridTimeMs(sh.x0);
+    const b = gridTimeMs(sh.x1);
+    if (!isFinite(a) || !isFinite(b)) continue;
+    add(name, { x0: Math.min(a, b), x1: Math.max(a, b), color: color });
+  }
+  for (const tr of (fig && fig.data) || []) {
+    if (!tr || tr.mode !== "markers" || tr.hovertemplate) continue;
+    if (tr.meta && tr.meta.band_hover) continue;
+    const name = axisStations.get(tr.xaxis || "x");
+    if (!name) continue;
+    const xs = decodeArray(tr.x) || [];
+    const raw = tr.marker && tr.marker.color;
+    const colors = decodeArray(raw);
+    const flat = typeof raw === "string" ? raw : null;
+    for (let i = 0; i < xs.length; i++) {
+      const t = gridTimeMs(xs[i]);
+      const color = solid((colors && colors[i]) || flat);
+      if (!isFinite(t) || !color) continue;
+      add(name, {
+        x0: t - NEIGHBOUR_MAP_MATCH_MS,
+        x1: t + NEIGHBOUR_MAP_MATCH_MS,
+        color: color,
+      });
+    }
+  }
+  return out;
+}
+
+function gridAlertsAt(marks, xval) {
+  const out = new Map();
+  for (const [key, list] of marks) {
+    for (const m of list) {
+      if (xval >= m.x0 && xval < m.x1) {
+        out.set(key, m.color);
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+function windowAlertColors(findings) {
+  const best = new Map();
+  for (const f of findings || []) {
+    if (!f || !f.station) continue;
+    const key = neighbourKey(f.station);
+    const sev = ovSeverity(f);
+    const have = best.get(key);
+    if (have && have.sev >= sev) continue;
+    best.set(key, { sev: sev, color: solid(f.color) || NEIGHBOUR_MAP_RING_FALLBACK });
+  }
+  const out = new Map();
+  for (const [key, v] of best) out.set(key, v.color);
+  return out;
+}
+
+function neighbourMapLabel(label, name, km, focus) {
+  label.node.className = focus ? "focus" : "";
+  label.node.innerHTML = "";
+  label.node.appendChild(document.createTextNode(km ? name + " " : name));
+  if (km) label.node.appendChild(el("span", "km", `(${km})`));
+  label.dot.className = "";
+}
+
+function neighbourMapReading(label, name, km, focus, reading) {
+  const off = reading.value === null;
+  label.node.className = (focus ? "focus" : "") + (off ? " off" : "");
+  label.node.innerHTML = "";
+  label.node.appendChild(document.createTextNode(km ? `${name} (${km}) ` : name + " "));
+  label.node.appendChild(
+    off ? el("span", "none", "no data") : el("span", "val", reading.text)
+  );
+  label.dot.className = off ? "off" : reading.hollow ? "hollow" : "";
+}
+
+function boxesOverlap(a, b) {
+  return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+}
+
+function placeNeighbourLabels(labels, at, w, h) {
+  const marks = labels.map((l, i) => {
+    const p = at[i];
+    const r = l.size / 2 + 2;
+    return { x: p.x - r, y: p.y - r, w: 2 * r, h: 2 * r };
+  });
+  const placed = [];
+  labels.forEach((l, i) => {
+    const p = at[i];
+    const lw = l.node.offsetWidth;
+    const lh = l.node.offsetHeight;
+    const gap = l.size / 2 + NEIGHBOUR_MAP_LABEL_GAP;
+    const spots = [
+      { x: p.x + gap, y: p.y - lh / 2 },
+      { x: p.x - gap - lw, y: p.y - lh / 2 },
+      { x: p.x - lw / 2, y: p.y - gap - lh },
+      { x: p.x - lw / 2, y: p.y + gap },
+      { x: p.x + gap - 2, y: p.y - gap - lh + 2 },
+      { x: p.x - gap - lw + 2, y: p.y - gap - lh + 2 },
+      { x: p.x + gap - 2, y: p.y + gap - 2 },
+      { x: p.x - gap - lw + 2, y: p.y + gap - 2 },
+    ].map((q) => ({ x: q.x, y: q.y, w: lw, h: lh }));
+    const inside = (q) =>
+      q.x >= NEIGHBOUR_MAP_EDGE &&
+      q.y >= NEIGHBOUR_MAP_EDGE &&
+      q.x + q.w <= w - NEIGHBOUR_MAP_EDGE &&
+      q.y + q.h <= h - NEIGHBOUR_MAP_EDGE;
+    const clear = (q) =>
+      !placed.some((o) => boxesOverlap(q, o)) &&
+      !marks.some((m, j) => j !== i && boxesOverlap(q, m));
+    const pick =
+      spots.find((q) => inside(q) && clear(q)) ||
+      spots.find((q) => inside(q)) ||
+      spots[0];
+    placed.push(pick);
+    l.node.style.transform = `translate(${Math.round(pick.x)}px,${Math.round(pick.y)}px)`;
+    if (l.dot) {
+      l.dot.style.transform =
+        `translate(${Math.round(p.x - l.size / 2)}px,${Math.round(p.y - l.size / 2)}px)`;
+    }
+  });
+}
+
+function collapseMapAttribution(plot) {
+  const fold = () => {
+    const box = plot.querySelector(".maplibregl-ctrl-attrib.maplibregl-compact-show");
+    if (!box) return false;
+    box.classList.remove("maplibregl-compact-show");
+    box.removeAttribute("open");
+    return true;
+  };
+  if (fold()) return () => {};
+  const watch = new MutationObserver(() => {
+    if (fold()) stop();
+  });
+  const timer = setTimeout(() => stop(), NEIGHBOUR_MAP_ATTRIB_WAIT_MS);
+  const stop = () => {
+    watch.disconnect();
+    clearTimeout(timer);
+  };
+  watch.observe(plot, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ["class", "open"],
+  });
+  return stop;
+}
+
+let _sharedNeighbourMap = null;
+
+function sharedNeighbourMap() {
+  if (!_sharedNeighbourMap) _sharedNeighbourMap = neighbourMap();
+  return _sharedNeighbourMap;
+}
+
+function inActivePane(node) {
+  return !!(node && node.closest && node.closest(".tab-pane.active"));
+}
+
+function neighbourMap() {
+  ensureNeighbourMapStyles();
+  const node = el("div", "wx-nb-map");
+  const plot = el("div", "wx-nb-map-plot");
+  const layer = el("div", "wx-nb-map-labels");
+  const chip = el("div", "wx-nb-map-time");
+  node.appendChild(plot);
+  node.appendChild(layer);
+  node.appendChild(chip);
+
+  let valuesAt = null;
+  let owner = null;
+  let expanded = false;
+  let drawn = false;
+  let sig = null;
+  let last = null;
+  let current = null;
+  let place = null;
+  let hoverAt = null;
+  let shownAt = null;
+  let clearTimer = 0;
+  let unbind = () => {};
+  let unwatch = () => {};
+
+  const size = () =>
+    expanded
+      ? { w: NEIGHBOUR_MAP_WIDTH_EXPANDED, h: NEIGHBOUR_MAP_HEIGHT_EXPANDED }
+      : { w: NEIGHBOUR_MAP_WIDTH, h: NEIGHBOUR_MAP_HEIGHT };
+
+  const btn = expandButton(() => {
+    expanded = !expanded;
+    setExpandButton(btn, expanded);
+    node.classList.toggle("wx-expanded", expanded);
+    if (last) {
+      sig = null;
+      show(last.focus, last.names, valuesAt, owner);
+    }
+  });
+  node.appendChild(btn);
+
+  const release = () => {
+    unbind();
+    unbind = () => {};
+    unwatch();
+    unwatch = () => {};
+    place = null;
+    current = null;
+  };
+
+  const paintLabels = () => {
+    if (!current) return;
+    const status = typeof valuesAt === "function" ? valuesAt(hoverAt) : null;
+    const readings = status && status.values ? status : null;
+    const alerts = status && status.alerts ? status.alerts : null;
+    shownAt = readings ? hoverAt : null;
+    current.forEach((l) => {
+      const ring = alerts ? alerts.get(neighbourKey(l.name)) : null;
+      l.dot.style.boxShadow = ring
+        ? `0 0 0 2px #fff, 0 0 0 ${NEIGHBOUR_MAP_RING_PX + 2}px ${ring}`
+        : "";
+    });
+    if (readings) {
+      chip.textContent = mapTimeLabel(hoverAt);
+      chip.className = "wx-nb-map-time on";
+    } else {
+      chip.className = "wx-nb-map-time";
+    }
+    current.forEach((l, i) => {
+      if (!readings) {
+        neighbourMapLabel(l, l.name, l.km, i === 0);
+        return;
+      }
+      const v = readings.values.get(neighbourKey(l.name));
+      const value = v === undefined ? null : v;
+      neighbourMapReading(l, l.name, l.km, i === 0, {
+        value: value,
+        text: value === null ? "" : mapValueText(value, readings.col),
+        hollow: readings.col === NEIGHBOUR_MAP_RAIN_COL && value !== null &&
+          Math.round(value * 10) === 0,
+      });
+    });
+    if (place) place();
+  };
+
+  const setTime = (xval, slot) => {
+    if (slot && slot !== owner) return;
+    if (clearTimer) {
+      clearTimeout(clearTimer);
+      clearTimer = 0;
+    }
+    if (xval === null || xval === undefined) {
+      if (hoverAt === null) return;
+      clearTimer = setTimeout(() => {
+        clearTimer = 0;
+        hoverAt = null;
+        paintLabels();
+      }, HOVER_HOLD_MS);
+      return;
+    }
+    hoverAt = xval;
+    if (shownAt === xval) return;
+    paintLabels();
+  };
+
+  let parked = false;
+
+  const hide = () => {
+    node.classList.remove("show");
+    if (node.parentNode) node.parentNode.removeChild(node);
+    owner = null;
+    hoverAt = null;
+    shownAt = null;
+    parked = true;
+    if (clearTimer) {
+      clearTimeout(clearTimer);
+      clearTimer = 0;
+    }
+    chip.className = "wx-nb-map-time";
+  };
+
+  const attachLabels = (labels, view, w, h) => {
+    layer.innerHTML = "";
+    for (const l of labels) {
+      l.dot.style.width = l.size + "px";
+      l.dot.style.height = l.size + "px";
+      l.dot.style.background = l.color;
+      l.dot.style.borderColor = l.color;
+      layer.appendChild(l.dot);
+    }
+    for (const l of labels) layer.appendChild(l.node);
+    const fixed = neighbourMapProject(view, w, h);
+    const sub =
+      plot._fullLayout && plot._fullLayout.map && plot._fullLayout.map._subplot;
+    const gl = sub && sub.map && typeof sub.map.project === "function" ? sub.map : null;
+    current = labels;
+    place = () => {
+      const at = labels.map((l) => {
+        if (gl) {
+          const q = gl.project([l.lon, l.lat]);
+          return { x: q.x, y: q.y };
+        }
+        return fixed(l.lon, l.lat);
+      });
+      placeNeighbourLabels(labels, at, w, h);
+    };
+    shownAt = null;
+    paintLabels();
+    if (gl) {
+      const move = () => {
+        if (place) place();
+      };
+      gl.on("move", move);
+      unbind = () => gl.off("move", move);
+    }
+  };
+
+  const show = (focus, names, source, slot) => {
+    if (
+      slot && owner && slot !== owner && owner.isConnected &&
+      inActivePane(owner) && !inActivePane(slot)
+    ) {
+      return;
+    }
+    if (slot && node.parentNode !== slot) slot.appendChild(node);
+    const switched = owner !== (slot || null) || valuesAt !== (source || null);
+    owner = slot || null;
+    valuesAt = source || null;
+    const here = stationCoord(focus);
+    if (!here || !names || !names.length) {
+      hide();
+      return;
+    }
+    const items = [];
+    names.forEach((name, i) => {
+      const at = stationCoord(name);
+      if (!at) return;
+      items.push({
+        name: name,
+        at: at,
+        color: overlayColor(i),
+        km: distanceLabel(distanceKm(here, at)),
+      });
+    });
+    if (!items.length) {
+      hide();
+      return;
+    }
+
+    last = { focus: focus, names: names };
+    node.classList.add("show");
+    const { w, h } = size();
+    const next = [focus, w].concat(items.map((it) => it.name)).join("\u0001");
+    const wasParked = parked;
+    parked = false;
+    if (drawn && next === sig && (current || !wasParked)) {
+      if (switched || wasParked) {
+        hoverAt = null;
+        shownAt = null;
+        paintLabels();
+      }
+      return;
+    }
+    sig = next;
+    release();
+    layer.innerHTML = "";
+
+    plot.style.width = w + "px";
+    plot.style.height = h + "px";
+
+    const data = items.map((it) => ({
+      type: "scattermap",
+      mode: "lines",
+      lon: [here.lon, it.at.lon],
+      lat: [here.lat, it.at.lat],
+      line: { color: it.color, width: 1.2 },
+      opacity: 0.55,
+      hoverinfo: "skip",
+      showlegend: false,
+    }));
+    const all = [{ at: here, color: OVERLAY_FOCUS_COLOR, name: focus, km: null, size: 10 }]
+      .concat(items.map((it) => ({
+        at: it.at,
+        color: it.color,
+        name: it.name,
+        km: it.km,
+        size: 8,
+      })));
+
+    const view = neighbourMapView(all.map((p) => p.at), w, h);
+    const layout = {
+      width: w,
+      height: h,
+      margin: { l: 0, r: 0, t: 0, b: 0 },
+      showlegend: false,
+      paper_bgcolor: NEIGHBOUR_MAP_PAPER,
+      font: { family: NEIGHBOUR_MAP_FONT, size: 11, color: DETAIL_HOVER_TEXT },
+      map: {
+        style: NEIGHBOUR_MAP_STYLE,
+        center: view.center,
+        zoom: view.zoom,
+      },
+    };
+    const labels = all.map((p) => ({
+      node: el("span"),
+      dot: el("i"),
+      name: p.name,
+      km: p.km,
+      color: p.color,
+      lon: p.at.lon,
+      lat: p.at.lat,
+      size: p.size,
+    }));
+    const mine = sig;
+    let done;
+    try {
+      done = Plotly.react(plot, data, layout, {
+        displayModeBar: false,
+        scrollZoom: true,
+        responsive: false,
+      });
+      drawn = true;
+    } catch (e) {
+      console.warn("neighbour map failed", e);
+      hide();
+      return;
+    }
+    Promise.resolve(done)
+      .then(() => {
+        if (sig !== mine || !node.isConnected) return;
+        unwatch = collapseMapAttribution(plot);
+        attachLabels(labels, view, w, h);
+      })
+      .catch((e) => {
+        console.warn("neighbour map failed", e);
+        hide();
+      });
+  };
+
+  return {
+    node: node,
+    show: show,
+    hide: (slot) => {
+      if (slot && owner && slot !== owner) return;
+      hide();
+    },
+    time: setTime,
+  };
+}
+
 function buildOverlayFigure(fig, cells, rowPx, selected, link, ranges, rank, focus) {
   if (!selected || !selected.size) return null;
 
@@ -3476,8 +4267,6 @@ function stationGrid(c, views, opts) {
   let baseSlots = null;
   let pendingRanges = null;
   let viewKey = null;
-  let lastSig = null;
-  let lastPd = null;
   let cumFrom = null;
   let cumData = null;
 
@@ -3516,6 +4305,45 @@ function stationGrid(c, views, opts) {
   useFigure(list[0].key);
 
   const g = graph(fig, { height: h, noModeBar: true });
+  const selPd = el("div", "wx-plot wx-plot-sel");
+  selPd.style.width = "100%";
+  selPd.style.display = "none";
+  g.appendChild(selPd);
+  const sigs = new WeakMap();
+  const baseView = list[0].key;
+  const activePd = () => wrap._wxGridPlot || g._wxPlotDiv;
+  const showPd = (pd) => {
+    const was = activePd();
+    if (was === pd && pd.style.display !== "none") return;
+    if (typeof wrap._wxSpikeOff === "function") wrap._wxSpikeOff();
+    const base = g._wxPlotDiv;
+    base.style.display = pd === base ? "" : "none";
+    selPd.style.display = pd === selPd ? "" : "none";
+    wrap._wxGridPlot = pd;
+    if (pd._wxSpikeAt) {
+      wrap._wxSpikeAt = pd._wxSpikeAt;
+      wrap._wxSpikeOff = pd._wxSpikeOff;
+    }
+  };
+  let selFitTimer = 0;
+  const fitSel = () => {
+    if (selFitTimer) clearTimeout(selFitTimer);
+    selFitTimer = setTimeout(() => {
+      selFitTimer = 0;
+      if (selPd._wxDrawn && selPd.style.display !== "none") fitPlot(selPd);
+    }, 140);
+  };
+  if (typeof ResizeObserver === "function") {
+    let selRaf = 0;
+    new ResizeObserver(() => {
+      if (selRaf) return;
+      selRaf = requestAnimationFrame(() => {
+        selRaf = 0;
+        if (!selPd._wxDrawn || selPd.style.display === "none" || g._wxHold) return;
+        if (syncSize(selPd)) fitSel();
+      });
+    }).observe(selPd);
+  }
 
   let selected = null;
   let order = null;
@@ -3555,7 +4383,7 @@ function stationGrid(c, views, opts) {
   };
 
   const linkGeom = (totals) => {
-    const pd = g._wxPlotDiv;
+    const pd = selPd._wxDrawn ? selPd : g._wxPlotDiv;
     const dpd = panelPlot(wrap._wxPanel);
     if (!pd || !dpd || !pd._fullLayout || !dpd._fullLayout) return null;
     const gs = pd._fullLayout._size;
@@ -3582,7 +4410,7 @@ function stationGrid(c, views, opts) {
 
   const refit = () => {
     fitFrame = 0;
-    const pd = g._wxPlotDiv;
+    const pd = activePd();
     const fl = pd && pd._fullLayout;
     if (!fl || !pd.layout || !fitIds || !wrap._wxStacked) return;
     const key = anchorXAxisKey(fl);
@@ -3620,12 +4448,48 @@ function stationGrid(c, views, opts) {
     }
   };
 
+  wrap._wxShareY = (col, base, xrange) => {
+    if (!base || !selected || !selected.size) return null;
+    if (overlay && canCumulate && cumulative && order) return null;
+    if (!gridCol || !col || String(col).toLowerCase() !== gridCol.toLowerCase()) {
+      return null;
+    }
+    const view = spanMs(xrange);
+    if (!view) return null;
+    const lit = wrap._wxPanel;
+    const focus = overlay && lit ? neighbourKey(lit._wxStation || "") : "";
+    const ids = new Set();
+    for (const cell of cells) {
+      if (selected.has(cell.station) || (focus && neighbourKey(cell.station) === focus)) {
+        ids.add(cell.id);
+      }
+    }
+    return ids.size ? stackYRange(fig, ids, base, view) : null;
+  };
+
+  let awaitTimer = 0;
+  let awaiting = false;
+  wrap._wxAwaitDetail = (on) => {
+    if (awaitTimer) {
+      clearTimeout(awaitTimer);
+      awaitTimer = 0;
+    }
+    awaiting = !!on;
+    if (awaiting) {
+      awaitTimer = setTimeout(() => {
+        awaitTimer = 0;
+        awaiting = false;
+        apply();
+      }, GRID_DETAIL_WAIT_MS);
+    }
+  };
+
   wrap._wxRefit = () => {
     if (!fitFrame) fitFrame = requestAnimationFrame(refit);
   };
 
   const captureRanges = () => {
-    const pd = g._wxPlotDiv;
+    const pd = activePd();
     const fl = pd && pd._fullLayout;
     if (!fl) return null;
     const out = new Map();
@@ -3640,8 +4504,11 @@ function stationGrid(c, views, opts) {
 
   const render = () => {
     if (!cells.length) return true;
-    const pd = g._wxPlotDiv;
-    if (!pd || !pd.data || !pd.isConnected) return false;
+    const base = g._wxPlotDiv;
+    if (!base || !base.data || !base.isConnected) return false;
+    if (awaiting && selected && selected.size && !panelPlot(wrap._wxPanel)) return true;
+    const visible = activePd();
+    const pd = selected && selected.size ? selPd : base;
 
     const useRanges = pendingRanges;
     pendingRanges = null;
@@ -3695,11 +4562,14 @@ function stationGrid(c, views, opts) {
     const natural = next.layout.height;
     const chrome = Math.max(
       0,
-      Math.round(wrap.getBoundingClientRect().height - pd.getBoundingClientRect().height)
+      Math.round(wrap.getBoundingClientRect().height - visible.getBoundingClientRect().height)
     );
 
     const canExpand = typeof wrap._wxExpand === "function";
     const isOpen = () => !!(wrap._wxIsExpanded && wrap._wxIsExpanded());
+    const collapsing = canExpand && !filtered && autoExpanded;
+    const expanding = canExpand && filtered && !isOpen();
+    const willOpen = collapsing ? false : expanding ? true : isOpen();
 
     const sig = [
       viewKey,
@@ -3711,7 +4581,7 @@ function stationGrid(c, views, opts) {
       Math.round(rowPx),
       Math.round(natural),
       chrome,
-      isOpen() ? "1" : "0",
+      willOpen ? "1" : "0",
       link
         ? [
             (link.align || []).join(","),
@@ -3721,11 +4591,13 @@ function stationGrid(c, views, opts) {
         : "",
     ].join("~");
 
-    if (!useRanges && pd === lastPd && pd._wxDrawn && sig === lastSig) return true;
-    lastPd = pd;
-    lastSig = sig;
-
-    const collapsing = canExpand && !filtered && autoExpanded;
+    const same =
+      !useRanges &&
+      pd._wxDrawn &&
+      (sigs.has(pd)
+        ? sigs.get(pd) === sig
+        : pd === base && !filtered && viewKey === baseView && !wantOverlay);
+    if (same && pd === visible) return true;
 
     g._wxHold = true;
     try {
@@ -3735,7 +4607,21 @@ function stationGrid(c, views, opts) {
           wrap._wxExpand(false);
         }
         if (typeof wrap._wxRebase === "function") wrap._wxRebase(natural + chrome);
+        if (expanding) {
+          autoExpanded = true;
+          wrap._wxExpand(true, true);
+        }
       });
+
+      showPd(pd);
+      if (same) {
+        if (syncSize(pd)) {
+          if (pd === base) g._wxFit();
+          else fitSel();
+        }
+        return true;
+      }
+      sigs.set(pd, sig);
 
       if (canExpand && isOpen()) {
         delete next.layout.height;
@@ -3748,9 +4634,14 @@ function stationGrid(c, views, opts) {
         Plotly.react(pd, next.data, next.layout, g._wxConfig);
       } catch (e) {
         console.warn("station grid redraw failed", e);
-        lastSig = null;
+        sigs.delete(pd);
         return true;
       }
+      if (pd === selPd && !selPd._wxDrawn) {
+        selPd._wxDrawn = true;
+        if (typeof wrap._wxRewire === "function") wrap._wxRewire();
+      }
+      if (pd === selPd) selPd._wxWidth = selPd.clientWidth;
       fitIds = ids;
 
       if (link && link.yRange && next.yRange) {
@@ -3763,17 +4654,16 @@ function stationGrid(c, views, opts) {
         releasePushed(panelPlot(wrap._wxPanel));
       }
 
-      if (canExpand && filtered && !isOpen()) {
-        autoExpanded = true;
-        quietly(() => wrap._wxExpand(true, true));
-      }
     } finally {
       g._wxHold = false;
     }
 
     const fl = pd._fullLayout;
     const want = Math.round(pd.clientHeight || 0);
-    if (fl && want && Math.abs(Math.round(fl.height || 0) - want) > 1) {
+    if (pd !== base) {
+      syncSize(pd);
+      fitSel();
+    } else if (fl && want && Math.abs(Math.round(fl.height || 0) - want) > 1) {
       if (typeof g._wxResize === "function") g._wxResize();
     } else if (typeof g._wxFit === "function") {
       g._wxFit();
@@ -3794,6 +4684,7 @@ function stationGrid(c, views, opts) {
   );
 
   let bar = null;
+  let nbMap = null;
   if (names.length > 1 || list.length > 1) {
     ensureGridToggleStyles();
     bar = el("div", "wx-grid-toggle");
@@ -3813,6 +4704,7 @@ function stationGrid(c, views, opts) {
         active = v.key;
         for (const b of buttons) b.btn.className = b.key === active ? "on" : "";
         useFigure(active);
+        if (typeof wrap._wxHeaderSync === "function") wrap._wxHeaderSync();
         apply();
       });
       seg.appendChild(btn);
@@ -3876,13 +4768,93 @@ function stationGrid(c, views, opts) {
     bar.appendChild(modeBtn);
     if (cumBtn) bar.appendChild(cumBtn);
 
-    const ctl = stationFilterControl(names, (sel, rank) => {
+    let mapCache = null;
+    const mapSeries = () => {
+      const src = (fig && fig.data) || [];
+      const use = cumulative ? cumulativeSource().data : src;
+      if (mapCache && mapCache.src === src && mapCache.use === use) return mapCache;
+      const col = gridColumnName(fig);
+      mapCache = {
+        src: src,
+        use: use,
+        col: col,
+        series: gridStationSeries(use, src, wrap._wxAxisStations, col),
+      };
+      return mapCache;
+    };
+    let markCache = null;
+    const mapMarks = () => {
+      const src = (fig && fig.data) || [];
+      if (markCache && markCache.src === src) return markCache.marks;
+      markCache = { src: src, marks: gridAlertMarks(fig, wrap._wxAxisStations) };
+      return markCache.marks;
+    };
+    const mapSource = (xval) => {
+      if (xval === null || xval === undefined) {
+        return { col: null, values: null, alerts: wrap._wxAlertColors || null };
+      }
+      const cache = mapSeries();
+      const values = new Map();
+      for (const [name, series] of cache.series) {
+        values.set(neighbourKey(name), gridSeriesAt(series, xval));
+      }
+      return { col: cache.col, values: values, alerts: gridAlertsAt(mapMarks(), xval) };
+    };
+    ensureNeighbourMapStyles();
+    const head = el("div", "wx-grid-head");
+    bar.insertBefore(head, bar.firstChild);
+    let headFocus = null;
+    const syncHeader = () => {
+      if (!headFocus) {
+        head.className = "wx-grid-head";
+        head.textContent = "";
+        return;
+      }
+      const col = gridColumnName(fig);
+      const u = col ? NEIGHBOUR_MAP_UNITS[col] : null;
+      const attr = col ? (u && u.unit ? `${col} (${u.unit})` : col) : "";
+      head.textContent = attr
+        ? `${headFocus} neighbours ${attr}`
+        : `${headFocus} neighbours`;
+      head.title = head.textContent;
+      head.className = "wx-grid-head show";
+    };
+    wrap._wxHeaderSync = syncHeader;
+    const mapSlot = el("div", "wx-nb-map-slot");
+    let mapArgs = null;
+    nbMap = {
+      slot: mapSlot,
+      show: (focus, rank) => {
+        mapArgs = { focus: focus, rank: rank };
+        sharedNeighbourMap().show(focus, rank, mapSource, mapSlot);
+      },
+      hide: () => {
+        mapArgs = null;
+        if (_sharedNeighbourMap) _sharedNeighbourMap.hide(mapSlot);
+      },
+      claim: () => {
+        if (mapArgs) sharedNeighbourMap().show(mapArgs.focus, mapArgs.rank, mapSource, mapSlot);
+      },
+    };
+    wrap._wxMapTime = (xval) => {
+      if (_sharedNeighbourMap) _sharedNeighbourMap.time(xval, mapSlot);
+    };
+    wrap._wxMapClaim = nbMap.claim;
+    wrap._wxMapPark = () => {
+      if (_sharedNeighbourMap) _sharedNeighbourMap.hide(mapSlot);
+    };
+
+    const ctl = stationFilterControl(names, (sel, rank, focus) => {
       selected = sel;
       order = rank && rank.length
         ? new Map(rank.map((name, i) => [name, i]))
         : null;
       if (!selected || !selected.size) overlay = false;
       syncMode();
+      headFocus = order && focus ? focus : null;
+      syncHeader();
+      if (order && focus) nbMap.show(focus, rank);
+      else nbMap.hide();
       apply();
     }, false, {
       focus: () => {
@@ -3896,10 +4868,25 @@ function stationGrid(c, views, opts) {
       typeof ctl._wxClear === "function" ? ctl._wxClear() : false;
     wrap._wxNeighbourSync = () =>
       typeof ctl._wxNbRetarget === "function" ? ctl._wxNbRetarget() : false;
+    wrap._wxGridState = (withNeighbours) => ({
+      filter: ctl._wxState(withNeighbours),
+      overlay: overlay,
+      cumulative: cumulative,
+    });
+    wrap._wxGridRestore = (st) => {
+      if (!st || !st.filter) return;
+      if (!ctl._wxRestore(st.filter)) return;
+      if (!selected || !selected.size) return;
+      overlay = !!st.overlay;
+      cumulative = !!st.cumulative;
+      syncMode();
+      apply();
+    };
     bar.appendChild(ctl);
   }
 
   if (bar) wrap.appendChild(bar);
+  wrap._wxNbMap = nbMap;
 
   wrap.appendChild(g);
   wrap._wxGridPlot = g._wxPlotDiv;
@@ -3925,10 +4912,19 @@ async function insightBanner(fc, hours, tab, panel, onPick) {
   ensureInsightStyles();
 
   const shell = el("div", "wx-insight-shell");
+  const grid = panel ? panel._wxGrid : null;
+  const nbMap = grid ? grid._wxNbMap : null;
+  const out = () => {
+    if (!nbMap) return shell;
+    const line = el("div", "wx-insight-row");
+    line.appendChild(shell);
+    line.appendChild(nbMap.slot);
+    return line;
+  };
   if (!findings.length) {
     const missing = text === null || text === undefined;
     shell.appendChild(emptyTable(missing ? SENSOR_MISSING_TEXT : SENSOR_EMPTY_TEXT));
-    return shell;
+    return out();
   }
 
   const colors = colorMap(palette);
@@ -3936,6 +4932,7 @@ async function insightBanner(fc, hours, tab, panel, onPick) {
     f.color = colors.get(colorKey(f.section, f.station)) || null;
   }
   applySeverity(findings);
+  if (grid) grid._wxAlertColors = windowAlertColors(findings);
 
   const wrap = sensorTable(findings, panel, null, {
     areas: source ? [source[2]] : AREA_ORDER,
@@ -3944,7 +4941,7 @@ async function insightBanner(fc, hours, tab, panel, onPick) {
   });
   shell.appendChild(wrap);
   makeBoxExpandable(shell, wrap);
-  return shell;
+  return out();
 }
 
 const OVERVIEW_TAB = "tab-overview";
@@ -4605,14 +5602,24 @@ function resetOverviewChart(panel) {
   panel.innerHTML = "";
 }
 
-function closeOverviewChart(panel) {
-  resetOverviewChart(panel);
+function closeOverviewChart(panel, keepGrid) {
+  const token = (panel._wxCloseToken || 0) + 1;
+  panel._wxCloseToken = token;
+  if (panel._wxRow) panel._wxRow.classList.remove("sel");
   panel.style.display = "none";
   panel.style.height = "";
   const grid = panel._wxGrid;
-  if (!grid) return;
-  if (typeof grid._wxClearFilter === "function" && grid._wxClearFilter()) return;
-  if (typeof grid._wxRefresh === "function") grid._wxRefresh();
+  if (grid && !keepGrid) {
+    grid._wxYPushed = false;
+    if (typeof grid._wxMapPark === "function") grid._wxMapPark();
+    const cleared =
+      typeof grid._wxClearFilter === "function" && grid._wxClearFilter();
+    if (!cleared && typeof grid._wxRefresh === "function") grid._wxRefresh();
+  }
+  afterPaint().then(() => {
+    if (panel._wxCloseToken !== token || panel.style.display !== "none") return;
+    resetOverviewChart(panel);
+  });
 }
 
 function detailPlotMax() {
@@ -4722,7 +5729,7 @@ function detailSpacer() {
   return wrap;
 }
 
-function openOverviewChart(panel, f, row, pick) {
+function openOverviewChart(panel, f, row, pick, view) {
   ensureOverviewStyles();
   ensureDetailStyles();
   const wasOpen = panel.style.display !== "none";
@@ -4781,6 +5788,13 @@ function openOverviewChart(panel, f, row, pick) {
   };
   opts.foldHead = fold;
   opts.pick = pick || null;
+  opts.view = view || null;
+  opts.shareY = (col, base, xrange) => {
+    const grid = panel._wxGrid;
+    return grid && typeof grid._wxShareY === "function"
+      ? grid._wxShareY(col, base, xrange)
+      : null;
+  };
   detailModule()
     .then((m) => {
       if (fold && loading.isConnected && typeof m.plotHeight === "function") {
@@ -4793,6 +5807,7 @@ function openOverviewChart(panel, f, row, pick) {
       const grid = panel._wxGrid;
       if (grid) {
         requestAnimationFrame(() => {
+          if (typeof grid._wxAwaitDetail === "function") grid._wxAwaitDetail(false);
           if (
             typeof grid._wxNeighbourSync === "function" &&
             grid._wxNeighbourSync()
@@ -4811,6 +5826,11 @@ function openOverviewChart(panel, f, row, pick) {
     })
     .catch((e) => {
       console.warn("detail module failed", e);
+      const held = panel._wxGrid;
+      if (held && typeof held._wxAwaitDetail === "function") {
+        held._wxAwaitDetail(false);
+        if (typeof held._wxRefresh === "function") held._wxRefresh();
+      }
       if (!panel.isConnected) return;
       body.innerHTML = "";
       body.appendChild(
@@ -6117,17 +7137,22 @@ function wirePanelHover(panel) {
     }
   };
 
+  const mapTime = (xval) => {
+    if (typeof wrap._wxMapTime === "function") wrap._wxMapTime(xval);
+  };
+
   dpd.on("plotly_hover", (ev) => {
     cancel();
-    if (!wrap._wxStacked || hoverEcho(dpd)) return;
     const pt = ev && ev.points && ev.points[0];
-    if (!pt) return;
-    const xval = axisValue(hoverAxis(dpd, pt), pt.x);
+    const xval = pt ? axisValue(hoverAxis(dpd, pt), pt.x) : null;
+    if (xval !== null) mapTime(xval);
+    if (!wrap._wxStacked || hoverEcho(dpd)) return;
     if (xval === null) return;
     gridHoverAt(wrap, panel._wxStation, xval);
   });
   dpd.on("plotly_unhover", () => {
     cancel();
+    mapTime(null);
     if (!wrap._wxStacked || hoverEcho(dpd)) return;
     timer = setTimeout(() => {
       timer = 0;
@@ -6342,6 +7367,22 @@ function wirePanelRangeSync(panel, dpd) {
   );
 }
 
+function wireGridMapTime(wrap) {
+  const pd = wrap._wxGridPlot;
+  if (!pd || typeof pd.on !== "function" || pd._wxMapTimeWired) return;
+  pd._wxMapTimeWired = true;
+  const send = (xval) => {
+    if (typeof wrap._wxMapTime === "function") wrap._wxMapTime(xval);
+  };
+  pd.on("plotly_hover", (ev) => {
+    const pt = ev && ev.points && ev.points[0];
+    const xval = pt ? axisValue(hoverAxis(pd, pt), pt.x) : null;
+    if (xval !== null) send(xval);
+  });
+  pd.on("plotly_unhover", () => send(null));
+  pd.addEventListener("mouseleave", () => send(null));
+}
+
 function wireGridSpike(wrap) {
   const pd = wrap._wxGridPlot;
   const host = wrap._wxGraphWrap;
@@ -6429,6 +7470,8 @@ function wireGridSpike(wrap) {
     return true;
   };
 
+  pd._wxSpikeAt = place;
+  pd._wxSpikeOff = hide;
   wrap._wxSpikeAt = place;
   wrap._wxSpikeOff = hide;
 
@@ -6525,11 +7568,13 @@ function wireGridStationClicks(wrap, g) {
     }
     wireGridAlertClicks(wrap);
     wireGridSpike(wrap);
+    wireGridMapTime(wrap);
     wireGridRangeSync(wrap);
     wireGridFit(wrap);
     wireGridZoom(wrap);
   };
 
+  wrap._wxRewire = run;
   if (g && typeof g._wxOnDrawn === "function") g._wxOnDrawn(run);
 }
 
@@ -6662,10 +7707,40 @@ function restoreOpenDetail(saved, pane) {
   const f = row && row._wxFinding
     ? row._wxFinding
     : { station: saved.station, tab: saved.tab };
-  openOverviewChart(panel, f, row, saved.pick || null);
+  openOverviewChart(panel, f, row, saved.pick || null, saved.view || null);
 }
 
 let _pendingDetail = null;
+
+function activeGrid(pane) {
+  const root = pane || activePane();
+  if (!root) return null;
+  for (const g of root.querySelectorAll(".station-grid")) {
+    if (typeof g._wxGridState === "function") return g;
+  }
+  return null;
+}
+
+function captureGridState(withNeighbours) {
+  const grid = activeGrid();
+  return grid ? grid._wxGridState(withNeighbours) : null;
+}
+
+function restoreCarried(saved, gridState, pane) {
+  const opening = !!(saved && saved.station);
+  const grid = activeGrid(pane);
+  if (opening && gridState && grid && typeof grid._wxAwaitDetail === "function") {
+    grid._wxAwaitDetail(true);
+  }
+  if (opening) restoreOpenDetail(saved, pane);
+  if (gridState) restoreGridState(gridState, pane);
+}
+
+function restoreGridState(saved, pane) {
+  if (!saved) return;
+  const grid = activeGrid(pane);
+  if (grid && typeof grid._wxGridRestore === "function") grid._wxGridRestore(saved);
+}
 
 const TAB_PREFETCH_DELAY_MS = 150;
 
@@ -6713,6 +7788,26 @@ function tabShell() {
       cancelPrefetch();
       renderTab(t.id);
     });
+    let hoverTimer = 0;
+    btn.addEventListener("pointerenter", (ev) => {
+      if (ev.pointerType && ev.pointerType !== "mouse") return;
+      if (t.id === state.activeTab) return;
+      if (hoverTimer) clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(() => {
+        hoverTimer = 0;
+        prebuildHovered(t.id);
+      }, PREBUILD_HOVER_MS);
+      if (!CARRY_TABS.has(t.id)) return;
+      const station = carriedStation();
+      if (station) prefetchDetail(station, t.id);
+    });
+    btn.addEventListener("pointerleave", () => {
+      if (hoverTimer) {
+        clearTimeout(hoverTimer);
+        hoverTimer = 0;
+      }
+      cancelPrefetch();
+    });
     bar.appendChild(btn);
   }
   $main.appendChild(bar);
@@ -6723,6 +7818,8 @@ function tabShell() {
 }
 
 function resetTabs() {
+  _prebuildToken++;
+  _prebuildDone.clear();
   tabPanes.clear();
   if ($panes) $panes.innerHTML = "";
   for (let i = _mountQueue.length - 1; i >= 0; i--) {
@@ -6778,7 +7875,7 @@ function fillPane(tab) {
         _pendingDetail = null;
         try {
           sizeOverviewShell();
-          restoreOpenDetail(pending.saved, entry.pane);
+          restoreCarried(pending.saved, pending.grid, entry.pane);
         } catch (e) {
           console.warn("detail restore failed", e);
         }
@@ -6811,6 +7908,98 @@ function prefetchTabPayloads(fc, hours, tabs) {
   for (const tab of tabs) {
     for (const file of tabPayloadFiles(fc, hours, tab)) warmFile(file);
   }
+}
+
+const PREBUILD_TABS = ["tab-rh", "tab-wind", "tab-temp", "tab-rn1", "tab-power"];
+
+const PREBUILD_HOVER_MS = 120;
+
+let _prebuildToken = 0;
+
+let _prebuildRunning = false;
+
+let _prebuildFront = null;
+
+const _prebuildDone = new Set();
+
+function prebuildable(tabId) {
+  return (
+    !isMobile() &&
+    !!state.fc &&
+    PREBUILD_TABS.indexOf(tabId) >= 0 &&
+    tabId !== state.activeTab &&
+    !_prebuildDone.has(tabId)
+  );
+}
+
+function prebuildTab(tab, eager) {
+  const fc = state.fc;
+  const hours = state.hours;
+  const token = _prebuildToken;
+  _prebuildDone.add(tab.id);
+  const stale = () =>
+    token !== _prebuildToken || state.fc !== fc || state.hours !== hours;
+  return fillPane(tab).then((entry) => {
+    if (stale() || !entry || !entry.ready || !entry.pane.isConnected) return;
+    const draw = () => {
+      if (stale() || !entry.pane.isConnected) return;
+      const grid = activeGrid(entry.pane);
+      if (grid) mountWithin(grid);
+    };
+    if (eager) {
+      draw();
+      return;
+    }
+    return new Promise((resolve) => {
+      whenFree(() => {
+        draw();
+        resolve();
+      });
+    });
+  });
+}
+
+function nextPrebuild() {
+  if (_prebuildFront && prebuildable(_prebuildFront)) {
+    return TABS.find((t) => t.id === _prebuildFront) || null;
+  }
+  for (const id of PREBUILD_TABS) {
+    if (prebuildable(id)) return TABS.find((t) => t.id === id) || null;
+  }
+  return null;
+}
+
+function prebuildPanes() {
+  if (_prebuildRunning || isMobile() || !state.fc) return;
+  const token = _prebuildToken;
+  _prebuildRunning = true;
+  const step = () => {
+    if (token !== _prebuildToken) {
+      _prebuildRunning = false;
+      prebuildPanes();
+      return;
+    }
+    const tab = nextPrebuild();
+    if (!tab) {
+      _prebuildRunning = false;
+      return;
+    }
+    whenFree(() => {
+      if (token !== _prebuildToken || !prebuildable(tab.id)) {
+        step();
+        return;
+      }
+      prebuildTab(tab, false).then(step, step);
+    });
+  };
+  step();
+}
+
+function prebuildHovered(tabId) {
+  if (isMobile() || !state.fc || tabId === state.activeTab) return;
+  if (PREBUILD_TABS.indexOf(tabId) < 0) return;
+  _prebuildFront = tabId;
+  prebuildPanes();
 }
 
 function warmTabPayloads() {
@@ -6880,6 +8069,17 @@ function unparkPlots(pane, plots) {
     if (pd) pd.style.contentVisibility = "";
     if (queue.length) requestAnimationFrame(step);
   };
+  if (pane.classList.contains("active")) {
+    const ranked = plots
+      .map((pd, i) => ({ pd: pd, i: i, gap: viewportGap(pd) }))
+      .sort((a, b) => a.gap - b.gap || a.i - b.i);
+    queue = [];
+    for (const item of ranked) {
+      if (item.gap <= 0) item.pd.style.contentVisibility = "";
+      else queue.push(item.pd);
+    }
+    if (!queue.length) return;
+  }
   requestAnimationFrame(step);
 }
 
@@ -6926,6 +8126,75 @@ function revealPane(host, entry, frames, built, staged) {
   });
 }
 
+const GRID_DETAIL_WAIT_MS = 4000;
+
+const CARRY_TABS = new Set([
+  OVERVIEW_TAB, "tab-rh", "tab-wind", "tab-temp", "tab-rn1", "tab-power",
+]);
+
+function captureTabCarry(pane, fromId, tabId) {
+  if (!CARRY_TABS.has(fromId) || !CARRY_TABS.has(tabId)) return null;
+  const panel = pane.querySelector(".wx-ov-chart");
+  const open =
+    panel && panel.style.display !== "none" && panel._wxStation ? panel._wxStation : null;
+  const grid = activeGrid(pane);
+  const gridState = grid ? grid._wxGridState(!!open) : null;
+  const picked = !!(gridState && gridState.filter && gridState.filter.selected.length);
+  const dpd = open ? panelPlot(panel) : null;
+  const xr = dpd && dpd.layout && dpd.layout.xaxis && dpd.layout.xaxis.range;
+  const view = Array.isArray(xr) && xr.length === 2 ? [xr[0], xr[1]] : null;
+  return {
+    saved: open ? { station: open, tab: tabId, pick: null, view: view } : null,
+    grid: picked ? gridState : null,
+    hasGrid: !!grid,
+  };
+}
+
+function carriedStation() {
+  if (!CARRY_TABS.has(state.activeTab)) return null;
+  const pane = activePane();
+  const panel = pane && pane.querySelector(".wx-ov-chart");
+  if (!panel || panel.style.display === "none") return null;
+  return panel._wxStation || null;
+}
+
+function applyTabCarry(carry, pane) {
+  if (!carry) return;
+  const panel = pane.querySelector(".wx-ov-chart");
+  const grid = activeGrid(pane);
+  const isOpen = !!(panel && panel.style.display !== "none");
+  const ownGrid = !!(grid && carry.hasGrid);
+  const clearGrid = () => {
+    if (ownGrid && !carry.grid && typeof grid._wxClearFilter === "function") {
+      grid._wxClearFilter();
+    }
+  };
+  if (!carry.saved) {
+    if (ownGrid && carry.grid) restoreGridState(carry.grid, pane);
+    clearGrid();
+    if (isOpen) closeOverviewChart(panel, ownGrid);
+    return;
+  }
+  if (isOpen && panel._wxStation === carry.saved.station) {
+    if (ownGrid && carry.grid) restoreGridState(carry.grid, pane);
+    clearGrid();
+    const dpd = panelPlot(panel);
+    const now = dpd && dpd.layout && dpd.layout.xaxis && dpd.layout.xaxis.range;
+    const want = carry.saved.view;
+    if (dpd && want && !(Array.isArray(now) && now[0] === want[0] && now[1] === want[1])) {
+      try {
+        Plotly.relayout(dpd, { "xaxis.autorange": false, "xaxis.range": want.slice() });
+      } catch (e) {
+        void e;
+      }
+    }
+    if (grid && typeof grid._wxNeighbourSync === "function") grid._wxNeighbourSync();
+    return;
+  }
+  clearGrid();
+  restoreCarried(carry.saved, ownGrid ? carry.grid : null, pane);
+}
+
 function renderTab(tabId) {
   const tab = TABS.find((t) => t.id === tabId) || TABS[0];
   const host = tabShell();
@@ -6935,6 +8204,39 @@ function renderTab(tabId) {
   if (state.activeTab === tab.id && current === entry.pane && entry.ready) {
     return Promise.resolve();
   }
+
+  const carry =
+    current && current !== entry.pane && current.dataset.tab !== tab.id
+      ? captureTabCarry(current, current.dataset.tab, tab.id)
+      : null;
+  const carryNow = !!carry && entry.ready;
+  const carryLater =
+    carry && !entry.ready && (carry.saved || carry.grid)
+      ? {
+          fc: state.fc,
+          hours: state.hours,
+          tab: tab.id,
+          saved: carry.saved,
+          grid: carry.grid,
+        }
+      : null;
+  if (carryLater) _pendingDetail = carryLater;
+  let carried = false;
+  const runCarry = () => {
+    if (!carry || carried || !entry.ready || state.activeTab !== tab.id) return;
+    let go = carryNow;
+    if (carryLater && _pendingDetail === carryLater) {
+      _pendingDetail = null;
+      go = true;
+    }
+    if (!go) return;
+    carried = true;
+    try {
+      applyTabCarry(carry, entry.pane);
+    } catch (e) {
+      console.warn("tab carry failed", e);
+    }
+  };
 
   state.activeTab = tab.id;
   writeRoute(false);
@@ -6955,12 +8257,16 @@ function renderTab(tabId) {
 
   reveal.then((ok) => {
     if (!ok) return;
+    runCarry();
+    const shown = activeGrid(entry.pane);
+    if (shown && typeof shown._wxMapClaim === "function") shown._wxMapClaim();
     afterFrame(() => {
       if (state.activeTab !== tab.id) return;
       kickMounts();
       kickSeeds();
       scheduleWarm();
       warmTabPayloads();
+      prebuildPanes();
     });
   });
 
@@ -6968,6 +8274,7 @@ function renderTab(tabId) {
     if (!res[1] || state.activeTab !== tab.id) return;
     return afterPaint().then(() => {
       if (state.activeTab !== tab.id) return;
+      runCarry();
       resizePlots(entry.pane);
       catchUpResize();
       sizeOverviewShell();
@@ -6991,7 +8298,13 @@ async function runAnalysis() {
   const sameFc = state.fc === fc;
   const changed = state.fc !== fc || state.hours !== hours;
   const carried = _pendingDetail ? _pendingDetail.saved : null;
-  const reopen = sameFc && changed ? captureOpenDetail() || carried : null;
+  const carriedGrid = _pendingDetail ? _pendingDetail.grid : null;
+  const keep = sameFc && changed;
+  const live = keep ? captureOpenDetail() : null;
+  const reopen = keep ? live || carried : null;
+  const gridKeep = keep
+    ? (live ? captureGridState(true) : null) || carriedGrid || captureGridState(false)
+    : null;
   state.fc = fc;
   state.hours = hours;
   if (changed) state.range = null;
@@ -7006,12 +8319,13 @@ async function runAnalysis() {
   const token = ++runToken;
   $footer.textContent = "";
 
-  const pending = reopen
+  const pending = reopen || gridKeep
     ? {
         fc: fc,
         hours: hours,
         tab: state.activeTab || OVERVIEW_TAB,
         saved: reopen,
+        grid: gridKeep,
       }
     : null;
   _pendingDetail = pending;
@@ -7021,7 +8335,7 @@ async function runAnalysis() {
 
   if (pending && _pendingDetail === pending) {
     _pendingDetail = null;
-    restoreOpenDetail(reopen);
+    restoreCarried(reopen, gridKeep, activePane());
   }
 
   const [dmin, dmax] = await extractDateRange(fc, hours);
