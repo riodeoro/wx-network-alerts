@@ -347,6 +347,7 @@ export async function loadStationConfig() {
       : [];
     const lat = coordinate(upper.LATITUDE, 90);
     const lon = coordinate(upper.LONGITUDE, 180);
+    const elev = coordinate(upper.ELEVATION, 9000);
     rows.push({
       fire_centre: String(upper.FIRE_CENTRE == null ? "" : upper.FIRE_CENTRE).trim(),
       station_name: String(upper.STATION_NAME == null ? "" : upper.STATION_NAME).trim(),
@@ -354,6 +355,7 @@ export async function loadStationConfig() {
       neighbours,
       lat: lat !== null && lon !== null ? lat : null,
       lon: lat !== null && lon !== null ? lon : null,
+      elev: elev,
     });
   }
   return rows.filter((r) => r.station_name);

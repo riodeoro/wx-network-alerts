@@ -26,6 +26,8 @@ const BAND_FILLS = [
 ];
 const INVERTED = new Set(["Rh", "Rn_1", "SM1", "SM2", "SM3"]);
 const LINE_ON_BANDS = "#26231f";
+const RANGE_FILL = "rgba(168, 162, 158, 0.22)";
+const RANGE_MEDIAN = "#8a857d";
 const YEAR_COLOR = "#4b5563";
 const YEAR_GAP_FACTOR = 3;
 const YEAR_GAP_MIN_MS = 2 * HOUR_MS;
@@ -418,6 +420,35 @@ function yearTraces(pick, col, yaxis) {
       hovertemplate: `${pick.year}: %{y:.1f}<extra></extra>`,
     }),
   ];
+}
+
+function rangeTraces(band, xaxis, yaxis) {
+  const x = band.x.map(isoStamp);
+  const p10 = band.p10.map(fmt);
+  const p90 = band.p90.map(fmt);
+  const p50 = band.p50.map(fmt);
+  const base = { xaxis: xaxis, meta: { normals: true } };
+  return [
+    under(x, p10, yaxis, Object.assign({ hoverinfo: "skip" }, base)),
+    under(x, p90, yaxis, Object.assign({
+      fill: "tonexty",
+      fillcolor: RANGE_FILL,
+      customdata: pairs(p10, p90),
+      hovertemplate: "P10-P90: " + PAIR,
+    }, base)),
+    under(x, p50, yaxis, Object.assign({
+      line: { color: RANGE_MEDIAN, width: 1 },
+      hovertemplate: "Median: %{y:.1f}<extra></extra>",
+    }, base)),
+  ];
+}
+
+export function normalsRangeTraces(normals, col, startMs, endMs, xaxis, yaxis) {
+  if (!normals || !col) return null;
+  const band = col === RAIN_COL
+    ? rainBandFor(normals, startMs, endMs)
+    : bandFor(normals, col, startMs, endMs);
+  return band ? rangeTraces(band, xaxis || "x", yaxis || "y") : null;
 }
 
 export function applyNormals(fig, normals, col, yaxis, startMs, endMs, pick) {

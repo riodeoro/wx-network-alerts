@@ -22,6 +22,12 @@ import {
   shiftYears,
 } from "./normals.js";
 
+export {
+  RAIN_COL as NORMALS_RAIN_COL,
+  loadNormals as neighbourNormals,
+  normalsRangeTraces,
+} from "./normals.js";
+
 const ATTR_TAB = {
   Rh: "rh",
   Wspd: "wind",
@@ -62,6 +68,10 @@ const CHECK_SVG =
   '<path d="M2.4 6.3 4.8 8.7 9.6 3.5"/></svg>';
 
 let _normalsOn = false;
+
+export function resetHistorical() {
+  _normalsOn = false;
+}
 
 const NORMALS_WAIT_MS = 120;
 
@@ -132,7 +142,16 @@ export function stationCoords() {
           if (!r || !r.station_name) continue;
           if (!Number.isFinite(r.lat) || !Number.isFinite(r.lon)) continue;
           const key = normName(r.station_name);
-          if (key && !map.has(key)) map.set(key, { lat: r.lat, lon: r.lon });
+          if (key && !map.has(key)) {
+            map.set(key, {
+              lat: r.lat,
+              lon: r.lon,
+              elev: Number.isFinite(r.elev) ? r.elev : null,
+              name: r.station_name,
+              fc: r.fire_centre || null,
+              enabled: r.enabled !== false,
+            });
+          }
         }
         return map;
       })
@@ -261,16 +280,20 @@ function extractAlerts(fig, station) {
 
     if (tr.meta && tr.meta.band_hover) {
       const xs = decodeArray(tr.x) || [];
-      let first = NaN;
-      for (const v of xs) {
-        const t = parseStamp(v);
-        if (Number.isFinite(t)) {
-          first = t;
-          break;
-        }
-      }
       const label = bandHoverText(tr.text);
-      if (Number.isFinite(first) && label) labels.set(first, label);
+      if (!label) continue;
+      let fresh = true;
+      for (const v of xs) {
+        if (v === null || v === undefined) {
+          fresh = true;
+          continue;
+        }
+        if (!fresh) continue;
+        const t = parseStamp(v);
+        if (!Number.isFinite(t)) continue;
+        labels.set(t, label);
+        fresh = false;
+      }
       continue;
     }
 
@@ -1119,6 +1142,12 @@ export async function mount(host, opts) {
       const p = Plotly.newPlot(plot, fig.data, fig.layout, PLOT_CONFIG);
       if (p && p.then) p.then(wire, () => {});
       else wire();
+    }
+    if (typeof opts.onHistorical === "function") {
+      const histOn = _normalsOn && anySupported(normals, [primary, secondary]);
+      opts.onHistorical(
+        histOn ? { startMs: payload.startMs, endMs: payload.endMs } : null
+      );
     }
     if (typeof opts.onFit === "function") opts.onFit();
   };

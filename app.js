@@ -132,7 +132,7 @@ function stripWebgl(bundle) {
     for (const tr of fig.data) {
       if (!tr || typeof tr !== "object") continue;
       const swap = GL_TRACE_TYPES[tr.type];
-      if (swap) tr.type = swap;
+      if (swap && !(tr.meta && tr.meta.keep_gl)) tr.type = swap;
     }
   }
   return bundle;
@@ -447,7 +447,8 @@ function ensureStationFilterStyles() {
   st.id = "wx-stnf-styles";
   st.textContent = [
     ".wx-stnf{position:relative;display:flex;justify-content:flex-end;align-items:center;",
-    "z-index:1100;}",
+    "z-index:1;}",
+    ".wx-stnf.open{z-index:1100;}",
     ".wx-stnf-inline{height:18px;margin:0 0 -4px 0;}",
     ".wx-stnf-float{position:absolute;top:14px;right:8px;}",
     ".wx-stnf-btn{font-family:inherit;font-size:11px;font-weight:500;letter-spacing:.01em;",
@@ -464,12 +465,12 @@ function ensureStationFilterStyles() {
     "box-shadow:0 2px 6px rgba(0,0,0,.05);padding:5px;display:none;}",
     ".wx-stnf-menu.open{display:block;}",
     ".wx-stnf-menu .wx-stnf-search{width:100%;box-sizing:border-box;font-family:inherit;",
-    "font-size:12px;line-height:1.4;color:var(--text);background:transparent;",
-    "border:none;border-bottom:1px solid var(--line);border-radius:0;",
-    "padding:4px 6px 5px 6px;margin:0;}",
-    ".wx-stnf-menu .wx-stnf-search::placeholder{color:var(--text-muted);}",
+    "font-size:11px;line-height:1.4;color:var(--text);background:transparent;",
+    "border:none;border-bottom:1px solid #f1f0ee;border-radius:0;",
+    "padding:3px 6px 6px 6px;margin:0 0 5px 0;}",
+    ".wx-stnf-menu .wx-stnf-search::placeholder{color:var(--text-muted);opacity:.6;}",
     ".wx-stnf-menu .wx-stnf-search:focus{outline:none;",
-    "border-bottom-color:var(--text-muted);}",
+    "border-bottom-color:var(--line);}",
     ".wx-stnf-list{max-height:210px;overflow-y:auto;margin-top:3px;}",
     ".wx-stnf-opt{padding:5px 6px;border-radius:3px;font-size:12px;font-weight:400;",
     "color:var(--text-muted);cursor:pointer;white-space:nowrap;overflow:hidden;",
@@ -478,7 +479,7 @@ function ensureStationFilterStyles() {
     ".wx-stnf-opt.sel{color:var(--text);font-weight:500;background:#f3f2ef;}",
     ".wx-stnf-opt.dis{opacity:.38;cursor:default;}",
     ".wx-stnf-opt.dis:hover{background:transparent;color:var(--text-muted);}",
-    ".wx-stnf-sep{height:1px;background:var(--line);margin:4px 2px;}",
+    ".wx-stnf-sep{height:1px;background:var(--line);margin:5px 2px;}",
     ".wx-stnf-none{padding:6px;font-size:12px;color:var(--text-muted);}",
     "@media (max-width:768px){.wx-stnf-menu{width:210px;}",
     ".wx-stnf-menu .wx-stnf-search{font-size:16px;}.wx-stnf-opt{padding:8px 6px;}",
@@ -544,11 +545,9 @@ function mergeView(layout, view) {
 
 const NEIGHBOUR_SHOW = "Show neighbours";
 
-const NEIGHBOUR_HIDE = "Hide neighbours";
-
 const NEIGHBOUR_PALETTE = [
-  "#2563eb", "#65a30d", "#a21caf", "#0891b2", "#6d28d9",
-  "#059669", "#0369a1", "#4d7c0f", "#c026d3", "#0d9488",
+  "#2b9282", "#b1389f", "#66b6dc", "#007830", "#ef8897",
+  "#8f1156", "#bfac45", "#9a990f", "#341793",
 ];
 
 const NEIGHBOUR_LINE_WIDTH = 1.3;
@@ -558,6 +557,8 @@ const NEIGHBOUR_LINE_OPACITY = 0.9;
 const NEIGHBOUR_MUTED_OPACITY = 0.55;
 
 const OVERLAY_FOCUS_COLOR = "#26231f";
+
+const HIST_LINE_COLOR = "#26231f";
 
 const OVERLAY_FOCUS_WIDTH = 2.2;
 
@@ -622,20 +623,31 @@ function neighbourKey(name) {
 
 let _nbCoords = null;
 
-function warmNeighbours() {
-  if (_nbGroups && _nbCoords) return;
-  detailModule()
-    .then((m) =>
-      Promise.all([
-        typeof m.neighbourGroups === "function" ? m.neighbourGroups() : null,
-        typeof m.stationCoords === "function" ? m.stationCoords() : null,
-      ])
-    )
-    .then(([map, coords]) => {
-      if (map && map.size) _nbGroups = map;
-      if (coords && coords.size) _nbCoords = coords;
-    })
-    .catch(() => {});
+let _nbWarm = null;
+
+function warmNeighbours(done) {
+  if (_nbGroups && _nbCoords) {
+    if (typeof done === "function") done();
+    return;
+  }
+  if (!_nbWarm) {
+    _nbWarm = detailModule()
+      .then((m) =>
+        Promise.all([
+          typeof m.neighbourGroups === "function" ? m.neighbourGroups() : null,
+          typeof m.stationCoords === "function" ? m.stationCoords() : null,
+        ])
+      )
+      .then(([map, coords]) => {
+        if (map && map.size) _nbGroups = map;
+        if (coords && coords.size) _nbCoords = coords;
+      })
+      .catch(() => {})
+      .then(() => {
+        _nbWarm = null;
+      });
+  }
+  if (typeof done === "function") _nbWarm.then(done, done);
 }
 
 function stationCoord(name) {
@@ -655,7 +667,23 @@ function neighboursFor(station, pool) {
   const out = [];
   for (const name of ranked) {
     const hit = index.get(neighbourKey(name));
-    if (hit && out.indexOf(hit) < 0) out.push(hit);
+    if (hit) {
+      if (out.indexOf(hit) < 0) out.push(hit);
+      continue;
+    }
+    const at = stationCoord(name);
+    const far = at && at.fc ? at.name || name : null;
+    if (far && out.indexOf(far) < 0) out.push(far);
+  }
+  return out;
+}
+
+function nearbyStations() {
+  if (!_nbCoords) return [];
+  const out = [];
+  for (const at of _nbCoords.values()) {
+    if (!at || !at.name || !at.fc || at.enabled === false) continue;
+    out.push(at);
   }
   return out;
 }
@@ -684,6 +712,8 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
   let nbPrev = null;
   let nbStation = null;
   let nbOrder = null;
+  const nbAdded = new Set();
+  const nbRemoved = new Set();
 
   const nbList = () => {
     if (!neighbours) return [];
@@ -706,10 +736,13 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
   list.appendChild(empty);
 
   let open = false;
+  let shownCount = null;
 
   const sync = () => {
-    const n = selected.size;
-    if (nbOn) {
+    const n = nbOn && shownCount !== null ? shownCount : selected.size;
+    if (nbOn && nbAdded.size) {
+      btnText.textContent = n === 1 ? "1 station" : `${n} stations`;
+    } else if (nbOn) {
       btnText.textContent = n === 1 ? "1 neighbour" : `${n} neighbours`;
     } else {
       btnText.textContent = n === 0
@@ -719,10 +752,10 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     btn.className = "wx-stnf-btn" + (n ? " on" : "");
     allOpt.className = "wx-stnf-opt" + (n ? "" : " sel");
     if (nbOpt) {
-      nbOpt.textContent = nbOn ? NEIGHBOUR_HIDE : NEIGHBOUR_SHOW;
-      const off = !nbOn && !nbList().length;
-      nbOpt.className =
-        "wx-stnf-opt" + (nbOn ? " sel" : "") + (off ? " dis" : "");
+      nbOpt.textContent = NEIGHBOUR_SHOW;
+      nbOpt.style.display = nbOn ? "none" : "";
+      const off = !nbList().length;
+      nbOpt.className = "wx-stnf-opt" + (off ? " dis" : "");
     }
     for (const r of rows) {
       r.opt.className = "wx-stnf-opt" + (selected.has(r.name) ? " sel" : "");
@@ -734,6 +767,8 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     nbPrev = null;
     nbStation = null;
     nbOrder = null;
+    nbAdded.clear();
+    nbRemoved.clear();
   };
 
   const nbRestore = () => {
@@ -743,12 +778,13 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     if (prev) for (const name of prev) selected.add(name);
   };
 
-  const emit = () => {
+  const emit = (fresh) => {
     sync();
     onChange(
       selected.size ? new Set(selected) : null,
       nbOn && nbOrder ? nbOrder.slice() : null,
-      nbOn ? nbStation : null
+      nbOn ? nbStation : null,
+      !!fresh
     );
   };
 
@@ -764,6 +800,7 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     if (open === next) return;
     open = next;
     menu.className = "wx-stnf-menu" + (open ? " open" : "");
+    wrap.classList.toggle("open", open);
     caret.textContent = open ? "\u25B4" : "\u25BE";
     if (open && nbOpt) sync();
     if (open) {
@@ -773,7 +810,15 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     } else {
       document.removeEventListener("mousedown", outside, true);
       document.removeEventListener("keydown", onKey, true);
+      clearSearch();
     }
+  }
+
+  function clearSearch() {
+    if (!search.value) return;
+    search.value = "";
+    for (const r of rows) r.opt.style.display = "block";
+    empty.style.display = "none";
   }
 
   btn.addEventListener("click", (ev) => {
@@ -791,12 +836,7 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
 
   if (nbOpt) {
     nbOpt.addEventListener("click", () => {
-      if (nbOn) {
-        setOpen(false);
-        nbRestore();
-        emit();
-        return;
-      }
+      if (nbOn) return;
       const station = neighbours.focus();
       const picks = station ? neighbours.resolve(station) : [];
       if (!picks.length) return;
@@ -804,15 +844,32 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
       nbPrev = new Set(selected);
       nbStation = station;
       nbOrder = picks.slice();
+      nbAdded.clear();
+      nbRemoved.clear();
       selected.clear();
       for (const name of picks) selected.add(name);
       nbOn = true;
-      emit();
+      emit(true);
     });
   }
 
   for (const r of rows) {
     r.opt.addEventListener("click", () => {
+      if (nbOn && wrap._wxNbToggle(r.name)) return;
+      if (
+        !nbOn && !selected.size && neighbours &&
+        typeof neighbours.open === "function"
+      ) {
+        const now = neighbours.focus();
+        if (now && neighbourKey(now) === neighbourKey(r.name)) {
+          setOpen(false);
+          return;
+        }
+        if (neighbours.open(r.name)) {
+          setOpen(false);
+          return;
+        }
+      }
       nbCancel();
       if (selected.has(r.name)) selected.delete(r.name);
       else selected.add(r.name);
@@ -849,18 +906,75 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     emit();
     return true;
   };
+  wrap._wxNbToggle = (name) => {
+    if (!nbOn || !name) return false;
+    if (selected.has(name)) {
+      if (selected.size <= 1) return false;
+      selected.delete(name);
+      if (nbAdded.has(name)) nbAdded.delete(name);
+      else nbRemoved.add(name);
+      nbOrder = (nbOrder || []).filter((n) => n !== name);
+    } else {
+      selected.add(name);
+      if (nbRemoved.has(name)) nbRemoved.delete(name);
+      else nbAdded.add(name);
+      nbOrder = (nbOrder || []).concat([name]);
+    }
+    emit();
+    return true;
+  };
+  wrap._wxNbAdded = (name) => nbAdded.has(name);
+  wrap._wxNbActive = () => nbOn;
+  wrap._wxToggle = (name) => {
+    if (!name) return false;
+    if (nbOn) return wrap._wxNbToggle(name);
+    if (selected.has(name)) {
+      if (selected.size <= 1) return false;
+      selected.delete(name);
+    } else {
+      selected.add(name);
+    }
+    emit();
+    return true;
+  };
+  wrap._wxShown = (n) => {
+    const next = Number.isFinite(n) ? n : null;
+    if (next === shownCount) return;
+    shownCount = next;
+    sync();
+  };
+  wrap._wxNbEdited = () => nbOn && (nbAdded.size > 0 || nbRemoved.size > 0);
+  wrap._wxNbExtra = () => nbOn && nbAdded.size > 0;
+  wrap._wxNbReset = () => {
+    if (!nbOn || !neighbours || !nbStation) return false;
+    const picks = neighbours.resolve(nbStation);
+    if (!picks.length) return false;
+    nbOrder = picks.slice();
+    nbAdded.clear();
+    nbRemoved.clear();
+    selected.clear();
+    for (const name of picks) selected.add(name);
+    emit();
+    return true;
+  };
   wrap._wxState = (withNeighbours) => {
     if (nbOn && withNeighbours && nbStation) {
       return {
         selected: Array.from(selected),
-        nb: { station: nbStation, prev: nbPrev ? Array.from(nbPrev) : [] },
+        nb: {
+          station: nbStation,
+          prev: nbPrev ? Array.from(nbPrev) : [],
+          added: Array.from(nbAdded),
+          removed: Array.from(nbRemoved),
+        },
       };
     }
     return { selected: Array.from(selected), nb: null };
   };
   wrap._wxRestore = (st) => {
     if (!st) return false;
-    const known = new Set(stations);
+    const local = new Set(stations);
+    const known = (name) => local.has(name) || !!stationCoord(name);
     nbCancel();
     selected.clear();
     if (st.nb && neighbours) {
@@ -869,19 +983,60 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
         nbOn = true;
         nbStation = st.nb.station;
         nbOrder = picks.slice();
-        nbPrev = new Set(st.nb.prev.filter((name) => known.has(name)));
-        for (const name of picks) selected.add(name);
+        nbPrev = new Set(st.nb.prev.filter((name) => local.has(name)));
+        const gone = new Set(st.nb.removed || []);
+        for (const name of picks) {
+          if (gone.has(name) && picks.length - nbRemoved.size > 1) {
+            nbRemoved.add(name);
+            continue;
+          }
+          selected.add(name);
+        }
+        nbOrder = nbOrder.filter((n) => selected.has(n));
+        for (const name of st.nb.added || []) {
+          if (selected.has(name) || !known(name)) continue;
+          selected.add(name);
+          nbAdded.add(name);
+          nbOrder.push(name);
+        }
         emit();
         return true;
       }
     }
-    for (const name of st.selected) if (known.has(name)) selected.add(name);
+    for (const name of st.selected) if (known(name)) selected.add(name);
     if (!selected.size) return false;
     emit();
     return true;
   };
   wrap._wxNbRetarget = () => {
-    if (!nbOn || !neighbours) return false;
+    if (!neighbours) return false;
+    if (!nbOn) {
+      const focus = neighbours.focus();
+      let cleared = false;
+      if (focus && selected.size === 1) {
+        const only = selected.values().next().value;
+        if (neighbourKey(only) === neighbourKey(focus)) {
+          selected.clear();
+          cleared = true;
+        }
+      }
+      const done = () => {
+        if (cleared) emit();
+        return cleared;
+      };
+      if (selected.size || isMobile()) return done();
+      const around = focus ? neighbours.resolve(focus) : [];
+      if (!around.length) return done();
+      nbPrev = new Set();
+      nbStation = focus;
+      nbOrder = around.slice();
+      nbAdded.clear();
+      nbRemoved.clear();
+      for (const name of around) selected.add(name);
+      nbOn = true;
+      emit(true);
+      return true;
+    }
     const station = neighbours.focus();
     if (!station || station === nbStation) return false;
     const picks = neighbours.resolve(station);
@@ -892,6 +1047,8 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     }
     nbStation = station;
     nbOrder = picks.slice();
+    nbAdded.clear();
+    nbRemoved.clear();
     selected.clear();
     for (const name of picks) selected.add(name);
     emit();
@@ -2473,8 +2630,11 @@ function ensureGridToggleStyles() {
     "stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:0;}",
     ".wx-grid-mode.on .box svg{opacity:1;}",
     ".wx-grid-toggle input[type=\"checkbox\"]{cursor:pointer;width:12px;height:12px;margin:0;",
-    "accent-color:var(--accent,#2563eb);}",
-    ".wx-grid-head{display:none;margin-right:auto;min-width:0;flex:0 1 auto;",
+    "accent-color:var(--accent,#2c5fa9);}",
+    ".wx-grid-headwrap{display:none;align-items:baseline;margin-right:auto;",
+    "min-width:0;flex:0 1 auto;}",
+    ".wx-grid-headwrap.show{display:flex;}",
+    ".wx-grid-head{display:none;min-width:0;flex:0 1 auto;",
     "font-size:13px;font-weight:600;letter-spacing:-.015em;color:var(--text,#26231f);",
     "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}",
     ".wx-grid-head.show{display:block;}",
@@ -2533,16 +2693,213 @@ function bandHoverBody(text) {
   return out || null;
 }
 
-function unifiedBandTrace(tr) {
+const BAND_GLYPH_FALLBACK = "rgb(138, 95, 242)";
+
+const BAND_FILL_FALLBACK = "rgba(138, 95, 242, 0.27)";
+
+const BAND_GLYPH_R = 3;
+
+const BAND_GLYPH_STROKE = 1;
+
+const BAND_GLYPH_CX = 20;
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function bandTraceFill(tr, layout) {
+  const xid = tr.xaxis || "x";
+  let lo = Infinity;
+  let hi = -Infinity;
+  for (const v of decodeArray(tr.x) || []) {
+    if (v === null || v === undefined) continue;
+    const t = stampMs(v);
+    if (!isFinite(t)) continue;
+    if (t < lo) lo = t;
+    if (t > hi) hi = t;
+  }
+  let best = null;
+  let gap = Infinity;
+  for (const sh of (layout && layout.shapes) || []) {
+    if (!sh || sh.type !== "rect" || typeof sh.xref !== "string") continue;
+    if (sh.xref.split(" ")[0] !== xid) continue;
+    if (!solid(sh.fillcolor)) continue;
+    const a = stampMs(sh.x0);
+    const b = stampMs(sh.x1);
+    if (!isFinite(a) || !isFinite(b)) continue;
+    const d = isFinite(lo)
+      ? Math.abs(Math.min(a, b) - lo) + Math.abs(Math.max(a, b) - hi)
+      : 0;
+    if (d < gap) {
+      gap = d;
+      best = sh.fillcolor;
+    }
+  }
+  return best || BAND_FILL_FALLBACK;
+}
+
+const BAND_HOVER_STEP_MS = 3600000;
+
+function bandHourPoints(tr) {
+  const xs = decodeArray(tr.x) || [];
+  const ys = decodeArray(tr.y) || [];
+  const segs = [];
+  let seg = null;
+  for (let i = 0; i < xs.length; i++) {
+    const v = xs[i];
+    if (v === null || v === undefined) {
+      seg = null;
+      continue;
+    }
+    const t = stampMs(v);
+    if (!isFinite(t)) continue;
+    if (!seg) {
+      seg = { lo: t, hi: t, ylo: Infinity, yhi: -Infinity };
+      segs.push(seg);
+    }
+    if (t < seg.lo) seg.lo = t;
+    if (t > seg.hi) seg.hi = t;
+    const y = Number(ys[i]);
+    if (isFinite(y)) {
+      if (y < seg.ylo) seg.ylo = y;
+      if (y > seg.yhi) seg.yhi = y;
+    }
+  }
+  const seen = new Set();
+  const x = [];
+  const y = [];
+  segs.sort((a, b) => a.lo - b.lo);
+  for (const s of segs) {
+    const key = s.lo + "-" + s.hi;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const ylo = isFinite(s.ylo) ? s.ylo : 0;
+    const yhi = isFinite(s.yhi) ? s.yhi : ylo;
+    if (x.length) {
+      x.push(null);
+      y.push(null);
+    }
+    let k = 0;
+    for (let t = s.lo; t <= s.hi; t += BAND_HOVER_STEP_MS) {
+      x.push(isoStampMs(t));
+      y.push(k % 2 ? yhi : ylo);
+      k++;
+    }
+    if (k === 1) {
+      x.push(isoStampMs(s.lo));
+      y.push(yhi);
+    }
+  }
+  return x.length ? { x: x, y: y } : null;
+}
+
+function isoStampMs(ms) {
+  const d = new Date(ms);
+  const p = (v) => String(v).padStart(2, "0");
+  return (
+    `${d.getUTCFullYear()}-${p(d.getUTCMonth() + 1)}-${p(d.getUTCDate())} ` +
+    `${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`
+  );
+}
+
+function unifiedBandTrace(tr, layout) {
   if (!tr || !tr.meta || !tr.meta.band_hover) return tr;
-  if (tr.hovertemplate || typeof tr.text !== "string" || !tr.text) return tr;
-  const body = bandHoverBody(tr.text);
-  if (!body) return tr;
-  const out = Object.assign({}, tr);
-  out.hovertemplate = body + "<extra></extra>";
-  out.hoveron = "points";
-  delete out.hoverinfo;
+  let out = tr;
+  if (!tr.hovertemplate && typeof tr.text === "string" && tr.text) {
+    const body = bandHoverBody(tr.text);
+    if (body) {
+      out = Object.assign({}, tr);
+      out.hovertemplate = body + "<extra></extra>";
+      out.hoveron = "points";
+      delete out.hoverinfo;
+      const hours = bandHourPoints(tr);
+      if (hours) {
+        out.x = hours.x;
+        out.y = hours.y;
+        out.fill = "none";
+      }
+    }
+  }
+  if (layout && !tr.meta.band_fill) {
+    if (out === tr) out = Object.assign({}, tr);
+    out.meta = Object.assign({}, tr.meta, { band_fill: bandTraceFill(tr, layout) });
+  }
   return out;
+}
+
+function paintBandGlyphs(pd) {
+  const layer = pd && pd.querySelector ? pd.querySelector(".hoverlayer") : null;
+  if (!layer) return;
+  for (const g of layer.querySelectorAll(".legend .traces")) {
+    const d = g.__data__;
+    const item = Array.isArray(d) ? d[0] : d;
+    const meta = item && item.trace ? item.trace.meta : null;
+    if (!meta || !meta.band_hover) continue;
+    const fill = meta.band_fill || BAND_FILL_FALLBACK;
+    const edge = solid(fill) || meta.band_color || BAND_GLYPH_FALLBACK;
+    const pts = g.querySelector(".legendpoints");
+    if (!pts || pts.querySelector(".wx-band-glyph")) continue;
+    let cx = BAND_GLYPH_CX;
+    const ref = pts.querySelector("path");
+    if (ref && typeof pts.getScreenCTM === "function") {
+      try {
+        const box = ref.getBoundingClientRect();
+        const m = pts.getScreenCTM();
+        if (box.width > 0 && m && m.a) cx = (box.left + box.width / 2 - m.e) / m.a;
+      } catch (e) {
+        void e;
+      }
+    }
+    for (const child of Array.from(pts.children)) child.style.display = "none";
+    const dot = document.createElementNS(SVG_NS, "rect");
+    dot.setAttribute("class", "wx-band-glyph");
+    const inset = BAND_GLYPH_STROKE / 2;
+    dot.setAttribute("x", String(cx - BAND_GLYPH_R + inset));
+    dot.setAttribute("y", String(-BAND_GLYPH_R + inset));
+    dot.setAttribute("width", String(BAND_GLYPH_R * 2 - BAND_GLYPH_STROKE));
+    dot.setAttribute("height", String(BAND_GLYPH_R * 2 - BAND_GLYPH_STROKE));
+    dot.setAttribute("fill", fill);
+    dot.setAttribute("stroke", edge);
+    dot.setAttribute("stroke-width", String(BAND_GLYPH_STROKE));
+    pts.appendChild(dot);
+  }
+}
+
+function wireBandGlyphs(wrap) {
+  wirePlotBandGlyphs(wrap._wxGridPlot);
+}
+
+function fitHoverReach(pd) {
+  const fl = pd && pd._fullLayout;
+  if (!fl) return;
+  let step = Infinity;
+  for (const key of Object.keys(fl)) {
+    if (!/^xaxis\d*$/.test(key)) continue;
+    const ax = fl[key];
+    if (!ax || ax.visible === false || ax.type !== "date" || !(ax._length > 0)) continue;
+    const r = Array.isArray(ax._rl)
+      ? ax._rl
+      : Array.isArray(ax.range) ? ax.range.map(stampMs) : null;
+    if (!r || !isFinite(r[0]) || !isFinite(r[1])) continue;
+    const span = Math.abs(r[1] - r[0]);
+    if (!(span > 0)) continue;
+    const px = (ax._length * BAND_HOVER_STEP_MS) / span;
+    if (px < step) step = px;
+  }
+  if (!isFinite(step)) return;
+  const reach = Math.max(1, Math.floor(step / 2));
+  if (fl.hoverdistance !== reach) fl.hoverdistance = reach;
+  if (pd.layout && pd.layout.hoverdistance !== reach) pd.layout.hoverdistance = reach;
+}
+
+function wirePlotBandGlyphs(pd) {
+  if (!pd || typeof pd.on !== "function" || pd._wxBandGlyphWired) return;
+  pd._wxBandGlyphWired = true;
+  fitHoverReach(pd);
+  pd.on("plotly_afterplot", () => fitHoverReach(pd));
+  pd.on("plotly_relayout", () => fitHoverReach(pd));
+  pd.on("plotly_hover", () => {
+    paintBandGlyphs(pd);
+    requestAnimationFrame(() => paintBandGlyphs(pd));
+  });
 }
 
 function overlayHoverTemplate(ht) {
@@ -2728,7 +3085,7 @@ function ensureInsightStyles() {
     ".wx-insight-shell > .wx-expand-btn{top:1px;right:4px;background:var(--surface,#fff);",
     "border-color:var(--line,#e8e6e3);}",
     ".wx-stn-link{cursor:pointer;border-bottom:1px dotted currentColor;}",
-    ".wx-stn-link.wx-stn-hot{background:#dbeafe;}",
+    ".wx-stn-link.wx-stn-hot{background:#e2e9f3;}",
     "@media (max-width:768px){.wx-insight-shell{margin-bottom:10px;}}",
   ].join("");
   document.head.appendChild(st);
@@ -2781,6 +3138,8 @@ const GRID_ZONE_PAD_Y = 0.005;
 const GRID_ZONE_EDGE_LEFT = 0.02;
 const GRID_ZONE_EDGE_RIGHT = 0.01;
 const GRID_Y_PAD = 0.05;
+const GRID_CIRCULAR_COLS = new Set(["Dir"]);
+const GRID_CIRCULAR_RANGE = [0, 360];
 const GRID_COL_RE = /<\/b><br>([A-Za-z0-9_]+)/;
 const DETAIL_COL_RE = /^([A-Za-z0-9_]+)/;
 
@@ -2884,6 +3243,7 @@ function detailFit(dpd, view) {
 }
 
 function stackYRange(fig, placed, base, view) {
+  if (GRID_CIRCULAR_COLS.has(gridColumnName(fig))) return GRID_CIRCULAR_RANGE.slice();
   let lo = Infinity;
   let hi = -Infinity;
   for (const tr of (fig && fig.data) || []) {
@@ -3309,6 +3669,54 @@ function buildGridFigure(fig, cells, fills, rowPx, selected, link, ranges, rank)
   };
 }
 
+const FOREIGN_AXIS_BASE = 900;
+
+function retargetRef(ref, from, to) {
+  if (typeof ref !== "string") return ref;
+  const parts = ref.split(" ");
+  if (parts[0] === from) parts[0] = to;
+  return parts.join(" ");
+}
+
+function stationGridPart(fig, name) {
+  if (!fig || !Array.isArray(fig.data)) return null;
+  const key = neighbourKey(name);
+  let xid = null;
+  for (const [id, nm] of gridAxisStations(fig)) {
+    if (neighbourKey(nm) === key) {
+      xid = id;
+      break;
+    }
+  }
+  if (!xid) return null;
+  const lay = fig.layout || {};
+  const idx = xid === "x" ? "" : xid.slice(1);
+  const xa = lay["xaxis" + idx];
+  if (!xa) return null;
+  const yid =
+    typeof xa.anchor === "string" && /^y\d*$/.test(xa.anchor) ? xa.anchor : "y" + idx;
+  const ya = lay["yaxis" + yid.slice(1)];
+  if (!ya) return null;
+  const strip = (t) => neighbourKey(String(t).replace(/<[^>]*>/g, ""));
+  return {
+    name: name,
+    xid: xid,
+    yid: yid,
+    xaxis: xa,
+    yaxis: ya,
+    traces: fig.data
+      .filter((tr) => tr && (tr.xaxis || "x") === xid)
+      .map((tr) => unifiedBandTrace(tr, lay)),
+    shapes: (lay.shapes || []).filter(
+      (sh) => sh && typeof sh.xref === "string" && sh.xref.split(" ")[0] === xid
+    ),
+    annotation:
+      (lay.annotations || []).find(
+        (a) => a && typeof a.text === "string" && strip(a.text) === key
+      ) || null,
+  };
+}
+
 function overlayColor(i) {
   return NEIGHBOUR_PALETTE[i % NEIGHBOUR_PALETTE.length];
 }
@@ -3342,6 +3750,38 @@ const NEIGHBOUR_MAP_RAIN_COL = "Rn_1";
 
 const NEIGHBOUR_MAP_RING_PX = 2;
 
+const NEIGHBOUR_MAP_CAND_PX = 6;
+
+const NEIGHBOUR_MAP_STATION_PX = 7;
+
+const NEIGHBOUR_MAP_STATION_COLOR = "#6b665e";
+
+const NEIGHBOUR_MAP_NEIGHBOUR_COLOR = "#2c5fa9";
+
+const NEIGHBOUR_MAP_LINE_COLOR = "#8a857d";
+
+const NEIGHBOUR_MAP_STAR_PX = 16;
+
+const MAP_STAR_PATH =
+  "M12 2.2l2.95 6.2 6.8.8-5.03 4.67 1.33 6.73L12 17.25 5.95 20.6l1.33-6.73L2.25 9.2l6.8-.8z";
+
+const MAP_TIP_ALERTS = 3;
+
+const MAP_HINT_OPEN = "Click to open";
+
+const MAP_HINT_ADD = "Click to add";
+
+const MAP_HINT_REMOVE = "Click to remove";
+
+const MAP_MIN_ICON =
+  '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
+  '<path d="M3.5 8h9"/></svg>';
+
+const MAP_PILL_ICON =
+  '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
+  '<path d="M1.8 4.2 5.8 2.5l4.4 1.8 4-1.7v9.2l-4 1.7-4.4-1.8-4 1.7z' +
+  'M5.8 2.5v9.2M10.2 4.3v9.2"/></svg>';
+
 const NEIGHBOUR_MAP_RING_FALLBACK = "#8a857d";
 
 const NEIGHBOUR_MAP_UNITS = {
@@ -3349,6 +3789,7 @@ const NEIGHBOUR_MAP_UNITS = {
   Temp: { unit: "\u00b0C", gap: "", digits: 1 },
   Wspd: { unit: "km/h", gap: " ", digits: 1 },
   Mx_Spd: { unit: "km/h", gap: " ", digits: 1 },
+  Dir: { unit: "°", gap: "", digits: 0 },
   Rn_1: { unit: "mm", gap: " ", digits: 1 },
   Vbat: { unit: "V", gap: " ", digits: 1 },
 };
@@ -3410,17 +3851,26 @@ function ensureNeighbourMapStyles() {
   const st = document.createElement("style");
   st.id = "wx-nbmap-styles";
   st.textContent = [
-    ".wx-insight-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;}",
-    ".wx-insight-row > .wx-insight-shell{flex:1 1 auto;min-width:0;margin-bottom:0;}",
-    ".wx-nb-map-slot{flex:0 0 auto;max-width:100%;}",
-    ".wx-nb-map-slot:empty{display:none;}",
-    ".wx-nb-map{display:none;position:relative;flex:0 0 auto;",
+    ".wx-nb-stack{display:flex;align-items:stretch;margin-bottom:16px;}",
+    ".wx-nb-main{flex:1 1 auto;min-width:0;}",
+    ".wx-nb-main > :last-child{margin-bottom:0;}",
+    ".wx-nb-map-slot{flex:0 0 auto;min-width:0;}",
+    ".wx-nb-stack.has-map > .wx-nb-map-slot{margin-left:12px;}",
+    ".wx-nb-map{display:none;position:sticky;top:0;z-index:5;",
     "background:" + NEIGHBOUR_MAP_PAPER + ";border:1px solid var(--line,#e8e6e3);",
-    "border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden;",
-    "transition:border-color .2s ease,box-shadow .24s ease;}",
+    "border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden;}",
     ".wx-nb-map.show{display:block;}",
-    ".wx-nb-map.wx-expanded{border-color:#dcd9d4;box-shadow:0 6px 22px rgba(0,0,0,.07);}",
     ".wx-nb-map:hover .wx-expand-btn{opacity:1;}",
+    ".wx-nb-map .wx-nb-map-min{right:38px;}",
+    ".wx-nb-map-pill{display:none;align-items:center;gap:6px;font-family:inherit;",
+    "font-size:11px;font-weight:600;letter-spacing:.01em;color:var(--text,#26231f);",
+    "background:#fff;border:none;padding:6px 12px;margin:0;cursor:pointer;}",
+    ".wx-nb-map-pill:hover{background:#f3f2ef;}",
+    ".wx-nb-map-pill svg{width:13px;height:13px;fill:none;stroke:currentColor;",
+    "stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}",
+    ".wx-nb-map.collapsed{border-radius:999px;}",
+    ".wx-nb-map.collapsed .wx-nb-map-pill{display:inline-flex;}",
+    ".wx-nb-map.collapsed > :not(.wx-nb-map-pill){display:none!important;}",
     ".wx-nb-map .wx-expand-btn{background:rgba(255,255,255,.85);",
     "border-color:var(--line,#e8e6e3);}",
     ".wx-nb-map .wx-expand-btn:hover{background:#fff;}",
@@ -3428,9 +3878,10 @@ function ensureNeighbourMapStyles() {
     ".wx-nb-map-labels{position:absolute;left:0;top:0;right:0;bottom:0;",
     "pointer-events:none;overflow:hidden;z-index:2;}",
     ".wx-nb-map-labels > span{position:absolute;left:0;top:0;white-space:nowrap;",
-    "font-size:11px;line-height:14px;font-weight:600;color:var(--text,#26231f);",
-    "padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.86);",
-    "box-shadow:0 0 0 1px rgba(38,35,31,.06);}",
+    "font-size:10px;line-height:13px;font-weight:600;color:var(--text,#26231f);",
+    "padding:1px 4px;border-radius:4px;background:rgba(255,255,255,.62);}",
+    ".wx-nb-map.wx-expanded .wx-nb-map-labels > span{font-size:12px;line-height:16px;",
+    "padding:1px 6px;}",
     ".wx-nb-map-labels > span.focus{font-weight:700;}",
     ".wx-nb-map-labels .km{color:#5f5a52;font-weight:500;}",
     ".wx-nb-map-labels .val{font-weight:700;}",
@@ -3439,7 +3890,28 @@ function ensureNeighbourMapStyles() {
     ".wx-nb-map-labels > i{position:absolute;left:0;top:0;box-sizing:border-box;",
     "border-radius:50%;border:2px solid transparent;",
     "box-shadow:0 0 0 2px #fff;}",
-    ".wx-nb-map-labels > i.hollow{background:#fff!important;}",
+    ".wx-nb-map-labels > i{pointer-events:auto;cursor:pointer;}",
+    ".wx-nb-map-labels > i.focus{cursor:default;}",
+    ".wx-nb-map-labels > i.star{border:none;border-radius:50%;box-shadow:none;}",
+    ".wx-nb-map-labels > i.star svg{display:block;width:100%;height:100%;overflow:visible;}",
+    ".wx-nb-map-labels > i.star path{stroke:#fff;stroke-width:2.2;stroke-linejoin:round;",
+    "paint-order:stroke;}",
+    ".wx-nb-map-labels > i.cand{background:#c9c4bc;border-color:#c9c4bc;}",
+    ".wx-nb-map-labels > i.cand:hover{background:#8a857d;border-color:#8a857d;}",
+    ".wx-nb-map-tip{position:absolute;left:0;top:0;z-index:5;display:none;",
+    "pointer-events:none;padding:5px 8px;border-radius:6px;",
+    "color:var(--text,#26231f);background:var(--surface,#fff);",
+    "border:1px solid var(--line,#e8e6e3);box-shadow:0 1px 3px rgba(0,0,0,.04);",
+    "white-space:nowrap;max-width:calc(100% - 8px);box-sizing:border-box;}",
+    ".wx-nb-map-tip > div{overflow:hidden;text-overflow:ellipsis;}",
+    ".wx-nb-map-tip .n{font-size:11px;line-height:16px;font-weight:600;",
+    "letter-spacing:-.01em;}",
+    ".wx-nb-map-tip .a{display:flex;align-items:center;gap:6px;margin-top:3px;",
+    "font-size:10px;line-height:13px;font-weight:500;letter-spacing:.03em;color:#a9a49c;}",
+    ".wx-nb-map-tip .a span{overflow:hidden;text-overflow:ellipsis;}",
+    ".wx-nb-map-tip .a i{flex:0 0 auto;width:3px;height:11px;border-radius:1px;}",
+    ".wx-nb-map-tip .a.more{display:block;padding-left:9px;}",
+    ".wx-nb-map-tip.on{display:block;}",
     ".wx-nb-map-labels > i.off{opacity:.35;}",
     ".wx-nb-map-time{position:absolute;left:8px;top:8px;z-index:3;display:none;",
     "padding:2px 7px;border-radius:6px;font-size:10px;font-weight:600;",
@@ -3449,8 +3921,13 @@ function ensureNeighbourMapStyles() {
     ".wx-nb-map .maplibregl-ctrl-attrib{font-size:9px;",
     "background:rgba(255,255,255,.75)!important;color:var(--text-muted,#8a857d);}",
     ".wx-nb-map .maplibregl-ctrl-attrib a{color:var(--text-muted,#8a857d);}",
-    "@media (max-width:768px){.wx-insight-row{flex-wrap:wrap;margin-bottom:10px;}",
-    ".wx-nb-map{max-width:100%;}}",
+    "@media (max-width:768px){.wx-nb-stack{flex-direction:column;margin-bottom:10px;}",
+    ".wx-nb-map-slot{order:-1;max-width:100%;}",
+    ".wx-nb-stack.has-map > .wx-nb-map-slot{margin-left:0;}",
+    ".wx-nb-map{position:relative;top:auto!important;max-width:100%;",
+    "margin-bottom:10px;box-shadow:none;}",
+    ".wx-nb-map.collapsed{display:none!important;}",
+    ".wx-nb-map .wx-nb-map-min,.wx-nb-map-pill{display:none!important;}}",
   ].join("");
   document.head.appendChild(st);
 }
@@ -3463,6 +3940,28 @@ function distanceKm(a, b) {
     Math.sin(dLat / 2) ** 2 +
     Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLon / 2) ** 2;
   return 2 * EARTH_RADIUS_KM * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+}
+
+function elevationDiff(here, at) {
+  if (!here || !at || !Number.isFinite(here.elev) || !Number.isFinite(at.elev)) return null;
+  const d = Math.round(at.elev - here.elev);
+  if (d > 0) return `+${d} m`;
+  if (d < 0) return `\u2212${Math.abs(d)} m`;
+  return "\u00b10 m";
+}
+
+function neighbourMeta(here, at) {
+  const km = distanceLabel(distanceKm(here, at));
+  const dz = elevationDiff(here, at);
+  return dz ? `${km}, ${dz}` : km;
+}
+
+function placeMeta(at) {
+  return at && Number.isFinite(at.elev) ? `${Math.round(at.elev)} m` : null;
+}
+
+function focusMeta(here) {
+  return here && Number.isFinite(here.elev) ? `${Math.round(here.elev)} m` : null;
 }
 
 function distanceLabel(km) {
@@ -3641,6 +4140,22 @@ function gridAlertsAt(marks, xval) {
   return out;
 }
 
+function windowAlertInfo(findings) {
+  const out = new Map();
+  const ranked = (findings || [])
+    .filter((f) => f && f.station && f.section)
+    .slice()
+    .sort((a, b) => ovSeverity(b) - ovSeverity(a));
+  for (const f of ranked) {
+    const key = neighbourKey(f.station);
+    if (!out.has(key)) out.set(key, []);
+    const list = out.get(key);
+    if (list.some((x) => x.section === f.section)) continue;
+    list.push({ section: f.section, color: solid(f.color) || NEIGHBOUR_MAP_RING_FALLBACK });
+  }
+  return out;
+}
+
 function windowAlertColors(findings) {
   const best = new Map();
   for (const f of findings || []) {
@@ -3661,7 +4176,7 @@ function neighbourMapLabel(label, name, km, focus) {
   label.node.innerHTML = "";
   label.node.appendChild(document.createTextNode(km ? name + " " : name));
   if (km) label.node.appendChild(el("span", "km", `(${km})`));
-  label.dot.className = "";
+  label.dot.classList.remove("off");
 }
 
 function neighbourMapReading(label, name, km, focus, reading) {
@@ -3672,7 +4187,7 @@ function neighbourMapReading(label, name, km, focus, reading) {
   label.node.appendChild(
     off ? el("span", "none", "no data") : el("span", "val", reading.text)
   );
-  label.dot.className = off ? "off" : reading.hollow ? "hollow" : "";
+  label.dot.classList.toggle("off", off);
 }
 
 function boxesOverlap(a, b) {
@@ -3718,6 +4233,8 @@ function placeNeighbourLabels(labels, at, w, h) {
     if (l.dot) {
       l.dot.style.transform =
         `translate(${Math.round(p.x - l.size / 2)}px,${Math.round(p.y - l.size / 2)}px)`;
+      l.dot._x = p.x;
+      l.dot._y = p.y;
     }
   });
 }
@@ -3759,19 +4276,48 @@ function inActivePane(node) {
   return !!(node && node.closest && node.closest(".tab-pane.active"));
 }
 
+function fitRailPlots(row) {
+  if (!row || !row.querySelectorAll || !window.Plotly) return;
+  for (const pd of row.querySelectorAll(".wx-detail-plot")) {
+    if (!pd._fullLayout || !pd.isConnected) continue;
+    const w = Math.round(pd.clientWidth || 0);
+    const cur = Math.round(pd._fullLayout.width || 0);
+    if (!w || Math.abs(w - cur) < 2) continue;
+    try {
+      const p = Plotly.relayout(pd, { width: w });
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    } catch (e) {
+      void e;
+    }
+  }
+  const grids = Array.from(row.querySelectorAll(".station-grid")).filter(
+    (g) => typeof g._wxRefresh === "function"
+  );
+  if (!grids.length) return;
+  for (const g of grids) if (typeof g._wxRailFit === "function") g._wxRailFit();
+  requestAnimationFrame(() => {
+    for (const g of grids) if (g.isConnected) g._wxRefresh();
+  });
+}
+
 function neighbourMap() {
   ensureNeighbourMapStyles();
   const node = el("div", "wx-nb-map");
   const plot = el("div", "wx-nb-map-plot");
   const layer = el("div", "wx-nb-map-labels");
   const chip = el("div", "wx-nb-map-time");
+  const tip = el("div", "wx-nb-map-tip");
   node.appendChild(plot);
   node.appendChild(layer);
   node.appendChild(chip);
+  node.appendChild(tip);
 
+  let acts = null;
+  let extras = [];
+  let quietNow = false;
   let valuesAt = null;
   let owner = null;
-  let expanded = false;
+  let expanded = !isMobile();
   let drawn = false;
   let sig = null;
   let last = null;
@@ -3794,10 +4340,64 @@ function neighbourMap() {
     node.classList.toggle("wx-expanded", expanded);
     if (last) {
       sig = null;
-      show(last.focus, last.names, valuesAt, owner);
+      show(last.focus, last.names, valuesAt, owner, acts, last.quiet);
     }
   });
+  setExpandButton(btn, expanded);
+  node.classList.toggle("wx-expanded", expanded);
   node.appendChild(btn);
+
+  let collapsed = isMobile();
+  let refitOnOpen = false;
+  node.classList.toggle("collapsed", collapsed);
+  const minBtn = el("button", "wx-expand-btn wx-nb-map-min");
+  minBtn.type = "button";
+  minBtn.innerHTML = MAP_MIN_ICON;
+  minBtn.title = "Minimise map";
+  minBtn.setAttribute("aria-label", "Minimise map");
+  const pill = el("button", "wx-nb-map-pill");
+  pill.type = "button";
+  pill.innerHTML = MAP_PILL_ICON;
+  pill.appendChild(el("span", null, "Map"));
+  pill.title = "Show map";
+  const setCollapsed = (on) => {
+    collapsed = on;
+    node.classList.toggle("collapsed", on);
+    hideTip();
+    if (owner && node.classList.contains("show")) markRow(owner, true);
+    if (on) return;
+    if (refitOnOpen && last) {
+      refitOnOpen = false;
+      sig = null;
+      drawnLines = null;
+      show(last.focus, last.names, valuesAt, owner, acts, last.quiet);
+      return;
+    }
+    if (!drawn) return;
+    requestAnimationFrame(() => {
+      const sub =
+        plot._fullLayout && plot._fullLayout.map && plot._fullLayout.map._subplot;
+      try {
+        if (sub && sub.map && typeof sub.map.resize === "function") sub.map.resize();
+        else Plotly.Plots.resize(plot);
+      } catch (e) {
+        void e;
+      }
+      if (place) place();
+    });
+  };
+  minBtn.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    setCollapsed(true);
+  });
+  pill.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    setCollapsed(false);
+  });
+  node.appendChild(minBtn);
+  node.appendChild(pill);
 
   const release = () => {
     unbind();
@@ -3828,16 +4428,14 @@ function neighbourMap() {
     }
     current.forEach((l, i) => {
       if (!readings) {
-        neighbourMapLabel(l, l.name, l.km, i === 0);
+        neighbourMapLabel(l, l.name, l.meta, !!l.isFocus);
         return;
       }
       const v = readings.values.get(neighbourKey(l.name));
       const value = v === undefined ? null : v;
-      neighbourMapReading(l, l.name, l.km, i === 0, {
+      neighbourMapReading(l, l.name, l.meta, !!l.isFocus, {
         value: value,
         text: value === null ? "" : mapValueText(value, readings.col),
-        hollow: readings.col === NEIGHBOUR_MAP_RAIN_COL && value !== null &&
-          Math.round(value * 10) === 0,
       });
     });
     if (place) place();
@@ -3864,10 +4462,51 @@ function neighbourMap() {
   };
 
   let parked = false;
+  let drawnSize = null;
+  let drawnLines = null;
+  let drawnFc = null;
+  let stale = false;
+  let reacting = null;
+
+  const liveMap = () => {
+    const sub =
+      plot._fullLayout && plot._fullLayout.map && plot._fullLayout.map._subplot;
+    return sub && sub.map && typeof sub.map.getBounds === "function" ? sub.map : null;
+  };
+
+  const keptView = (points, w, h) => {
+    if (!drawn || drawnSize !== w + "x" + h || drawnFc !== state.fc) return null;
+    const gl = liveMap();
+    if (!gl) return null;
+    try {
+      const b = gl.getBounds();
+      const inside = points.every((p) => b.contains([p.at.lon, p.at.lat]));
+      if (!inside) return null;
+      const c = gl.getCenter();
+      return { center: { lon: c.lng, lat: c.lat }, zoom: gl.getZoom() };
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const markRow = (slot, on) => {
+    const row = slot && slot.parentNode;
+    if (!row || !row.classList || !row.classList.contains("wx-nb-stack")) return;
+    row.classList.toggle("has-map", on);
+    if (on) node.style.top = isMobile() ? "" : stickyOffset() + PANEL_MARGIN + "px";
+    const rail = on ? (collapsed ? "c" : String(size().w)) : "";
+    if (row._wxRail === rail) return;
+    const first = row._wxRail === undefined && !on;
+    row._wxRail = rail;
+    if (first) return;
+    fitRailPlots(row);
+    requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+  };
 
   const hide = () => {
     node.classList.remove("show");
     if (node.parentNode) node.parentNode.removeChild(node);
+    markRow(owner, false);
     owner = null;
     hoverAt = null;
     shownAt = null;
@@ -3879,33 +4518,144 @@ function neighbourMap() {
     chip.className = "wx-nb-map-time";
   };
 
-  const attachLabels = (labels, view, w, h) => {
+  const tipFor = (name, meta, verb) => ({ name: name, meta: meta, verb: verb });
+
+  const showTip = (dot, info, w) => {
+    tip.innerHTML = "";
+    tip.appendChild(
+      el("div", "n", `${info.name}${info.meta ? ` (${info.meta})` : ""}`)
+    );
+    const found = [];
+    for (const a of found.slice(0, MAP_TIP_ALERTS)) {
+      const row = el("div", "a");
+      const swatch = el("i");
+      swatch.style.background = a.color;
+      row.appendChild(swatch);
+      row.appendChild(el("span", null, a.section));
+      tip.appendChild(row);
+    }
+    if (found.length > MAP_TIP_ALERTS) {
+      tip.appendChild(el("div", "a more", `+${found.length - MAP_TIP_ALERTS} more`));
+    }
+    tip.className = "wx-nb-map-tip on";
+    const tw = tip.offsetWidth;
+    const th = tip.offsetHeight;
+    const x = Math.max(4, Math.min(w - tw - 4, (dot._x || 0) - tw / 2));
+    const above = (dot._y || 0) - th - 10;
+    const y = above >= 4 ? above : (dot._y || 0) + 10;
+    tip.style.transform = `translate(${Math.round(x)}px,${Math.round(y)}px)`;
+  };
+
+  const hideTip = () => {
+    tip.className = "wx-nb-map-tip";
+  };
+
+  const editing = () => !!(acts && typeof acts.editing === "function" && acts.editing());
+
+  const wireDot = (dot, w, describe, act) => {
+    if (describe) {
+      dot.addEventListener("pointerenter", () => showTip(dot, describe(), w));
+      dot.addEventListener("pointerleave", hideTip);
+    }
+    if (!act) return;
+    dot.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      hideTip();
+      act(ev);
+    });
+  };
+
+  const attachLabels = (labels, view, w, h, focusAt) => {
     layer.innerHTML = "";
-    for (const l of labels) {
+    hideTip();
+    const taken = new Set(labels.map((l) => neighbourKey(l.name)));
+    extras = [];
+    for (const at of nearbyStations()) {
+      if (taken.has(neighbourKey(at.name))) continue;
+      const dot = el("i", "cand");
+      dot.style.width = NEIGHBOUR_MAP_CAND_PX + "px";
+      dot.style.height = NEIGHBOUR_MAP_CAND_PX + "px";
+      const meta = focusAt ? neighbourMeta(focusAt, at) : placeMeta(at);
+      wireDot(
+        dot,
+        w,
+        () => tipFor(at.name, meta, editing() ? MAP_HINT_ADD : MAP_HINT_OPEN),
+        () => {
+          if (!acts) return;
+          if (editing()) {
+            if (typeof acts.toggle === "function") acts.toggle(at.name);
+          } else if (typeof acts.open === "function") {
+            acts.open(at.name);
+          }
+        }
+      );
+      extras.push({ dot: dot, lon: at.lon, lat: at.lat });
+      layer.appendChild(dot);
+    }
+    const others = labels.filter((l) => !l.isFocus).length;
+    labels.forEach((l) => {
       l.dot.style.width = l.size + "px";
       l.dot.style.height = l.size + "px";
       l.dot.style.background = l.color;
       l.dot.style.borderColor = l.color;
+      if (l.isFocus) {
+        l.dot.classList.add("focus", "star");
+        l.dot.style.background = "transparent";
+        l.dot.style.borderColor = "transparent";
+        l.dot.innerHTML =
+          '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+          `<path d="${MAP_STAR_PATH}" fill="${l.color}"/></svg>`;
+      } else {
+        wireDot(
+          l.dot,
+          w,
+          l.quiet ? () => tipFor(l.name, l.meta, MAP_HINT_OPEN) : null,
+          () => {
+            if (!acts) return;
+            if (editing()) {
+              if (others > 1 && typeof acts.toggle === "function") acts.toggle(l.name);
+            } else if (typeof acts.open === "function") {
+              acts.open(l.name);
+            }
+          }
+        );
+      }
       layer.appendChild(l.dot);
+    });
+    for (const l of labels) {
+      l.node.style.display = l.quiet ? "none" : "";
+      layer.appendChild(l.node);
     }
-    for (const l of labels) layer.appendChild(l.node);
     const fixed = neighbourMapProject(view, w, h);
     const sub =
       plot._fullLayout && plot._fullLayout.map && plot._fullLayout.map._subplot;
     const gl = sub && sub.map && typeof sub.map.project === "function" ? sub.map : null;
+    const project = (lon, lat) => {
+      if (gl) {
+        const q = gl.project([lon, lat]);
+        return { x: q.x, y: q.y };
+      }
+      return fixed(lon, lat);
+    };
     current = labels;
     place = () => {
-      const at = labels.map((l) => {
-        if (gl) {
-          const q = gl.project([l.lon, l.lat]);
-          return { x: q.x, y: q.y };
-        }
-        return fixed(l.lon, l.lat);
-      });
+      const half = NEIGHBOUR_MAP_CAND_PX / 2;
+      for (const e of extras) {
+        const q = project(e.lon, e.lat);
+        const inside = q.x >= -half && q.y >= -half && q.x <= w + half && q.y <= h + half;
+        e.dot.style.display = inside ? "" : "none";
+        if (!inside) continue;
+        e.dot._x = q.x;
+        e.dot._y = q.y;
+        e.dot.style.transform = `translate(${Math.round(q.x - half)}px,${Math.round(q.y - half)}px)`;
+      }
+      const at = labels.map((l) => project(l.lon, l.lat));
       placeNeighbourLabels(labels, at, w, h);
     };
     shownAt = null;
     paintLabels();
+    layer.style.visibility = "";
     if (gl) {
       const move = () => {
         if (place) place();
@@ -3915,19 +4665,26 @@ function neighbourMap() {
     }
   };
 
-  const show = (focus, names, source, slot) => {
+  const show = (focus, names, source, slot, actions, quiet) => {
     if (
       slot && owner && slot !== owner && owner.isConnected &&
       inActivePane(owner) && !inActivePane(slot)
     ) {
       return;
     }
+    if (actions) acts = actions;
     if (slot && node.parentNode !== slot) slot.appendChild(node);
+    if (owner && owner !== slot) markRow(owner, false);
     const switched = owner !== (slot || null) || valuesAt !== (source || null);
     owner = slot || null;
     valuesAt = source || null;
-    const here = stationCoord(focus);
-    if (!here || !names || !names.length) {
+    if (!node.isConnected) {
+      last = { focus: focus, names: names, quiet: !!quiet };
+      stale = true;
+      return;
+    }
+    const here = focus ? stationCoord(focus) : null;
+    if (!names || !names.length) {
       hide();
       return;
     }
@@ -3938,8 +4695,8 @@ function neighbourMap() {
       items.push({
         name: name,
         at: at,
-        color: overlayColor(i),
-        km: distanceLabel(distanceKm(here, at)),
+        color: quiet ? NEIGHBOUR_MAP_STATION_COLOR : NEIGHBOUR_MAP_NEIGHBOUR_COLOR,
+        meta: here ? neighbourMeta(here, at) : placeMeta(at),
       });
     });
     if (!items.length) {
@@ -3947,13 +4704,21 @@ function neighbourMap() {
       return;
     }
 
-    last = { focus: focus, names: names };
+    last = { focus: focus, names: names, quiet: !!quiet };
     node.classList.add("show");
     const { w, h } = size();
-    const next = [focus, w].concat(items.map((it) => it.name)).join("\u0001");
-    const wasParked = parked;
+    plot.style.width = w + "px";
+    plot.style.height = h + "px";
+    markRow(slot, true);
+    quietNow = !!quiet;
+    const next = [here ? focus : "", w, quiet ? "q" : ""]
+      .concat(items.map((it) => it.name))
+      .join("\u0001");
+    hideTip();
+    const wasParked = parked || stale;
     parked = false;
-    if (drawn && next === sig && (current || !wasParked)) {
+    stale = false;
+    if (drawn && next === sig && (current || reacting === next)) {
       if (switched || wasParked) {
         hoverAt = null;
         shownAt = null;
@@ -3963,31 +4728,57 @@ function neighbourMap() {
     }
     sig = next;
     release();
-    layer.innerHTML = "";
 
-    plot.style.width = w + "px";
-    plot.style.height = h + "px";
-
-    const data = items.map((it) => ({
+    const spokes = here && !quiet ? items : [];
+    const lineLon = [];
+    const lineLat = [];
+    for (const it of spokes) {
+      lineLon.push(here.lon, it.at.lon, null);
+      lineLat.push(here.lat, it.at.lat, null);
+    }
+    const data = [{
       type: "scattermap",
       mode: "lines",
-      lon: [here.lon, it.at.lon],
-      lat: [here.lat, it.at.lat],
-      line: { color: it.color, width: 1.2 },
-      opacity: 0.55,
+      lon: lineLon,
+      lat: lineLat,
+      connectgaps: false,
+      line: { color: NEIGHBOUR_MAP_LINE_COLOR, width: 1 },
+      opacity: 0.8,
       hoverinfo: "skip",
       showlegend: false,
-    }));
-    const all = [{ at: here, color: OVERLAY_FOCUS_COLOR, name: focus, km: null, size: 10 }]
-      .concat(items.map((it) => ({
-        at: it.at,
-        color: it.color,
-        name: it.name,
-        km: it.km,
-        size: 8,
-      })));
+    }];
+    data.push({
+      type: "scattermap",
+      mode: "markers",
+      lon: [],
+      lat: [],
+      hoverinfo: "skip",
+      showlegend: false,
+    });
+    const all = (here
+      ? [{
+          at: here,
+          color: OVERLAY_FOCUS_COLOR,
+          name: focus,
+          meta: focusMeta(here),
+          size: NEIGHBOUR_MAP_STAR_PX,
+          isFocus: true,
+        }]
+      : []
+    ).concat(items.map((it) => ({
+      at: it.at,
+      color: it.color,
+      name: it.name,
+      meta: it.meta,
+      size: quiet ? NEIGHBOUR_MAP_STATION_PX : 8,
+      quiet: !!quiet,
+    })));
 
-    const view = neighbourMapView(all.map((p) => p.at), w, h);
+    const fit = neighbourMapView(all.map((p) => p.at), w, h);
+    const view = keptView(all, w, h) || fit;
+    const sameSize = drawnSize === w + "x" + h;
+    if (!sameSize) layer.style.visibility = "hidden";
+    drawnSize = w + "x" + h;
     const layout = {
       width: w,
       height: h,
@@ -3995,23 +4786,41 @@ function neighbourMap() {
       showlegend: false,
       paper_bgcolor: NEIGHBOUR_MAP_PAPER,
       font: { family: NEIGHBOUR_MAP_FONT, size: 11, color: DETAIL_HOVER_TEXT },
+      uirevision: "nbmap|" + (state.fc || ""),
       map: {
         style: NEIGHBOUR_MAP_STYLE,
         center: view.center,
         zoom: view.zoom,
+        uirevision: "nbmap|" + (state.fc || ""),
       },
     };
     const labels = all.map((p) => ({
       node: el("span"),
       dot: el("i"),
       name: p.name,
-      km: p.km,
+      meta: p.meta,
       color: p.color,
       lon: p.at.lon,
       lat: p.at.lat,
       size: p.size,
+      isFocus: !!p.isFocus,
+      quiet: !!p.quiet,
     }));
     const mine = sig;
+    const lineSig = JSON.stringify([
+      w,
+      h,
+      data.map((tr) => [tr.lon, tr.lat, tr.line ? tr.line.color : ""]),
+    ]);
+    const kept = keptView(all, w, h);
+    if (drawn && kept && lineSig === drawnLines && liveMap()) {
+      attachLabels(labels, kept, w, h, here);
+      return;
+    }
+    const warm = drawn && drawnFc === state.fc && sameSize && !!liveMap();
+    drawnLines = lineSig;
+    drawnFc = state.fc;
+    reacting = mine;
     let done;
     try {
       done = Plotly.react(plot, data, layout, {
@@ -4025,13 +4834,35 @@ function neighbourMap() {
       hide();
       return;
     }
+    if (warm && liveMap()) attachLabels(labels, view, w, h, here);
     Promise.resolve(done)
       .then(() => {
-        if (sig !== mine || !node.isConnected) return;
+        if (reacting === mine) reacting = null;
+        if (sig !== mine) return;
+        if (!node.isConnected) {
+          sig = null;
+          stale = true;
+          return;
+        }
+        const gl = liveMap();
+        if (gl && typeof gl.resize === "function") {
+          try {
+            gl.resize();
+          } catch (e) {
+            void e;
+          }
+        }
+        unwatch();
         unwatch = collapseMapAttribution(plot);
-        attachLabels(labels, view, w, h);
+        if (current === labels && place) {
+          place();
+          layer.style.visibility = "";
+          return;
+        }
+        attachLabels(labels, view, w, h, here);
       })
       .catch((e) => {
+        if (reacting === mine) reacting = null;
         console.warn("neighbour map failed", e);
         hide();
       });
@@ -4045,6 +4876,10 @@ function neighbourMap() {
       hide();
     },
     time: setTime,
+    collapse: (on) => setCollapsed(!!on),
+    reset: () => {
+      if (collapsed) refitOnOpen = true;
+    },
   };
 }
 
@@ -4285,7 +5120,9 @@ function stationGrid(c, views, opts) {
     fills = gridZoneFills(fig, cells);
     rowPx = gridRowPx(fig, cells) * scale;
     gridCol = gridColumnName(fig);
-    if (fig && Array.isArray(fig.data)) fig.data = fig.data.map(unifiedBandTrace);
+    if (fig && Array.isArray(fig.data)) {
+      fig.data = fig.data.map((tr) => unifiedBandTrace(tr, fig.layout));
+    }
     if (!baseSlots) {
       baseSlots = new Map();
       for (const cell of cells) {
@@ -4303,6 +5140,116 @@ function stationGrid(c, views, opts) {
     }
   };
   useFigure(list[0].key);
+
+  const suffix = (opts && opts.suffix) || null;
+  const foreign = new Map();
+  let aug = null;
+  let refreshQueued = false;
+
+  const baseSrc = () => ({ key: "", base: fig, fig: fig, cells: cells, fills: fills });
+
+  const foreignPart = (name) => {
+    const k = viewKey + "|" + neighbourKey(name);
+    if (foreign.has(k)) return foreign.get(k);
+    const entry = { part: null };
+    foreign.set(k, entry);
+    const at = stationCoord(name);
+    if (!at || !at.fc || !suffix) return entry;
+    const vk = viewKey;
+    const fc = state.fc;
+    const hours = state.hours;
+    Promise.resolve(loadCharts(at.fc, hours, suffix))
+      .then((cc) => {
+        if (state.fc !== fc || state.hours !== hours) return;
+        entry.part = stationGridPart(cc && cc[vk], name);
+        if (!entry.part || refreshQueued) return;
+        refreshQueued = true;
+        requestAnimationFrame(() => {
+          refreshQueued = false;
+          if (selected && selected.size) apply();
+        });
+      })
+      .catch(() => {});
+    return entry;
+  };
+
+  const augmentWith = (parts, key) => {
+    const layout = Object.assign({}, fig.layout);
+    const data = (fig.data || []).slice();
+    const shapes = ((fig.layout && fig.layout.shapes) || []).slice();
+    const anns = ((fig.layout && fig.layout.annotations) || []).slice();
+    const lead = cells.find((cl) => cl.matches);
+    const matchX = lead ? lead.matches : null;
+    const extra = [];
+    parts.forEach((p, i) => {
+      const n = FOREIGN_AXIS_BASE + i;
+      const xid = "x" + n;
+      const yid = "y" + n;
+      const xa = deepClone(p.xaxis);
+      xa.anchor = yid;
+      if (matchX) xa.matches = matchX;
+      else delete xa.matches;
+      const ya = deepClone(p.yaxis);
+      ya.anchor = xid;
+      delete ya.matches;
+      layout["xaxis" + n] = xa;
+      layout["yaxis" + n] = ya;
+      for (const tr of p.traces) data.push(Object.assign({}, tr, { xaxis: xid, yaxis: yid }));
+      for (const sh of p.shapes) {
+        const copy = deepClone(sh);
+        copy.xref = retargetRef(sh.xref, p.xid, xid);
+        copy.yref = retargetRef(sh.yref, p.yid, yid);
+        shapes.push(copy);
+      }
+      if (p.annotation) {
+        const a = deepClone(p.annotation);
+        if (String(a.text).replace(/<[^>]*>/g, "").trim() !== p.name) {
+          a.text = String(a.text).replace(/(<[^>]*>)*[^<]+/, (m, tag) => (tag || "") + p.name);
+        }
+        anns.push(a);
+      }
+      wrap._wxAxisStations.set(xid, p.name);
+      const dx = Array.isArray(xa.domain) ? xa.domain : [0, 1];
+      const dy = Array.isArray(ya.domain) ? ya.domain : [0, 1];
+      extra.push({
+        id: xid,
+        xkey: "xaxis" + n,
+        ykey: "yaxis" + n,
+        station: p.name,
+        x0: dx[0],
+        x1: dx[1],
+        y0: dy[0],
+        y1: dy[1],
+        matches: matchX,
+      });
+    });
+    layout.shapes = shapes;
+    layout.annotations = anns;
+    return {
+      key: key,
+      base: fig,
+      fig: { data: data, layout: layout },
+      cells: cells.concat(extra),
+      fills: fills,
+    };
+  };
+
+  const srcNow = () => {
+    if (!selected || !selected.size) return baseSrc();
+    const have = new Set(cells.map((cl) => neighbourKey(cl.station)));
+    const parts = [];
+    for (const name of selected) {
+      if (have.has(neighbourKey(name))) continue;
+      const entry = foreignPart(name);
+      if (entry && entry.part) parts.push(entry.part);
+    }
+    if (!parts.length) return baseSrc();
+    parts.sort((a, b) => a.name.localeCompare(b.name));
+    const key = viewKey + "|" + parts.map((p) => p.name).join("\u0001");
+    if (aug && aug.key === key && aug.base === fig) return aug;
+    aug = augmentWith(parts, key);
+    return aug;
+  };
 
   const g = graph(fig, { height: h, noModeBar: true });
   const selPd = el("div", "wx-plot wx-plot-sel");
@@ -4353,13 +5300,88 @@ function stationGrid(c, views, opts) {
   wrap._wxStacked = false;
   wrap._wxCumulative = false;
 
-  const cumulativeSource = () => {
-    const data = (fig && fig.data) || [];
+  let histInfo = null;
+  let histKey = "";
+  let histApi = null;
+  let histQueued = false;
+  const histCache = new Map();
+
+  const historicalNow = () =>
+    histInfo && histApi && panelPlot(wrap._wxPanel) ? histInfo : null;
+
+  const histNormals = (name) => {
+    const key = neighbourKey(name);
+    if (histCache.has(key)) return histCache.get(key);
+    histCache.set(key, null);
+    Promise.resolve(histApi.neighbourNormals(name))
+      .then((n) => {
+        if (!n) return;
+        histCache.set(key, n);
+        if (histQueued) return;
+        histQueued = true;
+        requestAnimationFrame(() => {
+          histQueued = false;
+          if (selected && selected.size) apply();
+        });
+      })
+      .catch(() => {});
+    return null;
+  };
+
+  const historicalBands = (next, list, hist) => {
+    if (!hist || !gridCol || !next || !next.ids) return "";
+    const bands = [];
+    const lit = new Set();
+    const names = [];
+    for (const cell of list) {
+      if (!next.ids.has(cell.id)) continue;
+      const n = histNormals(cell.station);
+      if (!n) continue;
+      const yid = "y" + cell.ykey.slice(5);
+      const traces = histApi.normalsRangeTraces(
+        n, gridCol, hist.startMs, hist.endMs, cell.id, yid
+      );
+      if (!traces || !traces.length) continue;
+      for (const tr of traces) bands.push(tr);
+      lit.add(cell.id);
+      names.push(cell.station);
+    }
+    if (!bands.length) return "";
+    next.data = bands.concat(
+      next.data.map((tr) => {
+        if (!tr || !lit.has(tr.xaxis || "x") || isAlertTrace(tr)) return tr;
+        if (tr.meta && (tr.meta.band_hover || tr.meta.normals)) return tr;
+        const out = Object.assign({}, tr);
+        if (out.fill) out.fill = "none";
+        if (out.line) out.line = Object.assign({}, out.line, { color: HIST_LINE_COLOR });
+        if (out.marker) out.marker = Object.assign({}, out.marker, { color: HIST_LINE_COLOR });
+        return out;
+      })
+    );
+    return names.sort().join("\u0001");
+  };
+
+  wrap._wxHistorical = (info) => {
+    const key = info ? info.startMs + "-" + info.endMs : "";
+    if (key === histKey) return;
+    histKey = key;
+    histInfo = info || null;
+    detailModule()
+      .then((m) => {
+        histApi = m;
+        if (selected && selected.size) apply();
+      })
+      .catch(() => {});
+  };
+
+  const cumulativeSource = (from) => {
+    const f = from || srcNow().fig;
+    const data = (f && f.data) || [];
     if (cumFrom !== data) {
       cumFrom = data;
       cumData = cumulativeTraces(data);
     }
-    return { data: cumData, layout: fig.layout };
+    return { data: cumData, layout: f.layout };
   };
 
   const releasePushed = (dpd) => {
@@ -4420,8 +5442,9 @@ function stationGrid(c, views, opts) {
     const totals = wrap._wxCumulative === true;
     const base =
       dpd && !totals && sharedColumn(dpd) ? detailFit(dpd, view) : null;
+    const now = srcNow();
     const range = stackYRange(
-      totals ? cumulativeSource() : fig, fitIds, base, view
+      totals ? cumulativeSource(now.fig) : now.fig, fitIds, base, view
     );
     if (!range) return;
     const patch = {};
@@ -4451,6 +5474,7 @@ function stationGrid(c, views, opts) {
   wrap._wxShareY = (col, base, xrange) => {
     if (!base || !selected || !selected.size) return null;
     if (overlay && canCumulate && cumulative && order) return null;
+    if (wrap._wxCumulative) return null;
     if (!gridCol || !col || String(col).toLowerCase() !== gridCol.toLowerCase()) {
       return null;
     }
@@ -4458,13 +5482,14 @@ function stationGrid(c, views, opts) {
     if (!view) return null;
     const lit = wrap._wxPanel;
     const focus = overlay && lit ? neighbourKey(lit._wxStation || "") : "";
+    const now = srcNow();
     const ids = new Set();
-    for (const cell of cells) {
+    for (const cell of now.cells) {
       if (selected.has(cell.station) || (focus && neighbourKey(cell.station) === focus)) {
         ids.add(cell.id);
       }
     }
-    return ids.size ? stackYRange(fig, ids, base, view) : null;
+    return ids.size ? stackYRange(now.fig, ids, base, view) : null;
   };
 
   let awaitTimer = 0;
@@ -4493,7 +5518,7 @@ function stationGrid(c, views, opts) {
     const fl = pd && pd._fullLayout;
     if (!fl) return null;
     const out = new Map();
-    for (const cell of cells) {
+    for (const cell of srcNow().cells) {
       const xa = fl[cell.xkey];
       if (!xa || xa.visible === false) continue;
       if (!Array.isArray(xa.range) || xa.range.length !== 2) continue;
@@ -4523,34 +5548,67 @@ function stationGrid(c, views, opts) {
       if (open) dropHover(open);
       releasePushed(open);
     }
+    const src = srcNow();
+    syncMap(false);
     const wantOverlay = filtered && overlay;
     const wantCum = wantOverlay && canCumulate && cumulative && !!order;
-    const link = filtered ? linkGeom(wantCum) : null;
+    const hist = filtered && !wantOverlay ? historicalNow() : null;
+    const histCum = !!(hist && gridCol && gridCol === histApi.NORMALS_RAIN_COL);
+    const link = filtered ? linkGeom(wantCum || histCum) : null;
     const lit = wrap._wxPanel;
     const focus =
       wantOverlay && lit && lit.style.display !== "none"
         ? lit._wxStation || null
         : null;
+    let stackRow = rowPx;
+    if (filtered && !wantOverlay && !isMobile()) {
+      const width = g.getBoundingClientRect().width || 0;
+      const byWidth = width * GRID_STACK_ROW_RATIO;
+      const byView =
+        ((window.innerHeight || 900) * GRID_STACK_VIEW_SHARE) / Math.max(1, selected.size);
+      stackRow = Math.round(
+        Math.max(rowPx, Math.min(GRID_STACK_ROW_MAX, byWidth, byView))
+      );
+    }
     let next = null;
     try {
       if (wantOverlay) {
         next = buildOverlayFigure(
-          wantCum ? cumulativeSource() : fig,
-          cells, rowPx, selected, link, useRanges, order, focus
+          wantCum ? cumulativeSource(src.fig) : src.fig,
+          src.cells, rowPx, selected, link, useRanges, order, focus
         );
       }
       wrap._wxOverlay = !!next;
       wrap._wxCumulative = !!next && wantCum;
       if (!next) {
         next = buildGridFigure(
-          fig, cells, fills, rowPx, selected, link, useRanges, order
+          histCum ? cumulativeSource(src.fig) : src.fig,
+          src.cells, src.fills, stackRow, selected, link, useRanges, order
         );
+        if (histCum) wrap._wxCumulative = true;
       }
     } catch (e) {
       console.warn("station grid filter failed", e);
       return true;
     }
+    let histSig = "";
+    if (hist && !wrap._wxOverlay) {
+      try {
+        histSig = historicalBands(next, src.cells, hist);
+      } catch (e) {
+        console.warn("neighbour normals failed", e);
+        histSig = "";
+      }
+    }
     const ids = filtered ? next.ids || null : null;
+    if (ctlRef && typeof ctlRef._wxShown === "function") {
+      let shown = null;
+      if (filtered) {
+        shown = 0;
+        for (const cell of src.cells) if (selected.has(cell.station)) shown++;
+      }
+      ctlRef._wxShown(shown);
+    }
     if (isMobile()) {
       try {
         next = buildMobileFigure(next, { height: next.layout.height });
@@ -4567,20 +5625,23 @@ function stationGrid(c, views, opts) {
 
     const canExpand = typeof wrap._wxExpand === "function";
     const isOpen = () => !!(wrap._wxIsExpanded && wrap._wxIsExpanded());
-    const collapsing = canExpand && !filtered && autoExpanded;
-    const expanding = canExpand && filtered && !isOpen();
+    const collapsing = canExpand && autoExpanded && !(filtered && wantOverlay);
+    const expanding = canExpand && filtered && wantOverlay && !isOpen();
     const willOpen = collapsing ? false : expanding ? true : isOpen();
 
     const sig = [
       viewKey,
+      src.key,
       wantOverlay ? "1" : "0",
       wantCum ? "1" : "0",
       focus || "",
       selected ? Array.from(selected).sort().join("\u0001") : "",
       order ? Array.from(order.keys()).join("\u0002") : "",
-      Math.round(rowPx),
+      Math.round(stackRow),
       Math.round(natural),
       chrome,
+      hist ? hist.startMs + "-" + hist.endMs + (histCum ? "c" : "") : "",
+      histSig,
       willOpen ? "1" : "0",
       link
         ? [
@@ -4675,8 +5736,36 @@ function stationGrid(c, views, opts) {
     if (!render()) requestAnimationFrame(apply);
   };
 
+  watchResize(wrap, () => {
+    if (selected && selected.size && !overlay) apply();
+  });
+
   wrap._wxRefresh = () => {
     if (selected && selected.size) apply();
+  };
+
+  wrap._wxRailFit = () => {
+    if (selected && selected.size) return;
+    const pd = g._wxPlotDiv;
+    if (!pd || !pd._wxDrawn || !pd._fullLayout || !pd.isConnected) return;
+    if (pd.style.display === "none") return;
+    const w = Math.round(pd.clientWidth || 0);
+    if (!w || Math.abs(w - Math.round(pd._fullLayout.width || 0)) < 2) return;
+    const drop = () => {
+      if (pd.layout) delete pd.layout.width;
+      pd._wxWidth = pd.clientWidth;
+      fitPlot(pd);
+    };
+    g._wxHold = true;
+    try {
+      const p = Plotly.relayout(pd, { width: w });
+      if (p && typeof p.then === "function") p.then(drop, drop);
+      else drop();
+    } catch (e) {
+      void e;
+    } finally {
+      g._wxHold = false;
+    }
   };
 
   const names = Array.from(new Set(Array.from(wrap._wxAxisStations.values()))).sort(
@@ -4685,6 +5774,8 @@ function stationGrid(c, views, opts) {
 
   let bar = null;
   let nbMap = null;
+  let ctlRef = null;
+  let syncMap = () => {};
   if (names.length > 1 || list.length > 1) {
     ensureGridToggleStyles();
     bar = el("div", "wx-grid-toggle");
@@ -4770,10 +5861,11 @@ function stationGrid(c, views, opts) {
 
     let mapCache = null;
     const mapSeries = () => {
-      const src = (fig && fig.data) || [];
-      const use = cumulative ? cumulativeSource().data : src;
+      const now = srcNow().fig;
+      const src = (now && now.data) || [];
+      const use = wrap._wxCumulative ? cumulativeSource(now).data : src;
       if (mapCache && mapCache.src === src && mapCache.use === use) return mapCache;
-      const col = gridColumnName(fig);
+      const col = gridColumnName(now);
       mapCache = {
         src: src,
         use: use,
@@ -4784,14 +5876,15 @@ function stationGrid(c, views, opts) {
     };
     let markCache = null;
     const mapMarks = () => {
-      const src = (fig && fig.data) || [];
+      const now = srcNow().fig;
+      const src = (now && now.data) || [];
       if (markCache && markCache.src === src) return markCache.marks;
-      markCache = { src: src, marks: gridAlertMarks(fig, wrap._wxAxisStations) };
+      markCache = { src: src, marks: gridAlertMarks(now, wrap._wxAxisStations) };
       return markCache.marks;
     };
     const mapSource = (xval) => {
       if (xval === null || xval === undefined) {
-        return { col: null, values: null, alerts: wrap._wxAlertColors || null };
+        return { col: null, values: null, alerts: null };
       }
       const cache = mapSeries();
       const values = new Map();
@@ -4801,10 +5894,24 @@ function stationGrid(c, views, opts) {
       return { col: cache.col, values: values, alerts: gridAlertsAt(mapMarks(), xval) };
     };
     ensureNeighbourMapStyles();
+    const headWrap = el("div", "wx-grid-headwrap");
     const head = el("div", "wx-grid-head");
-    bar.insertBefore(head, bar.firstChild);
+    const resetLink = el("button", "wx-grid-mode");
+    resetLink.appendChild(el("span", null, NEIGHBOUR_RESET_LABEL));
+    resetLink.type = "button";
+    resetLink.title = "Go back to the default neighbours";
+    resetLink.addEventListener("click", () => {
+      if (ctlRef && typeof ctlRef._wxNbReset === "function") ctlRef._wxNbReset();
+    });
+    headWrap.appendChild(head);
+    bar.insertBefore(headWrap, bar.firstChild);
     let headFocus = null;
     const syncHeader = () => {
+      const edited = !!(
+        headFocus && ctlRef && typeof ctlRef._wxNbEdited === "function" && ctlRef._wxNbEdited()
+      );
+      resetLink.className = "wx-grid-mode" + (edited ? " show" : "");
+      headWrap.className = "wx-grid-headwrap" + (headFocus ? " show" : "");
       if (!headFocus) {
         head.className = "wx-grid-head";
         head.textContent = "";
@@ -4813,38 +5920,95 @@ function stationGrid(c, views, opts) {
       const col = gridColumnName(fig);
       const u = col ? NEIGHBOUR_MAP_UNITS[col] : null;
       const attr = col ? (u && u.unit ? `${col} (${u.unit})` : col) : "";
-      head.textContent = attr
-        ? `${headFocus} neighbours ${attr}`
-        : `${headFocus} neighbours`;
+      const extra = !!(
+        ctlRef && typeof ctlRef._wxNbExtra === "function" && ctlRef._wxNbExtra()
+      );
+      const lead = `${headFocus} ${extra ? "comparison" : "neighbours"}`;
+      head.textContent = attr ? `${lead} ${attr}` : lead;
       head.title = head.textContent;
       head.className = "wx-grid-head show";
     };
     wrap._wxHeaderSync = syncHeader;
     const mapSlot = el("div", "wx-nb-map-slot");
     let mapArgs = null;
+    const mapActions = {
+      alerts: (name) => {
+        const info = wrap._wxAlertInfo;
+        return info ? info.get(neighbourKey(name)) || null : null;
+      },
+      editing: () =>
+        !!(ctlRef && typeof ctlRef._wxNbActive === "function" && ctlRef._wxNbActive()),
+      open: (name) => {
+        const panel = wrap._wxPanel;
+        if (!panel) return;
+        const lit = panel.style.display !== "none" ? panel._wxStation : null;
+        if (lit && neighbourKey(lit) === neighbourKey(name)) return;
+        const key = neighbourKey(name);
+        const local = names.find((n) => neighbourKey(n) === key);
+        openStationChart(panel, local || name, state.activeTab);
+      },
+      toggle: (name) => {
+        if (!ctlRef || typeof ctlRef._wxToggle !== "function") return false;
+        const key = neighbourKey(name);
+        const local = names.find((n) => neighbourKey(n) === key);
+        return !!ctlRef._wxToggle(local || name);
+      },
+    };
     nbMap = {
       slot: mapSlot,
-      show: (focus, rank) => {
-        mapArgs = { focus: focus, rank: rank };
-        sharedNeighbourMap().show(focus, rank, mapSource, mapSlot);
+      show: (focus, rank, fresh, quiet) => {
+        mapArgs = { focus: focus, rank: rank, quiet: !!quiet };
+        const map = sharedNeighbourMap();
+        map.show(focus, rank, mapSource, mapSlot, mapActions, !!quiet);
       },
       hide: () => {
         mapArgs = null;
         if (_sharedNeighbourMap) _sharedNeighbourMap.hide(mapSlot);
       },
       claim: () => {
-        if (mapArgs) sharedNeighbourMap().show(mapArgs.focus, mapArgs.rank, mapSource, mapSlot);
+        if (mapArgs) {
+          sharedNeighbourMap().show(
+            mapArgs.focus, mapArgs.rank, mapSource, mapSlot, mapActions, mapArgs.quiet
+          );
+        }
       },
     };
     wrap._wxMapTime = (xval) => {
       if (_sharedNeighbourMap) _sharedNeighbourMap.time(xval, mapSlot);
     };
     wrap._wxMapClaim = nbMap.claim;
+    const mapList = () => {
+      if (selected && selected.size && order && headFocus) {
+        return { focus: headFocus, names: Array.from(order.keys()) };
+      }
+      const panel = wrap._wxPanel;
+      const focus =
+        panel && panel.style.display !== "none" ? panel._wxStation || null : null;
+      if (!focus) return null;
+      const key = neighbourKey(focus);
+      if (selected && selected.size) {
+        const picks = Array.from(selected).filter((n) => neighbourKey(n) !== key);
+        if (picks.length) return { focus: focus, names: picks };
+      }
+      if (!panelPlot(panel)) return { keep: true, names: [] };
+      const around = neighboursFor(focus, names).filter((n) => neighbourKey(n) !== key);
+      return around.length ? { focus: focus, names: around, quiet: true } : null;
+    };
+    syncMap = (fresh) => {
+      const m = mapList();
+      if (m && m.keep) return;
+      if (!m || !m.names.length) {
+        nbMap.hide();
+        return;
+      }
+      nbMap.show(m.focus, m.names, fresh, !!m.quiet);
+    };
+    wrap._wxMapSync = () => syncMap(false);
     wrap._wxMapPark = () => {
       if (_sharedNeighbourMap) _sharedNeighbourMap.hide(mapSlot);
     };
 
-    const ctl = stationFilterControl(names, (sel, rank, focus) => {
+    const ctl = stationFilterControl(names, (sel, rank, focus, fresh) => {
       selected = sel;
       order = rank && rank.length
         ? new Map(rank.map((name, i) => [name, i]))
@@ -4853,8 +6017,7 @@ function stationGrid(c, views, opts) {
       syncMode();
       headFocus = order && focus ? focus : null;
       syncHeader();
-      if (order && focus) nbMap.show(focus, rank);
-      else nbMap.hide();
+      syncMap(fresh);
       apply();
     }, false, {
       focus: () => {
@@ -4863,7 +6026,14 @@ function stationGrid(c, views, opts) {
         return panel._wxStation || null;
       },
       resolve: (station) => neighboursFor(station, names),
+      open: (station) => {
+        const panel = wrap._wxPanel;
+        if (!panel || !station) return false;
+        openStationChart(panel, station, state.activeTab);
+        return true;
+      },
     });
+    ctlRef = ctl;
     wrap._wxClearFilter = () =>
       typeof ctl._wxClear === "function" ? ctl._wxClear() : false;
     wrap._wxNeighbourSync = () =>
@@ -4882,7 +6052,9 @@ function stationGrid(c, views, opts) {
       syncMode();
       apply();
     };
+    bar.appendChild(resetLink);
     bar.appendChild(ctl);
+    warmNeighbours(() => syncMap(false));
   }
 
   if (bar) wrap.appendChild(bar);
@@ -4913,18 +6085,10 @@ async function insightBanner(fc, hours, tab, panel, onPick) {
 
   const shell = el("div", "wx-insight-shell");
   const grid = panel ? panel._wxGrid : null;
-  const nbMap = grid ? grid._wxNbMap : null;
-  const out = () => {
-    if (!nbMap) return shell;
-    const line = el("div", "wx-insight-row");
-    line.appendChild(shell);
-    line.appendChild(nbMap.slot);
-    return line;
-  };
   if (!findings.length) {
     const missing = text === null || text === undefined;
     shell.appendChild(emptyTable(missing ? SENSOR_MISSING_TEXT : SENSOR_EMPTY_TEXT));
-    return out();
+    return shell;
   }
 
   const colors = colorMap(palette);
@@ -4932,7 +6096,10 @@ async function insightBanner(fc, hours, tab, panel, onPick) {
     f.color = colors.get(colorKey(f.section, f.station)) || null;
   }
   applySeverity(findings);
-  if (grid) grid._wxAlertColors = windowAlertColors(findings);
+  if (grid) {
+    grid._wxAlertColors = windowAlertColors(findings);
+    grid._wxAlertInfo = windowAlertInfo(findings);
+  }
 
   const wrap = sensorTable(findings, panel, null, {
     areas: source ? [source[2]] : AREA_ORDER,
@@ -4941,7 +6108,27 @@ async function insightBanner(fc, hours, tab, panel, onPick) {
   });
   shell.appendChild(wrap);
   makeBoxExpandable(shell, wrap);
-  return out();
+  return shell;
+}
+
+function insightStack(banner, panel, grid) {
+  const nbMap = grid ? grid._wxNbMap : null;
+  if (!nbMap) {
+    const flat = document.createDocumentFragment();
+    flat.appendChild(banner);
+    flat.appendChild(panel);
+    flat.appendChild(grid);
+    return flat;
+  }
+  ensureNeighbourMapStyles();
+  const main = el("div", "wx-nb-main");
+  main.appendChild(banner);
+  main.appendChild(panel);
+  main.appendChild(grid);
+  const stack = el("div", "wx-nb-stack");
+  stack.appendChild(main);
+  stack.appendChild(nbMap.slot);
+  return stack;
 }
 
 const OVERVIEW_TAB = "tab-overview";
@@ -5451,7 +6638,7 @@ function ensureOverviewStyles() {
     ".wx-ov-table tbody tr:first-child td{border-top:none;}",
     ".wx-ov-row{cursor:pointer;}",
     ".wx-ov-row:hover td{background:#fafaf9;}",
-    ".wx-ov-row.sel td{background:#f5f8ff;}",
+    ".wx-ov-row.sel td{background:#f2f5fa;}",
     ".wx-ov-sensor{font-size:10px;font-weight:600;letter-spacing:.04em;",
     "text-transform:uppercase;color:var(--text-muted);white-space:nowrap;}",
     ".wx-ov-name{font-size:11px;font-weight:600;letter-spacing:-.01em;",
@@ -5611,11 +6798,11 @@ function closeOverviewChart(panel, keepGrid) {
   const grid = panel._wxGrid;
   if (grid && !keepGrid) {
     grid._wxYPushed = false;
-    if (typeof grid._wxMapPark === "function") grid._wxMapPark();
     const cleared =
       typeof grid._wxClearFilter === "function" && grid._wxClearFilter();
     if (!cleared && typeof grid._wxRefresh === "function") grid._wxRefresh();
   }
+  if (grid && typeof grid._wxMapSync === "function") grid._wxMapSync();
   afterPaint().then(() => {
     if (panel._wxCloseToken !== token || panel.style.display !== "none") return;
     resetOverviewChart(panel);
@@ -5704,7 +6891,7 @@ function watchRowVisible(panel, row) {
 function openStationChart(panel, station, tabId) {
   if (!panel || !station) return;
   if (panel.style.display !== "none" && panel._wxStation === station) {
-    closeOverviewChart(panel);
+    closeDetailByUser(panel);
     return;
   }
   openOverviewChart(panel, { station: station, tab: tabId || null }, null);
@@ -5712,7 +6899,7 @@ function openStationChart(panel, station, tabId) {
 
 function toggleOverviewChart(panel, f, row) {
   if (panel.style.display !== "none" && panel._wxRow === row) {
-    closeOverviewChart(panel);
+    closeDetailByUser(panel);
     return;
   }
   openOverviewChart(panel, f, row);
@@ -5750,7 +6937,7 @@ function openOverviewChart(panel, f, row, pick, view) {
   title.textContent = f.station;
   const close = el("button", fold ? "wx-detail-close" : null, "Close");
   close.type = "button";
-  close.addEventListener("click", () => closeOverviewChart(panel));
+  close.addEventListener("click", () => closeDetailByUser(panel));
   head.appendChild(title);
   if (fold) head.appendChild(detailSpacer());
   head.appendChild(close);
@@ -5786,6 +6973,10 @@ function openOverviewChart(panel, f, row, pick, view) {
     const grid = panel._wxGrid;
     if (grid && typeof grid._wxRefit === "function") grid._wxRefit();
   };
+  opts.onHistorical = (info) => {
+    const grid = panel._wxGrid;
+    if (grid && typeof grid._wxHistorical === "function") grid._wxHistorical(info);
+  };
   opts.foldHead = fold;
   opts.pick = pick || null;
   opts.view = view || null;
@@ -5804,6 +6995,7 @@ function openOverviewChart(panel, f, row, pick, view) {
     })
     .then(() => {
       wirePanelHover(panel);
+      wirePlotBandGlyphs(panelPlot(panel));
       const grid = panel._wxGrid;
       if (grid) {
         requestAnimationFrame(() => {
@@ -5814,6 +7006,7 @@ function openOverviewChart(panel, f, row, pick, view) {
           ) {
             return;
           }
+          if (typeof grid._wxMapSync === "function") grid._wxMapSync();
           if (typeof grid._wxRefresh === "function") grid._wxRefresh();
         });
       }
@@ -6606,11 +7799,10 @@ async function buildRh(fc, hours) {
   const c = await loadCharts(fc, hours, "rh");
   if (!c) return unavailable();
   const box = el("div");
-  const grid = stationGrid(c);
+  const grid = stationGrid(c, null, { suffix: "rh" });
   const panel = tabPanel(grid);
-  box.appendChild(await insightBanner(fc, hours, "rh", panel));
-  box.appendChild(panel);
-  box.appendChild(grid);
+  const banner = await insightBanner(fc, hours, "rh", panel);
+  box.appendChild(insightStack(banner, panel, grid));
   box.appendChild(boxCard(c.rh_distribution));
   box.appendChild(row(
     rowGraph(c.rh_volcano, { stationFilter: true }),
@@ -6626,11 +7818,11 @@ async function buildWind(fc, hours) {
   const grid = stationGrid(c, [
     { key: "station_grid", label: "Wspd" },
     { key: "station_grid_mx", label: "Mx Spd" },
-  ]);
+    { key: "station_grid_dir", label: "Dir" },
+  ], { suffix: "wind" });
   const panel = tabPanel(grid);
-  box.appendChild(await insightBanner(fc, hours, "wind", panel));
-  box.appendChild(panel);
-  box.appendChild(grid);
+  const banner = await insightBanner(fc, hours, "wind", panel);
+  box.appendChild(insightStack(banner, panel, grid));
   box.appendChild(row(
     graph(c.wind_distribution, { height: boxHeight() }),
     graph(c.mx_distribution, { height: boxHeight() })
@@ -6643,11 +7835,10 @@ async function buildTemp(fc, hours) {
   const c = await loadCharts(fc, hours, "temp");
   if (!c) return unavailable();
   const box = el("div");
-  const grid = stationGrid(c);
+  const grid = stationGrid(c, null, { suffix: "temp" });
   const panel = tabPanel(grid);
-  box.appendChild(await insightBanner(fc, hours, "temp", panel));
-  box.appendChild(panel);
-  box.appendChild(grid);
+  const banner = await insightBanner(fc, hours, "temp", panel);
+  box.appendChild(insightStack(banner, panel, grid));
   box.appendChild(boxCard(c.temp_distribution));
   box.appendChild(row(
     rowGraph(c.temp_volcano, { stationFilter: true }),
@@ -6660,11 +7851,10 @@ async function buildRn1(fc, hours) {
   const c = await loadCharts(fc, hours, "rn1");
   if (!c) return unavailable();
   const box = el("div");
-  const grid = stationGrid(c, null, { cumulative: true });
+  const grid = stationGrid(c, null, { cumulative: true, suffix: "rn1" });
   const panel = tabPanel(grid);
-  box.appendChild(await insightBanner(fc, hours, "rn1", panel));
-  box.appendChild(panel);
-  box.appendChild(grid);
+  const banner = await insightBanner(fc, hours, "rn1", panel);
+  box.appendChild(insightStack(banner, panel, grid));
   box.appendChild(boxCard(c.rn1_distribution));
   box.appendChild(row(
     rowGraph(c.precip_diagnostic_dashboard, { stationFilter: true }),
@@ -6677,11 +7867,10 @@ async function buildPower(fc, hours) {
   const c = await loadCharts(fc, hours, "power");
   if (!c) return unavailable();
   const box = el("div");
-  const grid = stationGrid(c);
+  const grid = stationGrid(c, null, { suffix: "power" });
   const panel = tabPanel(grid);
-  box.appendChild(await insightBanner(fc, hours, "power", panel));
-  box.appendChild(panel);
-  box.appendChild(grid);
+  const banner = await insightBanner(fc, hours, "power", panel);
+  box.appendChild(insightStack(banner, panel, grid));
   box.appendChild(boxCard(stripTitle(c.power_distribution)));
   box.appendChild(row(
     rowGraph(annotateEmptyPanels(c.power_diagnostic_dashboard,
@@ -6750,6 +7939,21 @@ async function buildData(fc, hours) {
 }
 
 let _detailModule = null;
+
+function resetHistorical() {
+  if (!_detailModule) return;
+  _detailModule.then(
+    (m) => {
+      if (typeof m.resetHistorical === "function") m.resetHistorical();
+    },
+    () => {}
+  );
+}
+
+function closeDetailByUser(panel) {
+  resetHistorical();
+  closeOverviewChart(panel);
+}
 
 function detailModule() {
   if (!_detailModule) {
@@ -7535,12 +8739,18 @@ function markStationCursors(pd, known) {
     const name = (n.textContent || "").trim();
     if (!known.has(name)) continue;
     n.style.cursor = "pointer";
-    if (n._wxHoverWired) continue;
-    n._wxHoverWired = true;
-    n.addEventListener("mouseenter", () => {
+    const host = (n.closest && n.closest(".annotation")) || n;
+    if (host._wxHoverWired) continue;
+    host._wxHoverWired = true;
+    host.style.cursor = "pointer";
+    host.addEventListener("mouseenter", () => {
+      n.style.textDecoration = "underline";
       prefetchDetail(name, state.activeTab);
     });
-    n.addEventListener("mouseleave", cancelPrefetch);
+    host.addEventListener("mouseleave", () => {
+      n.style.textDecoration = "";
+      cancelPrefetch();
+    });
   }
   return true;
 }
@@ -7569,6 +8779,7 @@ function wireGridStationClicks(wrap, g) {
     wireGridAlertClicks(wrap);
     wireGridSpike(wrap);
     wireGridMapTime(wrap);
+    wireBandGlyphs(wrap);
     wireGridRangeSync(wrap);
     wireGridFit(wrap);
     wireGridZoom(wrap);
@@ -8128,6 +9339,14 @@ function revealPane(host, entry, frames, built, staged) {
 
 const GRID_DETAIL_WAIT_MS = 4000;
 
+const NEIGHBOUR_RESET_LABEL = "Reset to neighbours";
+
+const GRID_STACK_ROW_RATIO = 1 / 12;
+
+const GRID_STACK_ROW_MAX = 150;
+
+const GRID_STACK_VIEW_SHARE = 0.5;
+
 const CARRY_TABS = new Set([
   OVERVIEW_TAB, "tab-rh", "tab-wind", "tab-temp", "tab-rn1", "tab-power",
 ]);
@@ -8296,6 +9515,7 @@ async function runAnalysis() {
     return;
   }
   const sameFc = state.fc === fc;
+  if (!sameFc && _sharedNeighbourMap) _sharedNeighbourMap.reset();
   const changed = state.fc !== fc || state.hours !== hours;
   const carried = _pendingDetail ? _pendingDetail.saved : null;
   const carriedGrid = _pendingDetail ? _pendingDetail.grid : null;
@@ -8377,7 +9597,7 @@ if (typeof MOBILE_QUERY.addEventListener === "function") {
 function closeOpenPanels(root) {
   if (!root || !root.querySelectorAll) return;
   for (const panel of root.querySelectorAll(".wx-ov-chart")) {
-    if (panel.style.display !== "none") closeOverviewChart(panel);
+    if (panel.style.display !== "none") closeDetailByUser(panel);
   }
 }
 

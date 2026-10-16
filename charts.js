@@ -11,10 +11,10 @@ export const FONT_FAMILY =
 
 export const SERIES_COLOR = "#a8a29e";
 export const SERIES_FILL = "rgba(168, 162, 158, 0.12)";
-export const SERIES2_COLOR = "#2563eb";
-export const SERIES2_FILL = "rgba(37, 99, 235, 0.10)";
+export const SERIES2_COLOR = "#2c5fa9";
+export const SERIES2_FILL = "rgba(44, 95, 169, 0.10)";
 export const SERIES2_OPACITY = 0.45;
-export const MATCH_COLOR = "#dc2626";
+export const MATCH_COLOR = "#da2d2a";
 
 export const DENSITY_SCALE = [
   [0.0, "#eee5d6"],
@@ -36,10 +36,10 @@ export const PARCOORDS_MUTED = "#a8a29e";
 export const PARCOORDS_MUTED_OPACITY = 0.05;
 
 export const WARM_SCALE = [
-  [0.0, "#fef3c7"],
-  [0.35, "#fbbf24"],
-  [0.7, "#ea580c"],
-  [1.0, "#991b1b"],
+  [0.0, "#f7edc5"],
+  [0.35, "#f4bd3b"],
+  [0.7, "#e35e25"],
+  [1.0, "#972824"],
 ];
 
 export const COOL_SCALE = [
@@ -58,15 +58,15 @@ export const GREEN_SCALE = [
 
 export const POWER_SCALE = [
   [0.0, "#ece7f7"],
-  [0.35, "#a78bfa"],
-  [0.7, "#7c3aed"],
-  [1.0, "#3b0764"],
+  [0.35, "#a58cf2"],
+  [0.7, "#794ed7"],
+  [1.0, "#3e1465"],
 ];
 
 export const PLAIN_SCALE = [
-  [0.0, "#e2e8f0"],
-  [0.5, "#64748b"],
-  [1.0, "#1e293b"],
+  [0.0, "#e7e5e4"],
+  [0.5, "#78716c"],
+  [1.0, "#292524"],
 ];
 
 const COL_SCALE = {
@@ -96,11 +96,11 @@ export function scaleFor(col) {
   return COL_SCALE[col] || PLAIN_SCALE;
 }
 
-export const PARCOORDS_LINE = "rgba(194, 65, 12, 0.30)";
+export const PARCOORDS_LINE = "rgba(193, 107, 85, 0.30)";
 
 export const STATION_PALETTE = [
-  "#ea8a0b", "#dc2626", "#7c3aed", "#0d9488", "#16a34a",
-  "#db2777", "#a16207", "#4f46e5", "#b45309", "#0891b2",
+  "#2b9282", "#b1389f", "#66b6dc", "#007830", "#ef8897",
+  "#8f1156", "#bfac45", "#9a990f", "#341793",
 ];
 
 export function discreteScale(n) {
@@ -614,9 +614,48 @@ function labelledBands(alerts) {
   );
 }
 
-function bandLabelAt(bands, t) {
-  for (const b of bands) if (t >= b.x0 && t <= b.x1) return b.label;
-  return null;
+const BAND_RGBA_RE = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i;
+
+const BAND_SOLID_FALLBACK = "rgb(138, 95, 242)";
+
+const BAND_FILL_FALLBACK = "rgba(138, 95, 242, 0.27)";
+
+const BAND_TRACE_NAME = "Alert band";
+
+function bandSolid(color) {
+  const raw = String(color || "");
+  if (/^#[0-9a-f]{6}$/i.test(raw)) return raw;
+  const m = BAND_RGBA_RE.exec(raw);
+  return m ? `rgb(${m[1]}, ${m[2]}, ${m[3]})` : BAND_SOLID_FALLBACK;
+}
+
+function bandHoverTraces(bands, times, vals, yaxis) {
+  const out = [];
+  for (const b of bands) {
+    const x = [];
+    const y = [];
+    for (let k = 0; k < times.length; k++) {
+      if (times[k] < b.x0 || times[k] > b.x1) continue;
+      x.push(isoStamp(times[k]));
+      y.push(vals[k]);
+    }
+    if (!x.length) continue;
+    const color = bandSolid(b.fillcolor);
+    out.push({
+      type: "scatter",
+      x,
+      y,
+      mode: "markers",
+      name: BAND_TRACE_NAME,
+      xaxis: "x",
+      yaxis,
+      marker: { color, size: 3, opacity: 0 },
+      hovertemplate: `${b.label}<extra></extra>`,
+      meta: { band_hover: true, band_color: color, band_fill: b.fillcolor || BAND_FILL_FALLBACK },
+      showlegend: false,
+    });
+  }
+  return out;
 }
 
 function alertPoints(alerts) {
@@ -707,12 +746,11 @@ function seriesTrace(series, col, alerts, opts) {
         seg.y.push(null);
         seg.text.push("");
       }
-      const label = bandLabelAt(bands, t);
       segOf[k] = s;
       slotOf[k] = seg.x.length;
       seg.x.push(isoStamp(t));
       seg.y.push(vals[k]);
-      seg.text.push(label ? `<br>${label}` : "");
+      seg.text.push("");
     }
     if (seg.x.length) segments.push(seg);
   }
@@ -758,7 +796,10 @@ function seriesTrace(series, col, alerts, opts) {
     }
     return trace;
   });
-  return { traces, folded };
+  return {
+    traces: traces.concat(bandHoverTraces(bands, times, vals, opts.yaxis)),
+    folded,
+  };
 }
 
 function markerTrace(points, yaxis, hoverable, showlegend, visible) {
@@ -783,10 +824,10 @@ function markerTrace(points, yaxis, hoverable, showlegend, visible) {
     yaxis,
     marker: {
       color: colors,
-      size: 8,
+      size: 9,
       symbol: "circle",
       line: { width: 1, color: "white" },
-      opacity: 0.92,
+      opacity: 1,
     },
     cliponaxis: false,
     showlegend: !!showlegend,
@@ -826,7 +867,7 @@ function alertBands(alerts, yaxis) {
       x1: isoStamp(b.x1),
       y0: 0,
       y1: 1,
-      fillcolor: b.fillcolor || "rgba(139, 92, 246, 0.16)",
+      fillcolor: b.fillcolor || "rgba(138, 95, 242, 0.27)",
       line: { width: 0 },
       layer: "below",
     });
