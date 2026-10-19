@@ -37,6 +37,8 @@ const ATTR_TAB = {
   Vbat: "power",
 };
 
+const RANGE_SUFFIXES = ["data", "rh", "wind", "temp", "rn1", "power"];
+
 const DIR_CONC_RE = /^Direction concentration/;
 
 const OPTIONAL_COLS = new Set([
@@ -73,7 +75,13 @@ export function resetHistorical() {
   _normalsOn = false;
 }
 
+export function historicalOn() {
+  return _normalsOn;
+}
+
 const NORMALS_WAIT_MS = 120;
+
+const GATE_WAIT_MS = 4000;
 
 const FIT_PAD = 0.06;
 const FIT_FLAT = 0.5;
@@ -395,24 +403,30 @@ function primeAlerts(opts) {
   for (const c of PLOT_PREF[opts.tab] || []) alertsFor(opts, c);
 }
 
+function explicitBounds(opts) {
+  if (!Array.isArray(opts.range) || opts.range.length !== 2) return null;
+  const lo = parseStamp(opts.range[0]);
+  const hi = parseStamp(opts.range[1]);
+  return Number.isFinite(lo) && Number.isFinite(hi) && hi > lo ? [lo, hi] : null;
+}
+
 async function windowBounds(opts) {
-  if (Array.isArray(opts.range) && opts.range.length === 2) {
-    const lo = parseStamp(opts.range[0]);
-    const hi = parseStamp(opts.range[1]);
-    if (Number.isFinite(lo) && Number.isFinite(hi) && hi > lo) return [lo, hi];
-  }
-  if (opts.tabSuffix && typeof opts.getChart === "function") {
-    let c = null;
-    try {
-      c = await opts.getChart(opts.tabSuffix);
-    } catch (e) {
-      void e;
-      c = null;
-    }
-    if (c) {
+  const given = explicitBounds(opts);
+  if (given) return given;
+  if (typeof opts.getChart === "function") {
+    for (const suffix of RANGE_SUFFIXES) {
+      let c = null;
+      try {
+        c = await opts.getChart(suffix);
+      } catch (e) {
+        void e;
+        c = null;
+      }
+      if (!c || !c._date_min || !c._date_max) continue;
       const lo = parseStamp(c._date_min);
       const hi = parseStamp(c._date_max);
       if (Number.isFinite(lo) && Number.isFinite(hi) && hi > lo) return [lo, hi];
+      break;
     }
   }
   const end = Date.now();
@@ -536,12 +550,8 @@ function chartReady(opts, suffix) {
 }
 
 function boundsReady(opts) {
-  if (Array.isArray(opts.range) && opts.range.length === 2) {
-    const lo = parseStamp(opts.range[0]);
-    const hi = parseStamp(opts.range[1]);
-    if (Number.isFinite(lo) && Number.isFinite(hi) && hi > lo) return true;
-  }
-  return chartReady(opts, opts.tabSuffix);
+  if (explicitBounds(opts)) return true;
+  return chartReady(opts, RANGE_SUFFIXES[0]);
 }
 
 export function prefetch(opts) {
@@ -952,7 +962,9 @@ export async function mount(host, opts) {
   const plot = node("div", "wx-detail-plot");
   plot.style.width = "100%";
 
-  const wait = kept ? node("div", "wx-plot-wait") : null;
+  const hold = !!kept || !!opts.hold;
+
+  const wait = hold ? node("div", "wx-plot-wait") : null;
   if (wait) {
     wait.appendChild(node("div", "wx-plot-spin"));
     plot.appendChild(wait);
@@ -991,6 +1003,7 @@ export async function mount(host, opts) {
   let shown = null;
   let fitFrame = 0;
   let yHeld = false;
+  let selfLayout = 0;
 
   plot._wxFitY = (view) => {
     const span = view || fullView(plot);
@@ -999,31 +1012,69 @@ export async function mount(host, opts) {
       : null;
   };
 
+  const viewRanges = (view) => {
+    const out = {};
+    let r1 = yHeld
+      ? null
+      : fitRange(shown.series, shown.primary, view, shown.year1);
+    if (r1 && typeof opts.shareY === "function") {
+      const shared = opts.shareY(
+        shown.primary,
+        r1,
+        [isoStamp(view[0]), isoStamp(view[1])]
+      );
+      if (shared) r1 = shared;
+    }
+    if (r1) out["yaxis.range"] = r1;
+    const r2 = shown.secondary
+      ? fitRange(shown.series, shown.secondary, view, shown.year2)
+      : null;
+    if (r2) out["yaxis2.range"] = r2;
+    return out;
+  };
+
+  const ownRelayout = (update) => {
+    selfLayout += 1;
+    const done = () => {
+      selfLayout = Math.max(0, selfLayout - 1);
+    };
+    try {
+      const p = Plotly.relayout(plot, update);
+      if (p && typeof p.then === "function") p.then(done, done);
+      else done();
+    } catch (e) {
+      void e;
+      done();
+    }
+  };
+
   const refit = () => {
     fitFrame = 0;
     if (!plot.isConnected || !shown) return;
     const view = fullView(plot);
     if (!view) return;
-    const update = {};
-    const r1 = yHeld
-      ? null
-      : fitRange(shown.series, shown.primary, view, shown.year1);
-    if (r1) update["yaxis.range"] = r1;
-    const r2 = shown.secondary
-      ? fitRange(shown.series, shown.secondary, view, shown.year2)
-      : null;
-    if (r2) update["yaxis2.range"] = r2;
-    if (!r1 && !r2) return;
-    try {
-      const p = Plotly.relayout(plot, update);
-      if (p && p.catch) p.catch(() => {});
-    } catch (e) {
-      void e;
+    const update = viewRanges(view);
+    if (!Object.keys(update).length) return;
+    ownRelayout(update);
+  };
+
+  plot._wxSetView = (range) => {
+    const span = startView(range);
+    if (!span || !shown || !plot._fullLayout || !plot.isConnected) return false;
+    const now = fullView(plot);
+    if (now && Math.abs(now[0] - span[0]) < 1000 && Math.abs(now[1] - span[1]) < 1000) {
+      return false;
     }
+    const update = viewRanges(span);
+    update["xaxis.autorange"] = false;
+    update["xaxis.range"] = [isoStamp(span[0]), isoStamp(span[1])];
+    ownRelayout(update);
+    return true;
   };
 
   const onRelayout = (ev) => {
     if (!ev) return;
+    if (selfLayout) return;
     let moved = false;
     if (ev["yaxis.autorange"] === false && ev["yaxis.range"]) {
       yHeld = true;
@@ -1203,12 +1254,25 @@ export async function mount(host, opts) {
   if (_normalsOn) {
     await Promise.race([
       normalsJob,
-      new Promise((resolve) => setTimeout(resolve, NORMALS_WAIT_MS)),
+      new Promise((resolve) =>
+        setTimeout(resolve, hold ? GATE_WAIT_MS : NORMALS_WAIT_MS)
+      ),
     ]);
     if (!plot.isConnected) return;
   }
 
-  await syncAlerts(!kept);
+  if (hold && typeof opts.gate === "function") {
+    const gate = opts.gate();
+    if (gate && typeof gate.then === "function") {
+      await Promise.race([
+        gate.catch(() => null),
+        new Promise((resolve) => setTimeout(resolve, GATE_WAIT_MS)),
+      ]);
+      if (!plot.isConnected) return;
+    }
+  }
+
+  await syncAlerts(!hold);
   if (!plot.isConnected) return;
 
   let touched = !!kept;

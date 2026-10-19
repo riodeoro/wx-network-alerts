@@ -1802,8 +1802,19 @@ function needsResize(pd) {
 
 function syncSize(pd) {
   if (!needsResize(pd)) return false;
+  const lay = pd.layout;
+  if (lay && lay.width && lay.height) return false;
+  if (pd._redrawTimer) {
+    clearTimeout(pd._redrawTimer);
+    pd._redrawTimer = null;
+  }
+  if (lay) {
+    delete lay.width;
+    delete lay.height;
+  }
   try {
-    Plotly.Plots.resize(pd);
+    const p = Plotly.relayout(pd, { autosize: true });
+    if (p && typeof p.catch === "function") p.catch(() => {});
   } catch (e) {
     void e;
   }
@@ -1951,13 +1962,8 @@ function graph(figDict, opts = {}) {
   wrap.appendChild(plotDiv);
   wrap._wxPlotDiv = plotDiv;
 
-  let fitTimer = 0;
   const scheduleFit = () => {
-    if (fitTimer) clearTimeout(fitTimer);
-    fitTimer = setTimeout(() => {
-      fitTimer = 0;
-      fitPlot(plotDiv);
-    }, 140);
+    fitPlot(plotDiv);
   };
   wrap._wxFit = scheduleFit;
 
@@ -2423,6 +2429,7 @@ function makeCardExpandable(c, child) {
   c._wxRebase = (h) => {
     if (!(h > 0)) return;
     baseH = Math.round(h);
+    c.classList.add("wx-sized");
     if (!expanded) {
       c.style.height = baseH + "px";
       return;
@@ -2640,6 +2647,20 @@ function ensureGridToggleStyles() {
     ".wx-grid-head.show{display:block;}",
     "@media (max-width:768px){.wx-grid-toggle{min-height:0;margin:2px 0;",
     "padding:0 6px;}}",
+  ].join("");
+  document.head.appendChild(st);
+}
+
+function ensureGridHoldStyles() {
+  if (document.getElementById("wx-gridhold-styles")) return;
+  const st = document.createElement("style");
+  st.id = "wx-gridhold-styles";
+  st.textContent = [
+    ".station-grid.wx-grid-hold{position:relative;}",
+    ".wx-grid-holdspin{display:none;}",
+    ".station-grid.wx-grid-hold > .wx-graph{visibility:hidden;}",
+    ".station-grid.wx-grid-hold > .wx-grid-holdspin{display:flex;position:absolute;",
+    "left:0;right:0;top:0;bottom:0;height:auto;z-index:2;}",
   ].join("");
   document.head.appendChild(st);
 }
@@ -3851,6 +3872,8 @@ function ensureNeighbourMapStyles() {
   const st = document.createElement("style");
   st.id = "wx-nbmap-styles";
   st.textContent = [
+    ".wx-nb-map-park{position:fixed;left:-100000px;top:0;width:max-content;",
+    "visibility:hidden;pointer-events:none;}",
     ".wx-nb-stack{display:flex;align-items:stretch;margin-bottom:16px;}",
     ".wx-nb-main{flex:1 1 auto;min-width:0;}",
     ".wx-nb-main > :last-child{margin-bottom:0;}",
@@ -4267,6 +4290,17 @@ function collapseMapAttribution(plot) {
 
 let _sharedNeighbourMap = null;
 
+let _mapHolder = null;
+
+function mapHolder() {
+  if (_mapHolder && _mapHolder.isConnected) return _mapHolder;
+  ensureNeighbourMapStyles();
+  _mapHolder = el("div", "wx-nb-map-park");
+  _mapHolder.setAttribute("aria-hidden", "true");
+  document.body.appendChild(_mapHolder);
+  return _mapHolder;
+}
+
 function sharedNeighbourMap() {
   if (!_sharedNeighbourMap) _sharedNeighbourMap = neighbourMap();
   return _sharedNeighbourMap;
@@ -4503,9 +4537,29 @@ function neighbourMap() {
     requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
   };
 
+  const park = () => {
+    const box = mapHolder();
+    if (node.parentNode !== box) box.appendChild(node);
+  };
+
+  const reserve = (slot) => {
+    if (!slot || !slot.isConnected || node.parentNode !== slot || isMobile()) return false;
+    const w = Math.round(node.offsetWidth || 0) || (collapsed ? 0 : size().w + 2);
+    if (!(w > 0)) return false;
+    slot.style.width = w + "px";
+    slot._wxReserved = true;
+    return true;
+  };
+
+  const unreserve = (slot) => {
+    if (!slot || !slot._wxReserved) return;
+    slot._wxReserved = false;
+    slot.style.width = "";
+    markRow(slot, false);
+  };
+
   const hide = () => {
-    node.classList.remove("show");
-    if (node.parentNode) node.parentNode.removeChild(node);
+    park();
     markRow(owner, false);
     owner = null;
     hoverAt = null;
@@ -4673,8 +4727,12 @@ function neighbourMap() {
       return;
     }
     if (actions) acts = actions;
+    if (owner && owner !== slot && !(slot && reserve(owner))) markRow(owner, false);
     if (slot && node.parentNode !== slot) slot.appendChild(node);
-    if (owner && owner !== slot) markRow(owner, false);
+    if (slot && slot._wxReserved) {
+      slot._wxReserved = false;
+      slot.style.width = "";
+    }
     const switched = owner !== (slot || null) || valuesAt !== (source || null);
     owner = slot || null;
     valuesAt = source || null;
@@ -4872,8 +4930,24 @@ function neighbourMap() {
     node: node,
     show: show,
     hide: (slot) => {
-      if (slot && owner && slot !== owner) return;
+      if (slot && slot !== owner) {
+        unreserve(slot);
+        return;
+      }
       hide();
+    },
+    park: () => {
+      park();
+      owner = null;
+      hoverAt = null;
+      shownAt = null;
+      parked = true;
+      if (clearTimer) {
+        clearTimeout(clearTimer);
+        clearTimer = 0;
+      }
+      chip.className = "wx-nb-map-time";
+      hideTip();
     },
     time: setTime,
     collapse: (on) => setCollapsed(!!on),
@@ -5148,30 +5222,68 @@ function stationGrid(c, views, opts) {
 
   const baseSrc = () => ({ key: "", base: fig, fig: fig, cells: cells, fills: fills });
 
+  const queueRefresh = () => {
+    if (refreshQueued) return;
+    refreshQueued = true;
+    requestAnimationFrame(() => {
+      refreshQueued = false;
+      if (selected && selected.size) apply();
+    });
+  };
+
   const foreignPart = (name) => {
     const k = viewKey + "|" + neighbourKey(name);
     if (foreign.has(k)) return foreign.get(k);
-    const entry = { part: null };
+    const entry = { part: null, done: false, job: null };
+    let finish = null;
+    entry.job = new Promise((resolve) => {
+      finish = resolve;
+    });
     foreign.set(k, entry);
     const at = stationCoord(name);
-    if (!at || !at.fc || !suffix) return entry;
+    if (!at || !at.fc || !suffix) {
+      entry.done = true;
+      finish();
+      return entry;
+    }
     const vk = viewKey;
     const fc = state.fc;
     const hours = state.hours;
+    const settle = () => {
+      if (entry.done) return;
+      entry.done = true;
+      finish();
+      queueRefresh();
+    };
+    setTimeout(settle, FOREIGN_WAIT_MS);
     Promise.resolve(loadCharts(at.fc, hours, suffix))
       .then((cc) => {
         if (state.fc !== fc || state.hours !== hours) return;
         entry.part = stationGridPart(cc && cc[vk], name);
-        if (!entry.part || refreshQueued) return;
-        refreshQueued = true;
-        requestAnimationFrame(() => {
-          refreshQueued = false;
-          if (selected && selected.size) apply();
-        });
+        if (entry.done) {
+          if (entry.part) queueRefresh();
+          return;
+        }
+        settle();
       })
-      .catch(() => {});
+      .catch(() => {})
+      .then(settle);
     return entry;
   };
+
+  const foreignJobs = () => {
+    const out = [];
+    if (!selected || !selected.size) return out;
+    const have = new Set(cells.map((cl) => neighbourKey(cl.station)));
+    for (const name of selected) {
+      if (have.has(neighbourKey(name))) continue;
+      const entry = foreignPart(name);
+      if (!entry.done) out.push(entry.job);
+    }
+    return out;
+  };
+
+  const foreignPending = () => foreignJobs().length > 0;
 
   const augmentWith = (parts, key) => {
     const layout = Object.assign({}, fig.layout);
@@ -5272,23 +5384,18 @@ function stationGrid(c, views, opts) {
       wrap._wxSpikeOff = pd._wxSpikeOff;
     }
   };
-  let selFitTimer = 0;
   const fitSel = () => {
-    if (selFitTimer) clearTimeout(selFitTimer);
-    selFitTimer = setTimeout(() => {
-      selFitTimer = 0;
-      if (selPd._wxDrawn && selPd.style.display !== "none") fitPlot(selPd);
-    }, 140);
+    if (selPd._wxDrawn && selPd.style.display !== "none") fitPlot(selPd);
   };
   if (typeof ResizeObserver === "function") {
-    let selRaf = 0;
+    let selTimer = 0;
     new ResizeObserver(() => {
-      if (selRaf) return;
-      selRaf = requestAnimationFrame(() => {
-        selRaf = 0;
+      if (selTimer) clearTimeout(selTimer);
+      selTimer = setTimeout(() => {
+        selTimer = 0;
         if (!selPd._wxDrawn || selPd.style.display === "none" || g._wxHold) return;
         if (syncSize(selPd)) fitSel();
-      });
+      }, SEL_RESIZE_SETTLE_MS);
     }).observe(selPd);
   }
 
@@ -5312,30 +5419,62 @@ function stationGrid(c, views, opts) {
   const histNormals = (name) => {
     const key = neighbourKey(name);
     if (histCache.has(key)) return histCache.get(key);
-    histCache.set(key, null);
-    Promise.resolve(histApi.neighbourNormals(name))
+    const entry = { n: null, done: false, job: null };
+    histCache.set(key, entry);
+    entry.job = Promise.resolve(histApi.neighbourNormals(name))
       .then((n) => {
-        if (!n) return;
-        histCache.set(key, n);
+        entry.n = n || null;
+      })
+      .catch(() => {})
+      .then(() => {
+        entry.done = true;
         if (histQueued) return;
         histQueued = true;
         requestAnimationFrame(() => {
           histQueued = false;
           if (selected && selected.size) apply();
         });
-      })
-      .catch(() => {});
-    return null;
+      });
+    return entry;
+  };
+
+  const histWanted = () => {
+    if (!histApi && _detailRef) histApi = _detailRef;
+    return !!(
+      histApi &&
+      gridCol &&
+      !overlay &&
+      typeof histApi.historicalOn === "function" &&
+      histApi.historicalOn()
+    );
+  };
+
+  const histJobs = () => {
+    const out = [];
+    if (!selected || !selected.size || !histWanted()) return out;
+    for (const name of selected) {
+      const entry = histNormals(name);
+      if (!entry.done) out.push(entry.job);
+    }
+    return out;
+  };
+
+  const histPending = () => {
+    if (!historicalNow() || overlay || !gridCol) return false;
+    return histJobs().length > 0;
   };
 
   const historicalBands = (next, list, hist) => {
     if (!hist || !gridCol || !next || !next.ids) return "";
+    const shown = list.filter((cell) => next.ids.has(cell.id));
+    const entries = shown.map((cell) => histNormals(cell.station));
+    if (entries.some((e) => !e.done)) return "";
     const bands = [];
     const lit = new Set();
     const names = [];
-    for (const cell of list) {
-      if (!next.ids.has(cell.id)) continue;
-      const n = histNormals(cell.station);
+    for (let i = 0; i < shown.length; i++) {
+      const cell = shown[i];
+      const n = entries[i].n;
       if (!n) continue;
       const yid = "y" + cell.ykey.slice(5);
       const traces = histApi.normalsRangeTraces(
@@ -5366,6 +5505,7 @@ function stationGrid(c, views, opts) {
     if (key === histKey) return;
     histKey = key;
     histInfo = info || null;
+    if (!histApi && _detailRef) histApi = _detailRef;
     detailModule()
       .then((m) => {
         histApi = m;
@@ -5411,12 +5551,15 @@ function stationGrid(c, views, opts) {
     const gs = pd._fullLayout._size;
     const ds = dpd._fullLayout._size;
     const dxa = dpd._fullLayout.xaxis;
-    if (!gs || !ds || !dxa || !(gs.w > 0) || !(ds.w > 0)) return null;
+    if (!gs || !ds || !dxa) return null;
     const gr = pd.getBoundingClientRect();
     const dr = dpd.getBoundingClientRect();
     if (!gr.width || !dr.width) return null;
-    const x0 = (dr.left + ds.l - gr.left - gs.l) / gs.w;
-    const x1 = (dr.left + ds.l + ds.w - gr.left - gs.l) / gs.w;
+    const gw = gr.width - (gs.l || 0) - (gs.r || 0);
+    const dw = dr.width - (ds.l || 0) - (ds.r || 0);
+    if (!(gw > 0) || !(dw > 0)) return null;
+    const x0 = (dr.left + ds.l - gr.left - gs.l) / gw;
+    const x1 = (dr.left + ds.l + dw - gr.left - gs.l) / gw;
     if (!(x1 > x0)) return null;
     const range = Array.isArray(dxa.range) ? dxa.range.slice() : null;
     return {
@@ -5494,19 +5637,126 @@ function stationGrid(c, views, opts) {
 
   let awaitTimer = 0;
   let awaiting = false;
+  let veilNext = false;
+  let veiled = false;
+  let veilTimer = 0;
+  const holdSpin = el("div", "wx-grid-holdspin wx-plot-wait");
+  holdSpin.setAttribute("role", "status");
+  holdSpin.setAttribute("aria-label", "Loading chart");
+  holdSpin.appendChild(el("div", "wx-plot-spin"));
+
+  const stackRowFor = (count) => {
+    if (isMobile()) return rowPx;
+    const width = g.getBoundingClientRect().width || 0;
+    const byWidth = width * GRID_STACK_ROW_RATIO;
+    const byView =
+      ((window.innerHeight || 900) * GRID_STACK_VIEW_SHARE) / Math.max(1, count);
+    return Math.round(Math.max(rowPx, Math.min(GRID_STACK_ROW_MAX, byWidth, byView)));
+  };
+
+  const expectedRows = () => {
+    const have = new Set(cells.map((cl) => neighbourKey(cl.station)));
+    let n = 0;
+    for (const name of selected) {
+      const key = neighbourKey(name);
+      if (have.has(key)) {
+        n++;
+        continue;
+      }
+      const entry = foreign.get(viewKey + "|" + key);
+      if (entry && entry.done) {
+        if (entry.part) n++;
+        continue;
+      }
+      const at = stationCoord(name);
+      if (at && at.fc && suffix) n++;
+    }
+    return n;
+  };
+
+  const holdHeight = () => {
+    if (isMobile() || overlay || !selected || !selected.size) return 0;
+    const rows = expectedRows();
+    if (!rows) return 0;
+    const vis = activePd();
+    const outer = wrap.getBoundingClientRect().height;
+    const inner = vis ? vis.getBoundingClientRect().height : 0;
+    const chrome = Math.max(0, Math.round(outer - inner));
+    return Math.round(rows * stackRowFor(selected.size) + GRID_PAD_PX) + chrome;
+  };
+
+  let veilHeight = 0;
+
+  const veil = () => {
+    if (veilTimer) {
+      clearTimeout(veilTimer);
+      veilTimer = 0;
+    }
+    if (!veiled) {
+      ensureGridHoldStyles();
+      if (holdSpin.parentNode !== wrap) wrap.appendChild(holdSpin);
+      veiled = true;
+      veilHeight = 0;
+      wrap.classList.add("wx-grid-hold");
+    }
+    const est = holdHeight();
+    if (est > 0 && est !== veilHeight && typeof wrap._wxRebase === "function") {
+      veilHeight = est;
+      quietly(() => wrap._wxRebase(est));
+    }
+  };
+
+  const unveil = () => {
+    veilNext = false;
+    if (veilTimer) {
+      clearTimeout(veilTimer);
+      veilTimer = 0;
+    }
+    if (!veiled) return;
+    veiled = false;
+    veilHeight = 0;
+    wrap.classList.remove("wx-grid-hold");
+  };
+
+  const waitingDetail = () => !!(awaiting && !panelPlot(wrap._wxPanel));
+
+  const blocked = () =>
+    !!(selected && selected.size) &&
+    (waitingDetail() || foreignPending() || histPending());
+
+  const outdated = () =>
+    !!(selected && selected.size) && (waitingDetail() || foreignPending());
+
+  const veilSoon = () => {
+    if (veiled || veilTimer || !outdated()) return;
+    veilTimer = setTimeout(() => {
+      veilTimer = 0;
+      if (outdated()) veil();
+    }, GRID_VEIL_DELAY_MS);
+  };
+
   wrap._wxAwaitDetail = (on) => {
     if (awaitTimer) {
       clearTimeout(awaitTimer);
       awaitTimer = 0;
     }
+    const was = awaiting;
     awaiting = !!on;
     if (awaiting) {
+      veilNext = true;
       awaitTimer = setTimeout(() => {
         awaitTimer = 0;
         awaiting = false;
         apply();
       }, GRID_DETAIL_WAIT_MS);
+      return;
     }
+    if (was) apply();
+  };
+
+  wrap._wxReady = () => {
+    const jobs = foreignJobs().concat(histJobs());
+    return jobs.length ? Promise.all(jobs) : null;
   };
 
   wrap._wxRefit = () => {
@@ -5529,9 +5779,24 @@ function stationGrid(c, views, opts) {
 
   const render = () => {
     if (!cells.length) return true;
+    const filtered = !!(selected && selected.size);
+    if (filtered) histJobs();
+    if (blocked()) {
+      if (veilNext || veiled) veil();
+      else veilSoon();
+      return true;
+    }
     const base = g._wxPlotDiv;
-    if (!base || !base.data || !base.isConnected) return false;
-    if (awaiting && selected && selected.size && !panelPlot(wrap._wxPanel)) return true;
+    if (!base || !base.data || !base.isConnected) {
+      if (filtered && (veilNext || veiled)) veil();
+      return false;
+    }
+    const done = paint(base);
+    unveil();
+    return done;
+  };
+
+  const paint = (base) => {
     const visible = activePd();
     const pd = selected && selected.size ? selPd : base;
 
@@ -5560,16 +5825,8 @@ function stationGrid(c, views, opts) {
       wantOverlay && lit && lit.style.display !== "none"
         ? lit._wxStation || null
         : null;
-    let stackRow = rowPx;
-    if (filtered && !wantOverlay && !isMobile()) {
-      const width = g.getBoundingClientRect().width || 0;
-      const byWidth = width * GRID_STACK_ROW_RATIO;
-      const byView =
-        ((window.innerHeight || 900) * GRID_STACK_VIEW_SHARE) / Math.max(1, selected.size);
-      stackRow = Math.round(
-        Math.max(rowPx, Math.min(GRID_STACK_ROW_MAX, byWidth, byView))
-      );
-    }
+    const stackRow =
+      filtered && !wantOverlay ? stackRowFor(selected.size) : rowPx;
     let next = null;
     try {
       if (wantOverlay) {
@@ -5658,7 +5915,12 @@ function stationGrid(c, views, opts) {
       (sigs.has(pd)
         ? sigs.get(pd) === sig
         : pd === base && !filtered && viewKey === baseView && !wantOverlay);
-    if (same && pd === visible) return true;
+    if (same && pd === visible) {
+      if (veiled && typeof wrap._wxRebase === "function") {
+        quietly(() => wrap._wxRebase(natural + chrome));
+      }
+      return true;
+    }
 
     g._wxHold = true;
     try {
@@ -5743,6 +6005,10 @@ function stationGrid(c, views, opts) {
   wrap._wxRefresh = () => {
     if (selected && selected.size) apply();
   };
+
+  wrap._wxHasFilter = () => !!(selected && selected.size);
+
+  wrap._wxFilterNames = () => (selected ? Array.from(selected) : []);
 
   wrap._wxRailFit = () => {
     if (selected && selected.size) return;
@@ -6045,10 +6311,19 @@ function stationGrid(c, views, opts) {
     });
     wrap._wxGridRestore = (st) => {
       if (!st || !st.filter) return;
-      if (!ctl._wxRestore(st.filter)) return;
-      if (!selected || !selected.size) return;
+      const wasOverlay = overlay;
+      const wasCumulative = cumulative;
+      const wasVeil = veilNext;
       overlay = !!st.overlay;
       cumulative = !!st.cumulative;
+      veilNext = true;
+      if (!ctl._wxRestore(st.filter) || !selected || !selected.size) {
+        overlay = wasOverlay;
+        cumulative = wasCumulative;
+        veilNext = wasVeil;
+        syncMode();
+        return;
+      }
       syncMode();
       apply();
     };
@@ -6792,6 +7067,7 @@ function resetOverviewChart(panel) {
 function closeOverviewChart(panel, keepGrid) {
   const token = (panel._wxCloseToken || 0) + 1;
   panel._wxCloseToken = token;
+  panel._wxOpenToken = (panel._wxOpenToken || 0) + 1;
   if (panel._wxRow) panel._wxRow.classList.remove("sel");
   panel.style.display = "none";
   panel.style.height = "";
@@ -6802,6 +7078,7 @@ function closeOverviewChart(panel, keepGrid) {
       typeof grid._wxClearFilter === "function" && grid._wxClearFilter();
     if (!cleared && typeof grid._wxRefresh === "function") grid._wxRefresh();
   }
+  if (grid && typeof grid._wxAwaitDetail === "function") grid._wxAwaitDetail(false);
   if (grid && typeof grid._wxMapSync === "function") grid._wxMapSync();
   afterPaint().then(() => {
     if (panel._wxCloseToken !== token || panel.style.display !== "none") return;
@@ -6916,9 +7193,19 @@ function detailSpacer() {
   return wrap;
 }
 
-function openOverviewChart(panel, f, row, pick, view) {
+function holdHeightFor(panel) {
+  const cap = overviewPlotCap(panel);
+  if (_detailRef && typeof _detailRef.plotHeight === "function") {
+    return _detailRef.plotHeight(cap);
+  }
+  return cap;
+}
+
+function openOverviewChart(panel, f, row, pick, view, restore) {
   ensureOverviewStyles();
   ensureDetailStyles();
+  const openToken = (panel._wxOpenToken || 0) + 1;
+  panel._wxOpenToken = openToken;
   const wasOpen = panel.style.display !== "none";
   resetOverviewChart(panel);
   panel.style.display = "";
@@ -6950,13 +7237,13 @@ function openOverviewChart(panel, f, row, pick, view) {
 
   panel.appendChild(head);
   panel.appendChild(body);
-  if (fold) loading.style.height = overviewPlotCap(panel) + "px";
+  if (fold) loading.style.height = holdHeightFor(panel) + "px";
   if (row) {
     watchRowVisible(panel, row);
     requestAnimationFrame(() => {
       if (panel._wxRow === row) revealRow(row);
     });
-  } else {
+  } else if (!restore) {
     requestAnimationFrame(() => {
       if (panel._wxRow === null) showPanel(panel);
     });
@@ -6969,9 +7256,16 @@ function openOverviewChart(panel, f, row, pick, view) {
 
   const opts = detailOpts(f.station, f.tab);
   opts.maxHeight = () => overviewPlotCap(panel);
+  opts.hold = !!restore;
+  opts.gate = () => {
+    const grid = panel._wxGrid;
+    return grid && typeof grid._wxReady === "function" ? grid._wxReady() : null;
+  };
   opts.onFit = () => {
     const grid = panel._wxGrid;
-    if (grid && typeof grid._wxRefit === "function") grid._wxRefit();
+    if (!grid) return;
+    if (typeof grid._wxAwaitDetail === "function") grid._wxAwaitDetail(false);
+    if (typeof grid._wxRefit === "function") grid._wxRefit();
   };
   opts.onHistorical = (info) => {
     const grid = panel._wxGrid;
@@ -6994,11 +7288,13 @@ function openOverviewChart(panel, f, row, pick, view) {
       return m.mount(panel, opts);
     })
     .then(() => {
+      if (panel._wxOpenToken !== openToken) return;
       wirePanelHover(panel);
       wirePlotBandGlyphs(panelPlot(panel));
       const grid = panel._wxGrid;
       if (grid) {
         requestAnimationFrame(() => {
+          if (panel._wxOpenToken !== openToken) return;
           if (typeof grid._wxAwaitDetail === "function") grid._wxAwaitDetail(false);
           if (
             typeof grid._wxNeighbourSync === "function" &&
@@ -7011,6 +7307,7 @@ function openOverviewChart(panel, f, row, pick, view) {
         });
       }
       if (panel._wxRow !== (row || null)) return;
+      if (!row && restore) return;
       requestAnimationFrame(() => {
         if (panel._wxRow !== (row || null)) return;
         if (row) revealRow(row);
@@ -7019,6 +7316,7 @@ function openOverviewChart(panel, f, row, pick, view) {
     })
     .catch((e) => {
       console.warn("detail module failed", e);
+      if (panel._wxOpenToken !== openToken) return;
       const held = panel._wxGrid;
       if (held && typeof held._wxAwaitDetail === "function") {
         held._wxAwaitDetail(false);
@@ -7940,6 +8238,8 @@ async function buildData(fc, hours) {
 
 let _detailModule = null;
 
+let _detailRef = null;
+
 function resetHistorical() {
   if (!_detailModule) return;
   _detailModule.then(
@@ -7957,7 +8257,10 @@ function closeDetailByUser(panel) {
 
 function detailModule() {
   if (!_detailModule) {
-    _detailModule = import("./detail.js");
+    _detailModule = import("./detail.js").then((m) => {
+      _detailRef = m;
+      return m;
+    });
     _detailModule.catch(() => { _detailModule = null; });
   }
   return _detailModule;
@@ -8918,7 +9221,7 @@ function restoreOpenDetail(saved, pane) {
   const f = row && row._wxFinding
     ? row._wxFinding
     : { station: saved.station, tab: saved.tab };
-  openOverviewChart(panel, f, row, saved.pick || null, saved.view || null);
+  openOverviewChart(panel, f, row, saved.pick || null, saved.view || null, true);
 }
 
 let _pendingDetail = null;
@@ -8940,11 +9243,11 @@ function captureGridState(withNeighbours) {
 function restoreCarried(saved, gridState, pane) {
   const opening = !!(saved && saved.station);
   const grid = activeGrid(pane);
-  if (opening && gridState && grid && typeof grid._wxAwaitDetail === "function") {
-    grid._wxAwaitDetail(true);
-  }
+  const linked = !!(opening && grid && typeof grid._wxAwaitDetail === "function");
+  if (linked) grid._wxAwaitDetail(true);
   if (opening) restoreOpenDetail(saved, pane);
   if (gridState) restoreGridState(gridState, pane);
+  if (linked && typeof grid._wxNeighbourSync === "function") grid._wxNeighbourSync();
 }
 
 function restoreGridState(saved, pane) {
@@ -9009,6 +9312,7 @@ function tabShell() {
         prebuildHovered(t.id);
       }, PREBUILD_HOVER_MS);
       if (!CARRY_TABS.has(t.id)) return;
+      warmCarryFiles(t.id);
       const station = carriedStation();
       if (station) prefetchDetail(station, t.id);
     });
@@ -9032,6 +9336,7 @@ function resetTabs() {
   _prebuildToken++;
   _prebuildDone.clear();
   tabPanes.clear();
+  if (_sharedNeighbourMap) _sharedNeighbourMap.park();
   if ($panes) $panes.innerHTML = "";
   for (let i = _mountQueue.length - 1; i >= 0; i--) {
     if (!_mountQueue[i].node.isConnected) _mountQueue.splice(i, 1);
@@ -9337,7 +9642,13 @@ function revealPane(host, entry, frames, built, staged) {
   });
 }
 
-const GRID_DETAIL_WAIT_MS = 4000;
+const GRID_DETAIL_WAIT_MS = 15000;
+
+const FOREIGN_WAIT_MS = 4000;
+
+const GRID_VEIL_DELAY_MS = 150;
+
+const SEL_RESIZE_SETTLE_MS = 100;
 
 const NEIGHBOUR_RESET_LABEL = "Reset to neighbours";
 
@@ -9377,6 +9688,28 @@ function carriedStation() {
   return panel._wxStation || null;
 }
 
+function warmCarryFiles(tabId) {
+  const suffix = TAB_SUFFIX[tabId];
+  if (!suffix || !state.fc || tabId === OVERVIEW_TAB || tabId === DATA_TAB) return;
+  const grid = activeGrid();
+  const local = new Set(((grid && grid._wxStations) || []).map(neighbourKey));
+  const names = new Set();
+  if (grid && typeof grid._wxFilterNames === "function") {
+    for (const name of grid._wxFilterNames()) names.add(name);
+  }
+  const station = carriedStation();
+  if (station && _nbGroups) {
+    for (const name of _nbGroups.get(neighbourKey(station)) || []) names.add(name);
+  }
+  const own = safeFc(state.fc);
+  for (const name of names) {
+    if (local.has(neighbourKey(name))) continue;
+    const at = stationCoord(name);
+    if (!at || !at.fc || safeFc(at.fc) === own) continue;
+    warmFile(chartFile(at.fc, state.hours, suffix));
+  }
+}
+
 function applyTabCarry(carry, pane) {
   if (!carry) return;
   const panel = pane.querySelector(".wx-ov-chart");
@@ -9395,18 +9728,11 @@ function applyTabCarry(carry, pane) {
     return;
   }
   if (isOpen && panel._wxStation === carry.saved.station) {
+    const dpd = panelPlot(panel);
+    const want = carry.saved.view;
+    if (dpd && want && typeof dpd._wxSetView === "function") dpd._wxSetView(want);
     if (ownGrid && carry.grid) restoreGridState(carry.grid, pane);
     clearGrid();
-    const dpd = panelPlot(panel);
-    const now = dpd && dpd.layout && dpd.layout.xaxis && dpd.layout.xaxis.range;
-    const want = carry.saved.view;
-    if (dpd && want && !(Array.isArray(now) && now[0] === want[0] && now[1] === want[1])) {
-      try {
-        Plotly.relayout(dpd, { "xaxis.autorange": false, "xaxis.range": want.slice() });
-      } catch (e) {
-        void e;
-      }
-    }
     if (grid && typeof grid._wxNeighbourSync === "function") grid._wxNeighbourSync();
     return;
   }
