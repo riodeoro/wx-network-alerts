@@ -920,7 +920,6 @@ export async function mount(host, opts) {
   arrowsBtn.className = "wx-grid-mode show";
   arrowsBtn.style.alignSelf = "flex-end";
   arrowsBtn.style.minHeight = "28px";
-  arrowsBtn.title = "Show Wspd as one arrow per hour pointing in the Dir direction";
   const arrowsBox = node("span", "box");
   arrowsBox.innerHTML = CHECK_SVG;
   arrowsBtn.appendChild(arrowsBox);

@@ -2626,6 +2626,9 @@ function ensureGridToggleStyles() {
     "border:none;border-radius:0;padding:0;margin:0;cursor:pointer;",
     "transition:color .12s ease;}",
     ".wx-grid-mode.show{display:inline-flex;}",
+    ".wx-grid-mode.wx-grid-mode,.wx-grid-mode.wx-grid-mode:hover,",
+    ".wx-grid-mode.wx-grid-mode:focus,.wx-grid-mode.wx-grid-mode:active{",
+    "background:transparent;border:none;box-shadow:none;border-radius:0;padding:0;}",
     ".wx-grid-mode:hover{color:var(--text,#26231f);}",
     ".wx-grid-mode.on{color:var(--text,#26231f);}",
     ".wx-grid-mode .box{width:11px;height:11px;flex:0 0 auto;border-radius:2px;",
@@ -3769,6 +3772,17 @@ const NEIGHBOUR_MAP_MATCH_MS = 30 * 60 * 1000;
 
 const NEIGHBOUR_MAP_RAIN_COL = "Rn_1";
 
+const RAIN_MIN_R = 9;
+
+const RAIN_MAX_R = 32;
+
+const RAIN_CAP_MM = 10;
+
+function rainRadius(mm) {
+  const f = Math.sqrt(Math.min(mm, RAIN_CAP_MM) / RAIN_CAP_MM);
+  return Math.round(RAIN_MIN_R + (RAIN_MAX_R - RAIN_MIN_R) * f);
+}
+
 const NEIGHBOUR_MAP_RING_PX = 2;
 
 const NEIGHBOUR_MAP_CAND_PX = 6;
@@ -3880,19 +3894,54 @@ const NEIGHBOUR_MAP_STYLE = {
       paint: { "background-color": NEIGHBOUR_MAP_PAPER },
     },
     {
+      id: "relief-fill",
+      type: "hillshade",
+      source: "dem",
+      paint: {
+        "hillshade-illumination-direction": 20,
+        "hillshade-exaggeration": [
+          "interpolate", ["linear"], ["zoom"], 5, 0.12, 9, 0.2, 12, 0.28,
+        ],
+        "hillshade-shadow-color": "#857b6d",
+        "hillshade-highlight-color": "#fffdf8",
+        "hillshade-accent-color": "#a39a8c",
+      },
+    },
+    {
       id: "relief",
       type: "hillshade",
       source: "dem",
       paint: {
         "hillshade-illumination-direction": 315,
-        "hillshade-exaggeration": 0.55,
-        "hillshade-shadow-color": "#5f5a52",
-        "hillshade-highlight-color": "#ffffff",
-        "hillshade-accent-color": "#8a857d",
+        "hillshade-exaggeration": [
+          "interpolate", ["linear"], ["zoom"], 5, 0.3, 9, 0.45, 12, 0.6,
+        ],
+        "hillshade-shadow-color": "#6f665a",
+        "hillshade-highlight-color": "#fffdf8",
+        "hillshade-accent-color": "#9a9184",
       },
     },
   ],
 };
+
+const MAP_SCALE_MAX_PX = 80;
+
+const MAP_TILE_WAIT_MS = 5000;
+
+const MAP_EARTH_CIRC_M = 2 * Math.PI * 6378137;
+
+function mapScaleStep(lat, zoom) {
+  const mpp =
+    (MAP_EARTH_CIRC_M * Math.cos((lat * Math.PI) / 180)) / (512 * Math.pow(2, zoom));
+  if (!(mpp > 0)) return null;
+  const most = mpp * MAP_SCALE_MAX_PX;
+  const base = Math.pow(10, Math.floor(Math.log10(most)));
+  const nice = [5, 2, 1].map((k) => k * base).find((v) => v <= most) || base;
+  return {
+    px: Math.round(nice / mpp),
+    text: nice >= 1000 ? `${nice / 1000} km` : `${nice} m`,
+  };
+}
 
 const EARTH_RADIUS_KM = 6371;
 
@@ -3928,6 +3977,9 @@ function ensureNeighbourMapStyles() {
     "border-color:var(--line,#e8e6e3);}",
     ".wx-nb-map .wx-expand-btn:hover{background:#fff;}",
     ".wx-nb-map-plot{display:block;}",
+    ".wx-nb-map-plot,.wx-nb-map-labels,.wx-nb-map-scale{transition:opacity .2s ease;}",
+    ".wx-nb-map.wx-nb-map-wait .wx-nb-map-plot,.wx-nb-map.wx-nb-map-wait .wx-nb-map-labels,",
+    ".wx-nb-map.wx-nb-map-wait .wx-nb-map-scale{opacity:0;transition:none;}",
     ".wx-nb-map-labels{position:absolute;left:0;top:0;right:0;bottom:0;",
     "pointer-events:none;overflow:hidden;z-index:2;}",
     ".wx-nb-map-labels > span{position:absolute;left:0;top:0;white-space:nowrap;",
@@ -3973,6 +4025,14 @@ function ensureNeighbourMapStyles() {
     ".wx-nb-map-labels > i.barbed{background:transparent!important;",
     "border-color:transparent!important;box-shadow:none;}",
     ".wx-nb-map-labels > i.barbed svg{visibility:hidden;}",
+    ".wx-nb-map-labels > i.wx-nb-map-rain{border-radius:50%;",
+    "border:1px solid rgba(44,111,199,.35);background:rgba(44,111,199,.2);",
+    "box-shadow:none;pointer-events:none;cursor:default;}",
+    ".wx-nb-map-labels > b.wx-nb-map-dist{position:absolute;left:0;top:0;",
+    "white-space:nowrap;font-size:9px;line-height:11px;font-weight:600;color:#6f6a62;",
+    "padding:0 3px;border-radius:3px;background:rgba(243,242,239,.85);pointer-events:none;}",
+    ".wx-nb-map.wx-expanded .wx-nb-map-labels > b.wx-nb-map-dist{font-size:10px;",
+    "line-height:13px;}",
     ".wx-nb-map-labels > span.hot{z-index:1;background:rgba(255,255,255,.95);",
     "box-shadow:0 0 0 1px rgba(38,35,31,.28);}",
     ".wx-nb-map-labels > i.hot{filter:drop-shadow(0 0 2px rgba(38,35,31,.7));}",
@@ -3981,6 +4041,11 @@ function ensureNeighbourMapStyles() {
     "letter-spacing:.02em;color:var(--text,#26231f);background:rgba(255,255,255,.85);",
     "border:1px solid var(--line,#e8e6e3);pointer-events:none;}",
     ".wx-nb-map-time.on{display:block;}",
+    ".wx-nb-map-scale{position:absolute;left:8px;bottom:8px;z-index:3;display:none;",
+    "box-sizing:border-box;padding:0 3px;font-size:9px;line-height:12px;font-weight:600;",
+    "color:#5f5a52;border:1.5px solid #5f5a52;border-top:none;",
+    "background:rgba(255,255,255,.6);pointer-events:none;white-space:nowrap;}",
+    ".wx-nb-map-scale.on{display:block;}",
     ".wx-nb-map .maplibregl-ctrl-attrib{font-size:9px;",
     "background:rgba(255,255,255,.75)!important;color:var(--text-muted,#8a857d);}",
     ".wx-nb-map .maplibregl-ctrl-attrib a{color:var(--text-muted,#8a857d);}",
@@ -4008,9 +4073,15 @@ function distanceKm(a, b) {
 function elevationDiff(here, at) {
   if (!here || !at || !Number.isFinite(here.elev) || !Number.isFinite(at.elev)) return null;
   const d = Math.round(at.elev - here.elev);
-  if (d > 0) return `+${d} m`;
-  if (d < 0) return `\u2212${Math.abs(d)} m`;
+  if (d > 0) return `\u25b2${d} m`;
+  if (d < 0) return `\u25bc${Math.abs(d)} m`;
   return "\u00b10 m";
+}
+
+function lineMeta(here, at) {
+  const km = distanceLabel(distanceKm(here, at));
+  const dz = elevationDiff(here, at);
+  return dz ? `${km} ${dz}` : km;
 }
 
 function neighbourMeta(here, at) {
@@ -4348,10 +4419,43 @@ function placeNeighbourLabels(labels, at, w, h, hold) {
       l.dot._x = p.x;
       l.dot._y = p.y;
     }
+    if (l.rain && l.rainR) {
+      l.rain.style.transform =
+        `translate(${Math.round(p.x - l.rainR)}px,${Math.round(p.y - l.rainR)}px)`;
+    }
     if (l.barb) {
       l.barb.style.transform =
         `translate(${Math.round(p.x - BARB_HALF)}px,${Math.round(p.y - BARB_HALF)}px)`;
     }
+  });
+  const hubAt = labels.findIndex((l) => l.isFocus);
+  const hub = hubAt >= 0 ? at[hubAt] : null;
+  labels.forEach((l, i) => {
+    if (!l.dist) return;
+    l.dist.style.display = hub ? "" : "none";
+    if (!hub) return;
+    const p = at[i];
+    const dw = l.dist.offsetWidth;
+    const dh = l.dist.offsetHeight;
+    const len = Math.hypot(p.x - hub.x, p.y - hub.y);
+    const room = reach(l) + reach(labels[hubAt]) + 2 * NEIGHBOUR_MAP_LABEL_GAP;
+    const box = {
+      x: (p.x + hub.x) / 2 - dw / 2,
+      y: (p.y + hub.y) / 2 - dh / 2,
+      w: dw,
+      h: dh,
+    };
+    const ok =
+      len - room >= Math.hypot(dw, dh) &&
+      box.x >= NEIGHBOUR_MAP_EDGE &&
+      box.y >= NEIGHBOUR_MAP_EDGE &&
+      box.x + dw <= w - NEIGHBOUR_MAP_EDGE &&
+      box.y + dh <= h - NEIGHBOUR_MAP_EDGE &&
+      !placed.some((o) => boxesOverlap(box, o)) &&
+      !marks.some((m) => boxesOverlap(box, m));
+    l.dist.style.visibility = ok ? "" : "hidden";
+    l.dist.style.transform = `translate(${Math.round(box.x)}px,${Math.round(box.y)}px)`;
+    if (ok) placed.push(box);
   });
 }
 
@@ -4434,10 +4538,23 @@ function neighbourMap() {
   const layer = el("div", "wx-nb-map-labels");
   const chip = el("div", "wx-nb-map-time");
   const tip = el("div", "wx-nb-map-tip");
+  const scaleBar = el("div", "wx-nb-map-scale");
   node.appendChild(plot);
   node.appendChild(layer);
   node.appendChild(chip);
   node.appendChild(tip);
+  node.appendChild(scaleBar);
+
+  const paintScale = (lat, zoom) => {
+    const step = mapScaleStep(lat, zoom);
+    if (!step) {
+      scaleBar.className = "wx-nb-map-scale";
+      return;
+    }
+    scaleBar.style.width = step.px + "px";
+    scaleBar.textContent = step.text;
+    scaleBar.className = "wx-nb-map-scale on";
+  };
 
   let acts = null;
   let extras = [];
@@ -4455,6 +4572,7 @@ function neighbourMap() {
   let hoverStation = null;
   let shownStation = null;
   let home = null;
+  let viewRev = 0;
   let clearTimer = 0;
   let unbind = () => {};
   let unwatch = () => {};
@@ -4513,6 +4631,11 @@ function neighbourMap() {
       } catch (e) {
         void e;
       }
+      const gl = liveMap();
+      if (gl && !tilesReady(gl)) {
+        node.classList.add("wx-nb-map-wait");
+        awaitTiles(gl);
+      }
       if (place) place();
     });
   };
@@ -4554,6 +4677,23 @@ function neighbourMap() {
     l.barb.style.display = "";
   };
 
+  const paintRain = (l, mm) => {
+    if (!l.rain) return;
+    const on = mm !== null && mm !== undefined && mm > 0;
+    if (!on) {
+      l.rain.style.display = "none";
+      l.rainR = 0;
+      return;
+    }
+    const r = rainRadius(mm);
+    if (l.rainR !== r) {
+      l.rainR = r;
+      l.rain.style.width = 2 * r + "px";
+      l.rain.style.height = 2 * r + "px";
+    }
+    l.rain.style.display = "";
+  };
+
   const paintLabels = () => {
     if (!current) return;
     const status = typeof valuesAt === "function" ? valuesAt(hoverAt) : null;
@@ -4580,6 +4720,7 @@ function neighbourMap() {
     current.forEach((l, i) => {
       if (!readings) {
         paintBarb(l, null);
+        paintRain(l, null);
         neighbourMapLabel(l, l.name, l.meta, !!l.isFocus);
         return;
       }
@@ -4588,6 +4729,7 @@ function neighbourMap() {
       const value = v === undefined ? null : v;
       const b = readings.barbs ? readings.barbs.get(key) || null : null;
       paintBarb(l, b);
+      paintRain(l, readings.rain ? readings.rain.get(key) : null);
       const dirText = b && b.d !== null ? ` ${b.d}\u00b0` : "";
       neighbourMapReading(l, l.name, l.meta, !!l.isFocus, {
         value: value,
@@ -4650,6 +4792,46 @@ function neighbourMap() {
     const sub =
       plot._fullLayout && plot._fullLayout.map && plot._fullLayout.map._subplot;
     return sub && sub.map && typeof sub.map.getBounds === "function" ? sub.map : null;
+  };
+
+  let waitTimer = 0;
+  let waitOff = null;
+
+  const reveal = () => {
+    if (waitTimer) {
+      clearTimeout(waitTimer);
+      waitTimer = 0;
+    }
+    if (waitOff) {
+      waitOff();
+      waitOff = null;
+    }
+    node.classList.remove("wx-nb-map-wait");
+  };
+
+  const tilesReady = (gl) => {
+    try {
+      return gl.loaded() && gl.areTilesLoaded();
+    } catch (e) {
+      return true;
+    }
+  };
+
+  const awaitTiles = (gl) => {
+    if (!node.classList.contains("wx-nb-map-wait")) return;
+    if (waitOff) {
+      waitOff();
+      waitOff = null;
+    }
+    if (!gl || tilesReady(gl)) {
+      reveal();
+      return;
+    }
+    const on = () => reveal();
+    gl.on("idle", on);
+    waitOff = () => gl.off("idle", on);
+    if (waitTimer) clearTimeout(waitTimer);
+    waitTimer = setTimeout(reveal, MAP_TILE_WAIT_MS);
   };
 
   const keptView = (points, w, h) => {
@@ -4720,9 +4902,10 @@ function neighbourMap() {
 
   const showTip = (dot, info, w) => {
     tip.innerHTML = "";
-    tip.appendChild(
-      el("div", "n", `${info.name}${info.meta ? ` (${info.meta})` : ""}`)
-    );
+    const head = el("div", "n");
+    head.appendChild(document.createTextNode(info.name));
+    if (info.meta) head.appendChild(document.createTextNode(` (${info.meta})`));
+    tip.appendChild(head);
     const found = [];
     for (const a of found.slice(0, MAP_TIP_ALERTS)) {
       const row = el("div", "a");
@@ -4767,6 +4950,11 @@ function neighbourMap() {
   const attachLabels = (labels, view, w, h, focusAt) => {
     layer.innerHTML = "";
     hideTip();
+    for (const l of labels) {
+      l.rain.style.display = "none";
+      l.rainR = 0;
+      layer.appendChild(l.rain);
+    }
     const taken = new Set(labels.map((l) => neighbourKey(l.name)));
     extras = [];
     for (const at of nearbyStations()) {
@@ -4828,6 +5016,9 @@ function neighbourMap() {
       layer.appendChild(l.barb);
     }
     for (const l of labels) {
+      if (l.dist) layer.appendChild(l.dist);
+    }
+    for (const l of labels) {
       l.node.style.display = l.quiet ? "none" : "";
       layer.appendChild(l.node);
     }
@@ -4857,6 +5048,8 @@ function neighbourMap() {
       }
       const at = labels.map((l) => project(l.lon, l.lat));
       placeNeighbourLabels(labels, at, w, h, !!hold);
+      const mid = gl ? gl.getCenter() : null;
+      paintScale(mid ? mid.lat : view.center.lat, gl ? gl.getZoom() : view.zoom);
     };
     shownAt = null;
     paintLabels();
@@ -4905,7 +5098,8 @@ function neighbourMap() {
         name: name,
         at: at,
         color: quiet ? NEIGHBOUR_MAP_STATION_COLOR : NEIGHBOUR_MAP_NEIGHBOUR_COLOR,
-        meta: here ? neighbourMeta(here, at) : placeMeta(at),
+        meta: here ? (quiet ? neighbourMeta(here, at) : null) : placeMeta(at),
+        dist: here && !quiet ? lineMeta(here, at) : null,
       });
     });
     if (!items.length) {
@@ -4979,13 +5173,16 @@ function neighbourMap() {
       color: it.color,
       name: it.name,
       meta: it.meta,
+      dist: it.dist,
       size: quiet ? NEIGHBOUR_MAP_STATION_PX : 8,
       quiet: !!quiet,
     })));
 
     const fit = neighbourMapView(all.map((p) => p.at), w, h);
     home = fit;
-    const view = keptView(all, w, h) || fit;
+    const held = keptView(all, w, h);
+    if (!held) viewRev += 1;
+    const view = held || fit;
     const sameSize = drawnSize === w + "x" + h;
     if (!sameSize) layer.style.visibility = "hidden";
     drawnSize = w + "x" + h;
@@ -4996,18 +5193,21 @@ function neighbourMap() {
       showlegend: false,
       paper_bgcolor: NEIGHBOUR_MAP_PAPER,
       font: { family: NEIGHBOUR_MAP_FONT, size: 11, color: DETAIL_HOVER_TEXT },
-      uirevision: "nbmap|" + (state.fc || ""),
+      uirevision: "nbmap|" + (state.fc || "") + "|" + viewRev,
       map: {
         style: NEIGHBOUR_MAP_STYLE,
         center: view.center,
         zoom: view.zoom,
-        uirevision: "nbmap|" + (state.fc || ""),
+        uirevision: "nbmap|" + (state.fc || "") + "|" + viewRev,
       },
     };
     const labels = all.map((p) => ({
       node: el("span"),
       dot: el("i"),
       barb: el("i", "wx-nb-map-barb"),
+      rain: el("i", "wx-nb-map-rain"),
+      rainR: 0,
+      dist: p.dist ? el("b", "wx-nb-map-dist", p.dist) : null,
       barbRoom: false,
       spot: null,
       name: p.name,
@@ -5031,6 +5231,8 @@ function neighbourMap() {
       return;
     }
     const warm = drawn && drawnFc === state.fc && sameSize && !!liveMap();
+    if (warm) reveal();
+    else node.classList.add("wx-nb-map-wait");
     drawnLines = lineSig;
     drawnFc = state.fc;
     reacting = mine;
@@ -5044,6 +5246,7 @@ function neighbourMap() {
       drawn = true;
     } catch (e) {
       console.warn("neighbour map failed", e);
+      reveal();
       hide();
       return;
     }
@@ -5067,6 +5270,7 @@ function neighbourMap() {
         }
         unwatch();
         unwatch = collapseMapAttribution(plot);
+        awaitTiles(gl);
         if (current === labels && place) {
           syncHome();
           place();
@@ -5078,6 +5282,7 @@ function neighbourMap() {
       .catch((e) => {
         if (reacting === mine) reacting = null;
         console.warn("neighbour map failed", e);
+        reveal();
         hide();
       });
   };
@@ -6237,7 +6442,6 @@ function stationGrid(c, views, opts) {
     modeBtn.type = "button";
     modeBtn.appendChild(el("span", "box", CHECK_ICON));
     modeBtn.appendChild(el("span", null, OVERLAY_LABEL));
-    modeBtn.title = "Draw the selected stations on one shared chart";
 
     let cumBtn = null;
     if (canCumulate) {
@@ -6245,7 +6449,6 @@ function stationGrid(c, views, opts) {
       cumBtn.type = "button";
       cumBtn.appendChild(el("span", "box", CHECK_ICON));
       cumBtn.appendChild(el("span", null, CUMULATIVE_LABEL));
-      cumBtn.title = "Show the running total for each station";
     }
 
     const cumReady = () =>
@@ -6298,6 +6501,12 @@ function stationGrid(c, views, opts) {
         use: use,
         col: col,
         series: gridStationSeries(use, src, wrap._wxAxisStations, col),
+        hourly:
+          col === NEIGHBOUR_MAP_RAIN_COL
+            ? use === src
+              ? null
+              : gridStationSeries(src, src, wrap._wxAxisStations, col)
+            : undefined,
       };
       return mapCache;
     };
@@ -6391,7 +6600,15 @@ function stationGrid(c, views, opts) {
       for (const [name, series] of cache.series) {
         values.set(neighbourKey(name), gridSeriesAt(series, xval));
       }
-      return { col: cache.col, values: values, alerts: gridAlertsAt(mapMarks(), xval) };
+      const out = { col: cache.col, values: values, alerts: gridAlertsAt(mapMarks(), xval) };
+      if (cache.hourly !== undefined) {
+        const hourly = cache.hourly || cache.series;
+        out.rain = new Map();
+        for (const [name, series] of hourly) {
+          out.rain.set(neighbourKey(name), gridSeriesAt(series, xval));
+        }
+      }
+      return out;
     };
     ensureNeighbourMapStyles();
     const headWrap = el("div", "wx-grid-headwrap");
@@ -10159,6 +10376,8 @@ async function runAnalysis() {
     : `FC: ${fc}  |  Window: ${hours}h`;
 }
 
+const UNASSIGNED_FC = "No Fire Centre";
+
 async function populateDropdown() {
   try {
     const res = await fetch(CONFIG_BASE + "fire_centres.json", { cache: "no-cache" });
@@ -10166,9 +10385,11 @@ async function populateDropdown() {
     const centres = await res.json();
     if (!Array.isArray(centres) || !centres.length) throw new Error("no fire centres");
     clearConnError();
-    centres.sort((a, b) => a.localeCompare(b));
+    const named = centres.filter((c) => c !== UNASSIGNED_FC).sort((a, b) => a.localeCompare(b));
+    const option = (c) => `<option value="${c.replace(/"/g, "&quot;")}">${c}</option>`;
     $fcSelect.innerHTML = '<option value="" selected disabled hidden>Select Centre…</option>' +
-      centres.map(c => `<option value="${c.replace(/"/g, "&quot;")}">${c}</option>`).join("");
+      named.map(option).join("") +
+      (centres.includes(UNASSIGNED_FC) ? "<hr>" + option(UNASSIGNED_FC) : "");
   } catch (e) {
     showConnError(e);
     $fcSelect.innerHTML = '<option value="">- unavailable -</option>';
