@@ -688,6 +688,40 @@ function nearbyStations() {
   return out;
 }
 
+const FC_INITIALS = {
+  "Kamloops Fire Centre": "KFC",
+  "Northwest Fire Centre": "NWFC",
+  "Cariboo Fire Centre": "CaFC",
+  "Coastal Fire Centre": "CoFC",
+  "Southeast Fire Centre": "SEFC",
+  "Prince George Fire Centre": "PGFC",
+};
+
+function mapStationName(name) {
+  const at = stationCoord(name);
+  if (!at || !at.fc || at.fc === state.fc) return name;
+  const tag = FC_INITIALS[at.fc];
+  return tag ? `${name} (${tag})` : name;
+}
+
+function inCurrentFc(name) {
+  const at = stationCoord(name);
+  return !at || (at.fc || UNASSIGNED_FC) === state.fc;
+}
+
+let _candCache = null;
+
+function mapCandidates() {
+  const fc = state.fc;
+  if (_candCache && _candCache.fc === fc && _candCache.coords === _nbCoords &&
+      _candCache.groups === _nbGroups) {
+    return _candCache.list;
+  }
+  const list = nearbyStations().filter((at) => (at.fc || UNASSIGNED_FC) === fc);
+  _candCache = { fc: fc, coords: _nbCoords, groups: _nbGroups, list: list };
+  return list;
+}
+
 function stationFilterControl(stations, onChange, floating, neighbours) {
   ensureStationFilterStyles();
 
@@ -803,6 +837,7 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     wrap.classList.toggle("open", open);
     caret.textContent = open ? "\u25B4" : "\u25BE";
     if (open && nbOpt) sync();
+    if (open) showRows(search.value.trim().toLowerCase());
     if (open) {
       document.addEventListener("mousedown", outside, true);
       document.addEventListener("keydown", onKey, true);
@@ -814,11 +849,19 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     }
   }
 
+  function showRows(q) {
+    let shown = 0;
+    for (const r of rows) {
+      const hit = inCurrentFc(r.name) && (!q || r.name.toLowerCase().indexOf(q) >= 0);
+      r.opt.style.display = hit ? "block" : "none";
+      if (hit) shown++;
+    }
+    empty.style.display = shown ? "none" : "block";
+  }
+
   function clearSearch() {
-    if (!search.value) return;
     search.value = "";
-    for (const r of rows) r.opt.style.display = "block";
-    empty.style.display = "none";
+    showRows("");
   }
 
   btn.addEventListener("click", (ev) => {
@@ -878,14 +921,7 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
   }
 
   search.addEventListener("input", () => {
-    const q = search.value.trim().toLowerCase();
-    let shown = 0;
-    for (const r of rows) {
-      const hit = !q || r.name.toLowerCase().indexOf(q) >= 0;
-      r.opt.style.display = hit ? "block" : "none";
-      if (hit) shown++;
-    }
-    empty.style.display = shown ? "none" : "block";
+    showRows(search.value.trim().toLowerCase());
   });
 
   menu.appendChild(search);
@@ -925,18 +961,6 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
   };
   wrap._wxNbAdded = (name) => nbAdded.has(name);
   wrap._wxNbActive = () => nbOn;
-  wrap._wxToggle = (name) => {
-    if (!name) return false;
-    if (nbOn) return wrap._wxNbToggle(name);
-    if (selected.has(name)) {
-      if (selected.size <= 1) return false;
-      selected.delete(name);
-    } else {
-      selected.add(name);
-    }
-    emit();
-    return true;
-  };
   wrap._wxShown = (n) => {
     const next = Number.isFinite(n) ? n : null;
     if (next === shownCount) return;
@@ -1008,7 +1032,13 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     emit();
     return true;
   };
+  let replacePicks = false;
+  wrap._wxReplacePicks = () => {
+    replacePicks = true;
+  };
   wrap._wxNbRetarget = () => {
+    const replacing = replacePicks;
+    replacePicks = false;
     if (!neighbours) return false;
     if (!nbOn) {
       const focus = neighbours.focus();
@@ -1024,9 +1054,10 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
         if (cleared) emit();
         return cleared;
       };
-      if (selected.size || isMobile()) return done();
+      if ((selected.size && !replacing) || isMobile()) return done();
       const around = focus ? neighbours.resolve(focus) : [];
       if (!around.length) return done();
+      selected.clear();
       nbPrev = new Set();
       nbStation = focus;
       nbOrder = around.slice();
@@ -3833,10 +3864,6 @@ const MAP_TIP_ALERTS = 3;
 
 const MAP_HINT_OPEN = "Click to open";
 
-const MAP_HINT_ADD = "Click to add";
-
-const MAP_HINT_REMOVE = "Click to remove";
-
 const MAP_MIN_ICON =
   '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
   '<path d="M3.5 8h9"/></svg>';
@@ -3929,6 +3956,8 @@ const MAP_TILE_WAIT_MS = 5000;
 
 const MAP_ZOOM_LABEL_STEP = 1.2;
 
+const MAP_EASE_MS = 300;
+
 const MAP_EARTH_CIRC_M = 2 * Math.PI * 6378137;
 
 function mapScaleStep(lat, zoom) {
@@ -4006,6 +4035,8 @@ function ensureNeighbourMapStyles() {
     "paint-order:stroke;}",
     ".wx-nb-map-labels > i.cand{background:#c9c4bc;border-color:#c9c4bc;}",
     ".wx-nb-map-labels > i.cand:hover{background:#8a857d;border-color:#8a857d;}",
+    ".wx-nb-map-labels > i.ext{cursor:default;}",
+    ".wx-nb-map-labels > i.cand.ext:hover{background:#c9c4bc;border-color:#c9c4bc;}",
     ".wx-nb-map-labels > i.hit{background:#2c5fa9!important;border-color:#2c5fa9!important;",
     "box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(44,95,169,.3);z-index:1;}",
     ".wx-nb-map-tip{position:absolute;left:0;top:0;z-index:5;display:none;",
@@ -4601,7 +4632,7 @@ function neighbourMap() {
       if (l.quiet) {
         l.optional = zm && zoomOn && !on;
         l.node.style.display = on || l.optional ? "" : "none";
-        if (zm) neighbourMapLabel(l, l.name, on ? l.meta : null, !!l.isFocus);
+        if (zm) neighbourMapLabel(l, l.display, on ? l.meta : null, !!l.isFocus);
         l.node.classList.toggle("zl", !!l.optional);
       } else {
         l.optional = false;
@@ -4777,7 +4808,7 @@ function neighbourMap() {
       if (!readings) {
         paintBarb(l, null);
         paintRain(l, null);
-        neighbourMapLabel(l, l.name, l.meta, !!l.isFocus);
+        neighbourMapLabel(l, l.display, l.meta, !!l.isFocus);
         return;
       }
       const key = neighbourKey(l.name);
@@ -4787,7 +4818,7 @@ function neighbourMap() {
       paintBarb(l, b);
       paintRain(l, readings.rain ? readings.rain.get(key) : null);
       const dirText = b && b.d !== null ? ` ${b.d}\u00b0` : "";
-      neighbourMapReading(l, l.name, l.meta, !!l.isFocus, {
+      neighbourMapReading(l, l.display, l.meta, !!l.isFocus, {
         value: value,
         text: value === null ? "" : mapValueText(value, readings.col) + dirText,
       });
@@ -4989,7 +5020,6 @@ function neighbourMap() {
     tip.className = "wx-nb-map-tip";
   };
 
-  const editing = () => !!(acts && typeof acts.editing === "function" && acts.editing());
 
   const wireDot = (dot, w, describe, act) => {
     if (describe) {
@@ -5016,29 +5046,27 @@ function neighbourMap() {
     const taken = new Set(labels.map((l) => neighbourKey(l.name)));
     extras = [];
     const localOnly = !!(owner && owner._wxMapLocalOnly);
-    for (const at of localOnly ? [] : nearbyStations()) {
+    for (const at of localOnly ? [] : mapCandidates()) {
       if (taken.has(neighbourKey(at.name))) continue;
       const dot = el("i", "cand");
       dot.style.width = NEIGHBOUR_MAP_CAND_PX + "px";
       dot.style.height = NEIGHBOUR_MAP_CAND_PX + "px";
       const meta = focusAt ? neighbourMeta(focusAt, at) : placeMeta(at);
+      const away = !inCurrentFc(at.name);
+      if (away) dot.classList.add("ext");
       wireDot(
         dot,
         w,
-        () => tipFor(at.name, meta, editing() ? MAP_HINT_ADD : MAP_HINT_OPEN),
-        () => {
-          if (!acts) return;
-          if (editing()) {
-            if (typeof acts.toggle === "function") acts.toggle(at.name);
-          } else if (typeof acts.open === "function") {
-            acts.open(at.name);
-          }
-        }
+        () => tipFor(mapStationName(at.name), meta, MAP_HINT_OPEN),
+        away
+          ? null
+          : () => {
+              if (acts && typeof acts.open === "function") acts.open(at.name);
+            }
       );
       extras.push({ dot: dot, lon: at.lon, lat: at.lat, key: neighbourKey(at.name) });
       layer.appendChild(dot);
     }
-    const others = labels.filter((l) => !l.isFocus).length;
     labels.forEach((l) => {
       l.dot.style.width = l.size + "px";
       l.dot.style.height = l.size + "px";
@@ -5052,18 +5080,17 @@ function neighbourMap() {
           '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
           `<path d="${MAP_STAR_PATH}" fill="${l.color}"/></svg>`;
       } else {
+        const away = !inCurrentFc(l.name);
+        if (away) l.dot.classList.add("ext");
         wireDot(
           l.dot,
           w,
-          l.quiet ? () => tipFor(l.name, l.meta, MAP_HINT_OPEN) : null,
-          () => {
-            if (!acts) return;
-            if (editing()) {
-              if (others > 1 && typeof acts.toggle === "function") acts.toggle(l.name);
-            } else if (typeof acts.open === "function") {
-              acts.open(l.name);
-            }
-          }
+          l.quiet ? () => tipFor(l.display, l.meta, MAP_HINT_OPEN) : null,
+          away
+            ? null
+            : () => {
+                if (acts && typeof acts.open === "function") acts.open(l.name);
+              }
         );
       }
       layer.appendChild(l.dot);
@@ -5295,9 +5322,21 @@ function neighbourMap() {
     if (slot) slot._wxMapView = null;
     shownSet = setKey;
     const held = fresh || recall ? null : keptView(all, w, h);
-    if (!held) viewRev += 1;
     const view = recall || held || fit;
     const sameSize = drawnSize === w + "x" + h;
+    const liveGl = drawn && drawnFc === state.fc ? liveMap() : null;
+    let shown = view;
+    if (liveGl) {
+      try {
+        const c = liveGl.getCenter();
+        shown = { center: { lon: c.lng, lat: c.lat }, zoom: liveGl.getZoom() };
+      } catch (e) {
+        shown = view;
+      }
+    } else if (!held) {
+      viewRev += 1;
+    }
+    const glide = !!liveGl && !held ? { to: view, ease: sameSize && !recall } : null;
     if (!sameSize) layer.style.visibility = "hidden";
     drawnSize = w + "x" + h;
     const layout = {
@@ -5310,8 +5349,8 @@ function neighbourMap() {
       uirevision: "nbmap|" + (state.fc || "") + "|" + viewRev,
       map: {
         style: NEIGHBOUR_MAP_STYLE,
-        center: view.center,
-        zoom: view.zoom,
+        center: shown.center,
+        zoom: shown.zoom,
         uirevision: "nbmap|" + (state.fc || "") + "|" + viewRev,
       },
     };
@@ -5325,6 +5364,7 @@ function neighbourMap() {
       barbRoom: false,
       spot: null,
       name: p.name,
+      display: mapStationName(p.name),
       meta: p.meta,
       color: p.color,
       lon: p.at.lon,
@@ -5378,6 +5418,18 @@ function neighbourMap() {
         if (gl && typeof gl.resize === "function") {
           try {
             gl.resize();
+          } catch (e) {
+            void e;
+          }
+        }
+        if (gl && glide) {
+          const dest = {
+            center: [glide.to.center.lon, glide.to.center.lat],
+            zoom: glide.to.zoom,
+          };
+          try {
+            if (glide.ease) gl.easeTo(Object.assign({ duration: MAP_EASE_MS }, dest));
+            else gl.jumpTo(dest);
           } catch (e) {
             void e;
           }
@@ -6785,8 +6837,6 @@ function stationGrid(c, views, opts) {
         const info = wrap._wxAlertInfo;
         return info ? info.get(neighbourKey(name)) || null : null;
       },
-      editing: () =>
-        !!(ctlRef && typeof ctlRef._wxNbActive === "function" && ctlRef._wxNbActive()),
       open: (name) => {
         const panel = wrap._wxPanel;
         if (!panel) return;
@@ -6794,15 +6844,11 @@ function stationGrid(c, views, opts) {
         if (lit && neighbourKey(lit) === neighbourKey(name)) return;
         const key = neighbourKey(name);
         const local = names.find((n) => neighbourKey(n) === key);
+        if (ctlRef && typeof ctlRef._wxReplacePicks === "function") ctlRef._wxReplacePicks();
         openStationChart(panel, local || name, state.activeTab);
       },
-      toggle: (name) => {
-        if (!ctlRef || typeof ctlRef._wxToggle !== "function") return false;
-        const key = neighbourKey(name);
-        const local = names.find((n) => neighbourKey(n) === key);
-        return !!ctlRef._wxToggle(local || name);
-      },
     };
+    mapSlot._wxMapTool = mapSearch(mapSlot, state.fc, (name) => mapActions.open(name));
     nbMap = {
       slot: mapSlot,
       show: (focus, rank, fresh, quiet) => {
@@ -8646,8 +8692,6 @@ const OV_DEFAULT_TAB = "tab-temp";
 
 const OV_FIND_MAX = 8;
 
-let _ovOpenAfter = null;
-
 function ensureOverviewPickerStyles() {
   if (document.getElementById("wx-ovpick-styles")) return;
   const st = document.createElement("style");
@@ -8659,6 +8703,8 @@ function ensureOverviewPickerStyles() {
     ".wx-ov-find{position:absolute;top:8px;right:68px;z-index:30;width:150px;}",
     ".wx-nb-map.wx-expanded .wx-ov-find{width:190px;}",
     ".wx-nb-map.wx-nb-map-fixed .wx-ov-find{right:8px;}",
+    ".wx-ov-find{transition:opacity .2s ease;}",
+    ".wx-nb-map.wx-nb-map-wait .wx-ov-find{opacity:0;pointer-events:none;transition:none;}",
     ".wx-ov-find svg{position:absolute;left:8px;top:7px;width:12px;height:12px;fill:none;",
     "stroke:var(--text-muted,#8a857d);stroke-width:1.5;stroke-linecap:round;pointer-events:none;}",
     ".wx-ov-find-input{display:block;width:100%;height:26px;box-sizing:border-box;margin:0;",
@@ -8698,19 +8744,8 @@ function pickableCoords() {
   return out;
 }
 
-function overviewPicker(fc, findings, table, shell) {
-  ensureNeighbourMapStyles();
+function mapSearch(slot, fc, onPick) {
   ensureOverviewPickerStyles();
-  const stack = el("div", "wx-nb-stack wx-ov-stack");
-  const main = el("div", "wx-nb-main");
-  main.appendChild(shell);
-  const slot = el("div", "wx-nb-map-slot wx-ov-slot");
-  if (isMobile()) {
-    slot.style.minHeight = NEIGHBOUR_MAP_HEIGHT + 12 + "px";
-  } else {
-    slot.style.width = NEIGHBOUR_MAP_WIDTH_EXPANDED + 2 + "px";
-    stack.classList.add("has-map");
-  }
   const find = el("div", "wx-ov-find");
   find.innerHTML =
     '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
@@ -8726,46 +8761,13 @@ function overviewPicker(fc, findings, table, shell) {
   list.setAttribute("role", "listbox");
   find.appendChild(input);
   find.appendChild(list);
-  slot._wxMapTool = find;
-  slot._wxMapZoomLabels = true;
-  slot._wxMapLocalOnly = true;
-  slot._wxMapSize = () => {
-    if (isMobile()) {
-      const room = Math.round(slot.clientWidth || 0) - 2;
-      return {
-        w: room > 0 ? Math.min(NEIGHBOUR_MAP_WIDTH_EXPANDED, room) : NEIGHBOUR_MAP_WIDTH,
-        h: NEIGHBOUR_MAP_HEIGHT,
-      };
-    }
-    const tall = Math.round(shell.clientHeight || 0) - 2;
-    return {
-      w: NEIGHBOUR_MAP_WIDTH_EXPANDED,
-      h: Math.max(NEIGHBOUR_MAP_HEIGHT, tall),
-    };
-  };
-  stack.appendChild(main);
-  stack.appendChild(slot);
 
   let hits = [];
   let active = -1;
-  let shownKey = null;
-
-  const fcNames = () =>
-    pickableCoords()
-      .filter((at) => coordFc(at) === fc)
-      .map((at) => at.name);
 
   const markHits = () => {
     if (!_sharedNeighbourMap) return;
-    const keys = new Set(
-      hits.filter((at) => coordFc(at) === fc).map((at) => neighbourKey(at.name))
-    );
-    _sharedNeighbourMap.mark(slot, keys);
-  };
-
-  const openHere = (station) => {
-    const f = stationFinding(findings, station);
-    openFindingInTab({ station: f.station || station, tab: f.tab });
+    _sharedNeighbourMap.mark(slot, new Set(hits.map((at) => neighbourKey(at.name))));
   };
 
   const closeList = () => {
@@ -8781,51 +8783,9 @@ function overviewPicker(fc, findings, table, shell) {
   };
 
   const pick = (name) => {
-    const at = stationCoord(name);
-    if (!at) return;
-    const station = at.name || name;
-    const home = coordFc(at);
     clearFind();
     input.blur();
-    if (home !== fc) {
-      if (!Array.from($fcSelect.options).some((o) => o.value === home)) return;
-      _ovOpenAfter = { fc: home, station: station };
-      state.activeTab = OVERVIEW_TAB;
-      $fcSelect.value = home;
-      onSelectionChange();
-      return;
-    }
-    openHere(station);
-  };
-
-  const sync = () => {
-    if (state.fc !== fc || !inActivePane(slot)) return;
-    const map = sharedNeighbourMap();
-    const focus = null;
-    const key = focus ? neighbourKey(focus) : "";
-    if (key !== shownKey) {
-      shownKey = key;
-      map.fit();
-    }
-    const actions = { editing: () => false, open: (name) => pick(name) };
-    if (focus) {
-      const around = neighboursFor(
-        focus,
-        pickableCoords().map((at) => at.name)
-      ).filter((n) => neighbourKey(n) !== key);
-      if (around.length) {
-        map.show(focus, around, null, slot, actions, false);
-        markHits();
-        return;
-      }
-    }
-    const names = fcNames().filter((n) => neighbourKey(n) !== key);
-    if (!names.length) {
-      map.hide(slot);
-      return;
-    }
-    map.show(focus, names, null, slot, actions, true);
-    markHits();
+    onPick(name);
   };
 
   const paintList = () => {
@@ -8906,17 +8866,98 @@ function overviewPicker(fc, findings, table, shell) {
     setTimeout(closeList, 0);
   });
 
+  find._wxRemark = markHits;
+  return find;
+}
+
+function overviewPicker(fc, findings, table, shell) {
+  ensureNeighbourMapStyles();
+  ensureOverviewPickerStyles();
+  const stack = el("div", "wx-nb-stack wx-ov-stack");
+  const main = el("div", "wx-nb-main");
+  main.appendChild(shell);
+  const slot = el("div", "wx-nb-map-slot wx-ov-slot");
+  if (isMobile()) {
+    slot.style.minHeight = NEIGHBOUR_MAP_HEIGHT + 12 + "px";
+  } else {
+    slot.style.width = NEIGHBOUR_MAP_WIDTH_EXPANDED + 2 + "px";
+    stack.classList.add("has-map");
+  }
+  slot._wxMapZoomLabels = true;
+  slot._wxMapLocalOnly = true;
+  slot._wxMapSize = () => {
+    if (isMobile()) {
+      const room = Math.round(slot.clientWidth || 0) - 2;
+      return {
+        w: room > 0 ? Math.min(NEIGHBOUR_MAP_WIDTH_EXPANDED, room) : NEIGHBOUR_MAP_WIDTH,
+        h: NEIGHBOUR_MAP_HEIGHT,
+      };
+    }
+    const tall = Math.round(shell.clientHeight || 0) - 2;
+    return {
+      w: NEIGHBOUR_MAP_WIDTH_EXPANDED,
+      h: Math.max(NEIGHBOUR_MAP_HEIGHT, tall),
+    };
+  };
+  stack.appendChild(main);
+  stack.appendChild(slot);
+
+  let shownKey = null;
+
+  const fcNames = () =>
+    pickableCoords()
+      .filter((at) => coordFc(at) === fc)
+      .map((at) => at.name);
+
+  const openHere = (station) => {
+    const f = stationFinding(findings, station);
+    openFindingInTab({ station: f.station || station, tab: f.tab });
+  };
+
+  const pick = (name) => {
+    const at = stationCoord(name);
+    if (!at || coordFc(at) !== fc) return;
+    openHere(at.name || name);
+  };
+
+  slot._wxMapTool = mapSearch(slot, fc, pick);
+
+  const sync = () => {
+    if (state.fc !== fc || !inActivePane(slot)) return;
+    const map = sharedNeighbourMap();
+    const focus = null;
+    const key = focus ? neighbourKey(focus) : "";
+    if (key !== shownKey) {
+      shownKey = key;
+      map.fit();
+    }
+    const actions = { open: (name) => pick(name) };
+    if (focus) {
+      const around = neighboursFor(
+        focus,
+        pickableCoords().map((at) => at.name)
+      ).filter((n) => neighbourKey(n) !== key);
+      if (around.length) {
+        map.show(focus, around, null, slot, actions, false);
+        slot._wxMapTool._wxRemark();
+        return;
+      }
+    }
+    const names = fcNames().filter((n) => neighbourKey(n) !== key);
+    if (!names.length) {
+      map.hide(slot);
+      return;
+    }
+    map.show(focus, names, null, slot, actions, true);
+    slot._wxMapTool._wxRemark();
+  };
+
   stack._wxPeek = (name) => {
     if (_sharedNeighbourMap) _sharedNeighbourMap.peek(slot, name || null);
   };
   stack._wxMapClaim = () => {
     warmNeighbours(() => {
       if (state.fc !== fc) return;
-      const want = _ovOpenAfter;
-      if (want && want.fc === fc) {
-        _ovOpenAfter = null;
-        openHere(want.station);
-      }
       sync();
     });
   };
@@ -11031,7 +11072,10 @@ function onSelectionChange() {
   runAnalysis();
 }
 
-$fcSelect.addEventListener("change", onSelectionChange);
+$fcSelect.addEventListener("change", () => {
+  state.activeTab = OVERVIEW_TAB;
+  onSelectionChange();
+});
 $rangeSelect.addEventListener("change", onSelectionChange);
 window.addEventListener("popstate", applyRoute);
 populateDropdown().then(applyRoute);
