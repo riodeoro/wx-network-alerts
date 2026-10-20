@@ -2199,7 +2199,6 @@ function siblingGraphResize(sib) {
 function setExpandButton(btn, on) {
   btn.innerHTML = on ? COLLAPSE_ICON : EXPAND_ICON;
   const label = on ? "Collapse" : "Expand";
-  btn.title = label;
   btn.setAttribute("aria-label", label);
   btn.setAttribute("aria-expanded", on ? "true" : "false");
 }
@@ -3928,6 +3927,8 @@ const MAP_SCALE_MAX_PX = 80;
 
 const MAP_TILE_WAIT_MS = 5000;
 
+const MAP_ZOOM_LABEL_STEP = 1.2;
+
 const MAP_EARTH_CIRC_M = 2 * Math.PI * 6378137;
 
 function mapScaleStep(lat, zoom) {
@@ -3973,6 +3974,8 @@ function ensureNeighbourMapStyles() {
     ".wx-nb-map.collapsed{border-radius:999px;}",
     ".wx-nb-map.collapsed .wx-nb-map-pill{display:inline-flex;}",
     ".wx-nb-map.collapsed > :not(.wx-nb-map-pill){display:none!important;}",
+    ".wx-nb-map.wx-nb-map-fixed .wx-expand-btn,.wx-nb-map.wx-nb-map-fixed .wx-nb-map-min,",
+    ".wx-nb-map.wx-nb-map-fixed .wx-nb-map-pill{display:none!important;}",
     ".wx-nb-map .wx-expand-btn{background:rgba(255,255,255,.85);",
     "border-color:var(--line,#e8e6e3);}",
     ".wx-nb-map .wx-expand-btn:hover{background:#fff;}",
@@ -4003,6 +4006,8 @@ function ensureNeighbourMapStyles() {
     "paint-order:stroke;}",
     ".wx-nb-map-labels > i.cand{background:#c9c4bc;border-color:#c9c4bc;}",
     ".wx-nb-map-labels > i.cand:hover{background:#8a857d;border-color:#8a857d;}",
+    ".wx-nb-map-labels > i.hit{background:#2c5fa9!important;border-color:#2c5fa9!important;",
+    "box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(44,95,169,.3);z-index:1;}",
     ".wx-nb-map-tip{position:absolute;left:0;top:0;z-index:5;display:none;",
     "pointer-events:none;padding:5px 8px;border-radius:6px;",
     "color:var(--text,#26231f);background:var(--surface,#fff);",
@@ -4036,6 +4041,11 @@ function ensureNeighbourMapStyles() {
     ".wx-nb-map-labels > span.hot{z-index:1;background:rgba(255,255,255,.95);",
     "box-shadow:0 0 0 1px rgba(38,35,31,.28);}",
     ".wx-nb-map-labels > i.hot{filter:drop-shadow(0 0 2px rgba(38,35,31,.7));}",
+    ".wx-nb-map-labels > span.peek{z-index:1;background:rgba(255,255,255,.95);",
+    "box-shadow:0 0 0 1px rgba(38,35,31,.28);}",
+    ".wx-nb-map-labels > span.zl{font-weight:500;animation:wx-zl-in .2s ease;}",
+    "@keyframes wx-zl-in{from{opacity:0;}to{opacity:1;}}",
+    ".wx-nb-map-labels > i.peek{filter:drop-shadow(0 0 2px rgba(38,35,31,.7));}",
     ".wx-nb-map-time{position:absolute;left:8px;top:8px;z-index:3;display:none;",
     "padding:2px 7px;border-radius:6px;font-size:10px;font-weight:600;",
     "letter-spacing:.02em;color:var(--text,#26231f);background:rgba(255,255,255,.85);",
@@ -4405,13 +4415,15 @@ function placeNeighbourLabels(labels, at, w, h, hold) {
     const clear = (q) =>
       !placed.some((o) => boxesOverlap(q, o)) &&
       !marks.some((m, j) => j !== i && boxesOverlap(q, m));
-    let at0 = hold && Number.isInteger(l.spot) ? l.spot : -1;
+    let at0 = !l.optional && hold && Number.isInteger(l.spot) ? l.spot : -1;
     if (at0 < 0) at0 = spots.findIndex((q) => inside(q) && clear(q));
+    const dropped = !!l.optional && at0 < 0;
     if (at0 < 0) at0 = spots.findIndex((q) => inside(q));
     if (at0 < 0) at0 = 0;
     l.spot = at0;
     const pick = spots[at0];
-    placed.push(pick);
+    l.node.style.visibility = dropped ? "hidden" : "";
+    if (!dropped) placed.push(pick);
     l.node.style.transform = `translate(${Math.round(pick.x)}px,${Math.round(pick.y)}px)`;
     if (l.dot) {
       l.dot.style.transform =
@@ -4573,14 +4585,60 @@ function neighbourMap() {
   let shownStation = null;
   let home = null;
   let viewRev = 0;
+  let forceFit = false;
+  let shownSet = null;
+  let marked = null;
+  let peekKey = null;
+  let zoomOn = false;
+
+  const zoomMode = () => !!(owner && owner._wxMapZoomLabels);
+
+  const applyPeek = () => {
+    if (!current) return;
+    const zm = zoomMode();
+    for (const l of current) {
+      const on = !!peekKey && neighbourKey(l.name) === peekKey;
+      if (l.quiet) {
+        l.optional = zm && zoomOn && !on;
+        l.node.style.display = on || l.optional ? "" : "none";
+        if (zm) neighbourMapLabel(l, l.name, on ? l.meta : null, !!l.isFocus);
+        l.node.classList.toggle("zl", !!l.optional);
+      } else {
+        l.optional = false;
+      }
+      l.node.classList.toggle("peek", on);
+      l.dot.classList.toggle("peek", on);
+    }
+  };
+  let tool = null;
+
+  const paintMarks = () => {
+    const has = (key) => !!marked && marked.has(key);
+    for (const e of extras) e.dot.classList.toggle("hit", has(e.key));
+    if (!current) return;
+    for (const l of current) l.dot.classList.toggle("hit", has(neighbourKey(l.name)));
+  };
   let clearTimer = 0;
   let unbind = () => {};
   let unwatch = () => {};
 
+  const fixedSize = () =>
+    owner && typeof owner._wxMapSize === "function" ? owner._wxMapSize() : null;
+
   const size = () =>
-    expanded
+    fixedSize() ||
+    (expanded
       ? { w: NEIGHBOUR_MAP_WIDTH_EXPANDED, h: NEIGHBOUR_MAP_HEIGHT_EXPANDED }
-      : { w: NEIGHBOUR_MAP_WIDTH, h: NEIGHBOUR_MAP_HEIGHT };
+      : { w: NEIGHBOUR_MAP_WIDTH, h: NEIGHBOUR_MAP_HEIGHT });
+
+  const folded = () => collapsed && !fixedSize();
+
+  const syncChrome = () => {
+    const fixed = !!fixedSize();
+    node.classList.toggle("wx-nb-map-fixed", fixed);
+    node.classList.toggle("collapsed", collapsed && !fixed);
+    node.classList.toggle("wx-expanded", fixed || expanded);
+  };
 
   const btn = expandButton(() => {
     expanded = !expanded;
@@ -4601,13 +4659,11 @@ function neighbourMap() {
   const minBtn = el("button", "wx-expand-btn wx-nb-map-min");
   minBtn.type = "button";
   minBtn.innerHTML = MAP_MIN_ICON;
-  minBtn.title = "Minimise map";
   minBtn.setAttribute("aria-label", "Minimise map");
   const pill = el("button", "wx-nb-map-pill");
   pill.type = "button";
   pill.innerHTML = MAP_PILL_ICON;
   pill.appendChild(el("span", null, "Map"));
-  pill.title = "Show map";
   const setCollapsed = (on) => {
     collapsed = on;
     node.classList.toggle("collapsed", on);
@@ -4744,6 +4800,8 @@ function neighbourMap() {
       l.dot.classList.toggle("hot", on);
       if (l.barb) l.barb.classList.toggle("hot", on);
     });
+    paintMarks();
+    applyPeek();
     if (place) place(hold);
   };
 
@@ -4854,7 +4912,7 @@ function neighbourMap() {
     if (!row || !row.classList || !row.classList.contains("wx-nb-stack")) return;
     row.classList.toggle("has-map", on);
     if (on) node.style.top = isMobile() ? "" : stickyOffset() + PANEL_MARGIN + "px";
-    const rail = on ? (collapsed ? "c" : String(size().w)) : "";
+    const rail = on ? (folded() ? "c" : String(size().w)) : "";
     if (row._wxRail === rail) return;
     const first = row._wxRail === undefined && !on;
     row._wxRail = rail;
@@ -4870,7 +4928,7 @@ function neighbourMap() {
 
   const reserve = (slot) => {
     if (!slot || !slot.isConnected || node.parentNode !== slot || isMobile()) return false;
-    const w = Math.round(node.offsetWidth || 0) || (collapsed ? 0 : size().w + 2);
+    const w = Math.round(node.offsetWidth || 0) || (folded() ? 0 : size().w + 2);
     if (!(w > 0)) return false;
     slot.style.width = w + "px";
     slot._wxReserved = true;
@@ -4976,7 +5034,7 @@ function neighbourMap() {
           }
         }
       );
-      extras.push({ dot: dot, lon: at.lon, lat: at.lat });
+      extras.push({ dot: dot, lon: at.lon, lat: at.lat, key: neighbourKey(at.name) });
       layer.appendChild(dot);
     }
     const others = labels.filter((l) => !l.isFocus).length;
@@ -5046,6 +5104,12 @@ function neighbourMap() {
         e.dot._y = q.y;
         e.dot.style.transform = `translate(${Math.round(q.x - half)}px,${Math.round(q.y - half)}px)`;
       }
+      const zoomNow = gl ? gl.getZoom() : view.zoom;
+      const zoomWant = zoomMode() && !!home && zoomNow >= home.zoom + MAP_ZOOM_LABEL_STEP;
+      if (zoomWant !== zoomOn) {
+        zoomOn = zoomWant;
+        applyPeek();
+      }
       const at = labels.map((l) => project(l.lon, l.lat));
       placeNeighbourLabels(labels, at, w, h, !!hold);
       const mid = gl ? gl.getCenter() : null;
@@ -5073,12 +5137,38 @@ function neighbourMap() {
     if (actions) acts = actions;
     if (owner && owner !== slot && !(slot && reserve(owner))) markRow(owner, false);
     if (slot && node.parentNode !== slot) slot.appendChild(node);
+    const want = (slot && slot._wxMapTool) || null;
+    if (tool !== want) {
+      if (tool && tool.parentNode === node) node.removeChild(tool);
+      tool = want;
+      if (tool) node.appendChild(tool);
+    }
     if (slot && slot._wxReserved) {
       slot._wxReserved = false;
       slot.style.width = "";
     }
     const switched = owner !== (slot || null) || valuesAt !== (source || null);
+    if (owner !== (slot || null)) {
+      marked = null;
+      peekKey = null;
+      zoomOn = false;
+      const gl = liveMap();
+      if (owner && gl && drawn && drawnFc === state.fc && shownSet) {
+        try {
+          const c = gl.getCenter();
+          owner._wxMapView = {
+            fc: drawnFc,
+            set: shownSet,
+            center: { lon: c.lng, lat: c.lat },
+            zoom: gl.getZoom(),
+          };
+        } catch (e) {
+          void e;
+        }
+      }
+    }
     owner = slot || null;
+    syncChrome();
     valuesAt = source || null;
     if (!node.isConnected) {
       last = { focus: focus, names: names, quiet: !!quiet };
@@ -5114,7 +5204,7 @@ function neighbourMap() {
     plot.style.height = h + "px";
     markRow(slot, true);
     quietNow = !!quiet;
-    const next = [here ? focus : "", w, quiet ? "q" : ""]
+    const next = [here ? focus : "", w, h, quiet ? "q" : ""]
       .concat(items.map((it) => it.name))
       .join("\u0001");
     hideTip();
@@ -5122,6 +5212,17 @@ function neighbourMap() {
     parked = false;
     stale = false;
     if (drawn && next === sig && (current || reacting === next)) {
+      if (forceFit) {
+        forceFit = false;
+        const gl = liveMap();
+        if (gl && home) {
+          try {
+            gl.jumpTo({ center: [home.center.lon, home.center.lat], zoom: home.zoom });
+          } catch (e) {
+            void e;
+          }
+        }
+      }
       if (switched || wasParked) {
         hoverAt = null;
         shownAt = null;
@@ -5180,9 +5281,21 @@ function neighbourMap() {
 
     const fit = neighbourMapView(all.map((p) => p.at), w, h);
     home = fit;
-    const held = keptView(all, w, h);
+    const fresh = forceFit;
+    forceFit = false;
+    const setKey = [here ? focus : "", quiet ? "q" : ""]
+      .concat(items.map((it) => it.name))
+      .join("\u0001");
+    const saved = slot && slot._wxMapView;
+    const recall =
+      !fresh && saved && saved.fc === state.fc && saved.set === setKey
+        ? { center: saved.center, zoom: saved.zoom }
+        : null;
+    if (slot) slot._wxMapView = null;
+    shownSet = setKey;
+    const held = fresh || recall ? null : keptView(all, w, h);
     if (!held) viewRev += 1;
-    const view = held || fit;
+    const view = recall || held || fit;
     const sameSize = drawnSize === w + "x" + h;
     if (!sameSize) layer.style.visibility = "hidden";
     drawnSize = w + "x" + h;
@@ -5225,12 +5338,12 @@ function neighbourMap() {
       h,
       data.map((tr) => [tr.lon, tr.lat, tr.line ? tr.line.color : ""]),
     ]);
-    const kept = keptView(all, w, h);
+    const kept = fresh || recall ? null : keptView(all, w, h);
     if (drawn && kept && lineSig === drawnLines && liveMap()) {
       attachLabels(labels, kept, w, h, here);
       return;
     }
-    const warm = drawn && drawnFc === state.fc && sameSize && !!liveMap();
+    const warm = drawn && drawnFc === state.fc && !!liveMap();
     if (warm) reveal();
     else node.classList.add("wx-nb-map-wait");
     drawnLines = lineSig;
@@ -5311,6 +5424,24 @@ function neighbourMap() {
       hideTip();
     },
     time: setTime,
+    fit: () => {
+      forceFit = true;
+    },
+    railWidth: () =>
+      collapsed ? 0 : (expanded ? NEIGHBOUR_MAP_WIDTH_EXPANDED : NEIGHBOUR_MAP_WIDTH) + 2,
+    peek: (slot, name) => {
+      if (slot && slot !== owner) return;
+      const key = name ? neighbourKey(name) : null;
+      if (key === peekKey) return;
+      peekKey = key;
+      applyPeek();
+      if (place) place();
+    },
+    mark: (slot, keys) => {
+      if (slot && slot !== owner) return;
+      marked = keys && keys.size ? keys : null;
+      paintMarks();
+    },
     refresh: (slot) => {
       if (slot && slot !== owner) return;
       if (hoverAt === null) return;
@@ -7522,6 +7653,7 @@ function closeOverviewChart(panel, keepGrid) {
   if (panel._wxRow) panel._wxRow.classList.remove("sel");
   panel.style.display = "none";
   panel.style.height = "";
+  if (typeof panel._wxMapFocus === "function") panel._wxMapFocus();
   const grid = panel._wxGrid;
   if (grid && !keepGrid) {
     grid._wxYPushed = false;
@@ -7664,6 +7796,7 @@ function openOverviewChart(panel, f, row, pick, view, restore) {
   panel._wxStation = f.station || null;
   panel._wxTab = f.tab || null;
   if (row) row.classList.add("sel");
+  if (typeof panel._wxMapFocus === "function") panel._wxMapFocus();
 
   if (!wasOpen) {
     panel.style.height = "";
@@ -8502,9 +8635,319 @@ function sizeOverviewShell() {
   const top = shell.getBoundingClientRect().top;
   const avail = window.innerHeight - top - overviewReserve(shell);
   shell.style.height = Math.max(320, Math.round(avail)) + "px";
+  const picker = shell.closest(".wx-ov-stack");
+  if (picker && typeof picker._wxMapClaim === "function") picker._wxMapClaim();
 }
 
 
+
+const OV_DEFAULT_TAB = "tab-temp";
+
+const OV_FIND_MAX = 8;
+
+let _ovOpenAfter = null;
+
+function ensureOverviewPickerStyles() {
+  if (document.getElementById("wx-ovpick-styles")) return;
+  const st = document.createElement("style");
+  st.id = "wx-ovpick-styles";
+  st.textContent = [
+    ".wx-ov-stack{margin-bottom:0;}",
+    "@media (min-width:769px){.wx-ov-slot{background:" + NEIGHBOUR_MAP_PAPER + ";",
+    "border-radius:10px;}}",
+    ".wx-ov-find{position:absolute;top:8px;right:68px;z-index:30;width:150px;}",
+    ".wx-nb-map.wx-expanded .wx-ov-find{width:190px;}",
+    ".wx-nb-map.wx-nb-map-fixed .wx-ov-find{right:8px;}",
+    ".wx-ov-find svg{position:absolute;left:8px;top:7px;width:12px;height:12px;fill:none;",
+    "stroke:var(--text-muted,#8a857d);stroke-width:1.5;stroke-linecap:round;pointer-events:none;}",
+    ".wx-ov-find-input{display:block;width:100%;height:26px;box-sizing:border-box;margin:0;",
+    "font-family:inherit;font-size:11px;font-weight:500;letter-spacing:.01em;",
+    "padding:0 8px 0 25px;color:var(--text,#26231f);background:rgba(255,255,255,.85);",
+    "border:1px solid var(--line,#e8e6e3);border-radius:6px;outline:none;box-shadow:none;",
+    "-webkit-appearance:none;appearance:none;transition:background-color .15s ease,border-color .15s ease;}",
+    ".wx-ov-find-input::placeholder{color:var(--text-muted,#8a857d);}",
+    ".wx-ov-find-input:hover{background:#fff;}",
+    ".wx-ov-find-input:focus{background:#fff;border-color:#c9c4bc;}",
+    ".wx-ov-find-input::-webkit-search-cancel-button{-webkit-appearance:none;display:none;}",
+    ".wx-ov-find-list{display:none;position:absolute;left:0;right:0;top:30px;",
+    "background:var(--surface,#fff);border:1px solid var(--line,#e8e6e3);border-radius:6px;",
+    "box-shadow:0 1px 3px rgba(0,0,0,.04);padding:3px 0;max-height:150px;overflow:auto;}",
+    ".wx-ov-find-list.on{display:block;}",
+    ".wx-ov-find-opt{padding:4px 9px;font-size:11px;font-weight:500;color:var(--text,#26231f);",
+    "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}",
+    ".wx-ov-find-opt.act{background:#f3f2ef;}",
+    ".wx-ov-find-none{padding:4px 9px;font-size:11px;color:var(--text-muted,#8a857d);}",
+  ].join("");
+  document.head.appendChild(st);
+}
+
+function coordFc(at) {
+  return (at && at.fc) || UNASSIGNED_FC;
+}
+
+function pickableCoords() {
+  if (!_nbCoords) return [];
+  const offered = new Set(Array.from($fcSelect.options).map((o) => o.value).filter(Boolean));
+  const out = [];
+  for (const at of _nbCoords.values()) {
+    if (!at || !at.name || at.enabled === false) continue;
+    if (!offered.has(coordFc(at))) continue;
+    out.push(at);
+  }
+  return out;
+}
+
+function overviewPicker(fc, findings, table, shell) {
+  ensureNeighbourMapStyles();
+  ensureOverviewPickerStyles();
+  const stack = el("div", "wx-nb-stack wx-ov-stack");
+  const main = el("div", "wx-nb-main");
+  main.appendChild(shell);
+  const slot = el("div", "wx-nb-map-slot wx-ov-slot");
+  if (isMobile()) {
+    slot.style.minHeight = NEIGHBOUR_MAP_HEIGHT + 12 + "px";
+  } else {
+    slot.style.width = NEIGHBOUR_MAP_WIDTH_EXPANDED + 2 + "px";
+    stack.classList.add("has-map");
+  }
+  const find = el("div", "wx-ov-find");
+  find.innerHTML =
+    '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
+    '<circle cx="7" cy="7" r="4.5"/><path d="M10.4 10.4 14 14"/></svg>';
+  const input = document.createElement("input");
+  input.className = "wx-ov-find-input";
+  input.type = "search";
+  input.placeholder = "Find a station";
+  input.autocomplete = "off";
+  input.spellcheck = false;
+  input.setAttribute("aria-label", "Find a station");
+  const list = el("div", "wx-ov-find-list");
+  list.setAttribute("role", "listbox");
+  find.appendChild(input);
+  find.appendChild(list);
+  slot._wxMapTool = find;
+  slot._wxMapZoomLabels = true;
+  slot._wxMapSize = () => {
+    if (isMobile()) {
+      const room = Math.round(slot.clientWidth || 0) - 2;
+      return {
+        w: room > 0 ? Math.min(NEIGHBOUR_MAP_WIDTH_EXPANDED, room) : NEIGHBOUR_MAP_WIDTH,
+        h: NEIGHBOUR_MAP_HEIGHT,
+      };
+    }
+    const tall = Math.round(shell.clientHeight || 0) - 2;
+    return {
+      w: NEIGHBOUR_MAP_WIDTH_EXPANDED,
+      h: Math.max(NEIGHBOUR_MAP_HEIGHT, tall),
+    };
+  };
+  stack.appendChild(main);
+  stack.appendChild(slot);
+
+  let hits = [];
+  let active = -1;
+  let shownKey = null;
+
+  const fcNames = () =>
+    pickableCoords()
+      .filter((at) => coordFc(at) === fc)
+      .map((at) => at.name);
+
+  const markHits = () => {
+    if (!_sharedNeighbourMap) return;
+    const keys = new Set(
+      hits.filter((at) => coordFc(at) === fc).map((at) => neighbourKey(at.name))
+    );
+    _sharedNeighbourMap.mark(slot, keys);
+  };
+
+  const openHere = (station) => {
+    const f = stationFinding(findings, station);
+    openFindingInTab({ station: f.station || station, tab: f.tab });
+  };
+
+  const closeList = () => {
+    list.className = "wx-ov-find-list";
+    active = -1;
+  };
+
+  const clearFind = () => {
+    input.value = "";
+    hits = [];
+    closeList();
+    markHits();
+  };
+
+  const pick = (name) => {
+    const at = stationCoord(name);
+    if (!at) return;
+    const station = at.name || name;
+    const home = coordFc(at);
+    clearFind();
+    input.blur();
+    if (home !== fc) {
+      if (!Array.from($fcSelect.options).some((o) => o.value === home)) return;
+      _ovOpenAfter = { fc: home, station: station };
+      state.activeTab = OVERVIEW_TAB;
+      $fcSelect.value = home;
+      onSelectionChange();
+      return;
+    }
+    openHere(station);
+  };
+
+  const sync = () => {
+    if (state.fc !== fc || !inActivePane(slot)) return;
+    const map = sharedNeighbourMap();
+    const focus = null;
+    const key = focus ? neighbourKey(focus) : "";
+    if (key !== shownKey) {
+      shownKey = key;
+      map.fit();
+    }
+    const actions = { editing: () => false, open: (name) => pick(name) };
+    if (focus) {
+      const around = neighboursFor(
+        focus,
+        pickableCoords().map((at) => at.name)
+      ).filter((n) => neighbourKey(n) !== key);
+      if (around.length) {
+        map.show(focus, around, null, slot, actions, false);
+        markHits();
+        return;
+      }
+    }
+    const names = fcNames().filter((n) => neighbourKey(n) !== key);
+    if (!names.length) {
+      map.hide(slot);
+      return;
+    }
+    map.show(focus, names, null, slot, actions, true);
+    markHits();
+  };
+
+  const paintList = () => {
+    list.innerHTML = "";
+    if (!input.value.trim()) {
+      closeList();
+      return;
+    }
+    if (!hits.length) {
+      list.appendChild(el("div", "wx-ov-find-none", "No matching stations"));
+    }
+    hits.forEach((at, i) => {
+      const opt = el("div", "wx-ov-find-opt" + (i === active ? " act" : ""));
+      opt.setAttribute("role", "option");
+      opt.textContent = at.name;
+      opt.addEventListener("mousedown", (ev) => {
+        ev.preventDefault();
+        pick(at.name);
+      });
+      opt.addEventListener("mouseenter", () => {
+        active = i;
+        for (const [j, node] of Array.from(list.children).entries()) {
+          node.classList.toggle("act", j === i);
+        }
+      });
+      list.appendChild(opt);
+    });
+    list.className = "wx-ov-find-list on";
+  };
+
+  const search = () => {
+    const q = neighbourKey(input.value);
+    hits = [];
+    active = -1;
+    if (q) {
+      const scored = [];
+      for (const at of pickableCoords()) {
+        if (coordFc(at) !== fc) continue;
+        const k = neighbourKey(at.name);
+        const i = k.indexOf(q);
+        if (i < 0) continue;
+        scored.push({ at: at, lead: i === 0 ? 0 : 1 });
+      }
+      scored.sort((a, b) => a.lead - b.lead || a.at.name.localeCompare(b.at.name));
+      hits = scored.slice(0, OV_FIND_MAX).map((x) => x.at);
+      if (hits.length) active = 0;
+    }
+    paintList();
+    markHits();
+  };
+
+  input.addEventListener("focus", () => warmNeighbours(() => {
+    if (input.value.trim()) search();
+  }));
+  input.addEventListener("input", () => warmNeighbours(search));
+  input.addEventListener("keydown", (ev) => {
+    if (ev.key === "ArrowDown" || ev.key === "ArrowUp") {
+      if (!hits.length) return;
+      ev.preventDefault();
+      const step = ev.key === "ArrowDown" ? 1 : -1;
+      active = (active + step + hits.length) % hits.length;
+      paintList();
+      return;
+    }
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      const at = hits[active >= 0 ? active : 0];
+      if (at) pick(at.name);
+      return;
+    }
+    if (ev.key === "Escape") {
+      ev.preventDefault();
+      clearFind();
+      input.blur();
+    }
+  });
+  input.addEventListener("blur", () => {
+    setTimeout(closeList, 0);
+  });
+
+  stack._wxPeek = (name) => {
+    if (_sharedNeighbourMap) _sharedNeighbourMap.peek(slot, name || null);
+  };
+  stack._wxMapClaim = () => {
+    warmNeighbours(() => {
+      if (state.fc !== fc) return;
+      const want = _ovOpenAfter;
+      if (want && want.fc === fc) {
+        _ovOpenAfter = null;
+        openHere(want.station);
+      }
+      sync();
+    });
+  };
+  return stack;
+}
+
+let _carryOverride = null;
+
+function openFindingInTab(f) {
+  const tabId = f.tab;
+  if (!tabId || tabId === OVERVIEW_TAB) return;
+  if (!CARRY_TABS.has(tabId)) {
+    renderTab(tabId);
+    return;
+  }
+  _carryOverride = {
+    tab: tabId,
+    saved: { station: f.station, tab: tabId, pick: null, view: null },
+  };
+  renderTab(tabId);
+}
+
+function stationFinding(findings, station) {
+  const key = neighbourKey(station);
+  let best = null;
+  for (const f of findings) {
+    if (neighbourKey(f.station) !== key || !CARRY_TABS.has(f.tab) || f.tab === OVERVIEW_TAB) {
+      continue;
+    }
+    if (!best || ovSeverity(f) > ovSeverity(best)) best = f;
+  }
+  return best || { station: station, tab: OV_DEFAULT_TAB };
+}
 
 async function buildOverview(fc, hours) {
   ensureOverviewStyles();
@@ -8523,10 +8966,24 @@ async function buildOverview(fc, hours) {
   }
 
   const shell = el("div", "wx-ov-shell");
-  const panel = chartPanel();
-  shell.appendChild(panel);
-  shell.appendChild(sensorTable(findings, panel, missing));
-  box.appendChild(shell);
+  const table = sensorTable(findings, null, missing, {
+    onPick: (f) => openFindingInTab(f),
+  });
+  shell.appendChild(table);
+  const picker = overviewPicker(fc, findings, table, shell);
+  box.appendChild(picker);
+  let peeked = null;
+  table.addEventListener("pointerover", (ev) => {
+    const row = ev.target && ev.target.closest ? ev.target.closest(".wx-ov-row") : null;
+    const name = row ? row._wxStation || null : null;
+    if (name === peeked) return;
+    peeked = name;
+    picker._wxPeek(name);
+  });
+  table.addEventListener("pointerleave", () => {
+    peeked = null;
+    picker._wxPeek(null);
+  });
   requestAnimationFrame(sizeOverviewShell);
 
   if (!isMobile()) {
@@ -9723,9 +10180,24 @@ function captureGridState(withNeighbours) {
   return grid ? grid._wxGridState(withNeighbours) : null;
 }
 
+function preReserveRail(grid) {
+  const nb = grid && grid._wxNbMap;
+  const slot = nb && nb.slot;
+  const row = slot && slot.parentNode;
+  if (!slot || !row || !row.classList || !row.classList.contains("wx-nb-stack")) return;
+  if (isMobile() || slot.firstChild || row.classList.contains("has-map")) return;
+  const w = sharedNeighbourMap().railWidth();
+  if (!w) return;
+  slot.style.width = w + "px";
+  slot._wxReserved = true;
+  row.classList.add("has-map");
+  row._wxRail = String(w - 2);
+}
+
 function restoreCarried(saved, gridState, pane) {
   const opening = !!(saved && saved.station);
   const grid = activeGrid(pane);
+  if (opening) preReserveRail(grid);
   const linked = !!(opening && grid && typeof grid._wxAwaitDetail === "function");
   if (linked) grid._wxAwaitDetail(true);
   if (opening) restoreOpenDetail(saved, pane);
@@ -10142,7 +10614,7 @@ const GRID_STACK_ROW_MAX = 150;
 const GRID_STACK_VIEW_SHARE = 0.5;
 
 const CARRY_TABS = new Set([
-  OVERVIEW_TAB, "tab-rh", "tab-wind", "tab-temp", "tab-rn1", "tab-power",
+  "tab-rh", "tab-wind", "tab-temp", "tab-rn1", "tab-power",
 ]);
 
 function captureTabCarry(pane, fromId, tabId) {
@@ -10233,8 +10705,11 @@ function renderTab(tabId) {
     return Promise.resolve();
   }
 
-  const carry =
-    current && current !== entry.pane && current.dataset.tab !== tab.id
+  const forced = _carryOverride && _carryOverride.tab === tab.id ? _carryOverride : null;
+  _carryOverride = null;
+  const carry = forced
+    ? { saved: forced.saved, grid: null, hasGrid: false }
+    : current && current !== entry.pane && current.dataset.tab !== tab.id
       ? captureTabCarry(current, current.dataset.tab, tab.id)
       : null;
   const carryNow = !!carry && entry.ready;
@@ -10288,6 +10763,8 @@ function renderTab(tabId) {
     runCarry();
     const shown = activeGrid(entry.pane);
     if (shown && typeof shown._wxMapClaim === "function") shown._wxMapClaim();
+    const picker = entry.pane.querySelector(".wx-ov-stack");
+    if (picker && typeof picker._wxMapClaim === "function") picker._wxMapClaim();
     afterFrame(() => {
       if (state.activeTab !== tab.id) return;
       kickMounts();
@@ -10306,6 +10783,8 @@ function renderTab(tabId) {
       resizePlots(entry.pane);
       catchUpResize();
       sizeOverviewShell();
+      const picker = entry.pane.querySelector(".wx-ov-stack");
+      if (picker && typeof picker._wxMapClaim === "function") picker._wxMapClaim();
       kickMounts();
     });
   });
