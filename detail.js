@@ -9,7 +9,12 @@ import {
   dispUnit,
 } from "./data.js";
 import { ready } from "./duck.js";
-import { buildStationDetail, isoStamp } from "./charts.js";
+import {
+  buildStationDetail,
+  isoStamp,
+  ARROW_COL,
+  ARROW_DIR_COL,
+} from "./charts.js";
 import {
   RAIN_COL,
   loadNormals,
@@ -70,6 +75,8 @@ const CHECK_SVG =
   '<path d="M2.4 6.3 4.8 8.7 9.6 3.5"/></svg>';
 
 let _normalsOn = false;
+
+let _arrowsOn = false;
 
 export function resetHistorical() {
   _normalsOn = false;
@@ -777,6 +784,24 @@ function message(body, text) {
   body.appendChild(node("div", "wx-detail-msg", text));
 }
 
+function toggleButton(label) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "wx-detail-select";
+  btn.style.display = "inline-flex";
+  btn.style.alignItems = "center";
+  btn.style.gap = "6px";
+  btn.style.flex = "0 0 auto";
+  const mark = node("span", "wx-grid-mode show");
+  mark.style.cursor = "inherit";
+  const box = node("span", "box");
+  box.innerHTML = CHECK_SVG;
+  mark.appendChild(box);
+  btn.appendChild(mark);
+  btn.appendChild(node("span", null, label));
+  return { btn, mark };
+}
+
 export async function mount(host, opts) {
   const body = host.querySelector(".wx-detail-body");
   const title = host.querySelector(".wx-detail-head .t");
@@ -876,20 +901,9 @@ export async function mount(host, opts) {
   normalsRow.style.display = "flex";
   normalsRow.style.alignItems = "stretch";
   normalsRow.style.gap = "6px";
-  const normalsBtn = document.createElement("button");
-  normalsBtn.type = "button";
-  normalsBtn.className = "wx-detail-select";
-  normalsBtn.style.display = "inline-flex";
-  normalsBtn.style.alignItems = "center";
-  normalsBtn.style.gap = "6px";
-  normalsBtn.style.flex = "0 0 auto";
-  const normalsMark = node("span", "wx-grid-mode show");
-  normalsMark.style.cursor = "inherit";
-  const normalsBox = node("span", "box");
-  normalsBox.innerHTML = CHECK_SVG;
-  normalsMark.appendChild(normalsBox);
-  normalsBtn.appendChild(normalsMark);
-  normalsBtn.appendChild(node("span", null, "Show"));
+  const normalsToggle = toggleButton("Show");
+  const normalsBtn = normalsToggle.btn;
+  const normalsMark = normalsToggle.mark;
   const selYear = document.createElement("select");
   selYear.className = "wx-detail-select";
   selYear.style.flex = "1 1 auto";
@@ -899,6 +913,19 @@ export async function mount(host, opts) {
   normalsRow.appendChild(selYear);
   normalsWrap.appendChild(normalsRow);
   controls.appendChild(normalsWrap);
+
+  const hasDir = hasReadings(payload.series, ARROW_DIR_COL);
+  const arrowsBtn = document.createElement("button");
+  arrowsBtn.type = "button";
+  arrowsBtn.className = "wx-grid-mode show";
+  arrowsBtn.style.alignSelf = "flex-end";
+  arrowsBtn.style.minHeight = "28px";
+  arrowsBtn.title = "Show Wspd as one arrow per hour pointing in the Dir direction";
+  const arrowsBox = node("span", "box");
+  arrowsBox.innerHTML = CHECK_SVG;
+  arrowsBtn.appendChild(arrowsBox);
+  arrowsBtn.appendChild(node("span", null, "Wind arrows"));
+  controls.appendChild(arrowsBtn);
 
   if (opts.foldHead && title) {
     const head = title.closest(".wx-detail-head");
@@ -958,6 +985,18 @@ export async function mount(host, opts) {
     syncYears();
   };
   updateNormalsControl();
+
+  const arrowsAvail = () =>
+    hasDir && (primary === ARROW_COL || secondary === ARROW_COL);
+
+  const updateArrowsControl = () => {
+    const avail = arrowsAvail();
+    const on = avail && _arrowsOn;
+    arrowsBtn.style.display = avail ? "" : "none";
+    arrowsBtn.className = "wx-grid-mode show" + (on ? " on" : "");
+    arrowsBtn.setAttribute("aria-pressed", on ? "true" : "false");
+  };
+  updateArrowsControl();
 
   const plot = node("div", "wx-detail-plot");
   plot.style.width = "100%";
@@ -1122,7 +1161,8 @@ export async function mount(host, opts) {
       secondary || null,
       aPrimary,
       aSecondary,
-      showAlerts
+      showAlerts,
+      _arrowsOn && arrowsAvail()
     );
     let year1 = null;
     let year2 = null;
@@ -1238,6 +1278,13 @@ export async function mount(host, opts) {
     draw();
   });
 
+  arrowsBtn.addEventListener("click", () => {
+    if (!arrowsAvail()) return;
+    _arrowsOn = !_arrowsOn;
+    updateArrowsControl();
+    draw();
+  });
+
   selYear.addEventListener("change", () => {
     const token = ++yearToken;
     pickYear = selYear.value ? Number(selYear.value) : null;
@@ -1286,6 +1333,7 @@ export async function mount(host, opts) {
       selPrimary.value = primary;
       selSecondary.value = secondary;
       updateNormalsControl();
+      updateArrowsControl();
       syncAlerts(true);
     });
   }
@@ -1300,6 +1348,7 @@ export async function mount(host, opts) {
     }
     remember();
     updateNormalsControl();
+    updateArrowsControl();
     syncAlerts(true);
   });
   selSecondary.addEventListener("change", () => {
@@ -1311,6 +1360,7 @@ export async function mount(host, opts) {
     }
     remember();
     updateNormalsControl();
+    updateArrowsControl();
     syncAlerts(true);
   });
 

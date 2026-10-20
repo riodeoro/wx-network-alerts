@@ -16,6 +16,16 @@ export const SERIES2_FILL = "rgba(44, 95, 169, 0.10)";
 export const SERIES2_OPACITY = 0.45;
 export const MATCH_COLOR = "#da2d2a";
 
+export const ARROW_COL = "Wspd";
+export const ARROW_DIR_COL = "Dir";
+
+const ARROW_SYMBOL = "arrow-open";
+const ARROW_STROKE = 1.3;
+const ARROW_MISSING_SYMBOL = "circle";
+const ARROW_SIZE = 11;
+const ARROW_MISSING_SIZE = 4;
+const ARROW_OPACITY = 0.9;
+
 export const DENSITY_SCALE = [
   [0.0, "#eee5d6"],
   [0.3, "#d3bd9b"],
@@ -717,14 +727,19 @@ function seriesTrace(series, col, alerts, opts) {
   const v = series && series[col];
   if (!v) return null;
   const circular = CIRCULAR_COLS.has(col);
+  const dir = opts.arrows ? series[ARROW_DIR_COL] : null;
+  const arrows = !!dir;
+  const dirLabel = dispUnit(ARROW_DIR_COL);
   const bands = opts.withAlerts ? labelledBands(alerts) : [];
   const times = [];
   const vals = [];
+  const angles = [];
 
   for (let i = 0; i < series.n; i++) {
     if (!Number.isFinite(v[i])) continue;
     times.push(series.t[i]);
     vals.push(v[i]);
+    if (arrows) angles.push(Number.isFinite(dir[i]) ? Math.round(dir[i]) % 360 : null);
   }
   if (!times.length) return null;
 
@@ -738,19 +753,33 @@ function seriesTrace(series, col, alerts, opts) {
   const slotOf = new Array(times.length);
 
   for (let s = 0; s < edges.length - 1; s++) {
-    const seg = { x: [], y: [], text: [] };
+    const seg = { x: [], y: [], text: [], angle: [], symbol: [], size: [] };
     for (let k = edges[s]; k < edges[s + 1]; k++) {
       const t = times[k];
       if (breaks.has(k)) {
         seg.x.push(isoStamp(times[k - 1] + 1000));
         seg.y.push(null);
         seg.text.push("");
+        if (arrows) {
+          seg.angle.push(0);
+          seg.symbol.push(ARROW_MISSING_SYMBOL);
+          seg.size.push(0);
+        }
       }
       segOf[k] = s;
       slotOf[k] = seg.x.length;
       seg.x.push(isoStamp(t));
       seg.y.push(vals[k]);
-      seg.text.push("");
+      if (arrows) {
+        const a = angles[k];
+        const known = a !== null;
+        seg.angle.push(known ? a : 0);
+        seg.symbol.push(known ? ARROW_SYMBOL : ARROW_MISSING_SYMBOL);
+        seg.size.push(known ? ARROW_SIZE : ARROW_MISSING_SIZE);
+        seg.text.push(`<br>${dirLabel}: ${known ? a : "n/a"}`);
+      } else {
+        seg.text.push("");
+      }
     }
     if (seg.x.length) segments.push(seg);
   }
@@ -769,6 +798,28 @@ function seriesTrace(series, col, alerts, opts) {
 
   const value = circular ? "%{y:.0f}" : "%{y:.1f}";
   const traces = segments.map((seg) => {
+    if (arrows) {
+      return {
+        type: "scattergl",
+        x: seg.x,
+        y: seg.y,
+        mode: "markers",
+        name: disp(col),
+        xaxis: "x",
+        yaxis: opts.yaxis,
+        marker: {
+          color: opts.color,
+          size: seg.size,
+          symbol: seg.symbol,
+          angle: seg.angle,
+          opacity: ARROW_OPACITY,
+          line: { width: ARROW_STROKE, color: opts.color },
+        },
+        text: seg.text,
+        hovertemplate: `${dispUnit(col)}: ${value}%{text}<extra></extra>`,
+        showlegend: false,
+      };
+    }
     const lone = seg.x.length === 1;
     const trace = {
       type: circular ? "scattergl" : "scatter",
@@ -881,7 +932,8 @@ export function buildStationDetail(
   plotCol2,
   alerts,
   alerts2,
-  showAlerts
+  showAlerts,
+  arrows
 ) {
   if (!series || !series.n || !series[plotCol])
     return emptyFig("No data for this station.", 440);
@@ -889,6 +941,7 @@ export function buildStationDetail(
   const show = showAlerts !== false;
   const circular = CIRCULAR_COLS.has(plotCol);
   const tolerance = Math.max(1, Math.floor(stepMs(series) / 2));
+  const arrowsOk = !!arrows && !!series[ARROW_DIR_COL];
 
   const data = [];
   const pts = show ? alertPoints(alerts) : [];
@@ -899,6 +952,7 @@ export function buildStationDetail(
     withAlerts: show,
     alertPts: pts,
     tolerance,
+    arrows: arrowsOk && plotCol === ARROW_COL,
   });
   if (built) data.push(...built.traces);
 
@@ -913,6 +967,7 @@ export function buildStationDetail(
       withAlerts: show,
       alertPts: pts2,
       tolerance,
+      arrows: arrowsOk && plotCol2 === ARROW_COL,
     });
     if (built2) data.push(...built2.traces);
     else hasSecond = false;

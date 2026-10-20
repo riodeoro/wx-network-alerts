@@ -3783,6 +3783,36 @@ const NEIGHBOUR_MAP_LINE_COLOR = "#8a857d";
 
 const NEIGHBOUR_MAP_STAR_PX = 16;
 
+const BARB_BOX = 56;
+
+const BARB_HALF = BARB_BOX / 2;
+
+const BARB_STAFF = 20;
+
+const BARB_FEATHER = 9;
+
+const BARB_SLANT = 3;
+
+const BARB_STEP = 4;
+
+const BARB_PENNANT = 5;
+
+const BARB_UNIT = 5;
+
+const BARB_CALM_R = 4.5;
+
+const BARB_DOT_R = 2.4;
+
+const BARB_STROKE = 1.6;
+
+const BARB_HALO = 3.8;
+
+const BARB_SPEED_KEY = "station_grid";
+
+const BARB_DIR_KEY = "station_grid_dir";
+
+const BARB_SPEED_COL = "Wspd";
+
 const MAP_STAR_PATH =
   "M12 2.2l2.95 6.2 6.8.8-5.03 4.67 1.33 6.73L12 17.25 5.95 20.6l1.33-6.73L2.25 9.2l6.8-.8z";
 
@@ -3936,6 +3966,16 @@ function ensureNeighbourMapStyles() {
     ".wx-nb-map-tip .a.more{display:block;padding-left:9px;}",
     ".wx-nb-map-tip.on{display:block;}",
     ".wx-nb-map-labels > i.off{opacity:.35;}",
+    ".wx-nb-map-labels > i.wx-nb-map-barb{border:none;border-radius:0;box-shadow:none;",
+    "background:none;pointer-events:none;cursor:default;}",
+    ".wx-nb-map-labels > i.wx-nb-map-barb svg{display:block;width:100%;height:100%;",
+    "overflow:visible;}",
+    ".wx-nb-map-labels > i.barbed{background:transparent!important;",
+    "border-color:transparent!important;box-shadow:none;}",
+    ".wx-nb-map-labels > i.barbed svg{visibility:hidden;}",
+    ".wx-nb-map-labels > span.hot{z-index:1;background:rgba(255,255,255,.95);",
+    "box-shadow:0 0 0 1px rgba(38,35,31,.28);}",
+    ".wx-nb-map-labels > i.hot{filter:drop-shadow(0 0 2px rgba(38,35,31,.7));}",
     ".wx-nb-map-time{position:absolute;left:8px;top:8px;z-index:3;display:none;",
     "padding:2px 7px;border-radius:6px;font-size:10px;font-weight:600;",
     "letter-spacing:.02em;color:var(--text,#26231f);background:rgba(255,255,255,.85);",
@@ -4213,14 +4253,61 @@ function neighbourMapReading(label, name, km, focus, reading) {
   label.dot.classList.toggle("off", off);
 }
 
+function windBarbParts(speed) {
+  const n = Math.round(speed / BARB_UNIT) * BARB_UNIT;
+  const c = BARB_HALF;
+  const tip = c - BARB_STAFF;
+  if (n < BARB_UNIT) {
+    return `<circle cx="${c}" cy="${c}" r="${BARB_CALM_R}" fill="none"/>`;
+  }
+  let rest = n;
+  const pennants = Math.floor(rest / 50);
+  rest -= pennants * 50;
+  const fulls = Math.floor(rest / 10);
+  rest -= fulls * 10;
+  const half = rest >= 5;
+  let out = `<path d="M${c} ${c}L${c} ${tip}" fill="none"/>`;
+  let y = tip;
+  for (let i = 0; i < pennants; i++) {
+    out +=
+      `<polygon points="${c},${y} ${c + BARB_FEATHER},${y - BARB_SLANT} ` +
+      `${c},${y + BARB_PENNANT}"/>`;
+    y += BARB_PENNANT + 2;
+  }
+  for (let i = 0; i < fulls; i++) {
+    out += `<path d="M${c} ${y}L${c + BARB_FEATHER} ${y - BARB_SLANT}" fill="none"/>`;
+    y += BARB_STEP;
+  }
+  if (half) {
+    if (!pennants && !fulls) y += BARB_STEP;
+    out +=
+      `<path d="M${c} ${y}L${c + BARB_FEATHER / 2} ${y - BARB_SLANT / 2}" fill="none"/>`;
+  }
+  return out;
+}
+
+function windBarbSvg(speed, dir, color) {
+  const c = BARB_HALF;
+  const parts = windBarbParts(speed);
+  return (
+    `<svg viewBox="0 0 ${BARB_BOX} ${BARB_BOX}" aria-hidden="true" focusable="false">` +
+    `<g transform="rotate(${dir} ${c} ${c})" stroke-linecap="round" stroke-linejoin="round">` +
+    `<g stroke="#fff" fill="#fff" stroke-width="${BARB_HALO}">${parts}</g>` +
+    `<g stroke="${color}" fill="${color}" stroke-width="${BARB_STROKE}">${parts}</g>` +
+    `</g><circle cx="${c}" cy="${c}" r="${BARB_DOT_R}" fill="${color}" ` +
+    `stroke="#fff" stroke-width="1.2"/></svg>`
+  );
+}
+
 function boxesOverlap(a, b) {
   return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 }
 
-function placeNeighbourLabels(labels, at, w, h) {
+function placeNeighbourLabels(labels, at, w, h, hold) {
+  const reach = (l) => (l.barbRoom ? BARB_STAFF : l.size / 2);
   const marks = labels.map((l, i) => {
     const p = at[i];
-    const r = l.size / 2 + 2;
+    const r = reach(l) + 2;
     return { x: p.x - r, y: p.y - r, w: 2 * r, h: 2 * r };
   });
   const placed = [];
@@ -4228,7 +4315,7 @@ function placeNeighbourLabels(labels, at, w, h) {
     const p = at[i];
     const lw = l.node.offsetWidth;
     const lh = l.node.offsetHeight;
-    const gap = l.size / 2 + NEIGHBOUR_MAP_LABEL_GAP;
+    const gap = reach(l) + NEIGHBOUR_MAP_LABEL_GAP;
     const spots = [
       { x: p.x + gap, y: p.y - lh / 2 },
       { x: p.x - gap - lw, y: p.y - lh / 2 },
@@ -4247,10 +4334,12 @@ function placeNeighbourLabels(labels, at, w, h) {
     const clear = (q) =>
       !placed.some((o) => boxesOverlap(q, o)) &&
       !marks.some((m, j) => j !== i && boxesOverlap(q, m));
-    const pick =
-      spots.find((q) => inside(q) && clear(q)) ||
-      spots.find((q) => inside(q)) ||
-      spots[0];
+    let at0 = hold && Number.isInteger(l.spot) ? l.spot : -1;
+    if (at0 < 0) at0 = spots.findIndex((q) => inside(q) && clear(q));
+    if (at0 < 0) at0 = spots.findIndex((q) => inside(q));
+    if (at0 < 0) at0 = 0;
+    l.spot = at0;
+    const pick = spots[at0];
     placed.push(pick);
     l.node.style.transform = `translate(${Math.round(pick.x)}px,${Math.round(pick.y)}px)`;
     if (l.dot) {
@@ -4258,6 +4347,10 @@ function placeNeighbourLabels(labels, at, w, h) {
         `translate(${Math.round(p.x - l.size / 2)}px,${Math.round(p.y - l.size / 2)}px)`;
       l.dot._x = p.x;
       l.dot._y = p.y;
+    }
+    if (l.barb) {
+      l.barb.style.transform =
+        `translate(${Math.round(p.x - BARB_HALF)}px,${Math.round(p.y - BARB_HALF)}px)`;
     }
   });
 }
@@ -4359,6 +4452,9 @@ function neighbourMap() {
   let place = null;
   let hoverAt = null;
   let shownAt = null;
+  let hoverStation = null;
+  let shownStation = null;
+  let home = null;
   let clearTimer = 0;
   let unbind = () => {};
   let unwatch = () => {};
@@ -4442,12 +4538,33 @@ function neighbourMap() {
     current = null;
   };
 
+  const paintBarb = (l, b) => {
+    if (!l.barb) return;
+    const on = !!(b && b.s !== null && b.d !== null);
+    l.dot.classList.toggle("barbed", on);
+    if (!on) {
+      l.barb.style.display = "none";
+      return;
+    }
+    const key = Math.round(b.s / BARB_UNIT) + "|" + b.d + "|" + l.color;
+    if (l.barb._sig !== key) {
+      l.barb._sig = key;
+      l.barb.innerHTML = windBarbSvg(b.s, b.d, l.color);
+    }
+    l.barb.style.display = "";
+  };
+
   const paintLabels = () => {
     if (!current) return;
     const status = typeof valuesAt === "function" ? valuesAt(hoverAt) : null;
     const readings = status && status.values ? status : null;
     const alerts = status && status.alerts ? status.alerts : null;
+    const room = !!(readings && readings.barbs);
+    const hold = !!readings && shownAt !== null && current.every((l) => l.barbRoom === room);
     shownAt = readings ? hoverAt : null;
+    current.forEach((l) => {
+      l.barbRoom = room;
+    });
     current.forEach((l) => {
       const ring = alerts ? alerts.get(neighbourKey(l.name)) : null;
       l.dot.style.boxShadow = ring
@@ -4462,20 +4579,33 @@ function neighbourMap() {
     }
     current.forEach((l, i) => {
       if (!readings) {
+        paintBarb(l, null);
         neighbourMapLabel(l, l.name, l.meta, !!l.isFocus);
         return;
       }
-      const v = readings.values.get(neighbourKey(l.name));
+      const key = neighbourKey(l.name);
+      const v = readings.values.get(key);
       const value = v === undefined ? null : v;
+      const b = readings.barbs ? readings.barbs.get(key) || null : null;
+      paintBarb(l, b);
+      const dirText = b && b.d !== null ? ` ${b.d}\u00b0` : "";
       neighbourMapReading(l, l.name, l.meta, !!l.isFocus, {
         value: value,
-        text: value === null ? "" : mapValueText(value, readings.col),
+        text: value === null ? "" : mapValueText(value, readings.col) + dirText,
       });
     });
-    if (place) place();
+    const hot = hoverAt !== null && hoverStation ? neighbourKey(hoverStation) : null;
+    shownStation = hoverStation;
+    current.forEach((l) => {
+      const on = !!hot && neighbourKey(l.name) === hot;
+      l.node.classList.toggle("hot", on);
+      l.dot.classList.toggle("hot", on);
+      if (l.barb) l.barb.classList.toggle("hot", on);
+    });
+    if (place) place(hold);
   };
 
-  const setTime = (xval, slot) => {
+  const setTime = (xval, slot, station) => {
     if (slot && slot !== owner) return;
     if (clearTimer) {
       clearTimeout(clearTimer);
@@ -4490,8 +4620,10 @@ function neighbourMap() {
       }, HOVER_HOLD_MS);
       return;
     }
+    const who = station || null;
     hoverAt = xval;
-    if (shownAt === xval) return;
+    hoverStation = who;
+    if (shownAt === xval && shownStation === who) return;
     paintLabels();
   };
 
@@ -4501,6 +4633,18 @@ function neighbourMap() {
   let drawnFc = null;
   let stale = false;
   let reacting = null;
+
+  const syncHome = () => {
+    const sub =
+      plot._fullLayout && plot._fullLayout.map && plot._fullLayout.map._subplot;
+    if (!sub || !home) return;
+    sub.viewInitial = {
+      center: { lon: home.center.lon, lat: home.center.lat },
+      zoom: home.zoom,
+      bearing: 0,
+      pitch: 0,
+    };
+  };
 
   const liveMap = () => {
     const sub =
@@ -4678,6 +4822,12 @@ function neighbourMap() {
       layer.appendChild(l.dot);
     });
     for (const l of labels) {
+      l.barb.style.width = BARB_BOX + "px";
+      l.barb.style.height = BARB_BOX + "px";
+      l.barb.style.display = "none";
+      layer.appendChild(l.barb);
+    }
+    for (const l of labels) {
       l.node.style.display = l.quiet ? "none" : "";
       layer.appendChild(l.node);
     }
@@ -4693,7 +4843,8 @@ function neighbourMap() {
       return fixed(lon, lat);
     };
     current = labels;
-    place = () => {
+    syncHome();
+    place = (hold) => {
       const half = NEIGHBOUR_MAP_CAND_PX / 2;
       for (const e of extras) {
         const q = project(e.lon, e.lat);
@@ -4705,7 +4856,7 @@ function neighbourMap() {
         e.dot.style.transform = `translate(${Math.round(q.x - half)}px,${Math.round(q.y - half)}px)`;
       }
       const at = labels.map((l) => project(l.lon, l.lat));
-      placeNeighbourLabels(labels, at, w, h);
+      placeNeighbourLabels(labels, at, w, h, !!hold);
     };
     shownAt = null;
     paintLabels();
@@ -4833,6 +4984,7 @@ function neighbourMap() {
     })));
 
     const fit = neighbourMapView(all.map((p) => p.at), w, h);
+    home = fit;
     const view = keptView(all, w, h) || fit;
     const sameSize = drawnSize === w + "x" + h;
     if (!sameSize) layer.style.visibility = "hidden";
@@ -4855,6 +5007,9 @@ function neighbourMap() {
     const labels = all.map((p) => ({
       node: el("span"),
       dot: el("i"),
+      barb: el("i", "wx-nb-map-barb"),
+      barbRoom: false,
+      spot: null,
       name: p.name,
       meta: p.meta,
       color: p.color,
@@ -4913,6 +5068,7 @@ function neighbourMap() {
         unwatch();
         unwatch = collapseMapAttribution(plot);
         if (current === labels && place) {
+          syncHome();
           place();
           layer.style.visibility = "";
           return;
@@ -4950,6 +5106,11 @@ function neighbourMap() {
       hideTip();
     },
     time: setTime,
+    refresh: (slot) => {
+      if (slot && slot !== owner) return;
+      if (hoverAt === null) return;
+      paintLabels();
+    },
     collapse: (on) => setCollapsed(!!on),
     reset: () => {
       if (collapsed) refitOnOpen = true;
@@ -6148,10 +6309,83 @@ function stationGrid(c, views, opts) {
       markCache = { src: src, marks: gridAlertMarks(now, wrap._wxAxisStations) };
       return markCache.marks;
     };
+    const barbMode = !!(opts && opts.barbs) && !!c[BARB_SPEED_KEY] && !!c[BARB_DIR_KEY];
+    let barbLocal = null;
+    const barbPick = (f) => {
+      const out = new Map();
+      if (!f) return out;
+      const found = gridStationSeries(f.data, f.data, gridAxisStations(f), gridColumnName(f));
+      for (const [name, s] of found) out.set(neighbourKey(name), s);
+      return out;
+    };
+    const barbLocalSeries = () => {
+      if (!barbLocal) {
+        barbLocal = { s: barbPick(c[BARB_SPEED_KEY]), d: barbPick(c[BARB_DIR_KEY]) };
+      }
+      return barbLocal;
+    };
+    const barbForeign = new Map();
+    const barbForeignFor = (name) => {
+      const k = neighbourKey(name);
+      if (barbForeign.has(k)) return barbForeign.get(k);
+      const entry = { s: null, d: null };
+      barbForeign.set(k, entry);
+      const at = stationCoord(name);
+      if (!at || !at.fc || !suffix) return entry;
+      const fc = state.fc;
+      const hours = state.hours;
+      Promise.resolve(loadCharts(at.fc, hours, suffix))
+        .then((cc) => {
+          if (!cc || state.fc !== fc || state.hours !== hours) return;
+          const one = (key) => {
+            const p = stationGridPart(cc[key], name);
+            if (!p) return null;
+            const found = gridStationSeries(
+              p.traces, p.traces, new Map([[p.xid, p.name]]), gridColumnName(cc[key])
+            );
+            return found.get(p.name) || null;
+          };
+          entry.s = one(BARB_SPEED_KEY);
+          entry.d = one(BARB_DIR_KEY);
+          if (_sharedNeighbourMap) _sharedNeighbourMap.refresh(mapSlot);
+        })
+        .catch(() => {});
+      return entry;
+    };
+    const barbSource = (xval) => {
+      const loc = barbLocalSeries();
+      const values = new Map();
+      const barbs = new Map();
+      const put = (key, ss, ds) => {
+        const s = ss ? gridSeriesAt(ss, xval) : null;
+        const d0 = ds ? gridSeriesAt(ds, xval) : null;
+        const d = d0 === null ? null : ((Math.round(d0) % 360) + 360) % 360;
+        values.set(key, s);
+        barbs.set(key, { s: s, d: d });
+      };
+      for (const key of new Set([...loc.s.keys(), ...loc.d.keys()])) {
+        put(key, loc.s.get(key), loc.d.get(key));
+      }
+      const want = mapArgs ? [mapArgs.focus].concat(mapArgs.rank || []) : [];
+      for (const name of want) {
+        if (!name) continue;
+        const key = neighbourKey(name);
+        if (barbs.has(key)) continue;
+        const entry = barbForeignFor(name);
+        put(key, entry.s, entry.d);
+      }
+      return {
+        col: gridColumnName(c[BARB_SPEED_KEY]) || BARB_SPEED_COL,
+        values: values,
+        alerts: gridAlertsAt(mapMarks(), xval),
+        barbs: barbs,
+      };
+    };
     const mapSource = (xval) => {
       if (xval === null || xval === undefined) {
         return { col: null, values: null, alerts: null };
       }
+      if (barbMode) return barbSource(xval);
       const cache = mapSeries();
       const values = new Map();
       for (const [name, series] of cache.series) {
@@ -6239,8 +6473,8 @@ function stationGrid(c, views, opts) {
         }
       },
     };
-    wrap._wxMapTime = (xval) => {
-      if (_sharedNeighbourMap) _sharedNeighbourMap.time(xval, mapSlot);
+    wrap._wxMapTime = (xval, station) => {
+      if (_sharedNeighbourMap) _sharedNeighbourMap.time(xval, mapSlot, station);
     };
     wrap._wxMapClaim = nbMap.claim;
     const mapList = () => {
@@ -8117,7 +8351,7 @@ async function buildWind(fc, hours) {
     { key: "station_grid", label: "Wspd" },
     { key: "station_grid_mx", label: "Mx Spd" },
     { key: "station_grid_dir", label: "Dir" },
-  ], { suffix: "wind" });
+  ], { suffix: "wind", barbs: true });
   const panel = tabPanel(grid);
   const banner = await insightBanner(fc, hours, "wind", panel);
   box.appendChild(insightStack(banner, panel, grid));
@@ -8645,7 +8879,8 @@ function wirePanelHover(panel) {
   };
 
   const mapTime = (xval) => {
-    if (typeof wrap._wxMapTime === "function") wrap._wxMapTime(xval);
+    if (hoverEcho(dpd)) return;
+    if (typeof wrap._wxMapTime === "function") wrap._wxMapTime(xval, panel._wxStation);
   };
 
   dpd.on("plotly_hover", (ev) => {
@@ -8878,13 +9113,44 @@ function wireGridMapTime(wrap) {
   const pd = wrap._wxGridPlot;
   if (!pd || typeof pd.on !== "function" || pd._wxMapTimeWired) return;
   pd._wxMapTimeWired = true;
-  const send = (xval) => {
-    if (typeof wrap._wxMapTime === "function") wrap._wxMapTime(xval);
+  const send = (xval, station) => {
+    if (hoverEcho(pd)) return;
+    if (typeof wrap._wxMapTime === "function") wrap._wxMapTime(xval, station);
+  };
+  const nearest = (ev, pts) => {
+    const e = ev && ev.event;
+    const box = pd.getBoundingClientRect();
+    if (!e || typeof e.clientY !== "number") return pts.length === 1 ? pts[0] : null;
+    const my = e.clientY - box.top;
+    let best = null;
+    let gap = Infinity;
+    for (const p of pts) {
+      const ya = p.yaxis;
+      const y = Number(p.y);
+      if (!ya || typeof ya.l2p !== "function" || !Number.isFinite(y)) continue;
+      const d = Math.abs(ya.l2p(y) + ya._offset - my);
+      if (d < gap) {
+        gap = d;
+        best = p;
+      }
+    }
+    return best;
+  };
+  const stationOf = (ev) => {
+    const pts = ((ev && ev.points) || []).filter((p) => p && p.data && !isAlertTrace(p.data));
+    if (!pts.length) return null;
+    if (wrap._wxOverlay) {
+      const pt = nearest(ev, pts);
+      return pt && typeof pt.data.name === "string" ? pt.data.name : null;
+    }
+    const pt = pts[0];
+    const axes = wrap._wxAxisStations;
+    return (axes && axes.get(pt.data.xaxis || "x")) || gridTraceStation(pt.data) || null;
   };
   pd.on("plotly_hover", (ev) => {
     const pt = ev && ev.points && ev.points[0];
     const xval = pt ? axisValue(hoverAxis(pd, pt), pt.x) : null;
-    if (xval !== null) send(xval);
+    if (xval !== null) send(xval, stationOf(ev));
   });
   pd.on("plotly_unhover", () => send(null));
   pd.addEventListener("mouseleave", () => send(null));
