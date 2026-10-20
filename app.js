@@ -5015,7 +5015,8 @@ function neighbourMap() {
     }
     const taken = new Set(labels.map((l) => neighbourKey(l.name)));
     extras = [];
-    for (const at of nearbyStations()) {
+    const localOnly = !!(owner && owner._wxMapLocalOnly);
+    for (const at of localOnly ? [] : nearbyStations()) {
       if (taken.has(neighbourKey(at.name))) continue;
       const dot = el("i", "cand");
       dot.style.width = NEIGHBOUR_MAP_CAND_PX + "px";
@@ -8727,6 +8728,7 @@ function overviewPicker(fc, findings, table, shell) {
   find.appendChild(list);
   slot._wxMapTool = find;
   slot._wxMapZoomLabels = true;
+  slot._wxMapLocalOnly = true;
   slot._wxMapSize = () => {
     if (isMobile()) {
       const room = Math.round(slot.clientWidth || 0) - 2;
