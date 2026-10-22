@@ -2055,6 +2055,7 @@ function graph(figDict, opts = {}) {
   const config = {
     responsive: false,
     displaylogo: false,
+    showTips: false,
     displayModeBar: (mobile || opts.noModeBar) ? false : "hover",
   };
   if (mobile) {
@@ -2093,6 +2094,7 @@ function graph(figDict, opts = {}) {
       filtered,
       selected && selected.size ? null : fig.data || []
     );
+    if (!opts.ownHover) quietHoverFigure(prepared);
     cards = prepared.cards;
     if (mounted) {
       const next = mergeView(prepared.layout, captureView(plotDiv));
@@ -2107,6 +2109,7 @@ function graph(figDict, opts = {}) {
         .then(() => {
           mounted = true;
           plotDiv._wxDrawn = true;
+          if (!opts.ownHover) wireChartHover(plotDiv);
           plotDiv._wxWidth = plotDiv.clientWidth;
           if (!listening && typeof plotDiv.on === "function") {
             listening = true;
@@ -2706,8 +2709,8 @@ function gridTraceStation(tr) {
     const name = tr.meta.station.trim();
     if (name) return name;
   }
-  const ht = tr.hovertemplate;
-  if (typeof ht !== "string") return null;
+  const ht = traceTemplate(tr);
+  if (!ht) return null;
   const m = GRID_STATION_RE.exec(ht);
   return m ? m[1].trim() : null;
 }
@@ -2737,7 +2740,7 @@ function cloneLayout(layout) {
 function isAlertTrace(tr) {
   if (!tr) return false;
   if (tr.meta && tr.meta.band_hover) return true;
-  return tr.mode === "markers" && !tr.hovertemplate;
+  return tr.mode === "markers" && !(tr.hovertemplate || tr.wxTemplate);
 }
 
 function bandHoverBody(text) {
@@ -2750,14 +2753,6 @@ function bandHoverBody(text) {
 const BAND_GLYPH_FALLBACK = "rgb(138, 95, 242)";
 
 const BAND_FILL_FALLBACK = "rgba(138, 95, 242, 0.27)";
-
-const BAND_GLYPH_R = 3;
-
-const BAND_GLYPH_STROKE = 1;
-
-const BAND_GLYPH_CX = 20;
-
-const SVG_NS = "http://www.w3.org/2000/svg";
 
 function bandTraceFill(tr, layout) {
   const xid = tr.xaxis || "x";
@@ -2879,46 +2874,8 @@ function unifiedBandTrace(tr, layout) {
   return out;
 }
 
-function paintBandGlyphs(pd) {
-  const layer = pd && pd.querySelector ? pd.querySelector(".hoverlayer") : null;
-  if (!layer) return;
-  for (const g of layer.querySelectorAll(".legend .traces")) {
-    const d = g.__data__;
-    const item = Array.isArray(d) ? d[0] : d;
-    const meta = item && item.trace ? item.trace.meta : null;
-    if (!meta || !meta.band_hover) continue;
-    const fill = meta.band_fill || BAND_FILL_FALLBACK;
-    const edge = solid(fill) || meta.band_color || BAND_GLYPH_FALLBACK;
-    const pts = g.querySelector(".legendpoints");
-    if (!pts || pts.querySelector(".wx-band-glyph")) continue;
-    let cx = BAND_GLYPH_CX;
-    const ref = pts.querySelector("path");
-    if (ref && typeof pts.getScreenCTM === "function") {
-      try {
-        const box = ref.getBoundingClientRect();
-        const m = pts.getScreenCTM();
-        if (box.width > 0 && m && m.a) cx = (box.left + box.width / 2 - m.e) / m.a;
-      } catch (e) {
-        void e;
-      }
-    }
-    for (const child of Array.from(pts.children)) child.style.display = "none";
-    const dot = document.createElementNS(SVG_NS, "rect");
-    dot.setAttribute("class", "wx-band-glyph");
-    const inset = BAND_GLYPH_STROKE / 2;
-    dot.setAttribute("x", String(cx - BAND_GLYPH_R + inset));
-    dot.setAttribute("y", String(-BAND_GLYPH_R + inset));
-    dot.setAttribute("width", String(BAND_GLYPH_R * 2 - BAND_GLYPH_STROKE));
-    dot.setAttribute("height", String(BAND_GLYPH_R * 2 - BAND_GLYPH_STROKE));
-    dot.setAttribute("fill", fill);
-    dot.setAttribute("stroke", edge);
-    dot.setAttribute("stroke-width", String(BAND_GLYPH_STROKE));
-    pts.appendChild(dot);
-  }
-}
-
-function wireBandGlyphs(wrap) {
-  wirePlotBandGlyphs(wrap._wxGridPlot);
+function wireGridHoverReach(wrap) {
+  wireHoverReach(wrap._wxGridPlot);
 }
 
 function fitHoverReach(pd) {
@@ -2944,16 +2901,12 @@ function fitHoverReach(pd) {
   if (pd.layout && pd.layout.hoverdistance !== reach) pd.layout.hoverdistance = reach;
 }
 
-function wirePlotBandGlyphs(pd) {
-  if (!pd || typeof pd.on !== "function" || pd._wxBandGlyphWired) return;
-  pd._wxBandGlyphWired = true;
+function wireHoverReach(pd) {
+  if (!pd || typeof pd.on !== "function" || pd._wxHoverReachWired) return;
+  pd._wxHoverReachWired = true;
   fitHoverReach(pd);
   pd.on("plotly_afterplot", () => fitHoverReach(pd));
   pd.on("plotly_relayout", () => fitHoverReach(pd));
-  pd.on("plotly_hover", () => {
-    paintBandGlyphs(pd);
-    requestAnimationFrame(() => paintBandGlyphs(pd));
-  });
 }
 
 function overlayHoverTemplate(ht) {
@@ -3204,8 +3157,8 @@ function gridColumnName(fig) {
     if (tr.meta && typeof tr.meta.col === "string" && tr.meta.col) {
       return tr.meta.col;
     }
-    const ht = tr.hovertemplate;
-    if (typeof ht !== "string") continue;
+    const ht = traceTemplate(tr);
+    if (!ht) continue;
     const m = GRID_COL_RE.exec(ht);
     if (m) return m[1];
   }
@@ -3215,8 +3168,8 @@ function gridColumnName(fig) {
 function detailColumnName(dpd) {
   for (const tr of (dpd && dpd.data) || []) {
     if (!tr || (tr.yaxis || "y") !== "y" || tr.mode === "markers") continue;
-    const ht = tr.hovertemplate;
-    if (typeof ht !== "string" || ht.indexOf(":") < 1) continue;
+    const ht = traceTemplate(tr);
+    if (!ht || ht.indexOf(":") < 1) continue;
     const m = DETAIL_COL_RE.exec(ht);
     if (m) return m[1];
   }
@@ -3506,6 +3459,86 @@ function gridRowPx(fig, cells) {
   return px > 8 ? px : GRID_ROW_PX;
 }
 
+const STACK_GRID_COLOR = "#f1f0ee";
+
+const STACK_DIVIDER_COLOR = "#e8e6e3";
+
+const STACK_TICK_COLOR = "#8a857d";
+
+const STACK_LINE_WIDTH = 1.1;
+
+const STACK_LINE_COLOR = "#3d3a35";
+
+const STACK_FILL = "rgba(120, 113, 108, 0.12)";
+
+const STACK_LINE2_COLOR = "#2c5fa9";
+
+const STACK_FILL2 = "rgba(44, 95, 169, 0.10)";
+
+const STACK_DIVIDER_PX = 4;
+
+function styleNeighbourStack(fig) {
+  const lay = fig && fig.layout;
+  if (!lay || !Array.isArray(fig.data)) return;
+  fig.data = fig.data.map((tr) => {
+    if (!tr || isAlertTrace(tr) || !tr.line || !/lines/.test(String(tr.mode || ""))) return tr;
+    const second = tr.fill === "tonexty";
+    const color = second ? STACK_LINE2_COLOR : STACK_LINE_COLOR;
+    const out = Object.assign({}, tr, {
+      line: Object.assign({}, tr.line, { width: STACK_LINE_WIDTH, color: color }),
+    });
+    if (tr.marker) out.marker = Object.assign({}, tr.marker, { color: color });
+    if (tr.fill && tr.fill !== "none") out.fillcolor = second ? STACK_FILL2 : STACK_FILL;
+    return out;
+  });
+  const rows = [];
+  for (const key of Object.keys(lay)) {
+    if (!/^xaxis\d*$/.test(key)) continue;
+    const ax = lay[key];
+    if (!ax || ax.visible === false || !Array.isArray(ax.domain)) continue;
+    const idx = key.slice(5);
+    const yid =
+      typeof ax.anchor === "string" && /^y\d*$/.test(ax.anchor) ? ax.anchor : "y" + idx;
+    const ay = lay["yaxis" + yid.slice(1)];
+    if (!ay || ay.visible === false || !Array.isArray(ay.domain)) continue;
+    ay.showgrid = true;
+    ay.gridcolor = STACK_GRID_COLOR;
+    ay.gridwidth = 1;
+    ay.tickfont = Object.assign({}, ay.tickfont, { color: STACK_TICK_COLOR });
+    ax.showgrid = true;
+    ax.gridcolor = STACK_GRID_COLOR;
+    ax.gridwidth = 1;
+    rows.push({ x0: ax.domain[0], x1: ax.domain[1], y0: ay.domain[0], y1: ay.domain[1] });
+  }
+  lay.shapes = (Array.isArray(lay.shapes) ? lay.shapes : []).filter(
+    (sh) => !(sh && sh.type === "rect" && sh.xref === "paper")
+  );
+  if (rows.length < 2) return;
+  rows.sort((a, b) => b.y1 - a.y1);
+  const margin = lay.margin || {};
+  const plotH = (Number(lay.height) || 0) - (Number(margin.t) || 0) - (Number(margin.b) || 0);
+  if (!(plotH > 0)) return;
+  const lines = [];
+  for (let i = 0; i < rows.length - 1; i++) {
+    const upper = rows[i];
+    const lower = rows[i + 1];
+    if (upper.y0 <= lower.y1) continue;
+    const y = Math.max(lower.y1, upper.y0 - STACK_DIVIDER_PX / plotH);
+    lines.push({
+      type: "line",
+      xref: "paper",
+      yref: "paper",
+      x0: Math.min(upper.x0, lower.x0),
+      x1: Math.max(upper.x1, lower.x1),
+      y0: y,
+      y1: y,
+      line: { color: STACK_DIVIDER_COLOR, width: 1 },
+      layer: "below",
+    });
+  }
+  lay.shapes = (Array.isArray(lay.shapes) ? lay.shapes : []).concat(lines);
+}
+
 function buildGridFigure(fig, cells, fills, rowPx, selected, link, ranges, rank) {
   const stack = !!(selected && selected.size);
   const align = stack && link && link.align ? link.align : null;
@@ -3591,7 +3624,7 @@ function buildGridFigure(fig, cells, fills, rowPx, selected, link, ranges, rank)
     const kept = [];
     for (const a of layout.annotations) {
       const cell = a && typeof a.text === "string"
-        ? byStation.get(a.text.replace(/<[^>]*>/g, "").trim())
+        ? byStation.get(a._wxStation || a.text.replace(/<[^>]*>/g, "").trim())
         : null;
       if (!cell) {
         kept.push(a);
@@ -3817,13 +3850,15 @@ const NEIGHBOUR_MAP_RING_PX = 2;
 
 const NEIGHBOUR_MAP_CAND_PX = 6;
 
-const NEIGHBOUR_MAP_STATION_PX = 7;
+const NEIGHBOUR_MAP_STATION_PX = 8;
 
-const NEIGHBOUR_MAP_STATION_COLOR = "#6b665e";
-
-const NEIGHBOUR_MAP_NEIGHBOUR_COLOR = "#2c5fa9";
+const NEIGHBOUR_MAP_STATION_COLOR = "#26231f";
 
 const NEIGHBOUR_MAP_LINE_COLOR = "#8a857d";
+
+const NEIGHBOUR_MAP_LINE_OPACITY = 0.8;
+
+const MAP_SVG_NS = "http://www.w3.org/2000/svg";
 
 const NEIGHBOUR_MAP_STAR_PX = 16;
 
@@ -3977,6 +4012,15 @@ const EARTH_RADIUS_KM = 6371;
 
 function ensureNeighbourMapStyles() {
   if (document.getElementById("wx-nbmap-styles")) return;
+  try {
+    const link = document.createElement("link");
+    link.rel = "preconnect";
+    link.href = new URL(NEIGHBOUR_MAP_DEM_TILES.replace(/[{}]/g, "")).origin;
+    link.crossOrigin = "anonymous";
+    document.head.appendChild(link);
+  } catch (e) {
+    void e;
+  }
   ensureCardExpandStyles();
   const st = document.createElement("style");
   st.id = "wx-nbmap-styles";
@@ -4002,7 +4046,9 @@ function ensureNeighbourMapStyles() {
     "stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}",
     ".wx-nb-map.collapsed{border-radius:999px;}",
     ".wx-nb-map.collapsed .wx-nb-map-pill{display:inline-flex;}",
-    ".wx-nb-map.collapsed > :not(.wx-nb-map-pill){display:none!important;}",
+    ".wx-nb-map.collapsed > :not(.wx-nb-map-pill):not(.wx-nb-map-plot){display:none!important;}",
+    ".wx-nb-map.collapsed > .wx-nb-map-plot{position:absolute;left:-10000px;top:0;",
+    "visibility:hidden;pointer-events:none;}",
     ".wx-nb-map.wx-nb-map-fixed .wx-expand-btn,.wx-nb-map.wx-nb-map-fixed .wx-nb-map-min,",
     ".wx-nb-map.wx-nb-map-fixed .wx-nb-map-pill{display:none!important;}",
     ".wx-nb-map .wx-expand-btn{background:rgba(255,255,255,.85);",
@@ -4013,7 +4059,7 @@ function ensureNeighbourMapStyles() {
     ".wx-nb-map.wx-nb-map-wait .wx-nb-map-plot,.wx-nb-map.wx-nb-map-wait .wx-nb-map-labels,",
     ".wx-nb-map.wx-nb-map-wait .wx-nb-map-scale{opacity:0;transition:none;}",
     ".wx-nb-map-labels{position:absolute;left:0;top:0;right:0;bottom:0;",
-    "pointer-events:none;overflow:hidden;z-index:2;}",
+    "pointer-events:none;overflow:hidden;z-index:2;contain:strict;}",
     ".wx-nb-map-labels > span{position:absolute;left:0;top:0;white-space:nowrap;",
     "font-size:10px;line-height:13px;font-weight:600;color:var(--text,#26231f);",
     "padding:1px 4px;border-radius:4px;background:rgba(255,255,255,.62);}",
@@ -4028,6 +4074,8 @@ function ensureNeighbourMapStyles() {
     "border-radius:50%;border:2px solid transparent;",
     "box-shadow:0 0 0 2px #fff;}",
     ".wx-nb-map-labels > i{pointer-events:auto;cursor:pointer;}",
+    ".wx-nb-map-labels > svg.wx-nb-map-spokes{position:absolute;left:0;top:0;width:100%;",
+    "height:100%;overflow:visible;pointer-events:none;}",
     ".wx-nb-map-labels > i.focus{cursor:default;}",
     ".wx-nb-map-labels > i.star{border:none;border-radius:50%;box-shadow:none;}",
     ".wx-nb-map-labels > i.star svg{display:block;width:100%;height:100%;overflow:visible;}",
@@ -4062,7 +4110,7 @@ function ensureNeighbourMapStyles() {
     "border-color:transparent!important;box-shadow:none;}",
     ".wx-nb-map-labels > i.barbed svg{visibility:hidden;}",
     ".wx-nb-map-labels > i.wx-nb-map-rain{border-radius:50%;",
-    "border:1px solid rgba(44,111,199,.35);background:rgba(44,111,199,.2);",
+    "border:1px solid rgba(12,138,150,.35);background:rgba(12,138,150,.2);",
     "box-shadow:none;pointer-events:none;cursor:default;}",
     ".wx-nb-map-labels > b.wx-nb-map-dist{position:absolute;left:0;top:0;",
     "white-space:nowrap;font-size:9px;line-height:11px;font-weight:600;color:#6f6a62;",
@@ -4143,8 +4191,9 @@ function distanceLabel(km) {
   return km >= 1 ? `${Math.round(km)} km` : `${km.toFixed(1)} km`;
 }
 
-function neighbourMapView(points, w, h) {
+function neighbourMapView(points, w, h, pad) {
   const mercY = (lat) => Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360));
+  if (pad) return paddedMapView(points, w, h, pad, mercY);
   let lonLo = Infinity;
   let lonHi = -Infinity;
   let yLo = Infinity;
@@ -4168,6 +4217,42 @@ function neighbourMapView(points, w, h) {
   return {
     center: {
       lon: (lonLo + lonHi) / 2,
+      lat: ((2 * Math.atan(Math.exp(yMid)) - Math.PI / 2) * 180) / Math.PI,
+    },
+    zoom: zoom,
+  };
+}
+
+function paddedMapView(points, w, h, pad, mercY) {
+  let lonLo = Infinity;
+  let lonHi = -Infinity;
+  let yLo = Infinity;
+  let yHi = -Infinity;
+  for (const p of points) {
+    const y = mercY(p.lat);
+    lonLo = Math.min(lonLo, p.lon);
+    lonHi = Math.max(lonHi, p.lon);
+    yLo = Math.min(yLo, y);
+    yHi = Math.max(yHi, y);
+  }
+  const lonSpan = Math.max(lonHi - lonLo, NEIGHBOUR_MAP_MIN_SPAN_DEG);
+  const ySpan = Math.max(yHi - yLo, (NEIGHBOUR_MAP_MIN_SPAN_DEG * Math.PI) / 180);
+  const roomW = Math.max(w - pad.left - pad.right, 1);
+  const roomH = Math.max(h - pad.top - pad.bottom, 1);
+  const zx = Math.log2((roomW * 360) / (512 * lonSpan));
+  const zy = Math.log2((roomH * 2 * Math.PI) / (512 * ySpan));
+  const zoom = Math.max(
+    NEIGHBOUR_MAP_ZOOM_MIN,
+    Math.min(NEIGHBOUR_MAP_ZOOM_MAX, Math.min(zx, zy))
+  );
+  const scale = 512 * Math.pow(2, zoom);
+  const dx = (pad.left - pad.right) / 2;
+  const dy = (pad.top - pad.bottom) / 2;
+  const lon = (lonLo + lonHi) / 2 - (dx * 360) / scale;
+  const yMid = (yLo + yHi) / 2 + (dy * 2 * Math.PI) / scale;
+  return {
+    center: {
+      lon: lon,
       lat: ((2 * Math.atan(Math.exp(yMid)) - Math.PI / 2) * 180) / Math.PI,
     },
     zoom: zoom,
@@ -4234,7 +4319,7 @@ function gridStationSeries(data, source, axisStations, col) {
   const out = new Map();
   (source || []).forEach((tr, i) => {
     if (!tr || isAlertTrace(tr)) return;
-    const ht = typeof tr.hovertemplate === "string" ? tr.hovertemplate : "";
+    const ht = traceTemplate(tr);
     const m = GRID_COL_RE.exec(ht);
     const label = (tr.meta && tr.meta.col) || (m ? m[1] : null);
     if (col && label !== col) return;
@@ -4280,7 +4365,7 @@ function gridAlertMarks(fig, axisStations) {
     add(name, { x0: Math.min(a, b), x1: Math.max(a, b), color: color });
   }
   for (const tr of (fig && fig.data) || []) {
-    if (!tr || tr.mode !== "markers" || tr.hovertemplate) continue;
+    if (!tr || tr.mode !== "markers" || tr.hovertemplate || tr.wxTemplate) continue;
     if (tr.meta && tr.meta.band_hover) continue;
     const name = axisStations.get(tr.xaxis || "x");
     if (!name) continue;
@@ -4347,6 +4432,7 @@ function windowAlertColors(findings) {
 }
 
 function neighbourMapLabel(label, name, km, focus) {
+  label._sz = null;
   label.node.className = focus ? "focus" : "";
   label.node.innerHTML = "";
   label.node.appendChild(document.createTextNode(km ? name + " " : name));
@@ -4355,6 +4441,7 @@ function neighbourMapLabel(label, name, km, focus) {
 }
 
 function neighbourMapReading(label, name, km, focus, reading) {
+  label._sz = null;
   const off = reading.value === null;
   label.node.className = (focus ? "focus" : "") + (off ? " off" : "");
   label.node.innerHTML = "";
@@ -4417,6 +4504,26 @@ function boxesOverlap(a, b) {
 
 function placeNeighbourLabels(labels, at, w, h, hold) {
   const reach = (l) => (l.barbRoom ? BARB_STAFF : l.size / 2);
+  const hubAt = labels.findIndex((l) => l.isFocus);
+  const hub = hubAt >= 0 ? at[hubAt] : null;
+  for (const l of labels) {
+    if (!l.dist) continue;
+    const want = hub ? "" : "none";
+    if (l.dist.style.display !== want) l.dist.style.display = want;
+  }
+  const measure = (n) => {
+    const sz = { w: n.offsetWidth, h: n.offsetHeight };
+    return sz.w || sz.h ? sz : null;
+  };
+  const sizes = labels.map((l) => {
+    if (!l._sz) l._sz = measure(l.node);
+    return l._sz || { w: 0, h: 0 };
+  });
+  const dsizes = labels.map((l) => {
+    if (!l.dist || !hub) return null;
+    if (!l._dsz) l._dsz = measure(l.dist);
+    return l._dsz || { w: 0, h: 0 };
+  });
   const marks = labels.map((l, i) => {
     const p = at[i];
     const r = reach(l) + 2;
@@ -4425,8 +4532,8 @@ function placeNeighbourLabels(labels, at, w, h, hold) {
   const placed = [];
   labels.forEach((l, i) => {
     const p = at[i];
-    const lw = l.node.offsetWidth;
-    const lh = l.node.offsetHeight;
+    const lw = sizes[i].w;
+    const lh = sizes[i].h;
     const gap = reach(l) + NEIGHBOUR_MAP_LABEL_GAP;
     const spots = [
       { x: p.x + gap, y: p.y - lh / 2 },
@@ -4470,16 +4577,22 @@ function placeNeighbourLabels(labels, at, w, h, hold) {
       l.barb.style.transform =
         `translate(${Math.round(p.x - BARB_HALF)}px,${Math.round(p.y - BARB_HALF)}px)`;
     }
+    if (l.spoke) {
+      const want = hub ? "" : "none";
+      if (l.spoke.style.display !== want) l.spoke.style.display = want;
+      if (hub) {
+        l.spoke.setAttribute("x1", hub.x.toFixed(1));
+        l.spoke.setAttribute("y1", hub.y.toFixed(1));
+        l.spoke.setAttribute("x2", p.x.toFixed(1));
+        l.spoke.setAttribute("y2", p.y.toFixed(1));
+      }
+    }
   });
-  const hubAt = labels.findIndex((l) => l.isFocus);
-  const hub = hubAt >= 0 ? at[hubAt] : null;
   labels.forEach((l, i) => {
-    if (!l.dist) return;
-    l.dist.style.display = hub ? "" : "none";
-    if (!hub) return;
+    if (!l.dist || !hub) return;
     const p = at[i];
-    const dw = l.dist.offsetWidth;
-    const dh = l.dist.offsetHeight;
+    const dw = dsizes[i].w;
+    const dh = dsizes[i].h;
     const len = Math.hypot(p.x - hub.x, p.y - hub.y);
     const room = reach(l) + reach(labels[hubAt]) + 2 * NEIGHBOUR_MAP_LABEL_GAP;
     const box = {
@@ -4499,6 +4612,122 @@ function placeNeighbourLabels(labels, at, w, h, hold) {
     l.dist.style.visibility = ok ? "" : "hidden";
     l.dist.style.transform = `translate(${Math.round(box.x)}px,${Math.round(box.y)}px)`;
     if (ok) placed.push(box);
+  });
+}
+
+function mapSpoke() {
+  const line = document.createElementNS(MAP_SVG_NS, "line");
+  line.setAttribute("stroke", NEIGHBOUR_MAP_LINE_COLOR);
+  line.setAttribute("stroke-width", "1");
+  line.setAttribute("stroke-opacity", String(NEIGHBOUR_MAP_LINE_OPACITY));
+  line.style.display = "none";
+  return line;
+}
+
+function glSized(gl) {
+  try {
+    const box = gl.getContainer();
+    const cv = gl.getCanvas();
+    if (!box || !cv) return false;
+    const w = Math.round(parseFloat(cv.style.width) || 0);
+    const h = Math.round(parseFloat(cv.style.height) || 0);
+    return (
+      w > 0 && h > 0 &&
+      w === Math.round(box.clientWidth) &&
+      h === Math.round(box.clientHeight)
+    );
+  } catch (e) {
+    return false;
+  }
+}
+
+let _plotDragging = false;
+
+let _plotPress = null;
+
+const _plotDragEnds = new Set();
+
+const PLOT_PRESS_MOVE_PX = 3;
+
+function safeCall(fn, arg) {
+  try {
+    fn(arg);
+  } catch (e) {
+    void e;
+  }
+}
+
+function endPlotDrag(ev) {
+  if (!_plotDragging) return;
+  _plotDragging = false;
+  const press = _plotPress;
+  _plotPress = null;
+  const at = ev && typeof ev.clientX === "number" ? { x: ev.clientX, y: ev.clientY } : null;
+  const run = Array.from(_plotDragEnds);
+  _plotDragEnds.clear();
+  setTimeout(() => {
+    for (const fn of run) safeCall(fn);
+    if (!press) return;
+    for (const w of press.watchers) {
+      if (w.done) continue;
+      w.done = true;
+      safeCall(w.end, at);
+    }
+  }, 0);
+}
+
+document.addEventListener("pointerdown", (ev) => {
+  if (ev.button !== 0 || (ev.pointerType && ev.pointerType !== "mouse")) return;
+  const t = ev.target;
+  if (!t || !t.closest || !t.closest(".js-plotly-plot")) return;
+  if (t.closest(".wx-nb-map")) return;
+  _plotDragging = true;
+  _plotPress = { x: ev.clientX, y: ev.clientY, moved: false, watchers: new Set() };
+}, true);
+
+document.addEventListener("pointermove", (ev) => {
+  const press = _plotPress;
+  if (!press || press.moved) return;
+  if (
+    Math.abs(ev.clientX - press.x) < PLOT_PRESS_MOVE_PX &&
+    Math.abs(ev.clientY - press.y) < PLOT_PRESS_MOVE_PX
+  ) {
+    return;
+  }
+  press.moved = true;
+  for (const w of press.watchers) {
+    if (w.done) continue;
+    w.done = true;
+    safeCall(w.moved);
+  }
+}, true);
+
+document.addEventListener("pointerup", endPlotDrag, true);
+
+document.addEventListener("pointercancel", endPlotDrag, true);
+
+window.addEventListener("blur", endPlotDrag);
+
+function pointInside(node, at) {
+  if (!at) return false;
+  const hit = document.elementFromPoint(at.x, at.y);
+  return !!hit && node.contains(hit);
+}
+
+function onPlotLeave(pd, fn) {
+  pd.addEventListener("mouseleave", () => {
+    const press = _plotPress;
+    if (!_plotDragging || !press || press.moved) {
+      fn();
+      return;
+    }
+    press.watchers.add({
+      done: false,
+      moved: fn,
+      end: (at) => {
+        if (!pointInside(pd, at)) fn();
+      },
+    });
   });
 }
 
@@ -4548,6 +4777,14 @@ function sharedNeighbourMap() {
 
 function inActivePane(node) {
   return !!(node && node.closest && node.closest(".tab-pane.active"));
+}
+
+function inShownPane(node) {
+  return inActivePane(node) && !($panes && $panes.classList.contains("wx-holding"));
+}
+
+function inHeldPane(node) {
+  return !!(node && node.closest && node.closest(".tab-pane.active, .tab-pane.wx-stale"));
 }
 
 function fitRailPlots(row) {
@@ -4614,12 +4851,16 @@ function neighbourMap() {
   let shownAt = null;
   let hoverStation = null;
   let shownStation = null;
+  let hoverRing = null;
+  let shownRing = null;
   let home = null;
   let viewRev = 0;
   let forceFit = false;
   let shownSet = null;
+  let shownFocus = null;
   let marked = null;
   let peekKey = null;
+  let peekColor = null;
   let zoomOn = false;
 
   const zoomMode = () => !!(owner && owner._wxMapZoomLabels);
@@ -4630,6 +4871,7 @@ function neighbourMap() {
     for (const l of current) {
       const on = !!peekKey && neighbourKey(l.name) === peekKey;
       if (l.quiet) {
+        l._sz = null;
         l.optional = zm && zoomOn && !on;
         l.node.style.display = on || l.optional ? "" : "none";
         if (zm) neighbourMapLabel(l, l.display, on ? l.meta : null, !!l.isFocus);
@@ -4639,6 +4881,13 @@ function neighbourMap() {
       }
       l.node.classList.toggle("peek", on);
       l.dot.classList.toggle("peek", on);
+      if (!l.isFocus) {
+        const edge = on && peekColor ? solid(peekColor) : null;
+        l.dot.style.borderColor = edge || l.color;
+        l.dot.style.background = edge
+          ? (/^rgba\(/i.test(peekColor) ? peekColor : edge)
+          : l.color;
+      }
     }
   };
   let tool = null;
@@ -4710,11 +4959,13 @@ function neighbourMap() {
     }
     if (!drawn) return;
     requestAnimationFrame(() => {
-      const sub =
-        plot._fullLayout && plot._fullLayout.map && plot._fullLayout.map._subplot;
+      const live = liveMap();
       try {
-        if (sub && sub.map && typeof sub.map.resize === "function") sub.map.resize();
-        else Plotly.Plots.resize(plot);
+        if (live) {
+          if (!glSized(live)) live.resize();
+        } else {
+          Plotly.Plots.resize(plot);
+        }
       } catch (e) {
         void e;
       }
@@ -4792,8 +5043,13 @@ function neighbourMap() {
     current.forEach((l) => {
       l.barbRoom = room;
     });
+    const ringKey = hoverAt !== null && hoverRing && hoverStation ? neighbourKey(hoverStation) : null;
+    shownRing = ringKey ? hoverRing : null;
     current.forEach((l) => {
-      const ring = alerts ? alerts.get(neighbourKey(l.name)) : null;
+      const key = neighbourKey(l.name);
+      const ring = ringKey && key === ringKey
+        ? solid(hoverRing) || hoverRing
+        : alerts ? alerts.get(key) : null;
       l.dot.style.boxShadow = ring
         ? `0 0 0 2px #fff, 0 0 0 ${NEIGHBOUR_MAP_RING_PX + 2}px ${ring}`
         : "";
@@ -4836,14 +5092,23 @@ function neighbourMap() {
     if (place) place(hold);
   };
 
-  const setTime = (xval, slot, station) => {
+  let paintFrame = 0;
+
+  const clearAfterDrag = () => setTime(null);
+
+  const setTime = (xval, slot, station, ring) => {
     if (slot && slot !== owner) return;
     if (clearTimer) {
       clearTimeout(clearTimer);
       clearTimer = 0;
     }
+    _plotDragEnds.delete(clearAfterDrag);
     if (xval === null || xval === undefined) {
       if (hoverAt === null) return;
+      if (_plotDragging) {
+        _plotDragEnds.add(clearAfterDrag);
+        return;
+      }
       clearTimer = setTimeout(() => {
         clearTimer = 0;
         hoverAt = null;
@@ -4854,8 +5119,13 @@ function neighbourMap() {
     const who = station || null;
     hoverAt = xval;
     hoverStation = who;
-    if (shownAt === xval && shownStation === who) return;
-    paintLabels();
+    hoverRing = ring || null;
+    if (shownAt === xval && shownStation === who && shownRing === hoverRing) return;
+    if (paintFrame) return;
+    paintFrame = requestAnimationFrame(() => {
+      paintFrame = 0;
+      paintLabels();
+    });
   };
 
   let parked = false;
@@ -5021,10 +5291,18 @@ function neighbourMap() {
   };
 
 
-  const wireDot = (dot, w, describe, act) => {
+  const warmFor = (name) => () => {
+    if (acts && typeof acts.warm === "function") acts.warm(name);
+  };
+
+  const wireDot = (dot, w, describe, act, warm) => {
     if (describe) {
       dot.addEventListener("pointerenter", () => showTip(dot, describe(), w));
       dot.addEventListener("pointerleave", hideTip);
+    }
+    if (warm) {
+      dot.addEventListener("pointerenter", warm);
+      dot.addEventListener("pointerleave", cancelPrefetch);
     }
     if (!act) return;
     dot.addEventListener("click", (ev) => {
@@ -5038,6 +5316,15 @@ function neighbourMap() {
   const attachLabels = (labels, view, w, h, focusAt) => {
     layer.innerHTML = "";
     hideTip();
+    if (labels.some((l) => l.spoke)) {
+      const spokes = document.createElementNS(MAP_SVG_NS, "svg");
+      spokes.setAttribute("class", "wx-nb-map-spokes");
+      spokes.setAttribute("aria-hidden", "true");
+      for (const l of labels) {
+        if (l.spoke) spokes.appendChild(l.spoke);
+      }
+      layer.appendChild(spokes);
+    }
     for (const l of labels) {
       l.rain.style.display = "none";
       l.rainR = 0;
@@ -5062,7 +5349,8 @@ function neighbourMap() {
           ? null
           : () => {
               if (acts && typeof acts.open === "function") acts.open(at.name);
-            }
+            },
+        away ? null : warmFor(at.name)
       );
       extras.push({ dot: dot, lon: at.lon, lat: at.lat, key: neighbourKey(at.name) });
       layer.appendChild(dot);
@@ -5090,7 +5378,8 @@ function neighbourMap() {
             ? null
             : () => {
                 if (acts && typeof acts.open === "function") acts.open(l.name);
-              }
+              },
+          away ? null : warmFor(l.name)
         );
       }
       layer.appendChild(l.dot);
@@ -5158,7 +5447,7 @@ function neighbourMap() {
   const show = (focus, names, source, slot, actions, quiet) => {
     if (
       slot && owner && slot !== owner && owner.isConnected &&
-      inActivePane(owner) && !inActivePane(slot)
+      inHeldPane(owner) && !inShownPane(slot)
     ) {
       return;
     }
@@ -5179,6 +5468,7 @@ function neighbourMap() {
     if (owner !== (slot || null)) {
       marked = null;
       peekKey = null;
+      peekColor = null;
       zoomOn = false;
       const gl = liveMap();
       if (owner && gl && drawn && drawnFc === state.fc && shownSet) {
@@ -5215,7 +5505,7 @@ function neighbourMap() {
       items.push({
         name: name,
         at: at,
-        color: quiet ? NEIGHBOUR_MAP_STATION_COLOR : NEIGHBOUR_MAP_NEIGHBOUR_COLOR,
+        color: NEIGHBOUR_MAP_STATION_COLOR,
         meta: here ? (quiet ? neighbourMeta(here, at) : null) : placeMeta(at),
         dist: here && !quiet ? lineMeta(here, at) : null,
       });
@@ -5261,32 +5551,14 @@ function neighbourMap() {
     sig = next;
     release();
 
-    const spokes = here && !quiet ? items : [];
-    const lineLon = [];
-    const lineLat = [];
-    for (const it of spokes) {
-      lineLon.push(here.lon, it.at.lon, null);
-      lineLat.push(here.lat, it.at.lat, null);
-    }
     const data = [{
-      type: "scattermap",
-      mode: "lines",
-      lon: lineLon,
-      lat: lineLat,
-      connectgaps: false,
-      line: { color: NEIGHBOUR_MAP_LINE_COLOR, width: 1 },
-      opacity: 0.8,
-      hoverinfo: "skip",
-      showlegend: false,
-    }];
-    data.push({
       type: "scattermap",
       mode: "markers",
       lon: [],
       lat: [],
       hoverinfo: "skip",
       showlegend: false,
-    });
+    }];
     const all = (here
       ? [{
           at: here,
@@ -5303,11 +5575,11 @@ function neighbourMap() {
       name: it.name,
       meta: it.meta,
       dist: it.dist,
-      size: quiet ? NEIGHBOUR_MAP_STATION_PX : 8,
+      size: NEIGHBOUR_MAP_STATION_PX,
       quiet: !!quiet,
     })));
 
-    const fit = neighbourMapView(all.map((p) => p.at), w, h);
+    const fit = neighbourMapView(all.map((p) => p.at), w, h, slot ? slot._wxMapFitPad : null);
     home = fit;
     const fresh = forceFit;
     forceFit = false;
@@ -5321,12 +5593,33 @@ function neighbourMap() {
         : null;
     if (slot) slot._wxMapView = null;
     shownSet = setKey;
-    const held = fresh || recall ? null : keptView(all, w, h);
+    const focusKey = here ? neighbourKey(focus) : "";
+    const sameFocus = shownFocus === focusKey;
+    shownFocus = focusKey;
+    const holdPts =
+      !switched && slot && slot._wxMapHold
+        ? (here ? all.slice(0, 1) : [])
+        : sameFocus ? all : null;
+    const held = fresh || recall || !holdPts ? null : keptView(holdPts, w, h);
     const view = recall || held || fit;
     const sameSize = drawnSize === w + "x" + h;
     const liveGl = drawn && drawnFc === state.fc ? liveMap() : null;
+    const snap = !!liveGl && (!sameSize || !!recall);
     let shown = view;
-    if (liveGl) {
+    if (snap) {
+      viewRev += 1;
+      const sub = plot._fullLayout && plot._fullLayout.map && plot._fullLayout.map._subplot;
+      if (sub && sub.div) {
+        sub.div.style.width = w + "px";
+        sub.div.style.height = h + "px";
+      }
+      try {
+        liveGl.resize();
+        liveGl.jumpTo({ center: [view.center.lon, view.center.lat], zoom: view.zoom });
+      } catch (e) {
+        void e;
+      }
+    } else if (liveGl) {
       try {
         const c = liveGl.getCenter();
         shown = { center: { lon: c.lng, lat: c.lat }, zoom: liveGl.getZoom() };
@@ -5336,8 +5629,8 @@ function neighbourMap() {
     } else if (!held) {
       viewRev += 1;
     }
-    const glide = !!liveGl && !held ? { to: view, ease: sameSize && !recall } : null;
-    if (!sameSize) layer.style.visibility = "hidden";
+    const glide = !!liveGl && !snap && !held ? { to: view, ease: true } : null;
+    if (!sameSize && !liveGl) layer.style.visibility = "hidden";
     drawnSize = w + "x" + h;
     const layout = {
       width: w,
@@ -5361,6 +5654,7 @@ function neighbourMap() {
       rain: el("i", "wx-nb-map-rain"),
       rainR: 0,
       dist: p.dist ? el("b", "wx-nb-map-dist", p.dist) : null,
+      spoke: p.dist ? mapSpoke() : null,
       barbRoom: false,
       spot: null,
       name: p.name,
@@ -5374,12 +5668,8 @@ function neighbourMap() {
       quiet: !!p.quiet,
     }));
     const mine = sig;
-    const lineSig = JSON.stringify([
-      w,
-      h,
-      data.map((tr) => [tr.lon, tr.lat, tr.line ? tr.line.color : ""]),
-    ]);
-    const kept = fresh || recall ? null : keptView(all, w, h);
+    const lineSig = w + "x" + h;
+    const kept = fresh || recall || !holdPts ? null : keptView(holdPts, w, h);
     if (drawn && kept && lineSig === drawnLines && liveMap()) {
       attachLabels(labels, kept, w, h, here);
       return;
@@ -5396,6 +5686,7 @@ function neighbourMap() {
         displayModeBar: false,
         scrollZoom: true,
         responsive: false,
+        showTips: false,
       });
       drawn = true;
     } catch (e) {
@@ -5415,7 +5706,7 @@ function neighbourMap() {
           return;
         }
         const gl = liveMap();
-        if (gl && typeof gl.resize === "function") {
+        if (gl && typeof gl.resize === "function" && !glSized(gl)) {
           try {
             gl.resize();
           } catch (e) {
@@ -5482,11 +5773,13 @@ function neighbourMap() {
     },
     railWidth: () =>
       collapsed ? 0 : (expanded ? NEIGHBOUR_MAP_WIDTH_EXPANDED : NEIGHBOUR_MAP_WIDTH) + 2,
-    peek: (slot, name) => {
+    peek: (slot, name, color) => {
       if (slot && slot !== owner) return;
       const key = name ? neighbourKey(name) : null;
-      if (key === peekKey) return;
+      const tint = key && color ? color : null;
+      if (key === peekKey && tint === peekColor) return;
       peekKey = key;
+      peekColor = tint;
       applyPeek();
       if (place) place();
     },
@@ -5639,7 +5932,7 @@ function buildOverlayFigure(fig, cells, rowPx, selected, link, ranges, rank, foc
   if (Array.isArray(layout.annotations)) {
     layout.annotations = layout.annotations.filter((a) => {
       if (!a || typeof a.text !== "string") return true;
-      return !known.has(a.text.replace(/<[^>]*>/g, "").trim());
+      return !known.has(a._wxStation || a.text.replace(/<[^>]*>/g, "").trim());
     });
   }
 
@@ -5865,9 +6158,11 @@ function stationGrid(c, views, opts) {
       }
       if (p.annotation) {
         const a = deepClone(p.annotation);
-        if (String(a.text).replace(/<[^>]*>/g, "").trim() !== p.name) {
-          a.text = String(a.text).replace(/(<[^>]*>)*[^<]+/, (m, tag) => (tag || "") + p.name);
+        const title = mapStationName(p.name);
+        if (String(a.text).replace(/<[^>]*>/g, "").trim() !== title) {
+          a.text = String(a.text).replace(/(<[^>]*>)*[^<]+/, (m, tag) => (tag || "") + title);
         }
+        a._wxStation = p.name;
         anns.push(a);
       }
       wrap._wxAxisStations.set(xid, p.name);
@@ -6360,7 +6655,7 @@ function stationGrid(c, views, opts) {
     if (!filtered) {
       if (typeof wrap._wxSpikeOff === "function") wrap._wxSpikeOff();
       const open = panelPlot(wrap._wxPanel);
-      if (open) dropHover(open);
+      if (open && typeof open._wxSpikeOff === "function") open._wxSpikeOff();
       releasePushed(open);
     }
     const src = srcNow();
@@ -6398,6 +6693,7 @@ function stationGrid(c, views, opts) {
       console.warn("station grid filter failed", e);
       return true;
     }
+    if (filtered && !wrap._wxOverlay) styleNeighbourStack(next);
     let histSig = "";
     if (hist && !wrap._wxOverlay) {
       try {
@@ -6503,6 +6799,7 @@ function stationGrid(c, views, opts) {
         pd.style.height = natural + "px";
       }
 
+      quietHoverFigure(next);
       try {
         Plotly.react(pd, next.data, next.layout, g._wxConfig);
       } catch (e) {
@@ -6847,6 +7144,15 @@ function stationGrid(c, views, opts) {
         if (ctlRef && typeof ctlRef._wxReplacePicks === "function") ctlRef._wxReplacePicks();
         openStationChart(panel, local || name, state.activeTab);
       },
+      warm: (name) => {
+        const panel = wrap._wxPanel;
+        if (!panel) return;
+        const lit = panel.style.display !== "none" ? panel._wxStation : null;
+        if (lit && neighbourKey(lit) === neighbourKey(name)) return;
+        const key = neighbourKey(name);
+        const local = names.find((n) => neighbourKey(n) === key);
+        prefetchDetail(local || name, state.activeTab);
+      },
     };
     mapSlot._wxMapTool = mapSearch(mapSlot, state.fc, (name) => mapActions.open(name));
     nbMap = {
@@ -6868,8 +7174,8 @@ function stationGrid(c, views, opts) {
         }
       },
     };
-    wrap._wxMapTime = (xval, station) => {
-      if (_sharedNeighbourMap) _sharedNeighbourMap.time(xval, mapSlot, station);
+    wrap._wxMapTime = (xval, station, ring) => {
+      if (_sharedNeighbourMap) _sharedNeighbourMap.time(xval, mapSlot, station, ring);
     };
     wrap._wxMapClaim = nbMap.claim;
     const mapList = () => {
@@ -7266,11 +7572,11 @@ const SEV_RE = {
   parenReadings: /\((\d+)\s+reading/i,
   pctOfDays: /\((\d+(?:\.\d+)?)\s*%\s+of\s+days/i,
   rhMax: /max\s+(-?\d+(?:\.\d+)?)\s*%/i,
+  rhMin: /min\s+(-?\d+(?:\.\d+)?)\s*%/i,
   rhPeak: /peak\s+\u0394\s*([+-]?\d+(?:\.\d+)?)\s*%\/h/i,
   tempPeak: /peak\s+([+-]?\d+(?:\.\d+)?)\s*\u00b0C\/h/i,
   peakKmh: /peak\s+(-?\d+(?:\.\d+)?)\s*km\/h/i,
   leadKmh: /^(-?\d+(?:\.\d+)?)\s*km\/h/i,
-  leadPct: /^(-?\d+(?:\.\d+)?)\s*%/i,
   leadMmh: /^(-?\d+(?:\.\d+)?)\s*mm\/h/i,
   leadTemp: /^(-?\d+(?:\.\d+)?)\s*\u00b0C/i,
   parenTemp: /\((-?\d+(?:\.\d+)?)\s*\u00b0C\)/i,
@@ -7328,6 +7634,10 @@ const SEVERITY_CATEGORIES = [
     freq: { re: SEV_RE.shifts },
     mag: { re: SEV_RE.rhPeak, abs: true },
   }],
+  ["RH", "RH BELOW 10%", 12, {
+    freq: { re: SEV_RE.readings },
+    mag: { re: SEV_RE.rhMin, invert: true },
+  }],
   ["Temp", "TEMPERATURE CHANGED >5\u00b0C/H, UNCORRELATED WITH RH", 13, {
     freq: { re: SEV_RE.uncorrelated },
     mag: { re: SEV_RE.tempPeak, abs: true },
@@ -7360,7 +7670,6 @@ const SEVERITY_CATEGORIES = [
     mag: { re: SEV_RE.leadTemp, abs: true },
   }],
   ["Precip", "HIGH PRECIPITATION", 21, { mag: { re: SEV_RE.leadMmh } }],
-  ["RH", "RH DROPPED AS LOW AS", 22, { mag: { re: SEV_RE.leadPct, invert: true } }],
   ["Temp", "EXTREME VALUES", 23, { mag: { re: SEV_RE.parenTemp, abs: true } }],
   ["Wind", "WIND SPEED OUTLIERS", 24, { mag: { re: SEV_RE.leadKmh } }],
   ["Wind", "GUST OUTLIERS", 24, { mag: { re: SEV_RE.leadKmh } }],
@@ -7537,8 +7846,10 @@ function ensureOverviewStyles() {
     ".wx-ov-table th .a{margin-left:5px;color:var(--accent);}",
     ".wx-ov-table td{padding:5px 12px;vertical-align:top;",
     "border-top:1px solid #f5f4f2;}",
-    ".wx-ov-table td:first-child,.wx-ov-table th:first-child{",
-    "border-left:3px solid transparent;}",
+    ".wx-ov-mark{display:inline-block;box-sizing:border-box;margin-right:7px;",
+    "vertical-align:-1px;border:1px solid transparent;}",
+    ".wx-ov-mark.dot{width:8px;height:8px;border-radius:50%;margin-left:2.5px;margin-right:9.5px;}",
+    ".wx-ov-mark.bar{width:13px;height:8px;border-radius:2px;}",
     ".wx-ov-table tbody tr:first-child td{border-top:none;}",
     ".wx-ov-row{cursor:pointer;}",
     ".wx-ov-row:hover td{background:#fafaf9;}",
@@ -7549,13 +7860,12 @@ function ensureOverviewStyles() {
     "color:var(--text);white-space:nowrap;}",
     ".wx-ov-type{font-size:10px;letter-spacing:.03em;color:#a9a49c;}",
     ".wx-ov-detail{font-size:12px;color:var(--text);line-height:1.35;}",
+    ".wx-ov-detail b{font-weight:600;}",
     ".wx-ov-when{font-size:10px;color:var(--text-muted);white-space:nowrap;}",
-    ".wx-ov-sect thead th{height:28px;box-sizing:border-box;padding-top:0;",
-    "padding-bottom:0;z-index:3;}",
     ".wx-ov-sect td{padding-top:4px;padding-bottom:4px;line-height:16px;",
     "vertical-align:baseline;}",
     ".wx-ov-sect .wx-ov-detail{width:100%;}",
-    ".wx-ov-sect .wx-ov-group td{position:sticky;top:28px;z-index:2;",
+    ".wx-ov-sect .wx-ov-group td{position:sticky;top:0;z-index:2;",
     "padding-top:2px;padding-bottom:2px;font-size:11px;font-weight:700;",
     "letter-spacing:.07em;text-transform:uppercase;color:var(--text);",
     "background:#f3f2ef;border-top:1px solid var(--line);",
@@ -7593,7 +7903,7 @@ const TAB_COLUMNS = ["Station", "Alert", "Type", "Time"];
 const OVERVIEW_CELLS = {
   Sensor: (f) => ovText("td", "wx-ov-sensor", f.area),
   Station: (f) => ovText("td", "wx-ov-name", f.station),
-  Alert: (f) => ovText("td", "wx-ov-detail", ovDetail(f)),
+  Alert: (f) => ovDetailCell(ovDetail(f)),
   Type: (f) => ovText("td", "wx-ov-type", f.section),
   Time: (f) => ovText("td", "wx-ov-when", ovWhen(f)),
 };
@@ -7647,6 +7957,30 @@ function ovWhen(f) {
   return String(f.when || "").replace(ONGOING_SUFFIX_RE, "").trim();
 }
 
+const OV_KEY_VALUE_RE = new RegExp(
+  "(?<![\\w.<>\u2264\u2265\u00b1/])" +
+  "(?<!(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) )" +
+  "[+\\-\u2212]?\\d+(?:\\.\\d+)?" +
+  "(?:\\s?[\u2013-]\\s?\\d+(?:\\.\\d+)?)?" +
+  "(?:\\s?(?:%\\/h|\u00b0C\\/h|km\\/h|mm\\/h|mm|\u00b0C|%|\u00b0|V|h|\u00d7)(?![A-Za-z]))?",
+  "g"
+);
+
+function ovDetailCell(text) {
+  const cell = el("td", "wx-ov-detail");
+  const str = text == null ? "" : String(text);
+  let at = 0;
+  for (const m of str.matchAll(OV_KEY_VALUE_RE)) {
+    if (m.index > at) cell.appendChild(document.createTextNode(str.slice(at, m.index)));
+    const b = document.createElement("b");
+    b.textContent = m[0];
+    cell.appendChild(b);
+    at = m.index + m[0].length;
+  }
+  if (at < str.length) cell.appendChild(document.createTextNode(str.slice(at)));
+  return cell;
+}
+
 function ovDetail(f) {
   const text = String(f.detail || "");
   if (f.section === EXTREME_SECTION && EXTREME_PREFIX_RE.test(text)) {
@@ -7670,19 +8004,11 @@ function tabPanel(grid) {
   return panel;
 }
 
-function resetOverviewChart(panel) {
+function releasePanelState(panel) {
   if (typeof panel._wxRowWatch === "function") {
     try { panel._wxRowWatch(); } catch (e) {}
   }
   panel._wxRowWatch = null;
-  if (typeof panel._wxCleanup === "function") {
-    try { panel._wxCleanup(); } catch (e) {}
-  } else {
-    for (const pd of panel.querySelectorAll(".wx-detail-plot")) {
-      try { Plotly.purge(pd); } catch (e) {}
-    }
-  }
-  panel._wxCleanup = null;
   panel._wxStation = null;
   panel._wxTab = null;
   panel._wxPick = null;
@@ -7690,6 +8016,68 @@ function resetOverviewChart(panel) {
     panel._wxRow.classList.remove("sel");
     panel._wxRow = null;
   }
+}
+
+function purgeDetail(root, cleanup, selector) {
+  if (typeof cleanup === "function") {
+    try { cleanup(); } catch (e) {}
+    return;
+  }
+  for (const pd of root.querySelectorAll(selector)) {
+    try { Plotly.purge(pd); } catch (e) {}
+  }
+}
+
+function dropOverviewGhost(panel) {
+  const ghost = panel._wxGhost;
+  if (!ghost) return;
+  panel._wxGhost = null;
+  panel.classList.remove("wx-ghosting");
+  panel.style.minHeight = "";
+  purgeDetail(ghost.node, ghost.cleanup, ".wx-detail-plot-ghost");
+  if (ghost.node.parentNode) ghost.node.parentNode.removeChild(ghost.node);
+}
+
+function ghostOverviewChart(panel) {
+  releasePanelState(panel);
+  const cleanup = panel._wxCleanup;
+  panel._wxCleanup = null;
+  const prior = panel._wxGhost;
+  if (prior) {
+    const rest = Array.from(panel.childNodes).filter((n) => n !== prior.node);
+    const scrap = el("div");
+    for (const n of rest) scrap.appendChild(n);
+    purgeDetail(scrap, cleanup, ".wx-detail-plot");
+    return;
+  }
+  ensureStaleStyles();
+  const cs = window.getComputedStyle(panel);
+  const padTop = parseFloat(cs.paddingTop) || 0;
+  const padBottom = parseFloat(cs.paddingBottom) || 0;
+  const room = Math.max(0, Math.round(panel.clientHeight - padTop - padBottom));
+  const ghost = el("div", "wx-detail-ghost");
+  ghost.setAttribute("aria-hidden", "true");
+  ghost.style.padding = cs.padding;
+  const inner = el("div", "wx-detail-ghost-in");
+  while (panel.firstChild) inner.appendChild(panel.firstChild);
+  for (const pd of inner.querySelectorAll(".wx-detail-plot")) {
+    pd.classList.remove("wx-detail-plot");
+    pd.classList.add("wx-detail-plot-ghost");
+  }
+  ghost.appendChild(inner);
+  const spin = el("div", "wx-plot-wait");
+  spin.appendChild(el("div", "wx-plot-spin"));
+  ghost.appendChild(spin);
+  panel._wxGhost = { node: ghost, cleanup: cleanup };
+  panel.classList.add("wx-ghosting");
+  if (room) panel.style.minHeight = room + "px";
+}
+
+function resetOverviewChart(panel) {
+  dropOverviewGhost(panel);
+  releasePanelState(panel);
+  purgeDetail(panel, panel._wxCleanup, ".wx-detail-plot");
+  panel._wxCleanup = null;
   panel.innerHTML = "";
 }
 
@@ -7837,7 +8225,11 @@ function openOverviewChart(panel, f, row, pick, view, restore) {
   const openToken = (panel._wxOpenToken || 0) + 1;
   panel._wxOpenToken = openToken;
   const wasOpen = panel.style.display !== "none";
-  resetOverviewChart(panel);
+  const ghostable =
+    wasOpen && !restore && !isMobile() && f.tab !== DATA_TAB &&
+    (!!panel._wxGhost || !!panelPlot(panel));
+  if (ghostable) ghostOverviewChart(panel);
+  else resetOverviewChart(panel);
   panel.style.display = "";
   panel._wxRow = row || null;
   panel._wxStation = f.station || null;
@@ -7868,6 +8260,7 @@ function openOverviewChart(panel, f, row, pick, view, restore) {
 
   panel.appendChild(head);
   panel.appendChild(body);
+  if (panel._wxGhost) panel.appendChild(panel._wxGhost.node);
   if (fold) loading.style.height = holdHeightFor(panel) + "px";
   if (row) {
     watchRowVisible(panel, row);
@@ -7920,8 +8313,9 @@ function openOverviewChart(panel, f, row, pick, view, restore) {
     })
     .then(() => {
       if (panel._wxOpenToken !== openToken) return;
+      dropOverviewGhost(panel);
       wirePanelHover(panel);
-      wirePlotBandGlyphs(panelPlot(panel));
+      wireHoverReach(panelPlot(panel));
       const grid = panel._wxGrid;
       if (grid) {
         requestAnimationFrame(() => {
@@ -7948,6 +8342,7 @@ function openOverviewChart(panel, f, row, pick, view, restore) {
     .catch((e) => {
       console.warn("detail module failed", e);
       if (panel._wxOpenToken !== openToken) return;
+      dropOverviewGhost(panel);
       const held = panel._wxGrid;
       if (held && typeof held._wxAwaitDetail === "function") {
         held._wxAwaitDetail(false);
@@ -8085,6 +8480,143 @@ function ganttTraceKey(tr) {
   return String((tr && (tr.legendgroup || tr.name)) || "");
 }
 
+const GANTT_HOVER_STEP_MS = 3600000;
+
+const GANTT_CURSOR_Y = -0.5;
+
+const GANTT_CURSOR_META = "wx-gantt-cursor";
+
+const GANTT_NC_NAME = "Not configured";
+
+const GANTT_OUTAGE_NAME = "Outage";
+
+const GANTT_POINT_KEYS = ["x", "base", "text", "hovertext", "customdata"];
+
+function ganttHoverSpan(layout, bars) {
+  const ax = layout && layout.xaxis;
+  const range = ax && Array.isArray(ax.range) && ax.range.length === 2 ? ax.range : null;
+  if (range) {
+    const lo = stampMs(range[0]);
+    const hi = stampMs(range[1]);
+    if (isFinite(lo) && isFinite(hi) && hi > lo) return [lo, hi];
+  }
+  let lo = Infinity;
+  let hi = -Infinity;
+  for (const tr of bars) {
+    const base = decodeArray(tr.base) || [];
+    const size = decodeArray(tr.x) || [];
+    base.forEach((b, i) => {
+      const start = stampMs(b);
+      if (!isFinite(start)) return;
+      lo = Math.min(lo, start);
+      hi = Math.max(hi, start + (Number(size[i]) || 0));
+    });
+  }
+  return hi > lo ? [lo, hi] : null;
+}
+
+function ganttUnified(fig) {
+  const parts = [];
+  const rest = [];
+  let rank = 0;
+  for (const tr of (fig && fig.data) || []) {
+    if (!tr) continue;
+    if (tr.type !== "bar") {
+      rest.push(tr);
+      continue;
+    }
+    rank += 1;
+    const quiet = ganttTraceKey(tr) === GANTT_NC_NAME;
+    const ys = decodeArray(tr.y);
+    if (!ys || !ys.length) {
+      rest.push(Object.assign({}, tr, { hoverinfo: quiet ? "skip" : "none" }));
+      continue;
+    }
+    const cols = {};
+    for (const key of GANTT_POINT_KEYS) {
+      const arr = decodeArray(tr[key]);
+      if (arr && arr.length === ys.length) cols[key] = arr;
+    }
+    const rows = new Map();
+    ys.forEach((y, i) => {
+      const row = Math.round(Number(y));
+      if (!rows.has(row)) rows.set(row, []);
+      rows.get(row).push(i);
+    });
+    const legend = tr.showlegend !== false;
+    const order = tr.legendrank === undefined ? rank : tr.legendrank;
+    for (const [row, idx] of rows) {
+      const part = Object.assign({}, tr, { showlegend: false, legendrank: order });
+      part.y = idx.map((i) => ys[i]);
+      for (const key of Object.keys(cols)) part[key] = idx.map((i) => cols[key][i]);
+      part.hoverinfo = quiet ? "skip" : "none";
+      parts.push({ row: row, at: parts.length, legend: legend, tr: part });
+    }
+  }
+  parts.sort((a, b) => a.row - b.row || a.at - b.at);
+  const listed = new Set();
+  for (const p of parts) {
+    const key = ganttTraceKey(p.tr);
+    if (!p.legend || listed.has(key)) continue;
+    listed.add(key);
+    p.tr.showlegend = true;
+  }
+  const bars = parts.map((p) => p.tr);
+  const data = bars.concat(rest);
+  const layout = cloneLayout((fig && fig.layout) || {});
+  const live = bars.filter((tr) => tr.visible !== "legendonly" && tr.hoverinfo !== "skip");
+  const span = live.length ? ganttHoverSpan(layout, live) : null;
+  if (span) {
+    const xs = [];
+    const first = Math.ceil(span[0] / GANTT_HOVER_STEP_MS) * GANTT_HOVER_STEP_MS;
+    for (let t = first; t <= span[1]; t += GANTT_HOVER_STEP_MS) xs.push(isoStampMs(t));
+    if (xs.length) {
+      data.push({
+        type: "scatter",
+        mode: "lines",
+        x: xs,
+        y: xs.map(() => GANTT_CURSOR_Y),
+        line: { width: 0 },
+        hoverinfo: "none",
+        meta: GANTT_CURSOR_META,
+        showlegend: false,
+      });
+    }
+  }
+  layout.hovermode = "x unified";
+  layout.xaxis = Object.assign({}, layout.xaxis, { showspikes: false });
+  return { data: data, layout: layout };
+}
+
+function ganttNothing(base, station) {
+  const layout = cloneLayout((base && base.layout) || {});
+  delete layout.title;
+  layout.showlegend = false;
+  layout.annotations = [{
+    text: `No missing-data rows for ${station} in this window.`,
+    xref: "paper",
+    yref: "paper",
+    x: 0.5,
+    y: 0.5,
+    xanchor: "center",
+    yanchor: "middle",
+    showarrow: false,
+    font: { size: 12, color: "#a9a49c" },
+  }];
+  layout.yaxis = Object.assign({}, layout.yaxis, {
+    tickvals: [],
+    ticktext: [],
+    range: [0, 1],
+    autorange: false,
+    showgrid: false,
+    zeroline: false,
+    showticklabels: false,
+  });
+  layout.margin = Object.assign({}, layout.margin, { t: 24 });
+  layout.height = GANTT_PANEL_MIN;
+  return { data: [], layout: layout };
+}
+
 function ganttCompact(base, hidden) {
   if (!base || !hidden.size || !Array.isArray(base.data)) return base;
   const rows = ganttRows(base.layout);
@@ -8133,14 +8665,863 @@ function wholeGantt(fig) {
   return { data: fig.data || [], layout: layout };
 }
 
+const HOVER_TIP_GAP = 14;
+
+const HOVER_TIP_EDGE = 8;
+
+const HOVER_TIP_GRACE_MS = 90;
+
+const HOVER_ANCHOR_GAP = 10;
+
+const HOVER_RANK_DEFAULT = 1000;
+
+const HOVER_SVG_NS = "http://www.w3.org/2000/svg";
+
+const HOVER_ARROW_PATH = "M0,-5L3.2,4.6L-3.2,4.6Z";
+
+const HOVER_ARROW_STROKE = 1.3;
+
+const HOVER_GLYPH_SIZE = 6;
+
+const HOVER_GLYPH_MIN_R = 2;
+
+const HOVER_GLYPH_MAX_R = 5;
+
+const HOVER_GLYPH_MIN_ALPHA = 0.35;
+
+const HOVER_ALERT_SIZE = 9;
+
+const HOVER_BOX_SPEC = ".2f";
+
+const HOVER_BOX_STATS = [
+  ["max", "max"],
+  ["uf", "upper fence"],
+  ["q3", "q3"],
+  ["med", "median"],
+  ["mean", "mean"],
+  ["q1", "q1"],
+  ["lf", "lower fence"],
+  ["min", "min"],
+];
+
+const HOVER_BARE_TYPES = new Set(["heatmap", "heatmapgl", "histogram2d", "contour"]);
+
+const HOVER_WHITE_RE = /^(white|#fff(fff)?|rgba?\(\s*255\s*,\s*255\s*,\s*255\b.*)$/i;
+
+const HOVER_BREAK_RE = /<br\s*\/?>/i;
+
+const HOVER_EXTRA_RE = /<extra>[\s\S]*?<\/extra>/gi;
+
+const HOVER_TOKEN_RE = /%\{([^}:|]+)(?::([^}|]*))?(?:\|([^}]*))?\}/g;
+
+const HOVER_PATH_RE = /^([A-Za-z_][A-Za-z0-9_.]*)(?:\[(\d+)\])?$/;
+
+const HOVER_NUM_RE = /^(,)?(?:\.(\d+))?([f%])?$/;
+
+const HOVER_BOLD_RE = /<b>/i;
+
+const HOVER_NEG_ZERO_RE = /^-0(?:\.0+)?$/;
+
+const HOVER_ENTITIES = { "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": "\"", "&#39;": "'" };
+
+const HOVER_ENTITY_RE = /&(amp|lt|gt|quot|#39);/g;
+
+let _hoverTip = null;
+
+function ensureHoverTipStyles() {
+  if (document.getElementById("wx-hover-tip-styles")) return;
+  const st = document.createElement("style");
+  st.id = "wx-hover-tip-styles";
+  st.textContent = [
+    ".wx-hover-tip{position:fixed;left:0;top:0;z-index:60;display:none;pointer-events:none;",
+    "box-sizing:border-box;max-width:320px;max-height:calc(100vh - 16px);overflow:hidden;",
+    "padding:7px 9px;background:#fff;border:1px solid var(--line,#e8e6e3);border-radius:7px;",
+    "box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:11px;line-height:1.4;",
+    "color:var(--text,#26231f);}",
+    ".wx-hover-tip.on{display:block;}",
+    ".wx-hover-tip .h{font-size:10px;font-weight:600;letter-spacing:.02em;",
+    "color:var(--text-muted,#8a857d);}",
+    ".wx-hover-tip .e{display:flex;align-items:flex-start;gap:7px;margin-top:5px;}",
+    ".wx-hover-tip .e i{flex:0 0 auto;width:9px;height:9px;margin-top:3px;border-radius:2px;",
+    "border:1px solid;box-sizing:border-box;}",
+    ".wx-hover-tip .e i.line{height:3px;margin-top:6px;border-radius:2px;}",
+    ".wx-hover-tip .e b{font-weight:600;}",
+    ".wx-hover-tip .e.bare{display:block;}",
+    ".wx-hover-tip .e svg{flex:0 0 auto;width:12px;height:12px;margin-top:1px;overflow:visible;}",
+    ".wx-gantt-spike{position:absolute;top:0;left:0;width:0;display:none;pointer-events:none;",
+    "z-index:2;border-left:1px dashed var(--text,#26231f);opacity:.7;}",
+    ".wx-gantt-spike.on{display:block;}",
+  ].join("");
+  document.head.appendChild(st);
+}
+
+function hoverTip() {
+  ensureHoverTipStyles();
+  if (!_hoverTip || !_hoverTip.isConnected) {
+    _hoverTip = el("div", "wx-hover-tip");
+    document.body.appendChild(_hoverTip);
+  }
+  return _hoverTip;
+}
+
+function hoverText(raw) {
+  return String(raw)
+    .replace(GANTT_TAG_RE, "")
+    .replace(HOVER_ENTITY_RE, (m) => HOVER_ENTITIES[m] || m)
+    .trim();
+}
+
+function hoverLines(html) {
+  const out = [];
+  for (const part of String(html == null ? "" : html).split(HOVER_BREAK_RE)) {
+    const text = hoverText(part);
+    if (text) out.push({ text: text, bold: HOVER_BOLD_RE.test(part) });
+  }
+  return out;
+}
+
+function fillHoverTip(tip, at, entries) {
+  tip.innerHTML = "";
+  if (at !== null && Number.isFinite(at)) tip.appendChild(el("div", "h", mapTimeLabel(at)));
+  for (const entry of entries) {
+    const row = el("div", "e");
+    const sw = entry.swatch || {};
+    if (!entry.swatch) {
+      row.classList.add("bare");
+    } else if (sw.shape === "glyph") {
+      row.appendChild(hoverGlyph(sw));
+    } else {
+      const mark = el("i", sw.shape === "line" ? "line" : null);
+      mark.style.background = sw.fill || "";
+      mark.style.borderColor = sw.edge || sw.fill || "";
+      row.appendChild(mark);
+    }
+    const body = el("div");
+    entry.lines.forEach((line, i) => {
+      if (i) body.appendChild(el("br"));
+      if (line.bold) {
+        const b = el("b");
+        b.textContent = line.text;
+        body.appendChild(b);
+      } else {
+        body.appendChild(document.createTextNode(line.text));
+      }
+    });
+    row.appendChild(body);
+    tip.appendChild(row);
+  }
+}
+
+function pointerOf(e) {
+  if (!e) return null;
+  if (typeof e.clientX === "number") return { x: e.clientX, y: e.clientY };
+  const t = (e.touches && e.touches[0]) || (e.changedTouches && e.changedTouches[0]);
+  return t ? { x: t.clientX, y: t.clientY } : null;
+}
+
+function boxAnchor(pt) {
+  const b = pt && pt.bbox;
+  if (!b) return null;
+  const x = (Number(b.x0) + Number(b.x1)) / 2;
+  const y = (Number(b.y0) + Number(b.y1)) / 2;
+  return Number.isFinite(x) && Number.isFinite(y) ? { x: x, y: y } : null;
+}
+
+function hoverAnchor(ev) {
+  const pts = (ev && ev.points) || [];
+  const first = pts[0];
+  const xa = first && first.xaxis;
+  if (!xa || typeof xa.d2l !== "function" || typeof xa.l2p !== "function") {
+    return boxAnchor(first);
+  }
+  const x = xa._offset + xa.l2p(xa.d2l(first.x));
+  if (!Number.isFinite(x)) return null;
+  let sum = 0;
+  let n = 0;
+  for (const pt of pts) {
+    const ya = pt && pt.yaxis;
+    if (!ya || typeof ya.d2l !== "function" || typeof ya.l2p !== "function") continue;
+    if (pt.y === undefined || pt.y === null) continue;
+    const v = ya.d2l(pt.y);
+    if (!Number.isFinite(v)) continue;
+    const py = ya._offset + ya.l2p(v);
+    if (!Number.isFinite(py)) continue;
+    sum += py;
+    n += 1;
+  }
+  const ya = first.yaxis;
+  const y = n ? sum / n : ya ? ya._offset + ya._length / 2 : NaN;
+  return Number.isFinite(y) ? { x: x, y: y } : null;
+}
+
+function wireHoverTip(pd, build, hooks, opts) {
+  const anchored = !!(opts && opts.anchor);
+  let showing = false;
+  let pointer = null;
+  let anchor = null;
+
+  const placeAtPointer = (tip, w, h, vw, vh) => {
+    let left = pointer.x + HOVER_TIP_GAP;
+    if (left + w > vw - HOVER_TIP_EDGE) left = pointer.x - HOVER_TIP_GAP - w;
+    left = Math.max(HOVER_TIP_EDGE, left);
+    const top = Math.max(
+      HOVER_TIP_EDGE,
+      Math.min(vh - h - HOVER_TIP_EDGE, pointer.y - h / 2)
+    );
+    tip.style.transform = `translate(${Math.round(left)}px,${Math.round(top)}px)`;
+  };
+
+  const placeAtAnchor = (tip, w, h, vw, vh) => {
+    const box = pd.getBoundingClientRect();
+    const ax = box.left + anchor.x;
+    const ay = box.top + anchor.y;
+    const right = Math.min(vw - HOVER_TIP_EDGE, box.right);
+    let left = ax + HOVER_ANCHOR_GAP;
+    if (left + w > right) left = ax - HOVER_ANCHOR_GAP - w;
+    left = Math.max(HOVER_TIP_EDGE, left);
+    const lo = Math.max(HOVER_TIP_EDGE, box.top);
+    const hi = Math.min(vh - HOVER_TIP_EDGE, box.bottom) - h;
+    let top = ay - h / 2;
+    top = hi >= lo
+      ? Math.max(lo, Math.min(hi, top))
+      : Math.max(HOVER_TIP_EDGE, Math.min(vh - h - HOVER_TIP_EDGE, top));
+    tip.style.transform = `translate(${Math.round(left)}px,${Math.round(top)}px)`;
+  };
+
+  const place = () => {
+    if (!showing) return;
+    if (anchored ? !anchor : !pointer) return;
+    const tip = hoverTip();
+    const w = tip.offsetWidth;
+    const h = tip.offsetHeight;
+    const vw = window.innerWidth || 0;
+    const vh = window.innerHeight || 0;
+    if (anchored) placeAtAnchor(tip, w, h, vw, vh);
+    else placeAtPointer(tip, w, h, vw, vh);
+  };
+
+  const overChart = () => {
+    if (!pointer) return false;
+    const hit = document.elementFromPoint(pointer.x, pointer.y);
+    return !!hit && pd.contains(hit);
+  };
+
+  let tracking = false;
+  let onScroll = null;
+  const track = (on) => {
+    if (on === tracking) return;
+    tracking = on;
+    if (on) window.addEventListener("scroll", onScroll, { passive: true });
+    else window.removeEventListener("scroll", onScroll);
+  };
+
+  const hide = () => {
+    showing = false;
+    if (_hoverTip && _hoverTip._wxOwner === pd) _hoverTip.classList.remove("on");
+    if (hooks && typeof hooks.hide === "function") hooks.hide();
+  };
+
+  let grace = 0;
+  const cancelGrace = () => {
+    if (!grace) return;
+    clearTimeout(grace);
+    grace = 0;
+  };
+
+  const leave = () => {
+    cancelGrace();
+    track(false);
+    hide();
+  };
+
+  const softLeave = () => {
+    cancelGrace();
+    grace = setTimeout(() => {
+      grace = 0;
+      leave();
+    }, HOVER_TIP_GRACE_MS);
+  };
+
+  onScroll = () => {
+    if (overChart()) {
+      place();
+      return;
+    }
+    leave();
+    try {
+      if (window.Plotly && Plotly.Fx && typeof Plotly.Fx.unhover === "function") {
+        Plotly.Fx.unhover(pd, { target: pd });
+      }
+    } catch (e) {
+      void e;
+    }
+  };
+
+  pd.on("plotly_hover", (ev) => {
+    const at = pointerOf(ev && ev.event) || (pd.matches(":hover") ? pointer : null);
+    if (!at) return;
+    cancelGrace();
+    pointer = at;
+    track(true);
+    const hit = build(ev);
+    const spot = anchored ? hoverAnchor(ev) : null;
+    if (!hit || !hit.entries.length || (anchored && !spot)) {
+      hide();
+      return;
+    }
+    const tip = hoverTip();
+    tip._wxOwner = pd;
+    fillHoverTip(tip, hit.at, hit.entries);
+    tip.style.borderColor = hit.border || "";
+    showing = true;
+    tip.classList.add("on");
+    anchor = spot;
+    place();
+    if (hooks && typeof hooks.show === "function") hooks.show(ev, hit);
+  });
+  pd.on("plotly_unhover", softLeave);
+  onPlotLeave(pd, leave);
+  pd.addEventListener("mousemove", (e) => {
+    pointer = { x: e.clientX, y: e.clientY };
+    if (!anchored) place();
+  });
+}
+
+function traceTemplate(tr) {
+  if (!tr) return "";
+  if (typeof tr.hovertemplate === "string") return tr.hovertemplate;
+  if (typeof tr.wxTemplate === "string") return tr.wxTemplate;
+  return "";
+}
+
+function quietTrace(tr) {
+  if (!tr || tr.wxQuiet || tr.hoverinfo === "skip") return tr;
+  const out = Object.assign({}, tr, {
+    hoverinfo: "none",
+    wxQuiet: true,
+    wxInfo: tr.hoverinfo || "all",
+  });
+  if (tr.hovertemplate !== undefined) {
+    out.wxTemplate = tr.hovertemplate;
+    delete out.hovertemplate;
+  }
+  return out;
+}
+
+function quietHoverFigure(fig) {
+  if (!fig) return fig;
+  if (Array.isArray(fig.data)) fig.data = fig.data.map(quietTrace);
+  const layout = fig.layout;
+  if (layout) {
+    for (const key of Object.keys(layout)) {
+      if (!/^xaxis\d*$/.test(key) || !layout[key]) continue;
+      layout[key] = Object.assign({}, layout[key], { showspikes: false });
+    }
+  }
+  return fig;
+}
+
+function hoverPathValue(pt, key) {
+  const m = HOVER_PATH_RE.exec(key);
+  if (!m) return undefined;
+  const path = m[1];
+  let v;
+  if (path.indexOf(".") > 0) {
+    v = path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), pt);
+  } else if (pt[path] !== undefined) {
+    v = pt[path];
+  } else {
+    const tr = pt.data || {};
+    const arr = decodeArray(tr[path]);
+    v = arr ? arr[pt.pointNumber] : tr[path];
+  }
+  if (m[2] !== undefined) v = v == null ? undefined : v[Number(m[2])];
+  return v;
+}
+
+function hoverNumber(v, spec) {
+  const n = Number(v);
+  if (!Number.isFinite(n)) return String(v);
+  const m = HOVER_NUM_RE.exec(spec || "");
+  if (!m || (m[1] === undefined && m[2] === undefined && m[3] === undefined)) {
+    return String(Math.round(n * 10000) / 10000);
+  }
+  const x = m[3] === "%" ? n * 100 : n;
+  const digits = m[2] !== undefined ? Number(m[2]) : m[3] ? 6 : 0;
+  const raw = m[1]
+    ? x.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits })
+    : x.toFixed(digits);
+  const s = HOVER_NEG_ZERO_RE.test(raw) ? raw.slice(1) : raw;
+  return m[3] === "%" ? s + "%" : s;
+}
+
+function hoverDate(v, fmt) {
+  const ms = typeof v === "number" ? v : stampMs(v);
+  if (!Number.isFinite(ms)) return String(v);
+  const d = new Date(ms);
+  const p = (n) => String(n).padStart(2, "0");
+  return String(fmt).replace(/%([YymdeHMSb])/g, (m, c) => {
+    switch (c) {
+      case "Y": return String(d.getUTCFullYear());
+      case "y": return p(d.getUTCFullYear() % 100);
+      case "m": return p(d.getUTCMonth() + 1);
+      case "d": return p(d.getUTCDate());
+      case "e": return String(d.getUTCDate());
+      case "H": return p(d.getUTCHours());
+      case "M": return p(d.getUTCMinutes());
+      case "S": return p(d.getUTCSeconds());
+      case "b": return MONTH_ABBR[d.getUTCMonth()];
+      default: return m;
+    }
+  });
+}
+
+function fillHoverTemplate(tpl, pt) {
+  return String(tpl)
+    .replace(HOVER_EXTRA_RE, "")
+    .replace(HOVER_TOKEN_RE, (m, key, num, date) => {
+      const v = hoverPathValue(pt, key.trim());
+      if (v === undefined || v === null || v === "") return "";
+      if (date !== undefined) return hoverDate(v, date);
+      if (typeof v === "number" || num) return hoverNumber(v, num || "");
+      return String(v);
+    });
+}
+
+function pointValue(value, index) {
+  if (Array.isArray(value)) return value[index];
+  return value;
+}
+
+function hoverGlyph(sw) {
+  const svg = document.createElementNS(HOVER_SVG_NS, "svg");
+  svg.setAttribute("viewBox", "-6 -6 12 12");
+  svg.setAttribute("aria-hidden", "true");
+  const open = /-open$/.test(sw.symbol);
+  const color = sw.fill || "";
+  let shape;
+  if (/^arrow/.test(sw.symbol)) {
+    shape = document.createElementNS(HOVER_SVG_NS, "path");
+    shape.setAttribute("d", HOVER_ARROW_PATH);
+    shape.setAttribute("transform", `rotate(${sw.angle || 0})`);
+    shape.setAttribute("fill", open ? "none" : color);
+    shape.setAttribute("stroke", color);
+    shape.setAttribute("stroke-width", String(HOVER_ARROW_STROKE));
+    shape.setAttribute("stroke-linejoin", "round");
+  } else {
+    const r = Math.max(HOVER_GLYPH_MIN_R, Math.min(HOVER_GLYPH_MAX_R, (sw.size || HOVER_GLYPH_SIZE) / 2));
+    shape = document.createElementNS(HOVER_SVG_NS, "circle");
+    shape.setAttribute("r", String(r));
+    shape.setAttribute("fill", open ? "none" : color);
+    const lined =
+      open ||
+      (sw.edgeWidth > 0 && sw.edge && sw.edge !== color && !HOVER_WHITE_RE.test(sw.edge));
+    shape.setAttribute("stroke", lined ? sw.edge || color : "none");
+    if (lined) shape.setAttribute("stroke-width", "1");
+  }
+  svg.appendChild(shape);
+  svg.style.opacity = String(Math.max(HOVER_GLYPH_MIN_ALPHA, Math.min(1, sw.opacity)));
+  return svg;
+}
+
+function pointColor(value, index) {
+  if (Array.isArray(value)) {
+    const v = value[index];
+    return typeof v === "string" ? v : null;
+  }
+  return typeof value === "string" ? value : null;
+}
+
+function hoverSwatch(pt) {
+  const tr = pt.data || {};
+  const full = pt.fullData || {};
+  const meta = tr.meta || {};
+  const type = String(tr.type || full.type || "scatter");
+  if (HOVER_BARE_TYPES.has(type)) return null;
+  if (type === "bar") {
+    const mk = tr.marker || {};
+    const fullMk = full.marker || {};
+    const fill = pointColor(mk.color, pt.pointNumber) || pointColor(fullMk.color, pt.pointNumber);
+    const edge =
+      pointColor(mk.line && mk.line.color, pt.pointNumber) ||
+      pointColor(fullMk.line && fullMk.line.color, pt.pointNumber);
+    return fill ? { shape: "box", fill: fill, edge: edge || fill } : null;
+  }
+  if (meta.band_hover) {
+    const fill = meta.band_fill || BAND_FILL_FALLBACK;
+    return { shape: "box", fill: fill, edge: solid(fill) || meta.band_color || BAND_GLYPH_FALLBACK };
+  }
+  const i = pt.pointNumber;
+  const mode = String(tr.mode || full.mode || "");
+  const mk = tr.marker || {};
+  const fullMk = full.marker || {};
+  const marker = pointColor(mk.color, i) || pointColor(fullMk.color, i);
+  if (mode.indexOf("lines") < 0 && marker) {
+    const symbol = pointValue(mk.symbol, i) || pointValue(fullMk.symbol, i) || "circle";
+    const size = Number(pointValue(mk.size, i));
+    const angle = Number(pointValue(mk.angle, i));
+    const alpha = Number(pointValue(mk.opacity, i));
+    const traceAlpha = Number(tr.opacity);
+    const edge = pointColor(mk.line && mk.line.color, i);
+    const edgeWidth = Number(mk.line && mk.line.width);
+    return {
+      shape: "glyph",
+      symbol: String(symbol),
+      size: Number.isFinite(size) ? size : HOVER_GLYPH_SIZE,
+      angle: Number.isFinite(angle) ? angle : 0,
+      opacity:
+        (Number.isFinite(alpha) ? alpha : 1) * (Number.isFinite(traceAlpha) ? traceAlpha : 1),
+      fill: marker,
+      edge: edgeWidth > 0 && edge ? edge : marker,
+      edgeWidth: Number.isFinite(edgeWidth) ? edgeWidth : 0,
+    };
+  }
+  const width = tr.line && tr.line.width !== undefined ? Number(tr.line.width) : 1;
+  const fill = tr.fillcolor || full.fillcolor;
+  if (!(width > 0) && fill) return { shape: "box", fill: fill, edge: solid(fill) || fill };
+  const line =
+    pointColor(tr.line && tr.line.color, i) ||
+    pointColor(full.line && full.line.color, i) ||
+    marker ||
+    fill ||
+    "";
+  return { shape: "line", fill: line, edge: line };
+}
+
+function hoverPointLines(pt) {
+  const tr = pt.data || {};
+  const raw = Array.isArray(tr.wxTemplate) ? tr.wxTemplate[pt.pointNumber] : tr.wxTemplate;
+  if (typeof raw === "string" && raw) {
+    return hoverLines(fillHoverTemplate(overlayHoverTemplate(raw), pt));
+  }
+  const info = String(tr.wxInfo || "all");
+  const scalar = (v) => (typeof v === "string" ? v : undefined);
+  const text =
+    pt.hovertext !== undefined ? pt.hovertext
+      : pt.text !== undefined ? pt.text
+        : scalar(tr.hovertext) !== undefined ? tr.hovertext
+          : scalar(tr.text);
+  if ((info === "all" || info.indexOf("text") >= 0) && text) return hoverLines(text);
+  if (pt.y === undefined || pt.y === null) return [];
+  const name = typeof tr.name === "string" && tr.name ? tr.name + ": " : "";
+  return [{ text: name + hoverNumber(pt.y, ""), bold: false }];
+}
+
+function alertGlyph(color) {
+  const fill = solid(color) || color || NEIGHBOUR_MAP_RING_FALLBACK;
+  return {
+    shape: "glyph",
+    symbol: "circle",
+    size: HOVER_ALERT_SIZE,
+    angle: 0,
+    opacity: 1,
+    fill: fill,
+    edge: fill,
+    edgeWidth: 0,
+  };
+}
+
+function boxStatsAt(pd, pt) {
+  const cd = pd && pd.calcdata && pd.calcdata[pt.curveNumber];
+  if (!Array.isArray(cd)) return null;
+  const tr = pt.data || {};
+  const pa = tr.orientation === "h" ? pt.yaxis : pt.xaxis;
+  const raw = tr.orientation === "h" ? pt.y : pt.x;
+  if (!pa || typeof pa.d2c !== "function") return null;
+  const pos = pa.d2c(raw);
+  for (const box of cd) {
+    if (box && Number.isFinite(box.pos) && Math.abs(box.pos - pos) < 1e-6) return box;
+  }
+  return null;
+}
+
+function templateSpec(tr, key) {
+  const tpl = traceTemplate(tr);
+  const m = tpl ? new RegExp("%\\{" + key + ":([^}|]+)\\}").exec(tpl) : null;
+  return m ? m[1] : HOVER_BOX_SPEC;
+}
+
+function boxEntry(pd, pts) {
+  const pt = pts[0];
+  const tr = pt.data || {};
+  const full = pt.fullData || {};
+  const horizontal = tr.orientation === "h";
+  const valueKey = horizontal ? "x" : "y";
+  const spec = templateSpec(tr, valueKey);
+  const vals = pts.map((p) => Number(p[valueKey])).filter(Number.isFinite);
+  const lines = [{ text: hoverText(horizontal ? pt.y : pt.x), bold: true }];
+  const box = boxStatsAt(pd, pt);
+  if (box) {
+    for (const [key, label] of HOVER_BOX_STATS) {
+      const v = Number(box[key]);
+      if (!Number.isFinite(v)) continue;
+      const tol = 1e-9 * Math.max(1, Math.abs(v));
+      if (!vals.some((y) => Math.abs(y - v) <= tol)) continue;
+      lines.push({ text: `${label}: ${hoverNumber(v, spec)}`, bold: false });
+    }
+  }
+  if (lines.length === 1) {
+    for (const v of vals.slice().sort((a, b) => b - a)) {
+      lines.push({ text: hoverNumber(v, spec), bold: false });
+    }
+  }
+  const fill = tr.fillcolor || full.fillcolor || "";
+  const edge = (tr.line && tr.line.color) || (full.line && full.line.color) || fill;
+  const legendRank = Number(tr.legendrank);
+  return {
+    rank: Number.isFinite(legendRank) ? legendRank : HOVER_RANK_DEFAULT,
+    order: pt.curveNumber,
+    sub: 0,
+    lines: lines,
+    swatch: fill || edge ? { shape: "box", fill: fill || edge, edge: edge } : null,
+  };
+}
+
+function hoverBorder(pt, fl) {
+  const hl = pt && pt.data && pt.data.hoverlabel;
+  const own = hl ? pointValue(hl.bordercolor, pt.pointNumber) : null;
+  if (typeof own === "string" && own) return own;
+  const shared = fl && fl.hoverlabel && fl.hoverlabel.bordercolor;
+  return typeof shared === "string" && shared ? shared : null;
+}
+
+function chartHoverAt(ev, pd) {
+  const fl = pd && pd._fullLayout;
+  const unified = !!(fl && /unified/.test(String(fl.hovermode || "")));
+  const entries = [];
+  const boxes = new Map();
+  let first = null;
+  for (const pt of (ev && ev.points) || []) {
+    if (!pt || !pt.data) continue;
+    if (!first) first = pt;
+    if (pt.hoverOnBox) {
+      const key = pt.curveNumber + "|" + String(pt.data.orientation === "h" ? pt.y : pt.x);
+      if (!boxes.has(key)) boxes.set(key, []);
+      boxes.get(key).push(pt);
+      continue;
+    }
+    const lines = hoverPointLines(pt);
+    if (!lines.length) continue;
+    const legendRank = Number(pt.data.legendrank);
+    const rank = Number.isFinite(legendRank) ? legendRank : HOVER_RANK_DEFAULT;
+    entries.push({
+      rank: rank,
+      order: pt.curveNumber,
+      sub: 0,
+      lines: lines,
+      swatch: hoverSwatch(pt),
+    });
+    const folded = pointValue(pt.data.wxAlerts, pt.pointNumber);
+    if (!Array.isArray(folded)) continue;
+    folded.forEach((a, k) => {
+      const text = hoverLines(a && a.text);
+      if (!text.length) return;
+      entries.push({
+        rank: rank,
+        order: pt.curveNumber,
+        sub: k + 1,
+        lines: text,
+        swatch: alertGlyph(a.color),
+      });
+    });
+  }
+  for (const group of boxes.values()) entries.push(boxEntry(pd, group));
+  entries.sort((a, b) => a.rank - b.rank || a.order - b.order || a.sub - b.sub);
+  const xa = first && first.xaxis;
+  const dated = unified && !!xa && xa.type === "date";
+  return {
+    at: dated ? stampMs(first.x) : NaN,
+    entries: entries,
+    border: unified ? null : hoverBorder(first, fl),
+  };
+}
+
+function wireChartHover(pd) {
+  if (!pd || typeof pd.on !== "function" || pd._wxChartHoverWired) return;
+  pd._wxChartHoverWired = true;
+  wireHoverTip(pd, (ev) => chartHoverAt(ev, pd), null, { anchor: true });
+}
+
+function plotYSpan(pd) {
+  const fl = pd && pd._fullLayout;
+  if (!fl) return null;
+  let top = Infinity;
+  let bottom = -Infinity;
+  for (const key of Object.keys(fl)) {
+    if (!/^yaxis\d*$/.test(key)) continue;
+    const ya = fl[key];
+    if (!ya || ya.visible === false || typeof ya._offset !== "number" || !ya._length) continue;
+    top = Math.min(top, ya._offset);
+    bottom = Math.max(bottom, ya._offset + ya._length);
+  }
+  return bottom > top ? { top: top, height: bottom - top } : null;
+}
+
+function wireDetailHover(pd) {
+  if (!pd || typeof pd.on !== "function" || pd._wxDetailHoverWired) return;
+  pd._wxDetailHoverWired = true;
+  wireChartHover(pd);
+  const host = pd.parentNode;
+  if (!host) return;
+  ensureGridSpikeStyles();
+  if (window.getComputedStyle(host).position === "static") host.style.position = "relative";
+  const line = el("div", "wx-grid-spike");
+  host.appendChild(line);
+
+  let raf = 0;
+  let timer = 0;
+  let pending = null;
+
+  const cancel = () => {
+    if (timer) {
+      clearTimeout(timer);
+      timer = 0;
+    }
+  };
+
+  const hide = () => {
+    cancel();
+    pending = null;
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
+    line.className = "wx-grid-spike";
+  };
+
+  const paint = () => {
+    raf = 0;
+    const job = pending;
+    pending = null;
+    const xa = pd._fullLayout && pd._fullLayout.xaxis;
+    const span = plotYSpan(pd);
+    if (!job || !xa || !span || !pd.isConnected) {
+      line.className = "wx-grid-spike";
+      return;
+    }
+    let px = NaN;
+    try {
+      px = xa.c2p(job);
+    } catch (e) {
+      void e;
+    }
+    if (!Number.isFinite(px)) {
+      line.className = "wx-grid-spike";
+      return;
+    }
+    line.style.left = Math.round(pd.offsetLeft + xa._offset + px) + "px";
+    line.style.top = Math.round(pd.offsetTop + span.top) + "px";
+    line.style.height = Math.round(span.height) + "px";
+    line.className = "wx-grid-spike on";
+  };
+
+  const place = (xval) => {
+    cancel();
+    if (xval === null || xval === undefined || !Number.isFinite(Number(xval))) {
+      hide();
+      return;
+    }
+    pending = Number(xval);
+    if (!raf) raf = requestAnimationFrame(paint);
+  };
+
+  pd._wxSpikeAt = place;
+  pd._wxSpikeOff = hide;
+
+  pd.on("plotly_hover", (ev) => {
+    const pt = ev && ev.points && ev.points[0];
+    const xval = pt ? axisValue(hoverAxis(pd, pt), pt.x) : null;
+    place(xval);
+  });
+  pd.on("plotly_unhover", () => {
+    cancel();
+    timer = setTimeout(() => {
+      timer = 0;
+      hide();
+    }, HOVER_HOLD_MS);
+  });
+  pd.on("plotly_relayout", hide);
+  onPlotLeave(pd, hide);
+}
+
+function ganttHoverAt(ev) {
+  const entries = [];
+  let cursor = null;
+  for (const pt of (ev && ev.points) || []) {
+    const tr = pt && pt.data;
+    if (!tr) continue;
+    if (tr.meta === GANTT_CURSOR_META) {
+      if (!cursor) cursor = pt;
+      continue;
+    }
+    if (tr.type !== "bar" || tr.hoverinfo === "skip") continue;
+    const list = decodeArray(tr.hovertext);
+    const raw = pt.hovertext !== undefined
+      ? pt.hovertext
+      : list ? list[pt.pointNumber] : tr.hovertext;
+    const lines = hoverLines(raw);
+    if (!lines.length) continue;
+    const marker = tr.marker || {};
+    const fill = typeof marker.color === "string" ? marker.color : "";
+    const edge = marker.line && typeof marker.line.color === "string" ? marker.line.color : "";
+    entries.push({
+      y: Number(pt.y),
+      lines: lines,
+      swatch: { shape: "box", fill: fill, edge: edge || fill },
+    });
+  }
+  entries.sort((a, b) => a.y - b.y);
+  return { at: cursor ? stampMs(cursor.x) : NaN, cursor: cursor, entries: entries };
+}
+
+function wireGanttHoverBox(g, pd) {
+  ensureHoverTipStyles();
+  const spike = el("div", "wx-gantt-spike");
+  if (!g.style.position) g.style.position = "relative";
+  g.appendChild(spike);
+
+  const spikeAt = (pt) => {
+    const xa = pt && pt.xaxis;
+    const ya = pt && pt.yaxis;
+    if (!xa || !ya || typeof xa.d2l !== "function" || typeof xa.l2p !== "function") {
+      spike.classList.remove("on");
+      return;
+    }
+    const x = xa.l2p(xa.d2l(pt.x));
+    if (!Number.isFinite(x)) {
+      spike.classList.remove("on");
+      return;
+    }
+    const left = pd.offsetLeft + xa._offset + x;
+    const top = pd.offsetTop + ya._offset;
+    spike.style.transform = `translate(${Math.round(left)}px,${Math.round(top)}px)`;
+    spike.style.height = Math.round(ya._length) + "px";
+    spike.classList.add("on");
+  };
+
+  const spikeOff = () => spike.classList.remove("on");
+
+  pd.on("plotly_hover", (ev) => {
+    if (!pointerOf(ev && ev.event)) return;
+    const pts = (ev && ev.points) || [];
+    const cursor = pts.find((pt) => pt && pt.data && pt.data.meta === GANTT_CURSOR_META);
+    if (cursor) spikeAt(cursor);
+    else spikeOff();
+  });
+  pd.on("plotly_unhover", spikeOff);
+  onPlotLeave(pd, spikeOff);
+
+  wireHoverTip(pd, ganttHoverAt, null);
+}
+
 function ganttView(g, base, cap) {
   const view = { base: base, hidden: new Set() };
   let want = null;
   let timer = null;
 
   const draw = () => {
-    const built = ganttCompact(view.base, view.hidden);
-    const next = { data: built.data, layout: cloneLayout(built.layout) };
+    const built = ganttUnified(ganttCompact(view.base, view.hidden));
+    const next = { data: built.data, layout: built.layout };
     if (typeof cap === "function") {
       const limit = cap();
       if (limit && next.layout.height > limit) next.layout.height = limit;
@@ -8208,6 +9589,7 @@ function ganttView(g, base, cap) {
       if (key) isolate(key);
       return false;
     });
+    wireGanttHoverBox(g, pd);
   });
 
   view.setBase = (next) => {
@@ -8283,7 +9665,7 @@ function mountGantt(panel, body, f, row) {
       const cap = inShell ? () => overviewPlotCap(panel) : null;
       const height = cap ? Math.min(fig.layout.height, cap()) : fig.layout.height;
       body.innerHTML = "";
-      const g = graph({ data: fig.data, layout: cloneLayout(fig.layout) }, { height: height });
+      const g = graph(ganttUnified(fig), { height: height, ownHover: true });
       body.appendChild(g);
       ganttView(g, fig, cap);
       requestAnimationFrame(() => {
@@ -8308,6 +9690,16 @@ function solid(color) {
   return m ? `rgb(${m[1]}, ${m[2]}, ${m[3]})` : null;
 }
 
+function ovMark(f) {
+  const edge = solid(f.color);
+  if (!edge) return null;
+  const span = /^rgba\(/i.test(String(f.color || "")) || f.tab === DATA_TAB;
+  const mark = el("i", "wx-ov-mark " + (span ? "bar" : "dot"));
+  mark.style.borderColor = edge;
+  mark.style.background = span && /^rgba\(/i.test(String(f.color)) ? f.color : edge;
+  return mark;
+}
+
 function overviewRow(f, panel, columns, onPick) {
   const row = el("tr", "wx-ov-row");
   for (const name of columns) {
@@ -8317,12 +9709,11 @@ function overviewRow(f, panel, columns, onPick) {
     if (name === "Sensor") row._wxSensor = cell;
     if (name === "Type") row._wxType = cell;
     if (!row.firstChild) {
-      const bar = solid(f.color);
-      if (bar) cell.style.borderLeftColor = bar;
+      const mark = ovMark(f);
+      if (mark) cell.insertBefore(mark, cell.firstChild);
     }
     row.appendChild(cell);
   }
-  row.title = "Show " + f.station;
   row._wxStation = f.station || null;
   row._wxFinding = f;
   row.addEventListener("click", () => {
@@ -8541,6 +9932,12 @@ function sensorEmptyText(area, missing) {
   return SENSOR_EMPTY_TEXT;
 }
 
+const UNTITLED_SECTIONS = new Set([DATA_SECTION]);
+
+const SECTION_LABELS = {
+  [EXTREME_SECTION]: "MAX/MIN",
+};
+
 function spanRow(className, text, span) {
   const row = el("tr", className);
   const cell = ovText("td", null, text);
@@ -8556,8 +9953,6 @@ function sensorTable(findings, panel, missing, opts) {
   const onPick = (opts && opts.onPick) || null;
   const wrap = el("div", "wx-ov-wrap");
   const table = el("table", "wx-ov-table wx-ov-sect");
-  const thead = el("thead");
-  const headRow = el("tr");
   const tbody = el("tbody");
 
   const entries = findings.map((f, i) => ({
@@ -8566,62 +9961,27 @@ function sensorTable(findings, panel, missing, opts) {
     row: overviewRow(f, panel, columns, onPick),
   }));
 
-  let column = null;
-  let dir = 0;
-  const cells = new Map();
-
-  const apply = () => {
-    for (const [name, cell] of cells) {
-      const mark = cell.querySelector(".a");
-      if (mark) mark.remove();
-      if (name !== column || !dir) continue;
-      const arrow = el("span", "a");
-      arrow.textContent = dir < 0 ? "↓" : "↑";
-      cell.appendChild(arrow);
+  const nodes = [];
+  for (const group of sensorSections(entries, null, 0, areas)) {
+    if (headers) nodes.push(spanRow("wx-ov-group", group.area, columns.length));
+    if (!group.types.length) {
+      nodes.push(
+        spanRow("wx-ov-none", sensorEmptyText(group.area, missing), columns.length)
+      );
+      continue;
     }
-    const nodes = [];
-    for (const group of sensorSections(entries, column, dir, areas)) {
-      if (headers) nodes.push(spanRow("wx-ov-group", group.area, columns.length));
-      if (!group.types.length) {
+    for (const type of group.types) {
+      if (type.section && !UNTITLED_SECTIONS.has(type.section)) {
         nodes.push(
-          spanRow("wx-ov-none", sensorEmptyText(group.area, missing), columns.length)
+          spanRow("wx-ov-sub", SECTION_LABELS[type.section] || type.section, columns.length)
         );
-        continue;
       }
-      for (const type of group.types) {
-        if (type.section) {
-          nodes.push(spanRow("wx-ov-sub", type.section, columns.length));
-        }
-        for (const e of type.rows) nodes.push(e.row);
-      }
+      for (const e of type.rows) nodes.push(e.row);
     }
-    tbody.replaceChildren(...nodes);
-    wrap.scrollTop = 0;
-  };
-
-  for (const label of columns) {
-    const cell = ovText("th", null, label);
-    cells.set(label, cell);
-    cell.addEventListener("click", () => {
-      if (column !== label) {
-        column = label;
-        dir = 1;
-      } else if (dir === 1) {
-        dir = -1;
-      } else {
-        column = null;
-        dir = 0;
-      }
-      apply();
-    });
-    headRow.appendChild(cell);
   }
-
-  thead.appendChild(headRow);
-  table.appendChild(thead);
+  tbody.replaceChildren(...nodes);
   table.appendChild(tbody);
   wrap.appendChild(table);
-  apply();
   return wrap;
 }
 
@@ -8691,6 +10051,8 @@ function sizeOverviewShell() {
 const OV_DEFAULT_TAB = "tab-temp";
 
 const OV_FIND_MAX = 8;
+
+const OV_MAP_FIT_PAD = { top: 44, right: 16, bottom: 30, left: 16 };
 
 function ensureOverviewPickerStyles() {
   if (document.getElementById("wx-ovpick-styles")) return;
@@ -8870,7 +10232,7 @@ function mapSearch(slot, fc, onPick) {
   return find;
 }
 
-function overviewPicker(fc, findings, table, shell) {
+function overviewPicker(fc, shell) {
   ensureNeighbourMapStyles();
   ensureOverviewPickerStyles();
   const stack = el("div", "wx-nb-stack wx-ov-stack");
@@ -8884,6 +10246,7 @@ function overviewPicker(fc, findings, table, shell) {
     stack.classList.add("has-map");
   }
   slot._wxMapZoomLabels = true;
+  slot._wxMapFitPad = OV_MAP_FIT_PAD;
   slot._wxMapLocalOnly = true;
   slot._wxMapSize = () => {
     if (isMobile()) {
@@ -8910,8 +10273,7 @@ function overviewPicker(fc, findings, table, shell) {
       .map((at) => at.name);
 
   const openHere = (station) => {
-    const f = stationFinding(findings, station);
-    openFindingInTab({ station: f.station || station, tab: f.tab });
+    openFindingInTab({ station: station, tab: lastWorkTab() });
   };
 
   const pick = (name) => {
@@ -8931,7 +10293,14 @@ function overviewPicker(fc, findings, table, shell) {
       shownKey = key;
       map.fit();
     }
-    const actions = { open: (name) => pick(name) };
+    const actions = {
+      open: (name) => pick(name),
+      warm: (name) => {
+        const at = stationCoord(name);
+        if (!at || coordFc(at) !== fc) return;
+        prefetchDetail(at.name || name, lastWorkTab());
+      },
+    };
     if (focus) {
       const around = neighboursFor(
         focus,
@@ -8952,8 +10321,8 @@ function overviewPicker(fc, findings, table, shell) {
     slot._wxMapTool._wxRemark();
   };
 
-  stack._wxPeek = (name) => {
-    if (_sharedNeighbourMap) _sharedNeighbourMap.peek(slot, name || null);
+  stack._wxPeek = (name, color) => {
+    if (_sharedNeighbourMap) _sharedNeighbourMap.peek(slot, name || null, color || null);
   };
   stack._wxMapClaim = () => {
     warmNeighbours(() => {
@@ -8980,16 +10349,30 @@ function openFindingInTab(f) {
   renderTab(tabId);
 }
 
-function stationFinding(findings, station) {
-  const key = neighbourKey(station);
-  let best = null;
-  for (const f of findings) {
-    if (neighbourKey(f.station) !== key || !CARRY_TABS.has(f.tab) || f.tab === OVERVIEW_TAB) {
-      continue;
+const LAST_TAB_KEY = "wx-last-tab";
+
+let _lastWorkTab = null;
+
+function lastWorkTab() {
+  if (!_lastWorkTab) {
+    try {
+      const saved = localStorage.getItem(LAST_TAB_KEY);
+      if (saved && CARRY_TABS.has(saved)) _lastWorkTab = saved;
+    } catch (e) {
+      void e;
     }
-    if (!best || ovSeverity(f) > ovSeverity(best)) best = f;
   }
-  return best || { station: station, tab: OV_DEFAULT_TAB };
+  return _lastWorkTab || OV_DEFAULT_TAB;
+}
+
+function noteWorkTab(tabId) {
+  if (!CARRY_TABS.has(tabId) || _lastWorkTab === tabId) return;
+  _lastWorkTab = tabId;
+  try {
+    localStorage.setItem(LAST_TAB_KEY, tabId);
+  } catch (e) {
+    void e;
+  }
 }
 
 async function buildOverview(fc, hours) {
@@ -9013,15 +10396,15 @@ async function buildOverview(fc, hours) {
     onPick: (f) => openFindingInTab(f),
   });
   shell.appendChild(table);
-  const picker = overviewPicker(fc, findings, table, shell);
+  const picker = overviewPicker(fc, shell);
   box.appendChild(picker);
   let peeked = null;
   table.addEventListener("pointerover", (ev) => {
     const row = ev.target && ev.target.closest ? ev.target.closest(".wx-ov-row") : null;
-    const name = row ? row._wxStation || null : null;
-    if (name === peeked) return;
-    peeked = name;
-    picker._wxPeek(name);
+    if (!row || row === peeked) return;
+    peeked = row;
+    const f = row ? row._wxFinding : null;
+    picker._wxPeek(row ? row._wxStation || null : null, f ? f.color : null);
   });
   table.addEventListener("pointerleave", () => {
     peeked = null;
@@ -9129,12 +10512,45 @@ async function buildPower(fc, hours) {
   return box;
 }
 
-function dataGantt(fig) {
+function ganttOutagesAt(pd, ev) {
+  const out = new Map();
+  const rows = pd ? ganttRows(pd.layout) : null;
+  if (!rows) return out;
+  const owners = ganttRowOwners(rows.labels);
+  const rowAt = new Map();
+  rows.vals.forEach((v, i) => rowAt.set(Math.round(Number(v)), i));
+  for (const pt of (ev && ev.points) || []) {
+    const tr = pt && pt.data;
+    if (!tr || tr.type !== "bar" || ganttTraceKey(tr) !== GANTT_OUTAGE_NAME) continue;
+    const i = rowAt.get(Math.round(Number(pt.y)));
+    const name = i === undefined ? null : owners[i];
+    if (!name) continue;
+    const color = solid(tr.marker && tr.marker.color) || NEIGHBOUR_MAP_RING_FALLBACK;
+    out.set(neighbourKey(name), color);
+  }
+  return out;
+}
+
+function wireGanttMapTime(g, onTime) {
+  g._wxOnDrawn(() => {
+    const pd = g._wxPlotDiv;
+    if (!pd || pd._wxGanttTimeWired || typeof pd.on !== "function") return;
+    pd._wxGanttTimeWired = true;
+    pd.on("plotly_hover", (ev) => {
+      const at = ev && Array.isArray(ev.xvals) ? Number(ev.xvals[0]) : NaN;
+      onTime(Number.isFinite(at) ? at : 0, ganttOutagesAt(pd, ev));
+    });
+    pd.on("plotly_unhover", () => onTime(null, null));
+  });
+}
+
+function dataGantt(fig, onPick, onTime) {
   ensureDetailStyles();
-  const g = graph(fig);
+  const g = graph(ganttUnified(fig), { ownHover: true });
   const node = card(g, null, { expandable: false });
   const whole = wholeGantt(fig);
   const view = ganttView(g, whole, null);
+  if (onTime) wireGanttMapTime(g, onTime);
   let picked = null;
 
   const head = el("div", "wx-detail-head");
@@ -9146,44 +10562,156 @@ function dataGantt(fig) {
   head.style.display = "none";
   node.insertBefore(head, g);
 
+  const same = (station) =>
+    !!picked && !!station && neighbourKey(picked) === neighbourKey(station);
+
   const clear = () => {
-    if (picked) picked.classList.remove("sel");
     picked = null;
     head.style.display = "none";
     title.textContent = "";
     view.setBase(whole);
+    if (onPick) onPick(null);
   };
 
   close.addEventListener("click", clear);
 
-  const pick = (f, row) => {
-    if (picked === row) {
-      clear();
-      return;
-    }
-    const next = ganttForStation(fig, f.station);
-    if (!next) return;
-    if (picked) picked.classList.remove("sel");
-    picked = row;
-    row.classList.add("sel");
-    title.textContent = f.station;
+  const show = (station) => {
+    if (!station || same(station)) return;
+    picked = station;
+    title.textContent = station;
     head.style.display = "";
-    view.setBase(next);
+    view.setBase(ganttForStation(fig, station) || ganttNothing(whole, station));
+    if (onPick) onPick(station);
     requestAnimationFrame(() => {
-      if (picked === row) showPanel(node);
+      if (picked === station) showPanel(node);
     });
   };
 
-  return { node: node, pick: pick };
+  const toggle = (station) => {
+    if (same(station)) clear();
+    else show(station);
+  };
+
+  return { node: node, show: show, toggle: toggle, picked: () => picked };
+}
+
+function dataMap(fc, main, view) {
+  ensureNeighbourMapStyles();
+  ensureOverviewPickerStyles();
+  const stack = el("div", "wx-nb-stack wx-data-stack");
+  const slot = el("div", "wx-nb-map-slot");
+  slot._wxMapZoomLabels = true;
+  slot._wxMapLocalOnly = true;
+  slot._wxMapFitPad = OV_MAP_FIT_PAD;
+  slot._wxMapHold = true;
+  stack.appendChild(main);
+  stack.appendChild(slot);
+  if (!isMobile()) {
+    const w = sharedNeighbourMap().railWidth();
+    if (w) {
+      slot.style.width = w + "px";
+      slot._wxReserved = true;
+      stack.classList.add("has-map");
+      stack._wxRail = String(w - 2);
+    }
+  }
+
+  const fcNames = () =>
+    pickableCoords()
+      .filter((at) => coordFc(at) === fc)
+      .map((at) => at.name);
+
+  const pick = (name) => {
+    const at = stationCoord(name);
+    if (!view || !at || coordFc(at) !== fc) return;
+    view.show(at.name || name);
+  };
+
+  const actions = { open: (name) => pick(name) };
+
+  slot._wxMapTool = mapSearch(slot, fc, pick);
+
+  let lit = null;
+  const source = (xval) => ({
+    col: null,
+    values: null,
+    alerts: xval === null || xval === undefined ? null : lit,
+  });
+
+  const sync = () => {
+    if (state.fc !== fc || !inActivePane(slot)) return;
+    const map = sharedNeighbourMap();
+    const chosen = view ? view.picked() : null;
+    const focus = chosen && stationCoord(chosen) ? chosen : null;
+    const key = focus ? neighbourKey(focus) : "";
+    const names = fcNames().filter((n) => neighbourKey(n) !== key);
+    if (!names.length && !focus) {
+      map.hide(slot);
+      return;
+    }
+    map.show(focus, names, source, slot, actions, true);
+    slot._wxMapTool._wxRemark();
+  };
+
+  stack._wxPeek = (name, color) => {
+    if (_sharedNeighbourMap) _sharedNeighbourMap.peek(slot, name || null, color || null);
+  };
+  stack._wxMapTime = (xval, alerts) => {
+    lit = alerts && alerts.size ? alerts : null;
+    if (_sharedNeighbourMap) _sharedNeighbourMap.time(xval, slot, null, null);
+  };
+  stack._wxMapClaim = () => {
+    warmNeighbours(() => {
+      if (state.fc !== fc) return;
+      sync();
+    });
+  };
+  return stack;
 }
 
 async function buildData(fc, hours) {
   const c = await loadCharts(fc, hours, DATA_SUFFIX);
   const box = el("div");
-  const view = c && c.data_gantt ? dataGantt(c.data_gantt) : null;
-  const pick = view ? view.pick : () => {};
-  box.appendChild(await insightBanner(fc, hours, DATA_SUFFIX, null, pick));
-  box.appendChild(view ? view.node : unavailable());
+  let banner = null;
+  let stack = null;
+  const mark = (station) => {
+    if (!banner) return;
+    const key = station ? neighbourKey(station) : null;
+    for (const row of banner.querySelectorAll(".wx-ov-row")) {
+      row.classList.toggle("sel", !!key && neighbourKey(row._wxStation) === key);
+    }
+  };
+  const view = c && c.data_gantt
+    ? dataGantt(
+        c.data_gantt,
+        (station) => {
+          mark(station);
+          if (stack) stack._wxMapClaim();
+        },
+        (xval, alerts) => {
+          if (stack) stack._wxMapTime(xval, alerts);
+        }
+      )
+    : null;
+  const pick = view ? (f) => view.toggle(f.station) : () => {};
+  banner = await insightBanner(fc, hours, DATA_SUFFIX, null, pick);
+  const main = el("div", "wx-nb-main");
+  main.appendChild(banner);
+  main.appendChild(view ? view.node : unavailable());
+  stack = dataMap(fc, main, view);
+  box.appendChild(stack);
+  let peeked = null;
+  banner.addEventListener("pointerover", (ev) => {
+    const row = ev.target && ev.target.closest ? ev.target.closest(".wx-ov-row") : null;
+    if (!row || row === peeked) return;
+    peeked = row;
+    const f = row ? row._wxFinding : null;
+    stack._wxPeek(row ? row._wxStation || null : null, f ? f.color : null);
+  });
+  banner.addEventListener("pointerleave", () => {
+    peeked = null;
+    stack._wxPeek(null);
+  });
   return box;
 }
 
@@ -9321,6 +10849,7 @@ function ensureDetailStyles() {
     ".wx-detail-select:hover{border-color:#d9d6d1;}",
     ".wx-detail-msg{padding:40px 8px;font-size:13px;line-height:1.6;",
     "color:var(--text-muted,#8a857d);text-align:center;}",
+    "@media (min-width:769px){.wx-detail-plot .nsewdrag{cursor:crosshair!important;}}",
     "@media (max-width:768px){.wx-detail-control{min-width:0;flex:1 1 100%;}",
     ".wx-detail-select{min-height:44px;font-size:16px;}",
     ".wx-detail-head button{min-height:40px;}}",
@@ -9489,42 +11018,7 @@ function gridSpikeVertical(pd, xa) {
   return { top: top, height: bottom - top };
 }
 
-const HOVER_ECHO_MS = 120;
-
 const HOVER_HOLD_MS = 160;
-
-let _hoverEchoTarget = null;
-let _hoverEchoAt = 0;
-
-function hoverEcho(gd) {
-  return _hoverEchoTarget === gd && Date.now() - _hoverEchoAt < HOVER_ECHO_MS;
-}
-
-function pushHover(gd, xval, subplot) {
-  if (!gd || !window.Plotly || !Plotly.Fx || typeof Plotly.Fx.hover !== "function") {
-    return;
-  }
-  _hoverEchoTarget = gd;
-  _hoverEchoAt = Date.now();
-  try {
-    Plotly.Fx.hover(gd, { xval: xval }, subplot, true);
-  } catch (e) {
-    void e;
-  }
-}
-
-function dropHover(gd) {
-  if (!gd || !window.Plotly || !Plotly.Fx || typeof Plotly.Fx.unhover !== "function") {
-    return;
-  }
-  _hoverEchoTarget = gd;
-  _hoverEchoAt = Date.now();
-  try {
-    Plotly.Fx.unhover(gd);
-  } catch (e) {
-    void e;
-  }
-}
 
 function panelPlot(panel) {
   if (!panel || panel.style.display === "none") return null;
@@ -9571,14 +11065,39 @@ function gridHoverAt(wrap, station, xval) {
   }
   if (!xa) return;
   if (typeof wrap._wxSpikeAt === "function") wrap._wxSpikeAt(xa, xval);
-  if (wrap._wxOverlay) return;
-  const ya = anchoredYAxis(fl, xa);
-  if (ya && ya._id) pushHover(pd, xval, xa._id + ya._id);
 }
 
 function gridHoverOff(wrap) {
-  if (typeof wrap._wxSpikeOff === "function") wrap._wxSpikeOff();
-  if (wrap && wrap._wxGridPlot) dropHover(wrap._wxGridPlot);
+  const pd = wrap && wrap._wxGridPlot;
+  if (pd && pd.matches && pd.matches(":hover")) return;
+  if (wrap && typeof wrap._wxSpikeOff === "function") wrap._wxSpikeOff();
+}
+
+const DETAIL_ALERT_TRACE = "Alerts";
+
+function detailAlertAt(pd, xval) {
+  if (!pd || !Array.isArray(pd.data) || !Number.isFinite(xval)) return null;
+  for (const tr of pd.data) {
+    if (!tr || tr.name !== DETAIL_ALERT_TRACE || tr.visible === "legendonly") continue;
+    const xs = decodeArray(tr.x) || [];
+    const raw = tr.marker && tr.marker.color;
+    const colors = Array.isArray(raw) ? raw : null;
+    for (let i = 0; i < xs.length; i++) {
+      const t = gridTimeMs(xs[i]);
+      if (!Number.isFinite(t) || Math.abs(t - xval) > NEIGHBOUR_MAP_MATCH_MS) continue;
+      return (colors ? colors[i] : raw) || NEIGHBOUR_MAP_RING_FALLBACK;
+    }
+  }
+  for (const sh of (pd.layout && pd.layout.shapes) || []) {
+    if (!sh || sh.type !== "rect" || sh.xref !== "x") continue;
+    const a = gridTimeMs(sh.x0);
+    const b = gridTimeMs(sh.x1);
+    if (!Number.isFinite(a) || !Number.isFinite(b)) continue;
+    if (xval >= Math.min(a, b) && xval <= Math.max(a, b)) {
+      return sh.fillcolor || NEIGHBOUR_MAP_RING_FALLBACK;
+    }
+  }
+  return null;
 }
 
 function wirePanelHover(panel) {
@@ -9596,8 +11115,9 @@ function wirePanelHover(panel) {
   };
 
   const mapTime = (xval) => {
-    if (hoverEcho(dpd)) return;
-    if (typeof wrap._wxMapTime === "function") wrap._wxMapTime(xval, panel._wxStation);
+    if (typeof wrap._wxMapTime !== "function") return;
+    const ring = xval === null || xval === undefined ? null : detailAlertAt(dpd, xval);
+    wrap._wxMapTime(xval, panel._wxStation, ring);
   };
 
   dpd.on("plotly_hover", (ev) => {
@@ -9605,19 +11125,20 @@ function wirePanelHover(panel) {
     const pt = ev && ev.points && ev.points[0];
     const xval = pt ? axisValue(hoverAxis(dpd, pt), pt.x) : null;
     if (xval !== null) mapTime(xval);
-    if (!wrap._wxStacked || hoverEcho(dpd)) return;
-    if (xval === null) return;
+    if (!wrap._wxStacked || xval === null) return;
     gridHoverAt(wrap, panel._wxStation, xval);
   });
-  dpd.on("plotly_unhover", () => {
+  const leave = () => {
     cancel();
     mapTime(null);
-    if (!wrap._wxStacked || hoverEcho(dpd)) return;
+    if (!wrap._wxStacked) return;
     timer = setTimeout(() => {
       timer = 0;
       gridHoverOff(wrap);
     }, HOVER_HOLD_MS);
-  });
+  };
+  dpd.on("plotly_unhover", leave);
+  onPlotLeave(dpd, leave);
 
   wirePanelRangeSync(panel, dpd);
 }
@@ -9831,7 +11352,6 @@ function wireGridMapTime(wrap) {
   if (!pd || typeof pd.on !== "function" || pd._wxMapTimeWired) return;
   pd._wxMapTimeWired = true;
   const send = (xval, station) => {
-    if (hoverEcho(pd)) return;
     if (typeof wrap._wxMapTime === "function") wrap._wxMapTime(xval, station);
   };
   const nearest = (ev, pts) => {
@@ -9870,7 +11390,7 @@ function wireGridMapTime(wrap) {
     if (xval !== null) send(xval, stationOf(ev));
   });
   pd.on("plotly_unhover", () => send(null));
-  pd.addEventListener("mouseleave", () => send(null));
+  onPlotLeave(pd, () => send(null));
 }
 
 function wireGridSpike(wrap) {
@@ -9884,10 +11404,22 @@ function wireGridSpike(wrap) {
   host.appendChild(line);
 
   let timer = 0;
+  let linkTimer = 0;
   let raf = 0;
   let pending = null;
   let offsets = null;
   const spans = new Map();
+
+  const linkedOff = () => {
+    if (!wrap._wxStacked) return;
+    if (linkTimer) clearTimeout(linkTimer);
+    linkTimer = setTimeout(() => {
+      linkTimer = 0;
+      const dpd = panelPlot(wrap._wxPanel);
+      if (!dpd || (dpd.matches && dpd.matches(":hover"))) return;
+      if (typeof dpd._wxSpikeOff === "function") dpd._wxSpikeOff();
+    }, HOVER_HOLD_MS);
+  };
 
   const cancel = () => {
     if (timer) {
@@ -9975,28 +11507,31 @@ function wireGridSpike(wrap) {
       return;
     }
     place(xa, xval);
-    if (!wrap._wxStacked || hoverEcho(pd)) return;
+    if (!wrap._wxStacked) return;
+    if (linkTimer) {
+      clearTimeout(linkTimer);
+      linkTimer = 0;
+    }
     const dpd = panelPlot(wrap._wxPanel);
-    if (dpd) pushHover(dpd, xval, "xy");
+    if (dpd && typeof dpd._wxSpikeAt === "function") dpd._wxSpikeAt(xval);
   });
   pd.on("plotly_unhover", () => {
     cancel();
-    const echo = hoverEcho(pd);
-    const linked = wrap._wxStacked && !echo;
     timer = setTimeout(() => {
       timer = 0;
       line.className = "wx-grid-spike";
-      if (!linked) return;
-      const dpd = panelPlot(wrap._wxPanel);
-      if (dpd) dropHover(dpd);
     }, HOVER_HOLD_MS);
+    linkedOff();
   });
   pd.on("plotly_relayout", () => {
     invalidate();
     hide();
   });
   pd.on("plotly_afterplot", invalidate);
-  pd.addEventListener("mouseleave", hide);
+  onPlotLeave(pd, () => {
+    hide();
+    linkedOff();
+  });
 }
 
 function captureStationAnnotations(fig, names) {
@@ -10065,7 +11600,8 @@ function wireGridStationClicks(wrap, g) {
     wireGridAlertClicks(wrap);
     wireGridSpike(wrap);
     wireGridMapTime(wrap);
-    wireBandGlyphs(wrap);
+    wireGridHoverReach(wrap);
+    wireChartHover(wrap._wxGridPlot);
     wireGridRangeSync(wrap);
     wireGridFit(wrap);
     wireGridZoom(wrap);
@@ -10334,11 +11870,141 @@ function resetTabs() {
   _prebuildToken++;
   _prebuildDone.clear();
   tabPanes.clear();
+  _staleToken++;
+  _stalePane = null;
   if (_sharedNeighbourMap) _sharedNeighbourMap.park();
-  if ($panes) $panes.innerHTML = "";
+  if ($panes) {
+    $panes.innerHTML = "";
+    $panes.classList.remove("wx-holding");
+  }
   for (let i = _mountQueue.length - 1; i >= 0; i--) {
     if (!_mountQueue[i].node.isConnected) _mountQueue.splice(i, 1);
   }
+}
+
+const STALE_SETTLE_MS = 3000;
+
+let _stalePane = null;
+
+let _staleToken = 0;
+
+function ensureStaleStyles() {
+  if (document.getElementById("wx-stale-styles")) return;
+  const st = document.createElement("style");
+  st.id = "wx-stale-styles";
+  st.textContent = [
+    "@keyframes wx-ghost-dim{to{opacity:.45;}}",
+    ".tab-panes > .tab-pane.wx-stale{content-visibility:visible;height:auto;",
+    "overflow:visible;visibility:visible;pointer-events:none;position:relative;z-index:1;",
+    "animation:wx-ghost-dim .2s ease .15s forwards;}",
+    ".tab-panes.wx-holding > .tab-pane.active{visibility:hidden;}",
+    ".tab-panes > .tab-pane.wx-leaving{animation:wx-ghost-dim .2s ease .15s forwards;}",
+    ".tab-panes > .wx-stale-spin{position:absolute;left:0;right:0;top:56px;",
+    "height:auto;z-index:2;}",
+    ".wx-ov-chart.wx-ghosting{position:relative;}",
+    ".wx-detail-ghost{position:absolute;left:0;top:0;right:0;bottom:0;z-index:3;",
+    "box-sizing:border-box;overflow:hidden;pointer-events:none;",
+    "background:var(--surface,#fff);}",
+    ".wx-detail-ghost > .wx-detail-ghost-in{animation:wx-ghost-dim .2s ease .15s forwards;}",
+    ".wx-detail-ghost > .wx-plot-wait{position:absolute;left:0;top:0;right:0;bottom:0;",
+    "height:auto;z-index:1;}",
+  ].join("");
+  document.head.appendChild(st);
+}
+
+function pruneMountsIn(root) {
+  for (let i = _mountQueue.length - 1; i >= 0; i--) {
+    const node = _mountQueue[i].node;
+    if (!node.isConnected || (root && root.contains(node))) _mountQueue.splice(i, 1);
+  }
+}
+
+function holdStalePane() {
+  const keep = _stalePane && _stalePane.isConnected ? _stalePane : activePane();
+  if (!$panes || !$panes.isConnected || !keep) {
+    resetTabs();
+    return;
+  }
+  ensureStaleStyles();
+  _prebuildToken++;
+  _prebuildDone.clear();
+  tabPanes.clear();
+  _staleToken++;
+  if (keep !== _stalePane) {
+    keep.classList.remove("active", "wx-leaving");
+    keep.classList.add("wx-stale");
+    keep.setAttribute("inert", "");
+    _stalePane = keep;
+  }
+  for (const child of Array.from($panes.children)) {
+    if (child === keep || child.classList.contains("wx-stale-spin")) continue;
+    if (_sharedNeighbourMap && child.contains(_sharedNeighbourMap.node)) {
+      _sharedNeighbourMap.park();
+    }
+    $panes.removeChild(child);
+  }
+  if (!$panes.querySelector(":scope > .wx-stale-spin")) {
+    const spin = el("div", "wx-plot-wait wx-stale-spin");
+    spin.setAttribute("role", "status");
+    spin.setAttribute("aria-label", "Loading");
+    spin.appendChild(el("div", "wx-plot-spin"));
+    $panes.appendChild(spin);
+  }
+  $panes.classList.add("wx-holding");
+  pruneMountsIn(keep);
+}
+
+function paneSettled(pane) {
+  const entry = pane ? tabPanes.get(pane.dataset.tab) : null;
+  if (!entry || !entry.ready || entry.pane !== pane) return false;
+  if (nextMountIndex() >= 0) return false;
+  const vh = window.innerHeight || 0;
+  for (const n of pane.querySelectorAll(".al-loading, .wx-plot-wait")) {
+    const r = n.getBoundingClientRect();
+    if (!r.width && !r.height) continue;
+    if (r.bottom < 0 || r.top > vh) continue;
+    return false;
+  }
+  return true;
+}
+
+function dropStalePane() {
+  const stale = _stalePane;
+  _stalePane = null;
+  if (!$panes) return;
+  if (stale) {
+    if (_sharedNeighbourMap && stale.contains(_sharedNeighbourMap.node)) {
+      _sharedNeighbourMap.park();
+    }
+    if (stale.parentNode) stale.parentNode.removeChild(stale);
+    pruneMountsIn(null);
+  }
+  const spin = $panes.querySelector(":scope > .wx-stale-spin");
+  if (spin) spin.remove();
+  $panes.classList.remove("wx-holding");
+  const pane = activePane();
+  if (!pane) return;
+  sizeOverviewShell();
+  const grid = activeGrid(pane);
+  if (grid && typeof grid._wxMapClaim === "function") grid._wxMapClaim();
+  const picker = pane.querySelector(MAP_STACK_SELECTOR);
+  if (picker && typeof picker._wxMapClaim === "function") picker._wxMapClaim();
+  kickMounts();
+}
+
+function settleStalePane() {
+  if (!_stalePane) return;
+  const token = _staleToken;
+  const start = performance.now();
+  const step = () => {
+    if (token !== _staleToken || !_stalePane) return;
+    if (paneSettled(activePane()) || performance.now() - start > STALE_SETTLE_MS) {
+      dropStalePane();
+      return;
+    }
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
 }
 
 function paneFor(tab) {
@@ -10424,7 +12090,9 @@ function prefetchTabPayloads(fc, hours, tabs) {
   }
 }
 
-const PREBUILD_TABS = ["tab-rh", "tab-wind", "tab-temp", "tab-rn1", "tab-power"];
+const PREBUILD_TABS = [
+  "tab-rh", "tab-wind", "tab-temp", "tab-rn1", "tab-power", OVERVIEW_TAB, DATA_TAB,
+];
 
 const PREBUILD_HOVER_MS = 120;
 
@@ -10540,6 +12208,8 @@ function markTabButtons(tabId) {
 function showPane(host, entry) {
   for (const pane of host.children) {
     if (!pane.classList.contains("tab-pane")) continue;
+    if (pane.classList.contains("wx-stale")) continue;
+    pane.classList.remove("wx-leaving");
     pane.classList.toggle("active", pane === entry.pane);
   }
 }
@@ -10659,6 +12329,8 @@ const GRID_STACK_VIEW_SHARE = 0.5;
 const CARRY_TABS = new Set([
   "tab-rh", "tab-wind", "tab-temp", "tab-rn1", "tab-power",
 ]);
+
+const MAP_STACK_SELECTOR = ".wx-ov-stack, .wx-data-stack";
 
 function captureTabCarry(pane, fromId, tabId) {
   if (!CARRY_TABS.has(fromId) || !CARRY_TABS.has(tabId)) return null;
@@ -10785,6 +12457,7 @@ function renderTab(tabId) {
   };
 
   state.activeTab = tab.id;
+  noteWorkTab(tab.id);
   writeRoute(false);
   holdPrebuild(PREBUILD_HOLD_MS);
   markTabButtons(tab.id);
@@ -10792,6 +12465,10 @@ function renderTab(tabId) {
   const moving = !!current && current !== entry.pane;
   const frames = moving ? 1 : 0;
   const cold = moving && !entry.ready;
+  if (cold) {
+    ensureStaleStyles();
+    current.classList.add("wx-leaving");
+  }
   const job = entry.ready ? Promise.resolve(entry) : fillPane(tab);
   const reveal = revealPane(
     host,
@@ -10803,10 +12480,11 @@ function renderTab(tabId) {
 
   reveal.then((ok) => {
     if (!ok) return;
+    if (entry.ready) sizeOverviewShell();
     runCarry();
     const shown = activeGrid(entry.pane);
     if (shown && typeof shown._wxMapClaim === "function") shown._wxMapClaim();
-    const picker = entry.pane.querySelector(".wx-ov-stack");
+    const picker = entry.pane.querySelector(MAP_STACK_SELECTOR);
     if (picker && typeof picker._wxMapClaim === "function") picker._wxMapClaim();
     afterFrame(() => {
       if (state.activeTab !== tab.id) return;
@@ -10826,7 +12504,7 @@ function renderTab(tabId) {
       resizePlots(entry.pane);
       catchUpResize();
       sizeOverviewShell();
-      const picker = entry.pane.querySelector(".wx-ov-stack");
+      const picker = entry.pane.querySelector(MAP_STACK_SELECTOR);
       if (picker && typeof picker._wxMapClaim === "function") picker._wxMapClaim();
       kickMounts();
     });
@@ -10863,12 +12541,11 @@ async function runAnalysis() {
     memCache.clear();
     inflight.clear();
     rawCache.clear();
-    resetTabs();
+    holdStalePane();
     cancelPrefetch();
   }
 
   const token = ++runToken;
-  $footer.textContent = "";
 
   const pending = reopen || gridKeep
     ? {
@@ -10881,13 +12558,18 @@ async function runAnalysis() {
     : null;
   _pendingDetail = pending;
 
-  await renderTab(state.activeTab || OVERVIEW_TAB);
+  try {
+    await renderTab(state.activeTab || OVERVIEW_TAB);
+  } catch (e) {
+    console.warn("tab render failed", e);
+  }
   if (token !== runToken) return;
 
   if (pending && _pendingDetail === pending) {
     _pendingDetail = null;
     restoreCarried(reopen, gridKeep, activePane());
   }
+  settleStalePane();
 
   const [dmin, dmax] = await extractDateRange(fc, hours);
   if (token !== runToken) return;

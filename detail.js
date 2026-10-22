@@ -64,6 +64,7 @@ const SERIES_CACHE_MAX = 8;
 const PLOT_CONFIG = {
   responsive: true,
   displaylogo: false,
+  showTips: false,
   displayModeBar: "hover",
   modeBarButtonsToRemove: ["lasso2d", "select2d"],
 };
@@ -1139,6 +1140,7 @@ export async function mount(host, opts) {
     plot.on("plotly_relayout", onRelayout);
     plot.on("plotly_afterplot", () => tidySlider(plot));
     tidySlider(plot);
+    if (typeof window.wireDetailHover === "function") window.wireDetailHover(plot);
   };
 
   const draw = () => {
@@ -1224,6 +1226,7 @@ export async function mount(host, opts) {
       }
     }
     fig.layout.height = heightFor();
+    if (typeof window.quietHoverFigure === "function") window.quietHoverFigure(fig);
     if (drawn) {
       Plotly.react(plot, fig.data, fig.layout, PLOT_CONFIG);
     } else {
@@ -1363,7 +1366,7 @@ export async function mount(host, opts) {
     syncAlerts(true);
   });
 
-  let resizeTimer = 0;
+  let resizeFrame = 0;
   let lastWidth = 0;
 
   const applySize = () => {
@@ -1384,11 +1387,11 @@ export async function mount(host, opts) {
   };
 
   const onResize = () => {
-    if (resizeTimer) clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      resizeTimer = 0;
+    if (resizeFrame) return;
+    resizeFrame = requestAnimationFrame(() => {
+      resizeFrame = 0;
       applySize();
-    }, 140);
+    });
   };
 
   window.addEventListener("resize", onResize);
@@ -1417,7 +1420,8 @@ export async function mount(host, opts) {
         void e;
       }
     }
-    if (resizeTimer) clearTimeout(resizeTimer);
+    if (resizeFrame) cancelAnimationFrame(resizeFrame);
+    resizeFrame = 0;
     try {
       Plotly.purge(plot);
     } catch (e) {

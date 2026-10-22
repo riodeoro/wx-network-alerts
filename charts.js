@@ -9,10 +9,12 @@ import {
 export const FONT_FAMILY =
   'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif';
 
-export const SERIES_COLOR = "#a8a29e";
-export const SERIES_FILL = "rgba(168, 162, 158, 0.12)";
+export const SERIES_COLOR = "#3d3a35";
+export const SERIES_FILL = "rgba(120, 113, 108, 0.12)";
+export const SERIES_WIDTH = 1.4;
 export const SERIES2_COLOR = "#2c5fa9";
 export const SERIES2_FILL = "rgba(44, 95, 169, 0.10)";
+export const SERIES2_WIDTH = 1.1;
 export const SERIES2_OPACITY = 0.45;
 export const MATCH_COLOR = "#da2d2a";
 
@@ -753,13 +755,14 @@ function seriesTrace(series, col, alerts, opts) {
   const slotOf = new Array(times.length);
 
   for (let s = 0; s < edges.length - 1; s++) {
-    const seg = { x: [], y: [], text: [], angle: [], symbol: [], size: [] };
+    const seg = { x: [], y: [], text: [], angle: [], symbol: [], size: [], alerts: [] };
     for (let k = edges[s]; k < edges[s + 1]; k++) {
       const t = times[k];
       if (breaks.has(k)) {
         seg.x.push(isoStamp(times[k - 1] + 1000));
         seg.y.push(null);
         seg.text.push("");
+        seg.alerts.push(null);
         if (arrows) {
           seg.angle.push(0);
           seg.symbol.push(ARROW_MISSING_SYMBOL);
@@ -770,6 +773,7 @@ function seriesTrace(series, col, alerts, opts) {
       slotOf[k] = seg.x.length;
       seg.x.push(isoStamp(t));
       seg.y.push(vals[k]);
+      seg.alerts.push(null);
       if (arrows) {
         const a = angles[k];
         const known = a !== null;
@@ -791,7 +795,12 @@ function seriesTrace(series, col, alerts, opts) {
       const near = nearestSlot(times, p.t);
       if (near < 0 || Math.abs(times[near] - p.t) > opts.tolerance) continue;
       const seg = segments[segOf[near]];
-      seg.text[slotOf[near]] += `<br>${p.text || `Alert \u00b7 ${stampLabel(p.t)}`}`;
+      const slot = slotOf[near];
+      if (!seg.alerts[slot]) seg.alerts[slot] = [];
+      seg.alerts[slot].push({
+        text: p.text || `Alert \u00b7 ${stampLabel(p.t)}`,
+        color: p.color || MATCH_COLOR,
+      });
       folded.add(k);
     }
   }
@@ -817,6 +826,7 @@ function seriesTrace(series, col, alerts, opts) {
         },
         text: seg.text,
         hovertemplate: `${dispUnit(col)}: ${value}%{text}<extra></extra>`,
+        wxAlerts: seg.alerts,
         showlegend: false,
       };
     }
@@ -835,10 +845,11 @@ function seriesTrace(series, col, alerts, opts) {
         opacity: circular ? 0.35 : lone ? 1 : 0.35,
         line: { width: 0 },
       },
-      line: { color: opts.color, width: 1.4, shape: "linear" },
+      line: { color: opts.color, width: opts.width || SERIES_WIDTH, shape: "linear" },
       connectgaps: false,
       text: seg.text,
       hovertemplate: `${dispUnit(col)}: ${value}%{text}<extra></extra>`,
+      wxAlerts: seg.alerts,
       showlegend: false,
     };
     if (!circular) {
@@ -949,6 +960,7 @@ export function buildStationDetail(
     yaxis: "y",
     color: SERIES_COLOR,
     fillcolor: SERIES_FILL,
+    width: SERIES_WIDTH,
     withAlerts: show,
     alertPts: pts,
     tolerance,
@@ -964,6 +976,7 @@ export function buildStationDetail(
       yaxis: "y2",
       color: SERIES2_COLOR,
       fillcolor: SERIES2_FILL,
+      width: SERIES2_WIDTH,
       withAlerts: show,
       alertPts: pts2,
       tolerance,
