@@ -14,6 +14,7 @@ import {
   isoStamp,
   ARROW_COL,
   ARROW_DIR_COL,
+  SENSOR_GROUPS,
 } from "./charts.js";
 import {
   RAIN_COL,
@@ -48,8 +49,15 @@ const DIR_CONC_RE = /^Direction concentration/;
 
 const OPTIONAL_COLS = new Set([
   "SM1", "SM2", "SM3", "ST1", "ST2", "ST3",
-  "PrecipOP2", "PrecipPC2", "SDepth",
+  "PrecipOP2", "PrecipPC2", "Rn_1_OP2", "Rn_1_PC2", "SDepth",
 ]);
+
+const GROUP_OF = new Map();
+for (const [key, group] of Object.entries(SENSOR_GROUPS)) {
+  for (const col of group.members) GROUP_OF.set(col, key);
+}
+
+const ALERTS_NAME = "Alerts";
 
 const PLOT_PREF = {
   "tab-rh": ["Rh", "Temp"],
@@ -613,6 +621,23 @@ function orderedCols(cols) {
     .sort((a, b) => (rank.get(a) ?? 999) - (rank.get(b) ?? 999));
 }
 
+function plotChoices(cols) {
+  const out = [];
+  for (const c of cols) {
+    const key = GROUP_OF.get(c) || c;
+    if (!out.includes(key)) out.push(key);
+  }
+  return out;
+}
+
+function choiceLabel(key) {
+  return SENSOR_GROUPS[key] ? SENSOR_GROUPS[key].label : dispUnit(key);
+}
+
+function choiceCols(key) {
+  return SENSOR_GROUPS[key] ? SENSOR_GROUPS[key].members : [key];
+}
+
 function detailHeight(modal, plot) {
   const vh = window.innerHeight || 800;
   const cap = Math.max(300, vh - (MOBILE() ? 16 : 56));
@@ -696,12 +721,17 @@ function yearExtent(drawn, col, pick) {
   return year && year.n && year[col] ? year : null;
 }
 
-function fitRange(series, col, view, year) {
-  const v = series && col && !CIRCULAR_COLS.has(col) ? series[col] : null;
-  if (!v || !series.n) return null;
+function fitRange(series, col, view, year, band) {
+  if (!series || !series.n || !col) return null;
+  const list = choiceCols(col).filter((c) => !CIRCULAR_COLS.has(c) && series[c]);
+  if (!list.length) return null;
   const box = { min: Infinity, max: -Infinity };
-  extent(series.t, v, series.n, view, box);
-  if (year) extent(year.t, year[col], year.n, view, box);
+  for (const c of list) extent(series.t, series[c], series.n, view, box);
+  if (year && year[col]) extent(year.t, year[col], year.n, view, box);
+  if (band && Array.isArray(band.x) && band.x.length) {
+    extent(band.x, band.p10, band.x.length, view, box);
+    extent(band.x, band.p90, band.x.length, view, box);
+  }
   const min = box.min;
   const max = box.max;
   if (min > max) return null;
@@ -837,7 +867,7 @@ export async function mount(host, opts) {
   }
   if (!host.isConnected) return;
 
-  const cols = orderedCols(payload.cols);
+  const cols = plotChoices(orderedCols(payload.cols));
   const pref = await preferredCols(opts, cols);
   if (!host.isConnected) return;
   const picked = pickPlotCols(pref, cols);
@@ -880,7 +910,7 @@ export async function mount(host, opts) {
     for (const c of cols) {
       const o = document.createElement("option");
       o.value = c;
-      o.textContent = dispUnit(c);
+      o.textContent = choiceLabel(c);
       sel.appendChild(o);
     }
     sel.value = value || "";
@@ -1039,6 +1069,13 @@ export async function mount(host, opts) {
     return false;
   };
 
+  const onLegend = (ev) => {
+    const list = ev && (ev.data || ev.fullData);
+    const tr = list ? list[ev.curveNumber] : null;
+    if (tr && tr.name !== ALERTS_NAME) return true;
+    return toggleAlerts();
+  };
+
   let shown = null;
   let fitFrame = 0;
   let yHeld = false;
@@ -1047,7 +1084,7 @@ export async function mount(host, opts) {
   plot._wxFitY = (view) => {
     const span = view || fullView(plot);
     return shown && span
-      ? fitRange(shown.series, shown.primary, span, shown.year1)
+      ? fitRange(shown.series, shown.primary, span, shown.year1, shown.band1)
       : null;
   };
 
@@ -1055,7 +1092,7 @@ export async function mount(host, opts) {
     const out = {};
     let r1 = yHeld
       ? null
-      : fitRange(shown.series, shown.primary, view, shown.year1);
+      : fitRange(shown.series, shown.primary, view, shown.year1, shown.band1);
     if (r1 && typeof opts.shareY === "function") {
       const shared = opts.shareY(
         shown.primary,
@@ -1066,7 +1103,7 @@ export async function mount(host, opts) {
     }
     if (r1) out["yaxis.range"] = r1;
     const r2 = shown.secondary
-      ? fitRange(shown.series, shown.secondary, view, shown.year2)
+      ? fitRange(shown.series, shown.secondary, view, shown.year2, shown.band2)
       : null;
     if (r2) out["yaxis2.range"] = r2;
     return out;
@@ -1135,8 +1172,8 @@ export async function mount(host, opts) {
     plot.style.minHeight = "";
     if (wired || typeof plot.on !== "function") return;
     wired = true;
-    plot.on("plotly_legendclick", toggleAlerts);
-    plot.on("plotly_legenddoubleclick", toggleAlerts);
+    plot.on("plotly_legendclick", onLegend);
+    plot.on("plotly_legenddoubleclick", onLegend);
     plot.on("plotly_relayout", onRelayout);
     plot.on("plotly_afterplot", () => tidySlider(plot));
     tidySlider(plot);
@@ -1167,6 +1204,8 @@ export async function mount(host, opts) {
     );
     let year1 = null;
     let year2 = null;
+    let band1 = null;
+    let band2 = null;
     if (on) {
       const pick =
         pickYear !== null && yearSeries
@@ -1178,17 +1217,11 @@ export async function mount(host, opts) {
                   : yearSeries,
             }
           : null;
-      year1 = yearExtent(
-        applyNormals(fig, normals, primary, "y", payload.startMs, payload.endMs, pick),
-        primary,
-        pick
-      );
+      band1 = applyNormals(fig, normals, primary, "y", payload.startMs, payload.endMs, pick);
+      year1 = yearExtent(band1, primary, pick);
       if (secondary && fig.layout && fig.layout.yaxis2) {
-        year2 = yearExtent(
-          applyNormals(fig, normals, secondary, "y2", payload.startMs, payload.endMs, pick),
-          secondary,
-          pick
-        );
+        band2 = applyNormals(fig, normals, secondary, "y2", payload.startMs, payload.endMs, pick);
+        year2 = yearExtent(band2, secondary, pick);
       }
     }
     const kept = drawn ? fullView(plot) || currentView(plot) : startView(opts.view);
@@ -1201,6 +1234,8 @@ export async function mount(host, opts) {
       secondary: hasSecond ? secondary : null,
       year1,
       year2,
+      band1,
+      band2: hasSecond ? band2 : null,
     };
     const slider = fig.layout.xaxis.rangeslider;
     slider.yaxis = sliderAxis(fig, "y");
@@ -1208,7 +1243,7 @@ export async function mount(host, opts) {
     let r1 =
       heldAxis && Array.isArray(heldAxis.range)
         ? heldAxis.range.slice()
-        : fitRange(series, primary, view, year1);
+        : fitRange(series, primary, view, year1, band1);
     if (r1 && !heldAxis && typeof opts.shareY === "function") {
       const shared = opts.shareY(primary, r1, fig.layout.xaxis.range);
       if (shared) r1 = shared;
@@ -1219,7 +1254,7 @@ export async function mount(host, opts) {
     }
     if (hasSecond) {
       slider.yaxis2 = sliderAxis(fig, "y2");
-      const r2 = fitRange(series, secondary, view, year2);
+      const r2 = fitRange(series, secondary, view, year2, band2);
       if (r2) {
         fig.layout.yaxis2.range = r2;
         fig.layout.yaxis2.autorange = false;

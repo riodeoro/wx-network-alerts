@@ -18,6 +18,24 @@ export const SERIES2_WIDTH = 1.1;
 export const SERIES2_OPACITY = 0.45;
 export const MATCH_COLOR = "#da2d2a";
 
+export const SENSOR_GROUPS = {
+  SM: { label: "SM (%)", members: ["SM1", "SM2", "SM3"] },
+  ST: { label: "ST (°C)", members: ["ST1", "ST2", "ST3"] },
+};
+
+export const GROUP_COLORS = ["#3d3a35", "#d97706", "#0e7490"];
+const GROUP_WIDTH = 1.3;
+
+export function groupMembers(series, key) {
+  const group = SENSOR_GROUPS[key];
+  const list = group ? group.members : [key];
+  return list.filter((c) => c && series && series[c]);
+}
+
+function axisLabel(key) {
+  return SENSOR_GROUPS[key] ? SENSOR_GROUPS[key].label : dispUnit(key);
+}
+
 export const ARROW_COL = "Wspd";
 export const ARROW_DIR_COL = "Dir";
 
@@ -93,6 +111,8 @@ const COL_SCALE = {
   Rn_1: COOL_SCALE,
   PrecipOP2: COOL_SCALE,
   PrecipPC2: COOL_SCALE,
+  Rn_1_OP2: COOL_SCALE,
+  Rn_1_PC2: COOL_SCALE,
   Wspd: GREEN_SCALE,
   Mx_Spd: GREEN_SCALE,
   Dir: GREEN_SCALE,
@@ -806,7 +826,7 @@ function seriesTrace(series, col, alerts, opts) {
   }
 
   const value = circular ? "%{y:.0f}" : "%{y:.1f}";
-  const traces = segments.map((seg) => {
+  const traces = segments.map((seg, si) => {
     if (arrows) {
       return {
         type: "scattergl",
@@ -850,9 +870,10 @@ function seriesTrace(series, col, alerts, opts) {
       text: seg.text,
       hovertemplate: `${dispUnit(col)}: ${value}%{text}<extra></extra>`,
       wxAlerts: seg.alerts,
-      showlegend: false,
+      showlegend: !!opts.legend && si === 0,
     };
-    if (!circular) {
+    if (opts.legend) trace.legendgroup = col;
+    if (!circular && !opts.noFill) {
       trace.fill = "tozeroy";
       trace.fillcolor = opts.fillcolor;
     }
@@ -937,6 +958,26 @@ function alertBands(alerts, yaxis) {
   return out;
 }
 
+function groupTraces(series, key, yaxis, tolerance) {
+  const members = SENSOR_GROUPS[key].members;
+  const out = [];
+  for (const col of groupMembers(series, key)) {
+    const built = seriesTrace(series, col, null, {
+      yaxis,
+      color: GROUP_COLORS[members.indexOf(col) % GROUP_COLORS.length],
+      width: GROUP_WIDTH,
+      withAlerts: false,
+      alertPts: [],
+      tolerance,
+      arrows: false,
+      noFill: true,
+      legend: true,
+    });
+    if (built) out.push(...built.traces);
+  }
+  return out;
+}
+
 export function buildStationDetail(
   series,
   plotCol,
@@ -946,32 +987,47 @@ export function buildStationDetail(
   showAlerts,
   arrows
 ) {
-  if (!series || !series.n || !series[plotCol])
+  if (!series || !series.n || !groupMembers(series, plotCol).length)
     return emptyFig("No data for this station.", 440);
 
   const show = showAlerts !== false;
-  const circular = CIRCULAR_COLS.has(plotCol);
+  const grouped1 = !!SENSOR_GROUPS[plotCol];
+  const circular = !grouped1 && CIRCULAR_COLS.has(plotCol);
   const tolerance = Math.max(1, Math.floor(stepMs(series) / 2));
   const arrowsOk = !!arrows && !!series[ARROW_DIR_COL];
 
   const data = [];
-  const pts = show ? alertPoints(alerts) : [];
-  const built = seriesTrace(series, plotCol, alerts, {
-    yaxis: "y",
-    color: SERIES_COLOR,
-    fillcolor: SERIES_FILL,
-    width: SERIES_WIDTH,
-    withAlerts: show,
-    alertPts: pts,
-    tolerance,
-    arrows: arrowsOk && plotCol === ARROW_COL,
-  });
-  if (built) data.push(...built.traces);
+  let built = null;
+  if (grouped1) {
+    data.push(...groupTraces(series, plotCol, "y", tolerance));
+  } else {
+    const pts = show ? alertPoints(alerts) : [];
+    built = seriesTrace(series, plotCol, alerts, {
+      yaxis: "y",
+      color: SERIES_COLOR,
+      fillcolor: SERIES_FILL,
+      width: SERIES_WIDTH,
+      withAlerts: show,
+      alertPts: pts,
+      tolerance,
+      arrows: arrowsOk && plotCol === ARROW_COL,
+    });
+    if (built) data.push(...built.traces);
+  }
 
-  let hasSecond = !!(plotCol2 && plotCol2 !== plotCol && series[plotCol2]);
-  const pts2 = hasSecond && show ? alertPoints(alerts2) : [];
+  let hasSecond = !!(
+    plotCol2 &&
+    plotCol2 !== plotCol &&
+    groupMembers(series, plotCol2).length
+  );
+  const grouped2 = hasSecond && !!SENSOR_GROUPS[plotCol2];
   let built2 = null;
-  if (hasSecond) {
+  if (hasSecond && grouped2) {
+    const traces = groupTraces(series, plotCol2, "y2", tolerance);
+    if (traces.length) data.push(...traces);
+    else hasSecond = false;
+  } else if (hasSecond) {
+    const pts2 = show ? alertPoints(alerts2) : [];
     built2 = seriesTrace(series, plotCol2, alerts2, {
       yaxis: "y2",
       color: SERIES2_COLOR,
@@ -985,9 +1041,11 @@ export function buildStationDetail(
     if (built2) data.push(...built2.traces);
     else hasSecond = false;
   }
+  const ownAlerts = grouped1 ? null : alerts;
+  const ownAlerts2 = grouped2 ? null : alerts2;
 
   const primaryAlerts = alertTraces(
-    alertPoints(alerts),
+    alertPoints(ownAlerts),
     (built && built.folded) || new Set(),
     "y",
     true,
@@ -997,7 +1055,7 @@ export function buildStationDetail(
 
   const secondAlerts = hasSecond
     ? alertTraces(
-        alertPoints(alerts2),
+        alertPoints(ownAlerts2),
         (built2 && built2.folded) || new Set(),
         "y2",
         !primaryAlerts.length,
@@ -1007,6 +1065,7 @@ export function buildStationDetail(
   for (const tr of secondAlerts) data.push(tr);
 
   const hasAlerts = !!(primaryAlerts.length || secondAlerts.length);
+  const hasGroups = grouped1 || (hasSecond && grouped2);
 
   const panels = hasSecond ? 2 : 1;
   const panelGap = 0.08;
@@ -1027,7 +1086,7 @@ export function buildStationDetail(
     plot_bgcolor: "#ffffff",
     paper_bgcolor: "white",
     font: { size: 11, color: "#57534e", family: FONT_FAMILY },
-    showlegend: hasAlerts,
+    showlegend: hasAlerts || hasGroups,
     legend: {
       orientation: "h",
       yanchor: "bottom",
@@ -1061,24 +1120,26 @@ export function buildStationDetail(
     },
     yaxis: circular
       ? circularAxis(dispUnit(plotCol))
-      : axisStyle(dispUnit(plotCol)),
+      : axisStyle(axisLabel(plotCol)),
   };
   layout.yaxis.domain = domains[0];
   layout.yaxis.anchor = "x";
   if (hasSecond) {
-    const y2 = CIRCULAR_COLS.has(plotCol2)
+    const y2 = !grouped2 && CIRCULAR_COLS.has(plotCol2)
       ? circularAxis(dispUnit(plotCol2))
-      : axisStyle(dispUnit(plotCol2));
-    y2.title.font = { color: SERIES2_COLOR, size: 12 };
-    y2.tickfont = { color: SERIES2_COLOR };
+      : axisStyle(axisLabel(plotCol2));
+    if (!grouped2) {
+      y2.title.font = { color: SERIES2_COLOR, size: 12 };
+      y2.tickfont = { color: SERIES2_COLOR };
+    }
     y2.domain = domains[1];
     y2.anchor = "x";
     layout.yaxis2 = y2;
   }
 
   if (show) {
-    const shapes = alertBands(alerts, "y");
-    if (hasSecond) shapes.push(...alertBands(alerts2, "y2"));
+    const shapes = alertBands(ownAlerts, "y");
+    if (hasSecond) shapes.push(...alertBands(ownAlerts2, "y2"));
     if (shapes.length) layout.shapes = shapes;
   }
 

@@ -47,7 +47,7 @@ export const FWI_COLS = ["FFMC", "ISI", "FWI", "DC", "DMC", "BUI"];
 
 export const ALL_SENSOR_COLS = [
   "Rh", "Wspd", "Dir", "Rn_1", "Mx_Spd", "Temp", "Vbat", "Vslr", "Ibat",
-  "PrecipOP2", "PrecipPC2", "SDepth",
+  "PrecipOP2", "PrecipPC2", "Rn_1_OP2", "Rn_1_PC2", "SDepth",
   "SM1", "SM2", "SM3", "ST1", "ST2", "ST3", "PYR",
 ].concat(FWI_COLS);
 
@@ -85,7 +85,7 @@ export const COL_LABELS = {
 
 export const COL_UNITS = {
   Temp: "\u00b0C", Rh: "%", Wspd: "km/h", Mx_Spd: "km/h", Dir: "\u00b0",
-  Rn_1: "mm", PrecipOP2: "mm", PrecipPC2: "mm",
+  Rn_1: "mm", PrecipOP2: "mm", PrecipPC2: "mm", Rn_1_OP2: "mm", Rn_1_PC2: "mm",
   SM1: "%", SM2: "%", SM3: "%",
   ST1: "\u00b0C", ST2: "\u00b0C", ST3: "\u00b0C",
   Vbat: "V", Vslr: "V", Ibat: "A", PYR: "W/m\u00b2",

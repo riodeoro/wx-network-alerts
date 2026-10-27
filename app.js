@@ -8706,6 +8706,8 @@ const HOVER_BOX_STATS = [
 
 const HOVER_BARE_TYPES = new Set(["heatmap", "heatmapgl", "histogram2d", "contour"]);
 
+const HOVER_BLANK_SWATCH = { shape: "box", fill: "transparent", edge: "transparent" };
+
 const HOVER_WHITE_RE = /^(white|#fff(fff)?|rgba?\(\s*255\s*,\s*255\s*,\s*255\b.*)$/i;
 
 const HOVER_BREAK_RE = /<br\s*\/?>/i;
@@ -9138,6 +9140,7 @@ function hoverSwatch(pt) {
   const meta = tr.meta || {};
   const type = String(tr.type || full.type || "scatter");
   if (HOVER_BARE_TYPES.has(type)) return null;
+  if (meta.noswatch) return HOVER_BLANK_SWATCH;
   if (type === "bar") {
     const mk = tr.marker || {};
     const fullMk = full.marker || {};

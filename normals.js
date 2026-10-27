@@ -31,6 +31,8 @@ const RANGE_MEDIAN = "#8a857d";
 const YEAR_COLOR = "#4b5563";
 const YEAR_GAP_FACTOR = 3;
 const YEAR_GAP_MIN_MS = 2 * HOUR_MS;
+const YEAR_HOVER_RANK = 1001;
+const BAND_HOVER_RANK = 1002;
 
 const STAT = { lo: 0, p10: 1, p25: 2, p50: 3, p75: 4, p90: 5, hi: 6 };
 const EDGES = ["lo", "p10", "p25", "p50", "p75", "p90", "hi"];
@@ -337,7 +339,7 @@ function pairs(a, b) {
   return out;
 }
 
-const PAIR = "%{customdata[0]:.1f} - %{customdata[1]:.1f}<extra></extra>";
+const PAIR = "%{customdata[0]:.1f} to %{customdata[1]:.1f}<extra></extra>";
 
 function bandTraces(band, yaxis, col) {
   const x = band.x.map(isoStamp);
@@ -356,7 +358,9 @@ function bandTraces(band, yaxis, col) {
   const out = [];
   for (let i = EDGES.length - 1; i >= 0; i--) {
     const edge = EDGES[i];
-    const extra = hover[edge] ? Object.assign({}, hover[edge]) : { hoverinfo: "skip" };
+    const extra = hover[edge]
+      ? Object.assign({ legendrank: BAND_HOVER_RANK, meta: { noswatch: true } }, hover[edge])
+      : { hoverinfo: "skip" };
     if (i < EDGES.length - 1) {
       extra.fill = "tonexty";
       extra.fillcolor = fills[i];
@@ -417,6 +421,7 @@ function yearTraces(pick, col, yaxis) {
       mode: times.length === 1 ? "lines+markers" : "lines",
       marker: { color: YEAR_COLOR, size: 3 },
       line: { color: YEAR_COLOR, width: 1.4, dash: "dot" },
+      legendrank: YEAR_HOVER_RANK,
       hovertemplate: `${pick.year}: %{y:.1f}<extra></extra>`,
     }),
   ];
@@ -452,13 +457,13 @@ export function normalsRangeTraces(normals, col, startMs, endMs, xaxis, yaxis) {
 }
 
 export function applyNormals(fig, normals, col, yaxis, startMs, endMs, pick) {
-  if (!fig || !fig.layout || !Array.isArray(fig.data) || !col) return false;
-  if (!fig.layout[axisKey(yaxis)]) return false;
+  if (!fig || !fig.layout || !Array.isArray(fig.data) || !col) return null;
+  if (!fig.layout[axisKey(yaxis)]) return null;
   const band = col === RAIN_COL
     ? rainBandFor(normals, startMs, endMs)
     : bandFor(normals, col, startMs, endMs);
-  if (!band) return false;
+  if (!band) return null;
   fig.data = bandTraces(band, yaxis, col).concat(yearTraces(pick, col, yaxis), fig.data);
   lineOnBands(fig, col, yaxis);
-  return true;
+  return band;
 }
