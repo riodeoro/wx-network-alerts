@@ -7939,8 +7939,6 @@ function ovText(tag, className, txt) {
   return n;
 }
 
-const ONGOING_SUFFIX_RE = /,\s*ongoing\s*$/i;
-
 const EXTREME_SECTION = "EXTREME VALUES";
 
 const EXTREME_PREFIX_RE = /^(Highest|Lowest)\b/;
@@ -8003,7 +8001,7 @@ function ovStamp(f) {
 }
 
 function ovWhen(f) {
-  return String(f.when || "").replace(ONGOING_SUFFIX_RE, "").trim();
+  return String(f.when || "").trim();
 }
 
 const OV_KEY_VALUE_RE = new RegExp(

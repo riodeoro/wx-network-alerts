@@ -5,7 +5,6 @@ import { isoStamp } from "./charts.js";
 export const NORMALS_PREFIX = "normals";
 export const RAIN_COL = "Rn_1";
 export const MIN_YEARS = 3;
-export const HOURLY_MAX_HOURS = 336;
 
 const FORMAT_VERSION = 2;
 const CACHE_MAX = 16;
@@ -113,9 +112,15 @@ function gridTimes(startMs, endMs) {
   return out;
 }
 
+function hourTimes(startMs, endMs) {
+  const out = [];
+  for (let t = Math.ceil(startMs / HOUR_MS) * HOUR_MS; t <= endMs; t += HOUR_MS) out.push(t);
+  return out;
+}
+
 function hourlyBand(attr, centres, startMs, endMs) {
   const out = emptyBand();
-  for (const t of gridTimes(startMs, endMs)) {
+  for (const t of hourTimes(startMs, endMs)) {
     const { i0, i1, f } = hourlyIndex(centres, t);
     const h = new Date(t).getUTCHours();
     out.x.push(t);
@@ -147,9 +152,8 @@ export function bandFor(normals, col, startMs, endMs) {
   if (!supports(normals, col) || col === RAIN_COL) return null;
   if (!Number.isFinite(startMs) || !Number.isFinite(endMs) || endMs <= startMs) return null;
   const attr = normals.attrs[col];
-  const hours = (endMs - startMs) / HOUR_MS;
   const centres = normals.hourly_centres;
-  const hourly = hours <= HOURLY_MAX_HOURS && Array.isArray(attr.h) && Array.isArray(centres);
+  const hourly = Array.isArray(attr.h) && Array.isArray(centres) && centres.length > 0;
   const band = hourly ? hourlyBand(attr, centres, startMs, endMs) : dailyBand(attr, startMs, endMs);
   if (!band.p50.some((v) => v !== null)) return null;
   band.kind = hourly ? "hourly" : "daily";
