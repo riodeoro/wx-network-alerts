@@ -16,18 +16,8 @@ const RAIN_MAX_MISSING = 0.2;
 const FEB29 = 60;
 const CUM_DAYS = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
 
-const BAND_FILLS = [
-  "rgba(229, 231, 235, 0.5)",
-  "rgba(191, 219, 254, 0.5)",
-  "rgba(209, 250, 229, 0.5)",
-  "rgba(254, 249, 195, 0.5)",
-  "rgba(253, 230, 138, 0.5)",
-  "rgba(252, 165, 165, 0.5)",
-];
-const INVERTED = new Set(["Rh", "Rn_1", "SM1", "SM2", "SM3"]);
 const LINE_ON_BANDS = "#26231f";
-const RANGE_FILL = "rgba(168, 162, 158, 0.22)";
-const RANGE_MEDIAN = "#8a857d";
+export const RANGE_FILL = "rgba(44, 95, 169, 0.18)";
 const BAND_HOVER_RANK = 1002;
 
 const STAT = { lo: 0, p10: 1, p25: 2, p50: 3, p75: 4, p90: 5, hi: 6 };
@@ -315,35 +305,6 @@ function pairs(a, b) {
 
 const PAIR = "%{customdata[0]:.1f} to %{customdata[1]:.1f}<extra></extra>";
 
-function bandTraces(band, yaxis, col) {
-  const x = band.x.map(isoStamp);
-  const fills = INVERTED.has(col) ? BAND_FILLS.slice().reverse() : BAND_FILLS;
-  const ys = {};
-  for (const edge of EDGES) ys[edge] = band[edge].map(fmt);
-  const hover = {
-    p90: { customdata: pairs(ys.lo, ys.hi), hovertemplate: "Range: " + PAIR },
-    p75: { customdata: pairs(ys.p10, ys.p90), hovertemplate: "P10-P90: " + PAIR },
-    p50: { customdata: pairs(ys.p25, ys.p75), hovertemplate: "P25-P75: " + PAIR },
-    p25: {
-      customdata: ys.p50,
-      hovertemplate: "Median: %{customdata:.1f}<extra></extra>",
-    },
-  };
-  const out = [];
-  for (let i = EDGES.length - 1; i >= 0; i--) {
-    const edge = EDGES[i];
-    const extra = hover[edge]
-      ? Object.assign({ legendrank: BAND_HOVER_RANK, meta: { noswatch: true } }, hover[edge])
-      : { hoverinfo: "skip" };
-    if (i < EDGES.length - 1) {
-      extra.fill = "tonexty";
-      extra.fillcolor = fills[i];
-    }
-    out.push(under(x, ys[edge], yaxis, extra));
-  }
-  return out;
-}
-
 function lineOnBands(fig, col, yaxis) {
   const name = disp(col);
   for (const tr of fig.data) {
@@ -358,7 +319,6 @@ function rangeTraces(band, xaxis, yaxis) {
   const x = band.x.map(isoStamp);
   const p10 = band.p10.map(fmt);
   const p90 = band.p90.map(fmt);
-  const p50 = band.p50.map(fmt);
   const base = { xaxis: xaxis, meta: { normals: true } };
   return [
     under(x, p10, yaxis, Object.assign({ hoverinfo: "skip" }, base)),
@@ -367,10 +327,6 @@ function rangeTraces(band, xaxis, yaxis) {
       fillcolor: RANGE_FILL,
       customdata: pairs(p10, p90),
       hovertemplate: "P10-P90: " + PAIR,
-    }, base)),
-    under(x, p50, yaxis, Object.assign({
-      line: { color: RANGE_MEDIAN, width: 1 },
-      hovertemplate: "Median: %{y:.1f}<extra></extra>",
     }, base)),
   ];
 }
@@ -390,7 +346,10 @@ export function applyNormals(fig, normals, col, yaxis, startMs, endMs) {
     ? rainBandFor(normals, startMs, endMs)
     : bandFor(normals, col, startMs, endMs);
   if (!band) return null;
-  fig.data = bandTraces(band, yaxis, col).concat(fig.data);
+  const traces = rangeTraces(band, "x", yaxis).map((tr) =>
+    tr.hoverinfo === "skip" ? tr : Object.assign(tr, { legendrank: BAND_HOVER_RANK })
+  );
+  fig.data = traces.concat(fig.data);
   lineOnBands(fig, col, yaxis);
   return band;
 }

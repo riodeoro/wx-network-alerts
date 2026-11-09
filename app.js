@@ -459,7 +459,11 @@ function ensureStationFilterStyles() {
     ".wx-stnf-btn.on{color:var(--text);}",
     ".wx-stnf-btn > span:first-child{overflow:hidden;text-overflow:ellipsis;",
     "white-space:nowrap;max-width:190px;}",
-    ".wx-stnf-btn .caret{font-size:8px;opacity:.6;flex:0 0 auto;}",
+    ".wx-stnf-btn .caret{display:inline-flex;flex:0 0 auto;opacity:.75;}",
+    ".wx-stnf-btn .caret svg{width:10px;height:10px;fill:none;stroke:currentColor;",
+    "stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;",
+    "transition:transform .15s ease;}",
+    ".wx-stnf.open .wx-stnf-btn .caret svg{transform:rotate(180deg);}",
     ".wx-stnf-menu{position:absolute;top:calc(100% + 5px);right:0;width:220px;z-index:1100;",
     "background:var(--surface);border:1px solid var(--line);border-radius:4px;",
     "box-shadow:0 2px 6px rgba(0,0,0,.05);padding:5px;display:none;}",
@@ -730,7 +734,12 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
   const btn = el("button", "wx-stnf-btn");
   btn.type = "button";
   const btnText = el("span");
-  const caret = el("span", "caret", "\u25BE");
+  const caret = el(
+    "span",
+    "caret",
+    '<svg viewBox="0 0 10 10" aria-hidden="true" focusable="false">' +
+      '<path d="M2 3.6 5 6.6 8 3.6"/></svg>'
+  );
   btn.appendChild(btnText);
   btn.appendChild(caret);
 
@@ -835,7 +844,6 @@ function stationFilterControl(stations, onChange, floating, neighbours) {
     open = next;
     menu.className = "wx-stnf-menu" + (open ? " open" : "");
     wrap.classList.toggle("open", open);
-    caret.textContent = open ? "\u25B4" : "\u25BE";
     if (open && nbOpt) sync();
     if (open) showRows(search.value.trim().toLowerCase());
     if (open) {
@@ -7185,7 +7193,7 @@ function stationGrid(c, views, opts) {
       const panel = wrap._wxPanel;
       const focus =
         panel && panel.style.display !== "none" ? panel._wxStation || null : null;
-      if (!focus) return null;
+      if (!focus) return names.length ? { focus: null, names: names, quiet: true } : null;
       const key = neighbourKey(focus);
       if (selected && selected.size) {
         const picks = Array.from(selected).filter((n) => neighbourKey(n) !== key);
@@ -7302,8 +7310,10 @@ async function insightBanner(fc, hours, tab, panel, onPick) {
   }
 
   const colors = colorMap(palette);
+  const limits = sectionLimits(palette);
   for (const f of findings) {
     f.color = colors.get(colorKey(f.section, f.station)) || null;
+    f.limit = sectionLimit(limits, f.section);
   }
   applySeverity(findings);
   if (grid) {
@@ -7504,6 +7514,26 @@ function colorMap(records) {
   return map;
 }
 
+const SECTION_ROW_LIMIT = 5;
+
+function sectionLimits(records) {
+  const map = new Map();
+  if (!Array.isArray(records)) return map;
+  for (const r of records) {
+    if (!r || !Object.prototype.hasOwnProperty.call(r, "limit")) continue;
+    const key = String(r.section || "");
+    if (map.has(key)) continue;
+    const n = Number(r.limit);
+    map.set(key, r.limit === null || !Number.isFinite(n) ? null : n);
+  }
+  return map;
+}
+
+function sectionLimit(limits, section) {
+  const key = String(section || "");
+  return limits.has(key) ? limits.get(key) : SECTION_ROW_LIMIT;
+}
+
 async function collectFindings(fc, hours) {
   const [texts, palettes] = await Promise.all([
     Promise.all(
@@ -7520,8 +7550,10 @@ async function collectFindings(fc, hours) {
     if (text === null || text === undefined) missing.add(INSIGHT_SOURCES[i][2]);
     if (!text) return;
     const palette = colorMap(palettes[i]);
+    const limits = sectionLimits(palettes[i]);
     for (const f of parseFindings(text, INSIGHT_SOURCES[i])) {
       f.color = palette.get(colorKey(f.section, f.station)) || null;
+      f.limit = sectionLimit(limits, f.section);
       if (f.area === DATA_AREA) {
         if (isDataSection(f.section)) dataRows.push(f);
         continue;
@@ -7878,6 +7910,23 @@ function ensureOverviewStyles() {
     ".wx-ov-sect .wx-ov-none td{padding-top:5px;padding-bottom:5px;",
     "font-size:10px;font-weight:500;letter-spacing:.04em;",
     "text-transform:uppercase;color:#a9a49c;}",
+    ".wx-ov-sect .wx-ov-more td{padding:3px 12px 6px;border-top:none;}",
+    ".wx-ov-more-btn{all:unset;box-sizing:border-box;display:inline-flex;",
+    "align-items:center;gap:5px;margin-left:-7px;padding:1px 9px 1px 6px;",
+    "font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.04em;",
+    "line-height:16px;color:var(--text-muted,#8a857d);cursor:pointer;",
+    "border:1px solid transparent;border-radius:999px;",
+    "transition:color .12s ease,border-color .12s ease,background-color .12s ease;}",
+    ".wx-ov-more-btn:hover{color:var(--text,#26231f);background:#fafaf9;",
+    "border-color:var(--line,#e8e6e3);}",
+    ".wx-ov-more-btn:focus-visible{outline:2px solid rgba(54,96,158,.35);",
+    "outline-offset:1px;}",
+    ".wx-ov-more-btn svg{width:9px;height:9px;flex:0 0 auto;fill:none;",
+    "stroke:currentColor;stroke-width:1.6;stroke-linecap:round;",
+    "stroke-linejoin:round;transition:transform .15s ease;}",
+    ".wx-ov-more-btn[aria-expanded=\"true\"] svg{transform:rotate(180deg);}",
+    "@media (max-width:768px){.wx-ov-sect .wx-ov-more td{padding:4px 8px 8px;}",
+    ".wx-ov-more-btn{min-height:30px;font-size:11px;padding:4px 10px 4px 7px;}}",
     "@media (max-width:768px){.wx-ov-chart{padding:8px;}",
     ".wx-ov-table th,.wx-ov-table td{padding:5px 8px;}}",
   ].join("");
@@ -8234,6 +8283,7 @@ function openOverviewChart(panel, f, row, pick, view, restore) {
   panel._wxRow = row || null;
   panel._wxStation = f.station || null;
   panel._wxTab = f.tab || null;
+  if (row && typeof row._wxReveal === "function") row._wxReveal();
   if (row) row.classList.add("sel");
   if (typeof panel._wxMapFocus === "function") panel._wxMapFocus();
 
@@ -9979,13 +10029,53 @@ function sensorTable(findings, panel, missing, opts) {
           spanRow("wx-ov-sub", SECTION_LABELS[type.section] || type.section, columns.length)
         );
       }
-      for (const e of type.rows) nodes.push(e.row);
+      const limit = type.rows.length ? type.rows[0].f.limit : null;
+      const cut = Number.isFinite(limit) && type.rows.length > limit ? limit : null;
+      type.rows.forEach((e, k) => {
+        e.row.style.display = cut !== null && k >= cut ? "none" : "";
+        e.row._wxReveal = null;
+        nodes.push(e.row);
+      });
+      if (cut !== null) nodes.push(moreRow(type.rows.slice(cut), columns.length));
     }
   }
   tbody.replaceChildren(...nodes);
   table.appendChild(tbody);
   wrap.appendChild(table);
   return wrap;
+}
+
+function moreRow(hidden, span) {
+  const row = el("tr", "wx-ov-more");
+  const cell = el("td");
+  cell.colSpan = span;
+  const btn = el("button", "wx-ov-more-btn");
+  btn.type = "button";
+  btn.innerHTML =
+    '<svg viewBox="0 0 10 10" aria-hidden="true" focusable="false">' +
+    '<path d="M2 3.6 5 6.6 8 3.6"/></svg>';
+  const text = el("span");
+  btn.appendChild(text);
+  let open = false;
+  const label = () => {
+    text.textContent = open ? "Show fewer" : `Show ${hidden.length} more`;
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  };
+  const set = (next) => {
+    open = next;
+    for (const e of hidden) e.row.style.display = open ? "" : "none";
+    label();
+  };
+  for (const e of hidden) e.row._wxReveal = () => set(true);
+  btn.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    set(!open);
+  });
+  label();
+  cell.appendChild(btn);
+  row.appendChild(cell);
+  return row;
 }
 
 function emptyTable(text) {
