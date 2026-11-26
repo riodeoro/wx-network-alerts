@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WX Network Alerts</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%23013366%27/%3E%3Cpath d=%27M16 13v12M12 25h8%27 stroke=%27%23fff%27 stroke-width=%272.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M11.2 8.2a6.8 6.8 0 0 0 0 9.6M20.8 8.2a6.8 6.8 0 0 1 0 9.6%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Ccircle cx=%2716%27 cy=%2713%27 r=%272.2%27 fill=%27%23fff%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://pub-5f2f92f12a6b4b88aa9f4558095a9644.r2.dev" crossorigin>
+<link rel="preconnect" href="https://cdn.plot.ly">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@bcgov/bc-sans@2.1.2/css/BC_Sans.css">
+<link rel="stylesheet" href="style.css">
+<script src="liteplot.js" defer></script>
+</head>
+<body>
+
+<nav id="wx-nav">
+  <span class="brand">
+  <span>WX Network Alerts</span>
+</span>
+<div class="controls-wrap">
+  <div class="wx-controls-row">
+    <div class="wx-control fc">
+      <select id="al-fc-select" class="wx-select"><option value="" selected disabled hidden>Select Centre…</option></select>
+    </div>
+    <div class="wx-control win">
+      <select id="al-range-select" class="wx-select">
+        <option value="24">24h</option>
+        <option value="48">48h</option>
+        <option value="72" selected> 72h</option>
+        <option value="168">7 days</option>
+        <option value="336">2 weeks</option>
+        <option value="720">1 month</option>
+        <option value="1440">2 months</option>
+        <option value="2160">3 months</option>
+        <option value="4380">6 months</option>
+      </select>
+    </div>
+  </div>
+</div>
+</nav>
+
+<div id="conn-error"></div>
+
+<div class="main-content" id="al-main-content"></div>
+
+<div class="al-footer">
+  <span id="al-timing-diag"></span>
+  <span class="muted">  |  Updated daily</span>
+</div>
+
+<script>
+
+  window.WX_DATA_BASE = "https://pub-5f2f92f12a6b4b88aa9f4558095a9644.r2.dev";
+</script>
+<script src="app.js" defer></script>
+</body>
+</html>
